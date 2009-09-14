@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN" "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+<faces-config>
+
+	<application>
+		<view-handler>
+			com.icesoft.faces.facelets.D2DFaceletViewHandler
+		</view-handler>
+	</application>
+
+	<managed-bean>
+		<managed-bean-name>renderManager</managed-bean-name>
+		<managed-bean-class>
+			com.icesoft.faces.async.render.RenderManager
+		</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+
+		#foreach($metaData  in $dataModel.theMetaData)
+		<managed-bean>
+			<managed-bean-name>${metaData.getRealClassNameAsVariable()}View</managed-bean-name>
+			<managed-bean-class>${virginPackage}.presentation.backEndBeans.${metaData.getRealClassName()}View</managed-bean-class>
+			<managed-bean-scope>request</managed-bean-scope>
+			        <managed-property>
+            <property-name>renderManager</property-name>
+            <value>#{renderManager}</value>
+        </managed-property>	
+		</managed-bean>	
+		#end
+			
+		#foreach($metaData  in $dataModel.theMetaData)
+		<navigation-rule>
+			<from-view-id>/JSPX/${metaData.getRealClassNameAsVariable()}.jspx</from-view-id>
+			<navigation-case>
+				<from-outcome>goInitialMenu</from-outcome>
+				<to-view-id>/JSPX/initialMenu.jspx</to-view-id>
+				<redirect />
+			</navigation-case>
+		</navigation-rule>
+		
+		<navigation-rule>
+			<from-view-id>/JSPX/${metaData.getRealClassNameAsVariable()}ListDataTable.jspx</from-view-id>
+			<navigation-case>
+				<from-outcome>goInitialMenu</from-outcome>
+				<to-view-id>/JSPX/initialMenu.jspx</to-view-id>
+				<redirect />
+			</navigation-case>
+		</navigation-rule>
+		
+				<navigation-rule>
+			<from-view-id>/JSPX/${metaData.getRealClassNameAsVariable()}ListDataTableEditable.jspx</from-view-id>
+			<navigation-case>
+				<from-outcome>goInitialMenu</from-outcome>
+				<to-view-id>/JSPX/initialMenu.jspx</to-view-id>
+				<redirect />
+			</navigation-case>
+		</navigation-rule>
+	
+		<navigation-rule>
+			<from-view-id>/JSPX/initialMenu.jspx</from-view-id>
+			<navigation-case>
+				<from-outcome>go${metaData.getRealClassName()}</from-outcome>
+				<to-view-id>/JSPX/${metaData.getRealClassNameAsVariable()}.jspx</to-view-id>
+				<redirect />
+			</navigation-case>
+		</navigation-rule>
+	
+		<navigation-rule>
+			<from-view-id>/JSPX/initialMenu.jspx</from-view-id>
+			<navigation-case>
+				<from-outcome>go${metaData.getRealClassName()}ListDataTable</from-outcome>
+				<to-view-id>/JSPX/${metaData.getRealClassNameAsVariable()}ListDataTable.jspx</to-view-id>
+				<redirect />
+			</navigation-case>
+		</navigation-rule>
+		
+				<navigation-rule>
+			<from-view-id>/JSPX/initialMenu.jspx</from-view-id>
+			<navigation-case>
+				<from-outcome>go${metaData.getRealClassName()}ListDataTableEditable</from-outcome>
+				<to-view-id>/JSPX/${metaData.getRealClassNameAsVariable()}ListDataTableEditable.jspx</to-view-id>
+				<redirect />
+			</navigation-case>
+		</navigation-rule>
+		#end
+				
+</faces-config>
+
