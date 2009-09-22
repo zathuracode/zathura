@@ -34,7 +34,7 @@ public class WizardChooseGenerator extends WizardPage {
 		setTitle("Zathura Java Code Generator");
 		setDescription("Generate Java Application based on Open Standards and JEE Design Patterns");			
 		setImageDescriptor(ResourceManager.getPluginImageDescriptor(Activator.getDefault(), "icons/balvardi-Robotic7070.png"));
-		
+		setPageComplete(false);
 	}
 
 	/**
@@ -60,6 +60,7 @@ public class WizardChooseGenerator extends WizardPage {
 				GeneratorModel generatorModel=theGenerators.get(architectureName);
 				if(generatorModel!=null){
 					bwrDescription.setText(generatorModel.getDescription());
+					setPageComplete(true);
 				}
 			}
 		});
