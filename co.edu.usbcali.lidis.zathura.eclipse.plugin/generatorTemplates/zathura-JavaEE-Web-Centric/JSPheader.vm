@@ -1,0 +1,42 @@
+<jsp:root jsfc="f:view" xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<ice:outputDeclaration doctypeRoot="html"
+		doctypePublic="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctypeSystem="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+	
+	<html>
+		<body>
+			<f:view>
+				<ui:composition>
+					<div id="header">
+			          <div class="tr">
+			          	<div class="br">
+			          		<div class="bl">
+			              		<h1><a href="http://www.freewebsitetemplates.com"><img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logo.gif" width="203" height="49" alt="Software Company" /></a></h1>
+					              <ul id="nav-top">
+					                  <li><a href="http://code.google.com/p/zathura/">Zathura</a>  &#160;&#160;|&#160;&#160;</li>
+					                  <li><a href="http://www.usbcali.edu.co/">UsbCali</a> &#160;&#160;|&#160;&#160;</li>
+					                  <li><a href="http://lidis.usbcali.edu.co">Lidis</a> &#160;&#160;|&#160;&#160;</li>
+					                  <li><a href="http://code.google.com/p/zathura/downloads/list">Download</a>  &#160;&#160;|&#160;&#160;</li>
+					                  <li><a href="http://lidis.usbcali.edu.co/openEdit/apps/contact/index.html">Contacts</a></li>
+					              </ul><!-- end top-nav -->
+					              <ul id="nav-left">
+					                  <li><a href="http://www.freewebsitetemplates.com"><img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/menu_1.gif" width="96" height="19" alt="Parteners" /></a></li>
+					                  <li><a href="http://www.freewebsitetemplates.com"><img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/menu_2.gif" width="96" height="18" alt="Home and Office" /></a></li>
+					                  <li><a href="http://www.freewebsitetemplates.com"><img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/menu_3.gif" width="96" height="19" alt="Small Business" /></a></li>
+					              </ul>
+			          		</div>
+			       		</div>
+			   		</div><!-- end .corners -->
+			      </div><!-- end header -->
+				</ui:composition>
+			</f:view>
+		</body>
+	</html>
+</jsp:root>
