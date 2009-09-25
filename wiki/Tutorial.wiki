@@ -2,3 +2,7 @@
 = Tutorial how to use the Zathura plug-in for eclipse. =
 
 <wiki:video url="http://www.youtube.com/watch?v=zeUBVoaUs70"/>
+
+Created by
+Manuel Alejandro Galvez
+galvez.al@hotmail.com
