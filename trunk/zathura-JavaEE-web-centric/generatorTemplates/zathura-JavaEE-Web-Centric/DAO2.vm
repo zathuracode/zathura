@@ -287,6 +287,8 @@ public List<${metaData.getRealClassName()}> findBy${member.getGetNameOfPrimaryNa
 	}
 
 		public List< ${metaData.getRealClassName()}> findByCriteria(String whereCondition) {
+				EntityManagerHelper.log("finding ${metaData.getRealClassName()} " + whereCondition,
+				Level.INFO, null);
 		try {
 			String where = whereCondition == null
 					|| whereCondition.length() == 0 ? "" : "where "
@@ -311,6 +313,8 @@ public List<${metaData.getRealClassName()}> findBy${member.getGetNameOfPrimaryNa
 	
 		public List<${metaData.getRealClassName()}> findPage${metaData.getRealClassName()}(String sortColumnName, boolean sortAscending,
 			int startRow, int maxResults) {
+					EntityManagerHelper.log("finding ${metaData.getRealClassName()} findPage${metaData.getRealClassName()}",
+				Level.INFO, null);
 		if(sortColumnName!=null && sortColumnName.length()>0){
 			try {
 				String queryString = "select model from ${metaData.getRealClassName()} model order by model."
@@ -333,6 +337,8 @@ public List<${metaData.getRealClassName()}> findBy${member.getGetNameOfPrimaryNa
 
 	@SuppressWarnings("unchecked")
 	public Long findTotalNumber${metaData.getRealClassName()}() {
+						EntityManagerHelper.log("finding ${metaData.getRealClassName()} count",
+				Level.INFO, null);
 		try {
 			String queryString = "select count(*) from ${metaData.getRealClassName()} model";
 			return (Long) getEntityManager().createQuery(queryString)
