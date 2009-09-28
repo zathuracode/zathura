@@ -392,69 +392,71 @@ throw e;
 		String tempWhere = new String();
 
 		if (variables != null) {
-
 			for (int i = 0; i < variables.length; i++) {
+				if (variables[i] != null && variablesBetween[i + 1] != null
+						&& variablesBetween[i + 2] != null
+						&& variablesBetween[i + 3] != null) {
 
-				String variable = (String) variables[i];
-				Boolean booVariable = (Boolean) variables[i + 1];
-				Object value = variables[i + 2];
-				String comparator = (String) variables[i + 3];
-
-				if (value != null) {
+					String variable = (String) variables[i];
+					Boolean booVariable = (Boolean) variables[i + 1];
+					Object value = variables[i + 2];
+					String comparator = (String) variables[i + 3];
 
 					if (booVariable.booleanValue()) {
-						tempWhere = tempWhere.length() == 0 ? "(model."
-								+ variable + " " + comparator + " \'" + value
-								+ "\' )" : tempWhere + " AND (model."
-								+ variable + " " + comparator + " \'" + value
-								+ "\' )";
+						tempWhere = (tempWhere.length() == 0) ? ("(model."
+								+ variable + " " + comparator + " \'" + value + "\' )")
+								: (tempWhere + " AND (model." + variable + " "
+										+ comparator + " \'" + value + "\' )");
 					} else {
-						tempWhere = tempWhere.length() == 0 ? "(model."
-								+ variable + " " + comparator + " " + value
-								+ " )" : tempWhere + " AND (model." + variable
-								+ " " + comparator + " " + value + " )";
+						tempWhere = (tempWhere.length() == 0) ? ("(model."
+								+ variable + " " + comparator + " " + value + " )")
+								: (tempWhere + " AND (model." + variable + " "
+										+ comparator + " " + value + " )");
 					}
-				}
 
+				}
 				i = i + 3;
 			}
 		}
 
 		if (variablesBetween != null) {
 			for (int j = 0; j < variablesBetween.length; j++) {
+				if (variablesBetween[j] != null
+						&& variablesBetween[j + 1] != null
+						&& variablesBetween[j + 2] != null
+						&& variablesBetween[j + 3] != null
+						&& variablesBetween[j + 4] != null) {
 
-				String variable = (String) variablesBetween[j];
-				Object value = variablesBetween[j + 1];
-				Object value2 = variablesBetween[j + 2];
-				String comparator1 = (String) variablesBetween[j + 3];
-				String comparator2 = (String) variablesBetween[j + 4];
+					String variable = (String) variablesBetween[j];
+					Object value = variablesBetween[j + 1];
+					Object value2 = variablesBetween[j + 2];
+					String comparator1 = (String) variablesBetween[j + 3];
+					String comparator2 = (String) variablesBetween[j + 4];
 
-				if (variable != null) {
-
-					tempWhere = tempWhere.length() == 0 ? "(" + value + " "
-							+ comparator1 + " model." + variable
-							+ " and model." + variable + " " + comparator2
-							+ " " + value2 + " )" : tempWhere + " AND ("
-							+ value + " " + comparator1 + " model." + variable
-							+ " and model." + variable + " " + comparator2
-							+ " " + value2 + " )";
+					tempWhere = (tempWhere.length() == 0) ? ("(" + value
+							+ " " + comparator1 + " " + variable + " and "
+							+ variable + " " + comparator2 + " " + value2 + " )")
+							: (tempWhere + " AND (" + value + " "
+									+ comparator1 + " " + variable
+									+ " and " + variable + " "
+									+ comparator2 + " " + value2 + " )");
 				}
 
 				j = j + 4;
-
 			}
 		}
 
 		if (variablesBetweenDates != null) {
 			for (int k = 0; k < variablesBetweenDates.length; k++) {
+				if (variablesBetweenDates[k] != null
+						&& variablesBetweenDates[k + 1] != null
+						&& variablesBetweenDates[k + 2] != null) {
 
-				String variable = (String) variablesBetweenDates[k];
-				Object object1 = variablesBetweenDates[k + 1];
-				Object object2 = variablesBetweenDates[k + 2];
-				String value = null;
-				String value2 = null;
-
-				if (variable != null) {
+					String variable = (String) variablesBetweenDates[k];
+					Object object1 = variablesBetweenDates[k + 1];
+					Object object2 = variablesBetweenDates[k + 2];
+					String value = null;
+					String value2 = null;
 
 					try {
 						Date date1 = (Date) object1;
@@ -468,15 +470,14 @@ throw e;
 						throw e;
 					}
 
-					tempWhere = tempWhere.length() == 0 ? "(model." + variable
-							+ " between \'" + value + "\' and \'" + value2
-							+ "\')" : tempWhere + " AND (model." + variable
-							+ " between \'" + value + "\' and \'" + value2
-							+ "\')";
+					tempWhere = (tempWhere.length() == 0) ? ("(model."
+							+ variable + " between \'" + value + "\' and \'"
+							+ value2 + "\')") : (tempWhere + " AND (model."
+							+ variable + " between \'" + value + "\' and \'"
+							+ value2 + "\')");
+
 				}
-
 				k = k + 2;
-
 			}
 		}
 

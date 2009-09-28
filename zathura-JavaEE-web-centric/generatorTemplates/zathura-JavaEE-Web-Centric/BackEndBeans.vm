@@ -252,7 +252,7 @@ btnSave.setDisabled(false);
 					new FacesMessage(
 							ExceptionMessages.ENTITY_SUCCESFULLYMODIFIED));
 		} catch (Exception e) {
-				renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").requestRender();
+				//renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").requestRender();
 			FacesContext.getCurrentInstance().addMessage("",
 					new FacesMessage(e.getMessage()));
 			throw e;
