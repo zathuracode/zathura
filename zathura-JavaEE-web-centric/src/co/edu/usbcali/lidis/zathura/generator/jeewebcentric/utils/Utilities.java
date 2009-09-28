@@ -523,9 +523,9 @@ public class Utilities {
 
 		folderBuilder.add(model + "control");
 
-		if (specificityLevel.intValue() == 2) {
-			folderBuilder.add(model + "pojos");
-		}
+//		if (specificityLevel.intValue() == 2) {
+//			folderBuilder.add(model + "pojos");
+//		}
 
 		folderBuilder.add(model + "dto");
 
