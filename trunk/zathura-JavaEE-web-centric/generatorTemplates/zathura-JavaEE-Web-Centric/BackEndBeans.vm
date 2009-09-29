@@ -528,9 +528,7 @@ if(flag){
 		}
 	}
 
-	@Override
 	public void dispose() throws Exception {
-		// TODO Auto-generated method stub
 	}
 
 	public RenderManager getRenderManager() {
