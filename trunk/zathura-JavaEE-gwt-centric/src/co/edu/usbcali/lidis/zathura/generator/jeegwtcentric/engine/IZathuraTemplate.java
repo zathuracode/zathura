@@ -32,13 +32,16 @@ public interface IZathuraTemplate {
 
 	public void doBusinessDelegator(VelocityContext context, String hdLocation,
 			MetaDataModel dataModel);
-
+	
+	//Cambiar Nombre por lo de GWT
 	public void doJsp(MetaData metaData, VelocityContext context,
 			String hdLocation, MetaDataModel dataModel);
 
+	//Cambiar Nombre por lo de GWT
 	public void doJspInitialMenu(MetaDataModel dataModel,
 			VelocityContext context, String hdLocation);
 
+	//Cambiar Nombre por lo de GWT
 	public void doFacesConfig(MetaDataModel dataModel, VelocityContext context,
 			String hdLocation);
 
@@ -50,6 +53,7 @@ public interface IZathuraTemplate {
 	public void doUtilites(VelocityContext context, String hdLocation,
 			MetaDataModel dataModel, String modelName);
 
+	//Cambiar Nombre por lo de GWT
 	public void doJspFacelets(VelocityContext context, String hdLocation);
 
 }

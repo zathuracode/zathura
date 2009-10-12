@@ -23,10 +23,11 @@ import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.generator.utilities.JalopyCodeFormatter;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
+import co.edu.usbcali.lidis.zathura.generator.jeegwtcentric.utils.StringBuilder;
 
 /**
  * 
- * @author William Altuzarra Noriega
+ * @author Ricardo Alberto Chiriboga, Juan Manuel Caicedo
  * 
  */
 public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
@@ -35,21 +36,21 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 	private static Logger log = Logger
 			.getLogger(ZathuraJavaEE_Gwt_Centric.class);
 
-	private final static String webCentric = GeneratorUtil
-			.getWebCentricTemplates();
+	private final static String gwtCentric = GeneratorUtil
+			.getGwtCentricTemplates();
 
 	public String virginPackageInHd = new String();
 	private Properties properties;
 
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
 			String folderProjectPath, Properties propiedades) {
-		log.info("Begin ZathuraJavaEE_Web_Centric generation");
+		log.info("Begin ZathuraJavaEE_GWT_Centric generation");
 
 		String jpaPckgName = propiedades.getProperty("jpaPckgName");
 		Integer specificityLevel = (Integer) propiedades
 				.get("specificityLevel");
 		properties = propiedades;
-		log.info("doTemplate ZathuraJavaEE_Web_Centric generation");
+		log.info("doTemplate ZathuraJavaEE_GWT_Centric generation");
 		doTemplate(folderProjectPath, metaDataModel, jpaPckgName, projectName,
 				specificityLevel);
 		copyLibreriasExt();
@@ -64,29 +65,29 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 	 */
 	private void copyLibreriasExt() {
 
-		String generatorExtZathuraJavaEEWebCentricIndexJsp = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEWebCentric()
+		String generatorExtZathuraJavaEEGwtCentricIndexJsp = GeneratorUtil
+				.getGeneratorExtZathuraJavaEEGwtCentric()
 				+ GeneratorUtil.slash + "index.jsp";
-		String generatorExtZathuraJavaEEWebCentricImages = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEWebCentric()
+		String generatorExtZathuraJavaEEGwtCentricImages = GeneratorUtil
+				.getGeneratorExtZathuraJavaEEGwtCentric()
 				+ GeneratorUtil.slash + "images" + GeneratorUtil.slash;
-		String generatorExtZathuraJavaEEWebCentricCSS = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEWebCentric()
+		String generatorExtZathuraJavaEEGwtCentricCSS = GeneratorUtil
+				.getGeneratorExtZathuraJavaEEGwtCentric()
 				+ GeneratorUtil.slash + "css" + GeneratorUtil.slash;
-		String generatorExtZathuraJavaEEWebCentricXmlhttp = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEWebCentric()
+		String generatorExtZathuraJavaEEGwtCentricXmlhttp = GeneratorUtil
+				.getGeneratorExtZathuraJavaEEGwtCentric()
 				+ GeneratorUtil.slash + "xmlhttp" + GeneratorUtil.slash;
-		String generatorExtZathuraJavaEEWebCentricWEBXML = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEWebCentric()
+		String generatorExtZathuraJavaEEGwtCentricWEBXML = GeneratorUtil
+				.getGeneratorExtZathuraJavaEEGwtCentric()
 				+ GeneratorUtil.slash + "WEB-INF" + GeneratorUtil.slash;
-		String generatorExtZathuraJavaEEWebCentricLOG4J = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEWebCentric()
+		String generatorExtZathuraJavaEEGwtCentricLOG4J = GeneratorUtil
+				.getGeneratorExtZathuraJavaEEGwtCentric()
 				+ GeneratorUtil.slash + "log4j" + GeneratorUtil.slash;
-		String generatorLibrariesZathuraJavaEEWebCentricIceFaces = GeneratorUtil
-				.getGeneratorLibrariesZathuraJavaEEWebCentric()
+		String generatorLibrariesZathuraJavaEEGwtCentricIceFaces = GeneratorUtil
+				.getGeneratorLibrariesZathuraJavaEEGwtCentric()
 				+ GeneratorUtil.slash + "iceFaces1.8.1" + GeneratorUtil.slash;
-		String generatorLibrariesZathuraJavaEEWebCentricJpaHibernate = GeneratorUtil
-				.getGeneratorLibrariesZathuraJavaEEWebCentric()
+		String generatorLibrariesZathuraJavaEEGwtCentricJpaHibernate = GeneratorUtil
+				.getGeneratorLibrariesZathuraJavaEEGwtCentric()
 				+ GeneratorUtil.slash
 				+ "jpa-hibernate3.2"
 				+ GeneratorUtil.slash;
@@ -96,39 +97,39 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 		// Copy Libraries
 		String libFolderPath = properties.getProperty("libFolderPath");
 		GeneratorUtil.copyFolder(
-				generatorLibrariesZathuraJavaEEWebCentricIceFaces,
+				generatorLibrariesZathuraJavaEEGwtCentricIceFaces,
 				libFolderPath);
 		GeneratorUtil.copyFolder(
-				generatorLibrariesZathuraJavaEEWebCentricJpaHibernate,
+				generatorLibrariesZathuraJavaEEGwtCentricJpaHibernate,
 				libFolderPath);
 
 		// Copy Ext web.xml
 		String webRootFolderPath = properties.getProperty("webRootFolderPath");
-		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebCentricWEBXML,
+		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricWEBXML,
 				webRootFolderPath + "WEB-INF" + GeneratorUtil.slash);
 
 		// Copy Ext css
 		GeneratorUtil.createFolder(webRootFolderPath + "images");
-		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebCentricImages,
+		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricImages,
 				webRootFolderPath + "images" + GeneratorUtil.slash);
 
 		// Copy Ext css
 		GeneratorUtil.createFolder(webRootFolderPath + "css");
-		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebCentricCSS,
+		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricCSS,
 				webRootFolderPath + "css" + GeneratorUtil.slash);
 
 		// Copy Ext xmlhttp
 		GeneratorUtil.createFolder(webRootFolderPath + "xmlhttp");
-		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebCentricXmlhttp,
+		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricXmlhttp,
 				webRootFolderPath + "xmlhttp" + GeneratorUtil.slash);
 
 		// Copy Ext index.jsp
-		GeneratorUtil.copy(generatorExtZathuraJavaEEWebCentricIndexJsp,
+		GeneratorUtil.copy(generatorExtZathuraJavaEEGwtCentricIndexJsp,
 				webRootFolderPath + GeneratorUtil.slash + "index.jsp");
 
 		// Copy Ext log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
-		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebCentricLOG4J,
+		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricLOG4J,
 				folderProjectPath + GeneratorUtil.slash);
 
 	}
@@ -143,7 +144,7 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			properties
 					.setProperty("file.resource.loader.class",
 							"org.apache.velocity.runtime.resource.loader.FileResourceLoader");
-			properties.setProperty("file.resource.loader.path", webCentric);
+			properties.setProperty("file.resource.loader.path", gwtCentric);
 			properties.setProperty("file.resource.loader.cache", "false");
 			properties.setProperty(
 					"file.resource.loader.modificationCheckInterval", "2");
@@ -643,204 +644,19 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 
 	public void doBackEndBeans(MetaData metaData, VelocityContext context,
 			String hdLocation, MetaDataModel dataModel) {
-		log.info("Begin doBackEndBeans");
-
-		Template backEndBeans = null;
-
-		StringWriter swBackEndBeans = new StringWriter();
-
-		try {
-			backEndBeans = Velocity.getTemplate("BackEndBeans.vm");
-
-		} catch (ResourceNotFoundException rnfe) {
-			// couldn't find the template
-			rnfe.printStackTrace();
-		} catch (ParseErrorException pee) {
-			// syntax error: problem parsing the template
-			pee.printStackTrace();
-		} catch (MethodInvocationException mie) {
-			// something invoked in the template
-			// threw an exception
-			mie.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-			backEndBeans.merge(context, swBackEndBeans);
-
-			// System.out.println(swIdao);
-			// System.out.println(swdao);
-
-			String realLocation = hdLocation + GeneratorUtil.slash
-					+ virginPackageInHd + GeneratorUtil.slash + "presentation"
-					+ GeneratorUtil.slash + "backEndBeans"
-					+ GeneratorUtil.slash;
-
-			FileWriter fstream = new FileWriter(realLocation
-					+ metaData.getRealClassName() + "View.java");
-			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(swBackEndBeans.toString());
-			// Close the output stream
-			out.close();
-
-			JalopyCodeFormatter.formatJavaCodeFile(realLocation
-					+ metaData.getRealClassName() + "View.java");
-
-			Utilities.getInstance().dates = null;
-			Utilities.getInstance().datesId = null;
-
-			log.info("End doBackEndBeans");
-
-		} catch (Exception e) {
-			log.info("Error: " + e.getMessage());
-		}
 
 	}
 
+	//Cambiar Nombre por lo de GWT
 	public void doJsp(MetaData metaData, VelocityContext context,
 			String hdLocation, MetaDataModel dataModel) {
-		log.info("Begin doJsp");
-
-		Template jsp = null;
-		Template jspData = null;
-		Template jspDataEditable = null;
-
-		StringWriter swJsp = new StringWriter();
-		StringWriter swJspData = new StringWriter();
-		StringWriter swJspDataEditable = new StringWriter();
-
-		try {
-			jsp = Velocity.getTemplate("JSP.vm");
-			jspData = Velocity.getTemplate("JSPdataTables.vm");
-			jspDataEditable = Velocity.getTemplate("JSPdataTables-Editable.vm");
-
-		} catch (ResourceNotFoundException rnfe) {
-			// couldn't find the template
-			rnfe.printStackTrace();
-		} catch (ParseErrorException pee) {
-			// syntax error: problem parsing the template
-			pee.printStackTrace();
-		} catch (MethodInvocationException mie) {
-			// something invoked in the template
-			// threw an exception
-			mie.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-			jsp.merge(context, swJsp);
-			jspData.merge(context, swJspData);
-			jspDataEditable.merge(context, swJspDataEditable);
-
-			String realLocation = properties.getProperty("webRootFolderPath")
-					+ "JSPX" + GeneratorUtil.slash;
-
-			FileWriter fstream = new FileWriter(realLocation
-					+ metaData.getRealClassNameAsVariable() + ".jspx");
-			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(swJsp.toString());
-
-			// Close the output stream
-			out.close();
-
-			FileWriter fstreamData = new FileWriter(realLocation
-					+ metaData.getRealClassNameAsVariable()
-					+ "ListDataTable.jspx");
-			BufferedWriter outData = new BufferedWriter(fstreamData);
-			outData.write(swJspData.toString());
-			// Close the output stream
-			outData.close();
-
-			FileWriter fstreamDataEditable = new FileWriter(realLocation
-					+ metaData.getRealClassNameAsVariable()
-					+ "ListDataTableEditable.jspx");
-			BufferedWriter outDataEditable = new BufferedWriter(
-					fstreamDataEditable);
-			outDataEditable.write(swJspDataEditable.toString());
-			// Close the output stream
-			outDataEditable.close();
-
-			Utilities.getInstance().datesJSP = null;
-			Utilities.getInstance().datesIdJSP = null;
-
-			log.info("End doJSP");
-
-		} catch (Exception e) {
-			log.info("Error: " + e.getMessage());
-		}
+		
 
 	}
 
+	//Cambiar Nombre por lo de GWT
 	public void doJspFacelets(VelocityContext context, String hdLocation) {
-		log.info("Begin doJspFacelets");
-
-		Template jspMainTemplate = null;
-		Template jspHeader = null;
-		Template jspFooter = null;
-
-		StringWriter swMainTemplate = new StringWriter();
-		StringWriter swHeader = new StringWriter();
-		StringWriter swFooter = new StringWriter();
-
-		try {
-			jspMainTemplate = Velocity.getTemplate("JSPmainTemplate.vm");
-			jspHeader = Velocity.getTemplate("JSPheader.vm");
-			jspFooter = Velocity.getTemplate("JSPfooter.vm");
-
-		} catch (ResourceNotFoundException rnfe) {
-			// couldn't find the template
-			rnfe.printStackTrace();
-		} catch (ParseErrorException pee) {
-			// syntax error: problem parsing the template
-			pee.printStackTrace();
-		} catch (MethodInvocationException mie) {
-			// something invoked in the template
-			// threw an exception
-			mie.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-			jspMainTemplate.merge(context, swMainTemplate);
-			jspHeader.merge(context, swHeader);
-			jspFooter.merge(context, swFooter);
-
-			String realLocation = properties.getProperty("webRootFolderPath")
-					+ "WEB-INF" + GeneratorUtil.slash + "facelets"
-					+ GeneratorUtil.slash;
-
-			// Main template
-			FileWriter fstreamMainTemplate = new FileWriter(realLocation
-					+ "mainTemplate" + ".jspx");
-			BufferedWriter outMainTemplate = new BufferedWriter(
-					fstreamMainTemplate);
-			outMainTemplate.write(swMainTemplate.toString());
-			outMainTemplate.close();
-
-			// Header
-			FileWriter fstreamHeader = new FileWriter(realLocation
-					+ "header.jspx");
-			BufferedWriter outHeader = new BufferedWriter(fstreamHeader);
-			outHeader.write(swHeader.toString());
-			// Close the output stream
-			outHeader.close();
-
-			// Footer
-			FileWriter fstreamFooter = new FileWriter(realLocation
-					+ "footer.jspx");
-			BufferedWriter outFooter = new BufferedWriter(fstreamFooter);
-			outFooter.write(swFooter.toString());
-			// Close the output stream
-			outFooter.close();
-
-			log.info("End doJSPFacelets");
-
-		} catch (Exception e) {
-			log.info("Error: " + e.getMessage());
-		}
+		
 
 	}
 
@@ -1106,93 +922,19 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 
 	}
 
+	//Cambiar Nombre por lo de GWT
 	public void doJspInitialMenu(MetaDataModel dataModel,
 			VelocityContext context, String hdLocation) {
 
-		log.info("Begin doJspInitialMenu");
-
-		Template jspInitialMenu = null;
-		StringWriter swJspInitialMenu = new StringWriter();
-
-		try {
-			jspInitialMenu = Velocity.getTemplate("JSPinitialMenu.vm");
-			// logic = Velocity.getTemplate("Logic.vm");
-		} catch (ResourceNotFoundException rnfe) {
-			// couldn't find the template
-			rnfe.printStackTrace();
-		} catch (ParseErrorException pee) {
-			// syntax error: problem parsing the template
-			pee.printStackTrace();
-		} catch (MethodInvocationException mie) {
-			// something invoked in the template
-			// threw an exception
-			mie.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-			jspInitialMenu.merge(context, swJspInitialMenu);
-
-			String realLocation = properties.getProperty("webRootFolderPath")
-					+ "JSPX" + GeneratorUtil.slash;
-
-			FileWriter fstream = new FileWriter(realLocation
-					+ "initialMenu.jspx");
-			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(swJspInitialMenu.toString());
-			// Close the output stream
-			out.close();
-
-			log.info("End doJspInitialMenu");
-
-		} catch (Exception e) {
-			log.info("Error doJspInitialMenu");
-		}
+		
 
 	}
 
+	//Cambiar Nombre por lo de GWT
 	public void doFacesConfig(MetaDataModel dataModel, VelocityContext context,
 			String hdLocation) {
 
-		log.info("Begin doFacesConfig");
-
-		Template facesConfig = null;
-		StringWriter swFacesConfig = new StringWriter();
-
-		try {
-			facesConfig = Velocity.getTemplate("faces-config.xml.vm");
-			// logic = Velocity.getTemplate("Logic.vm");
-		} catch (ResourceNotFoundException rnfe) {
-			// couldn't find the template
-			rnfe.printStackTrace();
-		} catch (ParseErrorException pee) {
-			// syntax error: problem parsing the template
-			pee.printStackTrace();
-		} catch (MethodInvocationException mie) {
-			// something invoked in the template
-			// threw an exception
-			mie.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		try {
-			facesConfig.merge(context, swFacesConfig);
-
-			FileWriter fstream = new FileWriter(properties
-					.getProperty("webRootFolderPath")
-					+ "WEB-INF" + GeneratorUtil.slash + "faces-config.xml");
-			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(swFacesConfig.toString());
-			// Close the output stream
-			out.close();
-
-			log.info("End doFacesConfig");
-
-		} catch (Exception e) {
-			log.info("Error doFacesConfig");
-		}
+		
 
 	}
 
