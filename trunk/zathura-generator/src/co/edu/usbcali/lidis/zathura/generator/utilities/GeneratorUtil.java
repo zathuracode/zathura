@@ -33,6 +33,11 @@ public class GeneratorUtil {
 	private static String ejbCentricTemplates = "generatorTemplates"+ GeneratorUtil.slash + "zathura-JavaEE-ejb-centric"+ GeneratorUtil.slash;
 	private static String generatorLibrariesZathuraJavaEEejbCentric="generatorLibraries"+ GeneratorUtil.slash + "zathura-JavaEE-ejb-centric"+ GeneratorUtil.slash;
 	private static String generatorExtZathuraJavaEEejbCentric="generatorExt"+ GeneratorUtil.slash + "zathura-JavaEE-ejb-centric"+ GeneratorUtil.slash;
+	
+	//JavaEEGwtCentric
+	private static String gwtCentricTemplates = "generatorTemplates"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-centric"+ GeneratorUtil.slash;
+	private static String generatorLibrariesZathuraJavaEEGwtCentric="generatorLibraries"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-centric"+ GeneratorUtil.slash;
+	private static String generatorExtZathuraJavaEEGwtCentric="generatorExt"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-centric"+ GeneratorUtil.slash;
 		
 	
 	
@@ -87,6 +92,26 @@ public class GeneratorUtil {
 			return fullPath+webCentricTemplates;
 		}
 		return webCentricTemplates;
+	}
+	
+	//JavaEEGwtCentric
+	public static String getGeneratorLibrariesZathuraJavaEEGwtCentric() {
+		if(fullPath!=null && fullPath.equals("")!=true){
+			return fullPath+generatorLibrariesZathuraJavaEEGwtCentric;
+		}
+		return generatorLibrariesZathuraJavaEEGwtCentric;
+	}
+	public static String getGeneratorExtZathuraJavaEEGwtCentric() {
+		if(fullPath!=null && fullPath.equals("")!=true){
+			return fullPath+generatorExtZathuraJavaEEGwtCentric;
+		}
+		return generatorExtZathuraJavaEEGwtCentric;
+	}	
+	public static String getGwtCentricTemplates() {
+		if(fullPath!=null && fullPath.equals("")!=true){
+			return fullPath+gwtCentricTemplates;
+		}
+		return gwtCentricTemplates;
 	}
 	
 	/**
