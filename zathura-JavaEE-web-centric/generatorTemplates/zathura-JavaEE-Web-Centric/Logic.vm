@@ -393,9 +393,9 @@ throw e;
 
 		if (variables != null) {
 			for (int i = 0; i < variables.length; i++) {
-				if (variables[i] != null && variablesBetween[i + 1] != null
-						&& variablesBetween[i + 2] != null
-						&& variablesBetween[i + 3] != null) {
+				if (variables[i] != null && variables[i + 1] != null
+						&& variables[i + 2] != null
+						&& variables[i + 3] != null) {
 
 					String variable = (String) variables[i];
 					Boolean booVariable = (Boolean) variables[i + 1];
