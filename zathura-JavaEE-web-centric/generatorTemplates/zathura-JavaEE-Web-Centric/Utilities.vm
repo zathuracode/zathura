@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.List;
+import java.text.DecimalFormat;
 
 public class Utilities {
 
@@ -48,6 +49,11 @@ public class Utilities {
 		boolean ret = false;
 
 		if (fieldValue != null && precision != null && scale != null) {
+
+			if (fieldValue.contains("E")) {
+				DecimalFormat df = new DecimalFormat("##.################");
+				fieldValue = df.format(new Double(fieldValue));
+			}
 
 			fieldValue = fieldValue.replace(".", "%");
 
