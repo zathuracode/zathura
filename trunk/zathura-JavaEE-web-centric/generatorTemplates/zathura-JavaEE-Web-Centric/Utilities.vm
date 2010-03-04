@@ -50,10 +50,10 @@ public class Utilities {
 
 		if (fieldValue != null && precision != null && scale != null) {
 
-			if (fieldValue.contains("E")) {
+			if (fieldValue.contains("E") && scale!= 0) {
 				DecimalFormat df = new DecimalFormat("##.################");
 				fieldValue = df.format(new Double(fieldValue));
-								if (fieldValue.length() > 0 && !fieldValue.contains(".")) {
+				if (fieldValue.length() > 0 && !fieldValue.contains(".")) {
 					fieldValue = fieldValue + ".0";
 				}
 			}
