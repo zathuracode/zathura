@@ -53,6 +53,9 @@ public class Utilities {
 			if (fieldValue.contains("E")) {
 				DecimalFormat df = new DecimalFormat("##.################");
 				fieldValue = df.format(new Double(fieldValue));
+								if (fieldValue.length() > 0 && !fieldValue.contains(".")) {
+					fieldValue = fieldValue + ".0";
+				}
 			}
 
 			fieldValue = fieldValue.replace(".", "%");
