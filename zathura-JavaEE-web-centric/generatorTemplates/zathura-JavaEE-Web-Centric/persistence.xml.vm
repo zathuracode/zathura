@@ -11,10 +11,9 @@
 		
 #foreach($metaData  in $dataModel.theMetaData)
 		
-				<class>${package}.${metaData.getRealClassName()}	</class>
-		
+				<class>${package}.${metaData.getRealClassName()}</class>
 				#if(${metaData.hasComposeKey()})
-					<class>${package}.${metaData.getRealClassNameForComposeKey()}</class>
+				<class>${package}.${metaData.getRealClassNameForComposeKey()}</class>
 #end
 		
 #end
