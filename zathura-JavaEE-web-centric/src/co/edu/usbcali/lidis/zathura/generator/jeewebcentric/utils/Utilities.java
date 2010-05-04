@@ -286,7 +286,7 @@ public class Utilities {
 								+ variableName
 								+ "!=null && "
 								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + scale
+								+ variableName + "," + (new Integer(precision)-new Integer(scale))+ "," + scale
 								+ ")==false" + ifconditionClose
 								+ throwExceptionLength + "\"" + variableName
 								+ "\"" + throwExceptionClose);
@@ -312,7 +312,7 @@ public class Utilities {
 								+ variableName
 								+ "!=null && "
 								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + scale
+								+ variableName + "," + (new Integer(precision)-new Integer(scale)) + "," + scale
 								+ ")==false" + ifconditionClose
 								+ throwExceptionLength + "\"" + variableName
 								+ "\"" + throwExceptionClose);
