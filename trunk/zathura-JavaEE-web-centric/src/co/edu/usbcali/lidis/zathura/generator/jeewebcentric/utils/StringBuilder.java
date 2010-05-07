@@ -920,10 +920,10 @@ public class StringBuilder implements IStringBuilder {
 
 		Utilities.getInstance().dates = new ArrayList<String>();
 
-		if (metaData.getRealClassName().equalsIgnoreCase("DiaNoLaboral")) {
-			String tmp = "";
-			System.out.println(tmp);
-		}
+//		if (metaData.getRealClassName().equalsIgnoreCase("consignaciones")) {
+//			String tmp = "";
+//			System.out.println(tmp);
+//		}
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
