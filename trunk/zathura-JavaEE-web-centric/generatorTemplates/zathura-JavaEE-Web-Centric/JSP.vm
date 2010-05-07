@@ -1,168 +1,134 @@
 <jsp:root jsfc="f:view" xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ice="http://www.icesoft.com/icefaces/component"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
-	<html>
-		<body>
-			<f:view>
-
-				<ui:composition template="/WEB-INF/facelets/mainTemplate.jspx">
-
-					<ui:define name="header">
-						<ui:include src="/WEB-INF/facelets/header.jspx" />
-					</ui:define>
-					<br />
-					<ui:define name="body">
-
-			<ice:form>
-				<ice:outputConnectionStatus id="outputConnectionStatus" style="height: 30px; right: 10px; top: -10px; position: absolute;"/>
-				<br />
-				<br />
-				<div align="center">
-					
-					<ice:commandLink id="cmdBack" 
-						value="Back" action="goInitialMenu">
-					</ice:commandLink>
-
-					<ice:panelGrid columns="1" id="pnlPrincipal">
-
-						<div align="center">
-							<ice:outputText id="msgProject${metaData.getRealClassName()}Title" style="font-size: 20px"
-								value="${metaData.getRealClassName()}">
-							</ice:outputText>
-						</div>
-
-						<br />
-
-						<ice:messages
-							style="font-family: fantasy;color: red;font-size: 13px;" />
-
-						<ice:panelGroup style="border:1px solid #d9d9d9;">
-						
-							<div align="center">
-							<ice:panelGrid columns="2">
-
-#foreach($member  in $finalParamForIdClassAsVariables)
-
-#set( $str = $member ) 
-#set( $upper = $str.toString().substring(0,1).toUpperCase() )
-#set($str2 = $str.toString().substring(1))
- 
-									<ice:outputText id="msg${upper}${str2}"
-										value=" ${upper}${str2}">
-									</ice:outputText>
-									<ice:inputText id="txt${upper}${str2}"
-											binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}"
-											valueChangeListener="#{${metaData.getRealClassNameAsVariable()}View.listener_txtId}"
-											partialSubmit="true">
-									</ice:inputText>
-
-#end
-											
-#if($isFinalParamForIdClassAsVariablesForDates)
-#foreach($member  in $finalParamForIdClassAsVariablesForDates)
-				
-#set( $str = $member ) 
-#set( $upper = $str.toString().substring(0,1).toUpperCase() )
-#set($str2 = $str.toString().substring(1))
- 
-									<ice:outputText id="msg${upper}${str2}"
-										value=" ${upper}${str2}">
-									</ice:outputText>
-									<ice:selectInputDate id="txt${upper}${str2}" 
-										popupDateFormat="dd/MM/yyyy" onkeydown="javascript:return false;" 
-										disabled="true" renderAsPopup="true"
-										binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}"
-										valueChangeListener="#{${metaData.getRealClassNameAsVariable()}View.listener_txtId}">
-									</ice:selectInputDate>
-
-#end
-#end
-
-#foreach($member  in $finalParamVariablesAsList)
-
-#set( $str = $member ) 
-#set( $upper = $str.toString().substring(0,1).toUpperCase() )
-#set($str2 = $str.toString().substring(1))
-				
-									<ice:outputText id="msg${upper}${str2}"
-										value=" ${upper}${str2}">
-									</ice:outputText>
-									<ice:inputText id="txt${upper}${str2}" disabled="true"
-														binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}">
-									</ice:inputText>
-#end
-																			
-																			
-#if($isFinalParamDatesAsList)
-#foreach($member  in $finalParamDatesAsList)
-
-#set( $str = $member ) 
-#set( $upper = $str.toString().substring(0,1).toUpperCase() )
-#set($str2 = $str.toString().substring(1))
- 
-									<ice:outputText id="msg${upper}${str2}"
-										value=" ${upper}${str2}">
-									</ice:outputText>
-									<ice:selectInputDate id="txt${upper}${str2}"  
-		popupDateFormat="dd/MM/yyyy" 
-										onkeydown="javascript:return false;" 
-										disabled="true" renderAsPopup="true"
-										binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}">
-									</ice:selectInputDate>
-
-#end
-#end
-																																						
-
-								</ice:panelGrid>
-							</div>
-						</ice:panelGroup>
-
-						<ice:panelGroup style="border:1px solid #d9d9d9;">
-							<div align="center">
-								<ice:panelGrid columns="4">
-												
-									<ice:commandButton id="btnSave" disabled="true"
-										styleClass="button" value="Save"
-										action="#{${metaData.getRealClassNameAsVariable()}View.action_save}"
-										binding="#{${metaData.getRealClassNameAsVariable()}View.btnSave}">
-									</ice:commandButton>
-									<ice:commandButton id="btnModify" disabled="true"
-										styleClass="button" value="Modify"
-										action="#{${metaData.getRealClassNameAsVariable()}View.action_modify}"
-										binding="#{${metaData.getRealClassNameAsVariable()}View.btnModify}">
-									</ice:commandButton>
-									<ice:commandButton id="btnDelete" disabled="true"
-										styleClass="button" value="Delete"
-										action="#{${metaData.getRealClassNameAsVariable()}View.action_delete}"
-										binding="#{${metaData.getRealClassNameAsVariable()}View.btnDelete}"
-										onclick="if(!confirm('Do you really want to delete this Entry')){ return; };">
-									</ice:commandButton>
-									<ice:commandButton id="btnClear" disabled="false"
-										styleClass="button" value="Clear"
-										action="#{${metaData.getRealClassNameAsVariable()}View.action_clear}"
-										binding="#{${metaData.getRealClassNameAsVariable()}View.btnClear}">
-									</ice:commandButton>
-
-								</ice:panelGrid>
-							</div>
-						</ice:panelGroup>
-
-
-					</ice:panelGrid>
-				</div>
-			</ice:form>
-						
-					</ui:define>
-					<ui:define name="footer">
-						<ui:include src="/WEB-INF/facelets/footer.jspx" />
-					</ui:define>
-				</ui:composition>
-			</f:view>
-		</body>
-	</html>
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <html>
+        <body>
+            <f:view>
+                <ui:composition template="/WEB-INF/facelets/mainTemplate.jspx">
+                    <ui:define name="header">
+                        <ui:include src="/WEB-INF/facelets/header.jspx" />
+                    </ui:define>
+                    <br />
+                    <ui:define name="body">
+                        <ice:form>
+                            <ice:outputConnectionStatus id="outputConnectionStatus" style="height: 30px; right: 10px; top: -10px; position: absolute;"/>
+                            <br />
+                            <br />
+                            <div align="center">
+                                <ice:commandLink id="cmdBack" 
+                                    value="Back" action="goInitialMenu">
+                                </ice:commandLink>
+                                <ice:panelGrid columns="1" id="pnlPrincipal">
+                                    <div align="center">
+                                        <ice:outputText id="msgProject${metaData.getRealClassName()}Title" style="font-size: 20px"
+                                            value="${metaData.getRealClassName()}">
+                                        </ice:outputText>
+                                    </div>
+                                    <br />
+                                    <ice:messages
+                                        style="font-family: fantasy;color: red;font-size: 13px;" />
+                                        <ice:panelGroup style="border:1px solid #d9d9d9;">
+                                            <div align="center">
+                                                <ice:panelGrid columns="2">
+                                                    #foreach($member  in $finalParamForIdClassAsVariables)
+                                                        #set( $str = $member ) 
+                                                        #set( $upper = $str.toString().substring(0,1).toUpperCase() )
+                                                        #set($str2 = $str.toString().substring(1))
+                                                        <ice:outputText id="msg${upper}${str2}"
+                                                            value=" ${upper}${str2}">
+                                                        </ice:outputText>
+                                                        <ice:inputText id="txt${upper}${str2}"
+                                                            binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}"
+                                                            valueChangeListener="#{${metaData.getRealClassNameAsVariable()}View.listener_txtId}"
+                                                            partialSubmit="true">
+                                                        </ice:inputText>
+                                                    #end
+                                                    #if($isFinalParamForIdClassAsVariablesForDates)
+                                                        #foreach($member  in $finalParamForIdClassAsVariablesForDates)
+                                                            #set( $str = $member ) 
+                                                            #set( $upper = $str.toString().substring(0,1).toUpperCase() )
+                                                            #set($str2 = $str.toString().substring(1))
+                                                            <ice:outputText id="msg${upper}${str2}"
+                                                                value=" ${upper}${str2}">
+                                                            </ice:outputText>
+                                                            <ice:selectInputDate id="txt${upper}${str2}" 
+                                                                popupDateFormat="dd/MM/yyyy" onkeydown="javascript:return false;" 
+                                                                disabled="true" renderAsPopup="true"
+                                                                binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}"
+                                                                valueChangeListener="#{${metaData.getRealClassNameAsVariable()}View.listener_txtId}">
+                                                            </ice:selectInputDate>
+                                                        #end
+                                                    #end
+                                                    #foreach($member  in $finalParamVariablesAsList)
+                                                        #set( $str = $member ) 
+                                                        #set( $upper = $str.toString().substring(0,1).toUpperCase() )
+                                                        #set($str2 = $str.toString().substring(1))
+                                                        <ice:outputText id="msg${upper}${str2}"
+                                                            value=" ${upper}${str2}">
+                                                        </ice:outputText>
+                                                        <ice:inputText id="txt${upper}${str2}" disabled="true"
+                                                            binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}">
+                                                        </ice:inputText>
+                                                    #end
+                                                    #if($isFinalParamDatesAsList)
+                                                        #foreach($member  in $finalParamDatesAsList)
+                                                            #set( $str = $member ) 
+                                                            #set( $upper = $str.toString().substring(0,1).toUpperCase() )
+                                                            #set($str2 = $str.toString().substring(1))
+                                                            <ice:outputText id="msg${upper}${str2}"
+                                                                value=" ${upper}${str2}">
+                                                            </ice:outputText>
+                                                            <ice:selectInputDate id="txt${upper}${str2}"  
+                                                                popupDateFormat="dd/MM/yyyy" 
+                                                                onkeydown="javascript:return false;" 
+                                                                disabled="true" renderAsPopup="true"
+                                                                binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}">
+                                                            </ice:selectInputDate>
+                                                        #end
+                                                    #end
+                                                </ice:panelGrid>
+                                            </div>
+                                        </ice:panelGroup>
+                                        <ice:panelGroup style="border:1px solid #d9d9d9;">
+                                            <div align="center">
+                                                <ice:panelGrid columns="4">
+                                                    <ice:commandButton id="btnSave" disabled="true"
+                                                        styleClass="button" value="Save"
+                                                        action="#{${metaData.getRealClassNameAsVariable()}View.action_save}"
+                                                        binding="#{${metaData.getRealClassNameAsVariable()}View.btnSave}">
+                                                    </ice:commandButton>
+                                                    <ice:commandButton id="btnModify" disabled="true"
+                                                        styleClass="button" value="Modify"
+                                                        action="#{${metaData.getRealClassNameAsVariable()}View.action_modify}"
+                                                        binding="#{${metaData.getRealClassNameAsVariable()}View.btnModify}">
+                                                    </ice:commandButton>
+                                                    <ice:commandButton id="btnDelete" disabled="true"
+                                                        styleClass="button" value="Delete"
+                                                        action="#{${metaData.getRealClassNameAsVariable()}View.action_delete}"
+                                                        binding="#{${metaData.getRealClassNameAsVariable()}View.btnDelete}"
+                                                        onclick="if(!confirm('Do you really want to delete this Entry')){ return; };">
+                                                    </ice:commandButton>
+                                                    <ice:commandButton id="btnClear" disabled="false"
+                                                        styleClass="button" value="Clear"
+                                                        action="#{${metaData.getRealClassNameAsVariable()}View.action_clear}"
+                                                        binding="#{${metaData.getRealClassNameAsVariable()}View.btnClear}">
+                                                    </ice:commandButton>
+                                                </ice:panelGrid>
+                                            </div>
+                                        </ice:panelGroup>
+                                </ice:panelGrid>
+                            </div>
+                        </ice:form>
+                    </ui:define>
+                    <ui:define name="footer">
+                        <ui:include src="/WEB-INF/facelets/footer.jspx" />
+                    </ui:define>
+                </ui:composition>
+            </f:view>
+        </body>
+    </html>
 </jsp:root>
