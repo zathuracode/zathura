@@ -37,8 +37,9 @@ String fieldValue, Integer precision, Integer scale) {
 boolean ret = false;
 if (fieldValue != null && precision != null && scale != null) {
 if (fieldValue.contains("E") && scale!= 0) {
-#set( $deciform = "##.################" )
-DecimalFormat df = new DecimalFormat("$deciform");
+String dfString = "# # . # # # # # # # # # # # # # # # #";
+dfString = dfString.replace(" ", "");
+DecimalFormat df = new DecimalFormat(dfString);
 fieldValue = df.format(new Double(fieldValue));
 if (fieldValue.length() > 0 && !fieldValue.contains(".")) {
 fieldValue = fieldValue + ".0";
