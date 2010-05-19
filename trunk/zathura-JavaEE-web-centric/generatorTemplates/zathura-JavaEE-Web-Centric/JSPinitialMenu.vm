@@ -18,25 +18,15 @@
                             <br />
                             <br />
                             <div align="center">
-                                <ice:panelGrid columns="3" border="1" id="pnlPrincipal">
-                                    <div align="center">
-                                        <ice:outputText id="msg${projectName}ProjectName" style="font-size: 20px"
-                                            value="Welcome">
-                                        </ice:outputText>
-                                    </div>
-                                    <div align="center">
-                                        <ice:outputText id="msg${projectName}ProjectName2" style="font-size: 20px"
-                                            value="to">
-                                        </ice:outputText>
-                                    </div>
-                                    <div align="center">
-                                        <ice:outputText id="msg${projectName}ProjectName3" style="font-size: 20px"
-                                            value="${projectName}">
-                                        </ice:outputText>
-                                    </div>
-                                    <br />
-                                    <br />
-                                    <br />
+                               
+                               
+                               <ice:panelCollapsible expanded="true" toggleOnClick="true" 	style="width: 100%">
+									<f:facet name="header">
+										<ice:outputLabel value="Welcome to ${projectName}" />
+									</f:facet>
+                            
+                                <ice:panelGrid columns="3" border="0" id="pnlPrincipal">
+                                
                                     #foreach($metaData  in $dataModel.theMetaData)
                                         <ice:commandLink id="cmd${metaData.getRealClassName()}"
                                             value="${metaData.getRealClassName()}" action="go${metaData.getRealClassName()}">
@@ -49,6 +39,7 @@
                                         </ice:commandLink>
                                     #end
                                 </ice:panelGrid>
+                              </ice:panelCollapsible>
                             </div>
                         </ice:form>
                     </ui:define>
