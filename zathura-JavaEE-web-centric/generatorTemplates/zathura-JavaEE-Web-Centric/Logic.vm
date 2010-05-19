@@ -34,7 +34,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             #end
             #if(${metaData.isGetManyToOneProperties()})
                 #foreach($member  in ${metaData.getManyToOneProperties()})
-                    I${member.getRealClassName()}Logic logic${member.getRealClassName()}$velocityCount= new 					${member.getRealClassName()}Logic();
+                    I${member.getRealClassName()}Logic logic${member.getRealClassName()}$velocityCount= new ${member.getRealClassName()}Logic();
                 #end
                 #foreach($member  in $getStringsForManyToOneProperties)
                     $member
@@ -155,9 +155,11 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             #end
             #if(${metaData.isGetManyToOneProperties()})
                 #foreach($member  in ${metaData.getManyToOneProperties()})
+                	
                     I${member.getRealClassName()}Logic logic${member.getRealClassName()}$velocityCount= new 					${member.getRealClassName()}Logic();
                 #end
                 #foreach($member  in $getStringsForManyToOneProperties)
+                	//Cali
                     $member
                 #end
                 #foreach($member  in ${metaData.getManyToOneProperties()})
