@@ -21,18 +21,15 @@
                                 <ice:commandLink id="cmdBack" 
                                     value="Back" action="goInitialMenu">
                                 </ice:commandLink>
-                                <ice:panelGrid columns="1" id="pnlPrincipal">
-                                    <div align="center">
-                                        <ice:outputText id="msgTitle" style="font-size: 20px"
-                                            value="${metaData.getRealClassName()}Data">
-                                        </ice:outputText>
-                                    </div>
-                                    <br />
-                                    <ice:messages
-                                        style="font-family: fantasy;color: red;font-size: 13px;" />
+                                <ice:panelGrid columns="1" id="pnlPrincipal">                                
+                                    <ice:messages style="font-family: fantasy;color: red;font-size: 13px;" />
                                 </ice:panelGrid>
                             </div>
                             <div align="center">
+								<ice:panelCollapsible expanded="true" toggleOnClick="false" rendered="#{${metaData.getRealClassNameAsVariable()}View.renderDataTable}" >
+									<f:facet name="header">
+										<ice:outputLabel id="msgProjectClientesTitle" value="${metaData.getRealClassName()}Data" />
+									</f:facet>
                                 <ice:panelGroup rendered="#{${metaData.getRealClassNameAsVariable()}View.renderDataTable}">
                                     <div align="center" >
                                         <!--<div align="center" style="overflow: auto; width: 750px;">-->
@@ -143,6 +140,7 @@
                                         </ice:dataPaginator>
                                     </div>
                                 </ice:panelGroup>
+								</ice:panelCollapsible>
                             </div>
                             <div align="center">
                                 <ice:outputText value="NO DATA TO SHOW WAS FOUND" rendered="#{${metaData.getRealClassNameAsVariable()}View.renderDataTable== true ? false : true}"/>
