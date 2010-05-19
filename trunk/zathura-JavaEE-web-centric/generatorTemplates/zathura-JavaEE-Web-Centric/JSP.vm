@@ -22,16 +22,18 @@
                                 <ice:commandLink id="cmdBack" 
                                     value="Back" action="goInitialMenu">
                                 </ice:commandLink>
-                                <ice:panelGrid columns="1" id="pnlPrincipal">
-                                    <div align="center">
-                                        <ice:outputText id="msgProject${metaData.getRealClassName()}Title" style="font-size: 20px"
-                                            value="${metaData.getRealClassName()}">
-                                        </ice:outputText>
-                                    </div>
+                                
+                                <ice:panelCollapsible expanded="true" toggleOnClick="false" style="width: 100%">
+									<f:facet name="header">
+										<ice:outputLabel id="msgProject${metaData.getRealClassName()}Title" value="${metaData.getRealClassName()}" />
+									</f:facet>
+                                
+                                    
+                                    
                                     <br />
                                     <ice:messages
                                         style="font-family: fantasy;color: red;font-size: 13px;" />
-                                        <ice:panelGroup style="border:1px solid #d9d9d9;">
+                                        
                                             <div align="center">
                                                 <ice:panelGrid columns="2">
                                                     #foreach($member  in $finalParamForIdClassAsVariables)
@@ -92,8 +94,8 @@
                                                     #end
                                                 </ice:panelGrid>
                                             </div>
-                                        </ice:panelGroup>
-                                        <ice:panelGroup style="border:1px solid #d9d9d9;">
+                                       
+                                        
                                             <div align="center">
                                                 <ice:panelGrid columns="4">
                                                     <ice:commandButton id="btnSave" disabled="true"
@@ -119,8 +121,8 @@
                                                     </ice:commandButton>
                                                 </ice:panelGrid>
                                             </div>
-                                        </ice:panelGroup>
-                                </ice:panelGrid>
+                                       
+								</ice:panelCollapsible>
                             </div>
                         </ice:form>
                     </ui:define>
