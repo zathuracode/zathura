@@ -2,11 +2,13 @@ package co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.collections.ListUtils;
 
+import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 /**
@@ -2156,7 +2158,16 @@ public class StringBuilder implements IStringBuilder {
 	public List<String> getStringsForManyToOneProperties(
 			List<Member> manyToOne, List<MetaData> theMetaData) {
 		List<String> finalParam = new ArrayList<String>();
-
+		
+//		if(manyToOne!=null){
+			//Collections.reverse(manyToOne);
+//			@SuppressWarnings("unused")
+//			String tmp = "";
+//			Collections.sort(manyToOne, new ComparatorMember());
+//		}
+		
+//		Collections.sort(finalParam);
+		
 		int cont = 1;
 		for (MetaData metaData1 : theMetaData) {
 			for (Member member : manyToOne) {
@@ -2204,7 +2215,7 @@ public class StringBuilder implements IStringBuilder {
 										+ member.getName()
 										+ "Class = logic"
 										+ member.getRealClassName()
-										+ cont
+										+ "%"
 										+ ".get"
 										+ member.getRealClassName()
 										+ "("
@@ -2216,7 +2227,7 @@ public class StringBuilder implements IStringBuilder {
 					} else {
 						finalParam.add(member.getRealClassName() + " "
 								+ member.getName() + "Class = logic"
-								+ member.getRealClassName() + cont + ".get"
+								+ member.getRealClassName() + "%" + ".get"
 								+ member.getRealClassName() + "("
 								+ metaData1.getPrimaryKey().getName() + "_"
 								+ metaData1.getRealClassName() + ");");
@@ -2229,8 +2240,23 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		return finalParam;
+		return getRealNumbers(finalParam);
+	
 	}
+	
+	public List<String> getRealNumbers(List<String> stringList){
+		List<String> stringReturn = new ArrayList<String>();
+		if(stringList!=null){
+			Collections.sort(stringList);
+			int cont=1;
+			for (String string : stringList) {
+				string = GeneratorUtil.replaceAll(string ,"%", ""+cont);
+				stringReturn.add(string);
+				cont ++;
+			}
+		}
+		return stringReturn;
+	}	
 
 	// if (metaData.getRealClassName().equalsIgnoreCase("TipoAlarma")) {
 	// String tmp = "";
