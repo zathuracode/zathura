@@ -922,7 +922,7 @@ public class StringBuilder implements IStringBuilder {
 
 		Utilities.getInstance().dates = new ArrayList<String>();
 
-//		if (metaData.getRealClassName().equalsIgnoreCase("consignaciones")) {
+//		if (metaData.getRealClassName().equalsIgnoreCase("CodBarrasFamilia")) {
 //			String tmp = "";
 //			System.out.println(tmp);
 //		}
@@ -973,7 +973,7 @@ public class StringBuilder implements IStringBuilder {
 										.toUpperCase()
 										+ params[cont].substring(1);
 
-								if (tmpFinalParam.equalsIgnoreCase("date")) {
+								if (tmpFinalParam.contains("Date")) {
 									Utilities.getInstance().dates.add(tmp3);
 								} else {
 									finalParam2.add(tmp3);
@@ -2215,7 +2215,8 @@ public class StringBuilder implements IStringBuilder {
 										+ member.getName()
 										+ "Class = logic"
 										+ member.getRealClassName()
-										+ "%"
+										/*+ "%"*/
+										+ cont
 										+ ".get"
 										+ member.getRealClassName()
 										+ "("
@@ -2227,7 +2228,10 @@ public class StringBuilder implements IStringBuilder {
 					} else {
 						finalParam.add(member.getRealClassName() + " "
 								+ member.getName() + "Class = logic"
-								+ member.getRealClassName() + "%" + ".get"
+								+ member.getRealClassName() 
+								/*+ "%"*/
+								+ cont
+								+ ".get"
 								+ member.getRealClassName() + "("
 								+ metaData1.getPrimaryKey().getName() + "_"
 								+ metaData1.getRealClassName() + ");");
@@ -2240,7 +2244,8 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		return getRealNumbers(finalParam);
+		//return getRealNumbers(finalParam);
+		return finalParam;
 	
 	}
 	

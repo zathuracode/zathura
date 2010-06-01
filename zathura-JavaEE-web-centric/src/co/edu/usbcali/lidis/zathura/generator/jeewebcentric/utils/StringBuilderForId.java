@@ -399,10 +399,10 @@ public class StringBuilderForId implements IStringBuilderForId {
 	public List<String> finalParamForIdForViewVariablesInList(
 			List<MetaData> list, MetaData metaData) {
 
-		if (metaData.getRealClassName().equalsIgnoreCase("DiaNoLaboral")) {
-			String tmp = "";
-			System.out.println(tmp);
-		}
+//		if (metaData.getRealClassName().equalsIgnoreCase("DiaNoLaboral")) {
+//			String tmp = "";
+//			System.out.println(tmp);
+//		}
 
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
@@ -494,13 +494,19 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
+		
+//		if(metaData.getRealClassName().equalsIgnoreCase("alarma")){
+//			String tmp = "";
+//			System.out.println(tmp);
+//		}
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
 			for (Field field2 : field) {
 				String name = field2.getName();
 				finalParam = finalParam + name;
-				String type = field2.getClass().getCanonicalName();
+				String type = field2.getType().getSimpleName();
+				
 				// String idName = metaData.getPrimaryKey().getName();
 				// txtMasCodigo.setValue(entity.getId().getMasCodigo());
 				if (!type.equalsIgnoreCase("date")) {
@@ -567,7 +573,7 @@ public class StringBuilderForId implements IStringBuilderForId {
 			for (Field field2 : field) {
 				String name = field2.getName();
 				finalParam = finalParam + name;
-				String type = field2.getClass().getCanonicalName();
+				String type = field2.getType().getSimpleName();
 				// String idName = metaData.getPrimaryKey().getName();
 				// txtMasCodigo.setValue(entity.getId().getMasCodigo());
 				if (!type.equalsIgnoreCase("date")) {
