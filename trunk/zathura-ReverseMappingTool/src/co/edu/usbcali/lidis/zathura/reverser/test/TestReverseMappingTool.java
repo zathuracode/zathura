@@ -17,7 +17,7 @@ public class TestReverseMappingTool {
 	 */
 	public static void main(String[] args) {
 		
-		String argumentos[]=new String[22];
+		String argumentos[]=new String[24];
 		
 		//-directory/-d <output directory>: The directory where all generated code should be placed. Defaults to the current directory.
 		argumentos[0]="-directory";
@@ -67,10 +67,13 @@ public class TestReverseMappingTool {
 		argumentos[18]="-metadata";
 		argumentos[19]="none";
 		
+		//-properties
+		argumentos[20]="-properties";
+		argumentos[21]="/home/diegomez/Workspaces/workspaceZathura/zathura-ReverseMappingTool/src/META-INF/my-persistence.xml";
 		
 		//-schemas/-s <schemas and tables>: Comma-separated list of schemas and tables to reverse-map.
-		argumentos[20]="-schemas";
-		argumentos[21]="BANCO.CLIENTES, BANCO.TIPOS_DOCUMENTOS, BANCO.CONSIGNACIONES, BANCO.CUENTAS, BANCO.RETIROS, BANCO.TIPOS_USUARIOS, BANCO.USUARIOS";
+		argumentos[22]="-schemas";
+		argumentos[23]="BANCO.CLIENTES, BANCO.TIPOS_DOCUMENTOS, BANCO.CONSIGNACIONES, BANCO.CUENTAS, BANCO.RETIROS, BANCO.TIPOS_USUARIOS, BANCO.USUARIOS";
 		
 		
 
