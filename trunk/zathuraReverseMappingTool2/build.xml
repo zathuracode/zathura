@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<project name="zathuraReverseMappingTool2" default="createPojos">
+
+	<path id="toolslib">
+		<path location="lib/hibernate-tools.jar" />
+		<path location="lib/hibernate3.jar" />
+		<path location="lib/freemarker.jar" />
+		<path location="lib/commons-logging-1.0.4.jar" />
+		<path location="lib/dom4j-1.6.1.jar" />
+		<path location="lib/cglib-2.1.3.jar" />
+		<path location="lib/asm.jar" />
+		<path location="lib/asm-attrs.jar" />
+		<path location="lib/commons-collections-2.1.1.jar" />
+		<path location="lib/ejb3-persistence.jar" />
+		<path location="lib/mysql-connector-java-3[1].1.12-bin.jar" />
+	</path>
+
+	<taskdef name="hibernatetool"
+		classname="org.hibernate.tool.ant.HibernateToolTask"
+		classpathref="toolslib" />
+	
+	<hibernatetool destdir="src">
+		<!--annotationconfiguration
+			configurationfile="${build.dir}/hibernate.cfg.xml" />
+		<hbm2java jdk5="true" ejb3="true" /-->
+		<jdbcconfiguration configurationfile="hibernate.cfg.xml" packagename="co.edu.usbcali.mascotas.domain.pojos"
+			revengfile="hibernate.reveng.xml"
+			>
+		</jdbcconfiguration>
+		<hbm2java jdk5="true" ejb3="true" />
+
+		<!--  User templates  
+			<hbmtemplate exporterclass="my.own.Exporter" filepattern="." /-->
+	</hibernatetool>
+	
+	<target name="createPojos" >
+	</target>		
+
+</project>
