@@ -1,11 +1,16 @@
 package zTest;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
+
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ReverseUtil;
 
 public class Test {
 
@@ -13,7 +18,35 @@ public class Test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+//		String classPath = System.getProperty("java.Test.path");
 		
+//		System.out.println(classPath);
+//		File classPath = null;
+//		try {
+//			classPath = new File(new URI(Test.class.getResource("Test.class").toString()));
+//		} catch (URISyntaxException e) {
+//			e.printStackTrace();
+//		}
+//		System.out.println(classPath);
+		URL url = Test.class.getResource("Test.class");
+		String classPath = url.getPath().substring(1);
+		int tmp = classPath.indexOf("zathura-ReverseMappingTool")+26;
+		
+		String inconmpletePath =  classPath.substring(0, tmp);
+		String cPath1 = ""+classPath.charAt(tmp);
+		String projectPath = null;
+		
+		if(cPath1.equals("2")){
+			projectPath = inconmpletePath+"2"+ReverseUtil.slash;
+		}else{
+			projectPath = inconmpletePath+ReverseUtil.slash;
+		}
+		
+		System.out.println(projectPath);
+		
+	}
+	
+	public void tmp (){
 		File buildFile = new File("build.xml");
 		Project p = new Project();
 		p.setUserProperty("ant.file", buildFile.getAbsolutePath());		
@@ -55,9 +88,7 @@ public class Test {
 			p2.fireBuildFinished(null);
 		} catch (BuildException e) {
 			p2.fireBuildFinished(e);
-		}		
-
-		
+		}	
 	}
 
 }

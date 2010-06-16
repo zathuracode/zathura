@@ -3,8 +3,14 @@
 
 <hibernate-reverse-engineering>
 	<type-mapping>
-		<sql-type jdbc-type="NUMERIC" hibernate-type="Long">
+		<sql-type jdbc-type="NUMERIC" scale="0" hibernate-type="Long">
 		</sql-type>
+		<sql-type jdbc-type="NUMERIC" hibernate-type="Double">
+		</sql-type>		
+		<sql-type jdbc-type="DECIMAL" scale="0" hibernate-type="Long">
+		</sql-type>
+		<sql-type jdbc-type="DECIMAL" hibernate-type="Double">
+		</sql-type>			
 		<sql-type jdbc-type="TINYINT" hibernate-type="Integer">
 		</sql-type>
 		<sql-type jdbc-type="SMALLINT" hibernate-type="Integer">
@@ -20,5 +26,9 @@
 		<sql-type jdbc-type="DOUBLE" hibernate-type="Double">
 		</sql-type>
 	</type-mapping>
-
+	#if(${isTableList}==true)
+		#foreach($table  in ${tablesList})
+    	<table-filter match-name="$table" match-schema="${matchSchemaForTables}"></table-filter>
+		#end
+	#end
 </hibernate-reverse-engineering>
