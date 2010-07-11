@@ -10,7 +10,7 @@ import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 import co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader;
 import co.edu.usbcali.lidis.zathura.metadata.reader.MetaDataReaderFactory;
 
-public class TestZathuraJavaEE_Web_Centric {
+public class TestZathuraJavaEE_GWT_Centric {
 	
 	//private static Logger log = Logger.getLogger(TestZathuraJavaEE_Web_Centric.class);
 
