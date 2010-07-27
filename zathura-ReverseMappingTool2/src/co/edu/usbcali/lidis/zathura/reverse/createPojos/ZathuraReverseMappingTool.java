@@ -45,6 +45,7 @@ public class ZathuraReverseMappingTool implements IZathuraReverseMappingTool {
 	private String companyDomainNameForPojoLocation;
 	private String connectionDriverJarPath;
 	private String destinationDirectory;
+	private Boolean makeItXml;
 
 	private String matchSchemaForTables;
 	private List<String> tablesList;
@@ -70,23 +71,25 @@ public class ZathuraReverseMappingTool implements IZathuraReverseMappingTool {
 				.getProperty("destinationDirectory");
 		matchSchemaForTables = connectionProperties
 				.getProperty("matchSchemaForTables");
+		makeItXml = Boolean.parseBoolean(connectionProperties
+				.getProperty("makeItXml"));
 
 		this.tablesList = tables;
 		doTemplate();
-//		try {
-//			MyJarLoader.loadJar(connectionDriverJarPath);
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-		
+		// try {
+		// MyJarLoader.loadJar(connectionDriverJarPath);
+		// } catch (FileNotFoundException e) {
+		// e.printStackTrace();
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+
 		try {
 			MyJarLoader.loadJar2(connectionDriverJarPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		callAntProcess();
 		log.info("End ZathuraReverseMappingTool (Pojo Making & compilation)");
 	}
@@ -122,13 +125,13 @@ public class ZathuraReverseMappingTool implements IZathuraReverseMappingTool {
 		context.put("companyDomainNameForPojoLocation",
 				companyDomainNameForPojoLocation);
 		context.put("matchSchemaForTables", matchSchemaForTables);
-
+		context.put("makeItXml", makeItXml);
 		context.put("connectionDriverJarPath", connectionDriverJarPath);
 
 		context.put("destinationDirectory", destinationDirectory);
-		
+
 		context.put("tablesList", tablesList);
-		
+
 		context.put("isTableList", ReverseUtil.validationsList(tablesList));
 
 		doCfg(context);
