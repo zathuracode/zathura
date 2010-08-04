@@ -22,7 +22,7 @@ public class WizardMain extends Wizard {
 
 	public WizardMain() {
 		super();
-		setWindowTitle("LIDIS Zathura Code Generator V2.0");
+		setWindowTitle("Zathura Code Generator V2.1.0");
 		EclipseUtil.wizardMain=this;
 	}
 	
