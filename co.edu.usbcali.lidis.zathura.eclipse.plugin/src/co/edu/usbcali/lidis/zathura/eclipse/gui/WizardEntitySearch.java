@@ -82,11 +82,11 @@ public class WizardEntitySearch extends WizardPage {
 
 		final Label lblClassFolder = new Label(chooseEntityClassGroup, SWT.NONE);
 		lblClassFolder.setText("Class Folder:");
-		lblClassFolder.setBounds(10, 40, 84, 17);
+		lblClassFolder.setBounds(10, 46, 139, 17);
 
 		txtClassFolder = new Text(chooseEntityClassGroup, SWT.BORDER);
 		txtClassFolder.setEditable(false);
-		txtClassFolder.setBounds(145, 40, 322, 29);
+		txtClassFolder.setBounds(155, 40, 312, 29);
 
 		btnBrowseClassFolder = new Button(chooseEntityClassGroup,
 				SWT.NONE);
@@ -103,18 +103,18 @@ public class WizardEntitySearch extends WizardPage {
 		final Label lblJavaEntityPackage = new Label(chooseEntityClassGroup,
 				SWT.NONE);
 		lblJavaEntityPackage.setText("Java Entity package:");
-		lblJavaEntityPackage.setBounds(10, 75, 128, 17);
+		lblJavaEntityPackage.setBounds(10, 81, 139, 17);
 
 		txtJavaEntityPackage = new Text(chooseEntityClassGroup, SWT.BORDER);
 		txtJavaEntityPackage.setEditable(false);
-		txtJavaEntityPackage.setBounds(145, 75, 322, 29);
+		txtJavaEntityPackage.setBounds(155, 75, 312, 29);
 
 		final ScrolledComposite scrolledComposite = new ScrolledComposite(
 				chooseEntityClassGroup, SWT.BORDER | SWT.H_SCROLL
 						| SWT.V_SCROLL);
 		scrolledComposite.setBounds(10, 133, 561, 181);
 
-		listAvailableEnity = new List(scrolledComposite, SWT.BORDER);
+		listAvailableEnity = new List(scrolledComposite, SWT.NONE);
 		listAvailableEnity.setCapture(true);
 		listAvailableEnity.setSize(561, 181);
 		scrolledComposite.setContent(listAvailableEnity);

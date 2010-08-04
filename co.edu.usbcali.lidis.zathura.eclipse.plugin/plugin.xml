@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-
    <extension
          point="org.eclipse.ui.actionSets">
       <actionSet
@@ -12,7 +11,7 @@
                label="&amp;Zathura"
                id="sampleMenu">
             <separator
-                  name="sampleGroup">
+                  name="zathuraGroup">
             </separator>
          </menu>
          <action
@@ -21,8 +20,17 @@
                id="co.edu.usbcali.lidis.zathura.eclipse.plugin.actions.ZathuraAction"
                label="&amp;Java Generator"
                menubarPath="sampleMenu/sampleGroup"
-               toolbarPath="sampleGroup"
+               toolbarPath="zathuraGroup"
                tooltip="Zathura code generator">
+         </action>
+         <action
+               class="co.edu.usbcali.lidis.zathura.eclipse.plugin.actions.ZathuraJPAReverseEngineeringAction"
+               icon="icons/balvardi-Robotic1616.png"
+               id="co.edu.usbcali.lidis.zathura.eclipse.plugin.actions.ZathuraJPAReverseEngineeringAction"
+               label="&amp;JPA Reverse Engineering"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="zathuraGroup"
+               tooltip="Zathura JPA Reverse Engineering">
          </action>
       </actionSet>
    </extension>

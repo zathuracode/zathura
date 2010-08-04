@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.FileLocator;
 
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.Activator;
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
+import co.edu.usbcali.lidis.zathura.jpareverse.utilities.JPAReverseEngineeringUtil;
 
 public class ConfigEclipsePluginPath {
 	
@@ -14,7 +15,7 @@ public class ConfigEclipsePluginPath {
 	private static ConfigEclipsePluginPath me=null;
 	private ConfigEclipsePluginPath() {		
 		configPath();
-		//loadJars();		
+		
 	}
 	
 
@@ -28,6 +29,8 @@ public class ConfigEclipsePluginPath {
 			URL pluginUrl = FileLocator.resolve(bundleRootURL);
 			pluginPath = pluginUrl.getPath();
 			GeneratorUtil.setFullPath(pluginPath);
+			JPAReverseEngineeringUtil.setFullPath(pluginPath);
+			
 		} catch (IOException e) { 
 			System.out.println(e);
 		}
