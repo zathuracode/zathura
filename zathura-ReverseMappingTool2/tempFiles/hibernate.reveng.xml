@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<type-mapping>
+		<sql-type jdbc-type="NUMERIC" scale="0" hibernate-type="Long">
+		</sql-type>
+		<sql-type jdbc-type="NUMERIC" hibernate-type="Double">
+		</sql-type>		
+		<sql-type jdbc-type="DECIMAL" scale="0" hibernate-type="Long">
+		</sql-type>
+		<sql-type jdbc-type="DECIMAL" hibernate-type="Double">
+		</sql-type>			
+		<sql-type jdbc-type="TINYINT" hibernate-type="Integer">
+		</sql-type>
+		<sql-type jdbc-type="SMALLINT" hibernate-type="Integer">
+		</sql-type>
+		<sql-type jdbc-type="INTEGER" hibernate-type="Integer">
+		</sql-type>
+		<sql-type jdbc-type="BIGINT" hibernate-type="Long">
+		</sql-type>
+		<sql-type jdbc-type="REAL" hibernate-type="Float">
+		</sql-type>
+		<sql-type jdbc-type="FLOAT" hibernate-type="Float">
+		</sql-type>
+		<sql-type jdbc-type="DOUBLE" hibernate-type="Double">
+		</sql-type>
+	</type-mapping>
+			    	<table-filter match-name="TACHIEVEMENT" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TAPPRAISAL" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TAPPRAISALTYPE" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TAPPROVAL" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TCOMMITMENT" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TCOMPETENCE" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TCONTRIBUTION" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TDEFINEDVALUES" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TEVALUATOR" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TFINALRATING" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="THEADER" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TKNOWLEDGE" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TKNOWLEDGEITEMS" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TLANGUAGE" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TLEARNINGNEED" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TRATING" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TRECOMENDATIONITEMS" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TRECOMENDATIONS" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TRESULTS" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TSECTION" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TSUBDEFINED" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TTOOLITEMS" match-schema="PA01"></table-filter>
+		    	<table-filter match-name="TTOOLS" match-schema="PA01"></table-filter>
+			</hibernate-reverse-engineering>
