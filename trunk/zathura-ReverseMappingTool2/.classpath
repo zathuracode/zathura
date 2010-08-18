@@ -20,5 +20,6 @@
 	<classpathentry kind="lib" path="lib/ant-launcher.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-1.6.2-dep.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-1.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/jtidy-r938.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
