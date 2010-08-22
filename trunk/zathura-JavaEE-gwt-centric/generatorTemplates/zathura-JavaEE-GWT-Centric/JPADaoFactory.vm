@@ -1,5 +1,5 @@
-package  ${virginPackage}.dataaccess.daoFactory;
-import ${virginPackage}.dataaccess.dao.*;
+package  ${virginPackage}.server.dataaccess.daoFactory;
+import ${virginPackage}.server.dataaccess.dao.*;
 /**
 * Factory for Data Access Objects Strategy The DAO pattern can be made highly flexible 
 * by adopting the Abstract Factory [GoF] and the Factory Method [GoF] patterns.

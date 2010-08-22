@@ -1,4 +1,4 @@
-package  ${virginPackage}.exceptions;
+package  ${virginPackage}.server.exceptions;
 /**
 *  
 * @author Zathura Code Generator http://code.google.com/p/zathura/

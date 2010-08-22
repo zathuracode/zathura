@@ -1,13 +1,13 @@
-package  ${packageOriginal}.control;
+package  ${virginPackage}.server.control;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 import java.util.Set;
 import java.math.BigDecimal;
-import  ${virginPackage}.dataaccess.daoFactory.JPADaoFactory;
-import  ${virginPackage}.dataaccess.entityManager.EntityManagerHelper;
-import  ${virginPackage}.exceptions.*;
-import  ${virginPackage}.utilities.Utilities;
+import  ${virginPackage}.server.dataaccess.daoFactory.JPADaoFactory;
+import  ${virginPackage}.server.dataaccess.entityManager.EntityManagerHelper;
+import  ${virginPackage}.server.exceptions.*;
+import  ${virginPackage}.server.utilities.Utilities;
 import $package.${metaData.getRealClassName()};
 #if($isImports)
     #foreach($member  in $imports)

@@ -13,12 +13,10 @@
             #end
         #end
         <properties>
-            <property name="hibernate.connection.driver_class"
-                value="com.mysql.jdbc.Driver" />
-                <property name="hibernate.connection.url"
-                    value="jdbc:mysql://localhost:3306/mascotas" />
-                    <property name="hibernate.connection.username" value="root" />
-                    <property name="hibernate.connection.password" value="root" />
+            <property name="hibernate.connection.driver_class"  value="oracle.jdbc.driver.OracleDriver" />
+            <property name="hibernate.connection.url"       value="jdbc:oracle:thin:@localhost:1521:xe" />
+            <property name="hibernate.connection.username" value="gwt" />
+            <property name="hibernate.connection.password" value="gwt" />
         </properties>
     </persistence-unit>
 </persistence>

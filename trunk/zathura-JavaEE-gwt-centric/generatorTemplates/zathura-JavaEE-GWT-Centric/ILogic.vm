@@ -1,4 +1,4 @@
-package  ${packageOriginal}.control;
+package  ${virginPackage}.server.control;
 import java.util.*;
 import java.util.List;
 import java.util.Set;

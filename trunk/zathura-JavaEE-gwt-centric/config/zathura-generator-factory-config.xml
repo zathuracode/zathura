@@ -4,9 +4,9 @@
    xsi:schemaLocation='http://lidis.usbcali.edu.co/schema/zathura-generator-factory-config zathura-generator-factory-config.xsd'>
    
 	<generator>
-		<name>ZathuraJavaEE_Web_Centric</name>
-		<gui-name>JavaEE Web Centric</gui-name>
-		<class>co.edu.usbcali.lidis.zathura.generator.jeewebcentric.engine.ZathuraJavaEE_Web_Centric</class>
+		<name>ZathuraJavaEE_GWT_Centric</name>
+		<gui-name>JavaEE GWT Centric</gui-name>
+		<class>co.edu.usbcali.lidis.zathura.generator.jeegwtcentric.engine.ZathuraJavaEE_Gwt_Centric</class>
 		<description>
 		<![CDATA[
 				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -15,7 +15,7 @@
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
 					<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.4  (Linux)">
-					<META NAME="AUTHOR" CONTENT="Diego Gomez">
+					<META NAME="AUTHOR" CONTENT="Juan Manuel Caicedo, Ricardo Chiriboga">
 					<META NAME="CREATED" CONTENT="20090304;10252100">
 					<META NAME="CHANGEDBY" CONTENT="Diego Gomez">
 					<META NAME="CHANGED" CONTENT="20090304;10523800">

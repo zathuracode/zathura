@@ -1,4 +1,4 @@
-package  ${virginPackage}.dataaccess.entityManager;
+package  ${virginPackage}.server.dataaccess.entityManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;

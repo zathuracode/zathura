@@ -1,11 +1,11 @@
-package ${virginPackage}.presentation.businessDelegate;
+package ${virginPackage}.server.businessDelegate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.math.BigDecimal;
 #foreach($metaData  in $dataModel.theMetaData)
-    import ${packageOriginal}.control.${metaData.getRealClassName()}Logic;
-    import ${packageOriginal}.control.I${metaData.getRealClassName()}Logic;
+    import ${virginPackage}.server.control.${metaData.getRealClassName()}Logic;
+    import ${virginPackage}.server.control.I${metaData.getRealClassName()}Logic;
     import ${package}.${metaData.getRealClassName()};
     #if(${metaData.primaryKey.isPrimiaryKeyAComposeKey()})
         import ${package}.${metaData.primaryKey.getRealClassName()};
