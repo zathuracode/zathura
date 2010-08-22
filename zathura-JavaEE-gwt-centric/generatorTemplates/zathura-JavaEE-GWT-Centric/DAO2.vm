@@ -1,4 +1,4 @@
-package  ${virginPackage}.dataaccess.dao;
+package  ${virginPackage}.server.dataaccess.dao;
 import java.util.List;
 import java.util.Set;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.util.logging.Level;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import ${virginPackage}.dataaccess.entityManager.EntityManagerHelper;
+import ${virginPackage}.server.dataaccess.entityManager.EntityManagerHelper;
 import $package.${metaData.getRealClassName()};
 #if($composedKey)
     import $package.${metaData.primaryKey.getRealClassName()};

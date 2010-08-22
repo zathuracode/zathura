@@ -52,25 +52,25 @@ public class TestZathuraJavaEE_GWT_Centric {
 			String projectName = "ceres1";
 			String folderProjectPath = "E:/ZATHURA EXAMPLE(landed)/";
 			*/
-			/*
-			String jpaPath = "C:\\workspaces\\workspaceGanymedeJEE\\demoJpa\\build\\classes\\";
-			String jpaPckgName = "co.edu.usbcali.lidis.banco.modelo";			
-			String projectName = "demoJpa";
-			String folderProjectPath = "C:\\workspaces\\workspaceGanymedeJEE\\demoJpa\\src\\";
-			String webRootFolderPath="C:\\workspaces\\workspaceGanymedeJEE\\demoJpa\\WebContent\\";
-			String libFolderPath="C:\\workspaces\\workspaceGanymedeJEE\\demoJpa\\WebContent\\WEB-INF\\lib\\";
-			 */
+			
+			String jpaPath = "F:\\Tesis\\workspace\\demoClienteGWT\\bin\\";
+			String jpaPckgName = "co.edu.usbcali.cliente.model";			
+			String projectName = "demoClienteGWT";
+			String folderProjectPath = "F:\\Tesis\\workspace\\demoClienteGWT\\src\\";
+			String webRootFolderPath="F:\\Tesis\\workspace\\demoClienteGWT\\war\\";
+			String libFolderPath="F:\\Tesis\\workspace\\demoClienteGWT\\war\\WEB-INF\\lib\\";
+			 
 			///home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco
-			String jpaPath = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/build/classes/";
-			String jpaPckgName = "co.edu.usbcali.banco.modelo";			
-			String projectName = "demoBanco";
-			String folderProjectPath = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/src/";
-			String webRootFolderPath="/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/WebContent/";
-			String libFolderPath="/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/WebContent/WEB-INF/lib/";
+//			String jpaPath = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/build/classes/";
+//			String jpaPckgName = "co.edu.usbcali.banco.modelo";			
+//			String projectName = "demoBanco";
+//			String folderProjectPath = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/src/";
+//			String webRootFolderPath="/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/WebContent/";
+//			String libFolderPath="/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/WebContent/WEB-INF/lib/";
 			
 			//
 			
-			int specificityLevel = 2;
+			int specificityLevel = 1;
 
 			IMetaDataReader entityLoader=null;
 			MetaDataModel metaDataModel=null;
@@ -92,7 +92,7 @@ public class TestZathuraJavaEE_GWT_Centric {
 			
 			
 			
-			IZathuraGenerator zathuraGenerator=ZathuraGeneratorFactory.createZathuraGenerator("ZathuraJavaEE_Web_Centric");
+			IZathuraGenerator zathuraGenerator=ZathuraGeneratorFactory.createZathuraGenerator("ZathuraJavaEE_GWT_Centric");
 			zathuraGenerator.toGenerate(metaDataModel,projectName, folderProjectPath,properties);
 		
 			//Todos los generadores

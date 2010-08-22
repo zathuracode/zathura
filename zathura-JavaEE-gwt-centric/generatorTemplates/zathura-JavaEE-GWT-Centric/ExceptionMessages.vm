@@ -1,4 +1,4 @@
-package  ${virginPackage}.exceptions;
+package  ${virginPackage}.server.exceptions;
 public class ExceptionMessages {
 public static String VARIABLE_NULL = "Null variable: ";
 public static String VARIABLE_LENGTH = "Format or length not valid for the variable: ";

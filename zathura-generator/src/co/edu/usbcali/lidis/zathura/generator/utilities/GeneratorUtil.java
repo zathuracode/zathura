@@ -35,9 +35,9 @@ public class GeneratorUtil {
 	private static String generatorExtZathuraJavaEEejbCentric="generatorExt"+ GeneratorUtil.slash + "zathura-JavaEE-ejb-centric"+ GeneratorUtil.slash;
 	
 	//JavaEEGwtCentric
-	private static String gwtCentricTemplates = "generatorTemplates"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-centric"+ GeneratorUtil.slash;
-	private static String generatorLibrariesZathuraJavaEEGwtCentric="generatorLibraries"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-centric"+ GeneratorUtil.slash;
-	private static String generatorExtZathuraJavaEEGwtCentric="generatorExt"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-centric"+ GeneratorUtil.slash;
+	private static String gwtCentricTemplates = "generatorTemplates"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-Centric"+ GeneratorUtil.slash;
+	private static String generatorLibrariesZathuraJavaEEGwtCentric="generatorLibraries"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-Centric"+ GeneratorUtil.slash;
+	private static String generatorExtZathuraJavaEEGwtCentric="generatorExt"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-Centric"+ GeneratorUtil.slash;
 		
 	
 	

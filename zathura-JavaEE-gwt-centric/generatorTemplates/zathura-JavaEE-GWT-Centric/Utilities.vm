@@ -1,4 +1,4 @@
-package  ${virginPackage}.utilities;
+package  ${virginPackage}.server.utilities;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

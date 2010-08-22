@@ -1,4 +1,4 @@
-package  ${virginPackage}.dataaccess.dao;
+package  ${virginPackage}.server.dataaccess.dao;
 import java.util.List;
 import java.util.Set;
 import java.util.Date;
