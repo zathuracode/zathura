@@ -139,8 +139,8 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     JPADaoFactory.getInstance().get${metaData.getRealClassName()}DAO().delete(entity);
                     EntityManagerHelper.commit();
             #end
-            EntityManagerHelper.closeEntityManager();
             } catch (Exception e) {
+			EntityManagerHelper.rollback();
             throw e;
             }
             finally{
@@ -202,7 +202,6 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             EntityManagerHelper.beginTransaction();
             JPADaoFactory.getInstance().get${metaData.getRealClassName()}DAO().update(entity);
             EntityManagerHelper.commit();
-            EntityManagerHelper.closeEntityManager();
             } catch (Exception e) {
             EntityManagerHelper.rollback();
             throw e;
