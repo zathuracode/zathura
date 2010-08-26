@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
@@ -41,6 +42,7 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 
 	public String virginPackageInHd = new String();
 	private Properties properties;
+	VelocityEngine ve;
 
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
 			String folderProjectPath, Properties propiedades) {
@@ -137,6 +139,7 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel,
 			String jpaPckgName, String projectName, Integer specificityLevel) {
 		try {
+			ve = new VelocityEngine();
 			Properties properties = new Properties();
 
 			properties.setProperty("file.resource.loader.description",
@@ -149,7 +152,7 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 			properties.setProperty(
 					"file.resource.loader.modificationCheckInterval", "2");
 
-			Velocity.init(properties);
+			ve.init(properties);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -385,8 +388,8 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swLogic = new StringWriter();
 
 		try {
-			ilogic = Velocity.getTemplate("ILogic.vm");
-			logic = Velocity.getTemplate("LogicXMLHibernate.vm");
+			ilogic = ve.getTemplate("ILogic.vm");
+			logic = ve.getTemplate("LogicXMLHibernate.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -448,7 +451,7 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swDto = new StringWriter();
 
 		try {
-			dto = Velocity.getTemplate("Dto.vm");
+			dto = ve.getTemplate("Dto.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -506,10 +509,10 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swUtilitiesPagedListDataModel = new StringWriter();
 
 		try {
-			utilities = Velocity.getTemplate("Utilities.vm");
-			utilitiesDataPage = Velocity.getTemplate("DataPage.vm");
-			utilitiesDataSource = Velocity.getTemplate("DataSource.vm");
-			utilitiesPagedListDataModel = Velocity
+			utilities = ve.getTemplate("Utilities.vm");
+			utilitiesDataPage = ve.getTemplate("DataPage.vm");
+			utilitiesDataSource = ve.getTemplate("DataSource.vm");
+			utilitiesPagedListDataModel = ve
 					.getTemplate("PagedListDataModel.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -590,8 +593,8 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swExceptions2 = new StringWriter();
 
 		try {
-			exceptions2 = Velocity.getTemplate("ExceptionManager.vm");
-			exceptions = Velocity.getTemplate("ExceptionMessages.vm");
+			exceptions2 = ve.getTemplate("ExceptionManager.vm");
+			exceptions = ve.getTemplate("ExceptionMessages.vm");
 
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -651,7 +654,7 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swBackEndBeans = new StringWriter();
 
 		try {
-			backEndBeans = Velocity.getTemplate("BackEndBeans.vm");
+			backEndBeans = ve.getTemplate("BackEndBeans.vm");
 
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -712,9 +715,9 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swJspDataEditable = new StringWriter();
 
 		try {
-			jsp = Velocity.getTemplate("JSP.vm");
-			jspData = Velocity.getTemplate("JSPdataTables.vm");
-			jspDataEditable = Velocity.getTemplate("JSPdataTables-Editable.vm");
+			jsp = ve.getTemplate("JSP.vm");
+			jspData = ve.getTemplate("JSPdataTables.vm");
+			jspDataEditable = ve.getTemplate("JSPdataTables-Editable.vm");
 
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -786,9 +789,9 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swFooter = new StringWriter();
 
 		try {
-			jspMainTemplate = Velocity.getTemplate("JSPmainTemplate.vm");
-			jspHeader = Velocity.getTemplate("JSPheader.vm");
-			jspFooter = Velocity.getTemplate("JSPfooter.vm");
+			jspMainTemplate = ve.getTemplate("JSPmainTemplate.vm");
+			jspHeader = ve.getTemplate("JSPheader.vm");
+			jspFooter = ve.getTemplate("JSPfooter.vm");
 
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -855,7 +858,7 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swBusinessDelegator = new StringWriter();
 
 		try {
-			businessDelegator = Velocity
+			businessDelegator = ve
 					.getTemplate("BusinessDelegatorView.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -910,8 +913,8 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swDao = new StringWriter();
 
 		try {
-			idao = Velocity.getTemplate("IDAO2XMLHibernate.vm");
-			dao = Velocity.getTemplate("DAO2XMLHibernate.vm");
+			idao = ve.getTemplate("IDAO2XMLHibernate.vm");
+			dao = ve.getTemplate("DAO2XMLHibernate.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 		} catch (ParseErrorException pee) {
@@ -972,8 +975,8 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swDaoFactory = new StringWriter();
 
 		try {
-			daoFactory = Velocity.getTemplate("XMLHibernateDaoFactory.vm");
-			// logic = Velocity.getTemplate("Logic.vm");
+			daoFactory = ve.getTemplate("XMLHibernateDaoFactory.vm");
+			// logic = ve.getTemplate("Logic.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -1022,8 +1025,8 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swEntityManager = new StringWriter();
 
 		try {
-			entityManager = Velocity.getTemplate("HibernateSessionFactory.vm");
-			// logic = Velocity.getTemplate("Logic.vm");
+			entityManager = ve.getTemplate("HibernateSessionFactory.vm");
+			// logic = ve.getTemplate("Logic.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -1073,8 +1076,8 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swJspInitialMenu = new StringWriter();
 
 		try {
-			jspInitialMenu = Velocity.getTemplate("JSPinitialMenu.vm");
-			// logic = Velocity.getTemplate("Logic.vm");
+			jspInitialMenu = ve.getTemplate("JSPinitialMenu.vm");
+			// logic = ve.getTemplate("Logic.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -1119,8 +1122,8 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		StringWriter swFacesConfig = new StringWriter();
 
 		try {
-			facesConfig = Velocity.getTemplate("faces-config.xml.vm");
-			// logic = Velocity.getTemplate("Logic.vm");
+			facesConfig = ve.getTemplate("faces-config.xml.vm");
+			// logic = ve.getTemplate("Logic.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
