@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="&amp;Zathura"
+            visible="true"
+            id="co.edu.usbcali.lidis.zathura.eclipse.plugin.generator">
+         <menu
+               label="&amp;Zathura"
+               id="zathuraMenu">
+            <separator
+                  name="zathuraGroup">
+            </separator>
+         </menu>
+         <action
+               class="co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.actions.ZathuraGeneratorAction"
+               icon="icons/balvardi-Robotic1616.png"
+               id="co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.actions.ZathuraGeneratorAction"
+               label="&amp;Zathura Generator"
+               menubarPath="zathuraMenu/zathuraGroup"
+               toolbarPath="zathuraGroup"
+               tooltip="Zathura Code Generator">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>

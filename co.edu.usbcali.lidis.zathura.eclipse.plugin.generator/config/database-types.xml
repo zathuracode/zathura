@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<database-types>
+	
+	<!-- 
+	<database>        
+        <name>Teradata</name>
+        <driverClassName>com.ncr.teradata.TeraDriver</driverClassName>
+        <url>jdbc:teradata:[//host[:1025]/]&lt;database&gt;</url>
+    </database>
+    
+    <database>        
+        <name>Firebird (JayBird JCA/JDBC driver)</name>
+        <driverClassName>org.firebirdsql.jdbc.FBDriver</driverClassName>
+        <url>jdbc:firebirdsql:[//host[:port]/]&lt;database&gt;</url>
+    </database>
+    
+    <database>
+        <driverClassName>com.pointbase.net.netJDBCDriver</driverClassName>
+        <name>Pointbase Embedded</name>
+        <url>jdbc:pointbase:embedded:&lt;dbname&gt;</url>
+    </database>
+
+     <database>
+        <driverClassName>com.pointbase.net.netJDBCDriver</driverClassName>
+       
+        <name>Pointbase Server</name>
+        <url>jdbc:pointbase:server://&lt;server_name&gt;/&lt;dbname&gt;</url>
+    </database>
+
+     <database>	Class="net.sourceforge.squirrel_sql.fw.sql.SQLDriver">
+        <driverClassName>com.sap.dbtech.jdbc.DriverSapDB</driverClassName>
+       
+        <name>SAPDB</name>
+        <url>jdbc:sapdb:[//host/]dbname[?name=value[&amp;name=value]*]</url>
+    </database>
+
+	 <database>
+		<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
+	
+		<name>HSQLDB In-Memory</name>
+		<url>jdbc:hsqldb:.</url>
+	</database>
+
+	 <database>	Class="net.sourceforge.squirrel_sql.fw.sql.SQLDriver">
+		<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
+		
+		<name>HSQLDB Standalone</name>
+		<url>jdbc:hsqldb:&lt;databaseName&gt;</url>
+	</database>
+
+	 <database>
+		<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
+		
+		<name>HSQLDB Server</name>
+		<url>jdbc:hsqldb:hsql://&lt;server&gt;[:&lt;1476&gt;]</url>
+	</database>
+
+	 <database>
+		<driverClassName>org.hsqldb.jdbcDriver</driverClassName>
+		
+		<name>HSQLDB Web Server</name>
+		<url>jdbc:hsqldb:http://&lt;server&gt;[:&lt;1476&gt;]</url>
+	</database>
+
+	 <database>
+		<driverClassName>com.internetcds.jdbc.tds.Driver</driverClassName>
+		<name>jTDS (FreeTDS)</name>
+		<url>jdbc:freetds:sqlserver://&lt;hostname&gt;[:&lt;4100&gt;]/&lt;dbname&gt;[;&lt;property&gt;=&lt;value&gt;[;...]]</url>
+	</database>
+
+	 <database>
+		<driverClassName>com.mckoi.JDBCDriver</driverClassName>
+		<name>Mckoi</name>
+		<url>jdbc:mckoi://&lt;host&gt;[:9157][/&lt;schema&gt;]/</url>
+	</database>
+
+	 <database>
+		<driverClassName>uk.co.thinksql.ThinkSQLDriver</driverClassName>
+		
+		<name>ThinkSQL</name>
+		<url>jdbc:thinksql://&lt;server&gt;:&lt;9075&gt;</url>
+	</database>
+
+	 <database>
+		<driverClassName>org.axiondb.jdbc.AxionDriver</driverClassName>
+		
+		<name>Axion</name>
+		<url>jdbc:axiondb:&lt;database-name&gt;[:&lt;database-directory&gt;]</url>
+	</database>
+
+	 <database>
+		<driverClassName>com.mimer.jdbc.Driver</driverClassName>
+		
+		<name>Mimer SQL</name>
+		<url>jdbc:mimer:[//[&lt;user&gt;[:&lt;password&gt;]@]&lt;server&gt;[:&lt;1360&gt;]][/&lt;dbname&gt;][property-list]</url>
+	</database>
+
+	 <database>
+		<driverClassName>com.microsoft.jdbc.sqlserver.SQLServerDriver</driverClassName>
+		<name>Microsoft SQL Server</name>
+		<url>jdbc:microsoft:sqlserver://&lt;server_name&gt;:&lt;1433&gt;</url>
+	</database>
+	 <database>	Class="net.sourceforge.squirrel_sql.fw.sql.SQLDriver">
+		<driverClassName>com.sunopsis.jdbc.driver.xml.SnpsXmlDriver</driverClassName>
+		<name>Sunopsis XML</name>
+		<url>jdbc:snps:xml?f=&lt;file-name&gt;&amp;ro=true</url>
+	</database>
+	
+	 <database>
+		<url>jdbc:sybase:Tds:&lt;host&gt;:&lt;port&gt;/&lt;DBNAME&gt;</url>;
+		
+		<name>Sybase Adaptive Server Enterprise</name>
+		<driverClassName>com.sybase.jdbc2.jdbc.SybDriver</driverClassName>
+	</database>
+	
+	 <database>
+		
+		<url>jdbc:sybase:Tds:&lt;host&gt;:&lt;port&gt;?ServiceName=&lt;DBNAME&gt;</url>
+		
+		<name>Sybase Adaptive Server Anywhere</name>
+		<driverClassName>com.sybase.jdbc2.jdbc.SybDriver</driverClassName>
+	</database>
+	
+	
+	
+	 <database>		
+		<url>jdbc:idb:&lt;pathname&gt;</url>
+		<driverClassName>org.enhydra.instantdb.jdbc.idbDriver</driverClassName>
+		<name>InstantDB</name>
+	</database>
+	
+	
+	
+	 <database>
+		<name>InterClient</name>
+		<driverClassName>interbase.interclient.Driver</driverClassName>
+		<url>jdbc:interbase://&lt;server&gt;/&lt;full_db_path&gt;</url>
+	</database>
+	
+	
+	
+	 <database>
+		<name>JDBC ODBC Bridge</name>
+		<driverClassName>sun.jdbc.odbc.JdbcOdbcDriver</driverClassName>
+		<url>jdbc:odbc:&lt;alias&gt;</url>
+	</database>
+	 <database>
+		<driverClassName>com.microsoft.sqlserver.jdbc.SQLServerDriver</driverClassName>
+		<name>Microsoft SQL Server 2005</name>
+		<url>jdbc:sqlserver://&lt;server_name&gt;:&lt;port&gt;[;databaseName=&lt;dbname&gt;]</url>
+	</database>
+	 <database>
+		<driverClassName>org.apache.derby.jdbc.ClientDriver</driverClassName>
+		<name>Derby</name>
+		<url>jdbc:derby://&lt;server_name&gt;:&lt;port&gt;/&lt;databaseName&gt;[;create=true]</url>
+	</database>
+	
+	 <database>
+		<driverClassName>net.sourceforge.jtds.jdbc.Driver</driverClassName>
+		<name>Sybase (jTDS driver)</name>
+		<url>jdbc:jtds:sybase://&lt;hostname&gt;[:&lt;port&gt;]/&lt;dbname&gt;</url>
+	</database>
+	
+     <database>
+		<driverClassName>org.sqlite.JDBC</driverClassName>
+		<name>SQLite</name>
+		<url>jdbc:sqlite:&lt;path-to-db-file&gt;</url>
+	</database>	
+     -->
+    <database>	
+		<name>MySQL Connector/J</name>
+		<driverClassName>com.mysql.jdbc.Driver</driverClassName>
+		<url>jdbc:mysql://&lt;hostname&gt;[&lt;:3306&gt;]/&lt;dbname&gt;</url>		
+	</database>
+	
+    
+
+     <database>
+        <driverClassName>COM.ibm.db2.jdbc.net.DB2Driver</driverClassName>
+        <name>IBM DB2 (App driver)</name>
+        <url>jdbc:db2://&lt;host_name&gt;:6789/&lt;dbname&gt;</url>
+    </database>
+    
+     <database>
+		<driverClassName>com.ibm.db2.jcc.DB2Driver</driverClassName>
+		<name>Derby (IBM Universal driver)</name>
+		<url>jdbc:db2://&lt;server_name&gt;:&lt;port&gt;/&lt;databaseName&gt;</url>
+	</database>
+	
+	 <database>
+        <driverClassName>com.ibm.db2.jdbc.net.DB2Driver</driverClassName>
+        <name>IBM DB2 (Universal driver)</name>
+        <url>jdbc:db2://&lt;host_name&gt;:&lt;port&gt;/&lt;dbname&gt;</url>
+    </database>
+    
+     <database>	Class="net.sourceforge.squirrel_sql.fw.sql.SQLDriver">
+        <driverClassName>com.ibm.db2.jdbc.net.DB2Driver</driverClassName>
+        <name>IBM DB2 (Universal Type 2 driver)</name>
+        <url>jdbc:db2:&lt;dbname&gt;</url>
+    </database>
+    
+     <database>
+		<driverClassName>net.sourceforge.jtds.jdbc.Driver</driverClassName>
+		<name>Microsoft SQL Server (jTDS driver)</name>
+		<url>jdbc:jtds:sqlserver://&lt;hostname&gt;[:&lt;port&gt;]/&lt;dbname&gt;</url>
+	</database>
+	
+	 <database>
+		<name>Oracle (OCI driver)</name>
+		<driverClassName>oracle.jdbc.driver.OracleDriver</driverClassName>
+		<url>jdbc:oracle:oci8:@&lt;database_name&gt;</url>
+	</database>
+	
+	 <database>
+		<name>Oracle (Thin driver)</name>
+		<driverClassName>oracle.jdbc.driver.OracleDriver</driverClassName>
+		<url>jdbc:oracle:thin:@&lt;server&gt;[:&lt;1521&gt;]:&lt;database_name&gt;</url>
+	</database>
+	
+	 <database>		
+		<url>jdbc:postgresql:[&lt;//host&gt;[:&lt;5432&gt;/]]&lt;database&gt;</url>
+		<name>PostgreSQL</name>
+		<driverClassName>org.postgresql.Driver</driverClassName>
+	</database>
+
+     
+</database-types>
