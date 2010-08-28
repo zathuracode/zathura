@@ -31,13 +31,13 @@ import co.edu.usbcali.lidis.zathura.generator.jeegwtcentric.utils.StringBuilder;
  * 
  */
 public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
-		IZathuraTemplate {
+IZathuraTemplate {
 
 	private static Logger log = Logger
-			.getLogger(ZathuraJavaEE_Gwt_Centric.class);
+	.getLogger(ZathuraJavaEE_Gwt_Centric.class);
 
 	private final static String gwtCentric = GeneratorUtil
-			.getGwtCentricTemplates();
+	.getGwtCentricTemplates();
 
 	public String virginPackageInHd = new String();
 	private Properties properties;
@@ -64,32 +64,32 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 	 */
 	private void copyLibreriasExt() {
 
-//		String generatorExtZathuraJavaEEGwtCentricIndexJsp = GeneratorUtil
-//				.getGeneratorExtZathuraJavaEEGwtCentric()
-//				+ GeneratorUtil.slash + "index.jsp";
+		//		String generatorExtZathuraJavaEEGwtCentricIndexJsp = GeneratorUtil
+		//				.getGeneratorExtZathuraJavaEEGwtCentric()
+		//				+ GeneratorUtil.slash + "index.jsp";
 		String generatorExtZathuraJavaEEGwtCentricImages = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEGwtCentric()
-				+ GeneratorUtil.slash + "images" + GeneratorUtil.slash;
+		.getGeneratorExtZathuraJavaEEGwtCentric()
+		+ GeneratorUtil.slash + "images" + GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEGwtCentricCSS = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEGwtCentric()
-				+ GeneratorUtil.slash + "css" + GeneratorUtil.slash;
-//		String generatorExtZathuraJavaEEGwtCentricXmlhttp = GeneratorUtil
-//				.getGeneratorExtZathuraJavaEEGwtCentric()
-//				+ GeneratorUtil.slash + "xmlhttp" + GeneratorUtil.slash;
-//		String generatorExtZathuraJavaEEGwtCentricWEBXML = GeneratorUtil
-//				.getGeneratorExtZathuraJavaEEGwtCentric()
-//				+ GeneratorUtil.slash + "WEB-INF" + GeneratorUtil.slash;
+		.getGeneratorExtZathuraJavaEEGwtCentric()
+		+ GeneratorUtil.slash + "css" + GeneratorUtil.slash;
+		//		String generatorExtZathuraJavaEEGwtCentricXmlhttp = GeneratorUtil
+		//				.getGeneratorExtZathuraJavaEEGwtCentric()
+		//				+ GeneratorUtil.slash + "xmlhttp" + GeneratorUtil.slash;
+		//		String generatorExtZathuraJavaEEGwtCentricWEBXML = GeneratorUtil
+		//				.getGeneratorExtZathuraJavaEEGwtCentric()
+		//				+ GeneratorUtil.slash + "WEB-INF" + GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEGwtCentricLOG4J = GeneratorUtil
-				.getGeneratorExtZathuraJavaEEGwtCentric()
-				+ GeneratorUtil.slash + "log4j" + GeneratorUtil.slash;
-//		String generatorLibrariesZathuraJavaEEGwtCentricIceFaces = GeneratorUtil
-//				.getGeneratorLibrariesZathuraJavaEEGwtCentric()
-//				+ GeneratorUtil.slash + "iceFaces1.8.1" + GeneratorUtil.slash;
+		.getGeneratorExtZathuraJavaEEGwtCentric()
+		+ GeneratorUtil.slash + "log4j" + GeneratorUtil.slash;
+		//		String generatorLibrariesZathuraJavaEEGwtCentricIceFaces = GeneratorUtil
+		//				.getGeneratorLibrariesZathuraJavaEEGwtCentric()
+		//				+ GeneratorUtil.slash + "iceFaces1.8.1" + GeneratorUtil.slash;
 		String generatorLibrariesZathuraJavaEEGwtCentricJpaHibernate = GeneratorUtil
-				.getGeneratorLibrariesZathuraJavaEEGwtCentric()
-				+ GeneratorUtil.slash
-				+ "jpa-hibernate3.2"
-				+ GeneratorUtil.slash;
+		.getGeneratorLibrariesZathuraJavaEEGwtCentric()
+		+ GeneratorUtil.slash
+		+ "jpa-hibernate3.2"
+		+ GeneratorUtil.slash;
 		String generatorLibrariesZathuraJavaEEGwtCentricGWT2 = GeneratorUtil.getGeneratorLibrariesZathuraJavaEEGwtCentric()
 		+ GeneratorUtil.slash
 		+ "gwt 2.0.4"
@@ -104,20 +104,20 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 
 		// Copy Libraries
 		String libFolderPath = properties.getProperty("libFolderPath");
-//		GeneratorUtil.copyFolder(
-//				generatorLibrariesZathuraJavaEEGwtCentricIceFaces,
-//				libFolderPath);
+		//		GeneratorUtil.copyFolder(
+		//				generatorLibrariesZathuraJavaEEGwtCentricIceFaces,
+		//				libFolderPath);
 		GeneratorUtil.copyFolder(
 				generatorLibrariesZathuraJavaEEGwtCentricJpaHibernate,
 				libFolderPath);
 		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricGWT2,libFolderPath);
 		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricSmartGwt,libFolderPath);
-				
+
 
 		// Copy Ext web.xml
 		String webRootFolderPath = properties.getProperty("webRootFolderPath");
-//		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricWEBXML,
-//				webRootFolderPath + "WEB-INF" + GeneratorUtil.slash);
+		//		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricWEBXML,
+		//				webRootFolderPath + "WEB-INF" + GeneratorUtil.slash);
 
 		// Copy Ext css
 		GeneratorUtil.createFolder(webRootFolderPath + "images");
@@ -130,13 +130,13 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 				webRootFolderPath + "css" + GeneratorUtil.slash);
 
 		// Copy Ext xmlhttp
-//		GeneratorUtil.createFolder(webRootFolderPath + "xmlhttp");
-//		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricXmlhttp,
-//				webRootFolderPath + "xmlhttp" + GeneratorUtil.slash);
+		//		GeneratorUtil.createFolder(webRootFolderPath + "xmlhttp");
+		//		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricXmlhttp,
+		//				webRootFolderPath + "xmlhttp" + GeneratorUtil.slash);
 
 		// Copy Ext index.jsp
-//		GeneratorUtil.copy(generatorExtZathuraJavaEEGwtCentricIndexJsp,
-//				webRootFolderPath + GeneratorUtil.slash + "index.jsp");
+		//		GeneratorUtil.copy(generatorExtZathuraJavaEEGwtCentricIndexJsp,
+		//				webRootFolderPath + GeneratorUtil.slash + "index.jsp");
 
 		// Copy Ext log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
@@ -201,7 +201,7 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 		}
 
 		String projectNameClass = (projectName.substring(0, 1)).toUpperCase()
-				+ projectName.substring(1, projectName.length());
+		+ projectName.substring(1, projectName.length());
 
 		context.put("packageOriginal", packageOriginal);
 		context.put("virginPackage", virginPackage);
@@ -272,16 +272,16 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 
 			context.put("finalParamForIdForDtoForSetsVariablesInList",
 					stringBuilderForId
-							.finalParamForIdForDtoForSetsVariablesInList(list,
-									metaData));
+					.finalParamForIdForDtoForSetsVariablesInList(list,
+							metaData));
 
 			context.put("finalParamForDtoForSetsVariablesInList", stringBuilder
 					.finalParamForDtoForSetsVariablesInList(list, metaData));
 
 			context.put("finalParamForIdForDtoInViewForSetsVariablesInList",
 					stringBuilderForId
-							.finalParamForIdForDtoInViewForSetsVariablesInList(
-									list, metaData));
+					.finalParamForIdForDtoInViewForSetsVariablesInList(
+							list, metaData));
 
 			context.put("finalParamForDtoInViewForSetsVariablesInList",
 					stringBuilder.finalParamForDtoInViewForSetsVariablesInList(
@@ -289,8 +289,8 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 
 			context.put("finalParamForIdForViewForSetsVariablesInList",
 					stringBuilderForId
-							.finalParamForIdForViewForSetsVariablesInList(list,
-									metaData));
+					.finalParamForIdForViewForSetsVariablesInList(list,
+							metaData));
 
 			context.put("finalParamForIdVariablesAsList", stringBuilderForId
 					.finalParamForIdVariablesAsList(list, metaData));
@@ -311,7 +311,7 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			metaData.setFinalParamForId(finalParamForId);
 
 			String finalParamForIdVariables = stringBuilderForId
-					.finalParamForIdVariables(list, metaData);
+			.finalParamForIdVariables(list, metaData);
 			context.put("finalParamForIdVariables", stringBuilderForId
 					.finalParamForIdVariables(list, metaData));
 			metaData.setFinalParamForIdVariables(finalParamForIdVariables);
@@ -340,8 +340,8 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 					.finalParamForVariablesDataTablesAsList(list, metaData));
 			context.put("finalParamForVariablesDataTablesForIdAsList",
 					stringBuilderForId
-							.finalParamForVariablesDataTablesForIdAsList(list,
-									metaData));
+					.finalParamForVariablesDataTablesForIdAsList(list,
+							metaData));
 
 			if (metaData.isGetManyToOneProperties()) {
 				context.put("getVariableForManyToOneProperties", stringBuilder
@@ -365,11 +365,16 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 
 			doDao(metaData, context, hdLocation);
 
-//			doBackEndBeans(metaData, context, hdLocation, dataModel);
-//			doJsp(metaData, context, hdLocation, dataModel);
+			//			doBackEndBeans(metaData, context, hdLocation, dataModel);
+			//			doJsp(metaData, context, hdLocation, dataModel);
 			doLogic(metaData, context, hdLocation, dataModel, modelName);
-//			doDto(metaData, context, hdLocation, dataModel, modelName);
+			//			doDto(metaData, context, hdLocation, dataModel, modelName);
 			doExceptions(context, hdLocation);
+			
+			doDto(metaData, context, hdLocation, dataModel);
+			
+			doDataService(metaData, context, hdLocation, dataModel, modelName);
+			doDataServiceAsync(metaData, context, hdLocation, dataModel, modelName);
 		}
 
 		doUtilites(context, hdLocation, dataModel, modelName);
@@ -378,9 +383,11 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 		doPersitenceXml(dataModel, context, hdLocation);
 		doEntityManager(dataModel, context, hdLocation);
 		doWebXML(dataModel, context, hdLocation);
-//		doJspInitialMenu(dataModel, context, hdLocation);
-//		doFacesConfig(dataModel, context, hdLocation);
-//		doJspFacelets(context, hdLocation);
+		doAbstractDataSource(context, hdLocation, dataModel, modelName);
+		
+		//		doJspInitialMenu(dataModel, context, hdLocation);
+		//		doFacesConfig(dataModel, context, hdLocation);
+		//		doJspFacelets(context, hdLocation);
 	}
 
 	public void doLogic(MetaData metaData, VelocityContext context,
@@ -418,9 +425,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			// System.out.println(swdao);
 
 			String realLocation = hdLocation 
-//				+ GeneratorUtil.slash
-					+ virginPackageInHd 
-					+ GeneratorUtil.slash +"server"+ GeneratorUtil.slash + "control" + GeneratorUtil.slash;
+			//				+ GeneratorUtil.slash
+			+ virginPackageInHd 
+			+ GeneratorUtil.slash +"server"+ GeneratorUtil.slash + "control" + GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation + "I"
 					+ metaData.getRealClassName() + "Logic.java");
@@ -448,9 +455,116 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 		}
 
 	}
+	
+	public void doDataService(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel, String modelName) {
+		log.info("Begin doDataServices");
+
+		Template dataService = null;
+
+		StringWriter swDataService = new StringWriter();
+
+		try {
+			dataService = Velocity.getTemplate("DataService.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			// couldn't find the template
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+
+			dataService.merge(context, swDataService);
+			// System.out.println(swIdao);
+			// System.out.println(swdao);
+
+			String realLocation = hdLocation 
+			//				+ GeneratorUtil.slash
+			+ virginPackageInHd + GeneratorUtil.slash + "client" 
+			+ GeneratorUtil.slash +"dataService" + GeneratorUtil.slash;
+
+			FileWriter fstream1 = new FileWriter(realLocation+
+					"DataService"+ metaData.getRealClassName() +".java");
+			BufferedWriter out1 = new BufferedWriter(fstream1);
+			out1.write(swDataService.toString());
+			// Close the output stream
+			out1.close();
+
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation+
+					"DataService"+ metaData.getRealClassName() +".java");
+
+			log.info("End doDataServices");
+
+		} catch (Exception e) {
+			log.info("Error: " + e.getMessage());
+		}
+
+	}
+	
+	public void doDataServiceAsync(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel, String modelName) {
+		log.info("Begin doDataServicesAsync");
+
+		Template dataServiceAsync = null;
+
+		StringWriter swDataServiceAsync = new StringWriter();
+
+		try {
+			dataServiceAsync = Velocity.getTemplate("DataServiceAsync.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			// couldn't find the template
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+
+			dataServiceAsync.merge(context, swDataServiceAsync);
+			// System.out.println(swIdao);
+			// System.out.println(swdao);
+
+			String realLocation = hdLocation 
+			//				+ GeneratorUtil.slash
+			+ virginPackageInHd + GeneratorUtil.slash + "client" 
+			+ GeneratorUtil.slash +"dataService" + GeneratorUtil.slash;
+
+			FileWriter fstream1 = new FileWriter(realLocation+
+					"DataService"+ metaData.getRealClassName() +"Async.java");
+			BufferedWriter out1 = new BufferedWriter(fstream1);
+			out1.write(swDataServiceAsync.toString());
+			// Close the output stream
+			out1.close();
+
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation+
+					"DataService"+ metaData.getRealClassName() +"Async.java");
+
+			log.info("End doDataServicesAsync");
+
+		} catch (Exception e) {
+			log.info("Error: " + e.getMessage());
+		}
+
+	}
+	
 
 	public void doDto(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel, String modelName) {
+			String hdLocation, MetaDataModel dataModel) {
 		log.info("Begin doDTO");
 
 		Template dto = null;
@@ -458,7 +572,7 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 		StringWriter swDto = new StringWriter();
 
 		try {
-			dto = Velocity.getTemplate("Dto.vm");
+			dto = Velocity.getTemplate("DTO.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -479,12 +593,11 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			// System.out.println(swIdao);
 			// System.out.println(swdao);
 
-			String realLocation = hdLocation + GeneratorUtil.slash
-					+ virginPackageInHd + GeneratorUtil.slash + modelName
-					+ GeneratorUtil.slash + "dto" + GeneratorUtil.slash;
+			String realLocation = hdLocation + virginPackageInHd 
+			+ GeneratorUtil.slash  + GeneratorUtil.slash + "client" + GeneratorUtil.slash 
+			+ "dto" + GeneratorUtil.slash;
 
-			FileWriter fstream = new FileWriter(realLocation
-					+ metaData.getRealClassName() + "DTO.java");
+			FileWriter fstream = new FileWriter(realLocation+metaData.getRealClassName() + "DTO.java");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swDto.toString());
 			// Close the output stream
@@ -493,8 +606,58 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation
 					+ metaData.getRealClassName() + "DTO.java");
 
-			log.info("End doDTOc");
+			log.info("End doDTO");
 
+		} catch (Exception e) {
+			log.info("Error: " + e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void doAbstractDataSource(VelocityContext context, String hdLocation,
+			MetaDataModel dataModel, String modelName) {
+		log.info("Begin doAbstractDataSource");
+
+		Template abstractDataSoruce = null;
+
+		StringWriter swAbstractDataSource = new StringWriter();
+
+		try {
+			abstractDataSoruce = Velocity.getTemplate("AbstractGWTRPCDataSource.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			// couldn't find the template
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+
+			abstractDataSoruce.merge(context, swAbstractDataSource);
+
+			String realLocation = hdLocation + GeneratorUtil.slash
+			+ virginPackageInHd + GeneratorUtil.slash  +"client"+ GeneratorUtil.slash + "smartds"
+			+ GeneratorUtil.slash;
+
+			FileWriter fstream = new FileWriter(realLocation + "AbstractGWTRPCDataSource.java");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swAbstractDataSource.toString());
+			// Close the output stream
+			out.close();
+
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation
+					+ "AbstractGWTRPCDataSource.java");
+			
+			log.info("End doAbstractDataSource");
+			
 		} catch (Exception e) {
 			log.info("Error: " + e.getMessage());
 		}
@@ -506,21 +669,21 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 		log.info("Begin doUtilites");
 
 		Template utilities = null;
-//		Template utilitiesDataPage = null;
-//		Template utilitiesDataSource = null;
-//		Template utilitiesPagedListDataModel = null;
+		//		Template utilitiesDataPage = null;
+		//		Template utilitiesDataSource = null;
+		//		Template utilitiesPagedListDataModel = null;
 
 		StringWriter swUtilities = new StringWriter();
-//		StringWriter swUtilitiesDataPage = new StringWriter();
-//		StringWriter swUtilitiesDataSource = new StringWriter();
-//		StringWriter swUtilitiesPagedListDataModel = new StringWriter();
+		//		StringWriter swUtilitiesDataPage = new StringWriter();
+		//		StringWriter swUtilitiesDataSource = new StringWriter();
+		//		StringWriter swUtilitiesPagedListDataModel = new StringWriter();
 
 		try {
 			utilities = Velocity.getTemplate("Utilities.vm");
-//			utilitiesDataPage = Velocity.getTemplate("DataPage.vm");
-//			utilitiesDataSource = Velocity.getTemplate("DataSource.vm");
-//			utilitiesPagedListDataModel = Velocity
-//					.getTemplate("PagedListDataModel.vm");
+			//			utilitiesDataPage = Velocity.getTemplate("DataPage.vm");
+			//			utilitiesDataSource = Velocity.getTemplate("DataSource.vm");
+			//			utilitiesPagedListDataModel = Velocity
+			//					.getTemplate("PagedListDataModel.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -538,14 +701,14 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 		try {
 
 			utilities.merge(context, swUtilities);
-//			utilitiesDataPage.merge(context, swUtilitiesDataPage);
-//			utilitiesDataSource.merge(context, swUtilitiesDataSource);
-//			utilitiesPagedListDataModel.merge(context,
-//					swUtilitiesPagedListDataModel);
+			//			utilitiesDataPage.merge(context, swUtilitiesDataPage);
+			//			utilitiesDataSource.merge(context, swUtilitiesDataSource);
+			//			utilitiesPagedListDataModel.merge(context,
+			//					swUtilitiesPagedListDataModel);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
-					+ virginPackageInHd + GeneratorUtil.slash  +"server"+ GeneratorUtil.slash + "utilities"
-					+ GeneratorUtil.slash;
+			+ virginPackageInHd + GeneratorUtil.slash  +"server"+ GeneratorUtil.slash + "utilities"
+			+ GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation + "Utilities.java");
 			BufferedWriter out = new BufferedWriter(fstream);
@@ -553,34 +716,34 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			// Close the output stream
 			out.close();
 
-//			FileWriter fstream2 = new FileWriter(realLocation + "DataPage.java");
-//			BufferedWriter out2 = new BufferedWriter(fstream2);
-//			out2.write(swUtilitiesDataPage.toString());
-//			// Close the output stream
-//			out2.close();
+			//			FileWriter fstream2 = new FileWriter(realLocation + "DataPage.java");
+			//			BufferedWriter out2 = new BufferedWriter(fstream2);
+			//			out2.write(swUtilitiesDataPage.toString());
+			//			// Close the output stream
+			//			out2.close();
 
-//			FileWriter fstream3 = new FileWriter(realLocation
-//					+ "DataSource.java");
-//			BufferedWriter out3 = new BufferedWriter(fstream3);
-//			out3.write(swUtilitiesDataSource.toString());
-//			// Close the output stream
-//			out3.close();
+			//			FileWriter fstream3 = new FileWriter(realLocation
+			//					+ "DataSource.java");
+			//			BufferedWriter out3 = new BufferedWriter(fstream3);
+			//			out3.write(swUtilitiesDataSource.toString());
+			//			// Close the output stream
+			//			out3.close();
 
-//			FileWriter fstream4 = new FileWriter(realLocation
-//					+ "PagedListDataModel.java");
-//			BufferedWriter out4 = new BufferedWriter(fstream4);
-//			out4.write(swUtilitiesPagedListDataModel.toString());
-//			// Close the output stream
-//			out4.close();
+			//			FileWriter fstream4 = new FileWriter(realLocation
+			//					+ "PagedListDataModel.java");
+			//			BufferedWriter out4 = new BufferedWriter(fstream4);
+			//			out4.write(swUtilitiesPagedListDataModel.toString());
+			//			// Close the output stream
+			//			out4.close();
 
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation
 					+ "Utilities.java");
-//			JalopyCodeFormatter.formatJavaCodeFile(realLocation
-//					+ "DataPage.java");
-//			JalopyCodeFormatter.formatJavaCodeFile(realLocation
-//					+ "DataSource.java");
-//			JalopyCodeFormatter.formatJavaCodeFile(realLocation
-//					+ "PagedListDataModel.java");
+			//			JalopyCodeFormatter.formatJavaCodeFile(realLocation
+			//					+ "DataPage.java");
+			//			JalopyCodeFormatter.formatJavaCodeFile(realLocation
+			//					+ "DataSource.java");
+			//			JalopyCodeFormatter.formatJavaCodeFile(realLocation
+			//					+ "PagedListDataModel.java");
 
 			log.info("End doUtilites");
 
@@ -624,8 +787,8 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			// System.out.println(swdao);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
-					+ virginPackageInHd + GeneratorUtil.slash  +"server"+  GeneratorUtil.slash + "exceptions"
-					+ GeneratorUtil.slash;
+			+ virginPackageInHd + GeneratorUtil.slash  +"server"+  GeneratorUtil.slash + "exceptions"
+			+ GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
 					+ "ExceptionMessages.java");
@@ -664,7 +827,7 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 
 		try {
 			businessDelegator = Velocity
-					.getTemplate("BusinessDelegatorView.vm");
+			.getTemplate("BusinessDelegatorView.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -684,10 +847,10 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			// System.out.println(swdao);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
-					+ virginPackageInHd + GeneratorUtil.slash  +"server" 
-//					+ GeneratorUtil.slash + "presentation"
-					+ GeneratorUtil.slash + "businessDelegate"
-					+ GeneratorUtil.slash;
+			+ virginPackageInHd + GeneratorUtil.slash  +"server" 
+			//					+ GeneratorUtil.slash + "presentation"
+			+ GeneratorUtil.slash + "businessDelegate"
+			+ GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
 					+ "BusinessDelegatorView" + ".java");
@@ -741,8 +904,8 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			// System.out.println(swdao);
 
 			String daoLocation = hdLocation + GeneratorUtil.slash
-					+ virginPackageInHd + GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataaccess"
-					+ GeneratorUtil.slash + "dao" + GeneratorUtil.slash;
+			+ virginPackageInHd + GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataaccess"
+			+ GeneratorUtil.slash + "dao" + GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(daoLocation + "I"
 					+ metaData.getRealClassName() + "DAO.java");
@@ -801,8 +964,8 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			daoFactory.merge(context, swDaoFactory);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
-					+ virginPackageInHd+ GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataaccess"
-					+ GeneratorUtil.slash + "daoFactory" + GeneratorUtil.slash;
+			+ virginPackageInHd+ GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataaccess"
+			+ GeneratorUtil.slash + "daoFactory" + GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
 					+ "JPADaoFactory.java");
@@ -894,9 +1057,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			entityManager.merge(context, swEntityManager);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
-					+ virginPackageInHd + GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataaccess"
-					+ GeneratorUtil.slash + "entityManager"
-					+ GeneratorUtil.slash;
+			+ virginPackageInHd + GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataaccess"
+			+ GeneratorUtil.slash + "entityManager"
+			+ GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
 					+ "EntityManagerHelper.java");
@@ -945,7 +1108,7 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 		try {
 			webXml.merge(context, swWebXML);
 
-			
+
 			String realLocation = properties.getProperty("webRootFolderPath")
 			+"WEB-INF"
 			+ GeneratorUtil.slash;
@@ -964,7 +1127,7 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator,
 			log.info("Error doWebXML");
 		}
 
-		
+
 	}
 
 }

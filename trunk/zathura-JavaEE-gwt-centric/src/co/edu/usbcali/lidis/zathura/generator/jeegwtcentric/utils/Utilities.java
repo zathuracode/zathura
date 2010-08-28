@@ -568,40 +568,31 @@ public class Utilities {
 		String pckge = packageName.replace('.', '_') + "_";
 		String pckgeServer = pckge + "server_"; 
 		String modelPckg = packageOriginal.replace('.', '_') + "_";
-
+		String pckgeClient = pckge + "client_";
+		
 		String dataAcces = pckgeServer + "dataaccess_";
 		String model = modelPckg;
 //		String presentation = pckgeServer + "presentation_";
 		String dao = dataAcces + "dao_";
 
 		List<String> folderBuilder = new ArrayList<String>();
-
 		folderBuilder.add(pckgeServer);
-
 		folderBuilder.add(pckgeServer + "exceptions");
-
 		folderBuilder.add(pckgeServer + "utilities");
-
 		folderBuilder.add(dao);
-
 		folderBuilder.add(dataAcces + "daoFactory");
-
 		folderBuilder.add(dataAcces + "entityManager");
-
 		folderBuilder.add(pckgeServer + "control");
-
+		folderBuilder.add(pckgeClient + "dto");
+		folderBuilder.add(pckgeClient + "dataService");
+		folderBuilder.add(pckgeClient + "smartds");
 //		if (specificityLevel.intValue() == 2) {
 //			folderBuilder.add(model + "pojos");
 //		}
-
 //		folderBuilder.add(model + "dto");
-
 //		folderBuilder.add(presentation + "backEndBeans");
-
 		folderBuilder.add(pckgeServer + "businessDelegate");
-
 		folderBuilder.add(properties.getProperty("webRootFolderPath"));
-
 		for (String string : folderBuilder) {
 			try {
 				GeneratorUtil.validateDirectory(string, hardDiskLocation);
@@ -610,7 +601,6 @@ public class Utilities {
 				e.printStackTrace();
 			}
 		}
-
 		try {
 //			GeneratorUtil.validateDirectory("JSPX", properties
 //					.getProperty("webRootFolderPath"));

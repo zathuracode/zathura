@@ -1,0 +1,94 @@
+package  ${virginPackage}.client.dto;
+
+public class ${metaData.getRealClassName()}DTO{
+
+	public ${metaData.getRealClassName()}DTO() {
+		super();
+	}
+	
+#foreach($member2  in $finalParamForViewVariablesInList)
+    #set( $str = $member2 ) 
+    #set( $lower = $str.toString().substring(0,1).toLowerCase())
+    #set($str2 = $str.toString().substring(1))
+    private String $lower$str2;
+#end
+#foreach($member2  in $finalParamForIdForViewVariablesInList)
+    #set( $str = $member2 ) 
+    #set( $lower = $str.toString().substring(0,1).toLowerCase())
+    #set($str2 = $str.toString().substring(1))
+    private String $lower$str2;
+#end
+#if(${isFinalParamForViewDatesInList})
+    #foreach($member2  in $finalParamForViewDatesInList)
+        #set( $str = $member2 ) 
+        #set( $lower = $str.toString().substring(0,1).toLowerCase())
+        #set($str2 = $str.toString().substring(1))
+        private Date $lower$str2;
+    #end
+#end
+#if(${isFinalParamForIdForViewDatesInList})
+    #foreach($member2  in $finalParamForIdForViewDatesInList)
+        #set( $str = $member2 ) 
+        #set( $lower = $str.toString().substring(0,1).toLowerCase())
+        #set($str2 = $str.toString().substring(1))
+        private Date $lower$str2;
+    #end
+#end
+private boolean isFetchOnly;
+
+#foreach($member2  in $finalParamForViewVariablesInList)
+        #set( $str = $member2 ) 
+        #set( $lower = $str.toString().substring(0,1).toLowerCase())
+        #set($str2 = $str.toString().substring(1))
+        public String get${member2}() {
+        return $lower$str2;
+        }
+        public void set${member2}(String $lower$str2) {
+        this.$lower$str2 = $lower$str2;
+        }
+    #end
+    #if(${isFinalParamForViewDatesInList})
+        #foreach($member2  in $finalParamForViewDatesInList)
+            #set( $str = $member2 ) 
+            #set( $lower = $str.toString().substring(0,1).toLowerCase())
+            #set($str2 = $str.toString().substring(1))
+            public Date get${member2}() {
+            return $lower$str2;
+            }
+            public void set${member2}(Date $lower$str2) {
+            this.$lower$str2 = $lower$str2;
+            }
+        #end
+    #end
+    #foreach($member2  in $finalParamForIdForViewVariablesInList)
+        #set( $str = $member2 ) 
+        #set( $lower = $str.toString().substring(0,1).toLowerCase())
+        #set($str2 = $str.toString().substring(1))
+        public String get${member2}() {
+        return $lower$str2;
+        }
+        public void set${member2}(String $lower$str2) {
+        this.$lower$str2 = $lower$str2;
+        }
+    #end
+    #if(${isFinalParamForIdForViewDatesInList})
+        #foreach($member2  in $finalParamForIdForViewDatesInList)
+            #set( $str = $member2 ) 
+            #set( $lower = $str.toString().substring(0,1).toLowerCase())
+            #set($str2 = $str.toString().substring(1))
+            public Date get${member2}() {
+            return $lower$str2;
+            }
+            public void set${member2}(Date $lower$str2) {
+            this.$lower$str2 = $lower$str2;
+            }
+        #end
+    #end
+	public void setFetchOnly(boolean isFetchOnly) {
+		this.isFetchOnly = isFetchOnly;
+	}
+
+	public boolean isFetchOnly() {
+		return isFetchOnly;
+	}
+}

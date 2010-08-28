@@ -1,0 +1,20 @@
+package  ${virginPackage}.client.dataService;
+
+import java.util.List;
+
+import ${virginPackage}.client.dto.${metaData.getRealClassName()}DTO;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
+@RemoteServiceRelativePath("data${metaData.getRealClassName()}")
+public interface DataService${metaData.getRealClassName()} extends RemoteService {
+    List<${metaData.getRealClassName()}DTO> fetch ();
+    
+	public ${metaData.getRealClassName()}DTO fetch(Long key);
+
+	${metaData.getRealClassName()}DTO add (${metaData.getRealClassName()}DTO swagItemGWTDTO) throws Exception;
+
+	${metaData.getRealClassName()}DTO update (${metaData.getRealClassName()}DTO swagItemGWTDTO) throws Exception;
+
+    void remove (${metaData.getRealClassName()}DTO swagItemGWTDTO);
+}
