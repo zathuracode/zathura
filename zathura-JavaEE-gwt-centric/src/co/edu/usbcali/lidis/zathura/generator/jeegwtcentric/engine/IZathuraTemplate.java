@@ -49,7 +49,7 @@ public interface IZathuraTemplate {
 //			String hdLocation);
 
 	public void doDto(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel, String modelName);
+			String hdLocation, MetaDataModel dataModel);
 
 	public void doExceptions(VelocityContext context, String hdLocation);
 
