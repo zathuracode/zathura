@@ -36,6 +36,13 @@ public interface IZathuraTemplate {
 	public void doWebXML(MetaDataModel dataModel,
 			VelocityContext context, String hdLocation);
 
+	public void doEntryPoint(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel);
+	
+	public void doHTML(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel);
+
+
 	//TODO Cambiar Nombre por lo de GWT
 //	public void doJsp(MetaData metaData, VelocityContext context,
 //			String hdLocation, MetaDataModel dataModel);

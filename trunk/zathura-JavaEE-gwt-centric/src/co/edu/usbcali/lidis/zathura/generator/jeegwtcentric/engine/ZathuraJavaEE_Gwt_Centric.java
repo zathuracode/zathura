@@ -64,27 +64,15 @@ IZathuraTemplate {
 	 */
 	private void copyLibreriasExt() {
 
-		//		String generatorExtZathuraJavaEEGwtCentricIndexJsp = GeneratorUtil
-		//				.getGeneratorExtZathuraJavaEEGwtCentric()
-		//				+ GeneratorUtil.slash + "index.jsp";
 		String generatorExtZathuraJavaEEGwtCentricImages = GeneratorUtil
 		.getGeneratorExtZathuraJavaEEGwtCentric()
 		+ GeneratorUtil.slash + "images" + GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEGwtCentricCSS = GeneratorUtil
 		.getGeneratorExtZathuraJavaEEGwtCentric()
 		+ GeneratorUtil.slash + "css" + GeneratorUtil.slash;
-		//		String generatorExtZathuraJavaEEGwtCentricXmlhttp = GeneratorUtil
-		//				.getGeneratorExtZathuraJavaEEGwtCentric()
-		//				+ GeneratorUtil.slash + "xmlhttp" + GeneratorUtil.slash;
-		//		String generatorExtZathuraJavaEEGwtCentricWEBXML = GeneratorUtil
-		//				.getGeneratorExtZathuraJavaEEGwtCentric()
-		//				+ GeneratorUtil.slash + "WEB-INF" + GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEGwtCentricLOG4J = GeneratorUtil
 		.getGeneratorExtZathuraJavaEEGwtCentric()
 		+ GeneratorUtil.slash + "log4j" + GeneratorUtil.slash;
-		//		String generatorLibrariesZathuraJavaEEGwtCentricIceFaces = GeneratorUtil
-		//				.getGeneratorLibrariesZathuraJavaEEGwtCentric()
-		//				+ GeneratorUtil.slash + "iceFaces1.8.1" + GeneratorUtil.slash;
 		String generatorLibrariesZathuraJavaEEGwtCentricJpaHibernate = GeneratorUtil
 		.getGeneratorLibrariesZathuraJavaEEGwtCentric()
 		+ GeneratorUtil.slash
@@ -104,22 +92,14 @@ IZathuraTemplate {
 
 		// Copy Libraries
 		String libFolderPath = properties.getProperty("libFolderPath");
-		//		GeneratorUtil.copyFolder(
-		//				generatorLibrariesZathuraJavaEEGwtCentricIceFaces,
-		//				libFolderPath);
 		GeneratorUtil.copyFolder(
 				generatorLibrariesZathuraJavaEEGwtCentricJpaHibernate,
 				libFolderPath);
 		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricGWT2,libFolderPath);
 		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricSmartGwt,libFolderPath);
 
-
-		// Copy Ext web.xml
-		String webRootFolderPath = properties.getProperty("webRootFolderPath");
-		//		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricWEBXML,
-		//				webRootFolderPath + "WEB-INF" + GeneratorUtil.slash);
-
 		// Copy Ext css
+		String webRootFolderPath = properties.getProperty("webRootFolderPath");
 		GeneratorUtil.createFolder(webRootFolderPath + "images");
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricImages,
 				webRootFolderPath + "images" + GeneratorUtil.slash);
@@ -128,15 +108,6 @@ IZathuraTemplate {
 		GeneratorUtil.createFolder(webRootFolderPath + "css");
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricCSS,
 				webRootFolderPath + "css" + GeneratorUtil.slash);
-
-		// Copy Ext xmlhttp
-		//		GeneratorUtil.createFolder(webRootFolderPath + "xmlhttp");
-		//		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEGwtCentricXmlhttp,
-		//				webRootFolderPath + "xmlhttp" + GeneratorUtil.slash);
-
-		// Copy Ext index.jsp
-		//		GeneratorUtil.copy(generatorExtZathuraJavaEEGwtCentricIndexJsp,
-		//				webRootFolderPath + GeneratorUtil.slash + "index.jsp");
 
 		// Copy Ext log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
@@ -364,17 +335,13 @@ IZathuraTemplate {
 			context.put("dataModel", dataModel);
 
 			doDao(metaData, context, hdLocation);
-
-			//			doBackEndBeans(metaData, context, hdLocation, dataModel);
-			//			doJsp(metaData, context, hdLocation, dataModel);
 			doLogic(metaData, context, hdLocation, dataModel, modelName);
-			//			doDto(metaData, context, hdLocation, dataModel, modelName);
 			doExceptions(context, hdLocation);
-			
 			doDto(metaData, context, hdLocation, dataModel);
-			
 			doDataService(metaData, context, hdLocation, dataModel, modelName);
 			doDataServiceAsync(metaData, context, hdLocation, dataModel, modelName);
+			doEntryPoint(metaData, context, hdLocation, dataModel);
+			doHTML(metaData, context, hdLocation, dataModel);
 		}
 
 		doUtilites(context, hdLocation, dataModel, modelName);
@@ -385,9 +352,6 @@ IZathuraTemplate {
 		doWebXML(dataModel, context, hdLocation);
 		doAbstractDataSource(context, hdLocation, dataModel, modelName);
 		
-		//		doJspInitialMenu(dataModel, context, hdLocation);
-		//		doFacesConfig(dataModel, context, hdLocation);
-		//		doJspFacelets(context, hdLocation);
 	}
 
 	public void doLogic(MetaData metaData, VelocityContext context,
@@ -1128,6 +1092,107 @@ IZathuraTemplate {
 		}
 
 
+	}
+
+	@Override
+	public void doEntryPoint(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel) {
+		log.info("Begin doEntryPoint");
+
+		Template entryPoint = null;
+
+		StringWriter swEntryPoint = new StringWriter();
+
+		try {
+			entryPoint = Velocity.getTemplate("EntryPoint.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			entryPoint.merge(context, swEntryPoint);
+
+			String entryLocation = hdLocation + GeneratorUtil.slash
+			+ virginPackageInHd + GeneratorUtil.slash  +"client" + GeneratorUtil.slash + "entryPoint"
+			+ GeneratorUtil.slash ;
+
+			FileWriter fstream = new FileWriter(entryLocation 
+					+ metaData.getRealClassName() + "EP.java");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swEntryPoint.toString());
+			// Close the output stream
+			out.close();
+
+			JalopyCodeFormatter.formatJavaCodeFile(entryLocation
+					+ metaData.getRealClassName() + "EP.java");
+
+			log.info("End doEntryPoint");
+
+		} catch (Exception e) {
+			log.info("Error doEntryPoint");
+		}
+
+		
+	}
+
+	@Override
+	public void doHTML(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel) {
+
+		log.info("Begin doHTML");
+
+		Template html = null;
+
+		StringWriter swHtml = new StringWriter();
+
+		try {
+			html = Velocity.getTemplate("HTML.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			html.merge(context, swHtml);
+			
+			String realLocation = properties.getProperty("webRootFolderPath")
+			+ GeneratorUtil.slash;
+			FileWriter fstream = new FileWriter(realLocation 
+					+ metaData.getRealClassName() + ".html");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swHtml.toString());
+			// Close the output stream
+			out.close();
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation 
+					+ metaData.getRealClassName() + ".html");
+
+
+			log.info("End doHTML");
+
+		} catch (Exception e) {
+			log.info("Error doHTML");
+		}
+
+		
+	
+		
 	}
 
 }
