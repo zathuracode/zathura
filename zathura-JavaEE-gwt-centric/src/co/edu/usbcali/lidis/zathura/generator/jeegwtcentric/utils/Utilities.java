@@ -586,6 +586,7 @@ public class Utilities {
 		folderBuilder.add(pckgeClient + "dto");
 		folderBuilder.add(pckgeClient + "dataService");
 		folderBuilder.add(pckgeClient + "smartds");
+		folderBuilder.add(pckgeClient + "entryPoint");
 //		if (specificityLevel.intValue() == 2) {
 //			folderBuilder.add(model + "pojos");
 //		}
