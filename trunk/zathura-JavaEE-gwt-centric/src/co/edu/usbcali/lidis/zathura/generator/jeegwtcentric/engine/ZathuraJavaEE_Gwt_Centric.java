@@ -337,11 +337,13 @@ IZathuraTemplate {
 			doDao(metaData, context, hdLocation);
 			doLogic(metaData, context, hdLocation, dataModel, modelName);
 			doExceptions(context, hdLocation);
+			doGwtXml(metaData, context, hdLocation, dataModel, projectName);
 			doDto(metaData, context, hdLocation, dataModel);
 			doDataService(metaData, context, hdLocation, dataModel, modelName);
 			doDataServiceAsync(metaData, context, hdLocation, dataModel, modelName);
 			doEntryPoint(metaData, context, hdLocation, dataModel);
 			doHTML(metaData, context, hdLocation, dataModel);
+			doSmartGWTDataSource(metaData, context, hdLocation, dataModel, modelName);
 		}
 
 		doUtilites(context, hdLocation, dataModel, modelName);
@@ -621,6 +623,55 @@ IZathuraTemplate {
 					+ "AbstractGWTRPCDataSource.java");
 			
 			log.info("End doAbstractDataSource");
+			
+		} catch (Exception e) {
+			log.info("Error: " + e.getMessage());
+		}
+
+	}
+	
+	public void doSmartGWTDataSource(MetaData metaData, VelocityContext context, String hdLocation,
+			MetaDataModel dataModel, String modelName) {
+		log.info("Begin doSmartGWTDataSource");
+
+		Template smartGWTDataSource = null;
+
+		StringWriter swSmartGWTDataSource = new StringWriter();
+
+		try {
+			smartGWTDataSource = Velocity.getTemplate("SmartGWTDataSource.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			// couldn't find the template
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+
+			smartGWTDataSource.merge(context, swSmartGWTDataSource);
+
+			String realLocation = hdLocation + GeneratorUtil.slash
+			+ virginPackageInHd + GeneratorUtil.slash  +"client"+ GeneratorUtil.slash + "smartds"
+			+ GeneratorUtil.slash;
+
+			FileWriter fstream = new FileWriter(realLocation + "SmartGWTDataSource"+ metaData.getRealClassName() +".java");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swSmartGWTDataSource.toString());
+			// Close the output stream
+			out.close();
+
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation
+					+ "SmartGWTDataSource"+ metaData.getRealClassName() +".java");
+			
+			log.info("End doSmartGWTDataSource");
 			
 		} catch (Exception e) {
 			log.info("Error: " + e.getMessage());
@@ -1128,7 +1179,7 @@ IZathuraTemplate {
 			FileWriter fstream = new FileWriter(entryLocation 
 					+ metaData.getRealClassName() + "EP.java");
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(swEntryPoint.toString());
+			out.write(swEntryPoint.toString()); 
 			// Close the output stream
 			out.close();
 
@@ -1142,6 +1193,52 @@ IZathuraTemplate {
 		}
 
 		
+	}
+	
+	public void doGwtXml(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel, String projectName) {
+
+		log.info("Begin doGwtXml");
+
+		Template gwtXml = null;
+
+		StringWriter swGwtXml = new StringWriter();
+
+		try {
+			gwtXml = Velocity.getTemplate("GWTXML.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			gwtXml.merge(context, swGwtXml);
+			
+			String realLocation = hdLocation + GeneratorUtil.slash
+			+ virginPackageInHd + GeneratorUtil.slash;
+			FileWriter fstream = new FileWriter(realLocation 
+					+ projectName + ".gwt.xml");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swGwtXml.toString());
+			// Close the output stream
+			out.close();
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation 
+					+ projectName + ".gwt.xml");
+
+
+			log.info("End doGwtXml");
+
+		} catch (Exception e) {
+			log.info("Error doGwtXml");
+		}
 	}
 
 	@Override
@@ -1189,10 +1286,6 @@ IZathuraTemplate {
 		} catch (Exception e) {
 			log.info("Error doHTML");
 		}
-
-		
-	
-		
 	}
 
 }
