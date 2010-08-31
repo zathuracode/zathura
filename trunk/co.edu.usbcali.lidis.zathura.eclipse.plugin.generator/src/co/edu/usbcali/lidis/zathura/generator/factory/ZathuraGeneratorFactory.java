@@ -22,9 +22,9 @@ import co.edu.usbcali.lidis.zathura.generator.model.IZathuraGenerator;
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 
 /**
- * 
- * @author diegomez
- * 
+ * @version 1.0
+ * @author Diego Armando Gomez Mosquera
+ * dgomez@vortexbird.com
  */
 public class ZathuraGeneratorFactory {
 

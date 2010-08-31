@@ -7,8 +7,13 @@ import org.eclipse.core.runtime.FileLocator;
 
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ReverseEngineeringUtil;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ */
 public class ConfigEclipsePluginPath {
 	
 	private String pluginPath = null;
@@ -28,7 +33,7 @@ public class ConfigEclipsePluginPath {
 			URL pluginUrl = FileLocator.resolve(bundleRootURL);
 			pluginPath = pluginUrl.getPath();
 			GeneratorUtil.setFullPath(pluginPath);
-			ReverseEngineeringUtil.setFullPath(pluginPath);
+			ZathuraReverseEngineeringUtil.setFullPath(pluginPath);
 			
 			
 		} catch (IOException e) { 

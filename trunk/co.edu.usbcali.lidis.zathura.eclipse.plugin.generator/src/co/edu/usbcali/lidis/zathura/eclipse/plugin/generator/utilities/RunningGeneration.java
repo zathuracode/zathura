@@ -11,6 +11,12 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import co.edu.usbcali.lidis.zathura.generator.exceptions.GeneratorNotFoundException;
 import co.edu.usbcali.lidis.zathura.metadata.exceptions.MetaDataReaderNotFoundException;
 
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ * @see IRunnableWithProgress
+ */
 public class RunningGeneration implements IRunnableWithProgress {
 	  
 	  /**

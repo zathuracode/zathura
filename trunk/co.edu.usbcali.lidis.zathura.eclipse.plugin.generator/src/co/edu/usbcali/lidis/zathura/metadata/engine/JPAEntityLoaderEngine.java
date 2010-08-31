@@ -46,7 +46,7 @@ import co.edu.usbcali.lidis.zathura.metadata.utilities.MetaDataUtil;
 
 /**
  * 
- * @author diegomez Basado en el codigo de jpa2Web
+ * @author Diego Armando Gomez Mosquera Basado en el codigo de jpa2Web
  * 
  */
 public class JPAEntityLoaderEngine implements IMetaDataReader {

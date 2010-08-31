@@ -18,10 +18,14 @@ import co.edu.usbcali.lidis.zathura.metadata.exceptions.MetaDataReaderNotFoundEx
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 import co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader;
 import co.edu.usbcali.lidis.zathura.metadata.reader.MetaDataReaderFactory;
-import co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraJPAReverseEngineering;
-import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraJPAReverseEngineering;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ReverseEngineeringUtil;
-
+import co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraReverseEngineering;
+import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraReverseEngineering;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ */
 public class EclipseGeneratorUtil {
 
 	
@@ -158,7 +162,7 @@ public class EclipseGeneratorUtil {
 		//Crea carpeta de temporales
 		GeneratorUtil.createFolder(destinationDirectory);
 		
-		IZathuraJPAReverseEngineering mappingTool = new ZathuraJPAReverseEngineering();
+		IZathuraReverseEngineering mappingTool = new ZathuraReverseEngineering();
 		mappingTool.makePojosJPA_V1_0(connectionProperties, tablesList);
 		
 		
@@ -168,7 +172,7 @@ public class EclipseGeneratorUtil {
 		
 		Properties connectionProperties = new Properties();		
 		
-		destinationDirectory=ReverseEngineeringUtil.getTempFilesPath();
+		destinationDirectory=ZathuraReverseEngineeringUtil.getTempFilesPath();
 		
 		connectionProperties.put("connectionDriverClass", connectionDriverClass);
 		connectionProperties.put("connectionUrl", connectionUrl);
@@ -187,7 +191,7 @@ public class EclipseGeneratorUtil {
 		GeneratorUtil.createFolder(destinationDirectory);
 
 		
-		IZathuraJPAReverseEngineering mappingTool = new ZathuraJPAReverseEngineering();
+		IZathuraReverseEngineering mappingTool = new ZathuraReverseEngineering();
 		mappingTool.makePojosJPA_V1_0(connectionProperties, tablesList);
 		
 		

@@ -15,10 +15,15 @@ import org.eclipse.swt.widgets.List;
 
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ReverseEngineeringUtil;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 import com.swtdesigner.ResourceManager;
-
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ * @see WizardPage
+ */
 public class WizardSelectTables extends WizardPage {
 	
 	private Combo cmbCatlogSchema;
@@ -48,7 +53,7 @@ public class WizardSelectTables extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				listAvailableTables.removeAll();
 				listSelectedTables.removeAll();
-				java.util.List<String> listTables=ReverseEngineeringUtil.getTables(cmbCatlogSchema.getText());
+				java.util.List<String> listTables=ZathuraReverseEngineeringUtil.getTables(cmbCatlogSchema.getText());
 				for (String tableName : listTables) {
 					listAvailableTables.add(tableName);
 				}
@@ -77,7 +82,7 @@ public class WizardSelectTables extends WizardPage {
 				cmbCatlogSchema.removeAll();
 				listAvailableTables.removeAll();
 				listSelectedTables.removeAll();
-				java.util.List<String> listCatalogSchema=ReverseEngineeringUtil.getCatalogSchema();
+				java.util.List<String> listCatalogSchema=ZathuraReverseEngineeringUtil.getCatalogSchema();
 				for (String catalogSchemaName : listCatalogSchema) {
 					cmbCatlogSchema.add(catalogSchemaName);
 				}

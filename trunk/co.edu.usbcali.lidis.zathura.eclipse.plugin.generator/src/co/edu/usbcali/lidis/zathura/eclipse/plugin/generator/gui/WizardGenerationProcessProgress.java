@@ -10,7 +10,12 @@ import org.eclipse.swt.widgets.Text;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 
 import com.swtdesigner.ResourceManager;
-
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ * @see WizardPage
+ */
 public class WizardGenerationProcessProgress extends WizardPage {
 
 	private Text txtSummary;

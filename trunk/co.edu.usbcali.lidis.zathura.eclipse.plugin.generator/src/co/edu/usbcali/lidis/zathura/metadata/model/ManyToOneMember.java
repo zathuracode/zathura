@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  *
  */
 public class ManyToOneMember extends Member {

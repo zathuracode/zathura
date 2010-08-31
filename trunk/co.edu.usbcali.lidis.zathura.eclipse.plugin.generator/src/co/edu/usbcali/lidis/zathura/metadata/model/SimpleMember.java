@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  *
  */
 public class SimpleMember extends Member {

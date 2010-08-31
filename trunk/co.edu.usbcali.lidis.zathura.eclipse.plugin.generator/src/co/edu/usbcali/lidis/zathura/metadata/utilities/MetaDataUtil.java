@@ -16,7 +16,7 @@ import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  *
  */
 public class MetaDataUtil {

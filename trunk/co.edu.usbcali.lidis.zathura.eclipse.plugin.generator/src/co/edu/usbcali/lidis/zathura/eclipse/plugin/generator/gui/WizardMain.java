@@ -10,7 +10,12 @@ import org.eclipse.jface.wizard.Wizard;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.RunningGeneration;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
-
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ * @see Wizard
+ */
 public class WizardMain extends Wizard {
 	
 	//WizardPage

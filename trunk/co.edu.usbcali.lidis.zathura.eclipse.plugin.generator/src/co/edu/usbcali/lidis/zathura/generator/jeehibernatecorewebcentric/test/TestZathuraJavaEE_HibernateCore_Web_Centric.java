@@ -56,13 +56,13 @@ public class TestZathuraJavaEE_HibernateCore_Web_Centric {
 			String webRootFolderPath="E:/WORK(New)/banco/WebRoot/";
 			String libFolderPath="E:/WORK(New)/banco/WebRoot/WEB-INF/lib/";				
 			 
-			///home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco
-//			String jpaPath = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/build/classes/";
+			///home/Diego Armando Gomez Mosquera/Workspaces/runtime-EclipseApplication/demoBanco
+//			String jpaPath = "/home/Diego Armando Gomez Mosquera/Workspaces/runtime-EclipseApplication/demoBanco/build/classes/";
 //			String jpaPckgName = "co.edu.usbcali.banco.modelo";			
 //			String projectName = "demoBanco";
-//			String folderProjectPath = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/src/";
-//			String webRootFolderPath="/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/WebContent/";
-//			String libFolderPath="/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/WebContent/WEB-INF/lib/";
+//			String folderProjectPath = "/home/Diego Armando Gomez Mosquera/Workspaces/runtime-EclipseApplication/demoBanco/src/";
+//			String webRootFolderPath="/home/Diego Armando Gomez Mosquera/Workspaces/runtime-EclipseApplication/demoBanco/WebContent/";
+//			String libFolderPath="/home/Diego Armando Gomez Mosquera/Workspaces/runtime-EclipseApplication/demoBanco/WebContent/WEB-INF/lib/";
 			
 			//
 			

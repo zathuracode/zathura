@@ -28,10 +28,15 @@ import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ReverseEngineeringUtil;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 import com.swtdesigner.ResourceManager;
-
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ * @see WizardPage
+ */
 public class WizardChooseSourceFolderAndPackage extends WizardPage {
 	private Text txtPackage;
 	private Text txtJavaSourceFolder;
@@ -257,7 +262,7 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 				
 				
 				//Valida si el paquete esta bien escrito porque el generador lo crea si no existe
-				ReverseEngineeringUtil.validarPackage(txtPackage.getText());				
+				ZathuraReverseEngineeringUtil.validarPackage(txtPackage.getText());				
 				
 				EclipseGeneratorUtil.companyDomainName		=txtPackage.getText();
 				EclipseGeneratorUtil.destinationDirectory	=txtJavaSourceFolder.getText();

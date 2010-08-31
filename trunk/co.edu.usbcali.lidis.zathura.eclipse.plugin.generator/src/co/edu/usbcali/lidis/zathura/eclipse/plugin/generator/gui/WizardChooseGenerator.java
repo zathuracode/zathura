@@ -2,6 +2,7 @@ package co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.gui;
 
 import java.util.HashMap;
 
+
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -17,7 +18,12 @@ import co.edu.usbcali.lidis.zathura.generator.factory.ZathuraGeneratorFactory;
 import co.edu.usbcali.lidis.zathura.generator.model.GeneratorModel;
 
 import com.swtdesigner.ResourceManager;
-
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ * @see WizardPage
+ */
 public class WizardChooseGenerator extends WizardPage {
 
 	private List listGenerators;

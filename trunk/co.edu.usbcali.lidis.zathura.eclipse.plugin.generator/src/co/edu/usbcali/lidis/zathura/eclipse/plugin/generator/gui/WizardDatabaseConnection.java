@@ -23,11 +23,16 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorAct
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.DatabaseTypeModel;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ReverseEngineeringUtil;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 import com.swtdesigner.ResourceManager;
 
-
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ * @see WizardPage
+ */
 public class WizardDatabaseConnection extends WizardPage {
 	
 	
@@ -174,7 +179,7 @@ public class WizardDatabaseConnection extends WizardPage {
 				String user=txtUserName.getText();
 				String password=txtPassword.getText();
 				try {
-					ReverseEngineeringUtil.testDriver(url, driverClassName, user, password);
+					ZathuraReverseEngineeringUtil.testDriver(url, driverClassName, user, password);
 					MessageDialog.openInformation(getShell(), "Driver Test", "Database connection successfully established");
 					
 					EclipseGeneratorUtil.connectionDriverClass=	txtDriverClassName.getText();
@@ -228,7 +233,7 @@ public class WizardDatabaseConnection extends WizardPage {
 	private void loadCmbDriverTemplate(){		
 		try {		
 			if(zathuraDatabaseTypes==null){
-				zathuraDatabaseTypes =ReverseEngineeringUtil.loadZathuraDatabaseTypes();
+				zathuraDatabaseTypes =ZathuraReverseEngineeringUtil.loadZathuraDatabaseTypes();
 			}
 			
 			for (DatabaseTypeModel databaseTypeModel : zathuraDatabaseTypes.values()) {

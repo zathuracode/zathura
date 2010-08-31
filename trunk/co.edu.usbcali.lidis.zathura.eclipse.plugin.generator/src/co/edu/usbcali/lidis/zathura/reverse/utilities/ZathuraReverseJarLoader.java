@@ -10,7 +10,7 @@ import java.net.URLClassLoader;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
-public class ZathuraJarLoader {
+public class ZathuraReverseJarLoader {
 
 	public static void loadJar(String jarLocation)
 			throws FileNotFoundException, IOException {
