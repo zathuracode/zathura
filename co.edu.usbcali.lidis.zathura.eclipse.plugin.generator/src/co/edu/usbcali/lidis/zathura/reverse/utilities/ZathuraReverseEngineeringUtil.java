@@ -23,7 +23,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.log4j.Logger;
 
-public class ReverseEngineeringUtil {
+public class ZathuraReverseEngineeringUtil {
 
 	private static String fullPath = "";
 	public static String slash = System.getProperty("file.separator");
@@ -35,11 +35,11 @@ public class ReverseEngineeringUtil {
 	public static String buildCompileXmlFileName="buildCompile.xml";
 	
 
-	private static String reverseTemplates = "reverseTemplates"+ ReverseEngineeringUtil.slash;
-	private static String tempFiles = "tempFiles" + ReverseEngineeringUtil.slash;
-	private static String antRevEng = "antBuild-revEng" + ReverseEngineeringUtil.slash;
+	private static String reverseTemplates = "reverseTemplates"+ ZathuraReverseEngineeringUtil.slash;
+	private static String tempFiles = "tempFiles" + ZathuraReverseEngineeringUtil.slash;
+	private static String antRevEng = "antBuild-revEng" + ZathuraReverseEngineeringUtil.slash;
 		
-	private static String xmlDatabaseTypesPath ="config" + ReverseEngineeringUtil.slash + databaseTypesFileName;
+	private static String xmlDatabaseTypesPath ="config" + ZathuraReverseEngineeringUtil.slash + databaseTypesFileName;
 	private static String tempFileBuildPath=tempFiles+buildXmlFileName;
 	private static String tempFileBuildCompilePath=tempFiles+buildCompileXmlFileName;
 	
@@ -50,7 +50,7 @@ public class ReverseEngineeringUtil {
 	/**
 	 * Log4j
 	 */
-	private static Logger log = Logger.getLogger(ReverseEngineeringUtil.class);
+	private static Logger log = Logger.getLogger(ZathuraReverseEngineeringUtil.class);
 	
 	/**
 	 * Generator Model
@@ -164,7 +164,7 @@ public class ReverseEngineeringUtil {
 				}
 			}
 		}
-		ReverseEngineeringUtil.fullPath = fullPath;
+		ZathuraReverseEngineeringUtil.fullPath = fullPath;
 	}
 
 	public static String getReverseTemplates() {
@@ -194,7 +194,7 @@ public class ReverseEngineeringUtil {
 			return "";
 		}
 		if(domainName.length()>0){
-			retFixDomian = replaceAll(domainName, ".", ReverseEngineeringUtil.slash);
+			retFixDomian = replaceAll(domainName, ".", ZathuraReverseEngineeringUtil.slash);
 		}
 		return retFixDomian;
 	}
@@ -226,7 +226,7 @@ public class ReverseEngineeringUtil {
 	}
 	
 	public static String projectPathInConsole(){
-		URL url = ReverseEngineeringUtil.class.getResource("ReverseUtil.class");
+		URL url = ZathuraReverseEngineeringUtil.class.getResource("ReverseUtil.class");
 		String classPath = url.getPath().substring(1);
 		int tmp = classPath.indexOf("zathura-ReverseMappingTool")+26;
 		
@@ -235,9 +235,9 @@ public class ReverseEngineeringUtil {
 		String projectPath = null;
 		
 		if(cPath.equals("2")){
-			projectPath = inconmpletePath+"2"+ReverseEngineeringUtil.slash;
+			projectPath = inconmpletePath+"2"+ZathuraReverseEngineeringUtil.slash;
 		}else{
-			projectPath = inconmpletePath+ReverseEngineeringUtil.slash;
+			projectPath = inconmpletePath+ZathuraReverseEngineeringUtil.slash;
 		}		
 		return projectPath;
 	}
@@ -270,7 +270,7 @@ public class ReverseEngineeringUtil {
 	
 public static HashMap<String, DatabaseTypeModel> loadZathuraDatabaseTypes() throws FileNotFoundException,XMLStreamException, InstantiationException, IllegalAccessException,ClassNotFoundException {
 		
-		log.info("Reading:"+ReverseEngineeringUtil.xmlDatabaseTypesPath);
+		log.info("Reading:"+ZathuraReverseEngineeringUtil.xmlDatabaseTypesPath);
 		
 		DatabaseTypeModel databaseTypeModel = null;
 		boolean boolName = false;

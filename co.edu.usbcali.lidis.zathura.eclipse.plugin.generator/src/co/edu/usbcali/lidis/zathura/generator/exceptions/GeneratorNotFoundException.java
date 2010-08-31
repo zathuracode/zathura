@@ -1,7 +1,7 @@
 package co.edu.usbcali.lidis.zathura.generator.exceptions;
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  *
  */
 public class GeneratorNotFoundException extends Exception {

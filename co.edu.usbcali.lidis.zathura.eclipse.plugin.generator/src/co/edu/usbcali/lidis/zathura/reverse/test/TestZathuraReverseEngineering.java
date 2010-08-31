@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Properties;
 
 //import co.edu.usbcali.lidis.zathura.eclipse.plugin.reverse.utilities.ConfigEclipsePluginPath;
-import co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraJPAReverseEngineering;
-import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraJPAReverseEngineering;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ReverseEngineeringUtil;
+import co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraReverseEngineering;
+import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraReverseEngineering;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
-public class TestZathuraJPAReverseEngineering {
+public class TestZathuraReverseEngineering {
 
 	public static void main(String[] args) {
 		Properties connectionProperties = new Properties();
@@ -31,10 +31,10 @@ public class TestZathuraJPAReverseEngineering {
 		String connectionUsername = "banco";
 		String connectionPassword = "banco";
 		String companyDomainName = "co.edu.usbcali.banco.modelo";
-		String connectionDriverJarPath = "/home/diegomez/Software/jdbc/oracle11g/ojdbc6.jar";
-		String destinationDirectory = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/src/";
+		String connectionDriverJarPath = "/home/Diego Armando Gomez Mosquera/Software/jdbc/oracle11g/ojdbc6.jar";
+		String destinationDirectory = "/home/Diego Armando Gomez Mosquera/Workspaces/runtime-EclipseApplication/demoBanco/src/";
 		String matchSchemaForTables = "BANCO";
-		List<String> tablesList = ReverseEngineeringUtil.fillTableList();
+		List<String> tablesList = ZathuraReverseEngineeringUtil.fillTableList();
 		Boolean makeItXml = false;
 		
 
@@ -53,7 +53,7 @@ public class TestZathuraJPAReverseEngineering {
 		connectionProperties.put("makeItXml", makeItXml == true ? "True": false);
 		//ReverseUtil.setFullPath(ReverseUtil.projectPathInConsole());
 
-		IZathuraJPAReverseEngineering mappingTool = new ZathuraJPAReverseEngineering();
+		IZathuraReverseEngineering mappingTool = new ZathuraReverseEngineering();
 		mappingTool.makePojosJPA_V1_0(connectionProperties, tablesList);
 
 	}

@@ -5,7 +5,7 @@ import java.util.Properties;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 /**
  * 
- * @author Diego Armando Gomez Mosquera - diegomez
+ * @author Diego Armando Gomez Mosquera - Diego Armando Gomez Mosquera
  *
  */
 public interface IZathuraGenerator {

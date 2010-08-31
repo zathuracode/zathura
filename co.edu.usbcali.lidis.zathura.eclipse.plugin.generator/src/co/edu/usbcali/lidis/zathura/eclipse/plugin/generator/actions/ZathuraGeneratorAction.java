@@ -11,11 +11,16 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.gui.WizardMain;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ConfigEclipsePluginPath;
 
 /**
+ * Zathura Generator
+ * 
  * Our sample action implements workbench action delegate.
  * The action proxy will be created by the workbench and
  * shown in the UI. When the user tries to use the action,
  * this delegate will be created and execution will be 
  * delegated to it.
+ * 
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  * @see IWorkbenchWindowActionDelegate
  */
 public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {

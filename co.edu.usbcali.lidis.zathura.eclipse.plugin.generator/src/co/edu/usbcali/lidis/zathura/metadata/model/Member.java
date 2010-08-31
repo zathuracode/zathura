@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  * Basado en jpa2web
  *
  */

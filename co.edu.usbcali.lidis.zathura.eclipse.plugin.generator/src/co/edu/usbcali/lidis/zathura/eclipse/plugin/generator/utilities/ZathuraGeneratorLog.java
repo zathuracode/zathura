@@ -9,7 +9,7 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorAct
 
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  * dgomez@vortexbird.com
  *
  */

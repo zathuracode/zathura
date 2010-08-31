@@ -14,15 +14,13 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ReverseEngineeringUtil;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraJarLoader;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseJarLoader;
 
 /**
  * 
@@ -30,13 +28,13 @@ import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraJarLoader;
  *
  */
 
-public class ZathuraJPAReverseEngineering implements IZathuraJPAReverseEngineering {
+public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
-	private static Logger log = Logger.getLogger(ZathuraJPAReverseEngineering.class);
+	private static Logger log = Logger.getLogger(ZathuraReverseEngineering.class);
 
-	private final static String reverseTemplatesPath = ReverseEngineeringUtil.getReverseTemplates();
+	private final static String reverseTemplatesPath = ZathuraReverseEngineeringUtil.getReverseTemplates();
 
-	private final static String tempFiles = ReverseEngineeringUtil.getTempFilesPath();
+	private final static String tempFiles = ZathuraReverseEngineeringUtil.getTempFilesPath();
 
 	private String connectionDriverClass;
 	private String connectionUrl;
@@ -63,7 +61,7 @@ public class ZathuraJPAReverseEngineering implements IZathuraJPAReverseEngineeri
 		connectionUsername = connectionProperties.getProperty("connectionUsername");
 		connectionPassword = connectionProperties.getProperty("connectionPassword");
 		companyDomainName = connectionProperties.getProperty("companyDomainName");
-		companyDomainNameForPojoLocation = ReverseEngineeringUtil.fixDomain(companyDomainName);
+		companyDomainNameForPojoLocation = ZathuraReverseEngineeringUtil.fixDomain(companyDomainName);
 		connectionDriverJarPath = connectionProperties.getProperty("connectionDriverJarPath");
 		destinationDirectory = connectionProperties.getProperty("destinationDirectory");
 		matchSchemaForTables = connectionProperties.getProperty("matchSchemaForTables");
@@ -76,7 +74,7 @@ public class ZathuraJPAReverseEngineering implements IZathuraJPAReverseEngineeri
 		doTemplate();
 
 		try {
-			ZathuraJarLoader.loadJar2(connectionDriverJarPath);
+			ZathuraReverseJarLoader.loadJar2(connectionDriverJarPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -129,7 +127,7 @@ public class ZathuraJPAReverseEngineering implements IZathuraJPAReverseEngineeri
 		context.put("connectionDriverJarPath", connectionDriverJarPath);
 		context.put("destinationDirectory", destinationDirectory);		
 		context.put("tablesList", tablesList);		
-		context.put("isTableList", ReverseEngineeringUtil.validationsList(tablesList));
+		context.put("isTableList", ZathuraReverseEngineeringUtil.validationsList(tablesList));
 
 		
 		doCfg(context);
@@ -261,7 +259,7 @@ public class ZathuraJPAReverseEngineering implements IZathuraJPAReverseEngineeri
 	 */
 	public static void callAntProcess() {
 		log.info("Begin Ant");
-			File buildFile = new File(ReverseEngineeringUtil.getTempFileBuildPath());
+			File buildFile = new File(ZathuraReverseEngineeringUtil.getTempFileBuildPath());
 			Project p = new Project();
 			p.setUserProperty("ant.file", buildFile.getAbsolutePath());
 			DefaultLogger consoleLogger = new DefaultLogger();
@@ -283,7 +281,7 @@ public class ZathuraJPAReverseEngineering implements IZathuraJPAReverseEngineeri
 			}
 			
 			// Compile Pojos
-	         File buildFile2 = new File(ReverseEngineeringUtil.getTempFileBuildCompilePath());
+	         File buildFile2 = new File(ZathuraReverseEngineeringUtil.getTempFileBuildCompilePath());
 	         Project p2 = new Project();
 	         p2.setUserProperty("ant.file", buildFile2.getAbsolutePath());
 	         DefaultLogger consoleLogger2 = new DefaultLogger();

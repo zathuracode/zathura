@@ -3,7 +3,7 @@ package co.edu.usbcali.lidis.zathura.metadata.model;
 import java.util.List;
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  *
  */
 public class MetaDataModel {

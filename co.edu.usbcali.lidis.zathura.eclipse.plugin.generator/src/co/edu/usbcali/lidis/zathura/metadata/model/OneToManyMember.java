@@ -2,7 +2,7 @@ package co.edu.usbcali.lidis.zathura.metadata.model;
 
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  *
  */
 public class OneToManyMember extends Member{

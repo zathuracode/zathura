@@ -9,7 +9,7 @@ import org.apache.commons.collections.functors.IfClosure;
 
 /**
  * 
- * @author diegomez
+ * @author Diego Armando Gomez Mosquera
  *
  */
 public class MetaData {
