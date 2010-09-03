@@ -61,12 +61,12 @@ public class TestZathuraJavaEE_GWT_Centric {
 //			String libFolderPath="D:\\Tesis\\workspace\\demoClienteGWT\\war\\WEB-INF\\lib\\";
 			 
 			//RICARDO
-			String jpaPath = "F:\\Tesis\\workspace\\demoClienteGWT\\bin\\";
-			String jpaPckgName = "co.edu.usbcali.cliente.model";			
-			String projectName = "demoClienteGWT";
-			String folderProjectPath = "F:\\Tesis\\workspace\\demoClienteGWT\\src\\";
-			String webRootFolderPath="F:\\Tesis\\workspace\\demoClienteGWT\\war\\";
-			String libFolderPath="F:\\Tesis\\workspace\\demoClienteGWT\\war\\WEB-INF\\lib\\";
+			String jpaPath = "F:\\Tesis\\workspace\\demoClientesGWT\\war\\WEB-INF\\classes\\";
+			String jpaPckgName = "co.edu.usbcali.banco.model";			
+			String projectName = "demoClientesGWT";
+			String folderProjectPath = "F:\\Tesis\\workspace\\demoClientesGWT\\src\\";
+			String webRootFolderPath="F:\\Tesis\\workspace\\demoClientesGWT\\war\\";
+			String libFolderPath="F:\\Tesis\\workspace\\demoClientesGWT\\war\\WEB-INF\\lib\\";
 			
 			///home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco
 //			String jpaPath = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/build/classes/";

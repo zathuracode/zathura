@@ -577,6 +577,7 @@ public class Utilities {
 
 		List<String> folderBuilder = new ArrayList<String>();
 		folderBuilder.add(pckgeServer);
+		folderBuilder.add(pckgeServer + "dataService");
 		folderBuilder.add(pckgeServer + "exceptions");
 		folderBuilder.add(pckgeServer + "utilities");
 		folderBuilder.add(dao);
