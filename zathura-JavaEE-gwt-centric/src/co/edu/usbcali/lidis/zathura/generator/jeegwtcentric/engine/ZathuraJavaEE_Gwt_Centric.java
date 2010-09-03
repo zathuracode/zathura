@@ -344,6 +344,7 @@ IZathuraTemplate {
 			doEntryPoint(metaData, context, hdLocation, dataModel);
 			doHTML(metaData, context, hdLocation, dataModel);
 			doSmartGWTDataSource(metaData, context, hdLocation, dataModel, modelName);
+			doDataServiceImpl(metaData, context, hdLocation, dataModel);
 		}
 
 		doUtilites(context, hdLocation, dataModel, modelName);
@@ -1286,6 +1287,55 @@ IZathuraTemplate {
 		} catch (Exception e) {
 			log.info("Error doHTML");
 		}
+	}
+
+	@Override
+	public void doDataServiceImpl(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel) {
+		log.info("Begin doDataServiceImpl");
+
+		Template dataServiceImpl = null;
+
+		StringWriter swDataServiceImpl = new StringWriter();
+
+		try {
+			dataServiceImpl = Velocity.getTemplate("DataServiceImpl.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			dataServiceImpl.merge(context, swDataServiceImpl);
+
+			String realLocation = hdLocation + GeneratorUtil.slash
+			+ virginPackageInHd + GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataService"
+			+ GeneratorUtil.slash ;
+
+			FileWriter fstream = new FileWriter(realLocation 
+					+"DataService"+ metaData.getRealClassName() + "Impl.java");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swDataServiceImpl.toString()); 
+			// Close the output stream
+			out.close();
+
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation 
+					+"DataService"+ metaData.getRealClassName() + "Impl.java");
+
+			log.info("End doDataServiceImpl");
+
+		} catch (Exception e) {
+			log.info("Error doDataServiceImpl");
+		}
+		
 	}
 
 }

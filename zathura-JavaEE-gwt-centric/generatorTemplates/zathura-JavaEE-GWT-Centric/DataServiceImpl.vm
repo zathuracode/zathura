@@ -1,0 +1,116 @@
+package ${virginPackage}.server.dataService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ${virginPackage}.client.dataService.DataService${metaData.getRealClassName()};
+import ${virginPackage}.client.dto.${metaData.getRealClassName()}DTO;
+import ${packageOriginal}.${metaData.getRealClassName()};
+import ${virginPackage}.server.businessDelegate.BusinessDelegatorView;
+import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+
+public class DataService${metaData.getRealClassName()}Impl extends RemoteServiceServlet implements DataService${metaData.getRealClassName()} {
+
+	public List<${metaData.getRealClassName()}DTO> fetch() {
+		List<${metaData.getRealClassName()}DTO> fetchData = null;
+		try {
+			fetchData = toDTOList(BusinessDelegatorView.get${metaData.getRealClassName()}());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return fetchData;
+	}
+	
+	public ${metaData.getRealClassName()}DTO fetch(Long key) {
+		${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO = null;
+		try {
+			${metaData.getRealClassNameAsVariable()}DTO = toDTO(BusinessDelegatorView.get${metaData.getRealClassName()}(key));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return ${metaData.getRealClassNameAsVariable()}DTO;
+	}
+
+	public ${metaData.getRealClassName()}DTO add(${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) throws Exception {
+		${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()};
+		
+		BusinessDelegatorView.save${metaData.getRealClassName()}(	
+		#set( $count = 0 )
+		#foreach(${member2}  in ${metaData.getProperties()})
+			#set( $count = $count + 1 )
+			#if( $count < ${metaData.getProperties().size()})
+				${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}(),
+			#else
+				${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}()
+			#end
+        #end);
+		
+		${metaData.getRealClassNameAsVariable()} = toDTO(BusinessDelegatorView.get${metaData.getRealClassName()}(${metaData.getRealClassNameAsVariable()}DTO.get${metaData.primaryKey.getGetNameOfPrimaryName()}()));
+		
+		return ${metaData.getRealClassNameAsVariable()}DTO;
+	}
+
+	public ${metaData.getRealClassName()}DTO update(${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO)throws Exception {
+		${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()};
+		
+		BusinessDelegatorView.update${metaData.getRealClassName()}(	
+		#set( $count = 0 )
+		#foreach(${member2}  in ${metaData.getProperties()})
+			#set( $count = $count + 1 )
+			#if( $count < ${metaData.getProperties().size()})
+				${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}(),
+			#else
+				${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}()
+			#end
+        #end);
+		
+		${metaData.getRealClassNameAsVariable()} = toDTO(BusinessDelegatorView.get${metaData.getRealClassName()}(${metaData.getRealClassNameAsVariable()}DTO.get${metaData.primaryKey.getGetNameOfPrimaryName()}()));
+		
+		return ${metaData.getRealClassNameAsVariable()}DTO;	
+	}
+
+	public void remove(${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) {
+		try {
+			BusinessDelegatorView.deleteCliente(${metaData.getRealClassNameAsVariable()}DTO.get${metaData.primaryKey.getGetNameOfPrimaryName()}());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	public ${metaData.getRealClassName()} to${metaData.getRealClassName()}(${metaData.getRealClassName()}DTO dto) {
+		${metaData.getRealClassName()} ${metaData.getRealClassNameAsVariable()} = new ${metaData.getRealClassName()}();
+		
+		#foreach(${member2}  in ${metaData.getProperties()})
+				${metaData.getRealClassNameAsVariable()}.set${member2.getGetNameOfPrimaryName()}(dto.get${member2.getGetNameOfPrimaryName()}());
+		#end
+		
+		return ${metaData.getRealClassNameAsVariable()};
+	}
+	private ArrayList<${metaData.getRealClassName()}DTO> toDTOList(List<${metaData.getRealClassName()}> ${metaData.getRealClassName()}s) {
+		ArrayList<${metaData.getRealClassName()}DTO> dtos = new ArrayList<${metaData.getRealClassName()}DTO>();
+		for (${metaData.getRealClassName()} ${metaData.getRealClassNameAsVariable()} : ${metaData.getRealClassName()}s) {
+			dtos.add(toDTO(${metaData.getRealClassNameAsVariable()}));
+		}
+		return dtos;
+	}
+	public ${metaData.getRealClassName()}DTO toDTO(${metaData.getRealClassName()} entity) {
+		if (entity == null) {
+			return null;
+		}
+		return new ${metaData.getRealClassName()}DTO(
+		#set( $count = 0 )
+		#foreach(${member2}  in ${metaData.getProperties()})
+			#set( $count = $count + 1 )
+			#if( $count < ${metaData.getProperties().size()})
+				entity.get${member2.getGetNameOfPrimaryName()}(),
+			#else
+				entity.get${member2.getGetNameOfPrimaryName()}()
+			#end
+        #end);
+	
+	}
+}
