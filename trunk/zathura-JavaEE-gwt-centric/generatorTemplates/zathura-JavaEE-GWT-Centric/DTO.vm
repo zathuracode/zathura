@@ -1,5 +1,14 @@
 package  ${virginPackage}.client.dto;
 
+import java.util.*;
+import java.math.BigDecimal;
+
+#if($isImports)
+    #foreach($member  in $imports)
+        import ${member};
+    #end
+#end
+
 public class ${metaData.getRealClassName()}DTO{
 
 	private static final long serialVersionUID = 1L;
@@ -8,84 +17,34 @@ public class ${metaData.getRealClassName()}DTO{
 		super();
 	}
 	
-#foreach($member2  in $finalParamForViewVariablesInList)
-    #set( $str = $member2 ) 
-    #set( $lower = $str.toString().substring(0,1).toLowerCase())
-    #set($str2 = $str.toString().substring(1))
-    private String $lower$str2;
-#end
-#foreach($member2  in $finalParamForIdForViewVariablesInList)
-    #set( $str = $member2 ) 
-    #set( $lower = $str.toString().substring(0,1).toLowerCase())
-    #set($str2 = $str.toString().substring(1))
-    private String $lower$str2;
-#end
-#if(${isFinalParamForViewDatesInList})
-    #foreach($member2  in $finalParamForViewDatesInList)
-        #set( $str = $member2 ) 
-        #set( $lower = $str.toString().substring(0,1).toLowerCase())
-        #set($str2 = $str.toString().substring(1))
-        private Date $lower$str2;
-    #end
-#end
-#if(${isFinalParamForIdForViewDatesInList})
-    #foreach($member2  in $finalParamForIdForViewDatesInList)
-        #set( $str = $member2 ) 
-        #set( $lower = $str.toString().substring(0,1).toLowerCase())
-        #set($str2 = $str.toString().substring(1))
-        private Date $lower$str2;
-    #end
-#end
+	public ${metaData.getRealClassName()}DTO(${finalParam}) {
+	  #if(${metaData.isGetSimpleProperties()})
+                #foreach($member2  in ${metaData.getSimpleProperties()})
+                  this.${member2.getName()} = ${member2.getName()};
+                #end
+      #end
+      #if(${metaData.isGetManyToOneProperties()})
+           #foreach($member  in ${getVariableForManyToOneProperties})
+                this.${member} = ${member};
+           #end
+	  #end
+	
+	}
+	
+	#foreach(${member2}  in ${metaData.getProperties()})
+		private ${member2.getType().getSimpleName()} ${member2.getName()};
+	#end
+	
 private boolean isFetchOnly;
 
-#foreach($member2  in $finalParamForViewVariablesInList)
-        #set( $str = $member2 ) 
-        #set( $lower = $str.toString().substring(0,1).toLowerCase())
-        #set($str2 = $str.toString().substring(1))
-        public String get${member2}() {
-        return $lower$str2;
+#foreach(${member2}  in ${metaData.getProperties()})
+        public ${member2.getType().getSimpleName()} get${member2.getGetNameOfPrimaryName()}() {
+        return ${member2.getName()};
         }
-        public void set${member2}(String $lower$str2) {
-        this.$lower$str2 = $lower$str2;
+        public void set${member2.getGetNameOfPrimaryName()}(${member2.getType().getSimpleName()} ${member2.getName()}) {
+        this.${member2.getName()} = ${member2.getName()};
         }
-    #end
-    #if(${isFinalParamForViewDatesInList})
-        #foreach($member2  in $finalParamForViewDatesInList)
-            #set( $str = $member2 ) 
-            #set( $lower = $str.toString().substring(0,1).toLowerCase())
-            #set($str2 = $str.toString().substring(1))
-            public Date get${member2}() {
-            return $lower$str2;
-            }
-            public void set${member2}(Date $lower$str2) {
-            this.$lower$str2 = $lower$str2;
-            }
-        #end
-    #end
-    #foreach($member2  in $finalParamForIdForViewVariablesInList)
-        #set( $str = $member2 ) 
-        #set( $lower = $str.toString().substring(0,1).toLowerCase())
-        #set($str2 = $str.toString().substring(1))
-        public String get${member2}() {
-        return $lower$str2;
-        }
-        public void set${member2}(String $lower$str2) {
-        this.$lower$str2 = $lower$str2;
-        }
-    #end
-    #if(${isFinalParamForIdForViewDatesInList})
-        #foreach($member2  in $finalParamForIdForViewDatesInList)
-            #set( $str = $member2 ) 
-            #set( $lower = $str.toString().substring(0,1).toLowerCase())
-            #set($str2 = $str.toString().substring(1))
-            public Date get${member2}() {
-            return $lower$str2;
-            }
-            public void set${member2}(Date $lower$str2) {
-            this.$lower$str2 = $lower$str2;
-            }
-        #end
-    #end
+#end
 	public void setFetchOnly(boolean isFetchOnly) {
 		this.isFetchOnly = isFetchOnly;
 	}

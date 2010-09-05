@@ -38,18 +38,18 @@ public class DataService${metaData.getRealClassName()}Impl extends RemoteService
 		
 		BusinessDelegatorView.save${metaData.getRealClassName()}(	
 		#set( $count = 0 )
-		#foreach(${member2}  in ${metaData.getProperties()})
+		#foreach(${property}  in ${finalParamVariablesAsList})
 			#set( $count = $count + 1 )
-			#if( $count < ${metaData.getProperties().size()})
-				${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}(),
+			#if( $count < ${finalParamVariablesAsList.size()})
+				${metaData.getRealClassNameAsVariable()}DTO.get${property}(),
 			#else
-				${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}()
+				${metaData.getRealClassNameAsVariable()}DTO.get${property}()
 			#end
         #end);
 		
 		${metaData.getRealClassNameAsVariable()} = toDTO(BusinessDelegatorView.get${metaData.getRealClassName()}(${metaData.getRealClassNameAsVariable()}DTO.get${metaData.primaryKey.getGetNameOfPrimaryName()}()));
 		
-		return ${metaData.getRealClassNameAsVariable()}DTO;
+		return ${metaData.getRealClassNameAsVariable()};
 	}
 
 	public ${metaData.getRealClassName()}DTO update(${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO)throws Exception {
@@ -57,18 +57,18 @@ public class DataService${metaData.getRealClassName()}Impl extends RemoteService
 		
 		BusinessDelegatorView.update${metaData.getRealClassName()}(	
 		#set( $count = 0 )
-		#foreach(${member2}  in ${metaData.getProperties()})
+		#foreach(${property}  in ${finalParamVariablesAsList})
 			#set( $count = $count + 1 )
-			#if( $count < ${metaData.getProperties().size()})
-				${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}(),
+			#if( $count < ${finalParamVariablesAsList.size()})
+				${metaData.getRealClassNameAsVariable()}DTO.get${property}(),
 			#else
-				${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}()
+				${metaData.getRealClassNameAsVariable()}DTO.get${property}()
 			#end
         #end);
 		
 		${metaData.getRealClassNameAsVariable()} = toDTO(BusinessDelegatorView.get${metaData.getRealClassName()}(${metaData.getRealClassNameAsVariable()}DTO.get${metaData.primaryKey.getGetNameOfPrimaryName()}()));
 		
-		return ${metaData.getRealClassNameAsVariable()}DTO;	
+		return ${metaData.getRealClassNameAsVariable()};	
 	}
 
 	public void remove(${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) {
@@ -84,8 +84,8 @@ public class DataService${metaData.getRealClassName()}Impl extends RemoteService
 	public ${metaData.getRealClassName()} to${metaData.getRealClassName()}(${metaData.getRealClassName()}DTO dto) {
 		${metaData.getRealClassName()} ${metaData.getRealClassNameAsVariable()} = new ${metaData.getRealClassName()}();
 		
-		#foreach(${member2}  in ${metaData.getProperties()})
-				${metaData.getRealClassNameAsVariable()}.set${member2.getGetNameOfPrimaryName()}(dto.get${member2.getGetNameOfPrimaryName()}());
+		#foreach(${property}  in ${finalParamVariablesAsList})
+				${metaData.getRealClassNameAsVariable()}.set${property}(dto.get${property}());
 		#end
 		
 		return ${metaData.getRealClassNameAsVariable()};
@@ -103,12 +103,12 @@ public class DataService${metaData.getRealClassName()}Impl extends RemoteService
 		}
 		return new ${metaData.getRealClassName()}DTO(
 		#set( $count = 0 )
-		#foreach(${member2}  in ${metaData.getProperties()})
+		#foreach(${property}  in ${finalParamVariablesAsList})
 			#set( $count = $count + 1 )
-			#if( $count < ${metaData.getProperties().size()})
-				entity.get${member2.getGetNameOfPrimaryName()}(),
+			#if( $count < ${finalParamVariablesAsList.size()})
+				entity.get${property}(),
 			#else
-				entity.get${member2.getGetNameOfPrimaryName()}()
+				entity.get${property}()
 			#end
         #end);
 	

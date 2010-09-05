@@ -258,8 +258,8 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
-				if (!metaData.getPrimaryKey().getName()
-						.equals(member.getName())) {
+//				if (!metaData.getPrimaryKey().getName()
+//						.equals(member.getName())) {
 
 					String name = member.getName().substring(0, 1)
 							.toUpperCase()
@@ -272,7 +272,7 @@ public class StringBuilder implements IStringBuilder {
 					} else {
 						finalParam2.add(name);
 					}
-				}
+//				}
 			}
 		}
 
