@@ -44,7 +44,11 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		key.setRequired (true);
         addField (key);
     	#foreach(${member2}  in ${metaData.getProperties()})
-        addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", 30, false));
+			#if(${member2.getLength()} && ${member2.getNullable()})
+				addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+			#else
+				addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+			#end
     	#end
 	}
 
@@ -122,7 +126,7 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		
 		//Just do a fetch to refresh the item
 		if (testRec.isFetchOnly()) {
-			service.fetch(testRec.getId(),new UpdateOrFetchCallback(requestId, response));
+			service.fetch(testRec.get${metaData.primaryKey.getGetNameOfPrimaryName()}(),new UpdateOrFetchCallback(requestId, response));
 		}
 		else { //really do an update
 			service.update(testRec, new UpdateOrFetchCallback(requestId, response));
@@ -222,7 +226,7 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 	
 	public static void copyValues(ListGridRecord from, ${metaData.getRealClassName()}DTO to) {
 	#foreach(${member2}  in ${metaData.getProperties()})
-    to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsString("${member2.getName()}"));
+    to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
     #end
 	}
 
