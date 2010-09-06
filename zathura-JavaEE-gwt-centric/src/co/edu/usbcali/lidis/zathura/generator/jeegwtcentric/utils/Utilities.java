@@ -1,4 +1,4 @@
-|package co.edu.usbcali.lidis.zathura.generator.jeegwtcentric.utils;
+package co.edu.usbcali.lidis.zathura.generator.jeegwtcentric.utils;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
