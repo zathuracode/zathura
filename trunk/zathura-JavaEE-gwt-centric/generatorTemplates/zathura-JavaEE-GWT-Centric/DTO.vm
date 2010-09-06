@@ -3,11 +3,7 @@ package  ${virginPackage}.client.dto;
 import java.util.*;
 import java.math.BigDecimal;
 
-#if($isImports)
-    #foreach($member  in $imports)
-        import ${member};
-    #end
-#end
+
 
 public class ${metaData.getRealClassName()}DTO{
 
@@ -17,27 +13,26 @@ public class ${metaData.getRealClassName()}DTO{
 		super();
 	}
 	
-	public ${metaData.getRealClassName()}DTO(${finalParam}) {
-	  #if(${metaData.isGetSimpleProperties()})
-                #foreach($member2  in ${metaData.getSimpleProperties()})
-                  this.${member2.getName()} = ${member2.getName()};
-                #end
-      #end
-      #if(${metaData.isGetManyToOneProperties()})
-           #foreach($member  in ${getVariableForManyToOneProperties})
-                this.${member} = ${member};
+	
+	public ${metaData.getRealClassName()}DTO(#set( $count = 0 )
+		#foreach($member  in ${finalMembers})
+			#set( $count = $count + 1 )
+			#if( $count < ${finalMembers.size()})
+				${member.getType().getSimpleName()} ${member.getName()},
+			#else
+				${member.getType().getSimpleName()} ${member.getName()}
+			#end
+        #end) {
+           #foreach($member  in ${finalMembers})
+                this.${member.getName()} = ${member.getName()};
            #end
-	  #end
-	
 	}
-	
-	#foreach(${member2}  in ${metaData.getProperties()})
-		private ${member2.getType().getSimpleName()} ${member2.getName()};
-	#end
-	
-private boolean isFetchOnly;
+           #foreach($member2  in ${finalMembers})
+                private ${member2.getType().getSimpleName()} ${member2.getName()};
+           #end
+	private boolean isFetchOnly;
 
-#foreach(${member2}  in ${metaData.getProperties()})
+#foreach(${member2}  in ${finalMembers})
         public ${member2.getType().getSimpleName()} get${member2.getGetNameOfPrimaryName()}() {
         return ${member2.getName()};
         }

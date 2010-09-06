@@ -313,6 +313,8 @@ IZathuraTemplate {
 					stringBuilderForId
 					.finalParamForVariablesDataTablesForIdAsList(list,
 							metaData));
+			
+			context.put("finalMembers", Utilities.getInstance().getFinalParamMembers(list, metaData));
 
 			if (metaData.isGetManyToOneProperties()) {
 				context.put("getVariableForManyToOneProperties", stringBuilder

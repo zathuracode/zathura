@@ -1,4 +1,4 @@
-package co.edu.usbcali.lidis.zathura.generator.jeegwtcentric.utils;
+|package co.edu.usbcali.lidis.zathura.generator.jeegwtcentric.utils;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -62,19 +62,19 @@ public class Utilities {
 			if (metaData.getRealClassName().equalsIgnoreCase(strClass)) {
 
 				manyToOneTempHash = metaData.getPrimaryKey()
-						.getHashMapIdsProperties();
+				.getHashMapIdsProperties();
 
 				if (!metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 					Member member = metaData.getPrimaryKey();
 					ret[0] = member.getRealClassName();
 					ret[1] = member.getName() + "_"
-							+ metaData.getRealClassName();
+					+ metaData.getRealClassName();
 					// ret[2] = member.getGetNameOfPrimaryName();
 					// ret[3] = member.getRealClassName();
 				} else {
 					int contTmp = 0;
 					Field[] field = metaData.getComposeKey()
-							.getDeclaredFields();
+					.getDeclaredFields();
 					for (int i = 0; i < field.length; i++) {
 
 						Field field2 = field[i];
@@ -82,10 +82,10 @@ public class Utilities {
 						String name = field2.getName();
 
 						String realType = field2.getType().toString()
-								.substring(
-										(field2.getType().toString())
-												.lastIndexOf(".") + 1,
-										(field2.getType().toString()).length());
+						.substring(
+								(field2.getType().toString())
+								.lastIndexOf(".") + 1,
+								(field2.getType().toString()).length());
 
 						ret[contTmp] = realType;
 						contTmp++;
@@ -112,6 +112,119 @@ public class Utilities {
 		}
 
 	}
+	
+	public List<Member> getManyToOneMembers(String strClass,
+			List<MetaData> theMetaData){
+		
+		List<Member> memberList = new  ArrayList<Member>();
+		
+		for (MetaData metaData : theMetaData) {
+			if (metaData.getRealClassName().equalsIgnoreCase(strClass)) {
+
+				manyToOneTempHash = metaData.getPrimaryKey()
+				.getHashMapIdsProperties();
+
+				if (!metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+					Member member =  new SimpleMember(metaData.getPrimaryKey().getName()+ "_"
+							+ metaData.getRealClassName(),metaData.getPrimaryKey().getShowName()+ "_"
+							+ metaData.getRealClassName(), metaData.getPrimaryKey().getType(), metaData.getPrimaryKey().getOrder());
+					
+					memberList.add(member);
+					// ret[2] = member.getGetNameOfPrimaryName();
+					// ret[3] = member.getRealClassName();
+				} else {
+					int contTmp = 0;
+					Field[] field = metaData.getComposeKey()
+					.getDeclaredFields();
+					for (int i = 0; i < field.length; i++) {
+						Field field2 = field[i];
+						
+						String variableName = field2.getName();
+
+						buildStringToCheckLengths(field2, metaData.getComposeKey(), variableName);
+
+						Member member = new SimpleMember(variableName + "_" + metaData.getRealClassName(), variableName + "_" + metaData.getRealClassName(), field2.getType(), -1);
+						member.setLength(Utilities.getInstance().length);
+						member.setPrecision(Utilities.getInstance().precision);
+						member.setScale(Utilities.getInstance().scale);
+						member.setNullable(Utilities.getInstance().nullable);
+						
+						memberList.add(member);
+					}
+				}
+			}
+		}
+
+//		boolean watch = false;
+//
+//		for (int j = 0; j < ret.length; j++) {
+//			if (ret[j] != null) {
+//				if (!ret[j].equalsIgnoreCase(""))
+//					watch = true;
+//			}
+//		}
+//
+//		if (watch) {
+//			return ret;
+//		} else {
+//			return null;
+//		}
+		
+		return memberList;
+	}
+
+	public List<Member> getFinalParamMembers(List<MetaData> theMetaData, MetaData metaData){
+
+		List<Member> finalList =  new ArrayList<Member>();
+
+		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+			Field[] field = metaData.getComposeKey().getDeclaredFields();
+			for (Field field2 : field) {
+
+				String variableName = field2.getName();
+
+				buildStringToCheckLengths(field2, metaData.getComposeKey(), variableName);
+
+				Member member = new SimpleMember(field2.getName(), field2
+						.getName(), field2.getType(), -1);
+				member.setLength(Utilities.getInstance().length);
+				member.setPrecision(Utilities.getInstance().precision);
+				member.setScale(Utilities.getInstance().scale);
+				member.setNullable(Utilities.getInstance().nullable);
+				
+				finalList.add(member);
+			}
+		}
+
+		if (metaData.isGetSimpleProperties()) {
+			for (Member member : metaData.getSimpleProperties()) {
+				if (member.isPrimiaryKeyAComposeKey() == false) {
+					finalList.add(member);
+				}
+			}
+		}
+
+		if (metaData.isGetManyToOneProperties()) {
+			for (Member member : metaData.getManyToOneProperties()) {
+
+				// String params[] = getTypeAndvariableForManyToOneProperties(
+				// member.getName(), theMetaData);
+				List<Member> manyToOneMembers = Utilities.getInstance()
+				.getManyToOneMembers(member.getRealClassName(), theMetaData);
+				
+				for (Member member2 : manyToOneMembers) {
+					finalList.add(member2);
+				}
+
+
+			}
+		}
+		
+		
+		return finalList;
+
+	}
+
 
 	public List<String> addVariablesValuesToListDependingOnDataTypeForID(
 			List<String> finalParam2, Field field, String variableName,
@@ -120,8 +233,8 @@ public class Utilities {
 		String realClassName = field.getType().getSimpleName();
 
 		String variableNameFormethod = variableName.substring(0, 1)
-				.toUpperCase()
-				+ variableName.substring(1);
+		.toUpperCase()
+		+ variableName.substring(1);
 
 		buildStringToCheckLengths(field, clazz, variableName);
 
@@ -138,53 +251,53 @@ public class Utilities {
 		if (realClassName.equalsIgnoreCase("Integer")) {
 			if (!precision.equals("0"))
 				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + 0
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				.add(ifcondition
+						+ variableName
+						+ "!=null && "
+						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+						+ variableName + "," + precision + "," + 0
+						+ ")==false" + ifconditionClose
+						+ throwExceptionLength + "\"" + variableName
+						+ "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Double")) {
 			if (!precision.equals("0"))
 				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + scale
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				.add(ifcondition
+						+ variableName
+						+ "!=null && "
+						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+						+ variableName + "," + precision + "," + scale
+						+ ")==false" + ifconditionClose
+						+ throwExceptionLength + "\"" + variableName
+						+ "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Long")) {
 			if (!precision.equals("0"))
 				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + 0
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				.add(ifcondition
+						+ variableName
+						+ "!=null && "
+						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+						+ variableName + "," + precision + "," + 0
+						+ ")==false" + ifconditionClose
+						+ throwExceptionLength + "\"" + variableName
+						+ "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Float")) {
 			if (!precision.equals("0"))
 				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + scale
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				.add(ifcondition
+						+ variableName
+						+ "!=null && "
+						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+						+ variableName + "," + precision + "," + scale
+						+ ")==false" + ifconditionClose
+						+ throwExceptionLength + "\"" + variableName
+						+ "\"" + throwExceptionClose);
 		}
 
 		return finalParam2;
@@ -231,7 +344,7 @@ public class Utilities {
 
 							if (realClassName.equalsIgnoreCase(property)) {
 								Column column = method
-										.getAnnotation(Column.class);
+								.getAnnotation(Column.class);
 								length = new Long(column.length());
 								precision = new Long(column.precision());
 								scale = new Long(column.scale());
@@ -269,53 +382,53 @@ public class Utilities {
 		if (realClassName.equalsIgnoreCase("Integer")) {
 			if (!precision.equals("0"))
 				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + 0
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				.add(ifcondition
+						+ variableName
+						+ "!=null && "
+						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+						+ variableName + "," + precision + "," + 0
+						+ ")==false" + ifconditionClose
+						+ throwExceptionLength + "\"" + variableName
+						+ "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Double")) {
 			if (!precision.equals("0"))
 				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + scale
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				.add(ifcondition
+						+ variableName
+						+ "!=null && "
+						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+						+ variableName + "," + precision + "," + scale
+						+ ")==false" + ifconditionClose
+						+ throwExceptionLength + "\"" + variableName
+						+ "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Long")) {
 			if (!precision.equals("0"))
 				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + 0
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				.add(ifcondition
+						+ variableName
+						+ "!=null && "
+						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+						+ variableName + "," + precision + "," + 0
+						+ ")==false" + ifconditionClose
+						+ throwExceptionLength + "\"" + variableName
+						+ "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Float")) {
 			if (!precision.equals("0"))
 				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + precision + "," + scale
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				.add(ifcondition
+						+ variableName
+						+ "!=null && "
+						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+						+ variableName + "," + precision + "," + scale
+						+ ")==false" + ifconditionClose
+						+ throwExceptionLength + "\"" + variableName
+						+ "\"" + throwExceptionClose);
 		}
 
 		return finalParam2;
@@ -342,8 +455,8 @@ public class Utilities {
 					if (((SimpleMember) object).getType().getName()
 							.equalsIgnoreCase("java.util.Date")) {
 						imports
-								.add(((SimpleMember) object).getType()
-										.getName());
+						.add(((SimpleMember) object).getType()
+								.getName());
 					}
 				}
 			}
@@ -375,9 +488,9 @@ public class Utilities {
 
 		if (tmp != null) {
 			if ((tmp[0].equalsIgnoreCase("java") && tmp[1]
-					.equalsIgnoreCase("lang"))
-					|| (tmp[0].equalsIgnoreCase("java") && tmp[1]
-							.equalsIgnoreCase("util"))) {
+			                                            .equalsIgnoreCase("lang"))
+			                                            || (tmp[0].equalsIgnoreCase("java") && tmp[1]
+			                                                                                       .equalsIgnoreCase("util"))) {
 				ret = false;
 			} else {
 				ret = true;
@@ -523,9 +636,9 @@ public class Utilities {
 
 		folderBuilder.add(model + "control");
 
-//		if (specificityLevel.intValue() == 2) {
-//			folderBuilder.add(model + "pojos");
-//		}
+		//		if (specificityLevel.intValue() == 2) {
+		//			folderBuilder.add(model + "pojos");
+		//		}
 
 		folderBuilder.add(model + "dto");
 
@@ -569,10 +682,10 @@ public class Utilities {
 		String pckgeServer = pckge + "server_"; 
 		String modelPckg = packageOriginal.replace('.', '_') + "_";
 		String pckgeClient = pckge + "client_";
-		
+
 		String dataAcces = pckgeServer + "dataaccess_";
 		String model = modelPckg;
-//		String presentation = pckgeServer + "presentation_";
+		//		String presentation = pckgeServer + "presentation_";
 		String dao = dataAcces + "dao_";
 
 		List<String> folderBuilder = new ArrayList<String>();
@@ -588,11 +701,11 @@ public class Utilities {
 		folderBuilder.add(pckgeClient + "dataService");
 		folderBuilder.add(pckgeClient + "smartds");
 		folderBuilder.add(pckgeClient + "entryPoint");
-//		if (specificityLevel.intValue() == 2) {
-//			folderBuilder.add(model + "pojos");
-//		}
-//		folderBuilder.add(model + "dto");
-//		folderBuilder.add(presentation + "backEndBeans");
+		//		if (specificityLevel.intValue() == 2) {
+		//			folderBuilder.add(model + "pojos");
+		//		}
+		//		folderBuilder.add(model + "dto");
+		//		folderBuilder.add(presentation + "backEndBeans");
 		folderBuilder.add(pckgeServer + "businessDelegate");
 		folderBuilder.add(properties.getProperty("webRootFolderPath"));
 		for (String string : folderBuilder) {
@@ -604,13 +717,13 @@ public class Utilities {
 			}
 		}
 		try {
-//			GeneratorUtil.validateDirectory("JSPX", properties
-//					.getProperty("webRootFolderPath"));
+			//			GeneratorUtil.validateDirectory("JSPX", properties
+			//					.getProperty("webRootFolderPath"));
 			GeneratorUtil.validateDirectory("WEB-INF", properties
 					.getProperty("webRootFolderPath"));
-//			GeneratorUtil.validateDirectory("facelets", properties
-//					.getProperty("webRootFolderPath")
-//					+ GeneratorUtil.slash + "WEB-INF");
+			//			GeneratorUtil.validateDirectory("facelets", properties
+			//					.getProperty("webRootFolderPath")
+			//					+ GeneratorUtil.slash + "WEB-INF");
 			// WEB-INF
 			GeneratorUtil.validateDirectory("META-INF", hardDiskLocation);
 		} catch (IOException e) {
