@@ -29,6 +29,8 @@
 * not delete the provisions above, a recipient may use your version of
 * this file under either the MPL or the LGPL License."
 *
+* @author Zathura Code Generator http://code.google.com/p/zathura/
+*
 */
 package  ${virginPackage}.utilities;
 /**

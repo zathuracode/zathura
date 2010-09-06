@@ -1,5 +1,6 @@
 package co.edu.usbcali.lidis.zathura.reverse.test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -8,6 +9,11 @@ import co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraReverseEngineering;
 import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraReverseEngineering;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ */
 public class TestZathuraReverseEngineering {
 
 	public static void main(String[] args) {
@@ -34,7 +40,7 @@ public class TestZathuraReverseEngineering {
 		String connectionDriverJarPath = "/home/Diego Armando Gomez Mosquera/Software/jdbc/oracle11g/ojdbc6.jar";
 		String destinationDirectory = "/home/Diego Armando Gomez Mosquera/Workspaces/runtime-EclipseApplication/demoBanco/src/";
 		String matchSchemaForTables = "BANCO";
-		List<String> tablesList = ZathuraReverseEngineeringUtil.fillTableList();
+		List<String> tablesList = fillTableList();
 		Boolean makeItXml = false;
 		
 
@@ -56,6 +62,20 @@ public class TestZathuraReverseEngineering {
 		IZathuraReverseEngineering mappingTool = new ZathuraReverseEngineering();
 		mappingTool.makePojosJPA_V1_0(connectionProperties, tablesList);
 
+	}
+	
+	public static List<String> fillTableList(){
+		List<String> tablesList = new ArrayList<String>();
+		
+		tablesList.add("CLIENTES");
+		tablesList.add("CONSIGNACIONES");
+		tablesList.add("CUENTAS");
+		tablesList.add("RETIROS");
+		tablesList.add("TIPOS_DOCUMENTOS");
+		tablesList.add("TIPOS_USUARIOS");
+		tablesList.add("USUARIOS");
+		
+		return tablesList;
 	}
 	
 	public static void main() {

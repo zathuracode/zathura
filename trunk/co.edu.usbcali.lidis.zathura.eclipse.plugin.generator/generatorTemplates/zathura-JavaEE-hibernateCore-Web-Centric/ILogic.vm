@@ -8,6 +8,11 @@ import $package.${metaData.getRealClassName()};
 #if($composedKey)
     import $package.${metaData.primaryKey.getRealClassName()};
 #end
+/**
+ * interface ${metaData.getRealClassName()}Logic
+ * @author Zathura Code Generator http://code.google.com/p/zathura
+ *
+ */
 public interface I${metaData.getRealClassName()}Logic {
 public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception;
     public void save${metaData.getRealClassName()}(${finalParam})throws Exception;

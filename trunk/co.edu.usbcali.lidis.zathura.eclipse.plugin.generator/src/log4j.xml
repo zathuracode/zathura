@@ -13,7 +13,7 @@
  
 
   <root>
-  	<priority value="off"/>
+  	<priority value="OFF"/>
    <!-- 	
      	<priority value="off"/>
      	<priority value ="debug" />

@@ -1,6 +1,5 @@
 package co.edu.usbcali.lidis.zathura.metadata.engine;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,10 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.GeneratedValue;
@@ -44,10 +40,11 @@ import co.edu.usbcali.lidis.zathura.metadata.model.SimpleMember;
 import co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader;
 import co.edu.usbcali.lidis.zathura.metadata.utilities.MetaDataUtil;
 
+
 /**
- * 
- * @author Diego Armando Gomez Mosquera Basado en el codigo de jpa2Web
- * 
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
 public class JPAEntityLoaderEngine implements IMetaDataReader {
 

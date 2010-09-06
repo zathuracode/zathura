@@ -1,5 +1,6 @@
 package co.edu.usbcali.lidis.zathura.reverse.utilities;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -23,6 +24,12 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.apache.log4j.Logger;
 
+
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ */
 public class ZathuraReverseEngineeringUtil {
 
 	private static String fullPath = "";
@@ -66,8 +73,45 @@ public class ZathuraReverseEngineeringUtil {
 	
 	public static void testDriver(String url,String driverClassName, String user, String password)throws ClassNotFoundException,SQLException,Exception{
 		
-		Class.forName(driverClassName);
-		connection=DriverManager.getConnection(url,user,password);
+		
+		try {
+			Class.forName(driverClassName);			
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			//Ignore
+		}
+		
+		try {
+			Class.forName(driverClassName);
+			connection=DriverManager.getConnection(url,user,password);
+		} catch (Exception e) {
+			throw e;
+		}
+		/*
+		//Plugin
+		try {
+			ZathuraGeneratorActivator.getDefault().getBundle().loadClass(driverClassName);
+			connection=DriverManager.getConnection(url,user,password);
+			System.out.println(connection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		}
+		
+		//Thread
+		try {
+			Thread.currentThread().getContextClassLoader().loadClass(driverClassName);
+			connection=DriverManager.getConnection(url,user,password);
+			System.out.println(connection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		}
+		
+		*/
+		//systme
+		
+		
 		
 	}
 	
@@ -254,19 +298,7 @@ public class ZathuraReverseEngineeringUtil {
 		}
 	}
 	
-	public static List<String> fillTableList(){
-		List<String> tablesList = new ArrayList<String>();
-		
-		tablesList.add("CLIENTES");
-		tablesList.add("CONSIGNACIONES");
-		tablesList.add("CUENTAS");
-		tablesList.add("RETIROS");
-		tablesList.add("TIPOS_DOCUMENTOS");
-		tablesList.add("TIPOS_USUARIOS");
-		tablesList.add("USUARIOS");
-		
-		return tablesList;
-	}
+	
 	
 public static HashMap<String, DatabaseTypeModel> loadZathuraDatabaseTypes() throws FileNotFoundException,XMLStreamException, InstantiationException, IllegalAccessException,ClassNotFoundException {
 		
@@ -381,5 +413,52 @@ public static HashMap<String, DatabaseTypeModel> loadZathuraDatabaseTypes() thro
 			throw new Exception("A package name cannot start or end with a dot"); 
 		 }
 	}
+	/**
+	 * 
+	 * @param path
+	 */
+	public static void deleteFiles(String path) {
+		File file=new File(path);
+		deleteFiles(file);
+	}
+	/**
+	 * 
+	 * @param file
+	 */
+	public static void deleteFiles(File file) {
+		File fileAux = null;
+		File listFiles[] = null;
+		int iPos = -1;
 
-}
+		listFiles = file.listFiles();
+		for(iPos = 0; iPos < listFiles.length; iPos++){
+			fileAux = listFiles[iPos];
+			if(fileAux.isDirectory())
+				deleteFiles(listFiles[iPos]);
+			listFiles[iPos].delete();
+		}
+		if(file.listFiles().length == 0)
+			file.delete();		
+	}
+	/**
+	 * 
+	 * @param path
+	 * @param nameFolder
+	 * @return
+	 */
+	public static File createFolder(String path){	 	
+		File aFile  = new File(path);
+		aFile.mkdirs();
+		return aFile;
+	}
+	/**
+	 * Borrar los archivos de la carpeta tempFiles
+	 * @param path
+	 */
+	public static void resetTempFiles(String path){
+		//Borrar carpeta de temporales
+		deleteFiles(path);
+		//Crea carpeta de temporales
+		createFolder(path);
+	}
+	}

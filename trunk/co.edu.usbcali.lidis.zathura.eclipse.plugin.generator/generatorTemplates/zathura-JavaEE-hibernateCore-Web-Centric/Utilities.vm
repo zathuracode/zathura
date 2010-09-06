@@ -4,6 +4,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.List;
 import java.text.DecimalFormat;
+
+/**
+ * 
+ * @author Zathura Code Generator http://code.google.com/p/zathura
+ */
+
 public class Utilities {
 public static boolean isNumeric(String word) {
 boolean ret = false;

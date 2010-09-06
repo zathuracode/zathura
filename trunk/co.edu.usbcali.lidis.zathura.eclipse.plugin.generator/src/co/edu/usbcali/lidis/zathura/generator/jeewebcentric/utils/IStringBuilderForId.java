@@ -4,6 +4,13 @@ import java.util.List;
 
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 
+
+
+/**
+ * Zathura Generator
+ * @author William Altuzarra (williamaltu@gmail.com)
+ * @version 1.0
+ */
 public interface IStringBuilderForId {
 
 	public String finalParamForIdClassAsVariablesAsString(List<MetaData> list,

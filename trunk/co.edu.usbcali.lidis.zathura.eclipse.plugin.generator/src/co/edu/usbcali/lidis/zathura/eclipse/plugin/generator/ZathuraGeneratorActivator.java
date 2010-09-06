@@ -14,7 +14,7 @@ import org.osgi.framework.BundleContext;
 public class ZathuraGeneratorActivator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "co.edu.usbcali.lidis.zathura.eclipse.plugin";
+	public static final String PLUGIN_ID = "co.edu.usbcali.lidis.zathura.eclipse.plugin.generator";
 
 	// The shared instance
 	private static ZathuraGeneratorActivator plugin;
@@ -33,6 +33,7 @@ public class ZathuraGeneratorActivator extends AbstractUIPlugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		
 		plugin = this;
 	}
 

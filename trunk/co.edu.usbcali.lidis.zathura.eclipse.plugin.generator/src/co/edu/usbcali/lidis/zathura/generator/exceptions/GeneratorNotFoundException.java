@@ -1,8 +1,8 @@
 package co.edu.usbcali.lidis.zathura.generator.exceptions;
 /**
- * 
- * @author Diego Armando Gomez Mosquera
- *
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
 public class GeneratorNotFoundException extends Exception {
 

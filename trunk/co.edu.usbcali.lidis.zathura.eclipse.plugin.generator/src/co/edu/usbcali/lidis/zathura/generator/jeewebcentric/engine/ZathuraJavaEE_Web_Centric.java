@@ -9,7 +9,6 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
@@ -26,10 +25,12 @@ import co.edu.usbcali.lidis.zathura.generator.utilities.JalopyCodeFormatter;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 
+
+
 /**
- * 
- * @author William Altuzarra Noriega
- * 
+ * Zathura Generator
+ * @author William Altuzarra (williamaltu@gmail.com)
+ * @version 1.0
  */
 public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		IZathuraTemplate {

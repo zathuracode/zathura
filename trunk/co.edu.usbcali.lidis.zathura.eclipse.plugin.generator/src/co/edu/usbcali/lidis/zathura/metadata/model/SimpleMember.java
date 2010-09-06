@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 
- * @author Diego Armando Gomez Mosquera
- *
+ * Powered by jpa2web
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
 public class SimpleMember extends Member {
 	

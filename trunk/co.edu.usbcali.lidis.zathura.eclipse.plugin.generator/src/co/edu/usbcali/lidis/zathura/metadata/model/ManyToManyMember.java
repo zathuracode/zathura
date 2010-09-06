@@ -2,9 +2,10 @@
 package co.edu.usbcali.lidis.zathura.metadata.model;
 
 /**
- * 
- * @author Diego Armando Gomez Mosquera
- *
+ * Powered by jpa2web
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
 public class ManyToManyMember extends Member{
 

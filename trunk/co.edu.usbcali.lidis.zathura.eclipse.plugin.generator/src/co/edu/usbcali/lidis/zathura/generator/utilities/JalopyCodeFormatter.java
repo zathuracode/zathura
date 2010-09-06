@@ -6,10 +6,11 @@ import org.apache.log4j.Logger;
 
 import de.hunsicker.jalopy.Jalopy;
 
+
 /**
- * 
- * @author Diego Armando Gomez Mosquera
- *
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
 public class JalopyCodeFormatter {
 	

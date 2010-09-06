@@ -8,9 +8,10 @@ import org.apache.commons.collections.functors.IfClosure;
 
 
 /**
- * 
- * @author Diego Armando Gomez Mosquera
- *
+ * Powered by jpa2web
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
 public class MetaData {
 

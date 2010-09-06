@@ -1,16 +1,21 @@
 package co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.gui;
 
+import java.util.ArrayList;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.internal.core.PackageFragment;
 import org.eclipse.jdt.internal.ui.dialogs.PackageSelectionDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
@@ -37,6 +42,7 @@ import com.swtdesigner.ResourceManager;
  * @version 1.0
  * @see WizardPage
  */
+@SuppressWarnings("restriction")
 public class WizardChooseSourceFolderAndPackage extends WizardPage {
 	private Text txtPackage;
 	private Text txtJavaSourceFolder;
@@ -212,30 +218,51 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 	private void handleBrowsePackage() {
 
 		
-		Shell shell = getShell();
-
+		IPackageFragment[] packages =null;
 		IJavaProject javaProject = JavaCore.create(project);
+		IJavaElement javaElementArray[]=null;
+		ArrayList<IJavaElement>	javaElementsList=new ArrayList<IJavaElement>();
 		
-	
-		IPackageFragmentRoot iPackageFragmentRoot = javaProject.getPackageFragmentRoot("");
-
-		//TODO se debe filtrar para que solo muestre los paquetes del proyecto y no todos hasta los de las librerias		
-		IJavaSearchScope iJavaSearchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] {(IJavaElement) javaProject},false);
-
-		PackageSelectionDialog packageSelectionDialog = new PackageSelectionDialog(shell, new ProgressMonitorDialog(shell),
-				PackageSelectionDialog.F_REMOVE_DUPLICATES|PackageSelectionDialog.F_HIDE_EMPTY_INNER,iJavaSearchScope);
-
-		packageSelectionDialog.setTitle("Package selection");
-		packageSelectionDialog.setMessage("Please choose the Entity package:");
-
-		if (packageSelectionDialog.open() == Window.OK) {
-			Object results[] = packageSelectionDialog.getResult();
-			if (results != null && results.length > 0) {
-				PackageFragment packageFragment = (PackageFragment) results[0];
-				txtPackage.setText(packageFragment.getElementName());
-				EclipseGeneratorUtil.javaEntityPackage=packageFragment.getElementName();
-			}
+		
+		//Si el projecto no esta abierto se cancela el proceso
+		if(javaProject.isOpen()==false){
+			MessageDialog.openError(getShell(), "Error", "The project is not open");
+			return;
 		}
+		
+		//Lee los paquetes solo del proyecto
+		try {
+			packages = javaProject.getPackageFragments();
+			
+			for (IPackageFragment iPackageFragment : packages) {
+				if(iPackageFragment.getKind() == IPackageFragmentRoot.K_SOURCE){
+					javaElementsList.add(iPackageFragment);
+				}
+			}		
+			if(javaElementsList.size()>0){
+				javaElementArray=new IJavaElement[javaElementsList.size()];
+				javaElementArray=javaElementsList.toArray(javaElementArray);
+			}
+		} catch (JavaModelException e) {
+			MessageDialog.openError(getShell(), "Error", e.getMessage());
+		}
+		
+		
+			Shell shell = getShell();
+			IJavaSearchScope iJavaSearchScope = SearchEngine.createJavaSearchScope(javaElementArray,false);
+			PackageSelectionDialog packageSelectionDialog = new PackageSelectionDialog(shell, new ProgressMonitorDialog(shell),PackageSelectionDialog.F_REMOVE_DUPLICATES|PackageSelectionDialog.F_HIDE_EMPTY_INNER,iJavaSearchScope);
+			
+			packageSelectionDialog.setTitle("Package selection");
+			packageSelectionDialog.setMessage("Please choose the Entity package:");
+	
+			if (packageSelectionDialog.open() == Window.OK) {
+				Object results[] = packageSelectionDialog.getResult();
+				if (results != null && results.length > 0) {
+					PackageFragment packageFragment = (PackageFragment) results[0];
+					txtPackage.setText(packageFragment.getElementName());
+					EclipseGeneratorUtil.javaEntityPackage=packageFragment.getElementName();
+				}
+			}
 	}
 	
 	
@@ -257,10 +284,7 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 				if(txtLib==null || txtLib.getText().equals("")==true){
 					throw new Exception("Lib folder dont selected");		
 				}
-				
-							
-				
-				
+
 				//Valida si el paquete esta bien escrito porque el generador lo crea si no existe
 				ZathuraReverseEngineeringUtil.validarPackage(txtPackage.getText());				
 				
@@ -301,11 +325,5 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 				}
 			}
 		}
-		//Se usa para validar si la pagina se completo y poder activar el next o el finish segun sea necesario
-		/*
-		private void validatePageComplete(){
-			
-			
-		}
-		*/
+		
 }

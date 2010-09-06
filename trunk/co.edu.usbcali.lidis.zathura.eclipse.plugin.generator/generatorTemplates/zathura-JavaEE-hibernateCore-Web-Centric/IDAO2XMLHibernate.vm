@@ -7,10 +7,12 @@ import $package.${metaData.getRealClassName()};
 #if($composedKey == true)
     import $package.${metaData.primaryKey.getRealClassName()};
 #end
+
 /**
-* Interface for ${metaData.getRealClassName()}DAO.
-* 
-*/
+ * Interface for ${metaData.getRealClassName()}DAO.
+ * @author Zathura Code Generator http://code.google.com/p/zathura
+ *
+ */
 public interface I${metaData.getRealClassName()}DAO {
 
 public void save(${metaData.getRealClassName()} instance);

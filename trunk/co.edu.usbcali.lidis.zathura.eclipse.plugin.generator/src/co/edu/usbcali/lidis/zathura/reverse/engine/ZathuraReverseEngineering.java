@@ -23,11 +23,10 @@ import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringU
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseJarLoader;
 
 /**
- * 
- * @author zathuratools
- *
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
-
 public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 	private static Logger log = Logger.getLogger(ZathuraReverseEngineering.class);

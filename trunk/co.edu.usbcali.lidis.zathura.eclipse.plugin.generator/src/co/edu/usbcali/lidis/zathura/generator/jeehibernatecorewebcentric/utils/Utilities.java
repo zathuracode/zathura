@@ -16,10 +16,12 @@ import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 import co.edu.usbcali.lidis.zathura.metadata.model.SimpleMember;
+
+
 /**
- * 
- * @author William Altuzarra Noriega
- * 
+ * Zathura Generator
+ * @author William Altuzarra (williamaltu@gmail.com)
+ * @version 1.0
  */
 public class Utilities {
 

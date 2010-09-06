@@ -8,13 +8,17 @@ import  ${virginPackage}.dataaccess.daoFactory.XMLHibernateDaoFactory;
 import  ${virginPackage}.dataaccess.sessionFactory.HibernateSessionFactory;
 import  ${virginPackage}.exceptions.*;
 import  ${virginPackage}.utilities.Utilities;
-import org.hibernate.Transaction;
 import $package.${metaData.getRealClassName()};
 #if($isImports)
     #foreach($member  in $imports)
         import ${member};
     #end
 #end
+/**
+ * interface ${metaData.getRealClassName()}Logic
+ * @author Zathura Code Generator http://code.google.com/p/zathura
+ *
+ */
 public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealClassName()}Logic{
 public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception{
     List<${metaData.getRealClassName()}> list = new ArrayList<${metaData.getRealClassName()}>();
@@ -78,9 +82,9 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     entity.set${member.getGetNameOfPrimaryName()}(${member.getName()}Class);
                 #end
             #end
-            Transaction transaction = HibernateSessionFactory.getSession().beginTransaction();
-            XMLHibernateDaoFactory.getInstance().get${metaData.getRealClassName()}DAO().save(entity);
-            transaction.commit();
+            HibernateSessionFactory.beginTransaction();
+            	XMLHibernateDaoFactory.getInstance().get${metaData.getRealClassName()}DAO().save(entity);
+            HibernateSessionFactory.commit();
             } catch (Exception e) {
             HibernateSessionFactory.rollback();
             throw e;
@@ -132,13 +136,13 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                             }
                     #end
 				#end
-				Transaction transaction = HibernateSessionFactory.getSession().beginTransaction();
+				HibernateSessionFactory.beginTransaction();
                 XMLHibernateDaoFactory.getInstance().get${metaData.getRealClassName()}DAO().delete(entity);
-                transaction.commit();
+                HibernateSessionFactory.commit();
                 #else
-                    Transaction transaction = HibernateSessionFactory.getSession().beginTransaction();
+                    HibernateSessionFactory.beginTransaction();
                     XMLHibernateDaoFactory.getInstance().get${metaData.getRealClassName()}DAO().delete(entity);
-                    transaction.commit();
+                    HibernateSessionFactory.commit();
             #end
             } catch (Exception e) {
 			HibernateSessionFactory.rollback();
@@ -200,9 +204,9 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     entity.set${member.getGetNameOfPrimaryName()}(${member.getName()}Class);
                 #end
             #end
-            Transaction transaction = HibernateSessionFactory.getSession().beginTransaction();
+            HibernateSessionFactory.beginTransaction();
             XMLHibernateDaoFactory.getInstance().get${metaData.getRealClassName()}DAO().update(entity);
-            transaction.commit();
+            HibernateSessionFactory.commit();
             } catch (Exception e) {
             HibernateSessionFactory.rollback();
             throw e;

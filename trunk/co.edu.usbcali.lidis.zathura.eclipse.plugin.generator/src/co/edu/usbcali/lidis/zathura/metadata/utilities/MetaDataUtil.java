@@ -15,9 +15,9 @@ import co.edu.usbcali.lidis.zathura.metadata.engine.JPAEntityLoaderEngine;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 
 /**
- * 
- * @author Diego Armando Gomez Mosquera
- *
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
 public class MetaDataUtil {
 

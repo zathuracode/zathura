@@ -36,11 +36,10 @@ import ${virginPackage}.utilities.DataPage;
 import ${virginPackage}.utilities.DataSource;
 import ${virginPackage}.utilities.PagedListDataModel;
 /**
-* 
-*  
-* @author Zathura Code Generator http://code.google.com/p/zathura/
-*
-*/
+ *   
+ * @author Zathura Code Generator http://code.google.com/p/zathura/
+ *
+ */
 public class ${metaData.getRealClassName()}View extends DataSource implements Renderable, DisposableBean{
 public ${metaData.getRealClassName()}View() {
 super("");

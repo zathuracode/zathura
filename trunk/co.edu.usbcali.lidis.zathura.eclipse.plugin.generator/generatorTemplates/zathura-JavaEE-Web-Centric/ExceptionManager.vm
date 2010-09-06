@@ -1,9 +1,9 @@
 package  ${virginPackage}.exceptions;
 /**
-*  
-* @author Zathura Code Generator http://code.google.com/p/zathura/
-*
-*/
+ *  
+ * @author Zathura Code Generator http://code.google.com/p/zathura/
+ *
+ */
 public class ExceptionManager{
 private static ExceptionManager instance = null;
 /**

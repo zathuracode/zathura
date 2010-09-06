@@ -44,7 +44,11 @@ import javax.faces.model.DataModel;
 * This does require the managed bean (and in general the business
 * method that the managed bean uses) to provide the data wrapped in
 * a DataPage object that provides info on the full size of the dataset.
+*
+* @author Zathura Code Generator http://code.google.com/p/zathura
+*
 */
+
 public abstract class PagedListDataModel<T> extends DataModel {
     int pageSize;
     int rowIndex;

@@ -1,4 +1,9 @@
 package  ${virginPackage}.exceptions;
+/**
+ *  
+ * @author Zathura Code Generator http://code.google.com/p/zathura/
+ *
+ */
 public class ExceptionMessages {
 public static String VARIABLE_NULL = "Null variable: ";
 public static String VARIABLE_LENGTH = "Format or length not valid for the variable: ";
