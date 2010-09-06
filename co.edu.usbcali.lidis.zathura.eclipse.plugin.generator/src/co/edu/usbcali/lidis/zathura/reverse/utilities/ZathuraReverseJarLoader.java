@@ -10,6 +10,11 @@ import java.net.URLClassLoader;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ */
 public class ZathuraReverseJarLoader {
 
 	public static void loadJar(String jarLocation)

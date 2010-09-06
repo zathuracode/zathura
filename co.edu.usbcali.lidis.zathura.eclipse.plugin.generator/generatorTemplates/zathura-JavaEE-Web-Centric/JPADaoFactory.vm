@@ -1,14 +1,14 @@
 package  ${virginPackage}.dataaccess.daoFactory;
 import ${virginPackage}.dataaccess.dao.*;
 /**
-* Factory for Data Access Objects Strategy The DAO pattern can be made highly flexible 
-* by adopting the Abstract Factory [GoF] and the Factory Method [GoF] patterns.
-* When the underlying storage is not subject to change from one implementation to another, 
-* this strategy can be implemented using the Factory Method pattern to produce a number of DAOs needed by the application. 
-* This class is a Factory Method pattern
-*
-* @author Zathura Code Generator http://code.google.com/p/zathura/
-*/
+ * Factory for Data Access Objects Strategy The DAO pattern can be made highly flexible 
+ * by adopting the Abstract Factory [GoF] and the Factory Method [GoF] patterns.
+ * When the underlying storage is not subject to change from one implementation to another, 
+ * this strategy can be implemented using the Factory Method pattern to produce a number of DAOs needed by the application. 
+ * This class is a Factory Method pattern
+ *
+ * @author Zathura Code Generator http://code.google.com/p/zathura/
+ */
 public class JPADaoFactory {
 private static JPADaoFactory instance = null;
 /**

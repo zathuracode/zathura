@@ -14,6 +14,11 @@ import $package.${metaData.getRealClassName()};
         import ${member};
     #end
 #end
+/**
+ *   
+ * @author Zathura Code Generator http://code.google.com/p/zathura/
+ *
+ */
 public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealClassName()}Logic{
 public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception{
     List<${metaData.getRealClassName()}> list = new ArrayList<${metaData.getRealClassName()}>();

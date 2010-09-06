@@ -7,10 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
+
 /**
- * 
- * @author Diego Armando Gomez Mosquera
- *
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
  */
 public class GeneratorUtil {
 	

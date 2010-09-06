@@ -1,15 +1,17 @@
 package co.edu.usbcali.lidis.zathura.generator.jeewebcentric.engine;
 
-/**
- * 
- * @author William Altuzarra Noriega
- *
- */
+
 import org.apache.velocity.VelocityContext;
 
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 
+
+/**
+ * Zathura Generator
+ * @author William Altuzarra (williamaltu@gmail.com)
+ * @version 1.0
+ */
 public interface IZathuraTemplate {
 	
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel,

@@ -1,9 +1,9 @@
 package co.edu.usbcali.lidis.zathura.generator.jeehibernatecorewebcentric.engine;
 
 /**
- * 
- * @author William Altuzarra Noriega
- *
+ * Zathura Generator
+ * @author William Altuzarra (williamaltu@gmail.com)
+ * @version 1.0
  */
 import org.apache.velocity.VelocityContext;
 

@@ -17,8 +17,10 @@ import $package.${metaData.getRealClassName()};
 * operations must be handled externally by senders of these methods or must be
 * manually added to each of these methods for data to be persisted to the JPA
 * datastore.
-* 
+*
+* @author Zathura Code Generator http://code.google.com/p/zathura/
 * @see lidis.${metaData.getRealClassName()}
+*
 */
 public class ${metaData.getRealClassName()}DAO implements I${metaData.getRealClassName()}DAO {
 // property constants

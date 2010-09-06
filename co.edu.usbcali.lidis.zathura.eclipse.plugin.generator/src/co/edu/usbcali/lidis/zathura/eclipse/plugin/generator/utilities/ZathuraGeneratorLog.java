@@ -22,14 +22,14 @@ public class ZathuraGeneratorLog {
 	 * @param message
 	 */
 	public static void logInfo(String message){
-		//log(IStatus.INFO, IStatus.OK,message,null);
+		log(IStatus.INFO, IStatus.OK,message,null);
 	}
 	/**
 	 * 
 	 * @param exception
 	 */
 	public static void logError(Throwable exception){
-		//logError("Unexpected Exception",exception);
+		logError("Unexpected Exception",exception);
 	}
 	/**
 	 * 
@@ -37,7 +37,7 @@ public class ZathuraGeneratorLog {
 	 * @param exception
 	 */
 	public static void logError(String message,Throwable exception){
-		//log(IStatus.ERROR, IStatus.OK,message,exception);
+		log(IStatus.ERROR, IStatus.OK,message,exception);
 	}
 	
 	
@@ -49,7 +49,7 @@ public class ZathuraGeneratorLog {
 	 * @param exception
 	 */
 	public static void log(int severity, int code, String message, Throwable exception){
-		//log(createStatus(severity, code, message, exception));
+		log(createStatus(severity, code, message, exception));
 	}
 	
 	/**
@@ -61,9 +61,8 @@ public class ZathuraGeneratorLog {
 	 * @return
 	 */
 	public static IStatus createStatus(int severity, int code, String message, Throwable exception){
-		//IStatus status=new Status(severity,ZathuraGeneratorActivator.PLUGIN_ID,code, message,exception);
-		//return status;
-		return null;
+		IStatus status=new Status(severity,ZathuraGeneratorActivator.PLUGIN_ID,code, message,exception);
+		return status;	
 	}
 	
 	/**
@@ -71,7 +70,7 @@ public class ZathuraGeneratorLog {
 	 * @param status
 	 */
 	public static void log(IStatus status){
-		//ZathuraGeneratorActivator.getDefault().getLog().log(status);
+		ZathuraGeneratorActivator.getDefault().getLog().log(status);
 	}
 
 }

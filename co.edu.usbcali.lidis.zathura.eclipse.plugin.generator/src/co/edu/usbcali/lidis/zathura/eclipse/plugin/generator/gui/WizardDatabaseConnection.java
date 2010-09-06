@@ -55,7 +55,7 @@ public class WizardDatabaseConnection extends WizardPage {
 		setTitle("New Database Connection");
 		setDescription("Create a new connection driver");
 		setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
-		
+		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));		
 		setPageComplete(false);
 		
 	}
@@ -102,6 +102,8 @@ public class WizardDatabaseConnection extends WizardPage {
 		
 		txtPassword = new Text(container, SWT.BORDER);
 		txtPassword.setBounds(144, 111, 420, 27);
+		txtPassword.setEchoChar('*');
+		
 		
 		Label lblUserName = new Label(container, SWT.NONE);
 		lblUserName.setBounds(10, 83, 128, 17);
@@ -139,7 +141,7 @@ public class WizardDatabaseConnection extends WizardPage {
 			        String selected = fd.open();			    
 			        listJARs.add(selected);
 			        try {			        	
-						EclipseGeneratorUtil.loadJar(selected);
+						EclipseGeneratorUtil.loadJarSystem(selected);
 						validatePageComplete();
 					} catch (Exception e1) {
 						ZathuraGeneratorLog.logError(e1);
@@ -148,7 +150,7 @@ public class WizardDatabaseConnection extends WizardPage {
 			        
 			}
 		});
-		btnAddJar.setBounds(467, 205, 97, 29);
+		btnAddJar.setBounds(467, 205, 97, 25);
 		btnAddJar.setText("Add JARs");
 		
 		Button btnRemove = new Button(container, SWT.NONE);
@@ -162,7 +164,7 @@ public class WizardDatabaseConnection extends WizardPage {
 			}
 			
 		});
-		btnRemove.setBounds(467, 240, 97, 29);
+		btnRemove.setBounds(467, 236, 97, 25);
 		btnRemove.setText("Remove");
 		
 		Label lblDriverClassName = new Label(container, SWT.NONE);
@@ -199,11 +201,11 @@ public class WizardDatabaseConnection extends WizardPage {
 				validatePageComplete();
 			}
 		});
-		btnTestDriver.setBounds(10, 329, 88, 29);
+		btnTestDriver.setBounds(10, 329, 88, 25);
 		btnTestDriver.setText("Test Driver");
 		
 		txtDriverClassName = new Text(container, SWT.BORDER);
-		txtDriverClassName.setBounds(144, 301, 434, 27);
+		txtDriverClassName.setBounds(144, 301, 420, 27);
 		
 		loadCmbDriverTemplate();
 		

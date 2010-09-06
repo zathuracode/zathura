@@ -24,9 +24,10 @@ import $package.${metaData.getRealClassName()};
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
  * 
- * @see lidis.${metaData.getRealClassName()}
+ *
+ * @author Zathura Code Generator http://code.google.com/p/zathura
+ *
  */
-
 public class ${metaData.getRealClassName()}DAO implements I${metaData.getRealClassName()}DAO {
 private static final Log log = LogFactory.getLog(${metaData.getRealClassName()}DAO.class);
 // property constants

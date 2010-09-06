@@ -1,14 +1,16 @@
 package ${virginPackage}.dataaccess.sessionFactory;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 /**
  * Configures and provides access to Hibernate sessions, tied to the
  * current thread of execution.  Follows the Thread Local Session
  * pattern, see {@link http://hibernate.org/42.html }.
+ *
+ * @author Zathura Code Generator http://code.google.com/p/zathura/
  */
 public class HibernateSessionFactory {
 
@@ -116,10 +118,44 @@ public class HibernateSessionFactory {
 		return configuration;
 	}
 
-	public static void rollback() {
-		if ((getSession().getTransaction() != null)
-				&& (getSession().getTransaction().isActive() == true)) {
-			getSession().getTransaction().rollback();
-		}
-	}
+	 /**
+     *  Rollback hibernate Transaction
+     *
+     */
+    public static void rollback() {
+        if ((getSession().getTransaction() != null) && (getSession().getTransaction().isActive() == true)) {
+            getSession().getTransaction().rollback();
+        }
+    }
+    /**
+     *  Begin hibernate Transaction
+     *
+     */
+    public static void beginTransaction() {
+    	getSession().getTransaction().begin();
+    }
+
+    /**
+     *  Commit hibernate Transaction
+     *
+     */
+    public static void commit() {
+    	getSession().getTransaction().commit();
+    }
+    
+    /**
+     *  Create hibernate Query
+     *
+     */
+    public static Query createQuery(String query) {
+        return getSession().createQuery(query);
+    }
+
+    /**
+     *  Flush hibernate Session
+     *
+     */
+    public static void flush() {
+    	getSession().flush();
+    }
 }

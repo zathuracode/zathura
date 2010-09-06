@@ -8,9 +8,10 @@ import $package.${metaData.getRealClassName()};
     import $package.${metaData.primaryKey.getRealClassName()};
 #end
 /**
-* Interface for ${metaData.getRealClassName()}DAO.
-* 
-*/
+ * Interface for ${metaData.getRealClassName()}DAO.
+ *
+ * @author Zathura Code Generator http://code.google.com/p/zathura/
+ */
 public interface I${metaData.getRealClassName()}DAO {
 /**
 * Perform an initial save of a previously unsaved ${metaData.getRealClassName()} entity. All

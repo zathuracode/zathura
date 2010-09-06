@@ -1,5 +1,11 @@
 package co.edu.usbcali.lidis.zathura.generator.model;
 
+
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @version 1.0
+ */
 public class GeneratorModel {
 	
 	private String name;

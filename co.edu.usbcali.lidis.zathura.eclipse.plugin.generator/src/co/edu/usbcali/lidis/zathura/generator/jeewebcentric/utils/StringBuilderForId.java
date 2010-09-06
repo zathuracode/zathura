@@ -8,10 +8,12 @@ import java.util.List;
 import co.edu.usbcali.lidis.zathura.metadata.model.ManyToOneMember;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
+
+
 /**
- * 
- * @author William Altuzarra Noriega
- * 
+ * Zathura Generator
+ * @author William Altuzarra (williamaltu@gmail.com)
+ * @version 1.0
  */
 public class StringBuilderForId implements IStringBuilderForId {
 

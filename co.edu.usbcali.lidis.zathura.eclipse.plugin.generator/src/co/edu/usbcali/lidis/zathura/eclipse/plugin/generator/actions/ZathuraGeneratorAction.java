@@ -25,6 +25,8 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ConfigEcl
  */
 public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 	private IWorkbenchWindow window;
+	
+	
 	/**
 	 * The constructor.
 	 */
@@ -39,6 +41,7 @@ public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 	 * @see IWorkbenchWindowActionDelegate#run
 	 */
 	public void run(IAction action) {
+		
 		WizardMain wizardMain=new WizardMain();
 		WizardDialog dialog = new WizardDialog(window.getShell(), wizardMain);
         dialog.create();

@@ -1,6 +1,7 @@
 package ${virginPackage}. ${modelName}.dto;
 import javax.faces.event.ActionEvent;
 import java.util.Date;
+import java.io.Serializable;
 import ${package}.${metaData.getRealClassName()};
 import ${virginPackage}.presentation.backEndBeans.${metaData.getRealClassName()}View;
 /**
@@ -9,7 +10,10 @@ import ${virginPackage}.presentation.backEndBeans.${metaData.getRealClassName()}
 * @author Zathura Code Generator http://code.google.com/p/zathura/
 *
 */
-public class ${metaData.getRealClassName()}DTO {
+public class ${metaData.getRealClassName()}DTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
 #foreach($member2  in $finalParamForViewVariablesInList)
     #set( $str = $member2 ) 
     #set( $lower = $str.toString().substring(0,1).toLowerCase())
