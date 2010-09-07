@@ -135,12 +135,20 @@ public class EclipseGeneratorUtil {
 
 	}
 
+	/**
+	 * 
+	 * @param packageName
+	 * @throws Exception
+	 */
 	public static void validarPackage(String packageName) throws Exception {
 		if (packageName.startsWith(".") || packageName.endsWith(".")) {
 			throw new Exception("A package name cannot start or end with a dot");
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public static void generateJPAReverseEngineering() {
 
 		Properties connectionProperties = new Properties();
@@ -174,6 +182,9 @@ public class EclipseGeneratorUtil {
 
 	}
 
+	/**
+	 * 
+	 */
 	public static void generateJPAReverseEngineeringTMP() {
 
 		Properties connectionProperties = new Properties();
@@ -215,6 +226,11 @@ public class EclipseGeneratorUtil {
 		}
 	}
 
+	/**
+	 * 
+	 * @param jarLocation
+	 * @throws Exception
+	 */
 	@SuppressWarnings("deprecation")
 	public static void loadJarSystem(String jarLocation) throws Exception {
 
