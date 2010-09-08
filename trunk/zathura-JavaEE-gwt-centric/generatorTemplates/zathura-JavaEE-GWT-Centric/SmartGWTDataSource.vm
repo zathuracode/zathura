@@ -1,6 +1,6 @@
 package ${virginPackage}.client.smartds;
 
-import java.util.List;
+import java.util.*;
 
 import ${virginPackage}.client.dataService.DataService${metaData.getRealClassName()};
 import ${virginPackage}.client.dataService.DataService${metaData.getRealClassName()}Async;
@@ -43,7 +43,7 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 	    // AutoIncrement on server.
 		key.setRequired (true);
         addField (key);
-    	#foreach(${member2}  in ${metaData.getProperties()})
+    	#foreach(${member2}  in ${finalMembers})
 			#if(${member2.getLength()} && ${member2.getNullable()})
 				addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
 			#else
@@ -225,13 +225,13 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 	}
 	
 	public static void copyValues(ListGridRecord from, ${metaData.getRealClassName()}DTO to) {
-	#foreach(${member2}  in ${metaData.getProperties()})
+	#foreach(${member2}  in ${finalMembers})
     to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
     #end
 	}
 
 	public static void copyValues(${metaData.getRealClassName()}DTO from, ListGridRecord to) {
-	#foreach(${member2}  in ${metaData.getProperties()})
+	#foreach(${member2}  in ${finalMembers})
     to.setAttribute("${member2.getName()}", from.get${member2.getGetNameOfPrimaryName()}());
     #end
 	}
