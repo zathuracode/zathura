@@ -210,13 +210,14 @@ public class WizardSelectTables extends WizardPage {
 					EclipseGeneratorUtil.tablesList=loadTablesList();
 				}
 				
+				/*
 				if(listCatalogs!=null && listCatalogs.size()>0 && listSchemas!=null && listSchemas.size()>0){
 					EclipseGeneratorUtil.defaultSchema=cmbCatlogSchema.getText();
 					EclipseGeneratorUtil.matchSchemaForTables=cmbCatlogSchema.getText();
 					EclipseGeneratorUtil.tablesList=loadTablesList();
 				}
-				
-				EclipseGeneratorUtil.tablesList=loadTablesList();			
+				*/
+					
 				
 			}else{
 				throw new Exception("Table not selected");
