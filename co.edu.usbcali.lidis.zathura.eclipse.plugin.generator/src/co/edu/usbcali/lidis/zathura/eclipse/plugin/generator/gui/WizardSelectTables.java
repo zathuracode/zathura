@@ -1,6 +1,7 @@
 package co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.gui;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.eclipse.jface.wizard.WizardPage;
@@ -18,6 +19,7 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGe
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 import com.swtdesigner.ResourceManager;
+import org.eclipse.swt.widgets.Text;
 /**
  * Zathura Generator
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
@@ -29,11 +31,14 @@ public class WizardSelectTables extends WizardPage {
 	private Combo cmbCatlogSchema;
 	private List listAvailableTables;
 	private List listSelectedTables;
+	private Text txtTableFilter;
+	private java.util.List<String> listCatalogs;
+	private java.util.List<String> listSchemas;
 
 	public WizardSelectTables() {
 		super("wizardPage");
 		setTitle("Zathura Reverse Engineering");
-		setDescription("Generate JPA or Hibernate entity beans from database explorer tables");
+		setDescription("Generate entity beans from database explorer tables");
 		setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
 		setPageComplete(false);
 	}
@@ -44,52 +49,54 @@ public class WizardSelectTables extends WizardPage {
 		setControl(container);
 		
 		Label lblCatalogSchema = new Label(container, SWT.NONE);
-		lblCatalogSchema.setBounds(10, 16, 112, 17);
-		lblCatalogSchema.setText("Catalog/Schema:");
+		lblCatalogSchema.setBounds(10, 13, 112, 17);
+		lblCatalogSchema.setText("Catalogs/Schemas:");
 		
 		cmbCatlogSchema = new Combo(container, SWT.NONE);
-		cmbCatlogSchema.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				listAvailableTables.removeAll();
-				listSelectedTables.removeAll();
-				java.util.List<String> listTables=ZathuraReverseEngineeringUtil.getTables(cmbCatlogSchema.getText());
-				for (String tableName : listTables) {
-					listAvailableTables.add(tableName);
-				}
-			}
-		});
 		cmbCatlogSchema.setBounds(128, 10, 332, 29);
 		
 		listAvailableTables = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI);
-		listAvailableTables.setBounds(10, 70, 195, 206);
+		listAvailableTables.setBounds(10, 101, 195, 206);
 		
 		Label lblAvailableTables = new Label(container, SWT.NONE);
-		lblAvailableTables.setBounds(10, 47, 154, 17);
+		lblAvailableTables.setBounds(10, 78, 154, 17);
 		lblAvailableTables.setText("Available tables:");
 		
 		listSelectedTables = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI);
-		listSelectedTables.setBounds(383, 70, 195, 206);
+		listSelectedTables.setBounds(383, 101, 195, 206);
 		
 		Label lblSelectedTables = new Label(container, SWT.NONE);
-		lblSelectedTables.setBounds(384, 47, 194, 17);
+		lblSelectedTables.setBounds(384, 78, 194, 17);
 		lblSelectedTables.setText("Selected tables:");
 		
 		Button btnUpdateList = new Button(container, SWT.NONE);
 		btnUpdateList.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				cmbCatlogSchema.removeAll();
-				listAvailableTables.removeAll();
-				listSelectedTables.removeAll();
-				java.util.List<String> listCatalogSchema=ZathuraReverseEngineeringUtil.getCatalogSchema();
-				for (String catalogSchemaName : listCatalogSchema) {
-					cmbCatlogSchema.add(catalogSchemaName);
-				}
-				validatePageComplete();
+				
+				try {
+					txtTableFilter.setText("%");
+					cmbCatlogSchema.removeAll();
+					listAvailableTables.removeAll();
+					listSelectedTables.removeAll();
+				
+					listCatalogs = ZathuraReverseEngineeringUtil.getCatalogs();
+					for (String catalogSchemaName : listCatalogs) {
+						cmbCatlogSchema.add(catalogSchemaName);
+					}
+					listSchemas = ZathuraReverseEngineeringUtil.getSchemas();
+					for (String catalogSchemaName : listSchemas) {
+						cmbCatlogSchema.add(catalogSchemaName);
+					}
+					validatePageComplete();
+				} catch (SQLException e1) {	
+					setPageComplete(false);
+				} catch (Exception ex) {
+					setPageComplete(false);
+				}			
 			}
 		});
-		btnUpdateList.setBounds(466, 10, 112, 29);
+		btnUpdateList.setBounds(466, 10, 98, 25);
 		btnUpdateList.setText("Update List");
 		
 		Button btnAdd = new Button(container, SWT.NONE);
@@ -104,7 +111,7 @@ public class WizardSelectTables extends WizardPage {
 				validatePageComplete();
 			}
 		});
-		btnAdd.setBounds(237, 106, 112, 29);
+		btnAdd.setBounds(237, 137, 112, 29);
 		btnAdd.setText("Add -->");
 		
 		Button btnAddAll = new Button(container, SWT.NONE);
@@ -119,7 +126,7 @@ public class WizardSelectTables extends WizardPage {
 				validatePageComplete();
 			}
 		});
-		btnAddAll.setBounds(237, 141, 112, 29);
+		btnAddAll.setBounds(237, 172, 112, 29);
 		btnAddAll.setText("Add All -->");
 		
 		Button btnRemove = new Button(container, SWT.NONE);
@@ -134,7 +141,7 @@ public class WizardSelectTables extends WizardPage {
 				validatePageComplete();				
 			}
 		});
-		btnRemove.setBounds(237, 176, 112, 29);
+		btnRemove.setBounds(237, 207, 112, 29);
 		btnRemove.setText("<-- Remove");
 		
 		Button btnRemoveAll = new Button(container, SWT.NONE);
@@ -149,8 +156,36 @@ public class WizardSelectTables extends WizardPage {
 				validatePageComplete();
 			}
 		});
-		btnRemoveAll.setBounds(237, 211, 112, 29);
+		btnRemoveAll.setBounds(237, 242, 112, 29);
 		btnRemoveAll.setText("<-- Remove All");
+		
+		txtTableFilter = new Text(container, SWT.BORDER);
+		txtTableFilter.setText("%");
+		txtTableFilter.setBounds(128, 39, 332, 23);
+		
+		Label lblTableFilter = new Label(container, SWT.NONE);
+		lblTableFilter.setBounds(10, 42, 112, 15);
+		lblTableFilter.setText("Table Filter:");
+		
+		Button btnTableFilterSearch = new Button(container, SWT.NONE);
+		btnTableFilterSearch.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					listAvailableTables.removeAll();
+					listSelectedTables.removeAll();
+					java.util.List<String> listTables=ZathuraReverseEngineeringUtil.getTables(cmbCatlogSchema.getText(),txtTableFilter.getText());
+					for (String tableName : listTables) {
+						listAvailableTables.add(tableName);
+					}
+				} catch (Exception e2) {
+					//ignore
+					setPageComplete(false);
+				}
+			}
+		});
+		btnTableFilterSearch.setBounds(466, 37, 98, 25);
+		btnTableFilterSearch.setText("Search");
 		
 	}
 	
@@ -161,8 +196,26 @@ public class WizardSelectTables extends WizardPage {
 			if(listSelectedTables!=null && listSelectedTables.getItemCount()>0){
 				setPageComplete(true);
 				
-				EclipseGeneratorUtil.defaultSchema=cmbCatlogSchema.getText();
-				EclipseGeneratorUtil.matchSchemaForTables=cmbCatlogSchema.getText();
+				
+				//Si es por Catalogs
+				if(listCatalogs!=null && listCatalogs.size()>0){
+					EclipseGeneratorUtil.defaultSchema=cmbCatlogSchema.getText();
+					EclipseGeneratorUtil.matchSchemaForTables=null;
+					EclipseGeneratorUtil.tablesList=null;
+				}
+				//Si es por schema
+				if(listSchemas!=null && listSchemas.size()>0){
+					EclipseGeneratorUtil.defaultSchema=null;
+					EclipseGeneratorUtil.matchSchemaForTables=cmbCatlogSchema.getText();
+					EclipseGeneratorUtil.tablesList=loadTablesList();
+				}
+				
+				if(listCatalogs!=null && listCatalogs.size()>0 && listSchemas!=null && listSchemas.size()>0){
+					EclipseGeneratorUtil.defaultSchema=cmbCatlogSchema.getText();
+					EclipseGeneratorUtil.matchSchemaForTables=cmbCatlogSchema.getText();
+					EclipseGeneratorUtil.tablesList=loadTablesList();
+				}
+				
 				EclipseGeneratorUtil.tablesList=loadTablesList();			
 				
 			}else{
@@ -188,5 +241,4 @@ public class WizardSelectTables extends WizardPage {
 		}
 		return tablesList;
 	}
-	
 }

@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,96 +69,18 @@ public class ZathuraReverseEngineeringUtil {
 	
 	
 	
-	public static void testDriver(String url,String driverClassName, String user, String password)throws ClassNotFoundException,SQLException,Exception{
-		
-		
-		try {
-			Class.forName(driverClassName);			
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			//Ignore
-		}
-		
-		try {
-			Class.forName(driverClassName);
-			connection=DriverManager.getConnection(url,user,password);
-		} catch (Exception e) {
-			throw e;
-		}
-		/*
-		//Plugin
-		try {
-			ZathuraGeneratorActivator.getDefault().getBundle().loadClass(driverClassName);
-			connection=DriverManager.getConnection(url,user,password);
-			System.out.println(connection);
-		} catch (Exception e) {
-			e.printStackTrace();
-		
-		}
-		
-		//Thread
-		try {
-			Thread.currentThread().getContextClassLoader().loadClass(driverClassName);
-			connection=DriverManager.getConnection(url,user,password);
-			System.out.println(connection);
-		} catch (Exception e) {
-			e.printStackTrace();
-		
-		}
-		
-		*/
-		//systme
-		
-		
-		
+	
+	
+	public static List<String> getCatalogs()throws SQLException{		
+		return DatabaseUtilities.getCatalogs(connection);
+	}
+	public static List<String> getSchemas()throws SQLException, Exception{		
+		return DatabaseUtilities.getSchemas(connection);
 	}
 	
-	public static List<String> getCatalogSchema(){
-		
-		List<String> listCatalogSchema=new ArrayList<String>(); 		
-		
-		try {
-			DatabaseMetaData meta = connection.getMetaData();
-			ResultSet rsSchemas = meta.getSchemas();
-			ResultSet rsCatalogs = meta.getCatalogs();
-			
-			while(rsSchemas.next()){				
-				listCatalogSchema.add(rsSchemas.getString(1));
-			}
-			
-			while(rsCatalogs.next()){
-				listCatalogSchema.add(rsCatalogs.getString(1));	    	
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return listCatalogSchema;
+	public static List<String> getTables(String catalogSchema,String tablePattern)throws SQLException{		
+		return DatabaseUtilities.getTables(connection, catalogSchema, catalogSchema, tablePattern);
 	}
-	
-	public static List<String> getTables(String catalogSchema){
-		
-		List<String> tables=new ArrayList<String>(); 		
-		
-		try {
-			DatabaseMetaData meta = connection.getMetaData();			
-			ResultSet rs = meta.getTables(catalogSchema, catalogSchema, "%", null);
-			while(rs.next()){
-				tables.add(rs.getString(3));
-			}    
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return tables;
-	}
-	
-	
-	
-	
-	
 	
 	public static String getTempFileBuildPath() {
 		if(fullPath!=null && fullPath.equals("")!=true){
@@ -461,4 +381,57 @@ public static HashMap<String, DatabaseTypeModel> loadZathuraDatabaseTypes() thro
 		//Crea carpeta de temporales
 		createFolder(path);
 	}
+	/**
+	 * 
+	 * @param url
+	 * @param driverClassName
+	 * @param user
+	 * @param password
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 * @throws Exception
+	 */
+	public static void testDriver(String url,String driverClassName, String user, String password)throws ClassNotFoundException,SQLException,Exception{
+		
+		
+		try {
+			Class.forName(driverClassName);			
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			//Ignore
+		}
+		
+		try {
+			Class.forName(driverClassName);
+			connection=DriverManager.getConnection(url,user,password);
+		} catch (Exception e) {
+			throw e;
+		}
+		/*
+		//Plugin
+		try {
+			ZathuraGeneratorActivator.getDefault().getBundle().loadClass(driverClassName);
+			connection=DriverManager.getConnection(url,user,password);
+			System.out.println(connection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		}
+		
+		//Thread
+		try {
+			Thread.currentThread().getContextClassLoader().loadClass(driverClassName);
+			connection=DriverManager.getConnection(url,user,password);
+			System.out.println(connection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		}
+		
+		*/
+		//systme
+		
+		
+		
 	}
+}
