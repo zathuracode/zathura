@@ -64,6 +64,8 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		connectionDriverJarPath = connectionProperties.getProperty("connectionDriverJarPath");
 		destinationDirectory = connectionProperties.getProperty("destinationDirectory");
 		matchSchemaForTables = connectionProperties.getProperty("matchSchemaForTables");
+		
+		//Este parametro es para que genere hibernatexml y los pojos con hibernate
 		makeItXml = Boolean.parseBoolean(connectionProperties.getProperty("makeItXml"));
 		
 		this.tablesList = tables;

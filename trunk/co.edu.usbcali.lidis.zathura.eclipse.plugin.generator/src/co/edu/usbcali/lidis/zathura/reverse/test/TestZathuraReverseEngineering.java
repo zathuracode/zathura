@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-//import co.edu.usbcali.lidis.zathura.eclipse.plugin.reverse.utilities.ConfigEclipsePluginPath;
 import co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraReverseEngineering;
 import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraReverseEngineering;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 /**
  * Zathura Generator
@@ -46,13 +44,16 @@ public class TestZathuraReverseEngineering {
 
 		connectionProperties.put("connectionDriverClass", connectionDriverClass);
 		connectionProperties.put("connectionUrl", connectionUrl);
-		connectionProperties.put("defaultSchema", defaultSchema == null ? "" : defaultSchema);
 		connectionProperties.put("connectionUsername", connectionUsername);
 		connectionProperties.put("connectionPassword", connectionPassword);
-		connectionProperties.put("companyDomainName", companyDomainName);
-		connectionProperties.put("matchSchemaForTables", matchSchemaForTables == null ? "" : matchSchemaForTables);
-
 		connectionProperties.put("connectionDriverJarPath",	connectionDriverJarPath);
+		
+		connectionProperties.put("defaultSchema", defaultSchema == null ? "" : defaultSchema);
+		connectionProperties.put("matchSchemaForTables", matchSchemaForTables == null ? "" : matchSchemaForTables);		
+		connectionProperties.put("companyDomainName", companyDomainName);
+		
+
+		
 		
 		connectionProperties.put("destinationDirectory",destinationDirectory);
 
