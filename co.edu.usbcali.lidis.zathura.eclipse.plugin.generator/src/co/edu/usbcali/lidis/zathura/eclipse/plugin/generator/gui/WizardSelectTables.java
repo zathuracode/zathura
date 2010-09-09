@@ -4,6 +4,8 @@ package co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.gui;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import net.sourceforge.squirrel_sql.fw.sql.ITableInfo;
+
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -32,8 +34,12 @@ public class WizardSelectTables extends WizardPage {
 	private List listAvailableTables;
 	private List listSelectedTables;
 	private Text txtTableFilter;
-	private java.util.List<String> listCatalogs;
-	private java.util.List<String> listSchemas;
+	private String[] listCatalogs=null;
+	private String[] listSchemas=null;
+	private String catalogName=null;
+	private String schemaName=null;
+	private Boolean isSchema=null;
+	
 
 	public WizardSelectTables() {
 		super("wizardPage");
@@ -80,14 +86,30 @@ public class WizardSelectTables extends WizardPage {
 					listAvailableTables.removeAll();
 					listSelectedTables.removeAll();
 				
+					
 					listCatalogs = ZathuraReverseEngineeringUtil.getCatalogs();
-					for (String catalogSchemaName : listCatalogs) {
-						cmbCatlogSchema.add(catalogSchemaName);
-					}
 					listSchemas = ZathuraReverseEngineeringUtil.getSchemas();
-					for (String catalogSchemaName : listSchemas) {
-						cmbCatlogSchema.add(catalogSchemaName);
+					
+					if(listSchemas!=null && listSchemas.length>1){
+						if(listCatalogs!=null && listCatalogs.length==1){
+							catalogName=listCatalogs[0];
+						}else{
+							catalogName=null;
+						}
+						
+						isSchema=true;
+						for (String catalogSchemaName : listSchemas) {
+							cmbCatlogSchema.add(catalogSchemaName);
+						}
+					}else if(listCatalogs!=null && listCatalogs.length>0){
+						isSchema=false;
+						for (String catalogSchemaName : listCatalogs) {
+							cmbCatlogSchema.add(catalogSchemaName);
+						}
 					}
+					
+					
+					
 					validatePageComplete();
 				} catch (SQLException e1) {	
 					setPageComplete(false);
@@ -174,9 +196,17 @@ public class WizardSelectTables extends WizardPage {
 				try {
 					listAvailableTables.removeAll();
 					listSelectedTables.removeAll();
-					java.util.List<String> listTables=ZathuraReverseEngineeringUtil.getTables(cmbCatlogSchema.getText(),txtTableFilter.getText());
-					for (String tableName : listTables) {
-						listAvailableTables.add(tableName);
+					
+					if(isSchema==true){
+						ITableInfo[] tableInfos=ZathuraReverseEngineeringUtil.getTables(catalogName, cmbCatlogSchema.getText(), txtTableFilter.getText());
+						for (ITableInfo tableInfo : tableInfos) {
+							listAvailableTables.add(tableInfo.getSimpleName());
+						}
+					}else{
+						ITableInfo[] tableInfos=ZathuraReverseEngineeringUtil.getTables(cmbCatlogSchema.getText(), null, txtTableFilter.getText());
+						for (ITableInfo tableInfo : tableInfos) {
+							listAvailableTables.add(tableInfo.getSimpleName());
+						}
 					}
 				} catch (Exception e2) {
 					//ignore
@@ -198,13 +228,13 @@ public class WizardSelectTables extends WizardPage {
 				
 				
 				//Si es por Catalogs
-				if(listCatalogs!=null && listCatalogs.size()>0){
+				if(listCatalogs!=null && listCatalogs.length>0){
 					EclipseGeneratorUtil.defaultSchema=cmbCatlogSchema.getText();
 					EclipseGeneratorUtil.matchSchemaForTables=null;
 					EclipseGeneratorUtil.tablesList=null;
 				}
 				//Si es por schema
-				if(listSchemas!=null && listSchemas.size()>0){
+				if(listSchemas!=null && listSchemas.length>0){
 					EclipseGeneratorUtil.defaultSchema=null;
 					EclipseGeneratorUtil.matchSchemaForTables=cmbCatlogSchema.getText();
 					EclipseGeneratorUtil.tablesList=loadTablesList();
