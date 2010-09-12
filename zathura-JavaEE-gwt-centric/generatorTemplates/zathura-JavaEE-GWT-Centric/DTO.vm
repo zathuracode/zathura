@@ -15,7 +15,7 @@ public class ${metaData.getRealClassName()}DTO{
 	
 	
 	public ${metaData.getRealClassName()}DTO(#set( $count = 0 )
-		#foreach($member  in ${finalMembers})
+		#foreach($member  in ${finalMembers})    	
 			#set( $count = $count + 1 )
 			#if( $count < ${finalMembers.size()})
 				${member.getType().getSimpleName()} ${member.getName()},

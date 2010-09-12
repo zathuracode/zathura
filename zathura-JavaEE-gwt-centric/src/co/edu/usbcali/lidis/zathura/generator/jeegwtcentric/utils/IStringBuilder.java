@@ -54,5 +54,11 @@ public interface IStringBuilder {
 
 	public List<String> getStringsForManyToOneProperties(
 			List<Member> manyToOne, List<MetaData> theMetaData);
+	
+	public List<String> getStringsToEntityForManyToOneProperties(
+			List<Member> manyToOne, List<MetaData> theMetaData) ;
+
+	public List<String> finalParamForDtoForSetsVariablesInListGWT(
+			List<MetaData> list, MetaData metaData);
 
 }

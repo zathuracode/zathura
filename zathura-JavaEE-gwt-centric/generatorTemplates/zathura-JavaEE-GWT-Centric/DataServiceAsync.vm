@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface DataService${metaData.getRealClassName()}Async {
 	public abstract void fetch (AsyncCallback<List<${metaData.getRealClassName()}DTO>> asyncCallback);
 
-	public abstract void fetch (Long key, AsyncCallback<${metaData.getRealClassName()}DTO> asyncCallback);
+	public abstract void fetch (${finalParamForId}, AsyncCallback<${metaData.getRealClassName()}DTO> asyncCallback);
 
 	public abstract void add (${metaData.getRealClassName()}DTO entityDTO, AsyncCallback<${metaData.getRealClassName()}DTO> asyncCallback);
 
