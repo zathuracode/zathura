@@ -172,6 +172,30 @@ public class Utilities {
 		
 		return memberList;
 	}
+	
+	public List<Member> finalMemberForId(List<MetaData> list,
+			MetaData metaData) {
+		List<Member> memberList = new ArrayList<Member>();
+
+		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+			Field[] field = metaData.getComposeKey().getDeclaredFields();
+			for (Field field2 : field) {
+				String variableName = field2.getName();
+
+				Member member = new SimpleMember(variableName , variableName , field2.getType(), -1);
+				
+				memberList.add(member);
+			}
+
+			return memberList;
+		} else {
+			Member member =  new SimpleMember(metaData.getPrimaryKey().getName(),metaData.getPrimaryKey().getShowName(), metaData.getPrimaryKey().getType(), metaData.getPrimaryKey().getOrder());
+			
+			memberList.add(member);
+		}
+
+		return memberList;
+	}
 
 	public List<Member> getFinalParamMembers(List<MetaData> theMetaData, MetaData metaData){
 

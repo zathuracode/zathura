@@ -245,9 +245,18 @@ IZathuraTemplate {
 					stringBuilderForId
 					.finalParamForIdForDtoForSetsVariablesInList(list,
 							metaData));
-
+			
+			
+			context.put("finalParamForIdForDtoForSetsVariablesInListGWT",
+					stringBuilderForId
+					.finalParamForIdForDtoForSetsVariablesInListGWT(list,
+							metaData));
+			
 			context.put("finalParamForDtoForSetsVariablesInList", stringBuilder
 					.finalParamForDtoForSetsVariablesInList(list, metaData));
+			
+			context.put("finalParamForDtoForSetsVariablesInListGWT", stringBuilder
+					.finalParamForDtoForSetsVariablesInListGWT(list, metaData));
 
 			context.put("finalParamForIdForDtoInViewForSetsVariablesInList",
 					stringBuilderForId
@@ -314,12 +323,18 @@ IZathuraTemplate {
 					.finalParamForVariablesDataTablesForIdAsList(list,
 							metaData));
 			
+			context.put("finalMemberForId", Utilities.getInstance().finalMemberForId(list, metaData));
 			context.put("finalMembers", Utilities.getInstance().getFinalParamMembers(list, metaData));
 
 			if (metaData.isGetManyToOneProperties()) {
 				context.put("getVariableForManyToOneProperties", stringBuilder
 						.getVariableForManyToOneProperties(metaData
 								.getManyToOneProperties(), list));
+				
+				context.put("getStringsToEntityForManyToOneProperties", stringBuilder
+						.getStringsToEntityForManyToOneProperties(metaData
+								.getManyToOneProperties(), list));
+				
 				context.put("getStringsForManyToOneProperties", stringBuilder
 						.getStringsForManyToOneProperties(metaData
 								.getManyToOneProperties(), list));

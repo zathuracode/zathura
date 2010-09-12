@@ -10,11 +10,11 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface DataService${metaData.getRealClassName()} extends RemoteService {
     List<${metaData.getRealClassName()}DTO> fetch ();
     
-	public ${metaData.getRealClassName()}DTO fetch(Long key);
+	public ${metaData.getRealClassName()}DTO fetch(${finalParamForId});
 
-	${metaData.getRealClassName()}DTO add (${metaData.getRealClassName()}DTO swagItemGWTDTO) throws Exception;
+	${metaData.getRealClassName()}DTO add (${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) throws Exception;
 
-	${metaData.getRealClassName()}DTO update (${metaData.getRealClassName()}DTO swagItemGWTDTO) throws Exception;
+	${metaData.getRealClassName()}DTO update (${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) throws Exception;
 
-    void remove (${metaData.getRealClassName()}DTO swagItemGWTDTO);
+    void remove (${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO);
 }

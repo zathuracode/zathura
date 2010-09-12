@@ -2231,6 +2231,553 @@ public class StringBuilder implements IStringBuilder {
 
 		return finalParam;
 	}
+	
+	
+	public List<String> getStringsToDTOForManyToOneProperties(List<Member> manyToOne, List<MetaData> theMetaData){
+		List<String> finalParam = new ArrayList<String>();
+
+		int cont = 1;
+		for (MetaData metaData1 : theMetaData) {
+			for (Member member : manyToOne) {
+				if (metaData1.getRealClassName().equalsIgnoreCase(
+						member.getRealClassName())) {
+
+					if (metaData1.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+						Field[] field = metaData1.getComposeKey()
+								.getDeclaredFields();
+
+						finalParam.add(metaData1.getPrimaryKey()
+								.getRealClassName()
+								+ " "
+								+ metaData1.getPrimaryKey()
+										.getRealClassVariableName()
+								+ "Class = new "
+								+ metaData1.getPrimaryKey().getRealClassName()
+								+ "();");
+
+						for (int i = 0; i < field.length; i++) {
+
+							Field field2 = field[i];
+							String name = field2.getName();
+
+							// sitesId.setConame(coname);
+
+							String build = name.substring(0, 1).toUpperCase();
+							String build2 = name.substring(1, name.length());
+							String build3 = build + build2;
+
+							finalParam.add(metaData1.getPrimaryKey()
+									.getRealClassVariableName()
+									+ "Class.set"
+									+ build3
+									+ "("
+									+ name
+									+ "_"
+									+ metaData1.getRealClassName() + ");");
+
+						}
+
+						finalParam
+								.add(member.getRealClassName()
+										+ " "
+										+ member.getName()
+										+ "Class = BusinessDelegatorView.get"
+										+ member.getRealClassName()
+										+ "("
+										+ metaData1.getPrimaryKey()
+												.getRealClassVariableName()
+										+ "Class);");
+						cont++;
+
+					} else {
+						finalParam.add(member.getRealClassName() + " "
+								+ member.getName() + "Class = BusinessDelegatorView.get"
+								+ member.getRealClassName() + "("
+								+ metaData1.getPrimaryKey().getName() + "_"
+								+ metaData1.getRealClassName() + ");");
+						cont++;
+
+					}
+
+				}
+
+			}
+		}
+
+		return finalParam;
+
+		
+	}
+	
+	public List<String> getStringsToEntityForManyToOneProperties(
+			List<Member> manyToOne, List<MetaData> theMetaData) {
+		List<String> finalParam = new ArrayList<String>();
+
+		int cont = 1;
+		for (MetaData metaData1 : theMetaData) {
+			for (Member member : manyToOne) {
+				if (metaData1.getRealClassName().equalsIgnoreCase(
+						member.getRealClassName())) {
+
+					if (metaData1.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+						Field[] field = metaData1.getComposeKey()
+								.getDeclaredFields();
+
+						finalParam.add(metaData1.getPrimaryKey()
+								.getRealClassName()
+								+ " "
+								+ metaData1.getPrimaryKey()
+										.getRealClassVariableName()
+								+ "Class = new "
+								+ metaData1.getPrimaryKey().getRealClassName()
+								+ "();");
+
+						for (int i = 0; i < field.length; i++) {
+
+							Field field2 = field[i];
+							String name = field2.getName();
+
+							// sitesId.setConame(coname);
+
+							String build = name.substring(0, 1).toUpperCase();
+							String build2 = name.substring(1, name.length());
+							String build3 = build + build2;
+
+							finalParam.add(metaData1.getPrimaryKey()
+									.getRealClassVariableName()
+									+ "Class.set"
+									+ build3
+									+ "("
+									+ name
+									+ "_"
+									+ metaData1.getRealClassName() + ");");
+
+						}
+
+						finalParam
+								.add(member.getRealClassName()
+										+ " "
+										+ member.getName()
+										+ "Class = BusinessDelegatorView.get"
+										+ member.getRealClassName()
+										+ "("
+										+ metaData1.getPrimaryKey()
+												.getRealClassVariableName()
+										+ "Class);");
+						cont++;
+
+					} else {
+						finalParam.add(member.getRealClassName() + " "
+								+ member.getName() + "Class = BusinessDelegatorView.get"
+								+ member.getRealClassName() + "("
+								+ metaData1.getPrimaryKey().getName() + "_"
+								+ metaData1.getRealClassName() + ");");
+						cont++;
+
+					}
+
+				}
+
+			}
+		}
+
+		return finalParam;
+	}
+
+	@Override
+	public List<String> finalParamForDtoForSetsVariablesInListGWT(
+			List<MetaData> theMetaData, MetaData metaData) {
+
+		List<String> finalParam2 = new ArrayList<String>();
+		String finalParam = new String();
+
+		if (metaData.isGetSimpleProperties()) {
+			for (Member member : metaData.getSimpleProperties()) {
+				if (!member.getName().equalsIgnoreCase(
+						metaData.getPrimaryKey().getName())) {
+
+					finalParam = finalParam + member.getRealClassName() + " "
+							+ member.getName();
+					if (!member.getRealClassName().equalsIgnoreCase("date")) {
+						String tmp2 = member.getName()
+								+ "="
+								+ metaData.getRealClassNameAsVariable()
+								+ ".get"
+								+ (member.getName().substring(0, 1))
+										.toUpperCase()
+								+ member.getName().substring(1)
+								+ "()!=null ? "
+								+ metaData.getRealClassNameAsVariable()
+								+ ".get"
+								+ (member.getName().substring(0, 1))
+										.toUpperCase()
+								+ member.getName().substring(1)
+								+ "() : null;";
+						finalParam2.add(tmp2);
+					} else {
+						String tmp2 = member.getName()
+								+ "="
+								+ metaData.getRealClassNameAsVariable()
+								+ ".get"
+								+ (member.getName().substring(0, 1))
+										.toUpperCase()
+								+ member.getName().substring(1) + "();";
+						finalParam2.add(tmp2);
+					}
+
+				}
+			}
+		}
+
+		// txtCliCedula.setValue(entity.getClientes().getCliCedula());
+		if (metaData.isGetManyToOneProperties()) {
+			for (Member member : metaData.getManyToOneProperties()) {
+
+				String params[] = getTypeAndvariableForManyToOneProperties(
+						member.getType().getSimpleName(), theMetaData);
+
+				String tmpFinalParam = "";
+				String tmpFinalParam1 = "";
+				String tmpFinalParam2 = "";
+				String tmpFinalParam3 = "";
+				if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+					if (params != null) {
+						int cont = 0;
+						for (int i = 0; i < params.length; i++) {
+
+							tmpFinalParam = params[cont];
+
+							tmpFinalParam1 = params[cont];
+
+							if (tmpFinalParam != null) {
+								if (cont > params.length)
+									cont = params.length;
+								else
+									cont++;
+
+								tmpFinalParam2 = params[cont];
+								try {
+									tmpFinalParam3 = params[cont - 1];
+								} catch (Exception e) {
+									tmpFinalParam3 = "";
+								}
+
+								tmpFinalParam = tmpFinalParam + " "
+										+ params[cont];
+
+								if (cont > params.length)
+									cont = params.length;
+								else
+									cont++;
+
+								if (!finalParam.contains(tmpFinalParam)) {
+									finalParam = finalParam + tmpFinalParam
+											+ ", ";
+
+									HashMap<String, String> map = stringBuilderForId.hashMapIds;
+
+									String hashMapProve = "";
+									String hashMapProve1 = "";
+									try {
+
+										hashMapProve = (stringBuilderForId.hashMapIds
+												.get(tmpFinalParam2));
+
+									} catch (Exception e) {
+										// TODO: handle exception
+									}
+									String tmp3 = "";
+
+									if (hashMapProve == null) {
+										if (!tmpFinalParam3
+												.equalsIgnoreCase("date")) {
+											tmp3 = tmpFinalParam2
+													+ "="
+													+ metaData
+															.getRealClassNameAsVariable()
+													+ ".get"
+													+ member.getRealClassName()
+													+ "().get"
+													+ (tmpFinalParam2
+															.substring(0, 1))
+															.toUpperCase()
+													+ tmpFinalParam2
+															.substring(
+																	1,
+																	tmpFinalParam2
+																			.lastIndexOf("_"))
+													+ "()!=null ? "
+													+ metaData
+															.getRealClassNameAsVariable()
+													+ ".get"
+													+ member.getRealClassName()
+													+ "().get"
+													+ (tmpFinalParam2
+															.substring(0, 1))
+															.toUpperCase()
+													+ tmpFinalParam2
+															.substring(
+																	1,
+																	tmpFinalParam2
+																			.lastIndexOf("_"))
+													+ "() : null;";
+										} else {
+											tmp3 = tmpFinalParam2
+													+ "="
+													+ metaData
+															.getRealClassNameAsVariable()
+													+ ".get"
+													+ member.getRealClassName()
+													+ "().get"
+													+ (tmpFinalParam2
+															.substring(0, 1))
+															.toUpperCase()
+													+ tmpFinalParam2
+															.substring(
+																	1,
+																	tmpFinalParam2
+																			.lastIndexOf("_"))
+													+ "();";
+										}
+									} else {
+										if (hashMapProve.equals("")) {
+											if (!tmpFinalParam3
+													.equalsIgnoreCase("date")) {
+												tmp3 = tmpFinalParam2
+														+ "="
+														+ metaData
+																.getRealClassNameAsVariable()
+														+ ".get"
+														+ member
+																.getRealClassName()
+														+ "().get"
+														+ (tmpFinalParam2
+																.substring(0, 1))
+																.toUpperCase()
+														+ tmpFinalParam2
+																.substring(
+																		1,
+																		tmpFinalParam2
+																				.lastIndexOf("_"))
+														+ "()!=null ? "
+														+ metaData
+																.getRealClassNameAsVariable()
+														+ ".get"
+														+ member
+																.getRealClassName()
+														+ "().get"
+														+ (tmpFinalParam2
+																.substring(0, 1))
+																.toUpperCase()
+														+ tmpFinalParam2
+																.substring(
+																		1,
+																		tmpFinalParam2
+																				.lastIndexOf("_"))
+														+ "() : null;";
+											} else {
+												tmp3 = tmpFinalParam2
+														+ "="
+														+ metaData
+																.getRealClassNameAsVariable()
+														+ ".get"
+														+ member
+																.getRealClassName()
+														+ "().get"
+														+ (tmpFinalParam2
+																.substring(0, 1))
+																.toUpperCase()
+														+ tmpFinalParam2
+																.substring(
+																		1,
+																		tmpFinalParam2
+																				.lastIndexOf("_"))
+														+ "();";
+											}
+										} else {
+											if (!tmpFinalParam3
+													.equalsIgnoreCase("date")) {
+												tmp3 = tmpFinalParam2
+														+ "="
+														+ metaData
+																.getRealClassNameAsVariable()
+														+ ".get"
+														+ member
+																.getRealClassName()
+														+ "().get"
+														+ hashMapProve
+																.substring(0, 1)
+																.toUpperCase()
+														+ hashMapProve
+																.substring(1)
+														+ "().get"
+														+ (tmpFinalParam2
+																.substring(0, 1))
+																.toUpperCase()
+														+ tmpFinalParam2
+																.substring(
+																		1,
+																		tmpFinalParam2
+																				.lastIndexOf("_"))
+														+ "()!=null ? "
+														+ metaData
+																.getRealClassNameAsVariable()
+														+ ".get"
+														+ member
+																.getRealClassName()
+														+ "().get"
+														+ hashMapProve
+																.substring(0, 1)
+																.toUpperCase()
+														+ hashMapProve
+																.substring(1)
+														+ "().get"
+														+ (tmpFinalParam2
+																.substring(0, 1))
+																.toUpperCase()
+														+ tmpFinalParam2
+																.substring(
+																		1,
+																		tmpFinalParam2
+																				.lastIndexOf("_"))
+														+ "() : null;";
+											} else {
+												tmp3 = tmpFinalParam2
+														+ "="
+														+ metaData
+																.getRealClassNameAsVariable()
+														+ ".get"
+														+ member
+																.getRealClassName()
+														+ "().get"
+														+ hashMapProve
+																.substring(0, 1)
+																.toUpperCase()
+														+ hashMapProve
+																.substring(1)
+														+ "().get"
+														+ (tmpFinalParam2
+																.substring(0, 1))
+																.toUpperCase()
+														+ tmpFinalParam2
+																.substring(
+																		1,
+																		tmpFinalParam2
+																				.lastIndexOf("_"))
+														+ "();";
+											}
+										}
+									}
+
+									finalParam2.add(tmp3);
+								}
+							}
+
+						}
+					}
+
+				} else {
+
+					if (params != null) {
+						int cont = 0;
+						for (int i = 0; i < params.length; i++) {
+
+							tmpFinalParam = params[cont];
+
+							if (tmpFinalParam != null) {
+								if (cont > params.length)
+									cont = params.length;
+								else
+									cont++;
+
+								tmpFinalParam = tmpFinalParam + " "
+										+ params[cont];
+
+								tmpFinalParam1 = params[cont];
+								try {
+									tmpFinalParam3 = params[cont - 1];
+								} catch (Exception e) {
+									tmpFinalParam3 = "";
+								}
+
+								if (cont > params.length)
+									cont = params.length;
+								else
+									cont++;
+
+								if (!finalParam.contains(tmpFinalParam)) {
+									finalParam = finalParam + tmpFinalParam;
+									if (!tmpFinalParam3
+											.equalsIgnoreCase("date")) {
+										String tmp3 = tmpFinalParam1
+												+ "="
+												+ metaData
+														.getRealClassNameAsVariable()
+												+ ".get"
+												+ member.getRealClassName()
+												+ "()"
+												+ ".get"
+												+ tmpFinalParam1
+														.substring(0, 1)
+														.toUpperCase()
+												+ tmpFinalParam1
+														.substring(
+																1,
+																tmpFinalParam1
+																		.lastIndexOf("_"))
+												+ "()!=null ?"
+												+ metaData
+														.getRealClassNameAsVariable()
+												+ ".get"
+												+ member.getRealClassName()
+												+ "()"
+												+ ".get"
+												+ tmpFinalParam1
+														.substring(0, 1)
+														.toUpperCase()
+												+ tmpFinalParam1
+														.substring(
+																1,
+																tmpFinalParam1
+																		.lastIndexOf("_"))
+												+ "() : null;";
+
+										finalParam2.add(tmp3);
+									} else {
+										String tmp3 = tmpFinalParam1
+												+ "="
+												+ metaData
+														.getRealClassNameAsVariable()
+												+ ".get"
+												+ member.getRealClassName()
+												+ "()"
+												+ ".get"
+												+ tmpFinalParam1
+														.substring(0, 1)
+														.toUpperCase()
+												+ tmpFinalParam1
+														.substring(
+																1,
+																tmpFinalParam1
+																		.lastIndexOf("_"))
+												+ "();";
+
+										finalParam2.add(tmp3);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		List primaryKey = stringBuilderForId
+				.finalParamForIdForDtoForSetsVariablesInList(theMetaData,
+						metaData);
+
+		return ListUtils.subtract(finalParam2, primaryKey);
+	}
 
 	// if (metaData.getRealClassName().equalsIgnoreCase("TipoAlarma")) {
 	// String tmp = "";

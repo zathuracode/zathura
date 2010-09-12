@@ -485,6 +485,41 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam2;
 
 	}
+	
+	public List<String> finalParamForIdForViewForSetsVariablesInListGWT(
+			List<MetaData> theMetaData, MetaData metaData) {
+
+		List<String> finalParam2 = new ArrayList<String>();
+		String finalParam = new String();
+
+		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+			Field[] field = metaData.getComposeKey().getDeclaredFields();
+			for (Field field2 : field) {
+				String name = field2.getName();
+				finalParam = finalParam + name;
+				// String idName = metaData.getPrimaryKey().getName();
+				// txtMasCodigo.setValue(entity.getId().getMasCodigo());
+				String tmp1 = (name.toString())+" = " + metaData.getRealClassNameAsVariable()+".get"
+						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
+						+ "()" + ".get" + (name.substring(0, 1)).toUpperCase()
+						+ name.substring(1) + "()" + ";";
+
+				finalParam2.add(tmp1);
+			}
+
+		} else {
+			// txtCliCedula.setValue(entity.getCliCedula());
+			finalParam = metaData.getPrimaryKey().getName();
+			String tmp1 = finalParam.toString()+" = " + metaData.getRealClassNameAsVariable()+".get"
+					+ (finalParam.substring(0, 1)).toUpperCase()
+					+ finalParam.substring(1) + "()" + ";";
+			finalParam2.add(tmp1);
+		}
+
+		return finalParam2;
+
+	}
+
 
 	/* (non-Javadoc)
 	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdForDtoForSetsVariablesInList(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
@@ -538,6 +573,68 @@ public class StringBuilderForId implements IStringBuilderForId {
 						+ metaData.getRealClassNameAsVariable() + ".get"
 						+ (finalParam.substring(0, 1)).toUpperCase()
 						+ finalParam.substring(1) + "().toString()" + ";";
+				finalParam2.add(tmp1);
+			} else {
+				String tmp1 = finalParam + "="
+						+ metaData.getRealClassNameAsVariable() + ".get"
+						+ (finalParam.substring(0, 1)).toUpperCase()
+						+ finalParam.substring(1) + "()" + ";";
+				finalParam2.add(tmp1);
+			}
+
+		}
+
+		return finalParam2;
+
+	}
+
+	public List<String> finalParamForIdForDtoForSetsVariablesInListGWT(
+			List<MetaData> theMetaData, MetaData metaData) {
+
+		List<String> finalParam2 = new ArrayList<String>();
+		String finalParam = new String();
+
+		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+			Field[] field = metaData.getComposeKey().getDeclaredFields();
+			for (Field field2 : field) {
+				String name = field2.getName();
+				finalParam = finalParam + name;
+				String type = field2.getClass().getCanonicalName();
+				if (!type.equalsIgnoreCase("date")) {
+					String tmp1 = name
+							+ "="
+							+ metaData.getRealClassNameAsVariable()
+							+ ".get"
+							+ metaData.getPrimaryKey()
+									.getGetNameOfPrimaryName() + "()" + ".get"
+							+ (name.substring(0, 1)).toUpperCase()
+							+ name.substring(1) + "()" + ";";
+
+					finalParam2.add(tmp1);
+				} else {
+					String tmp1 = name
+							+ "="
+							+ metaData.getRealClassNameAsVariable()
+							+ ".get"
+							+ metaData.getPrimaryKey()
+									.getGetNameOfPrimaryName() + "()" + ".get"
+							+ (name.substring(0, 1)).toUpperCase()
+							+ name.substring(1) + "()" + ";";
+
+					finalParam2.add(tmp1);
+				}
+
+			}
+
+		} else {
+			// txtCliCedula.setValue(entity.getCliCedula());
+			finalParam = metaData.getPrimaryKey().getName();
+			String type = metaData.getPrimaryKey().getRealClassName();
+			if (!type.equalsIgnoreCase("date")) {
+				String tmp1 = finalParam + "="
+						+ metaData.getRealClassNameAsVariable() + ".get"
+						+ (finalParam.substring(0, 1)).toUpperCase()
+						+ finalParam.substring(1) + "()" + ";";
 				finalParam2.add(tmp1);
 			} else {
 				String tmp1 = finalParam + "="

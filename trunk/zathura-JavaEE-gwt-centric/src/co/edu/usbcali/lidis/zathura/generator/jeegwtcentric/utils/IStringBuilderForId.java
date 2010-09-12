@@ -45,5 +45,11 @@ public interface IStringBuilderForId {
 			MetaData metaData);
 
 	public void neededIds(List<MetaData> list);
+	
+	public List<String> finalParamForIdForDtoForSetsVariablesInListGWT(
+			List<MetaData> theMetaData, MetaData metaData) ;
+	
+	public List<String> finalParamForIdForViewForSetsVariablesInListGWT(
+			List<MetaData> theMetaData, MetaData metaData) ;
 
 }
