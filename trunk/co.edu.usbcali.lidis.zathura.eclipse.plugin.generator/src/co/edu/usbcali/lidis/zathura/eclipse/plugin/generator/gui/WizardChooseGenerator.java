@@ -2,7 +2,6 @@ package co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.gui;
 
 import java.util.HashMap;
 
-
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -12,12 +11,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
 
-import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.generator.factory.ZathuraGeneratorFactory;
 import co.edu.usbcali.lidis.zathura.generator.model.GeneratorModel;
-
-import com.swtdesigner.ResourceManager;
 /**
  * Zathura Generator
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
@@ -39,7 +35,7 @@ public class WizardChooseGenerator extends WizardPage {
 		super("wizardPage");		
 		setTitle("Zathura Java Code Generator");
 		setDescription("Generate Java Application based on Open Standards and JEE Design Patterns");			
-		setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
+		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
 		setPageComplete(false);
 	}
 

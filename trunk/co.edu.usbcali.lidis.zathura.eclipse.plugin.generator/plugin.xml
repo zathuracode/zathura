@@ -20,6 +20,7 @@
          </action>
          
          <!-- Carga la accion del plugin co.edu.usbcali.lidis.zathura.eclipse.plugin.reverse -->
+         <!--
          <action
                class="co.edu.usbcali.lidis.zathura.eclipse.plugin.reverse/co.edu.usbcali.lidis.zathura.eclipse.plugin.reverse.actions.ZathuraReverseEngineeringAction"
                icon="icons/Edit_Connection.gif"
@@ -29,7 +30,7 @@
                toolbarPath="zathuraGroup"
                tooltip="Zathura Reverse Engineering">
          </action>
-         
+         -->
       </actionSet>
    </extension>
 

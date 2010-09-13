@@ -28,6 +28,14 @@ import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseJarLoader;
  * @version 1.0
  */
 public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
+	
+	//MYSQL, SQLSERVER
+	public final static String CATALOG="1";
+	//ORACLE, POSTGRES, 
+	public final static String SCHEMA="2";
+	//DB2 AS400
+	public final static String CATALOG_SCHEMA="3";
+	
 
 	private static Logger log = Logger.getLogger(ZathuraReverseEngineering.class);
 
@@ -38,17 +46,22 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	private String connectionDriverClass;
 	private String connectionUrl;
 	private String connectionUsername;
-	private String defaultSchema;
+	
 	private String connectionPassword;
 	private String companyDomainName;
 	private String companyDomainNameForPojoLocation;
 	private String connectionDriverJarPath;
 	private String destinationDirectory;
 	private Boolean makeItXml;
-
-	private String matchSchemaForTables;
+	
+	private String catalog;
+	private String schema;
+	private String catalogAndSchema;
+	
 	private List<String> tablesList;
 	private VelocityEngine ve;
+	
+	
 
 	public void makePojosJPA_V1_0(Properties connectionProperties, List<String> tables) {
 		
@@ -56,14 +69,16 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 		connectionDriverClass = connectionProperties.getProperty("connectionDriverClass");
 		connectionUrl = connectionProperties.getProperty("connectionUrl");
-		defaultSchema = connectionProperties.getProperty("defaultSchema");
+		
 		connectionUsername = connectionProperties.getProperty("connectionUsername");
 		connectionPassword = connectionProperties.getProperty("connectionPassword");
 		companyDomainName = connectionProperties.getProperty("companyDomainName");
 		companyDomainNameForPojoLocation = ZathuraReverseEngineeringUtil.fixDomain(companyDomainName);
 		connectionDriverJarPath = connectionProperties.getProperty("connectionDriverJarPath");
 		destinationDirectory = connectionProperties.getProperty("destinationDirectory");
-		matchSchemaForTables = connectionProperties.getProperty("matchSchemaForTables");
+		schema = connectionProperties.getProperty("schema");
+		catalog = connectionProperties.getProperty("catalog");
+		catalogAndSchema = connectionProperties.getProperty("catalogAndSchema");
 		
 		//Este parametro es para que genere hibernatexml y los pojos con hibernate
 		makeItXml = Boolean.parseBoolean(connectionProperties.getProperty("makeItXml"));
@@ -118,18 +133,19 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 		context.put("connectionDriverClass", connectionDriverClass);
 		context.put("connectionUrl", connectionUrl);
-		context.put("defaultSchema", defaultSchema);
 		context.put("connectionUsername", connectionUsername);
 		context.put("connectionPassword", connectionPassword);
 		context.put("companyDomainName", companyDomainName);
 		context.put("companyDomainNameForPojoLocation",companyDomainNameForPojoLocation);
-		context.put("matchSchemaForTables", matchSchemaForTables);
 		context.put("makeItXml", makeItXml);
 		context.put("connectionDriverJarPath", connectionDriverJarPath);
 		context.put("destinationDirectory", destinationDirectory);		
 		context.put("tablesList", tablesList);		
-		context.put("isTableList", ZathuraReverseEngineeringUtil.validationsList(tablesList));
-
+		context.put("isTableList", ZathuraReverseEngineeringUtil.validationsList(tablesList));		
+		context.put("schema", schema);
+		context.put("catalog", catalog);
+		context.put("catalogAndSchema", catalogAndSchema);
+		
 		
 		doCfg(context);
 		doBuild(context);

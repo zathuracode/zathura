@@ -74,9 +74,9 @@ public class ZathuraReverseJarLoader {
 		for (int i = 0; i < files.length; i++) {
 			URL url = files[i].toURL();
 			addURL.invoke(cl, new Object[] { url });
-			System.out.println("\n---------------------");
-			System.out.println("Summary:");
-			System.out.println("\tLoaded:\t" + files[i].getName());			
+			//System.out.println("\n---------------------");
+			//System.out.println("Summary:");
+			//System.out.println("\tLoaded:\t" + files[i].getName());			
 		}
 		// at this point, the default class loader has all the jars you
 		// indicated

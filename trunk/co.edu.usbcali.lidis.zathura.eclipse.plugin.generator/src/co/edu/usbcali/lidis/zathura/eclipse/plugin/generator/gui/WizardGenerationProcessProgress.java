@@ -6,10 +6,6 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
-
-import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
-
-import com.swtdesigner.ResourceManager;
 /**
  * Zathura Generator
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
@@ -26,7 +22,7 @@ public class WizardGenerationProcessProgress extends WizardPage {
 		super("wizardPage");
 		setTitle("Generation Process Progress");
 		setDescription("blabla");
-		setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
+		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
 	}
 
 	/**

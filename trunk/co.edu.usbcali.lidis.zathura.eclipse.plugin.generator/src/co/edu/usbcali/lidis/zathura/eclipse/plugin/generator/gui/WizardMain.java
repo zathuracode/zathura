@@ -7,6 +7,9 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
+import com.swtdesigner.ResourceManager;
+
+import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.RunningGeneration;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
@@ -19,12 +22,12 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ZathuraGe
 public class WizardMain extends Wizard {
 	
 	//WizardPage
-	private WizardChooseGenerator wizardGeneratorChose;
+	public WizardChooseGenerator wizardGeneratorChose;
 	
 	//WizardPage Generator
-	WizardDatabaseConnection wizardDatabaseConnection;
-	WizardSelectTables wizardSelectTables;
-	WizardChooseSourceFolderAndPackage wizardChooseSourceFolderAndPackage;
+	public WizardDatabaseConnection wizardDatabaseConnection;
+	public WizardSelectTables wizardSelectTables;
+	public WizardChooseSourceFolderAndPackage wizardChooseSourceFolderAndPackage;
 	
 	
 
@@ -32,6 +35,9 @@ public class WizardMain extends Wizard {
 	public WizardMain() {
 		super();
 		setWindowTitle("Zathura Code Generator V2.1.0");
+		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
+		
+		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
 		EclipseGeneratorUtil.reset();
 		EclipseGeneratorUtil.wizardMain=this;		
 	}

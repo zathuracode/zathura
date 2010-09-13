@@ -65,9 +65,21 @@
 		#end	
 		
 	</type-mapping>
-	#if(${isTableList}==true)
+	#if(${catalogAndSchema}=='1')
 		#foreach($table  in ${tablesList})
-    	<table-filter match-name="$table" match-schema="${matchSchemaForTables}"></table-filter>
+		<table-filter match-catalog="${catalog}" match-name="$table" />
 		#end
 	#end
+	
+	#if(${catalogAndSchema}=='2')
+		#foreach($table  in ${tablesList})
+		<table-filter match-schema="${schema}" match-name="$table" />
+		#end
+	#end
+	
+	#if(${catalogAndSchema}=='3')
+		#foreach($table  in ${tablesList})
+		<table-filter match-catalog="${catalog}" match-schema="${schema}" match-name="$table" />
+		#end
+	#end	
 </hibernate-reverse-engineering>

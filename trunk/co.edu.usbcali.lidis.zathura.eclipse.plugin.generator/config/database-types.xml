@@ -206,7 +206,7 @@
     <database>	
 		<name>MySQL Connector/J</name>
 		<driverClassName>com.mysql.jdbc.Driver</driverClassName>
-		<url>jdbc:mysql://&lt;hostname&gt;[&lt;:3306&gt;]/&lt;dbname&gt;</url>		
+		<url>jdbc:mysql://&lt;hostname&gt;[&lt;:3306&gt;]/&lt;dbname&gt;</url>	
 	</database>
 	
     <database>

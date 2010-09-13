@@ -24,34 +24,39 @@ public class TestDataBases {
 		
 		
 		try {
+			
+			String className=null;
+			String url=null;
+			String user=null;
+			String password=null;
 			/** Oracle */
-			String className="oracle.jdbc.driver.OracleDriver";
-			String url="jdbc:oracle:thin:@127.0.0.1:1521:xe";
-			String user="banco";
-			String password="banco";
+			className="oracle.jdbc.driver.OracleDriver";
+			url="jdbc:oracle:thin:@127.0.0.1:1521:xe";
+			user="banco";
+			password="banco";
 			
 			System.out.println("------------------------------------ ORACLE ------------------------------------ ");
-			testMetaData(className, url, user, password);
+			//testMetaData(className, url, user, password);
 			
 			/** JT400 */ 
 			className="com.ibm.as400.access.AS400JDBCDriver";
-			url="jdbc:as400://192.1.4.164:8471/ZATHURADB2";
+			url="jdbc:as400://192.1.4.164:8471/ZATURADB2";
 			user="dnxout01";
 			password="eszyjm1";
 			
 			//System.out.println("------------------------------------ JT400 ------------------------------------ ");
-			//testMetaData(className, url, user, password);
+			testMetaData(className, url, user, password);
 			
 			
 			
-			/** mysql */ 
+			/** mysql  */
 			className="com.mysql.jdbc.Driver";
-			url="jdbc:mysql://127.0.0.1:3306/BANCO";
+			url="jdbc:mysql://127.0.0.1:3306/banco";
 			user="root";
 			password="diego";
 			
 			System.out.println("------------------------------------ mysql ------------------------------------ ");
-			testMetaData(className, url, user, password);
+			//testMetaData(className, url, user, password);
 			
 			
 			/** postgres */ 
@@ -61,7 +66,7 @@ public class TestDataBases {
 			password="vortex";
 			
 			System.out.println("------------------------------------ postgres ------------------------------------ ");
-			testMetaData(className, url, user, password);
+			//testMetaData(className, url, user, password);
 			
 			
 			

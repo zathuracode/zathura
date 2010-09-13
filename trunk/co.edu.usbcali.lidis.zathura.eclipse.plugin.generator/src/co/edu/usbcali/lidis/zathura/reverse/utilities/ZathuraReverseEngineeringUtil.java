@@ -24,8 +24,6 @@ import net.sourceforge.squirrel_sql.fw.sql.ISQLDriver;
 import net.sourceforge.squirrel_sql.fw.sql.ITableInfo;
 import net.sourceforge.squirrel_sql.fw.sql.SQLDriver;
 import net.sourceforge.squirrel_sql.fw.sql.SQLDriverManager;
-import net.sourceforge.squirrel_sql.fw.sql.SQLDriverProperty;
-import net.sourceforge.squirrel_sql.fw.sql.SQLDriverPropertyCollection;
 
 import org.apache.log4j.Logger;
 
@@ -61,7 +59,7 @@ public class ZathuraReverseEngineeringUtil {
 	private static ISQLConnection sqlConnection=null;
 	private static ISQLAlias alias=null;
 	private static ISQLDriver sqlDriver=null;
-	private static SQLDriverPropertyCollection driverProperties =null;
+	//private static SQLDriverPropertyCollection driverProperties =null;
 	private static SQLDriverManager sqlDriverManager=null;			
 				
 	
@@ -88,10 +86,7 @@ public class ZathuraReverseEngineeringUtil {
 	
 	
 
-	public static void closeAll(){
-		
-		//TODO revisar para que se cierren las conexiones
-	}
+	
 	
 	
 	public static String getTempFileBuildPath() {
@@ -409,14 +404,29 @@ public static HashMap<String, DatabaseTypeModel> loadZathuraDatabaseTypes() thro
 		sqlDriver=new  SQLDriver();
 		alias=new ZathuraSQLAlias();
 		
-		driverProperties = new SQLDriverPropertyCollection();
-		driverProperties.addDriverProperty(new SQLDriverProperty("user", user));
-		driverProperties.addDriverProperty(new SQLDriverProperty("url", url));
-		driverProperties.addDriverProperty(new SQLDriverProperty("password", password));
 		sqlDriver.setDriverClassName(driverClassName);
 		sqlDriver.setUrl(url);
 		alias.setUrl(url);
+		alias.setUserName(user);
+		alias.setPassword(password);
+		
 		sqlConnection=sqlDriverManager.getConnection(sqlDriver, alias, user, password);
+	}
+	
+	public static void closeAll(){
+		
+			try {
+				if(sqlConnection!=null){
+					sqlConnection.close();
+				}
+				alias=null;
+				sqlDriver=null;
+				sqlConnection=null;
+				sqlDriverManager=null;
+			} catch (SQLException e) {
+				//Ignore
+			}
+		
 		
 	}
 	

@@ -8,6 +8,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
+
 
 public class RunningGenerationReverseEngineering implements IRunnableWithProgress {
 	  
@@ -37,12 +39,14 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 		    		EclipseGeneratorUtil.generateJPAReverseEngineeringTMP();
 		    			
 		    		
+		    		ZathuraReverseEngineeringUtil.closeAll();
 					
 					monitor.subTask("Refresh "+EclipseGeneratorUtil.projectName+" project...");
 					EclipseGeneratorUtil.project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 					
 					monitor.subTask("Building "+EclipseGeneratorUtil.projectName+" project...");
 					EclipseGeneratorUtil.project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);	
+					
 					
 					
 				} catch (CoreException e) {

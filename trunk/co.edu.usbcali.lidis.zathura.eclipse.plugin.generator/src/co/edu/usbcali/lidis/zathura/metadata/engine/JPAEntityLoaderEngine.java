@@ -50,6 +50,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 
 	private static Logger log = Logger.getLogger(JPAEntityLoaderEngine.class);
 
+	@SuppressWarnings("unchecked")
 	public MetaDataModel loadMetaDataModel(String path, String pckgName) {
 		log.info("Loading JPA Entity Data Model");
 		MetaDataModel metaDataModel = new MetaDataModel();
