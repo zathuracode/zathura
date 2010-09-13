@@ -49,13 +49,14 @@ public class EclipseGeneratorUtil {
 
 	public static String connectionDriverClass;
 	public static String connectionUrl;
-	public static String defaultSchema;
 	public static String connectionUsername;
 	public static String connectionPassword;
 	public static String companyDomainName;
 	public static String connectionDriverJarPath;
 	public static String destinationDirectory;
-	public static String matchSchemaForTables;
+	public static String catalog;
+	public static String schema;
+	public static String catalogAndSchema;
 	public static List<String> tablesList;
 	public static Boolean makeItXml = false;
 	private static MetaDataModel metaDataModel = null;
@@ -80,13 +81,14 @@ public class EclipseGeneratorUtil {
 
 		connectionDriverClass = null;
 		connectionUrl = null;
-		defaultSchema = null;
+		catalog = null;
 		connectionUsername = null;
 		connectionPassword = null;
 		companyDomainName = null;
 		connectionDriverJarPath = null;
 		destinationDirectory = null;
-		matchSchemaForTables = null;
+		schema = null;
+		catalogAndSchema=null;
 		tablesList = null;
 		makeItXml = false;
 	}
@@ -159,18 +161,17 @@ public class EclipseGeneratorUtil {
 		connectionProperties
 				.put("connectionDriverClass", connectionDriverClass);
 		connectionProperties.put("connectionUrl", connectionUrl);
-		connectionProperties.put("defaultSchema", defaultSchema == null ? ""
-				: defaultSchema);
+		
 		connectionProperties.put("connectionUsername", connectionUsername);
 		connectionProperties.put("connectionPassword", connectionPassword);
 		connectionProperties.put("companyDomainName", companyDomainName);
-		connectionProperties.put("matchSchemaForTables",
-				matchSchemaForTables == null ? "" : matchSchemaForTables);
-		connectionProperties.put("connectionDriverJarPath",
-				connectionDriverJarPath);
+		
+		connectionProperties.put("connectionDriverJarPath",connectionDriverJarPath);
 		connectionProperties.put("destinationDirectory", destinationDirectory);
-		connectionProperties.put("makeItXml", makeItXml == true ? "True"
-				: false);
+		connectionProperties.put("makeItXml", makeItXml == true ? "True": false);
+		connectionProperties.put("catalogAndSchema", catalogAndSchema == null ? "" : catalogAndSchema);
+		connectionProperties.put("schema",schema == null ? "" : schema);
+		connectionProperties.put("catalog", catalog == null ? "": catalog);
 
 		// Borrar carpeta de temporales
 		GeneratorUtil.deleteFiles(destinationDirectory);
@@ -194,17 +195,16 @@ public class EclipseGeneratorUtil {
 		connectionProperties
 				.put("connectionDriverClass", connectionDriverClass);
 		connectionProperties.put("connectionUrl", connectionUrl);
-		connectionProperties.put("defaultSchema", defaultSchema == null ? ""
-				: defaultSchema);
 		connectionProperties.put("connectionUsername", connectionUsername);
 		connectionProperties.put("connectionPassword", connectionPassword);
 		connectionProperties.put("companyDomainName", companyDomainName);
-		connectionProperties.put("matchSchemaForTables",
-				matchSchemaForTables == null ? "" : matchSchemaForTables);
-		connectionProperties.put("connectionDriverJarPath",
-				connectionDriverJarPath);
+		connectionProperties.put("connectionDriverJarPath",connectionDriverJarPath);
 		connectionProperties.put("destinationDirectory", destinationDirectory);
+		//Genera JPA para poder usar el EntityLoader
 		connectionProperties.put("makeItXml", false);
+		connectionProperties.put("catalogAndSchema", catalogAndSchema == null ? "" : catalogAndSchema);
+		connectionProperties.put("schema",schema == null ? "" : schema);
+		connectionProperties.put("catalog", catalog == null ? "": catalog);
 
 		ZathuraReverseEngineeringUtil.resetTempFiles(destinationDirectory);
 

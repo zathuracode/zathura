@@ -30,12 +30,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
-import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
-
-import com.swtdesigner.ResourceManager;
 /**
  * Zathura Generator
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
@@ -60,7 +57,8 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 		super("wizardPage");
 		setTitle("Zathura Reverse Engineering");
 		setDescription("Generate JPA or Hibernate entity beans from database explorer tables");
-		setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
+		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
+		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
 		setPageComplete(false);
 		EclipseGeneratorUtil.makeItXml=true;
 	}

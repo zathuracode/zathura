@@ -19,13 +19,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
-import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.DatabaseTypeModel;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
-
-import com.swtdesigner.ResourceManager;
 
 /**
  * Zathura Generator
@@ -54,10 +51,9 @@ public class WizardDatabaseConnection extends WizardPage {
 		super("wizardPage");
 		setTitle("New Database Connection");
 		setDescription("Create a new connection driver");
-		setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
+		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));		
 		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));		
 		setPageComplete(false);
-		
 	}
 
 	/**
@@ -83,6 +79,8 @@ public class WizardDatabaseConnection extends WizardPage {
 					txtConnectionURL.setText(databaseTypeModel.getUrl());
 					txtDriverClassName.setText("");
 					txtDriverClassName.setText(databaseTypeModel.getDriverClassName());
+					//TODO Cambiar esto para la version 2.1.1
+					WizardSelectTables.db=databaseTypeModel.getName();
 					//Valida que la paguina este completa
 					validatePageComplete();
 				}

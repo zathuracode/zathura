@@ -15,13 +15,11 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
-
-import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
-import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
-import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
-
-import com.swtdesigner.ResourceManager;
 import org.eclipse.swt.widgets.Text;
+
+import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
+import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraReverseEngineering;
+import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 /**
  * Zathura Generator
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
@@ -34,18 +32,25 @@ public class WizardSelectTables extends WizardPage {
 	private List listAvailableTables;
 	private List listSelectedTables;
 	private Text txtTableFilter;
+	private Label lblCatalogSchema;
+	private Button btnTableFilterSearch=null; 
 	private String[] listCatalogs=null;
 	private String[] listSchemas=null;
 	private String catalogName=null;
-	private String schemaName=null;
+	//private String schemaName=null;
 	private Boolean isSchema=null;
+	
+	
+	///Se debe cambiar por fabrica de obejtos para la version 2.1.1
+	//TODO revisar esta locura
+	public static String db=null;
+	
 	
 
 	public WizardSelectTables() {
 		super("wizardPage");
 		setTitle("Zathura Reverse Engineering");
 		setDescription("Generate entity beans from database explorer tables");
-		setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
 		setPageComplete(false);
 	}
 	
@@ -54,11 +59,26 @@ public class WizardSelectTables extends WizardPage {
 		Composite container = new Composite(parent, SWT.NULL);	
 		setControl(container);
 		
-		Label lblCatalogSchema = new Label(container, SWT.NONE);
+		lblCatalogSchema = new Label(container, SWT.NONE);
 		lblCatalogSchema.setBounds(10, 13, 112, 17);
 		lblCatalogSchema.setText("Catalogs/Schemas:");
 		
 		cmbCatlogSchema = new Combo(container, SWT.NONE);
+		cmbCatlogSchema.setEnabled(false);
+		cmbCatlogSchema.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				txtTableFilter.setText("%");
+				listAvailableTables.removeAll();
+				listSelectedTables.removeAll();
+				btnTableFilterSearch.setEnabled(true);
+				
+				validatePageComplete();
+				
+				
+			}
+		});
 		cmbCatlogSchema.setBounds(128, 10, 332, 29);
 		
 		listAvailableTables = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI);
@@ -81,10 +101,7 @@ public class WizardSelectTables extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				
 				try {
-					txtTableFilter.setText("%");
-					cmbCatlogSchema.removeAll();
-					listAvailableTables.removeAll();
-					listSelectedTables.removeAll();
+					resetForm();
 				
 					
 					listCatalogs = ZathuraReverseEngineeringUtil.getCatalogs();
@@ -98,14 +115,21 @@ public class WizardSelectTables extends WizardPage {
 						}
 						
 						isSchema=true;
+						lblCatalogSchema.setText("Schemas:");
 						for (String catalogSchemaName : listSchemas) {
 							cmbCatlogSchema.add(catalogSchemaName);
 						}
 					}else if(listCatalogs!=null && listCatalogs.length>0){
 						isSchema=false;
+						lblCatalogSchema.setText("Catalogs:");
 						for (String catalogSchemaName : listCatalogs) {
 							cmbCatlogSchema.add(catalogSchemaName);
 						}
+						
+					}
+					if(cmbCatlogSchema.getItems()!=null && cmbCatlogSchema.getItems().length>0){
+						cmbCatlogSchema.setEnabled(true);
+						cmbCatlogSchema.select(0);
 					}
 					
 					
@@ -117,6 +141,8 @@ public class WizardSelectTables extends WizardPage {
 					setPageComplete(false);
 				}			
 			}
+
+			
 		});
 		btnUpdateList.setBounds(466, 10, 98, 25);
 		btnUpdateList.setText("Update List");
@@ -189,7 +215,8 @@ public class WizardSelectTables extends WizardPage {
 		lblTableFilter.setBounds(10, 42, 112, 15);
 		lblTableFilter.setText("Table Filter:");
 		
-		Button btnTableFilterSearch = new Button(container, SWT.NONE);
+		btnTableFilterSearch = new Button(container, SWT.NONE);
+		btnTableFilterSearch.setEnabled(false);
 		btnTableFilterSearch.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -229,24 +256,35 @@ public class WizardSelectTables extends WizardPage {
 				
 				//Si es por Catalogs
 				if(listCatalogs!=null && listCatalogs.length>0){
-					EclipseGeneratorUtil.defaultSchema=cmbCatlogSchema.getText();
-					EclipseGeneratorUtil.matchSchemaForTables=null;
-					EclipseGeneratorUtil.tablesList=null;
+					
+					EclipseGeneratorUtil.catalog=cmbCatlogSchema.getText();
+					EclipseGeneratorUtil.schema=null;
+					EclipseGeneratorUtil.catalogAndSchema=ZathuraReverseEngineering.CATALOG;
+					
+					EclipseGeneratorUtil.tablesList=loadTablesList();
+					
 				}
 				//Si es por schema
 				if(listSchemas!=null && listSchemas.length>0){
-					EclipseGeneratorUtil.defaultSchema=null;
-					EclipseGeneratorUtil.matchSchemaForTables=cmbCatlogSchema.getText();
-					EclipseGeneratorUtil.tablesList=loadTablesList();
+					
+					EclipseGeneratorUtil.catalog=null;
+					EclipseGeneratorUtil.schema=cmbCatlogSchema.getText();
+					EclipseGeneratorUtil.catalogAndSchema=ZathuraReverseEngineering.SCHEMA;
+					
+					EclipseGeneratorUtil.tablesList=loadTablesList();					
 				}
 				
-				/*
-				if(listCatalogs!=null && listCatalogs.size()>0 && listSchemas!=null && listSchemas.size()>0){
-					EclipseGeneratorUtil.defaultSchema=cmbCatlogSchema.getText();
-					EclipseGeneratorUtil.matchSchemaForTables=cmbCatlogSchema.getText();
-					EclipseGeneratorUtil.tablesList=loadTablesList();
+				
+				
+				//Ambos para db2/400 usa catalog y schema
+				if(listCatalogs!=null && listCatalogs.length>0 && listSchemas!=null && listSchemas.length>0 && db.equals("JTOpen(AS/400)")==true){
+					
+					EclipseGeneratorUtil.catalog=catalogName;
+					EclipseGeneratorUtil.schema=cmbCatlogSchema.getText();
+					EclipseGeneratorUtil.catalogAndSchema=ZathuraReverseEngineering.CATALOG_SCHEMA;					
+					EclipseGeneratorUtil.tablesList=loadTablesList();				
 				}
-				*/
+				
 					
 				
 			}else{
@@ -271,5 +309,15 @@ public class WizardSelectTables extends WizardPage {
 			tablesList.add(tableName);
 		}
 		return tablesList;
+	}
+	private void resetForm() {
+		txtTableFilter.setText("%");
+		cmbCatlogSchema.removeAll();
+		listAvailableTables.removeAll();
+		listSelectedTables.removeAll();
+		cmbCatlogSchema.setEnabled(false);
+		lblCatalogSchema.setText("Catalogs/Schemas:");
+		setPageComplete(false);
+		btnTableFilterSearch.setEnabled(false);
 	}
 }
