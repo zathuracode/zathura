@@ -72,13 +72,25 @@ public class WizardChooseGenerator extends WizardPage {
 		bwrDescription.setBounds(219, 28, 354, 243);
 		loadListGenerators();
 	}
+	
 
 	/**
 	 * 
 	 */
-	private void loadListGenerators(){
-		for(GeneratorModel generatorModel:theGenerators.values()){
-			listGenerators.add(generatorModel.getGuiName());
+	public void loadListGenerators(){
+		if(listGenerators!=null){
+			listGenerators.removeAll();
+			for(GeneratorModel generatorModel:theGenerators.values()){
+				if(EclipseGeneratorUtil.makeItXml==true && generatorModel.getPersistence().equals("hibernateCore")==true){
+					listGenerators.add(generatorModel.getGuiName());
+				}else if(EclipseGeneratorUtil.makeItXml==false && generatorModel.getPersistence().equals("jpa")==true){
+					listGenerators.add(generatorModel.getGuiName());
+				}
+					
+			}
+		}
+		if(bwrDescription!=null){
+			bwrDescription.setText("");
 		}
 	}
 	

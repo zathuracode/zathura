@@ -160,6 +160,7 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				setDescription("Generate JPA entity beans from database explorer tables");
 				EclipseGeneratorUtil.makeItXml=false;
+				loadListGeneratorsNextWizard();
 			}
 		});
 		bRadioJPAReverseEngineering.setBounds(10, 218, 189, 22);
@@ -172,12 +173,19 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				setDescription("Generate Hibernate mapping and Java classes from database explorer tables");
 				EclipseGeneratorUtil.makeItXml=true;
+				loadListGeneratorsNextWizard();
 			}
 		});
 		bRadioHibernateReverseEngineering.setBounds(10, 190, 232, 22);
 		bRadioHibernateReverseEngineering.setText("Hibernate Reverse Engineering");
 		
 		Button bRadioPOJOReverseEngineering = new Button(container, SWT.RADIO);
+		bRadioPOJOReverseEngineering.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				loadListGeneratorsNextWizard();
+			}
+		});
 		bRadioPOJOReverseEngineering.setEnabled(false);
 		bRadioPOJOReverseEngineering.setBounds(10, 248, 189, 16);
 		bRadioPOJOReverseEngineering.setText("POJO Reverse Engineering");
@@ -291,6 +299,7 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 				setPageComplete(true);
 				setErrorMessage(null);
 				
+				
 			} catch (Exception e) {
 				setPageComplete(false);
 				setErrorMessage(e.getMessage());
@@ -322,6 +331,15 @@ public class WizardChooseSourceFolderAndPackage extends WizardPage {
 					EclipseGeneratorUtil.libFolderPath=EclipseGeneratorUtil.workspaceFolderPath+txtLib.getText()+co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil.slash;				
 				}
 			}
+		}
+		
+		private void loadListGeneratorsNextWizard(){
+			Object object=getNextPage();
+			if(object instanceof WizardChooseGenerator){
+				WizardChooseGenerator wizardChooseGenerator=(WizardChooseGenerator)object;
+				wizardChooseGenerator.loadListGenerators();				
+			}
+			
 		}
 		
 }

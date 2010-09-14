@@ -11,6 +11,7 @@ public class GeneratorModel {
 	private String name;
 	private String guiName;
 	private String description;
+	private String persistence;
 	private IZathuraGenerator zathuraGenerator;
 	
 	public String getGuiName() {
@@ -21,6 +22,12 @@ public class GeneratorModel {
 	}
 	
 	
+	public String getPersistence() {
+		return persistence;
+	}
+	public void setPersistence(String persistence) {
+		this.persistence = persistence;
+	}
 	public String getName() {
 		return name;
 	}

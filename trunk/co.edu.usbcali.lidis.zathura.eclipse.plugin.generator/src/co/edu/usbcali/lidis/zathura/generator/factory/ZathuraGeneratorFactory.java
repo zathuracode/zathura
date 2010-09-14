@@ -109,6 +109,7 @@ public class ZathuraGeneratorFactory {
 		boolean descriptionName = false;
 		boolean className = false;
 		boolean guiName=false;
+		boolean persistence=false;
 
 		theZathuraGenerators = new HashMap<String, GeneratorModel>();
 		
@@ -156,6 +157,9 @@ public class ZathuraGeneratorFactory {
 				} else if (localName.equals("class") == true) {
 					className = true;
 					log.info(localName);
+				}else if (localName.equals("persistence") == true) {
+					persistence = true;
+					log.info(localName);
 				}
 			} else if (e.isCharacters()) {
 				Characters characters = (Characters) e;
@@ -176,6 +180,10 @@ public class ZathuraGeneratorFactory {
 				} else if (className == true) {
 					generatorModel.setZathuraGenerator((IZathuraGenerator) Class.forName(cadena).newInstance());
 					className = false;
+					log.info(cadena);
+				}else if (persistence == true) {
+					generatorModel.setPersistence(cadena);
+					persistence = false;
 					log.info(cadena);
 				}
 			} else if (e.isEndElement() == true) {
