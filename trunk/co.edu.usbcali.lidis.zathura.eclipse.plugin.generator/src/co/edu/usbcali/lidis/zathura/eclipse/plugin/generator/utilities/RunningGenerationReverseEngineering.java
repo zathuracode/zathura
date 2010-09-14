@@ -36,10 +36,13 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 		    		
 		    		//OJO
 		    		//Se generan los temporales y de estos se lee la metaData siempre
-		    		EclipseGeneratorUtil.generateJPAReverseEngineeringTMP();
-		    			
+		    		EclipseGeneratorUtil.generateJPAReverseEngineeringTMP();	
 		    		
+		    		//Cierra todas la conexiones
 		    		ZathuraReverseEngineeringUtil.closeAll();
+		    		
+		    		//copia los Drivers de la base de datos a la carpeta del proyecto
+		    		EclipseGeneratorUtil.copyDriverJars();
 					
 					monitor.subTask("Refresh "+EclipseGeneratorUtil.projectName+" project...");
 					EclipseGeneratorUtil.project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
