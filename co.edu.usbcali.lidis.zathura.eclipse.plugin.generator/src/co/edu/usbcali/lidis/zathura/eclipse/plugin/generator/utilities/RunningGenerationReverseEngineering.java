@@ -27,7 +27,7 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 	   * @param monitor the progress monitor
 	   */
 	  public void run(IProgressMonitor monitor) throws InvocationTargetException,InterruptedException {
-		  	monitor.setTaskName("Generating Artifacts");
+		  	monitor.setTaskName("Generating Entity Artifacts");
 		  	monitor.beginTask("Generation in progress...",IProgressMonitor.UNKNOWN);
 		    	try {
 		    	

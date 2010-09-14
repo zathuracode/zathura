@@ -5,8 +5,9 @@
    
 	<generator>
 		<name>ZathuraJavaEE_Web_Centric</name>
-		<gui-name>JavaEE Web JPA Centric</gui-name>
+		<gui-name>JavaEE JPA Web Centric</gui-name>
 		<class>co.edu.usbcali.lidis.zathura.generator.jeewebcentric.engine.ZathuraJavaEE_Web_Centric</class>
+		<persistence>jpa</persistence>
 		<description>
 		<![CDATA[
 				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -22,7 +23,7 @@
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
-				JavaEE Web Centric </B></FONT>
+				JavaEE JPA Web Centric </B></FONT>
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -61,6 +62,7 @@
 		<name>ZathuraJavaEE_HibernateCore_Web_Centric</name>
 		<gui-name>JavaEE HibernateCore Web Centric</gui-name>
 		<class>co.edu.usbcali.lidis.zathura.generator.jeehibernatecorewebcentric.engine.ZathuraJavaEE_HibernateCore_Web_Centric</class>
+		<persistence>hibernateCore</persistence>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
