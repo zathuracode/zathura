@@ -42,6 +42,7 @@ public class WizardDatabaseConnection extends WizardPage {
 	private List listJARs;
 	private Text txtDriverClassName;
 	private Button btnTestDriver;
+	private Button chkCopyDriverDB;
 	private boolean testConnection=false;
 
 	/**
@@ -86,7 +87,7 @@ public class WizardDatabaseConnection extends WizardPage {
 				}
 			}
 		});
-		cmbDriverTemplate.setBounds(144, 10, 420, 23);
+		cmbDriverTemplate.setBounds(144, 10, 420, 27);
 		
 		Label lblConnectionUrl = new Label(container, SWT.NONE);
 		lblConnectionUrl.setBounds(10, 50, 128, 17);
@@ -112,7 +113,7 @@ public class WizardDatabaseConnection extends WizardPage {
 		lblPassword.setText("Password:");
 		
 		Label lineSeparatorJar = new Label(container, SWT.SEPARATOR | SWT.HORIZONTAL);
-		lineSeparatorJar.setBounds(10, 160, 568, 2);
+		lineSeparatorJar.setBounds(10, 144, 568, 2);
 		
 		Label lblDriverJar = new Label(container, SWT.NONE);
 		lblDriverJar.setBounds(10, 182, 90, 17);
@@ -205,6 +206,17 @@ public class WizardDatabaseConnection extends WizardPage {
 		txtDriverClassName = new Text(container, SWT.BORDER);
 		txtDriverClassName.setBounds(144, 301, 420, 27);
 		
+		chkCopyDriverDB = new Button(container, SWT.CHECK);
+		chkCopyDriverDB.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				EclipseGeneratorUtil.copyDBdriverJars=chkCopyDriverDB.getSelection();				
+			}
+		});
+		chkCopyDriverDB.setSelection(true);
+		chkCopyDriverDB.setBounds(10, 160, 302, 16);
+		chkCopyDriverDB.setText("Copy DB driver jar(s) to project and add to buildpath?");
+		
 		loadCmbDriverTemplate();
 		
 	}
@@ -260,6 +272,13 @@ public class WizardDatabaseConnection extends WizardPage {
 			ZathuraGeneratorLog.logError("Driver Template",e);
 			e.printStackTrace();
 		}		
+	}
+	@Override
+	public void setPageComplete(boolean complete) {
+		super.setPageComplete(complete);
+		if(complete==true){
+			EclipseGeneratorUtil.jarList=listJARs.getItems();
+		}
 	}
 	
 }

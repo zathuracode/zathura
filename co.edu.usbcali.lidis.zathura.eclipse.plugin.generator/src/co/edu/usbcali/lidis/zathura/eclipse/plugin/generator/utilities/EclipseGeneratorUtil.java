@@ -43,6 +43,7 @@ public class EclipseGeneratorUtil {
 	public static String webRootFolderPath;
 	public static String libFolderPath;
 	public static String fullPathProject;
+	
 
 	public static String zathuraGeneratorName;
 	public static int metaDataReader;
@@ -60,6 +61,11 @@ public class EclipseGeneratorUtil {
 	public static List<String> tablesList;
 	public static Boolean makeItXml = false;
 	private static MetaDataModel metaDataModel = null;
+	
+	
+	public static boolean copyDBdriverJars=true;
+	public static String []jarList;
+	
 
 	public static WizardMain wizardMain;
 
@@ -132,8 +138,7 @@ public class EclipseGeneratorUtil {
 
 		IZathuraGenerator zathuraGenerator = ZathuraGeneratorFactory
 				.createZathuraGenerator(EclipseGeneratorUtil.zathuraGeneratorName);
-		zathuraGenerator.toGenerate(metaDataModel, projectName,
-				folderProjectPath, properties);
+		zathuraGenerator.toGenerate(metaDataModel, projectName,folderProjectPath, properties);
 
 	}
 
@@ -301,6 +306,20 @@ public class EclipseGeneratorUtil {
 
 	private EclipseGeneratorUtil() {
 
+	}
+	
+	public static void copyDriverJars(){
+		if(copyDBdriverJars==true && jarList!=null && jarList.length>0){
+			for (String path : jarList) {
+				String jarName=jarName(path);
+				GeneratorUtil.copy(path, libFolderPath+jarName);
+			}
+		}
+	}
+	private static String jarName(String path){
+		int lastIndex=path.lastIndexOf(File.separatorChar);
+		String nameJar=path.substring(lastIndex+1, path.length());
+		return nameJar;
 	}
 
 }
