@@ -13,8 +13,7 @@
                class="co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.actions.ZathuraGeneratorAction"
                icon="icons/balvardi-Robotic1616.png"
                id="co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.actions.ZathuraGeneratorAction"
-               label="&amp;Zathura Generator"
-               menubarPath="co.edu.usbcali.lidis.zathura.eclipse.plugin/generator"
+               label="&amp;Zathura Generator"               
                toolbarPath="zathuraGroup"
                tooltip="Zathura Code Generator">
          </action>
