@@ -35,7 +35,7 @@ public class WizardMain extends Wizard {
 	public WizardMain() {
 		super();
 		setWindowTitle("Zathura Code Generator V2.1.0");
-		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
+		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
 		
 		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
 		EclipseGeneratorUtil.reset();
