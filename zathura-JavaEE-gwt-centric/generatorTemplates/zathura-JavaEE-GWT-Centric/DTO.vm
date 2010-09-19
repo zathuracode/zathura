@@ -1,7 +1,6 @@
 package  ${virginPackage}.client.dto;
 
 import java.util.*;
-import java.math.BigDecimal;
 
 
 
