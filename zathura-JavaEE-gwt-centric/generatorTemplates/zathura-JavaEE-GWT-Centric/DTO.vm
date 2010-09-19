@@ -1,10 +1,11 @@
 package  ${virginPackage}.client.dto;
 
 import java.util.*;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 
 
-public class ${metaData.getRealClassName()}DTO{
+public class ${metaData.getRealClassName()}DTO implements IsSerializable{
 
 	private static final long serialVersionUID = 1L;
 
