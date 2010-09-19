@@ -57,6 +57,7 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		key.setRequired (true);
         addField (key);
 		#foreach(${member2}  in ${finalMembers})
+			#if(${member2.getName()} != ${metaData.primaryKey.getName()})
         		#if(${member2.getType().getSimpleName()} == "Date")
 					#if(${member2.getLength()} && ${member2.getNullable()})
 						addField(new DataSourceDateField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
@@ -93,7 +94,8 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 						#else
 							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
 						#end
-        		#end
+				#end
+			#end
     	#end
 	}
 
