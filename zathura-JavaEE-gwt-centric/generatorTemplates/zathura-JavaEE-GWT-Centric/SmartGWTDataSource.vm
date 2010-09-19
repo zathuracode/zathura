@@ -12,12 +12,10 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
 import com.smartgwt.client.data.DataSourceField;
-import com.smartgwt.client.data.fields.DataSourceIntegerField;
-import com.smartgwt.client.data.fields.DataSourceTextField;
+import com.smartgwt.client.data.fields.*;
 import com.smartgwt.client.rpc.RPCResponse;
 import com.smartgwt.client.util.JSOHelper;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
-import org.gwtwidgets.client.util.SimpleDateFormat;
 
 /**
  * A SwagSwapGWT client helper that makes remote calls to ItemServiceGWTWrapper
@@ -39,17 +37,63 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 	}
 
 	private SmartGWTDataSource${metaData.getRealClassName()}() {
-		DataSourceField key = new DataSourceIntegerField("id");
+		#if(${metaData.primaryKey.getType().getSimpleName()} == "Date")
+			DataSourceField key = new DataSourceDateField("${metaData.primaryKey.getName()}");
+        #elseif(${metaData.primaryKey.getType().getSimpleName()} == "String")
+			DataSourceField key = new DataSourceTextField("${metaData.primaryKey.getName()}");
+		#elseif(${metaData.primaryKey.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
+			DataSourceField key = new DataSourceIntegerField("${metaData.primaryKey.getName()}");
+		#elseif(${metaData.primaryKey.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
+			DataSourceField key = new DataSourceIntegerField("${metaData.primaryKey.getName()}");
+		#elseif(${metaData.primaryKey.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
+			DataSourceField key = new DataSourceBooleanField("${metaData.primaryKey.getName()}");
+		#elseif(${metaData.primaryKey.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
+			DataSourceField key = new DataSourceFloatField("${metaData.primaryKey.getName()}");
+		#else
+			DataSourceField key = new DataSourceField("${metaData.primaryKey.getName()}");
+        #end
 		key.setPrimaryKey(true);
 	    // AutoIncrement on server.
 		key.setRequired (true);
         addField (key);
-    	#foreach(${member2}  in ${finalMembers})
-			#if(${member2.getLength()} && ${member2.getNullable()})
-				addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
-			#else
-				addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
-			#end
+		#foreach(${member2}  in ${finalMembers})
+        		#if(${member2.getType().getSimpleName()} == "Date")
+					#if(${member2.getLength()} && ${member2.getNullable()})
+						addField(new DataSourceDateField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+					#else
+						addField(new DataSourceDateField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+					#end
+        		#elseif(${member2.getType().getSimpleName()} == "String")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#else
+							addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#elseif(${member2.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#else
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#elseif(${member2.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#else
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#elseif(${member2.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceBooleanField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#else
+							addField(new DataSourceBooleanField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#elseif(${member2.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#else
+							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+        		#end
     	#end
 	}
 
@@ -230,18 +274,21 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 	}
 	
 	public static void copyValues(ListGridRecord from, ${metaData.getRealClassName()}DTO to) {
-		try {
-        	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         	#foreach(${member2}  in ${finalMembers})
         		#if(${member2.getType().getSimpleName()} == "Date")
-        			to.set${member2.getGetNameOfPrimaryName()}(dateFormat.parse(from.getAttributeAsString("${member2.getName()}")));
-        		#else
-        			to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
+        			to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsDate("${member2.getName()}"));
+        		#elseif(${member2.getType().getSimpleName()} == "String")
+        			to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsString("${member2.getName()}"));
+				#elseif(${member2.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
+					to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
+				#elseif(${member2.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
+					to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsInt("${member2.getName()}"));
+				#elseif(${member2.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
+					to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsBoolean("${member2.getName()}"));
+				#elseif(${member2.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
+					to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
         		#end
     		#end
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	public static void copyValues(${metaData.getRealClassName()}DTO from, ListGridRecord to) {
