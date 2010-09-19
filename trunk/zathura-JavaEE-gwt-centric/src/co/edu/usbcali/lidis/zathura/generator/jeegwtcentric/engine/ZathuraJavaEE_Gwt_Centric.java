@@ -87,6 +87,11 @@ IZathuraTemplate {
 		+ GeneratorUtil.slash
 		+ "smartgwt"
 		+ GeneratorUtil.slash;
+		String generatorLibrariesZathuraJavaEEGwtCentricGwtWidgets = GeneratorUtil
+		.getGeneratorLibrariesZathuraJavaEEGwtCentric()
+		+ GeneratorUtil.slash
+		+ "gwt-widgets"
+		+ GeneratorUtil.slash;
 
 		log.info("Copy Libraries files ZathuraJavaEE_Web_Centric generation");
 
@@ -97,6 +102,7 @@ IZathuraTemplate {
 				libFolderPath);
 		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricGWT2,libFolderPath);
 		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricSmartGwt,libFolderPath);
+		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricGwtWidgets,libFolderPath);
 
 		// Copy Ext css
 		String webRootFolderPath = properties.getProperty("webRootFolderPath");
