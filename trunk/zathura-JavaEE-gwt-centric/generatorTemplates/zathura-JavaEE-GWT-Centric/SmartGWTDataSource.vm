@@ -17,6 +17,7 @@ import com.smartgwt.client.data.fields.DataSourceTextField;
 import com.smartgwt.client.rpc.RPCResponse;
 import com.smartgwt.client.util.JSOHelper;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
+import org.gwtwidgets.client.util.SimpleDateFormat;
 
 /**
  * A SwagSwapGWT client helper that makes remote calls to ItemServiceGWTWrapper
@@ -126,7 +127,11 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		
 		//Just do a fetch to refresh the item
 		if (testRec.isFetchOnly()) {
-			service.fetch(testRec.get${metaData.primaryKey.getGetNameOfPrimaryName()}(),new UpdateOrFetchCallback(requestId, response));
+			service.fetch(
+				#foreach(${member2}  in ${finalMemberForId})
+					testRec.get${member2.getGetNameOfPrimaryName()}(),
+				#end
+			new UpdateOrFetchCallback(requestId, response));
 		}
 		else { //really do an update
 			service.update(testRec, new UpdateOrFetchCallback(requestId, response));
@@ -225,9 +230,18 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 	}
 	
 	public static void copyValues(ListGridRecord from, ${metaData.getRealClassName()}DTO to) {
-	#foreach(${member2}  in ${finalMembers})
-    to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
-    #end
+		try {
+        	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        	#foreach(${member2}  in ${finalMembers})
+        		#if(${member2.getType().getSimpleName()} == "Date")
+        			to.set${member2.getGetNameOfPrimaryName()}(dateFormat.parse(from.getAttributeAsString("${member2.getName()}")));
+        		#else
+        			to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
+        		#end
+    		#end
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void copyValues(${metaData.getRealClassName()}DTO from, ListGridRecord to) {
