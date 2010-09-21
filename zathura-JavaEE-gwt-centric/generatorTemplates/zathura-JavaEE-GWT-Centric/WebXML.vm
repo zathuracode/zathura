@@ -14,16 +14,7 @@
 			<servlet-name>data${metaData.getRealClassName()}Servlet</servlet-name>
 			<url-pattern>/${projectNameLower}/data${metaData.getRealClassName()}</url-pattern>
 		</servlet-mapping>
-		#if(${metaData.hasComposeKey()})
-			<servlet>
-                <servlet-name>data${metaData.getRealClassNameForComposeKey()}Servlet</servlet-name>
-				<servlet-class>${virginPackage}.server.dataService.DataService${metaData.getRealClassNameForComposeKey()}Impl</servlet-class>
-			</servlet>
-			<servlet-mapping>
-    			<servlet-name>data${metaData.getRealClassNameForComposeKey()}Servlet</servlet-name>
-    			<url-pattern>/${projectNameLower}/data${metaData.getRealClassNameForComposeKey()}</url-pattern>
-			</servlet-mapping>
-		#end
+		
     #end
     
   <!-- Default page to serve -->
