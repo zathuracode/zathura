@@ -37,28 +37,30 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 	}
 
 	private SmartGWTDataSource${metaData.getRealClassName()}() {
-		#if(${metaData.primaryKey.getType().getSimpleName()} == "Date")
-			DataSourceField key = new DataSourceDateField("${metaData.primaryKey.getName()}");
-        #elseif(${metaData.primaryKey.getType().getSimpleName()} == "String")
-			DataSourceField key = new DataSourceTextField("${metaData.primaryKey.getName()}");
-		#elseif(${metaData.primaryKey.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
-			DataSourceField key = new DataSourceIntegerField("${metaData.primaryKey.getName()}");
-		#elseif(${metaData.primaryKey.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
-			DataSourceField key = new DataSourceIntegerField("${metaData.primaryKey.getName()}");
-		#elseif(${metaData.primaryKey.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
-			DataSourceField key = new DataSourceBooleanField("${metaData.primaryKey.getName()}");
-		#elseif(${metaData.primaryKey.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
-			DataSourceField key = new DataSourceFloatField("${metaData.primaryKey.getName()}");
-		#else
-			DataSourceField key = new DataSourceIntegerField("${metaData.primaryKey.getName()}");
-        #end
-		key.setPrimaryKey(true);
-	    // AutoIncrement on server.
-		key.setRequired (true);
-        addField (key);
-		#foreach(${member2}  in ${finalMembers})
-			#if(${member2.getName()} != ${metaData.primaryKey.getName()})
-        		#if(${member2.getType().getSimpleName()} == "Date")
+		#foreach(${member2}  in ${finalMemberForId})
+    		#if(${member2.getType().getSimpleName()} == "Date")
+    			DataSourceField key$velocityCount = new DataSourceDateField("${member2.getName()}");
+            #elseif(${member2.getType().getSimpleName()} == "String")
+    			DataSourceField key$velocityCount = new DataSourceTextField("${member2.getName()}");
+    		#elseif(${member2.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
+    			DataSourceField key$velocityCount = new DataSourceIntegerField("${member2.getName()}");
+    		#elseif(${member2.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
+    			DataSourceField key$velocityCount = new DataSourceIntegerField("${member2.getName()}");
+    		#elseif(${member2.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
+    			DataSourceField key$velocityCount = new DataSourceBooleanField("${member2.getName()}");
+    		#elseif(${member2.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
+    			DataSourceField key$velocityCount = new DataSourceFloatField("${member2.getName()}");
+    		#else
+    			DataSourceField key$velocityCount = new DataSourceIntegerField("${member2.getName()}");
+			#end
+			key${velocityCount}.setPrimaryKey(true);
+			// AutoIncrement on server.
+			key${velocityCount}.setRequired (true);
+			addField (key$velocityCount);
+		#end
+		
+		#foreach(${member2}  in ${finalMembersWithoutId})
+				#if(${member2.getType().getSimpleName()} == "Date")
 					#if(${member2.getLength()} && ${member2.getNullable()})
 						addField(new DataSourceDateField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
 					#else
@@ -95,8 +97,7 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
 						#end
 				#end
-			#end
-    	#end
+		#end
 	}
 
 	@Override

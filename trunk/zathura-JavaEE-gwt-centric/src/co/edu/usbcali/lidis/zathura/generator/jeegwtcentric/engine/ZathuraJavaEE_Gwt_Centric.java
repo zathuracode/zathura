@@ -6,6 +6,7 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.commons.collections.ListUtils;
 import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -87,11 +88,11 @@ IZathuraTemplate {
 		+ GeneratorUtil.slash
 		+ "smartgwt"
 		+ GeneratorUtil.slash;
-		String generatorLibrariesZathuraJavaEEGwtCentricGwtWidgets = GeneratorUtil
-		.getGeneratorLibrariesZathuraJavaEEGwtCentric()
-		+ GeneratorUtil.slash
-		+ "gwt-widgets"
-		+ GeneratorUtil.slash;
+//		String generatorLibrariesZathuraJavaEEGwtCentricGwtWidgets = GeneratorUtil
+//		.getGeneratorLibrariesZathuraJavaEEGwtCentric()
+//		+ GeneratorUtil.slash
+//		+ "gwt-widgets"
+//		+ GeneratorUtil.slash;
 
 		log.info("Copy Libraries files ZathuraJavaEE_Web_Centric generation");
 
@@ -102,7 +103,7 @@ IZathuraTemplate {
 				libFolderPath);
 		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricGWT2,libFolderPath);
 		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricSmartGwt,libFolderPath);
-		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricGwtWidgets,libFolderPath);
+//		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEGwtCentricGwtWidgets,libFolderPath);
 
 		// Copy Ext css
 		String webRootFolderPath = properties.getProperty("webRootFolderPath");
@@ -331,7 +332,8 @@ IZathuraTemplate {
 			
 			context.put("finalMemberForId", Utilities.getInstance().finalMemberForId(list, metaData));
 			context.put("finalMembers", Utilities.getInstance().getFinalParamMembers(list, metaData));
-
+			context.put("finalMembersWithoutId", Utilities.getInstance().finalMemberWithoutId(list, metaData));
+			
 			if (metaData.isGetManyToOneProperties()) {
 				context.put("getVariableForManyToOneProperties", stringBuilder
 						.getVariableForManyToOneProperties(metaData

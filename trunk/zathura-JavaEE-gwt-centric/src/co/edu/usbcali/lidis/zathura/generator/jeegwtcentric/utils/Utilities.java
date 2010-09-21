@@ -11,6 +11,8 @@ import java.util.Properties;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 
+import org.apache.commons.collections.ListUtils;
+
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
@@ -194,6 +196,27 @@ public class Utilities {
 			memberList.add(member);
 		}
 
+		return memberList;
+	}
+	
+	public List<Member> finalMemberWithoutId(List<MetaData> list,
+			MetaData metaData) {
+		
+
+		List<Member> members = getFinalParamMembers(list, metaData);
+		List<Member> idMembers = finalMemberForId(list, metaData);
+		
+		List<Member> memberList = new ArrayList<Member>(members);
+		
+		if (members != null && !members.isEmpty() && idMembers != null && !idMembers.isEmpty()) {
+			for (Member member : members) {
+				for (Member member2 : idMembers) {
+					if (member.getName().equals(member2.getName())) {
+						memberList.remove(member);
+					}
+				}
+			}
+		}
 		return memberList;
 	}
 
