@@ -357,6 +357,7 @@ IZathuraTemplate {
 			}
 
 			context.put("metaData", metaData);
+			
 			context.put("dataModel", dataModel);
 
 			doDao(metaData, context, hdLocation);
@@ -366,12 +367,12 @@ IZathuraTemplate {
 			doDto(metaData, context, hdLocation, dataModel);
 			doDataService(metaData, context, hdLocation, dataModel, modelName);
 			doDataServiceAsync(metaData, context, hdLocation, dataModel, modelName);
-			doEntryPoint(metaData, context, hdLocation, dataModel);
-			doHTML(metaData, context, hdLocation, dataModel);
+			
+			
 			doSmartGWTDataSource(metaData, context, hdLocation, dataModel, modelName);
 			doDataServiceImpl(metaData, context, hdLocation, dataModel);
 		}
-
+		doEntryPoint(context, hdLocation, dataModel, projectName);
 		doUtilites(context, hdLocation, dataModel, modelName);
 		doBusinessDelegator(context, hdLocation, dataModel);
 		doDaoFactory(dataModel, context, hdLocation);
@@ -379,6 +380,7 @@ IZathuraTemplate {
 		doEntityManager(dataModel, context, hdLocation);
 		doWebXML(dataModel, context, hdLocation);
 		doAbstractDataSource(context, hdLocation, dataModel, modelName);
+		doHTML(context, hdLocation, dataModel, projectName);
 		
 	}
 
@@ -1172,8 +1174,8 @@ IZathuraTemplate {
 	}
 
 	@Override
-	public void doEntryPoint(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel) {
+	public void doEntryPoint(VelocityContext context,
+			String hdLocation, MetaDataModel dataModel, String projectName) {
 		log.info("Begin doEntryPoint");
 
 		Template entryPoint = null;
@@ -1203,14 +1205,14 @@ IZathuraTemplate {
 			+ GeneratorUtil.slash ;
 
 			FileWriter fstream = new FileWriter(entryLocation 
-					+ metaData.getRealClassName() + "EP.java");
+					+ projectName + ".java");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swEntryPoint.toString()); 
 			// Close the output stream
 			out.close();
 
 			JalopyCodeFormatter.formatJavaCodeFile(entryLocation
-					+ metaData.getRealClassName() + "EP.java");
+					+ projectName + ".java");
 
 			log.info("End doEntryPoint");
 
@@ -1268,8 +1270,8 @@ IZathuraTemplate {
 	}
 
 	@Override
-	public void doHTML(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel) {
+	public void doHTML(VelocityContext context,
+			String hdLocation, MetaDataModel dataModel, String projectName) {
 
 		log.info("Begin doHTML");
 
@@ -1298,13 +1300,13 @@ IZathuraTemplate {
 			String realLocation = properties.getProperty("webRootFolderPath")
 			+ GeneratorUtil.slash;
 			FileWriter fstream = new FileWriter(realLocation 
-					+ metaData.getRealClassName() + ".html");
+					+ projectName + ".html");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swHtml.toString());
 			// Close the output stream
 			out.close();
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation 
-					+ metaData.getRealClassName() + ".html");
+					+ projectName + ".html");
 
 
 			log.info("End doHTML");

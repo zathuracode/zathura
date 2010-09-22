@@ -9,14 +9,18 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Random;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
 import com.smartgwt.client.data.DataSourceField;
 import com.smartgwt.client.data.fields.*;
 import com.smartgwt.client.rpc.RPCResponse;
 import com.smartgwt.client.util.JSOHelper;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.Window;
+import com.smartgwt.client.widgets.events.CloseClickHandler;
+import com.smartgwt.client.widgets.events.CloseClientEvent;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
-
 /**
  * A SwagSwapGWT client helper that makes remote calls to ItemServiceGWTWrapper
  * It conforms to the requirements of SwagSwapGWT components (which are a layer on top
@@ -69,30 +73,40 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
         		#elseif(${member2.getType().getSimpleName()} == "String")
 						#if(${member2.getLength()} && ${member2.getNullable()})
 							addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, false));
 						#else
 							addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
 						#end
 				#elseif(${member2.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
 						#if(${member2.getLength()} && ${member2.getNullable()})
-							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, false));
 						#else
 							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
 						#end
 				#elseif(${member2.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
 						#if(${member2.getLength()} && ${member2.getNullable()})
-							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, false));
 						#else
 							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
 						#end
 				#elseif(${member2.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
 						#if(${member2.getLength()} && ${member2.getNullable()})
 							addField(new DataSourceBooleanField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceBooleanField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, false));
 						#else
 							addField(new DataSourceBooleanField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
 						#end
 				#elseif(${member2.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
 						#if(${member2.getLength()} && ${member2.getNullable()})
-							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, false));
 						#else
 							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
 						#end
@@ -108,6 +122,25 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		service.fetch(new AsyncCallback<List<${metaData.getRealClassName()}DTO>>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
+				 final Window window = new Window();
+                    window.setWidth(360);
+                    window.setHeight(115);
+                    window.setTitle("Error");
+                    window.setShowMinimizeButton(false);
+                    window.setIsModal(true);
+                    window.setShowModalMask(true);
+                    window.centerInPage();
+                    window.addCloseClickHandler(new CloseClickHandler() {
+						@Override
+						public void onCloseClick(CloseClientEvent event) {
+							window.destroy();
+							
+						}
+					});
+                    Label label = new Label(caught.getMessage());
+                    window.addItem(label);
+                    window.show();
+
 				processResponse(requestId, response);
 			}
 			public void onSuccess(List<${metaData.getRealClassName()}DTO> result) {
@@ -146,6 +179,25 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		service.add(testRec, new AsyncCallback<${metaData.getRealClassName()}DTO>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
+				 final Window window = new Window();
+                    window.setWidth(360);
+                    window.setHeight(115);
+                    window.setTitle("Error");
+                    window.setShowMinimizeButton(false);
+                    window.setIsModal(true);
+                    window.setShowModalMask(true);
+                    window.centerInPage();
+                    window.addCloseClickHandler(new CloseClickHandler() {
+						@Override
+						public void onCloseClick(CloseClientEvent event) {
+							window.destroy();
+							
+						}
+					});
+                    Label label = new Label(caught.getMessage());
+                    window.addItem(label);
+                    window.show();
+
 				processResponse(requestId, response);
 			}
 
@@ -201,6 +253,25 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		}
 		
 		public void onFailure(Throwable caught) {
+		final Window window = new Window();
+             window.setWidth(360);
+             window.setHeight(115);
+             window.setTitle("Error");
+             window.setShowMinimizeButton(false);
+             window.setIsModal(true);
+             window.setShowModalMask(true);
+             window.centerInPage();
+             window.addCloseClickHandler(new CloseClickHandler() {
+					@Override
+					public void onCloseClick(CloseClientEvent event) {
+						window.destroy();
+						
+					}
+				});
+             Label label = new Label(caught.getMessage());
+             window.addItem(label);
+             window.show();
+
 			throw new RuntimeException(caught);
 		}
 		
@@ -228,6 +299,25 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		service.remove(testRec, new AsyncCallback<Void>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
+				final Window window = new Window();
+             window.setWidth(360);
+             window.setHeight(115);
+             window.setTitle("Error");
+             window.setShowMinimizeButton(false);
+             window.setIsModal(true);
+             window.setShowModalMask(true);
+             window.centerInPage();
+             window.addCloseClickHandler(new CloseClickHandler() {
+					@Override
+					public void onCloseClick(CloseClientEvent event) {
+						window.destroy();
+						
+					}
+				});
+             Label label = new Label(caught.getMessage());
+             window.addItem(label);
+             window.show();
+
 				processResponse(requestId, response);
 			}
 

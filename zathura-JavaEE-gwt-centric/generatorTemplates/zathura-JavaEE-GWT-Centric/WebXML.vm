@@ -6,20 +6,20 @@
 <web-app>
 	
 	#foreach($metaData  in $dataModel.theMetaData)
-		<servlet>
-            <servlet-name>data${metaData.getRealClassName()}Servlet</servlet-name>
-			<servlet-class>${virginPackage}.server.dataService.DataService${metaData.getRealClassName()}Impl</servlet-class>
-        </servlet>
-		<servlet-mapping>
-			<servlet-name>data${metaData.getRealClassName()}Servlet</servlet-name>
-			<url-pattern>/${projectNameLower}/data${metaData.getRealClassName()}</url-pattern>
-		</servlet-mapping>
+	<servlet>
+		<servlet-name>data${metaData.getRealClassName()}Servlet</servlet-name>
+		<servlet-class>${virginPackage}.server.dataService.DataService${metaData.getRealClassName()}Impl</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>data${metaData.getRealClassName()}Servlet</servlet-name>
+		<url-pattern>/${projectNameLower}/data${metaData.getRealClassName()}</url-pattern>
+	</servlet-mapping>
 		
     #end
     
   <!-- Default page to serve -->
-  <!--<welcome-file-list>
+  <welcome-file-list>
     <welcome-file>${projectName}.html</welcome-file>
-  </welcome-file-list>-->
+  </welcome-file-list>
 
 </web-app>

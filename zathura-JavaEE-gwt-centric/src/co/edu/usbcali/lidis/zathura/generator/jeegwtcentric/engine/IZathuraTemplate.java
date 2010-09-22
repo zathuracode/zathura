@@ -36,11 +36,11 @@ public interface IZathuraTemplate {
 	public void doWebXML(MetaDataModel dataModel,
 			VelocityContext context, String hdLocation);
 
-	public void doEntryPoint(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel);
+	public void doEntryPoint(VelocityContext context,
+			String hdLocation, MetaDataModel dataModel, String projectName);
 	
-	public void doHTML(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel);
+	public void doHTML(VelocityContext context,
+			String hdLocation, MetaDataModel dataModel, String projectName);
 	
 	public void doDataServiceImpl(MetaData metaData, VelocityContext context,
 			String hdLocation, MetaDataModel dataModel);
