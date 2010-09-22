@@ -16,21 +16,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class DataService${metaData.getRealClassName()}Impl extends RemoteServiceServlet implements DataService${metaData.getRealClassName()} {
 
-	public List<${metaData.getRealClassName()}DTO> fetch() {
+	public List<${metaData.getRealClassName()}DTO> fetch() throws Exception{
 		List<${metaData.getRealClassName()}DTO> fetchData = null;
-		try {
 			fetchData = toDTOList(BusinessDelegatorView.get${metaData.getRealClassName()}());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
 		return fetchData;
 	}
 	
-	public ${metaData.getRealClassName()}DTO fetch(${finalParamForId}) {
+	public ${metaData.getRealClassName()}DTO fetch(${finalParamForId}) throws Exception{
 		${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO = null;
-		try {
-		
 			#if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
                 #foreach($idString  in $finalParamForIdClass)
                     $idString
@@ -39,10 +32,6 @@ public class DataService${metaData.getRealClassName()}Impl extends RemoteService
 			#else
 				${metaData.getRealClassNameAsVariable()}DTO = toDTO(BusinessDelegatorView.get${metaData.getRealClassName()}(${metaData.getPrimaryKey().getName()}));
 			#end
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return ${metaData.getRealClassNameAsVariable()}DTO;
 	}
 
@@ -114,30 +103,22 @@ public class DataService${metaData.getRealClassName()}Impl extends RemoteService
 		return ${metaData.getRealClassNameAsVariable()};	
 	}
 
-	public void remove(${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) {
-		try {
-				
+	public void remove(${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) throws Exception{
 				#foreach($member2  in ${finalMemberForId})
 					${member2.getType().getSimpleName()} ${member2.getName()} = ${metaData.getRealClassNameAsVariable()}DTO.get${member2.getGetNameOfPrimaryName()}();
 				#end
 				
 				BusinessDelegatorView.delete${metaData.getRealClassName()}(${finalParamForIdVariables});
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	
-	public ${metaData.getRealClassName()} to${metaData.getRealClassName()}(${metaData.getRealClassName()}DTO dto) {
+	public ${metaData.getRealClassName()} to${metaData.getRealClassName()}(${metaData.getRealClassName()}DTO dto) throws Exception{
 		${metaData.getRealClassName()} entity  = new ${metaData.getRealClassName()}();
 		
 		#foreach($member2  in ${finalMembers})
                 ${member2.getType().getSimpleName()} ${member2.getName()} = dto.get${member2.getGetNameOfPrimaryName()}();
            #end
 		
-			try{
             #if(${metaData.isGetManyToOneProperties()})
                 #foreach($member  in $getStringsToEntityForManyToOneProperties)
                     $member
@@ -170,10 +151,6 @@ public class DataService${metaData.getRealClassName()}Impl extends RemoteService
                 #end
 			#end
 			
-			} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			}
 		
 		return entity;
 	}

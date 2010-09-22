@@ -1,10 +1,11 @@
 package ${virginPackage}.client.entryPoint;
 
 	
-
+#foreach($metaData  in $dataModel.theMetaData)
 import ${virginPackage}.client.dataService.DataService${metaData.getRealClassName()};
 import ${virginPackage}.client.dataService.DataService${metaData.getRealClassName()}Async;
 import ${virginPackage}.client.smartds.SmartGWTDataSource${metaData.getRealClassName()};
+#end
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
@@ -18,112 +19,129 @@ import com.smartgwt.client.widgets.grid.events.RecordClickEvent;
 import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class ${metaData.getRealClassName()}EP implements EntryPoint {
-
-	private DataService${metaData.getRealClassName()}Async dataService = GWT.create( DataService${metaData.getRealClassName()}.class );
-	private IButton buttonSave = new IButton("Save");
-	private IButton buttonClean = new IButton("Clean");
-	private IButton buttonDelete = new IButton("Delete");
-	private ListGrid grid ;
-	private DynamicForm form ;
+public class ${projectName} implements EntryPoint {
+	#foreach($metaData  in $dataModel.theMetaData)
+	private DataService${metaData.getRealClassName()}Async dataService${metaData.getRealClassName()} = GWT.create( DataService${metaData.getRealClassName()}.class );
+	private IButton buttonSave${metaData.getRealClassName()} = new IButton("Save");
+	private IButton buttonClean${metaData.getRealClassName()} = new IButton("Clean");
+	private IButton buttonDelete${metaData.getRealClassName()} = new IButton("Delete");
+	private ListGrid grid${metaData.getRealClassName()} ;
+	private DynamicForm form${metaData.getRealClassName()} ;
+	
+	#end
 
 	public void onModuleLoad() {
-		VLayout layout = new VLayout(16);
-		layout.setWidth("50%");
-		layout.setAlign(Alignment.CENTER);
-		ServiceDefTarget endpoint = ( ServiceDefTarget )dataService;
-		String moduleRelativeURL = GWT.getModuleBaseURL()+"data";
-		endpoint.setServiceEntryPoint( moduleRelativeURL );
-		
-		buttonSave.enable();
-		buttonDelete.disable();
-
-
-		form = new DynamicForm();
-		form.setDataSource(SmartGWTDataSource${metaData.getRealClassName()}.getInstance());
-		form.setIsGroup(true);  
-		form.setGroupTitle("Update");  
-		form.setNumCols(4);
-		form.setID("id");
-		
-		
-		form.setAlign(Alignment.CENTER);
-		
-
-
-
-		grid =  new ListGrid();
-		grid.setDataSource(SmartGWTDataSource${metaData.getRealClassName()}.getInstance());
-
-		
-		grid.setWidth100(); 
-		grid.setHeight(150);  
-		grid.setAutoFetchData(true);
-		grid.setSortField("id");
-		form.setAlign(Alignment.CENTER);
-		
-		grid.addRecordClickHandler(new RecordClickHandler() {
-
-			public void onRecordClick(RecordClickEvent event) {
-				form.editSelectedData(grid);
-				form.getField("id").setDisabled(true);
-				
-				buttonDelete.enable();
-
-			}
-		});
-
-
-		layout.addMember(grid);  
-		layout.addMember(form);
-
-		
-		buttonSave.addClickHandler(new ClickHandler() {
-
-			public void onClick(ClickEvent event) {
-				form.submit();
-				clear();
-				
-			}
-		});
-		buttonDelete.addClickHandler(new ClickHandler() {
-
-			public void onClick(ClickEvent event) {
-				grid.removeData(grid.getSelectedRecord());
-				clear();
-			}
-		});
-		buttonClean.addClickHandler(new ClickHandler() {
-
-			public void onClick(ClickEvent event) {
-				clear();
-			}
-
-		});
-
-		HLayout hLayout = new HLayout(15);
-		hLayout.addMember(buttonSave);
-		hLayout.addMember(buttonDelete);
-		hLayout.addMember(buttonClean);
-
-		layout.addMember(hLayout);
-		layout.setAlign(Alignment.CENTER);
-		layout.draw();
+		TabSet tabSet = new TabSet();
+		#foreach($metaData  in $dataModel.theMetaData)
+        Tab tab${metaData.getRealClassName()} = new Tab();
+        tab${metaData.getRealClassName()}.setTitle("${metaData.getRealClassName()}");
+        tab${metaData.getRealClassName()}.setPane(build${metaData.getRealClassName()}());
+        tabSet.addTab(tab${metaData.getRealClassName()});
+        
+		#end
+        VLayout vLayout = new VLayout();
+        vLayout.setMembersMargin(15);
+        vLayout.addMember(tabSet);
+        vLayout.setHeight100();
+        vLayout.setWidth100();
+        vLayout.draw();
 
 	}
-
+	#foreach($metaData  in $dataModel.theMetaData)
+    	private VLayout build${metaData.getRealClassName()}(){
+        	VLayout layout = new VLayout(16);
+            layout.setWidth("50%");
+            layout.setAlign(Alignment.CENTER);
+    
+            ServiceDefTarget endpoint = (ServiceDefTarget) dataService${metaData.getRealClassName()};
+            String moduleRelativeURL = GWT.getModuleBaseURL() + "data";
+            endpoint.setServiceEntryPoint(moduleRelativeURL);
+    
+            buttonSave${metaData.getRealClassName()}.enable();
+            buttonDelete${metaData.getRealClassName()}.disable();
+    
+            form${metaData.getRealClassName()} = new DynamicForm();
+            form${metaData.getRealClassName()}.setDataSource(SmartGWTDataSource${metaData.getRealClassName()}.getInstance());
+            form${metaData.getRealClassName()}.setIsGroup(true);
+            form${metaData.getRealClassName()}.setGroupTitle("Information ${metaData.getRealClassName()}");
+            form${metaData.getRealClassName()}.setNumCols(4);
+            form${metaData.getRealClassName()}.setAlign(Alignment.CENTER);
+    
+            grid${metaData.getRealClassName()} = new ListGrid();
+            grid${metaData.getRealClassName()}.setDataSource(SmartGWTDataSource${metaData.getRealClassName()}.getInstance());
+            grid${metaData.getRealClassName()}.setWidth100();
+            grid${metaData.getRealClassName()}.setHeight100();
+            grid${metaData.getRealClassName()}.setAutoFetchData(true);
+			#set($splitArray = ${metaData.getFinalParamForIdVariables().split(",")})
+			#foreach(${pk} in $splitArray)
+				grid${metaData.getRealClassName()}.setSortField("${pk.trim()}");
+			#end
+            grid${metaData.getRealClassName()}.addRecordClickHandler(new RecordClickHandler() {
+                    public void onRecordClick(RecordClickEvent event) {
+                        form${metaData.getRealClassName()}.editSelectedData(grid${metaData.getRealClassName()});
+						#set($splitArray = ${metaData.getFinalParamForIdVariables().split(",")})
+            			#foreach($pk in $splitArray)
+            				form${metaData.getRealClassName()}.getField("${pk.trim()}").setDisabled(true);
+            			#end
+                        buttonDelete${metaData.getRealClassName()}.enable();
+                    }
+                });
+    
+            layout.addMember(grid${metaData.getRealClassName()});
+            layout.addMember(form${metaData.getRealClassName()});
+    
+            buttonSave${metaData.getRealClassName()}.addClickHandler(new ClickHandler() {
+                    public void onClick(ClickEvent event) {
+                        form${metaData.getRealClassName()}.submit();
+                        clear${metaData.getRealClassName()}();
+                    }
+                });
+            buttonDelete${metaData.getRealClassName()}.addClickHandler(new ClickHandler() {
+                    public void onClick(ClickEvent event) {
+                        grid${metaData.getRealClassName()}.removeData(grid${metaData.getRealClassName()}.getSelectedRecord());
+                        clear${metaData.getRealClassName()}();
+                    }
+                });
+            buttonClean${metaData.getRealClassName()}.addClickHandler(new ClickHandler() {
+                    public void onClick(ClickEvent event) {
+                    	clear${metaData.getRealClassName()}();
+                    }
+                });
+    
+            HLayout hLayout = new HLayout(15);
+            hLayout.addMember(buttonSave${metaData.getRealClassName()});
+            hLayout.addMember(buttonDelete${metaData.getRealClassName()});
+            hLayout.addMember(buttonClean${metaData.getRealClassName()});
+    
+            layout.addMember(hLayout);
+            layout.setAlign(Alignment.CENTER);
+            
+            return layout;
+            
+        }
+	#end
 	
-	private void clear() {
-		form.clearValues();
-		form.editNewRecord();
-		form.getField("id").setDisabled(false);
-		buttonSave.enable();
-		buttonDelete.disable();
-	}
+	#foreach($metaData  in $dataModel.theMetaData)
+    	private void clear${metaData.getRealClassName()}() {
+    		form${metaData.getRealClassName()}.clearValues();
+    		form${metaData.getRealClassName()}.editNewRecord();
+			#set($splitArray = ${metaData.getFinalParamForIdVariables().split(",")})
+			#foreach($pk in $splitArray)
+				form${metaData.getRealClassName()}.getField("${pk.trim()}").setDisabled(false);
+			#end
+    		#foreach(${member2} in $metaData)
+    			form${metaData.getRealClassName()}.getField("${member2.getName()}").setDisabled(false);
+    		#end
+    		buttonSave${metaData.getRealClassName()}.enable();
+    		buttonDelete${metaData.getRealClassName()}.disable();
+    	}
+	#end
 
 
 }

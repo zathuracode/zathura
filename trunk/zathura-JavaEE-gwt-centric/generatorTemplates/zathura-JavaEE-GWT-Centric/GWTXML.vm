@@ -14,9 +14,7 @@
 	<!-- Other module inherits                                      -->
 
 	<!-- Specify the app entry point class.  -->
-	#foreach($metaData  in $dataModel.theMetaData)
-    	<entry-point class='${virginPackage}.client.entryPoint.${metaData.getRealClassName()}EP' />
-    #end
+    <entry-point class='${virginPackage}.client.entryPoint.${projectName}' />
 	
 
 	<!-- Specify the paths for translatable code                    -->
