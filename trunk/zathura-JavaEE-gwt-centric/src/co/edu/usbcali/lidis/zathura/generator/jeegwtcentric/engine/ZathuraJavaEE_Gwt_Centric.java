@@ -367,12 +367,12 @@ IZathuraTemplate {
 			doDto(metaData, context, hdLocation, dataModel);
 			doDataService(metaData, context, hdLocation, dataModel, modelName);
 			doDataServiceAsync(metaData, context, hdLocation, dataModel, modelName);
-			
+			doEntryPoint(metaData, context, hdLocation, dataModel, projectName);
 			
 			doSmartGWTDataSource(metaData, context, hdLocation, dataModel, modelName);
 			doDataServiceImpl(metaData, context, hdLocation, dataModel);
 		}
-		doEntryPoint(context, hdLocation, dataModel, projectName);
+		doGeneralEntryPoint(context, hdLocation, dataModel, projectName);
 		doUtilites(context, hdLocation, dataModel, modelName);
 		doBusinessDelegator(context, hdLocation, dataModel);
 		doDaoFactory(dataModel, context, hdLocation);
@@ -1174,16 +1174,16 @@ IZathuraTemplate {
 	}
 
 	@Override
-	public void doEntryPoint(VelocityContext context,
+	public void doGeneralEntryPoint(VelocityContext context,
 			String hdLocation, MetaDataModel dataModel, String projectName) {
-		log.info("Begin doEntryPoint");
+		log.info("Begin doGeneralEntryPoint");
 
 		Template entryPoint = null;
 
 		StringWriter swEntryPoint = new StringWriter();
 
 		try {
-			entryPoint = Velocity.getTemplate("EntryPoint.vm");
+			entryPoint = Velocity.getTemplate("GeneralEntryPoint.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 		} catch (ParseErrorException pee) {
@@ -1214,13 +1214,61 @@ IZathuraTemplate {
 			JalopyCodeFormatter.formatJavaCodeFile(entryLocation
 					+ projectName + ".java");
 
+			log.info("End doGeneralEntryPoint");
+
+		} catch (Exception e) {
+			log.info("Error doGeneralEntryPoint");
+		}
+
+		
+	}
+	
+	@Override
+	public void doEntryPoint(MetaData metaData, VelocityContext context,
+			String hdLocation, MetaDataModel dataModel, String projectName) {
+		log.info("Begin doEntryPoint");
+
+		Template entryPoint = null;
+
+		StringWriter swEntryPoint = new StringWriter();
+
+		try {
+			entryPoint = Velocity.getTemplate("EntryPoint.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			entryPoint.merge(context, swEntryPoint);
+
+			String entryLocation = hdLocation + GeneratorUtil.slash
+			+ virginPackageInHd + GeneratorUtil.slash  +"client" + GeneratorUtil.slash + "entryPoint"
+			+ GeneratorUtil.slash ;
+
+			FileWriter fstream = new FileWriter(entryLocation 
+					+ metaData.getRealClassName() + "EP.java");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swEntryPoint.toString()); 
+			// Close the output stream
+			out.close();
+
+			JalopyCodeFormatter.formatJavaCodeFile(entryLocation
+					+ metaData.getRealClassName() + "EP.java");
+
 			log.info("End doEntryPoint");
 
 		} catch (Exception e) {
 			log.info("Error doEntryPoint");
 		}
-
-		
 	}
 	
 	public void doGwtXml(MetaData metaData, VelocityContext context,
