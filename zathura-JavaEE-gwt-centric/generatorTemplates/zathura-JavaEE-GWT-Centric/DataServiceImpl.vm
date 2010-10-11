@@ -16,9 +16,9 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class DataService${metaData.getRealClassName()}Impl extends RemoteServiceServlet implements DataService${metaData.getRealClassName()} {
 
-	public List<${metaData.getRealClassName()}DTO> fetch() throws Exception{
+	public List<${metaData.getRealClassName()}DTO> fetch(int startRow,int finalRow) throws Exception{
 		List<${metaData.getRealClassName()}DTO> fetchData = null;
-			fetchData = toDTOList(BusinessDelegatorView.get${metaData.getRealClassName()}());
+			fetchData = toDTOList(BusinessDelegatorView.findPage${metaData.getRealClassName()}(null, true, startRow, 75));
 		return fetchData;
 	}
 	

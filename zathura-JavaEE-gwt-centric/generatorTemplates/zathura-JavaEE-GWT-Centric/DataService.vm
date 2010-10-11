@@ -8,7 +8,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 @RemoteServiceRelativePath("data${metaData.getRealClassName()}")
 public interface DataService${metaData.getRealClassName()} extends RemoteService {
-    List<${metaData.getRealClassName()}DTO> fetch () throws Exception;
+    List<${metaData.getRealClassName()}DTO> fetch (int startRow,int finalRow) throws Exception;
     
 	public ${metaData.getRealClassName()}DTO fetch(${finalParamForId}) throws Exception;
 
@@ -17,4 +17,6 @@ public interface DataService${metaData.getRealClassName()} extends RemoteService
 	${metaData.getRealClassName()}DTO update (${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) throws Exception;
 
     void remove (${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}DTO) throws Exception;
+	
+	Long totalRows() throws Exception;
 }

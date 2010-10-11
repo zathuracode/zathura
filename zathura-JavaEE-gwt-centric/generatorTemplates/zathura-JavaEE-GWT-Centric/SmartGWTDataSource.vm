@@ -32,6 +32,8 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 
 	// TODO is singleton what we want here?
 	private static SmartGWTDataSource${metaData.getRealClassName()} instance = null;
+	
+	private static Integer totalRows;
 
 	public static SmartGWTDataSource${metaData.getRealClassName()} getInstance() {
 		if (instance == null) {
@@ -119,6 +121,47 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 			final DSRequest request, final DSResponse response) {
 		DataService${metaData.getRealClassName()}Async service = GWT
 				.create(DataService${metaData.getRealClassName()}.class);
+				
+		int startRow = request.getStartRow();
+        int finalRow = request.getEndRow();
+		
+		service.totalRows(new AsyncCallback<Long>() {
+			
+			@Override
+			public void onSuccess(Long result) {
+				totalRows = result.intValue();
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+		        response.setStatus(RPCResponse.STATUS_FAILURE);
+
+                final Window window = new Window();
+                window.setWidth(360);
+                window.setHeight(115);
+                window.setTitle("Error");
+                window.setShowMinimizeButton(false);
+                window.setIsModal(true);
+                window.setShowModalMask(true);
+                window.centerInPage();
+                window.addCloseClickHandler(new CloseClickHandler() {
+                        @Override
+                        public void onCloseClick(CloseClientEvent event) {
+                            window.destroy();
+                        }
+                    });
+
+                Label label = new Label(caught.getMessage());
+                window.addItem(label);
+                window.show();
+
+                processResponse(requestId, response);
+	
+			}
+		});
+
+		
 		service.fetch(new AsyncCallback<List<${metaData.getRealClassName()}DTO>>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
@@ -155,7 +198,8 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 					}
 				}
 				response.setData(list);
-				response.setTotalRows(result.size());
+				response.setTotalRows(totalRows);
+				//response.setTotalRows(result.size());
 				processResponse(requestId, response);
 			}
 		});
