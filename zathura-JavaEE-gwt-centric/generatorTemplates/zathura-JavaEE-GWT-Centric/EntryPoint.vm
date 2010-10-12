@@ -18,6 +18,13 @@ import com.smartgwt.client.widgets.grid.events.RecordClickEvent;
 import com.smartgwt.client.widgets.grid.events.RecordClickHandler;
 import com.smartgwt.client.widgets.layout.HLayout;
 import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.form.fields.IntegerItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
+import com.smartgwt.client.widgets.form.fields.FloatItem;
+import com.smartgwt.client.widgets.form.fields.DateItem;
+import com.smartgwt.client.widgets.form.fields.BooleanItem;
+import com.smartgwt.client.widgets.grid.ListGridField;
+
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -55,12 +62,51 @@ public class ${metaData.getRealClassName()}EP {
 
 		buttonSave${metaData.getRealClassName()}.enable();
 		buttonDelete${metaData.getRealClassName()}.disable();
-
+		
 		form${metaData.getRealClassName()} = new DynamicForm();
 		form${metaData.getRealClassName()}.setDataSource(SmartGWTDataSource${metaData.getRealClassName()}.getInstance());
 		form${metaData.getRealClassName()}.setIsGroup(true);
 		form${metaData.getRealClassName()}.setGroupTitle("Information ${metaData.getRealClassName()}");
 		form${metaData.getRealClassName()}.setNumCols(4);
+		
+			#foreach(${member2}  in ${finalMembers})
+				#if(${member2.getType().getSimpleName()} == "Date")
+					DateItem f${member2.getGetNameOfPrimaryName()} = new DateItem();
+                    f${member2.getGetNameOfPrimaryName()}.setName("${member2.getName()}");
+					f${member2.getGetNameOfPrimaryName()}.setTitle("${member2.getGetNameOfPrimaryName()}");
+        		#elseif(${member2.getType().getSimpleName()} == "String")
+					TextItem f${member2.getGetNameOfPrimaryName()} = new TextItem();
+                    f${member2.getGetNameOfPrimaryName()}.setName("${member2.getName()}");
+					f${member2.getGetNameOfPrimaryName()}.setTitle("${member2.getGetNameOfPrimaryName()}");
+				#elseif(${member2.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
+					IntegerItem f${member2.getGetNameOfPrimaryName()} = new IntegerItem();
+					f${member2.getGetNameOfPrimaryName()}.setName("${member2.getName()}");
+					f${member2.getGetNameOfPrimaryName()}.setTitle("${member2.getGetNameOfPrimaryName()}");
+				#elseif(${member2.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
+					IntegerItem f${member2.getGetNameOfPrimaryName()} = new IntegerItem();
+					f${member2.getGetNameOfPrimaryName()}.setName("${member2.getName()}");
+					f${member2.getGetNameOfPrimaryName()}.setTitle("${member2.getGetNameOfPrimaryName()}");
+				#elseif(${member2.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
+					BooleanItem f${member2.getGetNameOfPrimaryName()} = new BooleanItem();
+					f${member2.getGetNameOfPrimaryName()}.setName("${member2.getName()}");
+					f${member2.getGetNameOfPrimaryName()}.setTitle("${member2.getGetNameOfPrimaryName()}");
+				#elseif(${member2.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
+					FloatItem f${member2.getGetNameOfPrimaryName()} = new FloatItem();
+					f${member2.getGetNameOfPrimaryName()}.setName("${member2.getName()}");
+					f${member2.getGetNameOfPrimaryName()}.setTitle("${member2.getGetNameOfPrimaryName()}");				
+				#end
+		#end
+			
+		form${metaData.getRealClassName()}.setFields(
+		#set( $count = 0 )
+		#foreach(${members}  in ${finalMembers})
+			#set( $count = $count + 1 )
+			#if( $count < ${finalMembers.size()})
+				f${members.getGetNameOfPrimaryName()},
+			#else
+				f${members.getGetNameOfPrimaryName()}
+			#end
+        #end);
 
 		grid${metaData.getRealClassName()} = new ListGrid();
 		grid${metaData.getRealClassName()}.setDataSource(SmartGWTDataSource${metaData.getRealClassName()}.getInstance());
@@ -69,6 +115,20 @@ public class ${metaData.getRealClassName()}EP {
 		#foreach($pk in $splitArray)
 			grid${metaData.getRealClassName()}.setSortField("${pk.trim()}");
 		#end
+		
+		#foreach(${members}  in ${finalMembers})
+			ListGridField lF${members.getGetNameOfPrimaryName()} = new ListGridField("${members.getName()}","${members.getGetNameOfPrimaryName()}");
+		#end
+		
+		grid${metaData.getRealClassName()}.setFields(#set( $count = 0 )
+		#foreach(${members}  in ${finalMembers})
+			#set( $count = $count + 1 )
+			#if( $count < ${finalMembers.size()})
+				lF${members.getGetNameOfPrimaryName()},
+			#else
+				lF${members.getGetNameOfPrimaryName()}
+			#end
+        #end);
 		
 		grid${metaData.getRealClassName()}.addRecordClickHandler(new RecordClickHandler() {
 			public void onRecordClick(RecordClickEvent event) {
