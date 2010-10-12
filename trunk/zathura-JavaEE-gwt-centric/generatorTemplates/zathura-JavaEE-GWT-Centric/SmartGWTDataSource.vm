@@ -162,7 +162,7 @@ public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGW
 		});
 
 		
-		service.fetch(new AsyncCallback<List<${metaData.getRealClassName()}DTO>>() {
+		service.fetch(startRow,finalRow,new AsyncCallback<List<${metaData.getRealClassName()}DTO>>() {
 			public void onFailure(Throwable caught) {
 				response.setStatus(RPCResponse.STATUS_FAILURE);
 				 final Window window = new Window();

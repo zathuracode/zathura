@@ -185,4 +185,7 @@ public class DataService${metaData.getRealClassName()}Impl extends RemoteService
 		return dto;
 	
 	}
+	public Long totalRows() throws Exception {
+		return BusinessDelegatorView.findTotalNumber${metaData.getRealClassName()}();
+	}
 }
