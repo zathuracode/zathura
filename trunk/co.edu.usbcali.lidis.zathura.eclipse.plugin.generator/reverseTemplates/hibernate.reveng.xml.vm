@@ -38,6 +38,10 @@
 		</sql-type>
 		<sql-type jdbc-type="DOUBLE" hibernate-type="java.lang.Double">
 		</sql-type>
+		<sql-type jdbc-type="BOOLEAN" hibernate-type="java.lang.Boolean">
+		</sql-type>
+		<sql-type jdbc-type="BOOL" hibernate-type="java.lang.Boolean">
+		</sql-type>
 		#end
 		#if(${makeItXml} == false)
 		<sql-type jdbc-type="NUMERIC" scale="0" hibernate-type="Long">
@@ -61,7 +65,11 @@
 		<sql-type jdbc-type="FLOAT" hibernate-type="Float">
 		</sql-type>
 		<sql-type jdbc-type="DOUBLE" hibernate-type="Double">
-		</sql-type>			
+		</sql-type>
+		<sql-type jdbc-type="BOOLEAN" hibernate-type="Boolean">
+		</sql-type>
+		<sql-type jdbc-type="BOOL" hibernate-type="Boolean">
+		</sql-type>					
 		#end	
 		
 	</type-mapping>
