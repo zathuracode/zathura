@@ -14,7 +14,7 @@
 	<!-- Other module inherits                                      -->
 
 	<!-- Specify the app entry point class.  -->
-    <entry-point class='${virginPackage}.client.entryPoint.${projectName}' />
+    <entry-point class='${virginPackage}.client.entrypoint.${projectName}' />
 	
 
 	<!-- Specify the paths for translatable code                    -->

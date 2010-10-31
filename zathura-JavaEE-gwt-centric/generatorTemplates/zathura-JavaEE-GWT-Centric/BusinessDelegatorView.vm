@@ -1,4 +1,4 @@
-package ${virginPackage}.server.businessDelegate;
+package ${virginPackage}.server.businessdelegate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
