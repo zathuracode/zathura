@@ -737,23 +737,23 @@ public class Utilities {
 
 		List<String> folderBuilder = new ArrayList<String>();
 		folderBuilder.add(pckgeServer);
-		folderBuilder.add(pckgeServer + "dataService");
+		folderBuilder.add(pckgeServer + "dataservice");
 		folderBuilder.add(pckgeServer + "exceptions");
 		folderBuilder.add(pckgeServer + "utilities");
 		folderBuilder.add(dao);
-		folderBuilder.add(dataAcces + "daoFactory");
-		folderBuilder.add(dataAcces + "entityManager");
+		folderBuilder.add(dataAcces + "daofactory");
+		folderBuilder.add(dataAcces + "entitymanager");
 		folderBuilder.add(pckgeServer + "control");
 		folderBuilder.add(pckgeClient + "dto");
-		folderBuilder.add(pckgeClient + "dataService");
+		folderBuilder.add(pckgeClient + "dataservice");
 		folderBuilder.add(pckgeClient + "smartds");
-		folderBuilder.add(pckgeClient + "entryPoint");
+		folderBuilder.add(pckgeClient + "entrypoint");
 		//		if (specificityLevel.intValue() == 2) {
 		//			folderBuilder.add(model + "pojos");
 		//		}
 		//		folderBuilder.add(model + "dto");
 		//		folderBuilder.add(presentation + "backEndBeans");
-		folderBuilder.add(pckgeServer + "businessDelegate");
+		folderBuilder.add(pckgeServer + "businessdelegate");
 		folderBuilder.add(properties.getProperty("webRootFolderPath"));
 		for (String string : folderBuilder) {
 			try {

@@ -53,20 +53,20 @@ public class TestZathuraJavaEE_GWT_Centric {
 			String folderProjectPath = "E:/ZATHURA EXAMPLE(landed)/";
 			*/
 			//JUAN MANUEL
-			String jpaPath = "E:\\Workspace\\Tesis\\workspace\\demoProyecto\\war\\WEB-INF\\classes\\";
-			String jpaPckgName = "co.edu.usbcali.cliente.model";			
-			String projectName = "demoProyecto";
-			String folderProjectPath = "E:\\Workspace\\Tesis\\workspace\\demoProyecto\\src\\";
-			String webRootFolderPath="E:\\Workspace\\Tesis\\workspace\\demoProyecto\\war\\";
-			String libFolderPath="E:\\Workspace\\Tesis\\workspace\\demoProyecto\\war\\WEB-INF\\lib\\";
+//			String jpaPath = "E:\\Workspace\\Tesis\\workspace\\demoProyecto\\war\\WEB-INF\\classes\\";
+//			String jpaPckgName = "co.edu.usbcali.cliente.model";			
+//			String projectName = "demoProyecto";
+//			String folderProjectPath = "E:\\Workspace\\Tesis\\workspace\\demoProyecto\\src\\";
+//			String webRootFolderPath="E:\\Workspace\\Tesis\\workspace\\demoProyecto\\war\\";
+//			String libFolderPath="E:\\Workspace\\Tesis\\workspace\\demoProyecto\\war\\WEB-INF\\lib\\";
 			 
 			//RICARDO
-//			String jpaPath = "F:\\Tesis\\workspace\\demoClientesGWT\\war\\WEB-INF\\classes\\";
-//			String jpaPckgName = "co.edu.usbcali.banco.model";			
-//			String projectName = "demoClientesGWT";
-//			String folderProjectPath = "F:\\Tesis\\workspace\\demoClientesGWT\\src\\";
-//			String webRootFolderPath="F:\\Tesis\\workspace\\demoClientesGWT\\war\\";
-//			String libFolderPath="F:\\Tesis\\workspace\\demoClientesGWT\\war\\WEB-INF\\lib\\";
+			String jpaPath = "F:\\Tesis\\workspace\\demoClientesGWT\\war\\WEB-INF\\classes\\";
+			String jpaPckgName = "co.edu.usbcali.banco.model";			
+			String projectName = "demoClientesGWT";
+			String folderProjectPath = "F:\\Tesis\\workspace\\demoClientesGWT\\src\\";
+			String webRootFolderPath="F:\\Tesis\\workspace\\demoClientesGWT\\war\\";
+			String libFolderPath="F:\\Tesis\\workspace\\demoClientesGWT\\war\\WEB-INF\\lib\\";
 			
 			///home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco
 //			String jpaPath = "/home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco/build/classes/";

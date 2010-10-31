@@ -1,4 +1,4 @@
-package ${virginPackage}.client.entryPoint;
+package ${virginPackage}.client.entrypoint;
 
 	
 import com.google.gwt.core.client.EntryPoint;

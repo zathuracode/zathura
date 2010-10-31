@@ -8,7 +8,7 @@
 	#foreach($metaData  in $dataModel.theMetaData)
 	<servlet>
 		<servlet-name>data${metaData.getRealClassName()}Servlet</servlet-name>
-		<servlet-class>${virginPackage}.server.dataService.DataService${metaData.getRealClassName()}Impl</servlet-class>
+		<servlet-class>${virginPackage}.server.dataservice.DataService${metaData.getRealClassName()}Impl</servlet-class>
     </servlet>
 	<servlet-mapping>
 		<servlet-name>data${metaData.getRealClassName()}Servlet</servlet-name>

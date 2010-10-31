@@ -1,8 +1,8 @@
-package ${virginPackage}.client.entryPoint;
+package ${virginPackage}.client.entrypoint;
 
 	
-import ${virginPackage}.client.dataService.DataService${metaData.getRealClassName()};
-import ${virginPackage}.client.dataService.DataService${metaData.getRealClassName()}Async;
+import ${virginPackage}.client.dataservice.DataService${metaData.getRealClassName()};
+import ${virginPackage}.client.dataservice.DataService${metaData.getRealClassName()}Async;
 import ${virginPackage}.client.smartds.SmartGWTDataSource${metaData.getRealClassName()};
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;

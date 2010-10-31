@@ -1,4 +1,4 @@
-package  ${virginPackage}.server.dataaccess.daoFactory;
+package  ${virginPackage}.server.dataaccess.daofactory;
 import ${virginPackage}.server.dataaccess.dao.*;
 /**
 * Factory for Data Access Objects Strategy The DAO pattern can be made highly flexible 

@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Date;
 import java.util.Set;
 import java.math.BigDecimal;
-import  ${virginPackage}.server.dataaccess.daoFactory.JPADaoFactory;
-import  ${virginPackage}.server.dataaccess.entityManager.EntityManagerHelper;
+import  ${virginPackage}.server.dataaccess.daofactory.JPADaoFactory;
+import  ${virginPackage}.server.dataaccess.entitymanager.EntityManagerHelper;
 import  ${virginPackage}.server.exceptions.*;
 import  ${virginPackage}.server.utilities.Utilities;
 import $package.${metaData.getRealClassName()};
@@ -126,7 +126,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                         }
                         #else
                             ${member.name}= JPADaoFactory.getInstance().get${member.getRealClassName()}DAO().findByProperty("${metaData.getRealClassNameAsVariable()}.${metaData.primaryKey.getShowName()}", ${metaData.primaryKey.getShowName()}, 0);
-                            if(Utilities.validationsList(${member.name})==false){
+                            if(Utilities.validationsList(${member.name})==true){
                             throw new Exception(ExceptionManager.getInstance().exceptionDeletingEntityWithChild());
                             }
                     #end

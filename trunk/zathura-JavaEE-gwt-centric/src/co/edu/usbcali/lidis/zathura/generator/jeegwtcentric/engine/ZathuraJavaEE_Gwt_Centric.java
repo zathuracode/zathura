@@ -483,7 +483,7 @@ IZathuraTemplate {
 			String realLocation = hdLocation 
 			//				+ GeneratorUtil.slash
 			+ virginPackageInHd + GeneratorUtil.slash + "client" 
-			+ GeneratorUtil.slash +"dataService" + GeneratorUtil.slash;
+			+ GeneratorUtil.slash +"dataservice" + GeneratorUtil.slash;
 
 			FileWriter fstream1 = new FileWriter(realLocation+
 					"DataService"+ metaData.getRealClassName() +".java");
@@ -536,7 +536,7 @@ IZathuraTemplate {
 			String realLocation = hdLocation 
 			//				+ GeneratorUtil.slash
 			+ virginPackageInHd + GeneratorUtil.slash + "client" 
-			+ GeneratorUtil.slash +"dataService" + GeneratorUtil.slash;
+			+ GeneratorUtil.slash +"dataservice" + GeneratorUtil.slash;
 
 			FileWriter fstream1 = new FileWriter(realLocation+
 					"DataService"+ metaData.getRealClassName() +"Async.java");
@@ -892,7 +892,7 @@ IZathuraTemplate {
 			String realLocation = hdLocation + GeneratorUtil.slash
 			+ virginPackageInHd + GeneratorUtil.slash  +"server" 
 			//					+ GeneratorUtil.slash + "presentation"
-			+ GeneratorUtil.slash + "businessDelegate"
+			+ GeneratorUtil.slash + "businessdelegate"
 			+ GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
@@ -1008,7 +1008,7 @@ IZathuraTemplate {
 
 			String realLocation = hdLocation + GeneratorUtil.slash
 			+ virginPackageInHd+ GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataaccess"
-			+ GeneratorUtil.slash + "daoFactory" + GeneratorUtil.slash;
+			+ GeneratorUtil.slash + "daofactory" + GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
 					+ "JPADaoFactory.java");
@@ -1101,7 +1101,7 @@ IZathuraTemplate {
 
 			String realLocation = hdLocation + GeneratorUtil.slash
 			+ virginPackageInHd + GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataaccess"
-			+ GeneratorUtil.slash + "entityManager"
+			+ GeneratorUtil.slash + "entitymanager"
 			+ GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
@@ -1201,7 +1201,7 @@ IZathuraTemplate {
 			entryPoint.merge(context, swEntryPoint);
 
 			String entryLocation = hdLocation + GeneratorUtil.slash
-			+ virginPackageInHd + GeneratorUtil.slash  +"client" + GeneratorUtil.slash + "entryPoint"
+			+ virginPackageInHd + GeneratorUtil.slash  +"client" + GeneratorUtil.slash + "entrypoint"
 			+ GeneratorUtil.slash ;
 
 			FileWriter fstream = new FileWriter(entryLocation 
@@ -1251,7 +1251,7 @@ IZathuraTemplate {
 			entryPoint.merge(context, swEntryPoint);
 
 			String entryLocation = hdLocation + GeneratorUtil.slash
-			+ virginPackageInHd + GeneratorUtil.slash  +"client" + GeneratorUtil.slash + "entryPoint"
+			+ virginPackageInHd + GeneratorUtil.slash  +"client" + GeneratorUtil.slash + "entrypoint"
 			+ GeneratorUtil.slash ;
 
 			FileWriter fstream = new FileWriter(entryLocation 
@@ -1392,7 +1392,7 @@ IZathuraTemplate {
 			dataServiceImpl.merge(context, swDataServiceImpl);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
-			+ virginPackageInHd + GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataService"
+			+ virginPackageInHd + GeneratorUtil.slash  +"server" + GeneratorUtil.slash + "dataservice"
 			+ GeneratorUtil.slash ;
 
 			FileWriter fstream = new FileWriter(realLocation 

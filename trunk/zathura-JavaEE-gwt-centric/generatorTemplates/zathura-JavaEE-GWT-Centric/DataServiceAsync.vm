@@ -1,4 +1,4 @@
-package ${virginPackage}.client.dataService;
+package ${virginPackage}.client.dataservice;
 
 import java.util.List;
 
