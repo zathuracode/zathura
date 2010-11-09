@@ -32,11 +32,11 @@ public class TestDataBases {
 			/** Oracle */
 			className="oracle.jdbc.driver.OracleDriver";
 			url="jdbc:oracle:thin:@127.0.0.1:1521:xe";
-			user="banco";
-			password="banco";
+			user="BITACORA";
+			password="BITACORA";
 			
 			System.out.println("------------------------------------ ORACLE ------------------------------------ ");
-			//testMetaData(className, url, user, password);
+			testMetaData(className, url, user, password);
 			
 			/** JT400 */ 
 			className="com.ibm.as400.access.AS400JDBCDriver";
@@ -45,7 +45,7 @@ public class TestDataBases {
 			password="eszyjm1";
 			
 			//System.out.println("------------------------------------ JT400 ------------------------------------ ");
-			testMetaData(className, url, user, password);
+			//testMetaData(className, url, user, password);
 			
 			
 			
@@ -61,9 +61,9 @@ public class TestDataBases {
 			
 			/** postgres */ 
 			className="org.postgresql.Driver";
-			url="jdbc:postgresql://127.0.0.1:5432/postgres";
-			user="vortex";
-			password="vortex";
+			url="jdbc:postgresql://127.0.0.1:5432/ecaes";
+			user="ecaes";
+			password="ecaes";
 			
 			System.out.println("------------------------------------ postgres ------------------------------------ ");
 			//testMetaData(className, url, user, password);
@@ -132,6 +132,7 @@ public class TestDataBases {
 					System.out.println("-------- TABLES --------");
 				for (ITableInfo iTableInfo : tableInfo) {					
 					System.out.println(iTableInfo.getSimpleName());
+					
 				}
 			} catch (Exception e) {
 				//e.printStackTrace();
@@ -145,7 +146,7 @@ public class TestDataBases {
 		for (String schema : listaSchemas) {
 			System.out.println(schema);
 			schemaName=schema;
-			if(schemaName.equalsIgnoreCase("ZATURADB2")==true || schemaName.equalsIgnoreCase("BANCO")==true ){
+			if(schemaName.equalsIgnoreCase("ZATURADB2")==true || schemaName.equalsIgnoreCase("BITACORA")==true ){
 				try {
 					tableInfo=sqlConnection.getSQLMetaData().getTables(catalogName, schema, null, types, null);
 					if(tableInfo!=null && tableInfo.length>0)

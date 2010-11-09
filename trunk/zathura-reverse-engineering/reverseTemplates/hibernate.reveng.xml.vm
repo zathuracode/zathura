@@ -38,6 +38,8 @@
 		</sql-type>
 		<sql-type jdbc-type="DOUBLE" hibernate-type="java.lang.Double">
 		</sql-type>
+		<sql-type jdbc-type="BOOLEAN" hibernate-type="java.lang.Boolean">
+		</sql-type>
 		#end
 		#if(${makeItXml} == false)
 		<sql-type jdbc-type="NUMERIC" scale="0" hibernate-type="Long">
