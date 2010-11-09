@@ -32,12 +32,12 @@ public class TestZathuraReverseEngineering {
 		String connectionDriverClass = "oracle.jdbc.driver.OracleDriver";
 		String connectionUrl = "jdbc:oracle:thin:@127.0.0.1:1521:xe";
 		String defaultSchema = null;
-		String connectionUsername = "banco";
-		String connectionPassword = "banco";
+		String connectionUsername = "bitacora";
+		String connectionPassword = "bitacora";
 		String companyDomainName = "co.edu.usbcali.banco.modelo";
-		String connectionDriverJarPath = "/home/Diego Armando Gomez Mosquera/Software/jdbc/oracle11g/ojdbc6.jar";
-		String destinationDirectory = "/home/Diego Armando Gomez Mosquera/Workspaces/runtime-EclipseApplication/demoBanco/src/";
-		String matchSchemaForTables = "BANCO";
+		String connectionDriverJarPath = "D:\\oracle11g\\ojdbc6.jar";
+		String destinationDirectory = "D:\\Workspaces\\runtime-EclipseApplication\\bitacoraTest\\src\\";
+		String matchSchemaForTables = "bitacora";
 		List<String> tablesList = fillTableList();
 		Boolean makeItXml = false;
 		
@@ -68,6 +68,25 @@ public class TestZathuraReverseEngineering {
 	public static List<String> fillTableList(){
 		List<String> tablesList = new ArrayList<String>();
 		
+		tablesList.add("ACTIVIDADES");
+		tablesList.add("BITACORAS");
+		tablesList.add("EMPRESAS");
+		tablesList.add("ESTADOS_BITACORAS");
+		tablesList.add("OPCIONES");
+		tablesList.add("OPCIONES_TIPOSROLES");
+		tablesList.add("PARAMETROS");
+		tablesList.add("ROLES");
+		tablesList.add("ROLES_PROYECTOS");
+		tablesList.add("ROLES_TIPOSACTIVIDADES");
+		tablesList.add("SERVICIOS");
+		tablesList.add("SERVICIOS_EMPRESAS");
+		tablesList.add("TIPOS_ACTIVIDADES");
+		tablesList.add("TIPOS_ROLES");
+		tablesList.add("USUARIOS");
+		tablesList.add("USUARIOS_ROLES_PROYECTOS");
+		
+		
+		/*
 		tablesList.add("CLIENTES");
 		tablesList.add("CONSIGNACIONES");
 		tablesList.add("CUENTAS");
@@ -75,6 +94,7 @@ public class TestZathuraReverseEngineering {
 		tablesList.add("TIPOS_DOCUMENTOS");
 		tablesList.add("TIPOS_USUARIOS");
 		tablesList.add("USUARIOS");
+		*/
 		
 		return tablesList;
 	}

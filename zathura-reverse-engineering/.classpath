@@ -22,5 +22,7 @@
 	<classpathentry kind="lib" path="lib/velocity-1.6.2-dep.jar"/>
 	<classpathentry kind="lib" path="lib/velocity-1.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/fw.jar"/>
+	<classpathentry kind="lib" path="D:/Software/jdbc/postgresql/postgresql-8.3-603.jdbc3.jar"/>
+	<classpathentry kind="lib" path="D:/Software/jdbc/oracle11g/ojdbc6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
