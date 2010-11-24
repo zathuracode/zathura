@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import ${virginPackage}.presentation.businessDelegate.IBusinessDelegatorView;
 
 #foreach($metaData  in $dataModel.theMetaData)
     import ${packageOriginal}.control.${metaData.getRealClassName()}Logic;
@@ -57,14 +58,12 @@ import org.springframework.stereotype.Service;
 *
 */
 @Scope("singleton")
-@Service("BusinessDelegator")
-public class BusinessDelegatorView {
-private BusinessDelegatorView(){
-}
+@Service("BusinessDelegatorView")
+public class BusinessDelegatorView implements IBusinessDelegatorView{
 #foreach($metaData  in $dataModel.theMetaData)
 	
 	@Autowired
-	private I${metaData.getRealClassName()}Logic ${metaData.getRealClassNameAsVariable()}Logic=null;
+	private I${metaData.getRealClassName()}Logic ${metaData.getRealClassNameAsVariable()}Logic;
 	
     public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception{
         return ${metaData.getRealClassNameAsVariable()}Logic.get${metaData.getRealClassName()}();
