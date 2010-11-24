@@ -30,12 +30,15 @@ public class GeneratorUtil {
 	private static String generatorLibrariesZathuraJavaEEWebCentric="generatorLibraries"+ GeneratorUtil.slash + "zathura-JavaEE-Web-Centric"+ GeneratorUtil.slash;
 	private static String generatorExtZathuraJavaEEWebCentric="generatorExt"+ GeneratorUtil.slash + "zathura-JavaEE-Web-Centric"+ GeneratorUtil.slash;
 	
+	//JavaEESpringWebCentric
+	private static String springCentricTemplates = "generatorTemplates"+ GeneratorUtil.slash + "zathura-JavaEE-hibernateCore-Spring-Centric"+ GeneratorUtil.slash;
+	private static String generatorLibrariesZathuraJavaEESpringWebCentric="generatorLibraries"+ GeneratorUtil.slash + "zathura-JavaEE-Web-Centric"+ GeneratorUtil.slash;
+	private static String generatorExtZathuraJavaEESpringWebCentric="generatorExt"+ GeneratorUtil.slash + "zathura-JavaEE-hibernateCore-Spring-Centric"+ GeneratorUtil.slash;	
+	
 	//JavaEE-HibernateCore-WebCentric
 	private static String          templatesZathuraJavaEEHibernateCoreWebCentric = "generatorTemplates"+ GeneratorUtil.slash + "zathura-JavaEE-hibernateCore-Web-Centric"+ GeneratorUtil.slash;
 	private static String generatorLibrariesZathuraJavaEEHibernateCoreWebCentric = "generatorLibraries"+ GeneratorUtil.slash + "zathura-JavaEE-hibernateCore-Web-Centric"+ GeneratorUtil.slash;
 	private static String       generatorExtZathuraJavaEEHibernateCoreWebCentric = "generatorExt"+ GeneratorUtil.slash + "zathura-JavaEE-hibernateCore-Web-Centric"+ GeneratorUtil.slash;
-	
-	
 	
 	//JavaEEGwtCentric
 	private static String gwtCentricTemplates = "generatorTemplates"+ GeneratorUtil.slash + "zathura-JavaEE-GWT-Centric"+ GeneratorUtil.slash;
@@ -101,6 +104,27 @@ public class GeneratorUtil {
 		}
 		return webCentricTemplates;
 	}
+	
+	//JavaEESpringWebCentric
+	public static String getGeneratorLibrariesZathuraJavaEESpringWebCentric() {
+		if(fullPath!=null && fullPath.equals("")!=true){
+			return fullPath+generatorLibrariesZathuraJavaEESpringWebCentric;
+		}
+		return generatorLibrariesZathuraJavaEESpringWebCentric;
+	}
+	public static String getGeneratorExtZathuraJavaEESpringWebCentric() {
+		if(fullPath!=null && fullPath.equals("")!=true){
+			return fullPath+generatorExtZathuraJavaEESpringWebCentric;
+		}
+		return generatorExtZathuraJavaEESpringWebCentric;
+	}	
+	
+	public static String getSpringWebCentricTemplates() {
+		if(fullPath!=null && fullPath.equals("")!=true){
+			return fullPath+springCentricTemplates;
+		}
+		return springCentricTemplates;
+	}	
 	
 	//JavaEEWebCentric
 	public static String getTemplatesZathuraJavaEEHibernateCoreWebCentric() {
