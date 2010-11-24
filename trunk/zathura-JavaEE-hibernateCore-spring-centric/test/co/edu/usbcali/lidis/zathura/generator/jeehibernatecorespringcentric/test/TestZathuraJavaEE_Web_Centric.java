@@ -49,12 +49,12 @@ public class TestZathuraJavaEE_Web_Centric {
 //			String webRootFolderPath="E:/WORK(New)/pa/WebRoot/";
 //			String libFolderPath="E:/WORK(New)/pa/WebRoot/WEB-INF/lib/";	
 			
-			String jpaPath = "E:/WORK(New)/bancoxmlspring/WebRoot/WEB-INF/classes/";
-			String jpaPckgName = "com.zathura.bancoxmlspring.domain";
-			String projectName = "bancoxmlspring";
-			String folderProjectPath = "E:/WORK(New)/bancoxmlspring/src/";
-			String webRootFolderPath = "E:/WORK(New)/bancoxmlspring/WebRoot/";
-			String libFolderPath = "E:/WORK(New)/bancoxmlspring/WebRoot/lib/";
+			String jpaPath = "C:/Development/work/bancoxmlspr/WebRoot/WEB-INF/classes/";
+			String jpaPckgName = "com.zathura.bancoxmlspr.domain";
+			String projectName = "bancoxmlspr";
+			String folderProjectPath = "C:/Development/work/bancoxmlspr/src/";
+			String webRootFolderPath = "C:/Development/work/bancoxmlspr/WebRoot/";
+			String libFolderPath = "C:/Development/work/bancoxmlspr/WebRoot/WEB-INF/lib/";
 			String domainName = "com.zathura";
 			 
 			///home/diegomez/Workspaces/runtime-EclipseApplication/demoBanco

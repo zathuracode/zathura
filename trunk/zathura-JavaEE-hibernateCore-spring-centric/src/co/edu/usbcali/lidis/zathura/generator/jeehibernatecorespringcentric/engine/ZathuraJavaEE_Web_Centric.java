@@ -908,12 +908,16 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 		log.info("Begin doBusinessDelegator");
 
 		Template businessDelegator = null;
+		Template iBusinessDelegator = null;
 
 		StringWriter swBusinessDelegator = new StringWriter();
+		StringWriter swIbusinessDelegator = new StringWriter();
 
 		try {
 			businessDelegator = ve
 					.getTemplate("BusinessDelegatorView.vm");
+			iBusinessDelegator = ve
+			.getTemplate("IBusinessDelegatorView.vm");			
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -930,22 +934,31 @@ public class ZathuraJavaEE_Web_Centric implements IZathuraGenerator,
 
 		try {
 			businessDelegator.merge(context, swBusinessDelegator);
+			iBusinessDelegator.merge(context, swIbusinessDelegator);
 			// System.out.println(swdao);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
 					+ virginPackageInHd + GeneratorUtil.slash + "presentation"
 					+ GeneratorUtil.slash + "businessDelegate"
 					+ GeneratorUtil.slash;
-
+			
 			FileWriter fstream = new FileWriter(realLocation
 					+ "BusinessDelegatorView" + ".java");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swBusinessDelegator.toString());
-			// Close the output stream
 			out.close();
-
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation
 					+ "BusinessDelegatorView" + ".java");
+			
+			
+			
+			FileWriter fstream2 = new FileWriter(realLocation
+					+ "IBusinessDelegatorView" + ".java");
+			BufferedWriter out2 = new BufferedWriter(fstream2);
+			out2.write(swIbusinessDelegator.toString());
+			out2.close();
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation
+					+ "IBusinessDelegatorView" + ".java");			
 
 			log.info("End doBusinessDelegator");
 

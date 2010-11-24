@@ -30,10 +30,8 @@ public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealC
 	
     #if(${metaData.isGetOneToManyProperties()})
 		#foreach($member  in ${metaData.getOneToManyProperties()})
-			#if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-				@Autowired
-				private I${member.getRealClassName()}DAO() ${member.getRealClassVariableName()}DAO;
-			#end
+			@Autowired
+			private I${member.getRealClassName()}DAO ${member.getRealClassVariableName()}DAO;
 		#end
     #end			
 	

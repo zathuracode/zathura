@@ -31,6 +31,7 @@ import  ${virginPackage}.exceptions.ExceptionMessages;
 #end
 import ${packageOriginal}.dto.${metaData.getRealClassName()}DTO;
 import ${virginPackage}.presentation.businessDelegate.BusinessDelegatorView;
+import ${virginPackage}.presentation.businessDelegate.IBusinessDelegatorView;
 import ${virginPackage}.utilities.Utilities;
 import ${virginPackage}.utilities.DataPage;
 import ${virginPackage}.utilities.DataSource;
@@ -69,8 +70,12 @@ private boolean renderDataTable;
 private boolean flag = true;
 private RenderManager renderManager;
 private PersistentFacesState state = PersistentFacesState.getInstance();
+
 private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariable()};
     private List<${metaData.getRealClassName()}DTO> ${metaData.getRealClassNameAsVariable()}DTO;
+		
+		private IBusinessDelegatorView businessDelegatorView;
+		
         public String action_clear() {
         #foreach($member2  in $finalParamForViewVariablesInList)
             txt${member2}.setValue(null);
@@ -105,7 +110,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
         #foreach($member2  in $finalParamForIdForViewClass)
             $member2
         #end
-        entity = BusinessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+        entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
         } catch (Exception e) {
         // TODO: handle exception
         }
@@ -146,7 +151,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
         }
         public String action_save() {
         try {
-        BusinessDelegatorView.save${metaData.getRealClassName()}(${finalParamForView});
+        businessDelegatorView.save${metaData.getRealClassName()}(${finalParamForView});
         FacesContext.getCurrentInstance().addMessage("", 
         new FacesMessage(ExceptionMessages.ENTITY_SUCCESFULLYSAVED));
         } catch (Exception e) {
@@ -158,7 +163,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
         }
         public String action_delete() {
         try {
-        BusinessDelegatorView.delete${metaData.getRealClassName()}($finalParamForIdClassAsVariablesAsString);
+        businessDelegatorView.delete${metaData.getRealClassName()}($finalParamForIdClassAsVariablesAsString);
         FacesContext.getCurrentInstance().addMessage("", 
         new FacesMessage(ExceptionMessages.ENTITY_SUCCESFULLYDELETED));
         } catch (Exception e) {
@@ -170,7 +175,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
         }
         public String action_modify() {
         try {
-        BusinessDelegatorView.update${metaData.getRealClassName()}(${finalParamForView});
+        businessDelegatorView.update${metaData.getRealClassName()}(${finalParamForView});
         FacesContext.getCurrentInstance().addMessage("", 
         new FacesMessage(ExceptionMessages.ENTITY_SUCCESFULLYMODIFIED));
         } catch (Exception e) {
@@ -182,7 +187,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
         }
         public String action_modifyWitDTO(${finalParam}) throws Exception {
         try {
-        BusinessDelegatorView.update${metaData.getRealClassName()}(${finalParamForDtoUpdateOnlyVariables});
+        businessDelegatorView.update${metaData.getRealClassName()}(${finalParamForDtoUpdateOnlyVariables});
         renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").requestRender();
         FacesContext.getCurrentInstance().addMessage(
         "",
@@ -199,7 +204,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
         public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() {
             if(flag){
             try {
-            ${metaData.getRealClassNameAsVariable()} = BusinessDelegatorView.get${metaData.getRealClassName()}();
+            ${metaData.getRealClassNameAsVariable()} = businessDelegatorView.get${metaData.getRealClassName()}();
             flag = false;
             } catch (Exception e) {
             flag = true;
@@ -218,7 +223,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                 public boolean isRenderDataTable() {
                 try {
                 if (flag) {
-                if (BusinessDelegatorView.findTotalNumber${metaData.getRealClassName()}()>0) {
+                if (businessDelegatorView.findTotalNumber${metaData.getRealClassName()}()>0) {
                 renderDataTable = true;
                 } else {
                 renderDataTable = false;
@@ -248,7 +253,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                     // the relative location of the page data.
                     int totalNumber${metaData.getRealClassName()} = 0;
                     try {
-                    totalNumber${metaData.getRealClassName()} = BusinessDelegatorView.findTotalNumber${metaData.getRealClassName()}().intValue();
+                    totalNumber${metaData.getRealClassName()} = businessDelegatorView.findTotalNumber${metaData.getRealClassName()}().intValue();
                     } catch (Exception e) {
                     FacesContext.getCurrentInstance().addMessage("", 
                     new FacesMessage(e.getMessage()));
@@ -259,7 +264,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                     endIndex = totalNumber${metaData.getRealClassName()};
                     }
                     try {
-                    ${metaData.getRealClassNameAsVariable()} = BusinessDelegatorView.findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow, endIndex - startRow);
+                    ${metaData.getRealClassNameAsVariable()} = businessDelegatorView.findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow, endIndex - startRow);
                     // Remove this Renderable from the existing render groups.
                     //leaveRenderGroups();        			
                     } catch (Exception e) {
@@ -297,7 +302,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                             // the relative location of the page data.
                             int totalNumber${metaData.getRealClassName()} = 0;
                             try {
-                            totalNumber${metaData.getRealClassName()} = BusinessDelegatorView.findTotalNumber${metaData.getRealClassName()}().intValue();
+                            totalNumber${metaData.getRealClassName()} = businessDelegatorView.findTotalNumber${metaData.getRealClassName()}().intValue();
                             } catch (Exception e) {
                             FacesContext.getCurrentInstance().addMessage("", 
                             new FacesMessage(e.getMessage()));
@@ -308,7 +313,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                             endIndex = totalNumber${metaData.getRealClassName()};
                             }
                             try {
-                            ${metaData.getRealClassNameAsVariable()} = BusinessDelegatorView.findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow, endIndex - startRow);
+                            ${metaData.getRealClassNameAsVariable()} = businessDelegatorView.findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow, endIndex - startRow);
                             if (Utilities.validationsList(			${metaData.getRealClassNameAsVariable()})) {
                             ${metaData.getRealClassNameAsVariable()}DTO = new ArrayList<${metaData.getRealClassName()}DTO>();
                                 for (${metaData.getRealClassName()} ${metaData.getRealClassNameAsVariable()}Tmp : ${metaData.getRealClassNameAsVariable()}) {
@@ -506,4 +511,12 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                                                     public TimeZone getTimeZone() {
                                                     return java.util.TimeZone.getDefault();
                                                     } 
-                                                    }
+	public IBusinessDelegatorView getBusinessDelegatorView() {
+		return businessDelegatorView;
+	}
+
+	public void setBusinessDelegatorView(IBusinessDelegatorView businessDelegator) {
+		this.businessDelegatorView = businessDelegator;
+	}
+	
+}												
