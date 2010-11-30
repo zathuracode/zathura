@@ -1,0 +1,33 @@
+<jsp:root jsfc="f:view" xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <ice:outputDeclaration doctypeRoot="html"
+        doctypePublic="-//W3C//DTD XHTML 1.0 Transitional//EN"
+        doctypeSystem="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+        <html>
+            <head>
+                <title>.::Powered by Zathura Code Generator 2010::.</title>
+                <meta http-equiv="Content-Type"
+                    content="text/html; charset=ISO-8859-1" />
+                    <link rel="stylesheet" type="text/css"
+                        href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/xmlhttp/css/rime/rime.css" />
+                        <link rel="stylesheet" type="text/css"
+                            href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
+            </head>
+            <body>
+                <div id="wrapper">
+                    <ui:insert name="header">Header</ui:insert>
+                    <div id="body">
+                        <ui:insert name="body">Body</ui:insert>
+                        <ui:insert name="footer">Footer</ui:insert>
+                    </div>
+                    <!-- end body -->
+                </div>
+                <!-- end wrapper -->
+            </body>
+        </html>
+</jsp:root>
