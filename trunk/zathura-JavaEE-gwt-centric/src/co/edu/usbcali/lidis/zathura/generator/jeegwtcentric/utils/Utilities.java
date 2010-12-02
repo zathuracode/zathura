@@ -442,14 +442,14 @@ public class Utilities {
 		if (realClassName.equalsIgnoreCase("Double")) {
 			if (!precision.equals("0"))
 				finalParam2
-				.add(ifcondition
-						+ variableName
-						+ "!=null && "
-						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-						+ variableName + "," + precision + "," + scale
-						+ ")==false" + ifconditionClose
-						+ throwExceptionLength + "\"" + variableName
-						+ "\"" + throwExceptionClose);
+						.add(ifcondition
+								+ variableName
+								+ "!=null && "
+								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+								+ variableName + "," + (new Integer(precision)-new Integer(scale))+ "," + scale
+								+ ")==false" + ifconditionClose
+								+ throwExceptionLength + "\"" + variableName
+								+ "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Long")) {
@@ -468,14 +468,14 @@ public class Utilities {
 		if (realClassName.equalsIgnoreCase("Float")) {
 			if (!precision.equals("0"))
 				finalParam2
-				.add(ifcondition
-						+ variableName
-						+ "!=null && "
-						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-						+ variableName + "," + precision + "," + scale
-						+ ")==false" + ifconditionClose
-						+ throwExceptionLength + "\"" + variableName
-						+ "\"" + throwExceptionClose);
+						.add(ifcondition
+								+ variableName
+								+ "!=null && "
+								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
+								+ variableName + "," + (new Integer(precision)-new Integer(scale)) + "," + scale
+								+ ")==false" + ifconditionClose
+								+ throwExceptionLength + "\"" + variableName
+								+ "\"" + throwExceptionClose);
 		}
 
 		return finalParam2;
