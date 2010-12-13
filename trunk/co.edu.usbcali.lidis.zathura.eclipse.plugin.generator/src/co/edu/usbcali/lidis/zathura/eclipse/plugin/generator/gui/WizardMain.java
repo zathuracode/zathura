@@ -25,6 +25,7 @@ public class WizardMain extends Wizard {
 	public WizardChooseGenerator wizardGeneratorChose;
 	
 	//WizardPage Generator
+	public WizardSelectDBConnection wizardSelectDBConnection;
 	public WizardDatabaseConnection wizardDatabaseConnection;
 	public WizardSelectTables wizardSelectTables;
 	public WizardChooseSourceFolderAndPackage wizardChooseSourceFolderAndPackage;
@@ -34,10 +35,8 @@ public class WizardMain extends Wizard {
 
 	public WizardMain() {
 		super();
-		setWindowTitle("Zathura Code Generator V2.1.0");
+		setWindowTitle("Zathura Code Generator V2.1.1");
 		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
-		
-		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
 		EclipseGeneratorUtil.reset();
 		EclipseGeneratorUtil.wizardMain=this;		
 	}
@@ -47,8 +46,11 @@ public class WizardMain extends Wizard {
 		super.addPages();
 		//Creo el wizard y lo asigno al administrado
 		
-		wizardDatabaseConnection=new WizardDatabaseConnection();
-		addPage(wizardDatabaseConnection);
+		wizardSelectDBConnection=new WizardSelectDBConnection();
+		addPage(wizardSelectDBConnection);
+		
+		//wizardDatabaseConnection=new WizardDatabaseConnection();
+		//addPage(wizardDatabaseConnection);
 		
 		wizardSelectTables=new WizardSelectTables();
 		addPage(wizardSelectTables);

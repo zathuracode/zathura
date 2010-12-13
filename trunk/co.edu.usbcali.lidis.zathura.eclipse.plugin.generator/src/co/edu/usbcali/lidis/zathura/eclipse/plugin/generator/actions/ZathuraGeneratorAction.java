@@ -27,6 +27,9 @@ public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 	private IWorkbenchWindow window;
 	
 	
+	
+	
+	
 	/**
 	 * The constructor.
 	 */
@@ -73,5 +76,6 @@ public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 	 */
 	public void init(IWorkbenchWindow window) {
 		this.window = window;
+		
 	}
 }
