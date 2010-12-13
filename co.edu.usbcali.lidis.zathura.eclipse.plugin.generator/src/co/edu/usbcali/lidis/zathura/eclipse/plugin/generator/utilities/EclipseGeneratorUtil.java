@@ -49,6 +49,7 @@ public class EclipseGeneratorUtil {
 	public static int metaDataReader;
 
 	public static String connectionDriverClass;
+	public static String connectionDriverName;
 	public static String connectionUrl;
 	public static String connectionUsername;
 	public static String connectionPassword;

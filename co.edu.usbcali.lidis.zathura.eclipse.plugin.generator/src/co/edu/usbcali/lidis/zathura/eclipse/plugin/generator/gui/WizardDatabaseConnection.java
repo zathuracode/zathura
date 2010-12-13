@@ -19,10 +19,13 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
 
+import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ConnectionsUtils;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.DatabaseTypeModel;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
+import org.eclipse.swt.events.FocusAdapter;
+import org.eclipse.swt.events.FocusEvent;
 
 /**
  * Zathura Generator
@@ -42,8 +45,14 @@ public class WizardDatabaseConnection extends WizardPage {
 	private List listJARs;
 	private Text txtDriverClassName;
 	private Button btnTestDriver;
-	private Button chkCopyDriverDB;
 	private boolean testConnection=false;
+	private Text txtDriverName;
+	
+	
+
+	
+
+
 
 	/**
 	 * Create the wizard
@@ -51,11 +60,11 @@ public class WizardDatabaseConnection extends WizardPage {
 	public WizardDatabaseConnection() {
 		super("wizardPage");
 		setTitle("New Database Connection");
-		setDescription("Create a new connection driver");
-		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));		
-		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));		
+		setDescription("Create a new connection driver");		
 		setPageComplete(false);
 	}
+	
+	
 
 	/**
 	 * Create contents of the wizard
@@ -66,7 +75,7 @@ public class WizardDatabaseConnection extends WizardPage {
 		setControl(container);
 		
 		Label lblDriverTemplate = new Label(container, SWT.NONE);
-		lblDriverTemplate.setBounds(10, 16, 128, 17);
+		lblDriverTemplate.setBounds(10, 13, 128, 17);
 		lblDriverTemplate.setText("Driver template:");
 		
 		cmbDriverTemplate = new Combo(container, SWT.NONE);		
@@ -90,30 +99,36 @@ public class WizardDatabaseConnection extends WizardPage {
 		cmbDriverTemplate.setBounds(144, 10, 420, 27);
 		
 		Label lblConnectionUrl = new Label(container, SWT.NONE);
-		lblConnectionUrl.setBounds(10, 50, 128, 17);
+		lblConnectionUrl.setBounds(10, 71, 128, 17);
 		lblConnectionUrl.setText("Connection URL:");
 		
 		txtConnectionURL = new Text(container, SWT.BORDER);
-		txtConnectionURL.setBounds(144, 45, 420, 27);
+		txtConnectionURL.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				validatePageComplete();
+			}
+		});
+		txtConnectionURL.setBounds(144, 68, 420, 22);
 		
 		txtUserName = new Text(container, SWT.BORDER);
-		txtUserName.setBounds(144, 78, 420, 27);
+		txtUserName.setBounds(144, 96, 420, 22);
 		
 		txtPassword = new Text(container, SWT.BORDER);
-		txtPassword.setBounds(144, 111, 420, 27);
+		txtPassword.setBounds(144, 124, 420, 22);
 		txtPassword.setEchoChar('*');
 		
 		
 		Label lblUserName = new Label(container, SWT.NONE);
-		lblUserName.setBounds(10, 83, 128, 17);
+		lblUserName.setBounds(10, 99, 128, 17);
 		lblUserName.setText("User name:");
 		
 		Label lblPassword = new Label(container, SWT.NONE);
-		lblPassword.setBounds(10, 116, 128, 17);
+		lblPassword.setBounds(10, 127, 128, 17);
 		lblPassword.setText("Password:");
 		
 		Label lineSeparatorJar = new Label(container, SWT.SEPARATOR | SWT.HORIZONTAL);
-		lineSeparatorJar.setBounds(10, 144, 568, 2);
+		lineSeparatorJar.setBounds(10, 152, 568, 2);
 		
 		Label lblDriverJar = new Label(container, SWT.NONE);
 		lblDriverJar.setBounds(10, 182, 90, 17);
@@ -183,6 +198,7 @@ public class WizardDatabaseConnection extends WizardPage {
 					ZathuraReverseEngineeringUtil.testDriver(url, driverClassName, user, password);
 					MessageDialog.openInformation(getShell(), "Driver Test", "Database connection successfully established");
 					
+					EclipseGeneratorUtil.connectionDriverName=	txtDriverName.getText();
 					EclipseGeneratorUtil.connectionDriverClass=	txtDriverClassName.getText();
 					EclipseGeneratorUtil.connectionUrl=			txtConnectionURL.getText();
 					EclipseGeneratorUtil.connectionUsername=		txtUserName.getText();
@@ -194,7 +210,7 @@ public class WizardDatabaseConnection extends WizardPage {
 					
 				} catch (Exception e1) {
 					MessageDialog.openError(getShell(), "Error", e1.getMessage());
-					ZathuraGeneratorLog.logError(e1);
+					//ZathuraGeneratorLog.logError(e1);
 					
 				}
 				validatePageComplete();
@@ -206,16 +222,18 @@ public class WizardDatabaseConnection extends WizardPage {
 		txtDriverClassName = new Text(container, SWT.BORDER);
 		txtDriverClassName.setBounds(144, 301, 420, 27);
 		
-		chkCopyDriverDB = new Button(container, SWT.CHECK);
-		chkCopyDriverDB.addSelectionListener(new SelectionAdapter() {
+		Label lblDriverName = new Label(container, SWT.NONE);
+		lblDriverName.setBounds(10, 42, 128, 17);
+		lblDriverName.setText("Driver name:");
+		
+		txtDriverName = new Text(container, SWT.BORDER);
+		txtDriverName.addFocusListener(new FocusAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				EclipseGeneratorUtil.copyDBdriverJars=chkCopyDriverDB.getSelection();				
+			public void focusLost(FocusEvent e) {
+				validatePageComplete();
 			}
 		});
-		chkCopyDriverDB.setSelection(true);
-		chkCopyDriverDB.setBounds(10, 160, 302, 16);
-		chkCopyDriverDB.setText("Copy DB driver jar(s) to project and add to buildpath?");
+		txtDriverName.setBounds(144, 39, 420, 22);
 		
 		loadCmbDriverTemplate();
 		
@@ -224,6 +242,13 @@ public class WizardDatabaseConnection extends WizardPage {
 	private void validatePageComplete(){		
 		
 		try {
+			
+			if(txtDriverName.getText()==null || txtDriverName.getText().equals("")==true){
+				throw new Exception("No driver name specified");
+			}
+			if(ConnectionsUtils.connectionExist(txtDriverName.getText())==true){
+				throw new Exception("A driver with that name already exists");
+			}
 			if(listJARs.getItems()==null || listJARs.getItems().length==0){
 				throw new Exception("Driver class not found");
 			}
@@ -231,6 +256,7 @@ public class WizardDatabaseConnection extends WizardPage {
 				btnTestDriver.setEnabled(true);
 				throw new Exception("Pleace Test Connection");				
 			}
+			
 			
 			setErrorMessage(null);
 			setPageComplete(true);
@@ -278,7 +304,57 @@ public class WizardDatabaseConnection extends WizardPage {
 		super.setPageComplete(complete);
 		if(complete==true){
 			EclipseGeneratorUtil.jarList=listJARs.getItems();
+			
 		}
 	}
+	
+	public Text getTxtConnectionURL() {
+		return txtConnectionURL;
+	}
+
+	public void setTxtConnectionURL(Text txtConnectionURL) {
+		this.txtConnectionURL = txtConnectionURL;
+	}
+
+	public Text getTxtUserName() {
+		return txtUserName;
+	}
+
+	public void setTxtUserName(Text txtUserName) {
+		this.txtUserName = txtUserName;
+	}
+
+	public Text getTxtPassword() {
+		return txtPassword;
+	}
+
+	public void setTxtPassword(Text txtPassword) {
+		this.txtPassword = txtPassword;
+	}
+
+	public List getListJARs() {
+		return listJARs;
+	}
+
+	public void setListJARs(List listJARs) {
+		this.listJARs = listJARs;
+	}
+	
+	public Text getTxtDriverClassName() {
+		return txtDriverClassName;
+	}
+
+	public void setTxtDriverClassName(Text txtDriverClassName) {
+		this.txtDriverClassName = txtDriverClassName;
+	}
+
+	public Text getTxtDriverName() {
+		return txtDriverName;
+	}
+
+	public void setTxtDriverName(Text txtDriverName) {
+		this.txtDriverName = txtDriverName;
+	}
+
 	
 }
