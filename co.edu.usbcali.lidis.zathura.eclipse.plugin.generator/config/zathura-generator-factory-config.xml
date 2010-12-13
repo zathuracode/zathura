@@ -5,7 +5,7 @@
    
 	<generator>
 		<name>ZathuraJavaEE_Web_Centric</name>
-		<gui-name>JavaEE JPA Web Centric</gui-name>
+		<gui-name>IceFaces + JPA</gui-name>
 		<class>co.edu.usbcali.lidis.zathura.generator.jee.jpa.webcentric.engine.ZathuraJavaEE_JPA_Web_Centric</class>
 		<persistence>jpa</persistence>
 		<description>
@@ -60,7 +60,7 @@
 	
 	<generator>
 		<name>ZathuraJavaEE_HibernateCore_Web_Centric</name>
-		<gui-name>JavaEE HibernateCore Web Centric</gui-name>
+		<gui-name>IceFaces + HibernateCore</gui-name>
 		<class>co.edu.usbcali.lidis.zathura.generator.jee.hibernatecore.webcentric.engine.ZathuraJavaEE_HibernateCore_Web_Centric</class>
 		<persistence>hibernateCore</persistence>
 		<description>
@@ -116,7 +116,7 @@
 	
 	<generator>
 		<name>ZathuraJavaEE_HibernateCore_Spring_Web_Centric</name>
-		<gui-name>JavaEE HibernateCore Spring Web Centric</gui-name>
+		<gui-name>IceFaces + Hibernate Core + Spring</gui-name>
 		<class>co.edu.usbcali.lidis.zathura.generator.jee.hibernatecore.springcentric.engine.ZathuraJavaEE_HibernateCore_Web_Spring_Centric</class>
 		<persistence>hibernateCore</persistence>
 		<description>
@@ -170,7 +170,7 @@
 	
 	<generator>
 		<name>ZathuraJavaEE_GWT_Centric</name>
-		<gui-name>JavaEE GWT Centric</gui-name>
+		<gui-name>GWT + JPA</gui-name>
 		<class>co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.ZathuraJavaEE_Gwt_Centric</class>
 		<persistence>jpa</persistence>
 		<description>
