@@ -14,11 +14,11 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecores.pringcentric.utils.IStringBuilder;
-import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecores.pringcentric.utils.IStringBuilderForId;
-import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecores.pringcentric.utils.StringBuilder;
-import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecores.pringcentric.utils.StringBuilderForId;
-import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecores.pringcentric.utils.Utilities;
+import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecore.springcentric.utils.IStringBuilder;
+import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecore.springcentric.utils.IStringBuilderForId;
+import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecore.springcentric.utils.StringBuilder;
+import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecore.springcentric.utils.StringBuilderForId;
+import co.edu.usbcali.lidis.zathura.generator.jee.hibernatecore.springcentric.utils.Utilities;
 import co.edu.usbcali.lidis.zathura.generator.model.IZathuraGenerator;
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.generator.utilities.JalopyCodeFormatter;
