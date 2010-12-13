@@ -23,6 +23,7 @@ public class GeneratorUtil {
 	
 	private static String fullPath="";
 	private static String xmlConfigFactoryPath ="config" + slash + FileName;
+	private static String xmlConfig ="config" + slash;
 	
 	
 	//JavaEEJPAWebCentric
@@ -79,6 +80,13 @@ public class GeneratorUtil {
 	public static String getXmlConfigFactoryPath() {
 		if(fullPath!=null && fullPath.equals("")!=true){
 			return fullPath+xmlConfigFactoryPath;
+		}
+		return xmlConfigFactoryPath;
+	}
+	
+	public static String getXmlConfig() {
+		if(fullPath!=null && fullPath.equals("")!=true){
+			return fullPath+xmlConfig+slash;
 		}
 		return xmlConfigFactoryPath;
 	}
