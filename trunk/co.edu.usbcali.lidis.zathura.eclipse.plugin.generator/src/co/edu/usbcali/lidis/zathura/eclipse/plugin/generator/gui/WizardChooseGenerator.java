@@ -34,7 +34,7 @@ public class WizardChooseGenerator extends WizardPage {
 	public WizardChooseGenerator() {
 		super("wizardPage");		
 		setTitle("Zathura Java Code Generator");
-		setDescription("Generate Java Application based on Open Standards and JEE Design Patterns");			
+		setDescription("Generate Java Application based on Open Standards and JavaEE Design Patterns");			
 		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
 		setPageComplete(false);
 	}

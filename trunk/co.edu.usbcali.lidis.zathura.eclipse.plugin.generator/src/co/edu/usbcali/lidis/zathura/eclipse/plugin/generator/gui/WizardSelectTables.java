@@ -310,7 +310,7 @@ public class WizardSelectTables extends WizardPage {
 		}
 		return tablesList;
 	}
-	private void resetForm() {
+	public void resetForm() {
 		txtTableFilter.setText("%");
 		cmbCatlogSchema.removeAll();
 		listAvailableTables.removeAll();
