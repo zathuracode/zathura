@@ -74,6 +74,7 @@ public class ConnectionsUtils {
 			connectionModel.setPassword(properties.getProperty(nameConnection+"-"+"password"));
 			connectionModel.setUrl(properties.getProperty(nameConnection+"-"+"url"));
 			connectionModel.setUser(properties.getProperty(nameConnection+"-"+"user"));
+			connectionModel.setDriverTemplate(properties.getProperty(nameConnection+"-"+"driverTemplate"));
 			theZathuraConnections.put(nameConnection,connectionModel);
 		}
 	}
@@ -121,6 +122,8 @@ public class ConnectionsUtils {
 		properties.remove(connectionName+"-password");
 		properties.remove(connectionName+"-url");
 		properties.remove(connectionName+"-user");
+		properties.remove(connectionName+"-driverTemplate");
+		
 		
 		theZathuraConnections.remove(connectionName);
 		
@@ -134,6 +137,9 @@ public class ConnectionsUtils {
 	public static void saveConnectionModel(ConnectionModel connectionModel)throws Exception{
 		if(connectionModel==null){
 			throw new Exception("Connection model null");
+		}
+		if(connectionModel.getDriverTemplate()==null || connectionModel.getDriverTemplate().trim().equals("")==true){
+			throw new Exception("Driver Template null");
 		}
 		if(connectionModel.getDriverClassName()==null || connectionModel.getDriverClassName().trim().equals("")==true){
 			throw new Exception("DriverClassName null");
@@ -153,9 +159,11 @@ public class ConnectionsUtils {
 		if(connectionModel.getUser()==null || connectionModel.getUser().trim().equals("")==true){
 			throw new Exception("User null");
 		}
+		/*
 		if(connectionExist(connectionModel.getName())==true){
 			throw new Exception("A driver with that name already exists");
 		}
+		*/
 		
 		properties.put(connectionModel.getName()+"-name", connectionModel.getName());
 		properties.put(connectionModel.getName()+"-driverClass", connectionModel.getDriverClassName());
@@ -163,6 +171,7 @@ public class ConnectionsUtils {
 		properties.put(connectionModel.getName()+"-password", connectionModel.getPassword());
 		properties.put(connectionModel.getName()+"-url", connectionModel.getUrl());
 		properties.put(connectionModel.getName()+"-user", connectionModel.getUser());
+		properties.put(connectionModel.getName()+"-driverTemplate", connectionModel.getDriverTemplate());
 		
 		//Graba en el properties
 		store();

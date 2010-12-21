@@ -48,12 +48,20 @@ public class WizardDatabaseConnection extends WizardPage {
 	private boolean testConnection=false;
 	private Text txtDriverName;
 	
-	
 
 	
-
-
-
+	private String driverTemplate;
+	private String name;
+	private String url;
+	private String user;
+	private String password;
+	private String driverClassName;
+	private String jarPath;
+	
+	
+	
+	
+	
 	/**
 	 * Create the wizard
 	 */
@@ -63,6 +71,23 @@ public class WizardDatabaseConnection extends WizardPage {
 		setDescription("Create a new connection driver");		
 		setPageComplete(false);
 	}
+	
+	/*
+	public WizardDatabaseConnection(String driverTemplate,String name, String url, String user,String password, String driverClassName, String jarPath) {
+		super("wizardPage");
+		setTitle("New Database Connection");
+		setDescription("Create a new connection driver");		
+		setPageComplete(false);
+		
+		this.driverTemplate=driverTemplate;
+		this.name=name;
+		this.url=url;
+		this.user=user;
+		this.password=password;
+		this.driverClassName=driverClassName;
+		this.jarPath=jarPath;
+	}
+	*/
 	
 	
 
@@ -237,6 +262,42 @@ public class WizardDatabaseConnection extends WizardPage {
 		
 		loadCmbDriverTemplate();
 		
+		
+		loadEditValues();
+		
+	}
+	
+	private void loadEditValues(){
+		/*
+		 * 	private String driverTemplate;
+	private String name;
+	private String url;
+	private String user;
+	private String password;
+	private String driverClassName;
+	private String jarPath;
+		 */
+		if(driverTemplate!=null && driverTemplate.equals("")!=true && 
+		   name!=null && name.equals("")!=true && 
+		   url!=null && url.equals("")!=true && 
+		   user!=null && user.equals("")!=true && 
+		   password!=null && password.equals("")!=true && 
+		   driverClassName!=null && driverClassName.equals("")!=true && 
+		   jarPath!=null && jarPath.equals("")!=true){
+			
+			getCmbDriverTemplate().setText(driverTemplate);
+			getTxtDriverName().setText(name);
+			getTxtConnectionURL().setText(url);
+			getTxtDriverClassName().setText(driverClassName);
+			getTxtPassword().setText(password);
+			getTxtUserName().setText(user);
+			getListJARs().removeAll();
+			getListJARs().add(jarPath);
+			
+			btnTestDriver.setEnabled(true);
+		}
+		
+		
 	}
 	
 	private void validatePageComplete(){		
@@ -246,7 +307,7 @@ public class WizardDatabaseConnection extends WizardPage {
 			if(txtDriverName.getText()==null || txtDriverName.getText().equals("")==true){
 				throw new Exception("No driver name specified");
 			}
-			if(ConnectionsUtils.connectionExist(txtDriverName.getText())==true){
+			if(ConnectionsUtils.connectionExist(txtDriverName.getText())==true && (name==null || name.equals("")==true)){
 				throw new Exception("A driver with that name already exists");
 			}
 			if(listJARs.getItems()==null || listJARs.getItems().length==0){
@@ -356,5 +417,69 @@ public class WizardDatabaseConnection extends WizardPage {
 		this.txtDriverName = txtDriverName;
 	}
 
+	public Combo getCmbDriverTemplate() {
+		return cmbDriverTemplate;
+	}
+
+	public void setCmbDriverTemplate(Combo cmbDriverTemplate) {
+		this.cmbDriverTemplate = cmbDriverTemplate;
+	}
+
+	public String getDriverTemplate() {
+		return driverTemplate;
+	}
+
+	public void setDriverTemplate(String driverTemplate) {
+		this.driverTemplate = driverTemplate;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getDriverClassName() {
+		return driverClassName;
+	}
+
+	public void setDriverClassName(String driverClassName) {
+		this.driverClassName = driverClassName;
+	}
+
+	public String getJarPath() {
+		return jarPath;
+	}
+
+	public void setJarPath(String jarPath) {
+		this.jarPath = jarPath;
+	}
 	
+
 }

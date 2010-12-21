@@ -2,6 +2,7 @@ package co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities;
 
 public class ConnectionModel {
 	
+	private String driverTemplate;
 	private String name;
 	private String url;
 	private String user;
@@ -13,9 +14,10 @@ public class ConnectionModel {
 		
 	}
 	
-	public ConnectionModel(String name, String url, String user,
+	public ConnectionModel(String driverTemplate,String name, String url, String user,
 			String password, String driverClassName, String jarPath) {
 		super();
+		this.driverTemplate=driverTemplate;
 		this.name = name;
 		this.url = url;
 		this.user = user;
@@ -59,6 +61,14 @@ public class ConnectionModel {
 	}
 	public void setDriverClassName(String driverClassName) {
 		this.driverClassName = driverClassName;
+	}
+
+	public String getDriverTemplate() {
+		return driverTemplate;
+	}
+
+	public void setDriverTemplate(String driverTemplate) {
+		this.driverTemplate = driverTemplate;
 	}
 	
 	

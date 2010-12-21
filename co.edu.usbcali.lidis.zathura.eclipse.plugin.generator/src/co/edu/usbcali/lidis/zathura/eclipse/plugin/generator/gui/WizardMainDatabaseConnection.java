@@ -13,22 +13,62 @@ public class WizardMainDatabaseConnection extends Wizard {
 	
 	private WizardDatabaseConnection wizardDatabaseConnection;
 
+	
+	
 	public WizardMainDatabaseConnection() {
 		super();
 		setWindowTitle("Zathura Code Generator V2.1.1");
 		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
+		wizardDatabaseConnection=new WizardDatabaseConnection();
 	}
+	
+	
+	
+	
+	/*
+	 * 
+	 * private Text txtConnectionURL;
+	private Text txtUserName;
+	private Text txtPassword;
+	private Combo cmbDriverTemplate;
+	private List listJARs;
+	private Text txtDriverClassName;
+	private Button btnTestDriver;
+	private boolean testConnection=false;
+	private Text txtDriverName;
+	
+	 */
+	public WizardMainDatabaseConnection(String connectionName) {
+		super();
+		setWindowTitle("Zathura Code Generator V2.1.1");
+		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
+		ConnectionModel connectionModel= ConnectionsUtils.getTheZathuraConnectionModel(connectionName);
+		
+		wizardDatabaseConnection=new WizardDatabaseConnection();
+		wizardDatabaseConnection.setDriverTemplate(connectionModel.getDriverTemplate());
+		wizardDatabaseConnection.setName(connectionModel.getName());
+		wizardDatabaseConnection.setUrl(connectionModel.getUrl());
+		wizardDatabaseConnection.setUser(connectionModel.getUser());
+		wizardDatabaseConnection.setPassword(connectionModel.getPassword());
+		wizardDatabaseConnection.setDriverClassName(connectionModel.getDriverClassName());
+		wizardDatabaseConnection.setJarPath(connectionModel.getJarPath());
+		wizardDatabaseConnection.setTitle("Edit Database Connection");
+		wizardDatabaseConnection.setDescription("Edit a connection driver");
+		
+	}
+	
 
 	@Override
 	public void addPages() {
-		wizardDatabaseConnection=new WizardDatabaseConnection();
+		
 		addPage(wizardDatabaseConnection);
 	}
 
 	@Override
 	public boolean performFinish() {
 		try {
-			ConnectionModel connectionModel=new ConnectionModel(wizardDatabaseConnection.getTxtDriverName().getText(), 
+			ConnectionModel connectionModel=new ConnectionModel(wizardDatabaseConnection.getCmbDriverTemplate().getText(),
+																wizardDatabaseConnection.getTxtDriverName().getText(), 
 																wizardDatabaseConnection.getTxtConnectionURL().getText(), 
 																wizardDatabaseConnection.getTxtUserName().getText(),
 																wizardDatabaseConnection.getTxtPassword().getText(), 
@@ -36,6 +76,7 @@ public class WizardMainDatabaseConnection extends Wizard {
 																wizardDatabaseConnection.getListJARs().getItem(0));
 			
 			ConnectionsUtils.saveConnectionModel(connectionModel);
+			WizardSelectDBConnection.loadConnections();
 		} catch (Exception e) {			
 			MessageDialog.openError(getShell(),"Error",e.getMessage());
 			return false;
@@ -44,4 +85,13 @@ public class WizardMainDatabaseConnection extends Wizard {
 		return true;
 	}
 
+	public WizardDatabaseConnection getWizardDatabaseConnection() {
+		return wizardDatabaseConnection;
+	}
+
+	public void setWizardDatabaseConnection(
+			WizardDatabaseConnection wizardDatabaseConnection) {
+		this.wizardDatabaseConnection = wizardDatabaseConnection;
+	}
+	
 }
