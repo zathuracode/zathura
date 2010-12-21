@@ -21,7 +21,7 @@ import $package.${metaData.getRealClassName()};
     #end
 #end
 
-@Scope("prototype")
+@Scope("singleton")
 @Service("${metaData.getRealClassName()}Logic")
 public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealClassName()}Logic{
 
