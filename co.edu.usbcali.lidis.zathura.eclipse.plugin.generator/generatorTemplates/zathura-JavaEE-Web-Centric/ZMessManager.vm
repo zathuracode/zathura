@@ -10,7 +10,7 @@ public class ZMessManager extends Exception {
 	public static String ENTITY_SUCCESFULLYDELETED = "Entity succesfully deleted";
 	public static String ENTITY_SUCCESFULLYMODIFIED = "Entity succesfully modified";
 	public static String ENTITY_WITHSAMEKEY = "Another Entity with the same key was found";
-	public static String ENTITY_NOENTITYTOUPDATE = "No Entity was found, with the typed key";
+	public static String ENTITY_NOENTITYTOUPDATE = "No Entity was found, with the typed key ";
 
 	public ZMessManager() {
 	}
@@ -52,9 +52,17 @@ public class ZMessManager extends Exception {
 			super("The Entity you are trying to delete "
 					+ "may have related information, "
 					+ "please before trying again, "
-					+ "check the data on the entity " + info);
+					+ "check the data on the entity, \"" + info+"\"");
 		}
 	}
+	
+	public class ForeignException extends ZMessManager {
+		private static final long serialVersionUID = 1L;
+
+		public ForeignException(String info) {
+			super("There was no data related with the input \"" + info+ "\"");
+		}
+	}	
 
 	public class GettingException extends ZMessManager {
 		private static final long serialVersionUID = 1L;

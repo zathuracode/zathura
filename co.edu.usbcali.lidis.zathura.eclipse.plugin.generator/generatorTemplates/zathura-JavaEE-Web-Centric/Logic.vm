@@ -45,7 +45,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                 #end
                 #foreach($member  in ${metaData.getManyToOneProperties()})
                     if(${member.getShowName()}Class==null){
-						throw new ZMessManager().new EmptyFieldException("${member.getShowName()}");
+						throw new ZMessManager().new ForeignException("${member.getShowName()}");
                     }
                 #end
             #end
@@ -170,7 +170,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                 #end
                 #foreach($member  in ${metaData.getManyToOneProperties()})
                     if(${member.getShowName()}Class==null){
-                    throw new ZMessManager().new EmptyFieldException("${member.getShowName()}");
+                    throw new ZMessManager().new ForeignException("${member.getShowName()}");
                     }
                 #end
             #end
