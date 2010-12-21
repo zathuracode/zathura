@@ -35,9 +35,9 @@ public class TestConnectionsUtils {
 	}
 	
 	private static void saveConnection(){
-		ConnectionModel connectionModel=new ConnectionModel("as/400", "urlas400", "dgomez", "sadjasdk","com.vortexbird.Connection", "d:\\");
+		//ConnectionModel connectionModel=new ConnectionModel("as/400", "urlas400", "dgomez", "sadjasdk","com.vortexbird.Connection", "d:\\");
 		try {
-			ConnectionsUtils.saveConnectionModel(connectionModel);
+			//ConnectionsUtils.saveConnectionModel(connectionModel);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
