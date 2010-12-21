@@ -1,4 +1,4 @@
-package  ${packageOriginal}.control;
+	package  ${packageOriginal}.control;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -8,29 +8,28 @@ import  ${virginPackage}.dataaccess.daoFactory.JPADaoFactory;
 import  ${virginPackage}.dataaccess.entityManager.EntityManagerHelper;
 import  ${virginPackage}.exceptions.*;
 import  ${virginPackage}.utilities.Utilities;
-import $package.${metaData.getRealClassName()};
-#if($isImports)
-    #foreach($member  in $imports)
-        import ${member};
-    #end
-#end
+import ${package}.*;
 /**
  *   
  * @author Zathura Code Generator http://code.google.com/p/zathura/
  *
  */
 public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealClassName()}Logic{
+
+
 public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception{
-    List<${metaData.getRealClassName()}> list = new ArrayList<${metaData.getRealClassName()}>();
+		List<${metaData.getRealClassName()}> list = new ArrayList<${metaData.getRealClassName()}>();
             try {
             list = JPADaoFactory.getInstance().get${metaData.getRealClassName()}DAO().findAll(0);
             } catch (Exception e) {
-            throw new Exception(ExceptionManager.getInstance().exceptionInGetAll());
+            throw new ZMessManager().new GettingException(ZMessManager.ALL+"${metaData.getRealClassName()}");
             }finally{
-            EntityManagerHelper.closeEntityManager();
             }
             return list;
             }
+			
+			
+			
             public void save${metaData.getRealClassName()}(${finalParam}) throws Exception {
             ${metaData.getRealClassName()} entity = null;
             try {
@@ -46,7 +45,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                 #end
                 #foreach($member  in ${metaData.getManyToOneProperties()})
                     if(${member.getShowName()}Class==null){
-                    throw new Exception(ExceptionMessages.VARIABLE_NULL);
+						throw new ZMessManager().new EmptyFieldException("${member.getShowName()}");
                     }
                 #end
             #end
@@ -61,7 +60,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()});
             #end
             if(entity != null){
-            throw new Exception(ExceptionMessages.ENTITY_WITHSAMEKEY);
+				throw new ZMessManager(ZMessManager.ENTITY_WITHSAMEKEY);
             }
             entity = new 		${metaData.getRealClassName()}();	
             #if(${metaData.isGetSimpleProperties()})
@@ -69,13 +68,13 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     #if(${member2.getRealClassName()}==${metaData.getPrimaryKey().getRealClassName()})
                         #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
                             entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()}Class);
-                            #else
+                        #else
                                 entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()});
-                        #end
+						#end
                         #else
                             entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()});
-                    #end
-                #end
+						#end
+				#end
             #end
             #if(${metaData.isGetManyToOneProperties()})
                 #foreach($member  in ${metaData.getManyToOneProperties()})
@@ -92,12 +91,15 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             EntityManagerHelper.closeEntityManager();
             }
             }
+			
+			
+			
             public void delete${metaData.getRealClassName()}(${finalParamForId}) throws Exception {
             ${metaData.getRealClassName()} entity = null;
             #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
                 #foreach($idStringAsVariable  in $finalParamForIdClassAsVariables)
                     if($idStringAsVariable==null){
-                    throw new Exception(ExceptionMessages.VARIABLE_NULL);
+                    throw new ZMessManager().new EmptyFieldException("$idStringAsVariable");
                     }
                 #end
                 #foreach($idString  in $finalParamForIdClass)
@@ -105,7 +107,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                 #end
                 #else
                     if(${metaData.primaryKey.getShowName()}==null){
-                    throw new Exception(ExceptionMessages.VARIABLE_NULL);
+                   throw new ZMessManager().new EmptyFieldException("${metaData.primaryKey.getShowName()}");
                     }
             #end
             #if(${metaData.isGetOneToManyProperties()})
@@ -119,7 +121,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()});
             #end
             if (entity == null) {
-            throw new Exception(ExceptionMessages.ENTITY_NULL);
+            throw new ZMessManager().new EmptyFieldException("${metaData.getRealClassName()}");
             }
             try {
             #if(${metaData.isGetOneToManyProperties()})
@@ -127,23 +129,19 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
                         ${member.name}= JPADaoFactory.getInstance().get${member.getRealClassName()}DAO().findByProperty("${metaData.getRealClassNameAsVariable()}.${metaData.primaryKey.getShowName()}", ${metaData.primaryKey.getShowName()}Class, 0);
                         if(Utilities.validationsList(${member.name})==true){
-                        throw new Exception(ExceptionManager.getInstance().exceptionDeletingEntityWithChild());
+                        throw new ZMessManager().new DeletingException("${member.name}");
                         }
                         #else
                             ${member.name}= JPADaoFactory.getInstance().get${member.getRealClassName()}DAO().findByProperty("${metaData.getRealClassNameAsVariable()}.${metaData.primaryKey.getShowName()}", ${metaData.primaryKey.getShowName()}, 0);
                             if(Utilities.validationsList(${member.name})==true){
-                            throw new Exception(ExceptionManager.getInstance().exceptionDeletingEntityWithChild());
+                            throw new ZMessManager().new DeletingException("${member.name}");
                             }
                     #end
                 #end
-                EntityManagerHelper.beginTransaction();
-                JPADaoFactory.getInstance().get${metaData.getRealClassName()}DAO().delete(entity);
-                EntityManagerHelper.commit();
-                #else
-                    EntityManagerHelper.beginTransaction();
-                    JPADaoFactory.getInstance().get${metaData.getRealClassName()}DAO().delete(entity);
-                    EntityManagerHelper.commit();
-            #end
+			#end
+			EntityManagerHelper.beginTransaction();
+            JPADaoFactory.getInstance().get${metaData.getRealClassName()}DAO().delete(entity);
+            EntityManagerHelper.commit();
             } catch (Exception e) {
 			EntityManagerHelper.rollback();
             throw e;
@@ -152,6 +150,10 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             EntityManagerHelper.closeEntityManager();
             }
             }
+			
+			
+			
+			
             public void update${metaData.getRealClassName()}(${finalParam}) throws Exception {
             ${metaData.getRealClassName()} entity = null;
             try {
@@ -164,12 +166,11 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     I${member.getRealClassName()}Logic logic${member.getRealClassName()}$velocityCount= new 					${member.getRealClassName()}Logic();
                 #end
                 #foreach($member  in $getStringsForManyToOneProperties)
-                	//Cali
                     $member
                 #end
                 #foreach($member  in ${metaData.getManyToOneProperties()})
                     if(${member.getShowName()}Class==null){
-                    throw new Exception(ExceptionMessages.VARIABLE_NULL);
+                    throw new ZMessManager().new EmptyFieldException("${member.getShowName()}");
                     }
                 #end
             #end
@@ -184,7 +185,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()});
             #end
             if(entity == null){
-            throw new Exception(ExceptionMessages.ENTITY_NOENTITYTOUPDATE);
+            throw new ZMessManager(ZMessManager.ENTITY_NOENTITYTOUPDATE);
             }
             #if(${metaData.isGetSimpleProperties()})
                 #foreach($member2  in ${metaData.getSimpleProperties()})
@@ -214,17 +215,22 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             EntityManagerHelper.closeEntityManager();
             }
             }
+			
+			
+			
             public ${metaData.getRealClassName()} get${metaData.getRealClassName()}(${metaData.primaryKey.getRealClassName()} ${metaData.primaryKey.getShowName()}) throws Exception {
             ${metaData.getRealClassName()} entity = null;
             try {
             entity = JPADaoFactory.getInstance().get${metaData.getRealClassName()}DAO().findById(${metaData.primaryKey.getShowName()});
             } catch (Exception e) {
-            throw new Exception(ExceptionManager.getInstance().exceptionFindingEntity("${metaData.getRealClassName()}"));
+			throw new ZMessManager().new FindingException("${metaData.getRealClassName()}");
             }finally{
-            EntityManagerHelper.closeEntityManager();
             }
             return entity;
             }
+			
+			
+			
             public List<${metaData.getRealClassName()}> findPage${metaData.getRealClassName()}(String sortColumnName, boolean sortAscending,
                 int startRow, int maxResults) throws Exception {
                 List<${metaData.getRealClassName()}> entity = null;
@@ -233,26 +239,28 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     .findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow,
                     maxResults);
                     } catch (Exception e) {
-                    throw new Exception(ExceptionManager.getInstance()
-                    .exceptionFindingEntity("${metaData.getRealClassName()}"));
+					throw new ZMessManager().new FindingException("${metaData.getRealClassName()}");
                     } finally {
-                    EntityManagerHelper.closeEntityManager();
                     }
                     return entity;
                     }
+					
+					
+					
                     public Long findTotalNumber${metaData.getRealClassName()}() throws Exception {
                     Long entity = null;
                     try {
                     entity = JPADaoFactory.getInstance().get${metaData.getRealClassName()}DAO()
                     .findTotalNumber${metaData.getRealClassName()}();
                     } catch (Exception e) {
-                    throw new Exception(ExceptionManager.getInstance()
-                    .exceptionFindingEntity("${metaData.getRealClassName()} Count"));
+					throw new ZMessManager().new FindingException("${metaData.getRealClassName()} Count");
                     } finally {
-                    EntityManagerHelper.closeEntityManager();
                     }
                     return entity;
                     }
+					
+					
+					
                     /**
                     * 
                     * @param varibles

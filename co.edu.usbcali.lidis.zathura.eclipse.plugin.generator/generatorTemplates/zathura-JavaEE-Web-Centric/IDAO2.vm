@@ -13,6 +13,14 @@ import $package.${metaData.getRealClassName()};
  * @author Zathura Code Generator http://code.google.com/p/zathura/
  */
 public interface I${metaData.getRealClassName()}DAO {
+// property constants
+#foreach($member  in $metaData.properties)
+    #set( $prop = ${member.name} ) #set( $propUpper = $prop.toString().toUpperCase() )
+    #if(${member.isSimpleMember()})
+        //public static final $member.getRealClassName()  $propUpper = "${member.name}";
+        public static final String  $propUpper = "${member.name}";
+    #end
+#end
 /**
 * Perform an initial save of a previously unsaved ${metaData.getRealClassName()} entity. All
 * subsequent persist actions of this entity should use the #update()
