@@ -45,8 +45,8 @@ public class Utilities {
 
 	public String ifcondition = "if(";
 	public String ifconditionClose = "){";
-	public String throwExceptionNull = "throw new Exception(ExceptionMessages.VARIABLE_NULL+";
-	public String throwExceptionLength = "throw new Exception(ExceptionMessages.VARIABLE_LENGTH+";
+	public String throwExceptionNull = "throw new ZMessManager().new EmptyFieldException(";
+	public String throwExceptionLength = "throw new ZMessManager().new NotValidFormatException(";
 	public String throwExceptionClose = ");}";
 
 	public List<String> dates;

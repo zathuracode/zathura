@@ -41,51 +41,11 @@ public class StringBuilderForId implements IStringBuilderForId {
 						(field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
-				// finalParam = finalParam + "new " + realType + "((String)txt"
-				// + nameWithCapitalOnFirst + ".getValue()), ";
-				if (realType.equalsIgnoreCase("date")) {
-					finalParam = finalParam + "(txt" + nameWithCapitalOnFirst
-							+ ".getValue())==null||(txt"
-							+ nameWithCapitalOnFirst
-							+ ".getValue()).equals(\"\")?null:(" + realType
-							+ ")txt" + nameWithCapitalOnFirst + ".getValue(), ";
-				} else {
-					finalParam = finalParam + "(txt" + nameWithCapitalOnFirst
-							+ ".getValue())==null||(txt"
-							+ nameWithCapitalOnFirst
-							+ ".getValue()).equals(\"\")?null:new " + realType
-							+ "(txt" + nameWithCapitalOnFirst
-							+ ".getValue().toString()), ";
-				}
+				finalParam = finalParam + "FacesUtils.check"+realType+"(txt"+nameWithCapitalOnFirst+"), ";
 
 			}
 		} else {
-			// finalParam = "new " + metaData.getPrimaryKey().getRealClassName()
-			// + "((String) txt"
-			// + metaData.getPrimaryKey().getGetNameOfPrimaryName()
-			// + ".getValue())";
-
-			if (metaData.getPrimaryKey().getRealClassName().equalsIgnoreCase(
-					"date")) {
-				finalParam = "(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue())==null||(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue()).equals(\"\")?null:("
-						+ metaData.getPrimaryKey().getRealClassName() + ")txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue(), ";
-			} else {
-				finalParam = "(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue())==null||(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue()).equals(\"\")?null:new "
-						+ metaData.getPrimaryKey().getRealClassName() + "(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue().toString()), ";
-			}
-
+			finalParam = "FacesUtils.check"+metaData.getPrimaryKey().getRealClassName()+"(txt"+metaData.getPrimaryKey().getGetNameOfPrimaryName()+"), ";
 		}
 
 		String finalCharacter = "" + finalParam.charAt(finalParam.length() - 2);

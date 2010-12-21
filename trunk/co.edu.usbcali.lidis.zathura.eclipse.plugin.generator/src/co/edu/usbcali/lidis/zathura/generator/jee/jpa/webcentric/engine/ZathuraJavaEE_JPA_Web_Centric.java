@@ -362,7 +362,6 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator,
 			doJsp(metaData, context, hdLocation, dataModel);
 			doLogic(metaData, context, hdLocation, dataModel, modelName);
 			doDto(metaData, context, hdLocation, dataModel, modelName);
-			doExceptions(context, hdLocation);
 		}
 
 		doUtilites(context, hdLocation, dataModel, modelName);
@@ -373,6 +372,7 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator,
 		doJspInitialMenu(dataModel, context, hdLocation);
 		doFacesConfig(dataModel, context, hdLocation);
 		doJspFacelets(context, hdLocation);
+		doExceptions(context, hdLocation);
 	}
 
 	public void doLogic(MetaData metaData, VelocityContext context,
@@ -497,17 +497,20 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator,
 		log.info("Begin doUtilites");
 
 		Template utilities = null;
+		Template utilitiesFacesUtils = null;
 		Template utilitiesDataPage = null;
 		Template utilitiesDataSource = null;
 		Template utilitiesPagedListDataModel = null;
 
 		StringWriter swUtilities = new StringWriter();
+		StringWriter swUtilitiesFacesUtils = new StringWriter();
 		StringWriter swUtilitiesDataPage = new StringWriter();
 		StringWriter swUtilitiesDataSource = new StringWriter();
 		StringWriter swUtilitiesPagedListDataModel = new StringWriter();
 
 		try {
 			utilities = ve.getTemplate("Utilities.vm");
+			utilitiesFacesUtils = ve.getTemplate("FacesUtils.vm");
 			utilitiesDataPage = ve.getTemplate("DataPage.vm");
 			utilitiesDataSource = ve.getTemplate("DataSource.vm");
 			utilitiesPagedListDataModel = ve
@@ -529,6 +532,7 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator,
 		try {
 
 			utilities.merge(context, swUtilities);
+			utilitiesFacesUtils.merge(context, swUtilitiesFacesUtils);
 			utilitiesDataPage.merge(context, swUtilitiesDataPage);
 			utilitiesDataSource.merge(context, swUtilitiesDataSource);
 			utilitiesPagedListDataModel.merge(context,
@@ -543,6 +547,12 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator,
 			out.write(swUtilities.toString());
 			// Close the output stream
 			out.close();
+			
+			FileWriter fstreamfu = new FileWriter(realLocation + "FacesUtils.java");
+			BufferedWriter outfu = new BufferedWriter(fstreamfu);
+			outfu.write(swUtilitiesFacesUtils.toString());
+			// Close the output stream
+			outfu.close();			
 
 			FileWriter fstream2 = new FileWriter(realLocation + "DataPage.java");
 			BufferedWriter out2 = new BufferedWriter(fstream2);
@@ -567,6 +577,8 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator,
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation
 					+ "Utilites.java");
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation
+					+ "FacesUtils.java");		
+			JalopyCodeFormatter.formatJavaCodeFile(realLocation
 					+ "DataPage.java");
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation
 					+ "DataSource.java");
@@ -585,14 +597,11 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator,
 		log.info("Begin doException");
 
 		Template exceptions = null;
-		Template exceptions2 = null;
 
 		StringWriter swExceptions = new StringWriter();
-		StringWriter swExceptions2 = new StringWriter();
 
 		try {
-			exceptions2 = ve.getTemplate("ExceptionManager.vm");
-			exceptions = ve.getTemplate("ExceptionMessages.vm");
+			exceptions = ve.getTemplate("ZMessManager.vm");
 
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -610,30 +619,20 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator,
 
 		try {
 			exceptions.merge(context, swExceptions);
-			exceptions2.merge(context, swExceptions2);
-			// System.out.println(swIdao);
-			// System.out.println(swdao);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
 					+ virginPackageInHd + GeneratorUtil.slash + "exceptions"
 					+ GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
-					+ "ExceptionMessages.java");
+					+ "ZMessManager.java");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swExceptions.toString());
 			// Close the output stream
 			out.close();
 
-			FileWriter fstream2 = new FileWriter(realLocation
-					+ "ExceptionManager.java");
-			BufferedWriter out2 = new BufferedWriter(fstream2);
-			out2.write(swExceptions2.toString());
-			// Close the output stream
-			out2.close();
-
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation
-					+ "ExceptionManager.java");
+					+ "ZMessManager.java");
 
 			log.info("End doException");
 
