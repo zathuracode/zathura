@@ -23,14 +23,7 @@ import $package.${metaData.getRealClassName()};
 *
 */
 public class ${metaData.getRealClassName()}DAO implements I${metaData.getRealClassName()}DAO {
-// property constants
-#foreach($member  in $metaData.properties)
-    #set( $prop = ${member.name} ) #set( $propUpper = $prop.toString().toUpperCase() )
-    #if(${member.isSimpleMember()})
-        //public static final $member.getRealClassName()  $propUpper = "${member.name}";
-        public static final String  $propUpper = "${member.name}";
-    #end
-#end
+
 private EntityManager getEntityManager() {
 return EntityManagerHelper.getEntityManager();
 }
