@@ -411,7 +411,6 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                                                                     } catch (Exception e) {
                                                                     throw new Exception(e.getMessage());
                                                                     } finally {
-                                                                    EntityManagerHelper.closeEntityManager();
                                                                     }
                                                                     return list;
                                                                     }
