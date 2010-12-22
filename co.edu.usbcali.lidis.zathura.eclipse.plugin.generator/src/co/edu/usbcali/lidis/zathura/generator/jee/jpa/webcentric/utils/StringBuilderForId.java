@@ -9,9 +9,9 @@ import co.edu.usbcali.lidis.zathura.metadata.model.ManyToOneMember;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 
-
 /**
  * Zathura Generator
+ * 
  * @author William Altuzarra (williamaltu@gmail.com)
  * @version 1.0
  */
@@ -24,8 +24,13 @@ public class StringBuilderForId implements IStringBuilderForId {
 		neededIds(list);
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdClassAsVariablesAsString(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId
+	 * #finalParamForIdClassAsVariablesAsString(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public String finalParamForIdClassAsVariablesAsString(List<MetaData> list,
 			MetaData metaData) {
@@ -41,11 +46,15 @@ public class StringBuilderForId implements IStringBuilderForId {
 						(field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
-				finalParam = finalParam + "FacesUtils.check"+realType+"(txt"+nameWithCapitalOnFirst+"), ";
+				finalParam = finalParam + "FacesUtils.check" + realType
+						+ "(txt" + nameWithCapitalOnFirst + "), ";
 
 			}
 		} else {
-			finalParam = "FacesUtils.check"+metaData.getPrimaryKey().getRealClassName()+"(txt"+metaData.getPrimaryKey().getGetNameOfPrimaryName()+"), ";
+			finalParam = "FacesUtils.check"
+					+ metaData.getPrimaryKey().getRealClassName() + "(txt"
+					+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
+					+ "), ";
 		}
 
 		String finalCharacter = "" + finalParam.charAt(finalParam.length() - 2);
@@ -56,8 +65,12 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdClassAsVariables(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForIdClassAsVariables(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdClassAsVariables(List<MetaData> list,
 			MetaData metaData) {
@@ -85,8 +98,13 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForVariablesDataTablesForIdAsList(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId
+	 * #finalParamForVariablesDataTablesForIdAsList(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForVariablesDataTablesForIdAsList(
 			List<MetaData> theMetaData, MetaData metaData) {
@@ -110,15 +128,17 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdVariablesAsList(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForIdVariablesAsList(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdVariablesAsList(
 			List<MetaData> theMetaData, MetaData metaData) {
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
-		
-
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
@@ -209,31 +229,31 @@ public class StringBuilderForId implements IStringBuilderForId {
 								String variableNames = (tmp.split("_"))[0];
 								String className = (tmp.split("_"))[1];
 
-//								Boolean nullable = null;
-//
-//								try {
-//									nullable = manyToOneMember
-//											.getHashMapNullableColumn()
-//											.get(variableNames.toUpperCase());
-//								} catch (Exception e) {
-//									// TODO: handle exception
-//								}
+								Boolean nullable = null;
 
-//								if (nullable == null) {
-//									try {
-//										nullable = manyToOneMember
-//												.getHashMapNullableColumn()
-//												.get(className.toUpperCase());
-//									} catch (Exception e) {
-//										// TODO: handle exception
-//									}
-//								}
+								try {
+									nullable = manyToOneMember
+											.getHashMapNullableColumn()
+											.get(variableNames.toUpperCase());
+								} catch (Exception e) {
+									// // TODO: handle exception
+								}
+
+								if (nullable == null) {
+									try {
+										nullable = manyToOneMember
+												.getHashMapNullableColumn()
+												.get(className.toUpperCase());
+									} catch (Exception e) {
+										// // TODO: handle exception
+									}
+								}
 
 								Member primarySimple = Utilities.getInstance().manyToOneTempHash
 										.get(variableNames);
 
-//								try {
-//									if (nullable == false) {
+								try {
+									if (nullable == false) {
 										finalParam2
 												.add(Utilities.getInstance().ifcondition
 														+ tmp
@@ -247,10 +267,10 @@ public class StringBuilderForId implements IStringBuilderForId {
 														+ "\""
 														+ Utilities
 																.getInstance().throwExceptionClose);
-//									}
-//								} catch (Exception e) {
-//									// System.out.println(e.getMessage());
-//								}
+									}
+								} catch (Exception e) {
+//									 System.out.println(e.getMessage());
+								}
 
 								try {
 
@@ -356,16 +376,20 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam2;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdForViewVariablesInList(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForIdForViewVariablesInList(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdForViewVariablesInList(
 			List<MetaData> list, MetaData metaData) {
 
-//		if (metaData.getRealClassName().equalsIgnoreCase("DiaNoLaboral")) {
-//			String tmp = "";
-//			System.out.println(tmp);
-//		}
+		// if (metaData.getRealClassName().equalsIgnoreCase("DiaNoLaboral")) {
+		// String tmp = "";
+		// System.out.println(tmp);
+		// }
 
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
@@ -406,8 +430,13 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam2;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdForViewForSetsVariablesInList(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId
+	 * #finalParamForIdForViewForSetsVariablesInList(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdForViewForSetsVariablesInList(
 			List<MetaData> theMetaData, MetaData metaData) {
@@ -449,19 +478,24 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdForDtoForSetsVariablesInList(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId
+	 * #finalParamForIdForDtoForSetsVariablesInList(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdForDtoForSetsVariablesInList(
 			List<MetaData> theMetaData, MetaData metaData) {
 
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
-		
-//		if(metaData.getRealClassName().equalsIgnoreCase("alarma")){
-//			String tmp = "";
-//			System.out.println(tmp);
-//		}
+
+		// if(metaData.getRealClassName().equalsIgnoreCase("alarma")){
+		// String tmp = "";
+		// System.out.println(tmp);
+		// }
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
@@ -469,7 +503,7 @@ public class StringBuilderForId implements IStringBuilderForId {
 				String name = field2.getName();
 				finalParam = finalParam + name;
 				String type = field2.getType().getSimpleName();
-				
+
 				// String idName = metaData.getPrimaryKey().getName();
 				// txtMasCodigo.setValue(entity.getId().getMasCodigo());
 				if (!type.equalsIgnoreCase("date")) {
@@ -522,8 +556,13 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdForDtoInViewForSetsVariablesInList(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId
+	 * #finalParamForIdForDtoInViewForSetsVariablesInList(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdForDtoInViewForSetsVariablesInList(
 			List<MetaData> theMetaData, MetaData metaData) {
@@ -597,8 +636,12 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdClass(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForIdClass(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdClass(List<MetaData> list,
 			MetaData metaData) {
@@ -623,8 +666,12 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdClassAsVariables2(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForIdClassAsVariables2(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdClassAsVariables2(List<MetaData> list,
 			MetaData metaData) {
@@ -644,8 +691,12 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdForViewClass(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForIdForViewClass(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public List<String> finalParamForIdForViewClass(List<MetaData> list,
 			MetaData metaData) {
@@ -669,36 +720,45 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 				String setToId = new String();
 
-				if (realType.equalsIgnoreCase("date")) {
-					setToId = metaData.getPrimaryKey().getName() + ".set"
-							+ nameFragment + "((txt" + nameFragment
-							+ ".getValue())==null||(txt" + nameFragment
-							+ ".getValue()).equals(\"\")?null:" + "("
-							+ realType + ")txt" + nameFragment
-							+ ".getValue());";
-				} else {
-					setToId = metaData.getPrimaryKey().getName() + ".set"
-							+ nameFragment + "((txt" + nameFragment
-							+ ".getValue())==null||(txt" + nameFragment
-							+ ".getValue()).equals(\"\")?null:new " + realType
-							+ "(txt" + nameFragment
-							+ ".getValue().toString()));";
-				}
+				// if (realType.equalsIgnoreCase("date")) {
+				// setToId = metaData.getPrimaryKey().getName() + ".set"
+				// + nameFragment + "((txt" + nameFragment
+				// + ".getValue())==null||(txt" + nameFragment
+				// + ".getValue()).equals(\"\")?null:" + "("
+				// + realType + ")txt" + nameFragment
+				// + ".getValue());";
+				// } else {
+				// setToId = metaData.getPrimaryKey().getName() + ".set"
+				// + nameFragment + "((txt" + nameFragment
+				// + ".getValue())==null||(txt" + nameFragment
+				// + ".getValue()).equals(\"\")?null:new " + realType
+				// + "(txt" + nameFragment
+				// + ".getValue().toString()));";
+				// }
 
-				// String setToId = metaData.getPrimaryKey().getName() + ".set"
-				// + nameFragment + "(new " + realType + "((String) txt"
-				// + nameFragment + ".getValue()));";
+				setToId = metaData.getPrimaryKey().getName() + ".set"
+						+ nameFragment + "(FacesUtils.check" + realType
+						+ "(txt" + nameFragment + "));";
 
 				finalParam.add(setToId);
 			}
 		} else {
 			String setToId = new String();
 
+			// setToId = metaData.getPrimaryKey().getRealClassName() + " "
+			// + metaData.getPrimaryKey().getName() + " = new "
+			// + metaData.getPrimaryKey().getRealClassName() + "(" + "txt"
+			// + metaData.getPrimaryKey().getGetNameOfPrimaryName()
+			// + ".getValue().toString());";
+
 			setToId = metaData.getPrimaryKey().getRealClassName() + " "
 					+ metaData.getPrimaryKey().getName() + " = new "
-					+ metaData.getPrimaryKey().getRealClassName() + "(" + "txt"
+					+ metaData.getPrimaryKey().getRealClassName() + "("
+					+ "FacesUtils.check"
+					+ metaData.getPrimaryKey().getType().getSimpleName()
+					+ "(txt"
 					+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-					+ ".getValue().toString());";
+					+ "));";
 
 			finalParam.add(setToId);
 		}
@@ -706,8 +766,12 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForId(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForId(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public String finalParamForId(List<MetaData> list, MetaData metaData) {
 		String finalParam = new String();
@@ -739,8 +803,12 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#finalParamForIdVariables(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForIdVariables(java.util.List,
+	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
 	public String finalParamForIdVariables(List<MetaData> list,
 			MetaData metaData) {
@@ -768,8 +836,11 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam;
 	}
 
-	/* (non-Javadoc)
-	 * @see co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilderForId#neededIds(java.util.List)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeco.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#neededIds(java.util.List)
 	 */
 	public void neededIds(List<MetaData> list) {
 		for (MetaData metaData : list) {
