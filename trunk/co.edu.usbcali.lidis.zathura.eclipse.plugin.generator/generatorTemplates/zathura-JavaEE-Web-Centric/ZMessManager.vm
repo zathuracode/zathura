@@ -1,4 +1,4 @@
-package com.zathura.banco.exceptions;
+package ${virginPackage}.exceptions;
 
 public class ZMessManager extends Exception {
 	private static final long serialVersionUID = 1L;

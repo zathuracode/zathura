@@ -3,14 +3,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.math.BigDecimal;
-#foreach($metaData  in $dataModel.theMetaData)
-    import ${packageOriginal}.control.${metaData.getRealClassName()}Logic;
-    import ${packageOriginal}.control.I${metaData.getRealClassName()}Logic;
-    import ${package}.${metaData.getRealClassName()};
-    #if(${metaData.primaryKey.isPrimiaryKeyAComposeKey()})
-        import ${package}.${metaData.primaryKey.getRealClassName()};
-    #end
-#end
+import ${packageOriginal}.control.*;
+import ${package}.*;
 /**
 * Use a Business Delegate to reduce coupling between presentation-tier clients and business services. 
 * The Business Delegate hides the underlying implementation details of the business service, such as lookup and access details of the EJB architecture.
