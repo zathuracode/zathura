@@ -20,7 +20,7 @@ import co.edu.usbcali.lidis.zathura.metadata.model.SimpleMember;
 
 /**
  * Zathura Generator
- * @author William Altuzarra (williamaltu@gmail.com)
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class Utilities {

@@ -12,7 +12,7 @@ import co.edu.usbcali.lidis.zathura.metadata.reader.MetaDataReaderFactory;
 
 /**
  * Zathura Generator
- * @author William Altuzarra (williamaltu@gmail.com)
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class TestZathuraJavaEE_Web_Centric {
@@ -47,12 +47,12 @@ public class TestZathuraJavaEE_Web_Centric {
 //			String webRootFolderPath = "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/webRoot/";
 //			String libFolderPath = "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/webRoot/lib/";	
 			
-			String jpaPath = "E:/WORKSPACE/banco/WebRoot/WEB-INF/classes/";
-			String jpaPckgName = "co.edu.usb.banco.domain";
-			String projectName = "banco";
-			String folderProjectPath = "E:/WORKSPACE/banco/src/";
-			String webRootFolderPath = "E:/WORKSPACE/banco/WebRoot/";
-			String libFolderPath = "E:/WORKSPACE/banco/WebRoot/lib/";	
+			String jpaPath = "E:/WORK(New)/bancojpa/WebRoot/WEB-INF/classes/";
+			String jpaPckgName = "org.zathura.bancojpa.domain";
+			String projectName = "bancojpa";
+			String folderProjectPath = "E:/WORK(New)/bancojpa/src/";
+			String webRootFolderPath = "E:/WORK(New)/bancojpa/WebRoot/";
+			String libFolderPath = "E:/WORK(New)/bancojpa/WebRoot/WEB-INF/lib/";
 			
 //			String jpaPath = "E:/WORKSPACE/sigyweb1/WebRoot/WEB-INF/classes/";
 //			String jpaPckgName = "org.cgiar.ciat.sigyweb1.domain.pojos";

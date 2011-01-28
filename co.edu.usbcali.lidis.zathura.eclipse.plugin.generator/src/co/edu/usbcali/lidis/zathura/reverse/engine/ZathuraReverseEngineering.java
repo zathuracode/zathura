@@ -25,6 +25,7 @@ import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseJarLoader;
 /**
  * Zathura Generator
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class ZathuraReverseEngineering implements IZathuraReverseEngineering {

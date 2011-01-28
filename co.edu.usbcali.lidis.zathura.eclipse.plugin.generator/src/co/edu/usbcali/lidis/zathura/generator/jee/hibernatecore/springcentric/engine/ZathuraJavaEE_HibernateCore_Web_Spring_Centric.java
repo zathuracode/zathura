@@ -27,7 +27,7 @@ import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 
 /**
  * 
- * @author William Altuzarra Noriega
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * 
  */
 public class ZathuraJavaEE_HibernateCore_Web_Spring_Centric implements IZathuraGenerator,

@@ -18,7 +18,7 @@ import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 import co.edu.usbcali.lidis.zathura.metadata.model.SimpleMember;
 /**
  * 
- * @author William Altuzarra Noriega
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * 
  */
 public class Utilities {
