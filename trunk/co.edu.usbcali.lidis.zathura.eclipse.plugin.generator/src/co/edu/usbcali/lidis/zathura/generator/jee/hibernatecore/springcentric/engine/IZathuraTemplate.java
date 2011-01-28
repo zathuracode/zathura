@@ -2,7 +2,7 @@ package co.edu.usbcali.lidis.zathura.generator.jee.hibernatecore.springcentric.e
 
 /**
  * 
- * @author William Altuzarra Noriega
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  *
  */
 import org.apache.velocity.VelocityContext;

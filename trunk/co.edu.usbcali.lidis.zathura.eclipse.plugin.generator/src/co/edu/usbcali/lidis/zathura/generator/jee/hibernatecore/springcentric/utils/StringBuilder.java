@@ -13,7 +13,7 @@ import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 /**
  * 
- * @author William Altuzarra Noriega
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * 
  */
 public class StringBuilder implements IStringBuilder {

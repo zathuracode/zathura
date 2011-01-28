@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 /**
  * Zathura Generator
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class GeneratorUtil {
