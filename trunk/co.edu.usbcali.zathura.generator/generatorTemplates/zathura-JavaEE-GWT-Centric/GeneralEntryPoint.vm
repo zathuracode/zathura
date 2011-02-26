@@ -1,0 +1,85 @@
+package ${virginPackage}.client.entrypoint;
+
+	
+import com.google.gwt.core.client.EntryPoint;
+import com.smartgwt.client.types.DragAppearance;
+import com.smartgwt.client.types.VisibilityMode;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.Window;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.Layout;
+import com.smartgwt.client.widgets.layout.SectionStack;
+import com.smartgwt.client.widgets.layout.SectionStackSection;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+/**
+ * Entry point classes define <code>onModuleLoad()</code>.
+ */
+public class ${projectName} implements EntryPoint {
+
+	public void onModuleLoad() {
+	
+		HLayout mainLayout = new HLayout();
+		mainLayout.setHeight100();
+		mainLayout.setWidth100();
+	
+		SectionStack sectionStack = new SectionStack();  
+        sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);  
+        sectionStack.setWidth(250);
+		SectionStackSection section1 = new SectionStackSection("Maestro Detalle");  
+		section1.setExpanded(true);
+		#foreach($metaData  in $dataModel.theMetaData)
+		section1.addItem(btn${metaData.getRealClassName()}());
+		#end
+		
+		sectionStack.addSection(section1);
+        
+       
+		
+		VLayout vLayout = new VLayout();  
+		vLayout.setShowEdges(true);  
+		vLayout.setWidth(250);  
+		vLayout.setMembersMargin(5);  
+		vLayout.setLayoutMargin(10);  
+		vLayout.addMember(sectionStack);  
+		mainLayout.addMember(vLayout); 
+
+		mainLayout.draw();
+	}
+	
+	#foreach($metaData  in $dataModel.theMetaData)
+    	private IButton btn${metaData.getRealClassName()}(){
+		IButton btnShowWindow = new IButton("${metaData.getRealClassName()}");
+		
+		final ${metaData.getRealClassName()}EP entryPoint = ${metaData.getRealClassName()}EP.getInstance();
+		btnShowWindow.setWidth100();
+		btnShowWindow.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				final Window winModal = new Window();
+				winModal.setTitle("${metaData.getRealClassName()}");
+				winModal.setIsModal(true);
+				winModal.setShowModalMask(true);
+				winModal.setModalMaskOpacity(20);
+				Layout layout = entryPoint.build${metaData.getRealClassName()}();
+				winModal.addItem(layout);
+				winModal.setWidth("50%");
+				winModal.setHeight("70%");
+				winModal.setCanDragResize(true);
+				winModal.setAutoCenter(true);
+				winModal.setShadowSoftness(10);
+				winModal.setShadowOffset(9);
+				winModal.setShowShadow(true);
+				winModal.setDragAppearance(DragAppearance.TARGET);
+				winModal.setDragOpacity(60);
+				winModal.show();
+			}
+			}
+		);
+		
+		return btnShowWindow;
+	}
+	#end
+
+}
