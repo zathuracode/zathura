@@ -1,0 +1,53 @@
+<jsp:root jsfc="f:view" xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ice="http://www.icesoft.com/icefaces/component"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+    <html>
+        <body>
+            <f:view>
+                <ui:composition template="/WEB-INF/facelets/mainTemplate.jspx">
+                    <ui:define name="header">
+                        <ui:include src="/WEB-INF/facelets/header.jspx" />
+                    </ui:define>
+                    <br />
+                    <ui:define name="body">
+                        <ice:form>
+                            <br />
+                            <br />
+                            <div align="center">
+                               
+                               
+                               <ice:panelCollapsible expanded="true" toggleOnClick="true" 	style="width: 100%">
+									<f:facet name="header">
+										<ice:outputLabel value="Welcome to ${projectName}" />
+									</f:facet>
+                            
+                                <ice:panelGrid columns="3" border="0" id="pnlPrincipal">
+                                
+                                    #foreach($metaData  in $dataModel.theMetaData)
+                                        <ice:commandLink id="cmd${metaData.getRealClassName()}"
+                                            value="${metaData.getRealClassName()}" action="go${metaData.getRealClassName()}">
+                                        </ice:commandLink>
+                                        <ice:commandLink id="cmd${metaData.getRealClassName()}${projectName}DataTable"
+                                            value="${metaData.getRealClassName()}-Data" action="go${metaData.getRealClassName()}ListDataTable">
+                                        </ice:commandLink>
+                                        <ice:commandLink id="cmd${metaData.getRealClassName()}${projectName}DataTableEditable"
+                                            value="${metaData.getRealClassName()}-Data-Editable" action="go${metaData.getRealClassName()}ListDataTableEditable">
+                                        </ice:commandLink>
+                                    #end
+                                </ice:panelGrid>
+                              </ice:panelCollapsible>
+                            </div>
+                        </ice:form>
+                    </ui:define>
+                    <ui:define name="footer">
+                        <ui:include src="/WEB-INF/facelets/footer.jspx" />
+                    </ui:define>
+                </ui:composition>
+            </f:view>
+        </body>
+    </html>
+</jsp:root>
