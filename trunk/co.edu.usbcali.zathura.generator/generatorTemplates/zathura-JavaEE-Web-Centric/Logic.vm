@@ -1,4 +1,4 @@
-	package  ${packageOriginal}.control;
+package  ${packageOriginal}.control;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
@@ -10,7 +10,7 @@ import  ${virginPackage}.exceptions.*;
 import  ${virginPackage}.utilities.Utilities;
 import ${package}.*;
 /**
- *   
+ * interface ${metaData.getRealClassName()}Logic
  * @author Zathura Code Generator http://code.google.com/p/zathura/
  *
  */
@@ -240,8 +240,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     maxResults);
                     } catch (Exception e) {
 					throw new ZMessManager().new FindingException("${metaData.getRealClassName()}");
-                    } finally {
-                    }
+                    } 
                     return entity;
                     }
 					
@@ -411,7 +410,6 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                                                                     } catch (Exception e) {
                                                                     throw new Exception(e.getMessage());
                                                                     } finally {
-                                                                    EntityManagerHelper.closeEntityManager();
                                                                     }
                                                                     return list;
                                                                     }

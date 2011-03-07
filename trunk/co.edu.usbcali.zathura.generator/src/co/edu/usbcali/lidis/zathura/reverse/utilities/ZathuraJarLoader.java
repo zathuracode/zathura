@@ -9,7 +9,12 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
-
+/**
+ * Zathura Generator
+ * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
+ * @author William Altuzarra Noriega Noriega (williamaltu@gmail.com)
+ * @version 1.0
+ */
 public class ZathuraJarLoader {
 
 	public static void loadJar(String jarLocation)

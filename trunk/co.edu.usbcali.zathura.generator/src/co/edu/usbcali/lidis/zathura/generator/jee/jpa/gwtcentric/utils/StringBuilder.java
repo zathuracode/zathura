@@ -10,9 +10,9 @@ import org.apache.commons.collections.ListUtils;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 /**
- * 
- * @author William Altuzarra Noriega
- * 
+ * Zathura Generator
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
+ * @version 1.0
  */
 public class StringBuilder implements IStringBuilder {
 

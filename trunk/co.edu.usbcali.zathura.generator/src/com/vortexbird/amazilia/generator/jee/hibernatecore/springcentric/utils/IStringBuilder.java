@@ -4,7 +4,11 @@ import java.util.List;
 
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
-
+/**
+ * Zathura Generator
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
+ * @version 1.0
+ */
 public interface IStringBuilder {
 
 	// finalParameter(List<MetaData> theMetaData, MetaData metaData) {
