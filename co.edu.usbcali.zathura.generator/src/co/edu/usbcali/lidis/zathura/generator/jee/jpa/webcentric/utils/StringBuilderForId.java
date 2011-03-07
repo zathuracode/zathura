@@ -12,7 +12,7 @@ import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 
 /**
  * Zathura Generator
- * @author William Altuzarra (williamaltu@gmail.com)
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class StringBuilderForId implements IStringBuilderForId {
@@ -42,7 +42,6 @@ public class StringBuilderForId implements IStringBuilderForId {
 						(field2.getType().toString()).length());
 
 				finalParam = finalParam + "FacesUtils.check"+realType+"(txt"+nameWithCapitalOnFirst+"), ";
-
 			}
 		} else {
 			finalParam = "FacesUtils.check"+metaData.getPrimaryKey().getRealClassName()+"(txt"+metaData.getPrimaryKey().getGetNameOfPrimaryName()+"), ";
@@ -204,10 +203,10 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 							if (!finalParam.contains(tmpFinalParam)) {
 
-								ManyToOneMember manyToOneMember = (ManyToOneMember) member;
+								//ManyToOneMember manyToOneMember = (ManyToOneMember) member;
 
 								String variableNames = (tmp.split("_"))[0];
-								String className = (tmp.split("_"))[1];
+								//String className = (tmp.split("_"))[1];
 
 //								Boolean nullable = null;
 //

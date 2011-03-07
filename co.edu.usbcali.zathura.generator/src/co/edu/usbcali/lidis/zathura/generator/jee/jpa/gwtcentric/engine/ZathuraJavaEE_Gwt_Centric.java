@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
@@ -42,6 +43,7 @@ IZathuraTemplate {
 
 	public String virginPackageInHd = new String();
 	private Properties properties;
+	private VelocityEngine ve;
 
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
 			String folderProjectPath, Properties propiedades) {
@@ -126,15 +128,19 @@ IZathuraTemplate {
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel,
 			String jpaPckgName, String projectName, Integer specificityLevel) {
 		try {
+			ve = new VelocityEngine();			
+			
 			Properties properties = new Properties();
-
 			properties.setProperty("file.resource.loader.description","Velocity File Resource Loader");
-			properties.setProperty("file.resource.loader.class","org.apache.velocity.runtime.resource.loader.FileResourceLoader");
-			properties.setProperty("file.resource.loader.path", gwtCentric);
+			properties.setProperty("file.resource.loader.class","org.apache.velocity.runtime.resource.loader.FileResourceLoader");			
+			properties.setProperty("file.resource.loader.path", gwtCentric);			
 			properties.setProperty("file.resource.loader.cache", "false");
 			properties.setProperty("file.resource.loader.modificationCheckInterval", "2");
-
-			Velocity.init(properties);
+			
+			log.info("Templates:"+gwtCentric);
+			
+			ve.init(properties);
+		
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -395,8 +401,8 @@ IZathuraTemplate {
 		StringWriter swLogic = new StringWriter();
 
 		try {
-			ilogic = Velocity.getTemplate("ILogic.vm");
-			logic = Velocity.getTemplate("Logic.vm");
+			ilogic = ve.getTemplate("ILogic.vm");
+			logic = ve.getTemplate("Logic.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -459,7 +465,7 @@ IZathuraTemplate {
 		StringWriter swDataService = new StringWriter();
 
 		try {
-			dataService = Velocity.getTemplate("DataService.vm");
+			dataService = ve.getTemplate("DataService.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -512,7 +518,7 @@ IZathuraTemplate {
 		StringWriter swDataServiceAsync = new StringWriter();
 
 		try {
-			dataServiceAsync = Velocity.getTemplate("DataServiceAsync.vm");
+			dataServiceAsync = ve.getTemplate("DataServiceAsync.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -566,7 +572,7 @@ IZathuraTemplate {
 		StringWriter swDto = new StringWriter();
 
 		try {
-			dto = Velocity.getTemplate("DTO.vm");
+			dto = ve.getTemplate("DTO.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -618,7 +624,7 @@ IZathuraTemplate {
 		StringWriter swAbstractDataSource = new StringWriter();
 
 		try {
-			abstractDataSoruce = Velocity.getTemplate("AbstractGWTRPCDataSource.vm");
+			abstractDataSoruce = ve.getTemplate("AbstractGWTRPCDataSource.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -667,7 +673,7 @@ IZathuraTemplate {
 		StringWriter swSmartGWTDataSource = new StringWriter();
 
 		try {
-			smartGWTDataSource = Velocity.getTemplate("SmartGWTDataSource.vm");
+			smartGWTDataSource = ve.getTemplate("SmartGWTDataSource.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -722,7 +728,7 @@ IZathuraTemplate {
 		//		StringWriter swUtilitiesPagedListDataModel = new StringWriter();
 
 		try {
-			utilities = Velocity.getTemplate("Utilities.vm");
+			utilities = ve.getTemplate("Utilities.vm");
 			//			utilitiesDataPage = Velocity.getTemplate("DataPage.vm");
 			//			utilitiesDataSource = Velocity.getTemplate("DataSource.vm");
 			//			utilitiesPagedListDataModel = Velocity
@@ -800,14 +806,11 @@ IZathuraTemplate {
 		log.info("Begin doException");
 
 		Template exceptions = null;
-		Template exceptions2 = null;
 
 		StringWriter swExceptions = new StringWriter();
-		StringWriter swExceptions2 = new StringWriter();
 
 		try {
-			exceptions2 = Velocity.getTemplate("ExceptionManager.vm");
-			exceptions = Velocity.getTemplate("ExceptionMessages.vm");
+			exceptions = ve.getTemplate("ZMessManager.vm");
 
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -825,30 +828,22 @@ IZathuraTemplate {
 
 		try {
 			exceptions.merge(context, swExceptions);
-			exceptions2.merge(context, swExceptions2);
-			// System.out.println(swIdao);
-			// System.out.println(swdao);
 
 			String realLocation = hdLocation + GeneratorUtil.slash
-			+ virginPackageInHd + GeneratorUtil.slash  +"server"+  GeneratorUtil.slash + "exceptions"
-			+ GeneratorUtil.slash;
+					+ virginPackageInHd + GeneratorUtil.slash  
+					+"server"+ GeneratorUtil.slash 
+					+ GeneratorUtil.slash + "exceptions"
+					+ GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation
-					+ "ExceptionMessages.java");
+					+ "ZMessManager.java");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swExceptions.toString());
 			// Close the output stream
 			out.close();
 
-			FileWriter fstream2 = new FileWriter(realLocation
-					+ "ExceptionManager.java");
-			BufferedWriter out2 = new BufferedWriter(fstream2);
-			out2.write(swExceptions2.toString());
-			// Close the output stream
-			out2.close();
-
 			JalopyCodeFormatter.formatJavaCodeFile(realLocation
-					+ "ExceptionManager.java");
+					+ "ZMessManager.java");
 
 			log.info("End doException");
 
@@ -869,7 +864,7 @@ IZathuraTemplate {
 		StringWriter swBusinessDelegator = new StringWriter();
 
 		try {
-			businessDelegator = Velocity
+			businessDelegator = ve
 			.getTemplate("BusinessDelegatorView.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -925,8 +920,8 @@ IZathuraTemplate {
 		StringWriter swDao = new StringWriter();
 
 		try {
-			idao = Velocity.getTemplate("IDAO2.vm");
-			dao = Velocity.getTemplate("DAO2.vm");
+			idao = ve.getTemplate("IDAO2.vm");
+			dao = ve.getTemplate("DAO2.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 		} catch (ParseErrorException pee) {
@@ -987,7 +982,7 @@ IZathuraTemplate {
 		StringWriter swDaoFactory = new StringWriter();
 
 		try {
-			daoFactory = Velocity.getTemplate("JPADaoFactory.vm");
+			daoFactory = ve.getTemplate("JPADaoFactory.vm");
 			// logic = Velocity.getTemplate("Logic.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -1037,7 +1032,7 @@ IZathuraTemplate {
 		StringWriter swPersistence = new StringWriter();
 
 		try {
-			persistence = Velocity.getTemplate("persistence.xml.vm");
+			persistence = ve.getTemplate("persistence.xml.vm");
 			// logic = Velocity.getTemplate("Logic.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -1080,7 +1075,7 @@ IZathuraTemplate {
 		StringWriter swEntityManager = new StringWriter();
 
 		try {
-			entityManager = Velocity.getTemplate("EntityManagerHelper.vm");
+			entityManager = ve.getTemplate("EntityManagerHelper.vm");
 			// logic = Velocity.getTemplate("Logic.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -1133,7 +1128,7 @@ IZathuraTemplate {
 		StringWriter swWebXML = new StringWriter();
 
 		try {
-			webXml = Velocity.getTemplate("WebXML.vm");
+			webXml = ve.getTemplate("WebXML.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
@@ -1183,7 +1178,7 @@ IZathuraTemplate {
 		StringWriter swEntryPoint = new StringWriter();
 
 		try {
-			entryPoint = Velocity.getTemplate("GeneralEntryPoint.vm");
+			entryPoint = ve.getTemplate("GeneralEntryPoint.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 		} catch (ParseErrorException pee) {
@@ -1233,7 +1228,7 @@ IZathuraTemplate {
 		StringWriter swEntryPoint = new StringWriter();
 
 		try {
-			entryPoint = Velocity.getTemplate("EntryPoint.vm");
+			entryPoint = ve.getTemplate("EntryPoint.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 		} catch (ParseErrorException pee) {
@@ -1281,7 +1276,7 @@ IZathuraTemplate {
 		StringWriter swGwtXml = new StringWriter();
 
 		try {
-			gwtXml = Velocity.getTemplate("GWTXML.vm");
+			gwtXml = ve.getTemplate("GWTXML.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 		} catch (ParseErrorException pee) {
@@ -1328,7 +1323,7 @@ IZathuraTemplate {
 		StringWriter swHtml = new StringWriter();
 
 		try {
-			html = Velocity.getTemplate("HTML.vm");
+			html = ve.getTemplate("HTML.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 		} catch (ParseErrorException pee) {
@@ -1374,7 +1369,7 @@ IZathuraTemplate {
 		StringWriter swDataServiceImpl = new StringWriter();
 
 		try {
-			dataServiceImpl = Velocity.getTemplate("DataServiceImpl.vm");
+			dataServiceImpl = ve.getTemplate("DataServiceImpl.vm");
 		} catch (ResourceNotFoundException rnfe) {
 			rnfe.printStackTrace();
 		} catch (ParseErrorException pee) {

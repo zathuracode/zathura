@@ -12,7 +12,7 @@ import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 
 /**
  * Zathura Generator
- * @author William Altuzarra (williamaltu@gmail.com)
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class StringBuilderForId implements IStringBuilderForId {
@@ -41,51 +41,11 @@ public class StringBuilderForId implements IStringBuilderForId {
 						(field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
-				// finalParam = finalParam + "new " + realType + "((String)txt"
-				// + nameWithCapitalOnFirst + ".getValue()), ";
-				if (realType.equalsIgnoreCase("date")) {
-					finalParam = finalParam + "(txt" + nameWithCapitalOnFirst
-							+ ".getValue())==null||(txt"
-							+ nameWithCapitalOnFirst
-							+ ".getValue()).equals(\"\")?null:(" + realType
-							+ ")txt" + nameWithCapitalOnFirst + ".getValue(), ";
-				} else {
-					finalParam = finalParam + "(txt" + nameWithCapitalOnFirst
-							+ ".getValue())==null||(txt"
-							+ nameWithCapitalOnFirst
-							+ ".getValue()).equals(\"\")?null:new " + realType
-							+ "(txt" + nameWithCapitalOnFirst
-							+ ".getValue().toString()), ";
-				}
+				finalParam = finalParam + "FacesUtils.check"+realType+"(txt"+nameWithCapitalOnFirst+"), ";
 
 			}
 		} else {
-			// finalParam = "new " + metaData.getPrimaryKey().getRealClassName()
-			// + "((String) txt"
-			// + metaData.getPrimaryKey().getGetNameOfPrimaryName()
-			// + ".getValue())";
-
-			if (metaData.getPrimaryKey().getRealClassName().equalsIgnoreCase(
-					"date")) {
-				finalParam = "(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue())==null||(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue()).equals(\"\")?null:("
-						+ metaData.getPrimaryKey().getRealClassName() + ")txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue(), ";
-			} else {
-				finalParam = "(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue())==null||(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue()).equals(\"\")?null:new "
-						+ metaData.getPrimaryKey().getRealClassName() + "(txt"
-						+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
-						+ ".getValue().toString()), ";
-			}
-
+			finalParam = "FacesUtils.check"+metaData.getPrimaryKey().getRealClassName()+"(txt"+metaData.getPrimaryKey().getGetNameOfPrimaryName()+"), ";
 		}
 
 		String finalCharacter = "" + finalParam.charAt(finalParam.length() - 2);
@@ -158,6 +118,8 @@ public class StringBuilderForId implements IStringBuilderForId {
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
 
+		
+		
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
 			for (Field field2 : field) {
@@ -217,7 +179,6 @@ public class StringBuilderForId implements IStringBuilderForId {
 		}
 
 		if (metaData.isGetManyToOneProperties()) {
-
 			for (Member member : metaData.getManyToOneProperties()) {
 
 				Utilities.getInstance().manyToOneTempHash = new HashMap<String, Member>();
@@ -243,36 +204,36 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 							if (!finalParam.contains(tmpFinalParam)) {
 
-								ManyToOneMember manyToOneMember = (ManyToOneMember) member;
+								//ManyToOneMember manyToOneMember = (ManyToOneMember) member;
 
 								String variableNames = (tmp.split("_"))[0];
-								String className = (tmp.split("_"))[1];
+								//String className = (tmp.split("_"))[1];
 
-								Boolean nullable = null;
-
-								try {
-									nullable = manyToOneMember
-											.getHashMapNullableColumn()
-											.get(variableNames.toUpperCase());
-								} catch (Exception e) {
-									// TODO: handle exception
-								}
-
-								if (nullable == null) {
-									try {
-										nullable = manyToOneMember
-												.getHashMapNullableColumn()
-												.get(className.toUpperCase());
-									} catch (Exception e) {
-										// TODO: handle exception
-									}
-								}
+//								Boolean nullable = null;
+//
+//								try {
+//									nullable = manyToOneMember
+//											.getHashMapNullableColumn()
+//											.get(variableNames.toUpperCase());
+//								} catch (Exception e) {
+//									// TODO: handle exception
+//								}
+//
+//								if (nullable == null) {
+//									try {
+//										nullable = manyToOneMember
+//												.getHashMapNullableColumn()
+//												.get(className.toUpperCase());
+//									} catch (Exception e) {
+//										// TODO: handle exception
+//									}
+//								}
 
 								Member primarySimple = Utilities.getInstance().manyToOneTempHash
 										.get(variableNames);
 
-								try {
-									if (nullable == false) {
+//								try {
+//									if (nullable == false) {
 										finalParam2
 												.add(Utilities.getInstance().ifcondition
 														+ tmp
@@ -286,10 +247,10 @@ public class StringBuilderForId implements IStringBuilderForId {
 														+ "\""
 														+ Utilities
 																.getInstance().throwExceptionClose);
-									}
-								} catch (Exception e) {
-									// System.out.println(e.getMessage());
-								}
+//									}
+//								} catch (Exception e) {
+//									// System.out.println(e.getMessage());
+//								}
 
 								try {
 

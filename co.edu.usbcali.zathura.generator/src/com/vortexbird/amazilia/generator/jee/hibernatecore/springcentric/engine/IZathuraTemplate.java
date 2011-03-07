@@ -1,9 +1,9 @@
 package com.vortexbird.amazilia.generator.jee.hibernatecore.springcentric.engine;
 
 /**
- * 
- * @author William Altuzarra Noriega
- *
+ * Zathura Generator
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
+ * @version 1.0
  */
 import org.apache.velocity.VelocityContext;
 

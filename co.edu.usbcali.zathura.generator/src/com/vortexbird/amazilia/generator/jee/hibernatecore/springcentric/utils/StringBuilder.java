@@ -12,9 +12,9 @@ import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 /**
- * 
- * @author William Altuzarra Noriega
- * 
+ * Zathura Generator
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
+ * @version 1.0
  */
 public class StringBuilder implements IStringBuilder {
 
@@ -614,22 +614,8 @@ public class StringBuilder implements IStringBuilder {
 						(field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
-				if (realType.equalsIgnoreCase("date")) {
-					finalParam = finalParam + "(txt" + nameWithCapitalOnFirst
-							+ ".getValue())==null||(txt"
-							+ nameWithCapitalOnFirst
-							+ ".getValue()).equals(\"\")?null:" + "("
-							+ realType + ")txt" + nameWithCapitalOnFirst
-							+ ".getValue(), ";
-				} else {
-					finalParam = finalParam + "(txt" + nameWithCapitalOnFirst
-							+ ".getValue())==null||(txt"
-							+ nameWithCapitalOnFirst
-							+ ".getValue()).equals(\"\")?null:new " + realType
-							+ "(txt" + nameWithCapitalOnFirst
-							+ ".getValue().toString()), ";
-				}
-
+				finalParam = finalParam + "FacesUtils.check" + realType
+						+ "(txt" + nameWithCapitalOnFirst + "), ";
 			}
 		}
 
@@ -637,30 +623,9 @@ public class StringBuilder implements IStringBuilder {
 			for (Member member : metaData.getSimpleProperties()) {
 				if (member.isPrimiaryKeyAComposeKey() == false) {
 
-					// finalParam = finalParam + "new "
-					// + member.getRealClassName() + "((String)txt"
-					// + member.getGetNameOfPrimaryName()
-					// + ".getValue()), ";
-
-					if (member.getRealClassName().equalsIgnoreCase("date")) {
-						finalParam = finalParam + "(txt"
-								+ member.getGetNameOfPrimaryName()
-								+ ".getValue())==null||(txt"
-								+ member.getGetNameOfPrimaryName()
-								+ ".getValue()).equals(\"\")?null:" + "("
-								+ member.getRealClassName() + ")txt"
-								+ member.getGetNameOfPrimaryName()
-								+ ".getValue(), ";
-					} else {
-						finalParam = finalParam + "(txt"
-								+ member.getGetNameOfPrimaryName()
-								+ ".getValue())==null||(txt"
-								+ member.getGetNameOfPrimaryName()
-								+ ".getValue()).equals(\"\")?null:new "
-								+ member.getRealClassName() + "(txt"
-								+ member.getGetNameOfPrimaryName()
-								+ ".getValue().toString()), ";
-					}
+					finalParam = finalParam + "FacesUtils.check"
+					+ member.getRealClassName() + "(txt"
+					+ member.getGetNameOfPrimaryName() + "), ";
 				}
 			}
 		}
@@ -684,22 +649,8 @@ public class StringBuilder implements IStringBuilder {
 							String tmp = Utilities.getInstance()
 									.getGetNameOfPrimaryName(params[cont]);
 
-							// tmpFinalParam = "new " + tmpFinalParam
-							// + "((String)txt" + tmp;
-
-							if (tmpFinalParam.equalsIgnoreCase("date")) {
-								tmpFinalParam = "(txt" + tmp
-										+ ".getValue())==null||(txt" + tmp
-										+ ".getValue()).equals(\"\")?null:"
-										+ "(" + tmpFinalParam + ")txt" + tmp
-										+ ".getValue(), ";
-							} else {
-								tmpFinalParam = "(txt" + tmp
-										+ ".getValue())==null||(txt" + tmp
-										+ ".getValue()).equals(\"\")?null:new "
-										+ tmpFinalParam + "(txt" + tmp
-										+ ".getValue().toString()), ";
-							}
+							tmpFinalParam = "FacesUtils.check"
+								+ tmpFinalParam + "(txt" + tmp + "), ";
 
 							if (cont > params.length)
 								cont = params.length;
@@ -713,12 +664,6 @@ public class StringBuilder implements IStringBuilder {
 
 					}
 				}
-
-				// String tmpFinalParam = "(" + params[0] + ") txt" + params[2];
-				// if (!finalParam.contains(tmpFinalParam)) {
-				// finalParam = finalParam + "(" + params[0] + ") txt"
-				// + params[2] + ".getValue(), ";
-				// }
 			}
 		}
 

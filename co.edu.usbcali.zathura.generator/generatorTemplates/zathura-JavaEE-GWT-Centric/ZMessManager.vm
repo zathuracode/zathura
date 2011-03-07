@@ -1,4 +1,4 @@
-package ${virginPackage}.exceptions;
+package ${virginPackage}.server.exceptions;
 
 public class ZMessManager extends Exception {
 	private static final long serialVersionUID = 1L;

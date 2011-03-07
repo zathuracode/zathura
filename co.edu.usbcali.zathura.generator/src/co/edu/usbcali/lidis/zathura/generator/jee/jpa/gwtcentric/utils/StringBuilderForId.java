@@ -9,9 +9,9 @@ import co.edu.usbcali.lidis.zathura.metadata.model.ManyToOneMember;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 /**
- * 
- * @author William Altuzarra Noriega
- * 
+ * Zathura Generator
+ * @author William Altuzarra Noriega (williamaltu@gmail.com)
+ * @version 1.0
  */
 public class StringBuilderForId implements IStringBuilderForId {
 
@@ -241,36 +241,36 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 							if (!finalParam.contains(tmpFinalParam)) {
 
-								ManyToOneMember manyToOneMember = (ManyToOneMember) member;
+//								ManyToOneMember manyToOneMember = (ManyToOneMember) member;
 
 								String variableNames = (tmp.split("_"))[0];
-								String className = (tmp.split("_"))[1];
+//								String className = (tmp.split("_"))[1];
 
-								Boolean nullable = null;
+//								Boolean nullable = null;
 
-								try {
-									nullable = manyToOneMember
-											.getHashMapNullableColumn()
-											.get(variableNames.toUpperCase());
-								} catch (Exception e) {
-									// TODO: handle exception
-								}
+//								try {
+//									nullable = manyToOneMember
+//											.getHashMapNullableColumn()
+//											.get(variableNames.toUpperCase());
+//								} catch (Exception e) {
+//									// TODO: handle exception
+//								}
 
-								if (nullable == null) {
-									try {
-										nullable = manyToOneMember
-												.getHashMapNullableColumn()
-												.get(className.toUpperCase());
-									} catch (Exception e) {
-										// TODO: handle exception
-									}
-								}
+//								if (nullable == null) {
+//									try {
+//										nullable = manyToOneMember
+//												.getHashMapNullableColumn()
+//												.get(className.toUpperCase());
+//									} catch (Exception e) {
+//										// TODO: handle exception
+//									}
+//								}
 
 								Member primarySimple = Utilities.getInstance().manyToOneTempHash
 										.get(variableNames);
 
-								try {
-									if (nullable == false) {
+//								try {
+//									if (nullable == false) {
 										finalParam2
 												.add(Utilities.getInstance().ifcondition
 														+ tmp
@@ -284,10 +284,10 @@ public class StringBuilderForId implements IStringBuilderForId {
 														+ "\""
 														+ Utilities
 																.getInstance().throwExceptionClose);
-									}
-								} catch (Exception e) {
+//									}
+//								} catch (Exception e) {
 									// System.out.println(e.getMessage());
-								}
+//								}
 
 								try {
 
