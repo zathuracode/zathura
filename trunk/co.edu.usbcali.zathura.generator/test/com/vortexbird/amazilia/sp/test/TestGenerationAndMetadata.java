@@ -11,46 +11,38 @@ import com.vortexbird.amazilia.sp.generation.GenerateXmlAndJavaFiles;
 import com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandler;
 import com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandlerFactory;
 
-
 /**
  * Class to test genetation and metadata
  */
-public class TestGenerationAndMetadata
-{
-    public static void main(String args[]) throws Exception
-    {
-	try
-	{
-		String DATA_BASE_TYPE="Oracle 10g (Thin driver)";
-		String DRIVER_CLASS="oracle.jdbc.driver.OracleDriver";
-		String URL="jdbc:oracle:thin:@10.11.61.10:1521:XE";
-		String SCHEMA = "BANCO";
-		String USER="BANCO";
-		String PASSWORD="BANCO";
-		String strPath = "C://testPLSQl//";
-		String strPackageName = "com.vortexbird.demo.call";
-		
-	   
-	    Connection connection = ZathuraReverseEngineeringUtil.getConnection(URL, DRIVER_CLASS, USER, PASSWORD);
+public class TestGenerationAndMetadata {
+	public static void main(String args[]) throws Exception {
+		try {
+			String DATA_BASE_TYPE = "Oracle 10g (Thin driver)";
+			String DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
+			String URL = "jdbc:oracle:thin:@10.11.61.10:1521:XE";
+			String SCHEMA = "BANCO";
+			String USER = "BANCO";
+			String PASSWORD = "BANCO";
+			String strPath = "C://testPLSQl//";
+			String strPackageName = "com.vortexbird.demo.call";
 
-	    MetadataStoreProcedureHandler metadata = MetadataStoreProcedureHandlerFactory.getInstace().getHandler(DATA_BASE_TYPE);
-	    
-	    List<String> procedureNames = metadata.getStoredProcedureNames(connection, SCHEMA,"%");
-	   
-	    CreateFile.createFolder(strPath, strPackageName);
-	    GenerateXmlAndJavaFiles generateXmlAndJavaFiles = new GenerateXmlAndJavaFiles();
-	    
-	    generateXmlAndJavaFiles.generateProcedureXmlHbmFile(connection,strPath + strPackageName, procedureNames,metadata);
-	    
-	    
-	    generateXmlAndJavaFiles.generateJavaClasses(connection,strPath, strPackageName, procedureNames,metadata);   
+			Connection connection = ZathuraReverseEngineeringUtil.getConnection(URL, DRIVER_CLASS, USER, PASSWORD);
 
+			MetadataStoreProcedureHandler metadata = MetadataStoreProcedureHandlerFactory.getInstace().getHandler(DATA_BASE_TYPE);
+
+			List<String> procedureNames = metadata.getStoredProcedureNames(connection, SCHEMA, "%");
+
+			CreateFile.createFolder(strPath, strPackageName);
+			GenerateXmlAndJavaFiles generateXmlAndJavaFiles = new GenerateXmlAndJavaFiles();
+
+			generateXmlAndJavaFiles.generateProcedureXmlHbmFile(connection, strPath + strPackageName, procedureNames, metadata);
+
+			generateXmlAndJavaFiles.generateJavaClasses(connection, strPath, strPackageName, procedureNames, metadata);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			e.getCause();
+			e.getMessage();
+		}
 	}
-	catch (SQLException e)
-	{
-	    e.printStackTrace();
-	    e.getCause();
-	    e.getMessage();
-	}
-    }
 }

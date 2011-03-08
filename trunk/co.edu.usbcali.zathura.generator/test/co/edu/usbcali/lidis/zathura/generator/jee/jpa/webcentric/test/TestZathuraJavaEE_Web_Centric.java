@@ -12,6 +12,7 @@ import co.edu.usbcali.lidis.zathura.metadata.reader.MetaDataReaderFactory;
 
 /**
  * Zathura Generator
+ * 
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
@@ -33,33 +34,37 @@ public class TestZathuraJavaEE_Web_Centric {
 			// String webRootFolderPath = "E:/ZATHURA EXAMPLE(landed)/webRoot/";
 			// String libFolderPath = "E:/ZATHURA EXAMPLE(landed)/lib/";
 
-//			String jpaPath = "E:/ZATHURA EXAMPLE(pojos)/";
-//			String jpaPckgName = "org.cgiar.ciat.smta.model.pojos";
-//			String projectName = "smta";
-//			String folderProjectPath = "E:/ZATHURA EXAMPLE(landed)/";
-//			String webRootFolderPath = "E:/ZATHURA EXAMPLE(landed)/webRoot/";
-//			String libFolderPath = "E:/ZATHURA EXAMPLE(landed)/lib/";
-			
-//			String jpaPath = "E:/ZATHURA EXAMPLE(pojos)/";
-//			String jpaPckgName = "org.cgiar.ciat.hpcontactlist.domain.pojos";
-//			String projectName = "hpcontactlist";
-//			String folderProjectPath = "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/";
-//			String webRootFolderPath = "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/webRoot/";
-//			String libFolderPath = "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/webRoot/lib/";	
-			
+			// String jpaPath = "E:/ZATHURA EXAMPLE(pojos)/";
+			// String jpaPckgName = "org.cgiar.ciat.smta.model.pojos";
+			// String projectName = "smta";
+			// String folderProjectPath = "E:/ZATHURA EXAMPLE(landed)/";
+			// String webRootFolderPath = "E:/ZATHURA EXAMPLE(landed)/webRoot/";
+			// String libFolderPath = "E:/ZATHURA EXAMPLE(landed)/lib/";
+
+			// String jpaPath = "E:/ZATHURA EXAMPLE(pojos)/";
+			// String jpaPckgName = "org.cgiar.ciat.hpcontactlist.domain.pojos";
+			// String projectName = "hpcontactlist";
+			// String folderProjectPath =
+			// "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/";
+			// String webRootFolderPath =
+			// "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/webRoot/";
+			// String libFolderPath =
+			// "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/webRoot/lib/";
+
 			String jpaPath = "E:/WORKSPACE/banco/WebRoot/WEB-INF/classes/";
 			String jpaPckgName = "co.edu.usb.banco.domain";
 			String projectName = "banco";
 			String folderProjectPath = "E:/WORKSPACE/banco/src/";
 			String webRootFolderPath = "E:/WORKSPACE/banco/WebRoot/";
-			String libFolderPath = "E:/WORKSPACE/banco/WebRoot/lib/";	
-			
-//			String jpaPath = "E:/WORKSPACE/sigyweb1/WebRoot/WEB-INF/classes/";
-//			String jpaPckgName = "org.cgiar.ciat.sigyweb1.domain.pojos";
-//			String projectName = "sigyweb1";
-//			String folderProjectPath = "E:/WORKSPACE/sigyweb1/src/";
-//			String webRootFolderPath = "E:/WORKSPACE/sigyweb1/WebRoot/";
-//			String libFolderPath = "E:/WORKSPACE/sigyweb1/WebRoot/lib/";					
+			String libFolderPath = "E:/WORKSPACE/banco/WebRoot/lib/";
+
+			// String jpaPath =
+			// "E:/WORKSPACE/sigyweb1/WebRoot/WEB-INF/classes/";
+			// String jpaPckgName = "org.cgiar.ciat.sigyweb1.domain.pojos";
+			// String projectName = "sigyweb1";
+			// String folderProjectPath = "E:/WORKSPACE/sigyweb1/src/";
+			// String webRootFolderPath = "E:/WORKSPACE/sigyweb1/WebRoot/";
+			// String libFolderPath = "E:/WORKSPACE/sigyweb1/WebRoot/lib/";
 
 			// String jpaPath = "E:/ZATHURA EXAMPLE(pojos)/";
 			// String jpaPckgName = "org.cgiar.hplus.dominio.pojos";
@@ -96,18 +101,14 @@ public class TestZathuraJavaEE_Web_Centric {
 			// String folderProjectPath = "E:/ZATHURA EXAMPLE(landed)/";
 			// String webRootFolderPath="E:/ZATHURA EXAMPLE(landed)/webRoot/";
 			// String libFolderPath="E:/ZATHURA EXAMPLE(landed)/lib/";
-			
-			
-			
+
 			int specificityLevel = 1;
 
 			IMetaDataReader entityLoader = null;
 			MetaDataModel metaDataModel = null;
 			try {
-				entityLoader = MetaDataReaderFactory
-						.createMetaDataReader(MetaDataReaderFactory.JPAEntityLoaderEngine);
-				metaDataModel = entityLoader.loadMetaDataModel(jpaPath,
-						jpaPckgName);
+				entityLoader = MetaDataReaderFactory.createMetaDataReader(MetaDataReaderFactory.JPAEntityLoaderEngine);
+				metaDataModel = entityLoader.loadMetaDataModel(jpaPath, jpaPckgName);
 			} catch (MetaDataReaderNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -120,18 +121,15 @@ public class TestZathuraJavaEE_Web_Centric {
 			properties.put("webRootFolderPath", webRootFolderPath);
 			properties.put("libFolderPath", libFolderPath);
 			properties.put("folderProjectPath", folderProjectPath);
-			
 
-			IZathuraGenerator zathuraGenerator = ZathuraGeneratorFactory
-					.createZathuraGenerator("ZathuraJavaEE_Web_Centric");
-			zathuraGenerator.toGenerate(metaDataModel, projectName,
-					folderProjectPath, properties);
+			IZathuraGenerator zathuraGenerator = ZathuraGeneratorFactory.createZathuraGenerator("ZathuraJavaEE_Web_Centric");
+			zathuraGenerator.toGenerate(metaDataModel, projectName, folderProjectPath, properties);
 
 			// Todos los generadores
 			/*
 			 * for(GeneratorModel
-			 * generatorModel:ZathuraGeneratorFactory.getTheZathuraGenerators().values()){
-			 * log.debug(generatorModel.getName());
+			 * generatorModel:ZathuraGeneratorFactory.getTheZathuraGenerators
+			 * ().values()){ log.debug(generatorModel.getName());
 			 * log.debug(generatorModel.getZathuraGenerator()); }
 			 */
 
