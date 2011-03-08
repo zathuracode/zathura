@@ -4,6 +4,7 @@ import co.edu.usbcali.lidis.zathura.metadata.exceptions.MetaDataReaderNotFoundEx
 
 /**
  * Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
@@ -14,15 +15,15 @@ public class MetaDataReaderFactory {
 	private MetaDataReaderFactory() {
 	}
 
-	public static IMetaDataReader createMetaDataReader(int metaDataReader)throws MetaDataReaderNotFoundException {
+	public static IMetaDataReader createMetaDataReader(int metaDataReader) throws MetaDataReaderNotFoundException {
 
 		switch (metaDataReader) {
-			case 1: {
-				return new co.edu.usbcali.lidis.zathura.metadata.engine.JPAEntityLoaderEngine();
-			}
-			default:{
-				throw new MetaDataReaderNotFoundException();
-			}
+		case 1: {
+			return new co.edu.usbcali.lidis.zathura.metadata.engine.JPAEntityLoaderEngine();
+		}
+		default: {
+			throw new MetaDataReaderNotFoundException();
+		}
 		}
 	}
 

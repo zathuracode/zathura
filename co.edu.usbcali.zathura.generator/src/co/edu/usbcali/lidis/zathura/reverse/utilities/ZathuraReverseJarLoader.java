@@ -12,19 +12,18 @@ import java.util.jar.JarInputStream;
 
 /**
  * Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @author William Altuzarra Noriega Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class ZathuraReverseJarLoader {
 
-	public static void loadJar(String jarLocation)
-			throws FileNotFoundException, IOException {
-		
+	public static void loadJar(String jarLocation) throws FileNotFoundException, IOException {
+
 		String jarName = jarLocation;
 
-		URLClassLoader urlLoader = getURLClassLoader(new URL("file", null,
-				jarName));
+		URLClassLoader urlLoader = getURLClassLoader(new URL("file", null, jarName));
 
 		JarInputStream jis = new JarInputStream(new FileInputStream(jarName));
 		JarEntry entry = jis.getNextJarEntry();
@@ -44,8 +43,7 @@ public class ZathuraReverseJarLoader {
 					loadedCount++;
 				} catch (Throwable e) {
 					System.out.println("\t- not loaded");
-					System.out.println("\t " + e.getClass().getName() + ": "
-							+ e.getMessage());
+					System.out.println("\t " + e.getClass().getName() + ": " + e.getMessage());
 				}
 
 			}
@@ -65,8 +63,7 @@ public class ZathuraReverseJarLoader {
 	}
 
 	public static void loadJar2(String jarLocation) throws Exception {
-		Method addURL = URLClassLoader.class.getDeclaredMethod("addURL",
-				new Class[] { URL.class });
+		Method addURL = URLClassLoader.class.getDeclaredMethod("addURL", new Class[] { URL.class });
 		addURL.setAccessible(true);// you're telling the JVM to override the
 		// default visibility
 		File[] files = getExternalJars(jarLocation);// some method returning the
@@ -75,14 +72,13 @@ public class ZathuraReverseJarLoader {
 		for (int i = 0; i < files.length; i++) {
 			URL url = files[i].toURL();
 			addURL.invoke(cl, new Object[] { url });
-			//System.out.println("\n---------------------");
-			//System.out.println("Summary:");
-			//System.out.println("\tLoaded:\t" + files[i].getName());			
+			// System.out.println("\n---------------------");
+			// System.out.println("Summary:");
+			// System.out.println("\tLoaded:\t" + files[i].getName());
 		}
 		// at this point, the default class loader has all the jars you
 		// indicated
 	}
-	
 
 	private static File[] getExternalJars(String jarLocation) {
 		File[] files = new File[1];

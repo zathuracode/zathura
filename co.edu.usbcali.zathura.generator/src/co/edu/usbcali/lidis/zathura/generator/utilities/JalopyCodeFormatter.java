@@ -6,20 +6,20 @@ import org.apache.log4j.Logger;
 
 import de.hunsicker.jalopy.Jalopy;
 
-
 /**
  * Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class JalopyCodeFormatter {
-	
-	private static Logger log=Logger.getLogger(JalopyCodeFormatter.class);
+
+	private static Logger log = Logger.getLogger(JalopyCodeFormatter.class);
 
 	private JalopyCodeFormatter() {
-		
+
 	}
-	
+
 	/**
 	 * 
 	 * @param pathFolder
@@ -32,13 +32,13 @@ public class JalopyCodeFormatter {
 			String[] fileNames = directory.list();
 
 			for (int i = 0; i < fileNames.length; i++) {
-				if(fileNames[i].endsWith(".java")){				
+				if (fileNames[i].endsWith(".java")) {
 					File in = new File(pathFolder + fileNames[i]);
 					jalopy.setInput(in);
 					jalopy.setOutput(in);
-	
+
 					jalopy.format();
-					
+
 					if (jalopy.getState() == Jalopy.State.OK) {
 						log.info(in + " format OK");
 					} else if (jalopy.getState() == Jalopy.State.WARN) {
@@ -46,16 +46,16 @@ public class JalopyCodeFormatter {
 					} else if (jalopy.getState() == Jalopy.State.ERROR) {
 						log.info(in + " format ERROR");
 					}
-					
+
 					in = null;
 					System.gc();
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(
-				"Fallo Formateo de Codigo con Jalopy:" + e.toString());
+			System.out.println("Fallo Formateo de Codigo con Jalopy:" + e.toString());
 		}
 	}
+
 	/**
 	 * 
 	 * @param pathFiles
@@ -64,13 +64,13 @@ public class JalopyCodeFormatter {
 		log.info("formatJavaCodeFile");
 		Jalopy jalopy = new Jalopy();
 		try {
-			if(pathFiles.endsWith(".java")){			
+			if (pathFiles.endsWith(".java")) {
 				File in = new File(pathFiles);
 				jalopy.setInput(in);
 				jalopy.setOutput(in);
-	
+
 				jalopy.format();
-	
+
 				if (jalopy.getState() == Jalopy.State.OK) {
 					log.info(in + " format OK");
 				} else if (jalopy.getState() == Jalopy.State.WARN) {
@@ -78,17 +78,14 @@ public class JalopyCodeFormatter {
 				} else if (jalopy.getState() == Jalopy.State.ERROR) {
 					log.info(in + " format ERROR");
 				}
-				
+
 				jalopy = null;
 				in = null;
 				System.gc();
 			}
 		} catch (Exception e) {
-			System.out.println(
-				"Fallo Formateo de Codigo con Jalopy:" + e.toString());
+			System.out.println("Fallo Formateo de Codigo con Jalopy:" + e.toString());
 		}
 	}
-
-	
 
 }

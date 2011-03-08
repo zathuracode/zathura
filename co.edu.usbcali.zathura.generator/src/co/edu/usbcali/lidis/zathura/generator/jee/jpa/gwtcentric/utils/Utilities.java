@@ -11,15 +11,15 @@ import java.util.Properties;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 
-import org.apache.commons.collections.ListUtils;
-
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 import co.edu.usbcali.lidis.zathura.metadata.model.SimpleMember;
+
 /**
  * Zathura Generator
+ * 
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
@@ -56,37 +56,30 @@ public class Utilities {
 	public HashMap<String, Member> manyToOneTempHash;
 
 	// getTypeAndvariableForManyToOneProperties
-	public String[] getTypeAndvariableForManyToOneProperties(String strClass,
-			List<MetaData> theMetaData) {
+	public String[] getTypeAndvariableForManyToOneProperties(String strClass, List<MetaData> theMetaData) {
 		String ret[] = new String[50];
 
 		for (MetaData metaData : theMetaData) {
 			if (metaData.getRealClassName().equalsIgnoreCase(strClass)) {
 
-				manyToOneTempHash = metaData.getPrimaryKey()
-				.getHashMapIdsProperties();
+				manyToOneTempHash = metaData.getPrimaryKey().getHashMapIdsProperties();
 
 				if (!metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 					Member member = metaData.getPrimaryKey();
 					ret[0] = member.getRealClassName();
-					ret[1] = member.getName() + "_"
-					+ metaData.getRealClassName();
+					ret[1] = member.getName() + "_" + metaData.getRealClassName();
 					// ret[2] = member.getGetNameOfPrimaryName();
 					// ret[3] = member.getRealClassName();
 				} else {
 					int contTmp = 0;
-					Field[] field = metaData.getComposeKey()
-					.getDeclaredFields();
+					Field[] field = metaData.getComposeKey().getDeclaredFields();
 					for (int i = 0; i < field.length; i++) {
 
 						Field field2 = field[i];
 
 						String name = field2.getName();
 
-						String realType = field2.getType().toString()
-						.substring(
-								(field2.getType().toString())
-								.lastIndexOf(".") + 1,
+						String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,
 								(field2.getType().toString()).length());
 
 						ret[contTmp] = realType;
@@ -114,69 +107,66 @@ public class Utilities {
 		}
 
 	}
-	
-	public List<Member> getManyToOneMembers(String strClass,
-			List<MetaData> theMetaData){
-		
-		List<Member> memberList = new  ArrayList<Member>();
-		
+
+	public List<Member> getManyToOneMembers(String strClass, List<MetaData> theMetaData) {
+
+		List<Member> memberList = new ArrayList<Member>();
+
 		for (MetaData metaData : theMetaData) {
 			if (metaData.getRealClassName().equalsIgnoreCase(strClass)) {
 
-				manyToOneTempHash = metaData.getPrimaryKey()
-				.getHashMapIdsProperties();
+				manyToOneTempHash = metaData.getPrimaryKey().getHashMapIdsProperties();
 
 				if (!metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
-					Member member =  new SimpleMember(metaData.getPrimaryKey().getName()+ "_"
-							+ metaData.getRealClassName(),metaData.getPrimaryKey().getShowName()+ "_"
-							+ metaData.getRealClassName(), metaData.getPrimaryKey().getType(), metaData.getPrimaryKey().getOrder());
-					
+					Member member = new SimpleMember(metaData.getPrimaryKey().getName() + "_" + metaData.getRealClassName(), metaData.getPrimaryKey()
+							.getShowName()
+							+ "_" + metaData.getRealClassName(), metaData.getPrimaryKey().getType(), metaData.getPrimaryKey().getOrder());
+
 					memberList.add(member);
 					// ret[2] = member.getGetNameOfPrimaryName();
 					// ret[3] = member.getRealClassName();
 				} else {
 					int contTmp = 0;
-					Field[] field = metaData.getComposeKey()
-					.getDeclaredFields();
+					Field[] field = metaData.getComposeKey().getDeclaredFields();
 					for (int i = 0; i < field.length; i++) {
 						Field field2 = field[i];
-						
+
 						String variableName = field2.getName();
 
 						buildStringToCheckLengths(field2, metaData.getComposeKey(), variableName);
 
-						Member member = new SimpleMember(variableName + "_" + metaData.getRealClassName(), variableName + "_" + metaData.getRealClassName(), field2.getType(), -1);
+						Member member = new SimpleMember(variableName + "_" + metaData.getRealClassName(), variableName + "_" + metaData.getRealClassName(),
+								field2.getType(), -1);
 						member.setLength(Utilities.getInstance().length);
 						member.setPrecision(Utilities.getInstance().precision);
 						member.setScale(Utilities.getInstance().scale);
 						member.setNullable(Utilities.getInstance().nullable);
-						
+
 						memberList.add(member);
 					}
 				}
 			}
 		}
 
-//		boolean watch = false;
-//
-//		for (int j = 0; j < ret.length; j++) {
-//			if (ret[j] != null) {
-//				if (!ret[j].equalsIgnoreCase(""))
-//					watch = true;
-//			}
-//		}
-//
-//		if (watch) {
-//			return ret;
-//		} else {
-//			return null;
-//		}
-		
+		// boolean watch = false;
+		//
+		// for (int j = 0; j < ret.length; j++) {
+		// if (ret[j] != null) {
+		// if (!ret[j].equalsIgnoreCase(""))
+		// watch = true;
+		// }
+		// }
+		//
+		// if (watch) {
+		// return ret;
+		// } else {
+		// return null;
+		// }
+
 		return memberList;
 	}
-	
-	public List<Member> finalMemberForId(List<MetaData> list,
-			MetaData metaData) {
+
+	public List<Member> finalMemberForId(List<MetaData> list, MetaData metaData) {
 		List<Member> memberList = new ArrayList<Member>();
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
@@ -184,30 +174,29 @@ public class Utilities {
 			for (Field field2 : field) {
 				String variableName = field2.getName();
 
-				Member member = new SimpleMember(variableName , variableName , field2.getType(), -1);
-				
+				Member member = new SimpleMember(variableName, variableName, field2.getType(), -1);
+
 				memberList.add(member);
 			}
 
 			return memberList;
 		} else {
-			Member member =  new SimpleMember(metaData.getPrimaryKey().getName(),metaData.getPrimaryKey().getShowName(), metaData.getPrimaryKey().getType(), metaData.getPrimaryKey().getOrder());
-			
+			Member member = new SimpleMember(metaData.getPrimaryKey().getName(), metaData.getPrimaryKey().getShowName(), metaData.getPrimaryKey().getType(),
+					metaData.getPrimaryKey().getOrder());
+
 			memberList.add(member);
 		}
 
 		return memberList;
 	}
-	
-	public List<Member> finalMemberWithoutId(List<MetaData> list,
-			MetaData metaData) {
-		
+
+	public List<Member> finalMemberWithoutId(List<MetaData> list, MetaData metaData) {
 
 		List<Member> members = getFinalParamMembers(list, metaData);
 		List<Member> idMembers = finalMemberForId(list, metaData);
-		
+
 		List<Member> memberList = new ArrayList<Member>(members);
-		
+
 		if (members != null && !members.isEmpty() && idMembers != null && !idMembers.isEmpty()) {
 			for (Member member : members) {
 				for (Member member2 : idMembers) {
@@ -220,9 +209,9 @@ public class Utilities {
 		return memberList;
 	}
 
-	public List<Member> getFinalParamMembers(List<MetaData> theMetaData, MetaData metaData){
+	public List<Member> getFinalParamMembers(List<MetaData> theMetaData, MetaData metaData) {
 
-		List<Member> finalList =  new ArrayList<Member>();
+		List<Member> finalList = new ArrayList<Member>();
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
@@ -232,13 +221,12 @@ public class Utilities {
 
 				buildStringToCheckLengths(field2, metaData.getComposeKey(), variableName);
 
-				Member member = new SimpleMember(field2.getName(), field2
-						.getName(), field2.getType(), -1);
+				Member member = new SimpleMember(field2.getName(), field2.getName(), field2.getType(), -1);
 				member.setLength(Utilities.getInstance().length);
 				member.setPrecision(Utilities.getInstance().precision);
 				member.setScale(Utilities.getInstance().scale);
 				member.setNullable(Utilities.getInstance().nullable);
-				
+
 				finalList.add(member);
 			}
 		}
@@ -256,102 +244,62 @@ public class Utilities {
 
 				// String params[] = getTypeAndvariableForManyToOneProperties(
 				// member.getName(), theMetaData);
-				List<Member> manyToOneMembers = Utilities.getInstance()
-				.getManyToOneMembers(member.getRealClassName(), theMetaData);
-				
+				List<Member> manyToOneMembers = Utilities.getInstance().getManyToOneMembers(member.getRealClassName(), theMetaData);
+
 				for (Member member2 : manyToOneMembers) {
 					finalList.add(member2);
 				}
 
-
 			}
 		}
-		
-		
+
 		return finalList;
 
 	}
 
-
-	public List<String> addVariablesValuesToListDependingOnDataTypeForID(
-			List<String> finalParam2, Field field, String variableName,
-			Class clazz) {
+	public List<String> addVariablesValuesToListDependingOnDataTypeForID(List<String> finalParam2, Field field, String variableName, Class clazz) {
 
 		String realClassName = field.getType().getSimpleName();
 
-		String variableNameFormethod = variableName.substring(0, 1)
-		.toUpperCase()
-		+ variableName.substring(1);
+		String variableNameFormethod = variableName.substring(0, 1).toUpperCase() + variableName.substring(1);
 
 		buildStringToCheckLengths(field, clazz, variableName);
 
 		if (realClassName.equalsIgnoreCase("String")) {
 			if (!length.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && "
-						+ "Utilities.checkWordAndCheckWithlength("
-						+ variableName + "," + length + ")==false"
-						+ ifconditionClose + throwExceptionLength + "\""
-						+ variableName + "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkWordAndCheckWithlength(" + variableName + "," + length + ")==false"
+						+ ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 
 		}
 
 		if (realClassName.equalsIgnoreCase("Integer")) {
 			if (!precision.equals("0"))
-				finalParam2
-				.add(ifcondition
-						+ variableName
-						+ "!=null && "
-						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-						+ variableName + "," + precision + "," + 0
-						+ ")==false" + ifconditionClose
-						+ throwExceptionLength + "\"" + variableName
-						+ "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+						+ precision + "," + 0 + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Double")) {
 			if (!precision.equals("0"))
-				finalParam2
-				.add(ifcondition
-						+ variableName
-						+ "!=null && "
-						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-						+ variableName + "," + precision + "," + scale
-						+ ")==false" + ifconditionClose
-						+ throwExceptionLength + "\"" + variableName
-						+ "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+						+ precision + "," + scale + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Long")) {
 			if (!precision.equals("0"))
-				finalParam2
-				.add(ifcondition
-						+ variableName
-						+ "!=null && "
-						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-						+ variableName + "," + precision + "," + 0
-						+ ")==false" + ifconditionClose
-						+ throwExceptionLength + "\"" + variableName
-						+ "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+						+ precision + "," + 0 + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Float")) {
 			if (!precision.equals("0"))
-				finalParam2
-				.add(ifcondition
-						+ variableName
-						+ "!=null && "
-						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-						+ variableName + "," + precision + "," + scale
-						+ ")==false" + ifconditionClose
-						+ throwExceptionLength + "\"" + variableName
-						+ "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+						+ precision + "," + scale + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		return finalParam2;
 	}
 
-	public void buildStringToCheckLengths(Field field, Class clazz,
-			String realClassName) {
+	public void buildStringToCheckLengths(Field field, Class clazz, String realClassName) {
 
 		if (field.getAnnotations() != null && field.getAnnotations().length > 0) {
 			if (field.getAnnotation(Column.class) != null) {
@@ -363,8 +311,7 @@ public class Utilities {
 
 			} else {
 				if (field.getAnnotation(Basic.class) != null) {
-					nullable = new Boolean(field.getAnnotation(Basic.class)
-							.optional());
+					nullable = new Boolean(field.getAnnotation(Basic.class).optional());
 				}
 			}
 		} else {
@@ -390,8 +337,7 @@ public class Utilities {
 							property = method.getName().substring(3);
 
 							if (realClassName.equalsIgnoreCase(property)) {
-								Column column = method
-								.getAnnotation(Column.class);
+								Column column = method.getAnnotation(Column.class);
 								length = new Long(column.length());
 								precision = new Long(column.precision());
 								scale = new Long(column.scale());
@@ -403,8 +349,7 @@ public class Utilities {
 					}
 				} else {
 					if (method.getAnnotation(Basic.class) != null) {
-						nullable = new Boolean(method
-								.getAnnotation(Basic.class).optional());
+						nullable = new Boolean(method.getAnnotation(Basic.class).optional());
 					}
 				}
 			}
@@ -412,77 +357,46 @@ public class Utilities {
 
 	}
 
-	public List<String> addVariablesValuesToListDependingOnDataType(
-			List<String> finalParam2, String realClassName,
-			String variableName, String precision, String scale, String length) {
+	public List<String> addVariablesValuesToListDependingOnDataType(List<String> finalParam2, String realClassName, String variableName, String precision,
+			String scale, String length) {
 
 		if (realClassName.equalsIgnoreCase("String")) {
 			if (!length.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && "
-						+ "Utilities.checkWordAndCheckWithlength("
-						+ variableName + "," + length + ")==false"
-						+ ifconditionClose + throwExceptionLength + "\""
-						+ variableName + "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkWordAndCheckWithlength(" + variableName + "," + length + ")==false"
+						+ ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 
 		}
 
 		if (realClassName.equalsIgnoreCase("Integer")) {
 			if (!precision.equals("0"))
-				finalParam2
-				.add(ifcondition
-						+ variableName
-						+ "!=null && "
-						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-						+ variableName + "," + precision + "," + 0
-						+ ")==false" + ifconditionClose
-						+ throwExceptionLength + "\"" + variableName
-						+ "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+						+ precision + "," + 0 + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Double")) {
 			if (!precision.equals("0"))
-				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + (new Integer(precision)-new Integer(scale))+ "," + scale
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+						+ (new Integer(precision) - new Integer(scale)) + "," + scale + ")==false" + ifconditionClose + throwExceptionLength + "\""
+						+ variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Long")) {
 			if (!precision.equals("0"))
-				finalParam2
-				.add(ifcondition
-						+ variableName
-						+ "!=null && "
-						+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-						+ variableName + "," + precision + "," + 0
-						+ ")==false" + ifconditionClose
-						+ throwExceptionLength + "\"" + variableName
-						+ "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+						+ precision + "," + 0 + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Float")) {
 			if (!precision.equals("0"))
-				finalParam2
-						.add(ifcondition
-								+ variableName
-								+ "!=null && "
-								+ "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+"
-								+ variableName + "," + (new Integer(precision)-new Integer(scale)) + "," + scale
-								+ ")==false" + ifconditionClose
-								+ throwExceptionLength + "\"" + variableName
-								+ "\"" + throwExceptionClose);
+				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+						+ (new Integer(precision) - new Integer(scale)) + "," + scale + ")==false" + ifconditionClose + throwExceptionLength + "\""
+						+ variableName + "\"" + throwExceptionClose);
 		}
 
 		return finalParam2;
 	}
 
-	public List<String> getRelatedClasses(MetaData metaData,
-			MetaDataModel dataModel) {
+	public List<String> getRelatedClasses(MetaData metaData, MetaDataModel dataModel) {
 		List<String> imports = null;
 		Member member = null;
 		imports = new ArrayList<String>();
@@ -499,11 +413,8 @@ public class Utilities {
 				getRelatedClasses(dataModel, member, imports);
 			} else {
 				if (object instanceof SimpleMember) {
-					if (((SimpleMember) object).getType().getName()
-							.equalsIgnoreCase("java.util.Date")) {
-						imports
-						.add(((SimpleMember) object).getType()
-								.getName());
+					if (((SimpleMember) object).getType().getName().equalsIgnoreCase("java.util.Date")) {
+						imports.add(((SimpleMember) object).getType().getName());
 					}
 				}
 			}
@@ -512,15 +423,12 @@ public class Utilities {
 		return imports;
 	}
 
-	public void getRelatedClasses(MetaDataModel dataModel, Member member,
-			List<String> imports) {
+	public void getRelatedClasses(MetaDataModel dataModel, Member member, List<String> imports) {
 
 		for (MetaData metaDataInList : dataModel.getTheMetaData()) {
-			if (metaDataInList.getRealClassName().equalsIgnoreCase(
-					member.getRealClassName())) {
+			if (metaDataInList.getRealClassName().equalsIgnoreCase(member.getRealClassName())) {
 				if (metaDataInList.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
-					imports.add(metaDataInList.getPrimaryKey().getType()
-							.getName());
+					imports.add(metaDataInList.getPrimaryKey().getType().getName());
 				}
 			}
 		}
@@ -534,10 +442,7 @@ public class Utilities {
 		String[] tmp = (firstLetters.replace(".", "%")).split("%");
 
 		if (tmp != null) {
-			if ((tmp[0].equalsIgnoreCase("java") && tmp[1]
-			                                            .equalsIgnoreCase("lang"))
-			                                            || (tmp[0].equalsIgnoreCase("java") && tmp[1]
-			                                                                                       .equalsIgnoreCase("util"))) {
+			if ((tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("lang")) || (tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("util"))) {
 				ret = false;
 			} else {
 				ret = true;
@@ -549,8 +454,7 @@ public class Utilities {
 
 	public boolean isFinalParamForViewDatesInList() {
 		if (Utilities.getInstance().dates != null) {
-			if (!Utilities.getInstance().dates.isEmpty()
-					&& Utilities.getInstance().dates.size() > 0) {
+			if (!Utilities.getInstance().dates.isEmpty() && Utilities.getInstance().dates.size() > 0) {
 				return true;
 			} else {
 				return false;
@@ -562,8 +466,7 @@ public class Utilities {
 
 	public boolean isFinalParamForIdForViewDatesInList() {
 		if (Utilities.getInstance().datesId != null) {
-			if (!Utilities.getInstance().datesId.isEmpty()
-					&& Utilities.getInstance().datesId.size() > 0) {
+			if (!Utilities.getInstance().datesId.isEmpty() && Utilities.getInstance().datesId.size() > 0) {
 				return true;
 			} else {
 				return false;
@@ -575,8 +478,7 @@ public class Utilities {
 
 	public Object isFinalParamForIdClassAsVariablesForDates() {
 		if (Utilities.getInstance().datesIdJSP != null) {
-			if (!Utilities.getInstance().datesIdJSP.isEmpty()
-					&& Utilities.getInstance().datesIdJSP.size() > 0) {
+			if (!Utilities.getInstance().datesIdJSP.isEmpty() && Utilities.getInstance().datesIdJSP.size() > 0) {
 				return true;
 			} else {
 				return false;
@@ -588,8 +490,7 @@ public class Utilities {
 
 	public Object isFinalParamDatesAsList() {
 		if (Utilities.getInstance().datesJSP != null) {
-			if (!Utilities.getInstance().datesJSP.isEmpty()
-					&& Utilities.getInstance().datesJSP.size() > 0) {
+			if (!Utilities.getInstance().datesJSP.isEmpty() && Utilities.getInstance().datesJSP.size() > 0) {
 				return true;
 			} else {
 				return false;
@@ -618,11 +519,9 @@ public class Utilities {
 					// scale;
 					// nullable;
 
-					Utilities.getInstance().buildStringToCheckLengths(field2,
-							clazz, realClassName);
+					Utilities.getInstance().buildStringToCheckLengths(field2, clazz, realClassName);
 
-					Member member = new SimpleMember(field2.getName(), field2
-							.getName(), field2.getType(), -1);
+					Member member = new SimpleMember(field2.getName(), field2.getName(), field2.getType(), -1);
 					member.setLength(Utilities.getInstance().length);
 					member.setPrecision(Utilities.getInstance().precision);
 					member.setScale(Utilities.getInstance().scale);
@@ -630,33 +529,26 @@ public class Utilities {
 
 					hashMapIdsProperties.put(field2.getName(), member);
 
-					metaData.getPrimaryKey().setHashMapIdsProperties(
-							hashMapIdsProperties);
+					metaData.getPrimaryKey().setHashMapIdsProperties(hashMapIdsProperties);
 				}
 			} else {
 
-				Member member = new SimpleMember(metaData.getPrimaryKey()
-						.getName(), metaData.getPrimaryKey().getName(),
-						metaData.getPrimaryKey().getType(), -1);
+				Member member = new SimpleMember(metaData.getPrimaryKey().getName(), metaData.getPrimaryKey().getName(), metaData.getPrimaryKey().getType(), -1);
 
 				member.setLength(metaData.getPrimaryKey().getLength());
 				member.setPrecision(metaData.getPrimaryKey().getPrecision());
 				member.setScale(metaData.getPrimaryKey().getScale());
 				member.setNullable(metaData.getPrimaryKey().getNullable());
 
-				hashMapIdsProperties.put(metaData.getPrimaryKey().getName(),
-						member);
+				hashMapIdsProperties.put(metaData.getPrimaryKey().getName(), member);
 
-				metaData.getPrimaryKey().setHashMapIdsProperties(
-						hashMapIdsProperties);
+				metaData.getPrimaryKey().setHashMapIdsProperties(hashMapIdsProperties);
 
 			}
 		}
 	}
 
-	public void buildFolders(String packageName, String hardDiskLocation,
-			Integer specificityLevel, String packageOriginal,
-			Properties properties) {
+	public void buildFolders(String packageName, String hardDiskLocation, Integer specificityLevel, String packageOriginal, Properties properties) {
 
 		// / se construye paquete
 		String pckge = packageName.replace('.', '_') + "_";
@@ -683,9 +575,9 @@ public class Utilities {
 
 		folderBuilder.add(model + "control");
 
-		//		if (specificityLevel.intValue() == 2) {
-		//			folderBuilder.add(model + "pojos");
-		//		}
+		// if (specificityLevel.intValue() == 2) {
+		// folderBuilder.add(model + "pojos");
+		// }
 
 		folderBuilder.add(model + "dto");
 
@@ -705,13 +597,9 @@ public class Utilities {
 		}
 
 		try {
-			GeneratorUtil.validateDirectory("JSPX", properties
-					.getProperty("webRootFolderPath"));
-			GeneratorUtil.validateDirectory("WEB-INF", properties
-					.getProperty("webRootFolderPath"));
-			GeneratorUtil.validateDirectory("facelets", properties
-					.getProperty("webRootFolderPath")
-					+ GeneratorUtil.slash + "WEB-INF");
+			GeneratorUtil.validateDirectory("JSPX", properties.getProperty("webRootFolderPath"));
+			GeneratorUtil.validateDirectory("WEB-INF", properties.getProperty("webRootFolderPath"));
+			GeneratorUtil.validateDirectory("facelets", properties.getProperty("webRootFolderPath") + GeneratorUtil.slash + "WEB-INF");
 			// WEB-INF
 			GeneratorUtil.validateDirectory("META-INF", hardDiskLocation);
 		} catch (IOException e) {
@@ -720,19 +608,18 @@ public class Utilities {
 		}
 
 	}
-	public void buildFoldersGWT(String packageName, String hardDiskLocation,
-			Integer specificityLevel, String packageOriginal,
-			Properties properties) {
+
+	public void buildFoldersGWT(String packageName, String hardDiskLocation, Integer specificityLevel, String packageOriginal, Properties properties) {
 
 		// / se construye paquete
 		String pckge = packageName.replace('.', '_') + "_";
-		String pckgeServer = pckge + "server_"; 
+		String pckgeServer = pckge + "server_";
 		String modelPckg = packageOriginal.replace('.', '_') + "_";
 		String pckgeClient = pckge + "client_";
 
 		String dataAcces = pckgeServer + "dataaccess_";
 		String model = modelPckg;
-		//		String presentation = pckgeServer + "presentation_";
+		// String presentation = pckgeServer + "presentation_";
 		String dao = dataAcces + "dao_";
 
 		List<String> folderBuilder = new ArrayList<String>();
@@ -748,11 +635,11 @@ public class Utilities {
 		folderBuilder.add(pckgeClient + "dataservice");
 		folderBuilder.add(pckgeClient + "smartds");
 		folderBuilder.add(pckgeClient + "entrypoint");
-		//		if (specificityLevel.intValue() == 2) {
-		//			folderBuilder.add(model + "pojos");
-		//		}
-		//		folderBuilder.add(model + "dto");
-		//		folderBuilder.add(presentation + "backEndBeans");
+		// if (specificityLevel.intValue() == 2) {
+		// folderBuilder.add(model + "pojos");
+		// }
+		// folderBuilder.add(model + "dto");
+		// folderBuilder.add(presentation + "backEndBeans");
 		folderBuilder.add(pckgeServer + "businessdelegate");
 		folderBuilder.add(properties.getProperty("webRootFolderPath"));
 		for (String string : folderBuilder) {
@@ -764,13 +651,12 @@ public class Utilities {
 			}
 		}
 		try {
-			//			GeneratorUtil.validateDirectory("JSPX", properties
-			//					.getProperty("webRootFolderPath"));
-			GeneratorUtil.validateDirectory("WEB-INF", properties
-					.getProperty("webRootFolderPath"));
-			//			GeneratorUtil.validateDirectory("facelets", properties
-			//					.getProperty("webRootFolderPath")
-			//					+ GeneratorUtil.slash + "WEB-INF");
+			// GeneratorUtil.validateDirectory("JSPX", properties
+			// .getProperty("webRootFolderPath"));
+			GeneratorUtil.validateDirectory("WEB-INF", properties.getProperty("webRootFolderPath"));
+			// GeneratorUtil.validateDirectory("facelets", properties
+			// .getProperty("webRootFolderPath")
+			// + GeneratorUtil.slash + "WEB-INF");
 			// WEB-INF
 			GeneratorUtil.validateDirectory("META-INF", hardDiskLocation);
 		} catch (IOException e) {
@@ -779,7 +665,6 @@ public class Utilities {
 		}
 
 	}
-
 
 	public String getGetNameOfPrimaryName(String name) {
 		String build = name.substring(0, 1).toUpperCase();

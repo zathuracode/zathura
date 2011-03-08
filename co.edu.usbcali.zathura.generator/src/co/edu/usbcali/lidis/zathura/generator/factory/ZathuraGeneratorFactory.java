@@ -23,6 +23,7 @@ import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 
 /**
  * Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
@@ -32,12 +33,12 @@ public class ZathuraGeneratorFactory {
 	 * Log4j
 	 */
 	private static Logger log = Logger.getLogger(ZathuraGeneratorFactory.class);
-	
+
 	/**
-	 * xml file path 
+	 * xml file path
 	 */
 	private static String xmlConfigFactoryPath = GeneratorUtil.getXmlConfigFactoryPath();
-	
+
 	/**
 	 * Generator Model
 	 */
@@ -46,8 +47,8 @@ public class ZathuraGeneratorFactory {
 	/**
 	 * The names of generators
 	 */
-	private static java.util.List<String> generatorNames=new ArrayList<String>();
-	
+	private static java.util.List<String> generatorNames = new ArrayList<String>();
+
 	static {
 		try {
 			loadZathuraGenerators();
@@ -76,10 +77,10 @@ public class ZathuraGeneratorFactory {
 	/**
 	 * 
 	 * @param generatorName
-	 * @return 
+	 * @return
 	 * @throws GeneratorNotFoundException
 	 */
-	public static IZathuraGenerator createZathuraGenerator(String generatorName)throws GeneratorNotFoundException {
+	public static IZathuraGenerator createZathuraGenerator(String generatorName) throws GeneratorNotFoundException {
 		IZathuraGenerator zathuraGenerator;
 		if (generatorName == null || generatorName.equals("") == true) {
 			throw new GeneratorNotFoundException();
@@ -100,42 +101,36 @@ public class ZathuraGeneratorFactory {
 	 * @throws InstantiationException
 	 * 
 	 */
-	public static void loadZathuraGenerators() throws FileNotFoundException,XMLStreamException, InstantiationException, IllegalAccessException,ClassNotFoundException {
-		
-		log.info("Reading:"+GeneratorUtil.getXmlConfigFactoryPath());
-		
+	public static void loadZathuraGenerators() throws FileNotFoundException, XMLStreamException, InstantiationException, IllegalAccessException,
+			ClassNotFoundException {
+
+		log.info("Reading:" + GeneratorUtil.getXmlConfigFactoryPath());
+
 		GeneratorModel generatorModel = null;
 		boolean boolName = false;
 		boolean descriptionName = false;
 		boolean className = false;
-		boolean guiName=false;
-		boolean persistence=false;
+		boolean guiName = false;
+		boolean persistence = false;
 
 		theZathuraGenerators = new HashMap<String, GeneratorModel>();
-		
-		// Get the factory instace first.		
-		XMLInputFactory factory = XMLInputFactory.newInstance();
-		 factory.setProperty(
-			        XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES,
-			        Boolean.TRUE);
-			    factory.setProperty(
-			        XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES,
-			        Boolean.FALSE);
-			    factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE,
-			        Boolean.TRUE);
-			    factory.setProperty(XMLInputFactory.IS_COALESCING,
-			        Boolean.TRUE);
 
-		
+		// Get the factory instace first.
+		XMLInputFactory factory = XMLInputFactory.newInstance();
+		factory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.TRUE);
+		factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
+		factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, Boolean.TRUE);
+		factory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
+
 		log.debug("FACTORY: " + factory);
 
 		// create the XMLEventReader, pass the filename for any relative
-		//XMLEventReader r = factory.createXMLEventReader(new FileInputStream(xmlConfigFactoryPath));
+		// XMLEventReader r = factory.createXMLEventReader(new
+		// FileInputStream(xmlConfigFactoryPath));
 
-		
-		//xmlConfigFactoryPath="config/zathura-generator-factory-config.xml";
+		// xmlConfigFactoryPath="config/zathura-generator-factory-config.xml";
 		XMLEventReader r = factory.createXMLEventReader(new FileInputStream(xmlConfigFactoryPath));
-		
+
 		// iterate as long as there are more events on the input stream
 		while (r.hasNext()) {
 			XMLEvent e = r.nextEvent();
@@ -157,14 +152,14 @@ public class ZathuraGeneratorFactory {
 				} else if (localName.equals("class") == true) {
 					className = true;
 					log.info(localName);
-				}else if (localName.equals("persistence") == true) {
+				} else if (localName.equals("persistence") == true) {
 					persistence = true;
 					log.info(localName);
 				}
 			} else if (e.isCharacters()) {
 				Characters characters = (Characters) e;
 				String cadena = characters.getData().toString().trim();
-				if(boolName == true) {
+				if (boolName == true) {
 					generatorModel.setName(cadena);
 					generatorNames.add(cadena);
 					boolName = false;
@@ -173,15 +168,15 @@ public class ZathuraGeneratorFactory {
 					generatorModel.setDescription(cadena);
 					descriptionName = false;
 					log.info(cadena);
-				} else if(guiName==true){
+				} else if (guiName == true) {
 					generatorModel.setGuiName(cadena);
-					guiName=false;
+					guiName = false;
 					log.info(cadena);
 				} else if (className == true) {
 					generatorModel.setZathuraGenerator((IZathuraGenerator) Class.forName(cadena).newInstance());
 					className = false;
 					log.info(cadena);
-				}else if (persistence == true) {
+				} else if (persistence == true) {
 					generatorModel.setPersistence(cadena);
 					persistence = false;
 					log.info(cadena);
@@ -191,12 +186,12 @@ public class ZathuraGeneratorFactory {
 				QName qname = endElement.getName();
 				String localName = qname.getLocalPart();
 				if (localName.equals("generator") == true) {
-					theZathuraGenerators.put(generatorModel.getName(),generatorModel);
+					theZathuraGenerators.put(generatorModel.getName(), generatorModel);
 				}
 			}
 
 		}
-		log.debug("Generator length:"+theZathuraGenerators.size());
+		log.debug("Generator length:" + theZathuraGenerators.size());
 	}
 
 	/**
@@ -206,6 +201,7 @@ public class ZathuraGeneratorFactory {
 	public static HashMap<String, GeneratorModel> getTheZathuraGenerators() {
 		return theZathuraGenerators;
 	}
+
 	/**
 	 * 
 	 * @return
@@ -213,9 +209,10 @@ public class ZathuraGeneratorFactory {
 	public static java.util.List<String> getGeneratorNames() {
 		return generatorNames;
 	}
-	public static String getGeneratorNameForGuiName(String guiName){
-		for(GeneratorModel generatorModel:theZathuraGenerators.values()){
-			if(generatorModel.getGuiName().equals(guiName)==true){
+
+	public static String getGeneratorNameForGuiName(String guiName) {
+		for (GeneratorModel generatorModel : theZathuraGenerators.values()) {
+			if (generatorModel.getGuiName().equals(guiName) == true) {
 				return generatorModel.getName();
 			}
 		}

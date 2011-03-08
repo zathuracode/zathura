@@ -40,9 +40,9 @@ import co.edu.usbcali.lidis.zathura.metadata.model.SimpleMember;
 import co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader;
 import co.edu.usbcali.lidis.zathura.metadata.utilities.MetaDataUtil;
 
-
 /**
  * Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
@@ -57,24 +57,17 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 		metaDataModel.setTheMetaData(new ArrayList<MetaData>());
 
 		try {
-			log.info("Reading from:"
-					+ JPAEntityLoaderEngine.class.getClassLoader().getResource(
-							"").getFile());
-			List<Class> classes = MetaDataUtil.findEntityInFolder(path,
-					pckgName);
+			log.info("Reading from:" + JPAEntityLoaderEngine.class.getClassLoader().getResource("").getFile());
+			List<Class> classes = MetaDataUtil.findEntityInFolder(path, pckgName);
 			for (Class clazz : classes) {
-				log
-						.info("--------------------------------------------------------------------------------------------------");
-				log.info("Loading MetaData Entity class:"
-						+ clazz.getCanonicalName());
+				log.info("--------------------------------------------------------------------------------------------------");
+				log.info("Loading MetaData Entity class:" + clazz.getCanonicalName());
 				MetaData metaData = loadMetaData(clazz);
 				metaDataModel.getTheMetaData().add(metaData);
 			}
 			for (MetaData metaData : metaDataModel.getTheMetaData()) {
 				if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
-					metaData.setComposeKey(MetaDataUtil.findClassIdInFolder(
-							path, pckgName, metaData.getPrimaryKey()
-									.getRealClassName()));
+					metaData.setComposeKey(MetaDataUtil.findClassIdInFolder(path, pckgName, metaData.getPrimaryKey().getRealClassName()));
 				}
 			}
 		} catch (ClassNotFoundException e) {
@@ -93,9 +86,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 		return metaDataModel;
 	}
 
-	private MetaData loadMetaData(Class clazz) throws IllegalAccessException,
-			InvocationTargetException, NoSuchMethodException,
-			InstantiationException {
+	private MetaData loadMetaData(Class clazz) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
 
 		MetaData metaData = new MetaData();
 		metaData.setMainClass(clazz);
@@ -127,68 +118,53 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 		return metaData;
 	}
 
-	private void loadMetaDataInField(Class clazz, MetaData metaData,
-			List<Member> theMembers, String memberName) {
+	private void loadMetaDataInField(Class clazz, MetaData metaData, List<Member> theMembers, String memberName) {
 
 		for (Field field : clazz.getDeclaredFields()) {
 			int order = -1;
 			if (field.getName().equals(memberName) == true) {
-				if (field.getAnnotations() != null
-						&& field.getAnnotations().length > 0) {
+				if (field.getAnnotations() != null && field.getAnnotations().length > 0) {
 					if (field.getAnnotation(OneToMany.class) != null) {
 						// es one-to-many
 						log.info("one to many:" + memberName);
 
-						ParameterizedType rettype = (ParameterizedType) field
-								.getGenericType();
-						log.debug(rettype.getActualTypeArguments()[0]
-								.toString());
+						ParameterizedType rettype = (ParameterizedType) field.getGenericType();
+						log.debug(rettype.getActualTypeArguments()[0].toString());
 
 						// Reomver esa propiedad
 						MetaDataUtil.removeMember(theMembers, memberName);
-						OneToManyMember oneToManyMember = new OneToManyMember(memberName, field
-								.getName(), (Class) rettype
-								.getActualTypeArguments()[0], field.getType(),
-								order);
+						OneToManyMember oneToManyMember = new OneToManyMember(memberName, field.getName(), (Class) rettype.getActualTypeArguments()[0], field
+								.getType(), order);
 						oneToManyMember.setMappedBy(field.getAnnotation(OneToMany.class).mappedBy());
 						theMembers.add(oneToManyMember);
 					} else if (field.getAnnotation(OneToOne.class) != null) {
 						// es one-to-one
 						log.info("one to one:" + memberName);
 						MetaDataUtil.removeMember(theMembers, memberName);
-						theMembers.add(new OneToOneMember(memberName, field
-								.getName(), field.getType(), order));
+						theMembers.add(new OneToOneMember(memberName, field.getName(), field.getType(), order));
 					} else if (field.getAnnotation(ManyToOne.class) != null) {
 						// many to one
 						log.info("many to one:" + memberName);
 						MetaDataUtil.removeMember(theMembers, memberName);
 
-						ManyToOneMember manyToOneMember = new ManyToOneMember(
-								memberName, field.getName(), field.getType(),
-								order);
+						ManyToOneMember manyToOneMember = new ManyToOneMember(memberName, field.getName(), field.getType(), order);
 
-						JoinColumn joinColumn = field
-								.getAnnotation(JoinColumn.class);
-						JoinColumns joinColumns = field
-								.getAnnotation(JoinColumns.class);
+						JoinColumn joinColumn = field.getAnnotation(JoinColumn.class);
+						JoinColumns joinColumns = field.getAnnotation(JoinColumns.class);
 
 						if (joinColumn != null) {
 
 							Boolean nullable = joinColumn.nullable();
-							nullable = nullable == null ? !field.getAnnotation(
-									ManyToOne.class).optional() : nullable;
+							nullable = nullable == null ? !field.getAnnotation(ManyToOne.class).optional() : nullable;
 
 							HashMap<String, Boolean> hashMapNullableColumn = new HashMap<String, Boolean>();
 
-							hashMapNullableColumn.put(memberName.toUpperCase(),
-									nullable);
+							hashMapNullableColumn.put(memberName.toUpperCase(), nullable);
 
-							manyToOneMember
-									.setHashMapNullableColumn(hashMapNullableColumn);
+							manyToOneMember.setHashMapNullableColumn(hashMapNullableColumn);
 						} else {
 							if (joinColumns != null) {
-								JoinColumn[] joinColumnFromColumns = joinColumns
-										.value();
+								JoinColumn[] joinColumnFromColumns = joinColumns.value();
 								HashMap<String, Boolean> hashMapNullableColumn = new HashMap<String, Boolean>();
 
 								for (JoinColumn joinColumn2 : joinColumnFromColumns) {
@@ -200,8 +176,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 										if (name.split("_").length > 1) {
 											String[] tmp = name.split("_");
 											for (int i = 0; i < tmp.length; i++) {
-												neededName = neededName
-														+ tmp[i];
+												neededName = neededName + tmp[i];
 											}
 										} else {
 											neededName = name;
@@ -214,11 +189,9 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 
 									Boolean nullable = joinColumn2.nullable();
 
-									hashMapNullableColumn.put(neededName,
-											nullable);
+									hashMapNullableColumn.put(neededName, nullable);
 								}
-								manyToOneMember
-										.setHashMapNullableColumn(hashMapNullableColumn);
+								manyToOneMember.setHashMapNullableColumn(hashMapNullableColumn);
 							}
 						}
 
@@ -226,36 +199,26 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 					} else if (field.getAnnotation(ManyToMany.class) != null) {
 						// many to many
 						log.info("many to many:" + memberName);
-						ParameterizedType rettype = (ParameterizedType) field
-								.getGenericType();
-						log.debug(rettype.getActualTypeArguments()[0]
-								.toString());
+						ParameterizedType rettype = (ParameterizedType) field.getGenericType();
+						log.debug(rettype.getActualTypeArguments()[0].toString());
 						MetaDataUtil.removeMember(theMembers, memberName);
-						theMembers.add(new ManyToManyMember(memberName, field
-								.getName(), (Class) rettype
-								.getActualTypeArguments()[0], order));
+						theMembers.add(new ManyToManyMember(memberName, field.getName(), (Class) rettype.getActualTypeArguments()[0], order));
 					} else {
 						Member mb = null;
 						log.info("regular:" + memberName);
 						if (field.getAnnotation(GeneratedValue.class) != null) {
-							mb = new GeneratedValueMember(memberName, field
-									.getName(), field.getType(), order);
+							mb = new GeneratedValueMember(memberName, field.getName(), field.getType(), order);
 						} else {
-							mb = new SimpleMember(memberName, field.getName(),
-									field.getType(), order);
+							mb = new SimpleMember(memberName, field.getName(), field.getType(), order);
 
 							if (field.getAnnotation(Column.class) != null) {
-								Column column = field
-										.getAnnotation(Column.class);
+								Column column = field.getAnnotation(Column.class);
 								Long lenght = new Long(column.length());
 								Long precision = new Long(column.precision());
 								Long scale = new Long(column.scale());
 
-								Boolean nullable = new Boolean(column
-										.nullable());
-								nullable = nullable == null ? !field
-										.getAnnotation(Basic.class).optional()
-										: nullable;
+								Boolean nullable = new Boolean(column.nullable());
+								nullable = nullable == null ? !field.getAnnotation(Basic.class).optional() : nullable;
 
 								mb.setLength(lenght);
 								mb.setPrecision(precision);
@@ -282,8 +245,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 		}
 	}
 
-	private void loadMetaDataInMethod(Class clazz, MetaData metaData,
-			List<Member> theMembers, String memberName) {
+	private void loadMetaDataInMethod(Class clazz, MetaData metaData, List<Member> theMembers, String memberName) {
 		if (clazz.getSimpleName().equalsIgnoreCase("NodoProduccion"))
 			System.out.println("NodoProduccion");
 		log.info("Read in Method:" + memberName);
@@ -292,16 +254,13 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 			String property = "";
 
 			// Lee los metodos get o is
-			if (method.getAnnotation(Transient.class) == null
-					&& method.getAnnotation(Override.class) == null) {
+			if (method.getAnnotation(Transient.class) == null && method.getAnnotation(Override.class) == null) {
 				if (method.getName().startsWith("is")) {
 					property = method.getName().substring(3);
-					property = method.getName().substring(2, 3).toLowerCase()
-							+ property;
+					property = method.getName().substring(2, 3).toLowerCase() + property;
 				} else if (method.getName().startsWith("get")) {
 					property = method.getName().substring(4);
-					property = method.getName().substring(3, 4).toLowerCase()
-							+ property;
+					property = method.getName().substring(3, 4).toLowerCase() + property;
 				}
 			}
 
@@ -317,14 +276,11 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 				if (method.getAnnotation(OneToMany.class) != null) {
 					// es one-to-many
 					log.info("one to many:" + memberName);
-					ParameterizedType rettype = (ParameterizedType) method
-							.getGenericReturnType();
+					ParameterizedType rettype = (ParameterizedType) method.getGenericReturnType();
 					log.debug(rettype.getActualTypeArguments()[0].toString());
 
-					OneToManyMember oneToManyMember = new OneToManyMember(
-							memberName, showName, (Class) rettype
-									.getActualTypeArguments()[0], method
-									.getReturnType(), order);
+					OneToManyMember oneToManyMember = new OneToManyMember(memberName, showName, (Class) rettype.getActualTypeArguments()[0], method
+							.getReturnType(), order);
 					oneToManyMember.setMappedBy(method.getAnnotation(OneToMany.class).mappedBy());
 
 					theMembers.add(oneToManyMember);
@@ -332,37 +288,29 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 				} else if (method.getAnnotation(OneToOne.class) != null) {
 					// es one-to-many
 					log.info("one to one:" + memberName);
-					theMembers.add(new OneToOneMember(memberName, showName,
-							method.getReturnType(), order));
+					theMembers.add(new OneToOneMember(memberName, showName, method.getReturnType(), order));
 				} else if (method.getAnnotation(ManyToOne.class) != null) {
 					// many to one
 					log.info("many to one:" + memberName);
 
-					ManyToOneMember manyToOneMember = new ManyToOneMember(
-							memberName, showName, method.getReturnType(), order);
+					ManyToOneMember manyToOneMember = new ManyToOneMember(memberName, showName, method.getReturnType(), order);
 
-					JoinColumn joinColumn = method
-							.getAnnotation(JoinColumn.class);
-					JoinColumns joinColumns = method
-							.getAnnotation(JoinColumns.class);
+					JoinColumn joinColumn = method.getAnnotation(JoinColumn.class);
+					JoinColumns joinColumns = method.getAnnotation(JoinColumns.class);
 
 					if (joinColumn != null) {
 
 						Boolean nullable = joinColumn.nullable();
-						nullable = nullable == null ? !method.getAnnotation(
-								ManyToOne.class).optional() : nullable;
+						nullable = nullable == null ? !method.getAnnotation(ManyToOne.class).optional() : nullable;
 
 						HashMap<String, Boolean> hashMapNullableColumn = new HashMap<String, Boolean>();
 
-						hashMapNullableColumn.put(property.toUpperCase(),
-								nullable);
+						hashMapNullableColumn.put(property.toUpperCase(), nullable);
 
-						manyToOneMember
-								.setHashMapNullableColumn(hashMapNullableColumn);
+						manyToOneMember.setHashMapNullableColumn(hashMapNullableColumn);
 					} else {
 						if (joinColumns != null) {
-							JoinColumn[] joinColumnFromColumns = joinColumns
-									.value();
+							JoinColumn[] joinColumnFromColumns = joinColumns.value();
 							HashMap<String, Boolean> hashMapNullableColumn = new HashMap<String, Boolean>();
 
 							int cont = 0;
@@ -390,17 +338,14 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 								Boolean nullable = joinColumn2.nullable();
 
 								if (hashMapNullableColumn.get(neededName) == null) {
-									hashMapNullableColumn.put(neededName,
-											nullable);
+									hashMapNullableColumn.put(neededName, nullable);
 								} else {
-									hashMapNullableColumn.put(
-											neededName + cont, nullable);
+									hashMapNullableColumn.put(neededName + cont, nullable);
 								}
 
 								cont++;
 							}
-							manyToOneMember
-									.setHashMapNullableColumn(hashMapNullableColumn);
+							manyToOneMember.setHashMapNullableColumn(hashMapNullableColumn);
 						}
 					}
 
@@ -408,34 +353,24 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 				} else if (method.getAnnotation(ManyToMany.class) != null) {
 					// many to many
 					log.info("many to many:" + memberName);
-					ParameterizedType rettype = (ParameterizedType) method
-							.getGenericReturnType();
+					ParameterizedType rettype = (ParameterizedType) method.getGenericReturnType();
 					log.debug(rettype.getActualTypeArguments()[0].toString());
-					theMembers
-							.add(new ManyToManyMember(
-									memberName,
-									showName,
-									(Class) rettype.getActualTypeArguments()[0],
-									order));
+					theMembers.add(new ManyToManyMember(memberName, showName, (Class) rettype.getActualTypeArguments()[0], order));
 				} else {
 
 					Member mb = null;
 					log.info("regular:" + memberName);
 					if (method.getAnnotation(GeneratedValue.class) != null) {
-						mb = new GeneratedValueMember(memberName, showName,
-								method.getReturnType(), order);
+						mb = new GeneratedValueMember(memberName, showName, method.getReturnType(), order);
 					} else {
-						mb = new SimpleMember(memberName, showName, method
-								.getReturnType(), order);
+						mb = new SimpleMember(memberName, showName, method.getReturnType(), order);
 						if (method.getAnnotation(Column.class) != null) {
 							Column column = method.getAnnotation(Column.class);
 							Long lenght = new Long(column.length());
 							Long precision = new Long(column.precision());
 							Long scale = new Long(column.scale());
 							Boolean nullable = new Boolean(column.nullable());
-							nullable = nullable == null ? !method
-									.getAnnotation(Basic.class).optional()
-									: nullable;
+							nullable = nullable == null ? !method.getAnnotation(Basic.class).optional() : nullable;
 
 							mb.setLength(lenght);
 							mb.setPrecision(precision);

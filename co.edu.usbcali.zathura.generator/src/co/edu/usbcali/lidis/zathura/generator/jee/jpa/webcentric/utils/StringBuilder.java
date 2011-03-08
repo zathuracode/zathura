@@ -22,8 +22,7 @@ public class StringBuilder implements IStringBuilder {
 
 	StringBuilderForId stringBuilderForId;
 
-	public StringBuilder(List<MetaData> list,
-			StringBuilderForId stringBuilderForId) {
+	public StringBuilder(List<MetaData> list, StringBuilderForId stringBuilderForId) {
 		this.stringBuilderForId = stringBuilderForId;
 	}
 
@@ -44,8 +43,7 @@ public class StringBuilder implements IStringBuilder {
 			for (Field field2 : field) {
 				String name = field2.getName();
 
-				String realType = field2.getType().toString().substring(
-						(field2.getType().toString()).lastIndexOf(".") + 1,
+				String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
 				finalParam = finalParam + realType + " " + name + ", ";
@@ -55,8 +53,7 @@ public class StringBuilder implements IStringBuilder {
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
 				if (member.isPrimiaryKeyAComposeKey() == false) {
-					finalParam = finalParam + member.getRealClassName() + " "
-							+ member.getName() + ", ";
+					finalParam = finalParam + member.getRealClassName() + " " + member.getName() + ", ";
 				}
 			}
 		}
@@ -66,9 +63,7 @@ public class StringBuilder implements IStringBuilder {
 
 				// String params[] = getTypeAndvariableForManyToOneProperties(
 				// member.getName(), theMetaData);
-				String params[] = Utilities.getInstance()
-						.getTypeAndvariableForManyToOneProperties(
-								member.getRealClassName(), theMetaData);
+				String params[] = Utilities.getInstance().getTypeAndvariableForManyToOneProperties(member.getRealClassName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -91,8 +86,7 @@ public class StringBuilder implements IStringBuilder {
 							if (!finalParam.contains(tmpFinalParam)) {
 								finalParam = finalParam + tmpFinalParam + ", ";
 							} else {
-								finalParam = finalParam + tmpFinalParam + i
-										+ ", ";
+								finalParam = finalParam + tmpFinalParam + i + ", ";
 							}
 						}
 
@@ -107,8 +101,7 @@ public class StringBuilder implements IStringBuilder {
 		if (finalParam.length() > 2) {
 			finalCharacter = "" + finalParam.charAt(finalParam.length() - 2);
 
-			finalParam = finalCharacter.equals(",") ? finalParam.substring(0,
-					finalParam.length() - 2) : finalParam;
+			finalParam = finalCharacter.equals(",") ? finalParam.substring(0, finalParam.length() - 2) : finalParam;
 		}
 
 		return finalParam;
@@ -122,8 +115,7 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamVariables(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public String finalParamVariables(List<MetaData> theMetaData,
-			MetaData metaData) {
+	public String finalParamVariables(List<MetaData> theMetaData, MetaData metaData) {
 		String finalParam = new String();
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
@@ -146,9 +138,7 @@ public class StringBuilder implements IStringBuilder {
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
 
-				String params[] = Utilities.getInstance()
-						.getTypeAndvariableForManyToOneProperties(
-								member.getType().getSimpleName(), theMetaData);
+				String params[] = Utilities.getInstance().getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -180,8 +170,7 @@ public class StringBuilder implements IStringBuilder {
 
 		String finalCharacter = "" + finalParam.charAt(finalParam.length() - 2);
 
-		finalParam = finalCharacter.equals(",") ? finalParam.substring(0,
-				finalParam.length() - 2) : finalParam;
+		finalParam = finalCharacter.equals(",") ? finalParam.substring(0, finalParam.length() - 2) : finalParam;
 
 		return finalParam;
 	}
@@ -194,38 +183,31 @@ public class StringBuilder implements IStringBuilder {
 	 * #getTypeAndvariableForManyToOneProperties(java.lang.String,
 	 * java.util.List)
 	 */
-	public String[] getTypeAndvariableForManyToOneProperties(String strClass,
-			List<MetaData> theMetaData) {
+	public String[] getTypeAndvariableForManyToOneProperties(String strClass, List<MetaData> theMetaData) {
 		String ret[] = new String[50];
 
 		for (MetaData metaData : theMetaData) {
 			if (metaData.getRealClassName().equalsIgnoreCase(strClass)) {
 
-				Utilities.getInstance().manyToOneTempHash = metaData
-						.getPrimaryKey().getHashMapIdsProperties();
+				Utilities.getInstance().manyToOneTempHash = metaData.getPrimaryKey().getHashMapIdsProperties();
 
 				if (!metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 					Member member = metaData.getPrimaryKey();
 					ret[0] = member.getRealClassName();
-					ret[1] = member.getName() + "_"
-							+ metaData.getRealClassName();
+					ret[1] = member.getName() + "_" + metaData.getRealClassName();
 					// ret[2] = member.getGetNameOfPrimaryName();
 					// ret[3] = member.getRealClassName();
 				} else {
 					int contTmp = 0;
-					Field[] field = metaData.getComposeKey()
-							.getDeclaredFields();
+					Field[] field = metaData.getComposeKey().getDeclaredFields();
 					for (int i = 0; i < field.length; i++) {
 
 						Field field2 = field[i];
 
 						String name = field2.getName();
 
-						String realType = field2.getType().toString()
-								.substring(
-										(field2.getType().toString())
-												.lastIndexOf(".") + 1,
-										(field2.getType().toString()).length());
+						String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,
+								(field2.getType().toString()).length());
 
 						ret[contTmp] = realType;
 						contTmp++;
@@ -261,8 +243,7 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamVariablesAsList(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public List<String> finalParamVariablesAsList(List<MetaData> theMetaData,
-			MetaData metaData) {
+	public List<String> finalParamVariablesAsList(List<MetaData> theMetaData, MetaData metaData) {
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
 
@@ -282,12 +263,9 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
-				if (!metaData.getPrimaryKey().getName()
-						.equals(member.getName())) {
+				if (!metaData.getPrimaryKey().getName().equals(member.getName())) {
 
-					String name = member.getName().substring(0, 1)
-							.toUpperCase()
-							+ member.getName().substring(1);
+					String name = member.getName().substring(0, 1).toUpperCase() + member.getName().substring(1);
 
 					finalParam = finalParam + name + ", ";
 
@@ -302,8 +280,7 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -326,9 +303,7 @@ public class StringBuilder implements IStringBuilder {
 
 							if (!finalParam.contains(tmpFinalParam)) {
 
-								String name = tmpFinalParam.substring(0, 1)
-										.toUpperCase()
-										+ tmpFinalParam.substring(1);
+								String name = tmpFinalParam.substring(0, 1).toUpperCase() + tmpFinalParam.substring(1);
 
 								finalParam = finalParam + tmpFinalParam + ", ";
 
@@ -356,8 +331,7 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		List<String> primaryKey = stringBuilderForId
-				.finalParamForIdClassAsVariables(theMetaData, metaData);
+		List<String> primaryKey = stringBuilderForId.finalParamForIdClassAsVariables(theMetaData, metaData);
 
 		return ListUtils.subtract(finalParam2, primaryKey);
 	}
@@ -370,19 +344,15 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamVariablesAsList2(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public List<String> finalParamVariablesAsList2(List<MetaData> theMetaData,
-			MetaData metaData) {
+	public List<String> finalParamVariablesAsList2(List<MetaData> theMetaData, MetaData metaData) {
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
-				if (!metaData.getPrimaryKey().getName()
-						.equals(member.getName())) {
+				if (!metaData.getPrimaryKey().getName().equals(member.getName())) {
 
-					String name = member.getName().substring(0, 1)
-							.toUpperCase()
-							+ member.getName().substring(1);
+					String name = member.getName().substring(0, 1).toUpperCase() + member.getName().substring(1);
 
 					finalParam = finalParam + name + ", ";
 
@@ -393,8 +363,7 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -417,9 +386,7 @@ public class StringBuilder implements IStringBuilder {
 
 							if (!finalParam.contains(tmpFinalParam)) {
 
-								String name = tmpFinalParam.substring(0, 1)
-										.toUpperCase()
-										+ tmpFinalParam.substring(1);
+								String name = tmpFinalParam.substring(0, 1).toUpperCase() + tmpFinalParam.substring(1);
 
 								finalParam = finalParam + tmpFinalParam + ", ";
 
@@ -432,8 +399,7 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		List<String> primaryKey = stringBuilderForId
-				.finalParamForIdClassAsVariables(theMetaData, metaData);
+		List<String> primaryKey = stringBuilderForId.finalParamForIdClassAsVariables(theMetaData, metaData);
 
 		return ListUtils.subtract(finalParam2, primaryKey);
 	}
@@ -446,20 +412,16 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamVariablesDatesAsList2(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public List<String> finalParamVariablesDatesAsList2(
-			List<MetaData> theMetaData, MetaData metaData) {
+	public List<String> finalParamVariablesDatesAsList2(List<MetaData> theMetaData, MetaData metaData) {
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
-				if (!metaData.getPrimaryKey().getName()
-						.equals(member.getName())) {
+				if (!metaData.getPrimaryKey().getName().equals(member.getName())) {
 					String type = member.getRealClassName();
 					if (type.equalsIgnoreCase("date")) {
-						String name = member.getName().substring(0, 1)
-								.toLowerCase()
-								+ member.getName().substring(1);
+						String name = member.getName().substring(0, 1).toLowerCase() + member.getName().substring(1);
 
 						finalParam = finalParam + name + ", ";
 
@@ -471,8 +433,7 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -501,12 +462,9 @@ public class StringBuilder implements IStringBuilder {
 
 							if (!finalParam.contains(tmpFinalParam)) {
 								if (tmpFinalType.equalsIgnoreCase("date")) {
-									String name = tmpFinalParam.substring(0, 1)
-											.toLowerCase()
-											+ tmpFinalParam.substring(1);
+									String name = tmpFinalParam.substring(0, 1).toLowerCase() + tmpFinalParam.substring(1);
 
-									finalParam = finalParam + tmpFinalParam
-											+ ", ";
+									finalParam = finalParam + tmpFinalParam + ", ";
 
 									finalParam2.add(name);
 								}
@@ -518,8 +476,7 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		List<String> primaryKey = stringBuilderForId
-				.finalParamForIdClassAsVariables(theMetaData, metaData);
+		List<String> primaryKey = stringBuilderForId.finalParamForIdClassAsVariables(theMetaData, metaData);
 
 		return ListUtils.subtract(finalParam2, primaryKey);
 	}
@@ -532,8 +489,7 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamForVariablesDataTablesAsList(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public List<String> finalParamForVariablesDataTablesAsList(
-			List<MetaData> theMetaData, MetaData metaData) {
+	public List<String> finalParamForVariablesDataTablesAsList(List<MetaData> theMetaData, MetaData metaData) {
 
 		// if (metaData.getRealClassName().equalsIgnoreCase("SampleInReb")) {
 		// String tmp = null;
@@ -557,8 +513,7 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
-				if (!metaData.getPrimaryKey().getName()
-						.equals(member.getName())) {
+				if (!metaData.getPrimaryKey().getName().equals(member.getName())) {
 
 					String name = member.getName();
 
@@ -569,8 +524,7 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -589,19 +543,16 @@ public class StringBuilder implements IStringBuilder {
 							String name = null;
 							String idName = null;
 							try {
-								idName = stringBuilderForId.hashMapIds
-										.get(tmpFinalParam);
+								idName = stringBuilderForId.hashMapIds.get(tmpFinalParam);
 
 							} catch (Exception e) {
 								name = member.getName() + "." + tmpFinalParam;
 							}
 
 							if (idName != null)
-								name = member.getName() + "." + idName + "."
-										+ tmpFinalParam.split("_")[0];
+								name = member.getName() + "." + idName + "." + tmpFinalParam.split("_")[0];
 							else
-								name = member.getName() + "."
-										+ tmpFinalParam.split("_")[0];
+								name = member.getName() + "." + tmpFinalParam.split("_")[0];
 
 							finalParam2.add(name);
 
@@ -642,22 +593,18 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamForView(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public String finalParamForView(List<MetaData> theMetaData,
-			MetaData metaData) {
+	public String finalParamForView(List<MetaData> theMetaData, MetaData metaData) {
 		String finalParam = new String();
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
 			for (Field field2 : field) {
 				String name = field2.getName();
-				String nameWithCapitalOnFirst = Utilities.getInstance()
-						.getGetNameOfPrimaryName(name);
-				String realType = field2.getType().toString().substring(
-						(field2.getType().toString()).lastIndexOf(".") + 1,
+				String nameWithCapitalOnFirst = Utilities.getInstance().getGetNameOfPrimaryName(name);
+				String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
-				finalParam = finalParam + "FacesUtils.check" + realType
-						+ "(txt" + nameWithCapitalOnFirst + "), ";
+				finalParam = finalParam + "FacesUtils.check" + realType + "(txt" + nameWithCapitalOnFirst + "), ";
 
 			}
 		}
@@ -666,17 +613,14 @@ public class StringBuilder implements IStringBuilder {
 			for (Member member : metaData.getSimpleProperties()) {
 				if (member.isPrimiaryKeyAComposeKey() == false) {
 
-					finalParam = finalParam + "FacesUtils.check"
-							+ member.getRealClassName() + "(txt"
-							+ member.getGetNameOfPrimaryName() + "), ";
+					finalParam = finalParam + "FacesUtils.check" + member.getRealClassName() + "(txt" + member.getGetNameOfPrimaryName() + "), ";
 				}
 			}
 		}
 
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -689,12 +633,9 @@ public class StringBuilder implements IStringBuilder {
 							else
 								cont++;
 
-							String tmp = Utilities.getInstance()
-									.getGetNameOfPrimaryName(params[cont]);
+							String tmp = Utilities.getInstance().getGetNameOfPrimaryName(params[cont]);
 
-							tmpFinalParam = "FacesUtils.check"
-							+ tmpFinalParam + "(txt" + tmp + "), ";
-							
+							tmpFinalParam = "FacesUtils.check" + tmpFinalParam + "(txt" + tmp + "), ";
 
 							if (cont > params.length)
 								cont = params.length;
@@ -713,8 +654,7 @@ public class StringBuilder implements IStringBuilder {
 
 		String finalCharacter = "" + finalParam.charAt(finalParam.length() - 2);
 
-		finalParam = finalCharacter.equals(",") ? finalParam.substring(0,
-				finalParam.length() - 2) : finalParam;
+		finalParam = finalCharacter.equals(",") ? finalParam.substring(0, finalParam.length() - 2) : finalParam;
 
 		return finalParam;
 	}
@@ -727,25 +667,20 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamForDtoUpdate(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public String finalParamForDtoUpdate(List<MetaData> theMetaData,
-			MetaData metaData) {
+	public String finalParamForDtoUpdate(List<MetaData> theMetaData, MetaData metaData) {
 		String finalParam = new String();
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
 			for (Field field2 : field) {
 				String name = field2.getName();
-				String realType = field2.getType().toString().substring(
-						(field2.getType().toString()).lastIndexOf(".") + 1,
+				String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
 				if (realType.equalsIgnoreCase("date")) {
-					finalParam = finalParam + name + "==null || " + name
-							+ ".equals(\"\")?null:" + name + ", ";
+					finalParam = finalParam + name + "==null || " + name + ".equals(\"\")?null:" + name + ", ";
 				} else {
-					finalParam = finalParam + name + "==null||" + name
-							+ ".equals(\"\")?null:new " + realType + "(" + name
-							+ "), ";
+					finalParam = finalParam + name + "==null||" + name + ".equals(\"\")?null:new " + realType + "(" + name + "), ";
 				}
 
 			}
@@ -761,15 +696,10 @@ public class StringBuilder implements IStringBuilder {
 					// + ".getValue()), ";
 
 					if (member.getRealClassName().equalsIgnoreCase("date")) {
-						finalParam = finalParam + member.getName()
-								+ "==null|| " + member.getName()
-								+ ".equals(\"\")?null:" + member.getName()
-								+ ", ";
+						finalParam = finalParam + member.getName() + "==null|| " + member.getName() + ".equals(\"\")?null:" + member.getName() + ", ";
 					} else {
-						finalParam = finalParam + member.getName() + "==null||"
-								+ member.getName() + ".equals(\"\")?null:new "
-								+ member.getRealClassName() + "("
-								+ member.getName() + "), ";
+						finalParam = finalParam + member.getName() + "==null||" + member.getName() + ".equals(\"\")?null:new " + member.getRealClassName()
+								+ "(" + member.getName() + "), ";
 					}
 				}
 			}
@@ -777,8 +707,7 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -797,12 +726,9 @@ public class StringBuilder implements IStringBuilder {
 							// + "((String)txt" + tmp;
 
 							if (tmpFinalParam.equalsIgnoreCase("date")) {
-								tmpFinalParam = tmp + "==null||" + tmp
-										+ ".equals(\"\")?null:" + tmp + ", ";
+								tmpFinalParam = tmp + "==null||" + tmp + ".equals(\"\")?null:" + tmp + ", ";
 							} else {
-								tmpFinalParam = tmp + "==null|| " + tmp
-										+ ".equals(\"\")?null:new "
-										+ tmpFinalParam + "(" + tmp + "), ";
+								tmpFinalParam = tmp + "==null|| " + tmp + ".equals(\"\")?null:new " + tmpFinalParam + "(" + tmp + "), ";
 							}
 
 							if (cont > params.length)
@@ -828,8 +754,7 @@ public class StringBuilder implements IStringBuilder {
 
 		String finalCharacter = "" + finalParam.charAt(finalParam.length() - 2);
 
-		finalParam = finalCharacter.equals(",") ? finalParam.substring(0,
-				finalParam.length() - 2) : finalParam;
+		finalParam = finalCharacter.equals(",") ? finalParam.substring(0, finalParam.length() - 2) : finalParam;
 
 		return finalParam;
 	}
@@ -842,16 +767,14 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamForDtoUpdateOnlyVariables(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public String finalParamForDtoUpdateOnlyVariables(
-			List<MetaData> theMetaData, MetaData metaData) {
+	public String finalParamForDtoUpdateOnlyVariables(List<MetaData> theMetaData, MetaData metaData) {
 		String finalParam = new String();
 
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
 			for (Field field2 : field) {
 				String name = field2.getName();
-				String realType = field2.getType().toString().substring(
-						(field2.getType().toString()).lastIndexOf(".") + 1,
+				String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
 				finalParam = finalParam + name + ", ";
@@ -870,8 +793,7 @@ public class StringBuilder implements IStringBuilder {
 
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -904,8 +826,7 @@ public class StringBuilder implements IStringBuilder {
 
 		String finalCharacter = "" + finalParam.charAt(finalParam.length() - 2);
 
-		finalParam = finalCharacter.equals(",") ? finalParam.substring(0,
-				finalParam.length() - 2) : finalParam;
+		finalParam = finalCharacter.equals(",") ? finalParam.substring(0, finalParam.length() - 2) : finalParam;
 
 		return finalParam;
 	}
@@ -918,8 +839,7 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamForViewVariablesInList(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public List<String> finalParamForViewVariablesInList(
-			List<MetaData> theMetaData, MetaData metaData) {
+	public List<String> finalParamForViewVariablesInList(List<MetaData> theMetaData, MetaData metaData) {
 
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
@@ -935,11 +855,8 @@ public class StringBuilder implements IStringBuilder {
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
 				if (member.isPrimiaryKeyAComposeKey() == false) {
-					finalParam = finalParam + member.getRealClassName() + " "
-							+ member.getName();
-					String tmp2 = (member.getName().substring(0, 1))
-							.toUpperCase()
-							+ member.getName().substring(1);
+					finalParam = finalParam + member.getRealClassName() + " " + member.getName();
+					String tmp2 = (member.getName().substring(0, 1)).toUpperCase() + member.getName().substring(1);
 					if (member.getRealClassName().equalsIgnoreCase("date")) {
 						Utilities.getInstance().dates.add(tmp2);
 					} else {
@@ -953,8 +870,7 @@ public class StringBuilder implements IStringBuilder {
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
 
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				if (params != null) {
 					int cont = 0;
@@ -974,9 +890,7 @@ public class StringBuilder implements IStringBuilder {
 								finalParam = finalParam + tmpFinalParam;
 								;
 
-								String tmp3 = (params[cont].substring(0, 1))
-										.toUpperCase()
-										+ params[cont].substring(1);
+								String tmp3 = (params[cont].substring(0, 1)).toUpperCase() + params[cont].substring(1);
 
 								if (tmpFinalParam.contains("Date")) {
 									Utilities.getInstance().dates.add(tmp3);
@@ -1010,8 +924,7 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		List primaryKey = stringBuilderForId
-				.finalParamForIdForViewVariablesInList(theMetaData, metaData);
+		List primaryKey = stringBuilderForId.finalParamForIdForViewVariablesInList(theMetaData, metaData);
 
 		return ListUtils.subtract(finalParam2, primaryKey);
 	}
@@ -1024,29 +937,19 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamForViewForSetsVariablesInList(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public List<String> finalParamForViewForSetsVariablesInList(
-			List<MetaData> theMetaData, MetaData metaData) {
+	public List<String> finalParamForViewForSetsVariablesInList(List<MetaData> theMetaData, MetaData metaData) {
 
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
-				if (!member.getName().equalsIgnoreCase(
-						metaData.getPrimaryKey().getName())) {
+				if (!member.getName().equalsIgnoreCase(metaData.getPrimaryKey().getName())) {
 
-					finalParam = finalParam + member.getRealClassName() + " "
-							+ member.getName();
-					String tmp2 = "txt"
-							+ (member.getName().substring(0, 1)).toUpperCase()
-							+ member.getName().substring(1) + ".setValue("
-							+ "entity.get"
-							+ (member.getName().substring(0, 1)).toUpperCase()
-							+ member.getName().substring(1) + "()" + ");"
-							+ "txt"
-							+ (member.getName().substring(0, 1)).toUpperCase()
-							+ (member.getName().substring(1))
-							+ ".setDisabled(false);";
+					finalParam = finalParam + member.getRealClassName() + " " + member.getName();
+					String tmp2 = "txt" + (member.getName().substring(0, 1)).toUpperCase() + member.getName().substring(1) + ".setValue(" + "entity.get"
+							+ (member.getName().substring(0, 1)).toUpperCase() + member.getName().substring(1) + "()" + ");" + "txt"
+							+ (member.getName().substring(0, 1)).toUpperCase() + (member.getName().substring(1)) + ".setDisabled(false);";
 					finalParam2.add(tmp2);
 
 				}
@@ -1057,8 +960,7 @@ public class StringBuilder implements IStringBuilder {
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
 
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				String tmpFinalParam = "";
 				String tmpFinalParam1 = "";
@@ -1080,8 +982,7 @@ public class StringBuilder implements IStringBuilder {
 
 								tmpFinalParam2 = params[cont];
 
-								tmpFinalParam = tmpFinalParam + " "
-										+ params[cont];
+								tmpFinalParam = tmpFinalParam + " " + params[cont];
 
 								if (cont > params.length)
 									cont = params.length;
@@ -1089,8 +990,7 @@ public class StringBuilder implements IStringBuilder {
 									cont++;
 
 								if (!finalParam.contains(tmpFinalParam)) {
-									finalParam = finalParam + tmpFinalParam
-											+ ", ";
+									finalParam = finalParam + tmpFinalParam + ", ";
 
 									HashMap<String, String> map = stringBuilderForId.hashMapIds;
 
@@ -1098,8 +998,7 @@ public class StringBuilder implements IStringBuilder {
 									String hashMapProve1 = "";
 									try {
 
-										hashMapProve = (stringBuilderForId.hashMapIds
-												.get(tmpFinalParam2));
+										hashMapProve = (stringBuilderForId.hashMapIds.get(tmpFinalParam2));
 
 									} catch (Exception e) {
 										// TODO: handle exception
@@ -1107,92 +1006,25 @@ public class StringBuilder implements IStringBuilder {
 									String tmp3 = "";
 
 									if (hashMapProve == null) {
-										tmp3 = "txt"
-												+ (tmpFinalParam2.substring(0,
-														1)).toUpperCase()
-												+ tmpFinalParam2.substring(1)
-												+ ".setValue("
-												+ "entity.get"
-												+ member.getRealClassName()
-												+ "().get"
-												+ (tmpFinalParam2.substring(0,
-														1)).toUpperCase()
-												+ tmpFinalParam2
-														.substring(
-																1,
-																tmpFinalParam2
-																		.lastIndexOf("_"))
-												+ "()"
-												+ ");"
-												+ "txt"
-												+ (tmpFinalParam2.substring(0,
-														1)).toUpperCase()
-												+ tmpFinalParam2.substring(1)
-												+ ".setDisabled(false);";
+										tmp3 = "txt" + (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setValue("
+												+ "entity.get" + member.getRealClassName() + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+												+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()" + ");" + "txt"
+												+ (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setDisabled(false);";
 									} else {
 										if (hashMapProve.equals("")) {
 
-											tmp3 = "txt"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(1)
-													+ ".setValue("
-													+ "entity.get"
-													+ member.getRealClassName()
-													+ "().get"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(
-																	1,
-																	tmpFinalParam2
-																			.lastIndexOf("_"))
-													+ "()"
-													+ ");"
-													+ "txt"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(1)
-													+ ".setDisabled(false);";
+											tmp3 = "txt" + (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setValue("
+													+ "entity.get" + member.getRealClassName() + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+													+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()" + ");" + "txt"
+													+ (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setDisabled(false);";
 
 										} else {
 
-											tmp3 = "txt"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(1)
-													+ ".setValue("
-													+ "entity.get"
-													+ member.getRealClassName()
-													+ "().get"
-													+ hashMapProve.substring(0,
-															1).toUpperCase()
-													+ hashMapProve.substring(1)
-													+ "().get"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(
-																	1,
-																	tmpFinalParam2
-																			.lastIndexOf("_"))
-													+ "()"
-													+ ");"
-													+ "txt"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(1)
-													+ ".setDisabled(false);";
+											tmp3 = "txt" + (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setValue("
+													+ "entity.get" + member.getRealClassName() + "().get" + hashMapProve.substring(0, 1).toUpperCase()
+													+ hashMapProve.substring(1) + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+													+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()" + ");" + "txt"
+													+ (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setDisabled(false);";
 
 										}
 									}
@@ -1218,8 +1050,7 @@ public class StringBuilder implements IStringBuilder {
 								else
 									cont++;
 
-								tmpFinalParam = tmpFinalParam + " "
-										+ params[cont];
+								tmpFinalParam = tmpFinalParam + " " + params[cont];
 
 								tmpFinalParam1 = params[cont];
 
@@ -1231,27 +1062,10 @@ public class StringBuilder implements IStringBuilder {
 								if (!finalParam.contains(tmpFinalParam)) {
 									finalParam = finalParam + tmpFinalParam;
 
-									String tmp3 = "txt"
-											+ (tmpFinalParam1.substring(0, 1))
-													.toUpperCase()
-											+ tmpFinalParam1.substring(1)
-											+ ".setValue("
-											+ "entity.get"
-											+ member.getRealClassName()
-											+ "()"
-											+ ".get"
-											+ tmpFinalParam1.substring(0, 1)
-													.toUpperCase()
-											+ tmpFinalParam1.substring(1,
-													tmpFinalParam1
-															.lastIndexOf("_"))
-											+ "()"
-											+ ");"
-											+ "txt"
-											+ (tmpFinalParam1.substring(0, 1))
-													.toUpperCase()
-											+ tmpFinalParam1.substring(1)
-											+ ".setDisabled(false);";
+									String tmp3 = "txt" + (tmpFinalParam1.substring(0, 1)).toUpperCase() + tmpFinalParam1.substring(1) + ".setValue("
+											+ "entity.get" + member.getRealClassName() + "()" + ".get" + tmpFinalParam1.substring(0, 1).toUpperCase()
+											+ tmpFinalParam1.substring(1, tmpFinalParam1.lastIndexOf("_")) + "()" + ");" + "txt"
+											+ (tmpFinalParam1.substring(0, 1)).toUpperCase() + tmpFinalParam1.substring(1) + ".setDisabled(false);";
 
 									finalParam2.add(tmp3);
 								}
@@ -1262,9 +1076,7 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		List primaryKey = stringBuilderForId
-				.finalParamForIdForViewForSetsVariablesInList(theMetaData,
-						metaData);
+		List primaryKey = stringBuilderForId.finalParamForIdForViewForSetsVariablesInList(theMetaData, metaData);
 
 		return ListUtils.subtract(finalParam2, primaryKey);
 	}
@@ -1277,43 +1089,25 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamForDtoForSetsVariablesInList(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public List<String> finalParamForDtoForSetsVariablesInList(
-			List<MetaData> theMetaData, MetaData metaData) {
+	public List<String> finalParamForDtoForSetsVariablesInList(List<MetaData> theMetaData, MetaData metaData) {
 
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
-				if (!member.getName().equalsIgnoreCase(
-						metaData.getPrimaryKey().getName())) {
+				if (!member.getName().equalsIgnoreCase(metaData.getPrimaryKey().getName())) {
 
-					finalParam = finalParam + member.getRealClassName() + " "
-							+ member.getName();
+					finalParam = finalParam + member.getRealClassName() + " " + member.getName();
 					if (!member.getRealClassName().equalsIgnoreCase("date")) {
-						String tmp2 = member.getName()
-								+ "="
-								+ metaData.getRealClassNameAsVariable()
-								+ ".get"
-								+ (member.getName().substring(0, 1))
-										.toUpperCase()
-								+ member.getName().substring(1)
-								+ "()!=null ? "
-								+ metaData.getRealClassNameAsVariable()
-								+ ".get"
-								+ (member.getName().substring(0, 1))
-										.toUpperCase()
-								+ member.getName().substring(1)
-								+ "().toString() : null;";
+						String tmp2 = member.getName() + "=" + metaData.getRealClassNameAsVariable() + ".get"
+								+ (member.getName().substring(0, 1)).toUpperCase() + member.getName().substring(1) + "()!=null ? "
+								+ metaData.getRealClassNameAsVariable() + ".get" + (member.getName().substring(0, 1)).toUpperCase()
+								+ member.getName().substring(1) + "().toString() : null;";
 						finalParam2.add(tmp2);
 					} else {
-						String tmp2 = member.getName()
-								+ "="
-								+ metaData.getRealClassNameAsVariable()
-								+ ".get"
-								+ (member.getName().substring(0, 1))
-										.toUpperCase()
-								+ member.getName().substring(1) + "();";
+						String tmp2 = member.getName() + "=" + metaData.getRealClassNameAsVariable() + ".get"
+								+ (member.getName().substring(0, 1)).toUpperCase() + member.getName().substring(1) + "();";
 						finalParam2.add(tmp2);
 					}
 
@@ -1325,8 +1119,7 @@ public class StringBuilder implements IStringBuilder {
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
 
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				String tmpFinalParam = "";
 				String tmpFinalParam1 = "";
@@ -1354,8 +1147,7 @@ public class StringBuilder implements IStringBuilder {
 									tmpFinalParam3 = "";
 								}
 
-								tmpFinalParam = tmpFinalParam + " "
-										+ params[cont];
+								tmpFinalParam = tmpFinalParam + " " + params[cont];
 
 								if (cont > params.length)
 									cont = params.length;
@@ -1363,8 +1155,7 @@ public class StringBuilder implements IStringBuilder {
 									cont++;
 
 								if (!finalParam.contains(tmpFinalParam)) {
-									finalParam = finalParam + tmpFinalParam
-											+ ", ";
+									finalParam = finalParam + tmpFinalParam + ", ";
 
 									HashMap<String, String> map = stringBuilderForId.hashMapIds;
 
@@ -1372,8 +1163,7 @@ public class StringBuilder implements IStringBuilder {
 									String hashMapProve1 = "";
 									try {
 
-										hashMapProve = (stringBuilderForId.hashMapIds
-												.get(tmpFinalParam2));
+										hashMapProve = (stringBuilderForId.hashMapIds.get(tmpFinalParam2));
 
 									} catch (Exception e) {
 										// TODO: handle exception
@@ -1381,182 +1171,47 @@ public class StringBuilder implements IStringBuilder {
 									String tmp3 = "";
 
 									if (hashMapProve == null) {
-										if (!tmpFinalParam3
-												.equalsIgnoreCase("date")) {
-											tmp3 = tmpFinalParam2
-													+ "="
-													+ metaData
-															.getRealClassNameAsVariable()
-													+ ".get"
-													+ member.getRealClassName()
-													+ "().get"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(
-																	1,
-																	tmpFinalParam2
-																			.lastIndexOf("_"))
-													+ "()!=null ? "
-													+ metaData
-															.getRealClassNameAsVariable()
-													+ ".get"
-													+ member.getRealClassName()
-													+ "().get"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(
-																	1,
-																	tmpFinalParam2
-																			.lastIndexOf("_"))
-													+ "().toString() : null;";
+										if (!tmpFinalParam3.equalsIgnoreCase("date")) {
+											tmp3 = tmpFinalParam2 + "=" + metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName() + "().get"
+													+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+													+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()!=null ? "
+													+ metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName() + "().get"
+													+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+													+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "().toString() : null;";
 										} else {
-											tmp3 = tmpFinalParam2
-													+ "="
-													+ metaData
-															.getRealClassNameAsVariable()
-													+ ".get"
-													+ member.getRealClassName()
-													+ "().get"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(
-																	1,
-																	tmpFinalParam2
-																			.lastIndexOf("_"))
-													+ "();";
+											tmp3 = tmpFinalParam2 + "=" + metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName() + "().get"
+													+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+													+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "();";
 										}
 									} else {
 										if (hashMapProve.equals("")) {
-											if (!tmpFinalParam3
-													.equalsIgnoreCase("date")) {
-												tmp3 = tmpFinalParam2
-														+ "="
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ ".get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "()!=null ? "
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ ".get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "().toString() : null;";
+											if (!tmpFinalParam3.equalsIgnoreCase("date")) {
+												tmp3 = tmpFinalParam2 + "=" + metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName()
+														+ "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()!=null ? "
+														+ metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName() + "().get"
+														+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "().toString() : null;";
 											} else {
-												tmp3 = tmpFinalParam2
-														+ "="
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ ".get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "();";
+												tmp3 = tmpFinalParam2 + "=" + metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName()
+														+ "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "();";
 											}
 										} else {
-											if (!tmpFinalParam3
-													.equalsIgnoreCase("date")) {
-												tmp3 = tmpFinalParam2
-														+ "="
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ ".get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ hashMapProve
-																.substring(0, 1)
-																.toUpperCase()
-														+ hashMapProve
-																.substring(1)
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "()!=null ? "
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ ".get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ hashMapProve
-																.substring(0, 1)
-																.toUpperCase()
-														+ hashMapProve
-																.substring(1)
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "().toString() : null;";
+											if (!tmpFinalParam3.equalsIgnoreCase("date")) {
+												tmp3 = tmpFinalParam2 + "=" + metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName()
+														+ "().get" + hashMapProve.substring(0, 1).toUpperCase() + hashMapProve.substring(1) + "().get"
+														+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()!=null ? "
+														+ metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName() + "().get"
+														+ hashMapProve.substring(0, 1).toUpperCase() + hashMapProve.substring(1) + "().get"
+														+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "().toString() : null;";
 											} else {
-												tmp3 = tmpFinalParam2
-														+ "="
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ ".get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ hashMapProve
-																.substring(0, 1)
-																.toUpperCase()
-														+ hashMapProve
-																.substring(1)
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "();";
+												tmp3 = tmpFinalParam2 + "=" + metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName()
+														+ "().get" + hashMapProve.substring(0, 1).toUpperCase() + hashMapProve.substring(1) + "().get"
+														+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "();";
 											}
 										}
 									}
@@ -1582,8 +1237,7 @@ public class StringBuilder implements IStringBuilder {
 								else
 									cont++;
 
-								tmpFinalParam = tmpFinalParam + " "
-										+ params[cont];
+								tmpFinalParam = tmpFinalParam + " " + params[cont];
 
 								tmpFinalParam1 = params[cont];
 								try {
@@ -1599,60 +1253,19 @@ public class StringBuilder implements IStringBuilder {
 
 								if (!finalParam.contains(tmpFinalParam)) {
 									finalParam = finalParam + tmpFinalParam;
-									if (!tmpFinalParam3
-											.equalsIgnoreCase("date")) {
-										String tmp3 = tmpFinalParam1
-												+ "="
-												+ metaData
-														.getRealClassNameAsVariable()
-												+ ".get"
-												+ member.getRealClassName()
-												+ "()"
-												+ ".get"
-												+ tmpFinalParam1
-														.substring(0, 1)
-														.toUpperCase()
-												+ tmpFinalParam1
-														.substring(
-																1,
-																tmpFinalParam1
-																		.lastIndexOf("_"))
-												+ "()!=null ?"
-												+ metaData
-														.getRealClassNameAsVariable()
-												+ ".get"
-												+ member.getRealClassName()
-												+ "()"
-												+ ".get"
-												+ tmpFinalParam1
-														.substring(0, 1)
-														.toUpperCase()
-												+ tmpFinalParam1
-														.substring(
-																1,
-																tmpFinalParam1
-																		.lastIndexOf("_"))
+									if (!tmpFinalParam3.equalsIgnoreCase("date")) {
+										String tmp3 = tmpFinalParam1 + "=" + metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName() + "()"
+												+ ".get" + tmpFinalParam1.substring(0, 1).toUpperCase()
+												+ tmpFinalParam1.substring(1, tmpFinalParam1.lastIndexOf("_")) + "()!=null ?"
+												+ metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName() + "()" + ".get"
+												+ tmpFinalParam1.substring(0, 1).toUpperCase() + tmpFinalParam1.substring(1, tmpFinalParam1.lastIndexOf("_"))
 												+ "().toString() : null;";
 
 										finalParam2.add(tmp3);
 									} else {
-										String tmp3 = tmpFinalParam1
-												+ "="
-												+ metaData
-														.getRealClassNameAsVariable()
-												+ ".get"
-												+ member.getRealClassName()
-												+ "()"
-												+ ".get"
-												+ tmpFinalParam1
-														.substring(0, 1)
-														.toUpperCase()
-												+ tmpFinalParam1
-														.substring(
-																1,
-																tmpFinalParam1
-																		.lastIndexOf("_"))
-												+ "();";
+										String tmp3 = tmpFinalParam1 + "=" + metaData.getRealClassNameAsVariable() + ".get" + member.getRealClassName() + "()"
+												+ ".get" + tmpFinalParam1.substring(0, 1).toUpperCase()
+												+ tmpFinalParam1.substring(1, tmpFinalParam1.lastIndexOf("_")) + "();";
 
 										finalParam2.add(tmp3);
 									}
@@ -1664,9 +1277,7 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		List primaryKey = stringBuilderForId
-				.finalParamForIdForDtoForSetsVariablesInList(theMetaData,
-						metaData);
+		List primaryKey = stringBuilderForId.finalParamForIdForDtoForSetsVariablesInList(theMetaData, metaData);
 
 		return ListUtils.subtract(finalParam2, primaryKey);
 	}
@@ -1679,51 +1290,27 @@ public class StringBuilder implements IStringBuilder {
 	 * #finalParamForDtoInViewForSetsVariablesInList(java.util.List,
 	 * co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
 	 */
-	public List<String> finalParamForDtoInViewForSetsVariablesInList(
-			List<MetaData> theMetaData, MetaData metaData) {
+	public List<String> finalParamForDtoInViewForSetsVariablesInList(List<MetaData> theMetaData, MetaData metaData) {
 
 		List<String> finalParam2 = new ArrayList<String>();
 		String finalParam = new String();
 
 		if (metaData.isGetSimpleProperties()) {
 			for (Member member : metaData.getSimpleProperties()) {
-				if (!member.getName().equalsIgnoreCase(
-						metaData.getPrimaryKey().getName())) {
+				if (!member.getName().equalsIgnoreCase(metaData.getPrimaryKey().getName())) {
 
-					finalParam = finalParam + member.getRealClassName() + " "
-							+ member.getName();
+					finalParam = finalParam + member.getRealClassName() + " " + member.getName();
 					if (!member.getRealClassName().equalsIgnoreCase("date")) {
-						String tmp2 = metaData.getRealClassNameAsVariable()
-								+ "DTO2.set"
-								+ (member.getName().substring(0, 1))
-										.toUpperCase()
-								+ member.getName().substring(1)
-								+ "("
-								+ metaData.getRealClassNameAsVariable()
-								+ "Tmp.get"
-								+ (member.getName().substring(0, 1))
-										.toUpperCase()
-								+ member.getName().substring(1)
-								+ "()!=null ?"
-								+ metaData.getRealClassNameAsVariable()
-								+ "Tmp.get"
-								+ (member.getName().substring(0, 1))
-										.toUpperCase()
-								+ member.getName().substring(1)
-								+ "().toString() : null);";
+						String tmp2 = metaData.getRealClassNameAsVariable() + "DTO2.set" + (member.getName().substring(0, 1)).toUpperCase()
+								+ member.getName().substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+								+ (member.getName().substring(0, 1)).toUpperCase() + member.getName().substring(1) + "()!=null ?"
+								+ metaData.getRealClassNameAsVariable() + "Tmp.get" + (member.getName().substring(0, 1)).toUpperCase()
+								+ member.getName().substring(1) + "().toString() : null);";
 						finalParam2.add(tmp2);
 					} else {
-						String tmp2 = metaData.getRealClassNameAsVariable()
-								+ "DTO2.set"
-								+ (member.getName().substring(0, 1))
-										.toUpperCase()
-								+ member.getName().substring(1)
-								+ "("
-								+ metaData.getRealClassNameAsVariable()
-								+ "Tmp.get"
-								+ (member.getName().substring(0, 1))
-										.toUpperCase()
-								+ member.getName().substring(1) + "());";
+						String tmp2 = metaData.getRealClassNameAsVariable() + "DTO2.set" + (member.getName().substring(0, 1)).toUpperCase()
+								+ member.getName().substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+								+ (member.getName().substring(0, 1)).toUpperCase() + member.getName().substring(1) + "());";
 						finalParam2.add(tmp2);
 					}
 
@@ -1735,8 +1322,7 @@ public class StringBuilder implements IStringBuilder {
 		if (metaData.isGetManyToOneProperties()) {
 			for (Member member : metaData.getManyToOneProperties()) {
 
-				String params[] = getTypeAndvariableForManyToOneProperties(
-						member.getType().getSimpleName(), theMetaData);
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
 
 				String tmpFinalParam = "";
 				String tmpFinalParam1 = "";
@@ -1764,8 +1350,7 @@ public class StringBuilder implements IStringBuilder {
 									tmpFinalParam3 = "";
 								}
 
-								tmpFinalParam = tmpFinalParam + " "
-										+ params[cont];
+								tmpFinalParam = tmpFinalParam + " " + params[cont];
 
 								if (cont > params.length)
 									cont = params.length;
@@ -1773,8 +1358,7 @@ public class StringBuilder implements IStringBuilder {
 									cont++;
 
 								if (!finalParam.contains(tmpFinalParam)) {
-									finalParam = finalParam + tmpFinalParam
-											+ ", ";
+									finalParam = finalParam + tmpFinalParam + ", ";
 
 									HashMap<String, String> map = stringBuilderForId.hashMapIds;
 
@@ -1782,8 +1366,7 @@ public class StringBuilder implements IStringBuilder {
 									String hashMapProve1 = "";
 									try {
 
-										hashMapProve = (stringBuilderForId.hashMapIds
-												.get(tmpFinalParam2));
+										hashMapProve = (stringBuilderForId.hashMapIds.get(tmpFinalParam2));
 
 									} catch (Exception e) {
 										// TODO: handle exception
@@ -1791,222 +1374,53 @@ public class StringBuilder implements IStringBuilder {
 									String tmp3 = "";
 
 									if (hashMapProve == null) {
-										if (!tmpFinalParam3
-												.equalsIgnoreCase("date")) {
-											tmp3 = metaData
-													.getRealClassNameAsVariable()
-													+ "DTO2.set"
-													+ tmpFinalParam2.substring(
-															0, 1).toUpperCase()
-													+ tmpFinalParam2
-															.substring(1)
-													+ "("
-													+ metaData
-															.getRealClassNameAsVariable()
-													+ "Tmp.get"
-													+ member.getRealClassName()
-													+ "().get"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(
-																	1,
-																	tmpFinalParam2
-																			.lastIndexOf("_"))
-													+ "()!=null ? "
-													+ metaData
-															.getRealClassNameAsVariable()
-													+ "Tmp.get"
-													+ member.getRealClassName()
-													+ "().get"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(
-																	1,
-																	tmpFinalParam2
-																			.lastIndexOf("_"))
-													+ "().toString() : null);";
+										if (!tmpFinalParam3.equalsIgnoreCase("date")) {
+											tmp3 = metaData.getRealClassNameAsVariable() + "DTO2.set" + tmpFinalParam2.substring(0, 1).toUpperCase()
+													+ tmpFinalParam2.substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+													+ member.getRealClassName() + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+													+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()!=null ? "
+													+ metaData.getRealClassNameAsVariable() + "Tmp.get" + member.getRealClassName() + "().get"
+													+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+													+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "().toString() : null);";
 										} else {
-											tmp3 = metaData
-													.getRealClassNameAsVariable()
-													+ "DTO2.set"
-													+ tmpFinalParam2.substring(
-															0, 1).toUpperCase()
-													+ tmpFinalParam2
-															.substring(1)
-													+ "("
-													+ metaData
-															.getRealClassNameAsVariable()
-													+ "Tmp.get"
-													+ member.getRealClassName()
-													+ "().get"
-													+ (tmpFinalParam2
-															.substring(0, 1))
-															.toUpperCase()
-													+ tmpFinalParam2
-															.substring(
-																	1,
-																	tmpFinalParam2
-																			.lastIndexOf("_"))
-													+ "());";
+											tmp3 = metaData.getRealClassNameAsVariable() + "DTO2.set" + tmpFinalParam2.substring(0, 1).toUpperCase()
+													+ tmpFinalParam2.substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+													+ member.getRealClassName() + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+													+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "());";
 										}
 									} else {
 										if (hashMapProve.equals("")) {
-											if (!tmpFinalParam3
-													.equalsIgnoreCase("date")) {
-												tmp3 = metaData
-														.getRealClassNameAsVariable()
-														+ "DTO2.set"
-														+ tmpFinalParam2
-																.substring(0, 1)
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(1)
-														+ "("
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ "Tmp.get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "()!=null ? "
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ "Tmp.get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "().toString() : null);";
+											if (!tmpFinalParam3.equalsIgnoreCase("date")) {
+												tmp3 = metaData.getRealClassNameAsVariable() + "DTO2.set" + tmpFinalParam2.substring(0, 1).toUpperCase()
+														+ tmpFinalParam2.substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+														+ member.getRealClassName() + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()!=null ? "
+														+ metaData.getRealClassNameAsVariable() + "Tmp.get" + member.getRealClassName() + "().get"
+														+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "().toString() : null);";
 											} else {
-												tmp3 = metaData
-														.getRealClassNameAsVariable()
-														+ "DTO2.set"
-														+ tmpFinalParam2
-																.substring(0, 1)
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(1)
-														+ "("
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ "Tmp.get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "());";
+												tmp3 = metaData.getRealClassNameAsVariable() + "DTO2.set" + tmpFinalParam2.substring(0, 1).toUpperCase()
+														+ tmpFinalParam2.substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+														+ member.getRealClassName() + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "());";
 											}
 										} else {
-											if (!tmpFinalParam3
-													.equalsIgnoreCase("date")) {
-												tmp3 = metaData
-														.getRealClassNameAsVariable()
-														+ "DTO2.set"
-														+ tmpFinalParam2
-																.substring(0, 1)
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(1)
-														+ "("
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ "Tmp.get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ hashMapProve
-																.substring(0, 1)
-																.toUpperCase()
-														+ hashMapProve
-																.substring(1)
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "()!=null ?"
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ "Tmp.get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ hashMapProve
-																.substring(0, 1)
-																.toUpperCase()
-														+ hashMapProve
-																.substring(1)
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "().toString() : null);";
+											if (!tmpFinalParam3.equalsIgnoreCase("date")) {
+												tmp3 = metaData.getRealClassNameAsVariable() + "DTO2.set" + tmpFinalParam2.substring(0, 1).toUpperCase()
+														+ tmpFinalParam2.substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+														+ member.getRealClassName() + "().get" + hashMapProve.substring(0, 1).toUpperCase()
+														+ hashMapProve.substring(1) + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "()!=null ?"
+														+ metaData.getRealClassNameAsVariable() + "Tmp.get" + member.getRealClassName() + "().get"
+														+ hashMapProve.substring(0, 1).toUpperCase() + hashMapProve.substring(1) + "().get"
+														+ (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "().toString() : null);";
 											} else {
-												tmp3 = metaData
-														.getRealClassNameAsVariable()
-														+ "DTO2.set"
-														+ tmpFinalParam2
-																.substring(0, 1)
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(1)
-														+ "("
-														+ metaData
-																.getRealClassNameAsVariable()
-														+ "Tmp.get"
-														+ member
-																.getRealClassName()
-														+ "().get"
-														+ hashMapProve
-																.substring(0, 1)
-																.toUpperCase()
-														+ hashMapProve
-																.substring(1)
-														+ "().get"
-														+ (tmpFinalParam2
-																.substring(0, 1))
-																.toUpperCase()
-														+ tmpFinalParam2
-																.substring(
-																		1,
-																		tmpFinalParam2
-																				.lastIndexOf("_"))
-														+ "());";
+												tmp3 = metaData.getRealClassNameAsVariable() + "DTO2.set" + tmpFinalParam2.substring(0, 1).toUpperCase()
+														+ tmpFinalParam2.substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+														+ member.getRealClassName() + "().get" + hashMapProve.substring(0, 1).toUpperCase()
+														+ hashMapProve.substring(1) + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+														+ tmpFinalParam2.substring(1, tmpFinalParam2.lastIndexOf("_")) + "());";
 											}
 										}
 									}
@@ -2032,8 +1446,7 @@ public class StringBuilder implements IStringBuilder {
 								else
 									cont++;
 
-								tmpFinalParam = tmpFinalParam + " "
-										+ params[cont];
+								tmpFinalParam = tmpFinalParam + " " + params[cont];
 
 								tmpFinalParam1 = params[cont];
 								try {
@@ -2049,72 +1462,21 @@ public class StringBuilder implements IStringBuilder {
 
 								if (!finalParam.contains(tmpFinalParam)) {
 									finalParam = finalParam + tmpFinalParam;
-									if (!tmpFinalParam3
-											.equalsIgnoreCase("date")) {
-										String tmp3 = metaData
-												.getRealClassNameAsVariable()
-												+ "DTO2.set"
-												+ tmpFinalParam1
-														.substring(0, 1)
-														.toUpperCase()
-												+ tmpFinalParam1.substring(1)
-												+ "("
-												+ metaData
-														.getRealClassNameAsVariable()
-												+ "Tmp.get"
-												+ member.getRealClassName()
-												+ "()"
-												+ ".get"
-												+ tmpFinalParam1
-														.substring(0, 1)
-														.toUpperCase()
-												+ tmpFinalParam1
-														.substring(
-																1,
-																tmpFinalParam1
-																		.lastIndexOf("_"))
-												+ "()!=null ? "
-												+ metaData
-														.getRealClassNameAsVariable()
-												+ "Tmp.get"
-												+ member.getRealClassName()
-												+ "()"
-												+ ".get"
-												+ tmpFinalParam1
-														.substring(0, 1)
-														.toUpperCase()
-												+ tmpFinalParam1
-														.substring(
-																1,
-																tmpFinalParam1
-																		.lastIndexOf("_"))
+									if (!tmpFinalParam3.equalsIgnoreCase("date")) {
+										String tmp3 = metaData.getRealClassNameAsVariable() + "DTO2.set" + tmpFinalParam1.substring(0, 1).toUpperCase()
+												+ tmpFinalParam1.substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+												+ member.getRealClassName() + "()" + ".get" + tmpFinalParam1.substring(0, 1).toUpperCase()
+												+ tmpFinalParam1.substring(1, tmpFinalParam1.lastIndexOf("_")) + "()!=null ? "
+												+ metaData.getRealClassNameAsVariable() + "Tmp.get" + member.getRealClassName() + "()" + ".get"
+												+ tmpFinalParam1.substring(0, 1).toUpperCase() + tmpFinalParam1.substring(1, tmpFinalParam1.lastIndexOf("_"))
 												+ "().toString() : null);";
 
 										finalParam2.add(tmp3);
 									} else {
-										String tmp3 = metaData
-												.getRealClassNameAsVariable()
-												+ "DTO2.set"
-												+ tmpFinalParam1
-														.substring(0, 1)
-														.toUpperCase()
-												+ tmpFinalParam1.substring(1)
-												+ "("
-												+ metaData
-														.getRealClassNameAsVariable()
-												+ "Tmp.get"
-												+ member.getRealClassName()
-												+ "()"
-												+ ".get"
-												+ tmpFinalParam1
-														.substring(0, 1)
-														.toUpperCase()
-												+ tmpFinalParam1
-														.substring(
-																1,
-																tmpFinalParam1
-																		.lastIndexOf("_"))
-												+ "());";
+										String tmp3 = metaData.getRealClassNameAsVariable() + "DTO2.set" + tmpFinalParam1.substring(0, 1).toUpperCase()
+												+ tmpFinalParam1.substring(1) + "(" + metaData.getRealClassNameAsVariable() + "Tmp.get"
+												+ member.getRealClassName() + "()" + ".get" + tmpFinalParam1.substring(0, 1).toUpperCase()
+												+ tmpFinalParam1.substring(1, tmpFinalParam1.lastIndexOf("_")) + "());";
 
 										finalParam2.add(tmp3);
 									}
@@ -2126,9 +1488,7 @@ public class StringBuilder implements IStringBuilder {
 			}
 		}
 
-		List primaryKey = stringBuilderForId
-				.finalParamForIdForDtoInViewForSetsVariablesInList(theMetaData,
-						metaData);
+		List primaryKey = stringBuilderForId.finalParamForIdForDtoInViewForSetsVariablesInList(theMetaData, metaData);
 
 		return ListUtils.subtract(finalParam2, primaryKey);
 	}
@@ -2140,34 +1500,29 @@ public class StringBuilder implements IStringBuilder {
 	 * co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilder
 	 * #getVariableForManyToOneProperties(java.util.List, java.util.List)
 	 */
-	public List<String> getVariableForManyToOneProperties(
-			List<Member> manyToOne, List<MetaData> theMetaData) {
+	public List<String> getVariableForManyToOneProperties(List<Member> manyToOne, List<MetaData> theMetaData) {
 		List<String> finalParam = new ArrayList<String>();
 
 		for (MetaData metaData1 : theMetaData) {
 			for (Member member : manyToOne) {
-				if (metaData1.getRealClassName().equalsIgnoreCase(
-						member.getRealClassName())) {
+				if (metaData1.getRealClassName().equalsIgnoreCase(member.getRealClassName())) {
 
 					if (metaData1.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 
-						Field[] field = metaData1.getComposeKey()
-								.getDeclaredFields();
+						Field[] field = metaData1.getComposeKey().getDeclaredFields();
 
 						for (int i = 0; i < field.length; i++) {
 
 							Field field2 = field[i];
 
-							String name = field2.getName() + "_"
-									+ metaData1.getRealClassName();
+							String name = field2.getName() + "_" + metaData1.getRealClassName();
 
 							finalParam.add(name);
 
 						}
 
 					} else {
-						finalParam.add(metaData1.getPrimaryKey().getName()
-								+ "_" + metaData1.getRealClassName());
+						finalParam.add(metaData1.getPrimaryKey().getName() + "_" + metaData1.getRealClassName());
 					}
 				}
 			}
@@ -2183,8 +1538,7 @@ public class StringBuilder implements IStringBuilder {
 	 * co.edu.usbcali.lidis.zathura.generator.jeewebcentric.utils.IStringBuilder
 	 * #getStringsForManyToOneProperties(java.util.List, java.util.List)
 	 */
-	public List<String> getStringsForManyToOneProperties(
-			List<Member> manyToOne, List<MetaData> theMetaData) {
+	public List<String> getStringsForManyToOneProperties(List<Member> manyToOne, List<MetaData> theMetaData) {
 		List<String> finalParam = new ArrayList<String>();
 
 		// if(manyToOne!=null){
@@ -2199,21 +1553,13 @@ public class StringBuilder implements IStringBuilder {
 		int cont = 1;
 		for (MetaData metaData1 : theMetaData) {
 			for (Member member : manyToOne) {
-				if (metaData1.getRealClassName().equalsIgnoreCase(
-						member.getRealClassName())) {
+				if (metaData1.getRealClassName().equalsIgnoreCase(member.getRealClassName())) {
 
 					if (metaData1.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
-						Field[] field = metaData1.getComposeKey()
-								.getDeclaredFields();
+						Field[] field = metaData1.getComposeKey().getDeclaredFields();
 
-						finalParam.add(metaData1.getPrimaryKey()
-								.getRealClassName()
-								+ " "
-								+ metaData1.getPrimaryKey()
-										.getRealClassVariableName()
-								+ "Class = new "
-								+ metaData1.getPrimaryKey().getRealClassName()
-								+ "();");
+						finalParam.add(metaData1.getPrimaryKey().getRealClassName() + " " + metaData1.getPrimaryKey().getRealClassVariableName()
+								+ "Class = new " + metaData1.getPrimaryKey().getRealClassName() + "();");
 
 						for (int i = 0; i < field.length; i++) {
 
@@ -2226,43 +1572,20 @@ public class StringBuilder implements IStringBuilder {
 							String build2 = name.substring(1, name.length());
 							String build3 = build + build2;
 
-							finalParam.add(metaData1.getPrimaryKey()
-									.getRealClassVariableName()
-									+ "Class.set"
-									+ build3
-									+ "("
-									+ name
-									+ "_"
+							finalParam.add(metaData1.getPrimaryKey().getRealClassVariableName() + "Class.set" + build3 + "(" + name + "_"
 									+ metaData1.getRealClassName() + ");");
 
 						}
 
-						finalParam
-								.add(member.getRealClassName()
-										+ " "
-										+ member.getName()
-										+ "Class = logic"
-										+ member.getRealClassName()
-										/* + "%" */
-										+ cont
-										+ ".get"
-										+ member.getRealClassName()
-										+ "("
-										+ metaData1.getPrimaryKey()
-												.getRealClassVariableName()
-										+ "Class);");
+						finalParam.add(member.getRealClassName() + " " + member.getName() + "Class = logic" + member.getRealClassName()
+						/* + "%" */
+						+ cont + ".get" + member.getRealClassName() + "(" + metaData1.getPrimaryKey().getRealClassVariableName() + "Class);");
 						cont++;
 
 					} else {
-						finalParam.add(member.getRealClassName() + " "
-								+ member.getName() + "Class = logic"
-								+ member.getRealClassName()
-								/* + "%" */
-								+ cont 
-								+ ".get" 
-								+ member.getRealClassName() + "(" 
-								+ metaData1.getPrimaryKey().getName() + "_" 
-								+ metaData1.getRealClassName() + ");");
+						finalParam.add(member.getRealClassName() + " " + member.getName() + "Class = logic" + member.getRealClassName()
+						/* + "%" */
+						+ cont + ".get" + member.getRealClassName() + "(" + metaData1.getPrimaryKey().getName() + "_" + metaData1.getRealClassName() + ");");
 						cont++;
 
 					}
