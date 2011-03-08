@@ -12,13 +12,13 @@ import co.edu.usbcali.lidis.zathura.metadata.reader.MetaDataReaderFactory;
 
 /**
  * Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class TestJPAEntityLoaderEngine {
 
-	private static Logger log = Logger
-			.getLogger(TestJPAEntityLoaderEngine.class);
+	private static Logger log = Logger.getLogger(TestJPAEntityLoaderEngine.class);
 
 	/**
 	 * @param args
@@ -33,7 +33,7 @@ public class TestJPAEntityLoaderEngine {
 			entityLoader = MetaDataReaderFactory.createMetaDataReader(MetaDataReaderFactory.JPAEntityLoaderEngine);
 
 			// MetaDataModel metaDataModel=entityLoader.loadMetaDataModel();
-			MetaDataModel metaDataModel = entityLoader.loadMetaDataModel(path,pckgName);
+			MetaDataModel metaDataModel = entityLoader.loadMetaDataModel(path, pckgName);
 
 			for (MetaData metaData : metaDataModel.getTheMetaData()) {
 				log.info("-----------------------------------------------------");
@@ -45,7 +45,7 @@ public class TestJPAEntityLoaderEngine {
 					log.info("Member type:" + member.getType());
 					if (member instanceof OneToManyMember) {
 						OneToManyMember oneToManyMember = (OneToManyMember) member;
-						log.info("Member CollectionType:"+ oneToManyMember.getCollectionType());
+						log.info("Member CollectionType:" + oneToManyMember.getCollectionType());
 					}
 				}
 			}
