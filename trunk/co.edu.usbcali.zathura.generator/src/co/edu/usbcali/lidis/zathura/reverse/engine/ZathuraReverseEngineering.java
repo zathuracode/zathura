@@ -24,19 +24,19 @@ import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseJarLoader;
 
 /**
  * Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @author William Altuzarra Noriega Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
-	
-	//MYSQL, SQLSERVER
-	public final static String CATALOG="1";
-	//ORACLE, POSTGRES, 
-	public final static String SCHEMA="2";
-	//DB2 AS400
-	public final static String CATALOG_SCHEMA="3";
-	
+
+	// MYSQL, SQLSERVER
+	public final static String CATALOG = "1";
+	// ORACLE, POSTGRES,
+	public final static String SCHEMA = "2";
+	// DB2 AS400
+	public final static String CATALOG_SCHEMA = "3";
 
 	private static Logger log = Logger.getLogger(ZathuraReverseEngineering.class);
 
@@ -47,30 +47,28 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	private String connectionDriverClass;
 	private String connectionUrl;
 	private String connectionUsername;
-	
+
 	private String connectionPassword;
 	private String companyDomainName;
 	private String companyDomainNameForPojoLocation;
 	private String connectionDriverJarPath;
 	private String destinationDirectory;
 	private Boolean makeItXml;
-	
+
 	private String catalog;
 	private String schema;
 	private String catalogAndSchema;
-	
+
 	private List<String> tablesList;
 	private VelocityEngine ve;
-	
-	
 
 	public void makePojosJPA_V1_0(Properties connectionProperties, List<String> tables) {
-		
+
 		log.info("Begin ZathuraReverseMappingTool (Pojo Making & compilation)");
 
 		connectionDriverClass = connectionProperties.getProperty("connectionDriverClass");
 		connectionUrl = connectionProperties.getProperty("connectionUrl");
-		
+
 		connectionUsername = connectionProperties.getProperty("connectionUsername");
 		connectionPassword = connectionProperties.getProperty("connectionPassword");
 		companyDomainName = connectionProperties.getProperty("companyDomainName");
@@ -80,14 +78,15 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		schema = connectionProperties.getProperty("schema");
 		catalog = connectionProperties.getProperty("catalog");
 		catalogAndSchema = connectionProperties.getProperty("catalogAndSchema");
-		
-		//Este parametro es para que genere hibernatexml y los pojos con hibernate
+
+		// Este parametro es para que genere hibernatexml y los pojos con
+		// hibernate
 		makeItXml = Boolean.parseBoolean(connectionProperties.getProperty("makeItXml"));
-		
+
 		this.tablesList = tables;
-		
-		
-		//Llama los templates que generan los archivos de configuracion para HibernateTools
+
+		// Llama los templates que generan los archivos de configuracion para
+		// HibernateTools
 		doTemplate();
 
 		try {
@@ -95,19 +94,19 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		//LLama el proceso de ANT con los archivos generados
+
+		// LLama el proceso de ANT con los archivos generados
 		callAntProcess();
-		
+
 		log.info("End ZathuraReverseMappingTool (Pojo Making & compilation)");
 	}
 
 	private void doTemplate() {
-		
+
 		try {
 			ve = new VelocityEngine();
-			
-			//Limpio las propiedades
+
+			// Limpio las propiedades
 			ve.clearProperty("file.resource.loader.description");
 			ve.clearProperty("file.resource.loader.description");
 			ve.clearProperty("file.resource.loader.class");
@@ -115,13 +114,11 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			ve.clearProperty("file.resource.loader.cache");
 			ve.clearProperty("file.resource.loader.modificationCheckInterval");
 
-			
-			
 			Properties properties = new Properties();
 
-			properties.setProperty("file.resource.loader.description","Velocity File Resource Loader");
-			properties.setProperty("file.resource.loader.class","org.apache.velocity.runtime.resource.loader.FileResourceLoader");
-			properties.setProperty("file.resource.loader.path",reverseTemplatesPath);
+			properties.setProperty("file.resource.loader.description", "Velocity File Resource Loader");
+			properties.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
+			properties.setProperty("file.resource.loader.path", reverseTemplatesPath);
 			properties.setProperty("file.resource.loader.cache", "false");
 			properties.setProperty("file.resource.loader.modificationCheckInterval", "2");
 
@@ -137,17 +134,16 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		context.put("connectionUsername", connectionUsername);
 		context.put("connectionPassword", connectionPassword);
 		context.put("companyDomainName", companyDomainName);
-		context.put("companyDomainNameForPojoLocation",companyDomainNameForPojoLocation);
+		context.put("companyDomainNameForPojoLocation", companyDomainNameForPojoLocation);
 		context.put("makeItXml", makeItXml);
 		context.put("connectionDriverJarPath", connectionDriverJarPath);
-		context.put("destinationDirectory", destinationDirectory);		
-		context.put("tablesList", tablesList);		
-		context.put("isTableList", ZathuraReverseEngineeringUtil.validationsList(tablesList));		
+		context.put("destinationDirectory", destinationDirectory);
+		context.put("tablesList", tablesList);
+		context.put("isTableList", ZathuraReverseEngineeringUtil.validationsList(tablesList));
 		context.put("schema", schema);
 		context.put("catalog", catalog);
 		context.put("catalogAndSchema", catalogAndSchema);
-		
-		
+
 		doCfg(context);
 		doBuild(context);
 		doRevEng(context);
@@ -187,7 +183,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			log.info("End doCfg");
 
 		} catch (Exception e) {
-			log.error("Error doCfg",e);
+			log.error("Error doCfg", e);
 		}
 	}
 
@@ -227,7 +223,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			log.info("End doBuild");
 
 		} catch (Exception e) {
-			log.error("Error doBuild",e);
+			log.error("Error doBuild", e);
 		}
 	}
 
@@ -258,8 +254,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 			revEng.merge(context, swRevEng);
 
-			FileWriter fstream = new FileWriter(tempFiles
-					+ "hibernate.reveng.xml");
+			FileWriter fstream = new FileWriter(tempFiles + "hibernate.reveng.xml");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swRevEng.toString());
 			// Close the output stream
@@ -268,7 +263,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			log.info("End doRevEng");
 
 		} catch (Exception e) {
-			log.error("Error doRevEng",e);
+			log.error("Error doRevEng", e);
 		}
 	}
 
@@ -277,51 +272,51 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	 */
 	public static void callAntProcess() {
 		log.info("Begin Ant");
-			File buildFile = new File(ZathuraReverseEngineeringUtil.getTempFileBuildPath());
-			Project p = new Project();
-			p.setUserProperty("ant.file", buildFile.getAbsolutePath());
-			DefaultLogger consoleLogger = new DefaultLogger();
-			consoleLogger.setErrorPrintStream(System.err);
-			consoleLogger.setOutputPrintStream(System.out);
-			consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
-			p.addBuildListener(consoleLogger);
-	
-			try {
-				p.fireBuildStarted();
-				p.init();
-				ProjectHelper helper = ProjectHelper.getProjectHelper();
-				p.addReference("ant.projectHelper", helper);
-				helper.parse(p, buildFile);
-				p.executeTarget(p.getDefaultTarget());
-				p.fireBuildFinished(null);
-			} catch (BuildException e) {
-				p.fireBuildFinished(e);
-			}
-			
-			// Compile Pojos
-	         File buildFile2 = new File(ZathuraReverseEngineeringUtil.getTempFileBuildCompilePath());
-	         Project p2 = new Project();
-	         p2.setUserProperty("ant.file", buildFile2.getAbsolutePath());
-	         DefaultLogger consoleLogger2 = new DefaultLogger();
-	         consoleLogger2.setErrorPrintStream(System.err);
-	         consoleLogger2.setOutputPrintStream(System.out);
-	         consoleLogger2.setMessageOutputLevel(Project.MSG_INFO);
-	         p2.addBuildListener(consoleLogger2);
-	        
-	         try {
-		         p2.fireBuildStarted();
-		         p2.init();
-		         ProjectHelper helper2 = ProjectHelper.getProjectHelper();
-		         p2.addReference("ant.projectHelper", helper2);
-		         helper2.parse(p2, buildFile2);
-		         p2.executeTarget(p2.getDefaultTarget());
-		         p2.fireBuildFinished(null);
-	         } catch (BuildException e) {
-	         p2.fireBuildFinished(e);
-	         }
+		File buildFile = new File(ZathuraReverseEngineeringUtil.getTempFileBuildPath());
+		Project p = new Project();
+		p.setUserProperty("ant.file", buildFile.getAbsolutePath());
+		DefaultLogger consoleLogger = new DefaultLogger();
+		consoleLogger.setErrorPrintStream(System.err);
+		consoleLogger.setOutputPrintStream(System.out);
+		consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
+		p.addBuildListener(consoleLogger);
+
+		try {
+			p.fireBuildStarted();
+			p.init();
+			ProjectHelper helper = ProjectHelper.getProjectHelper();
+			p.addReference("ant.projectHelper", helper);
+			helper.parse(p, buildFile);
+			p.executeTarget(p.getDefaultTarget());
+			p.fireBuildFinished(null);
+		} catch (BuildException e) {
+			p.fireBuildFinished(e);
+		}
+
+		// Compile Pojos
+		File buildFile2 = new File(ZathuraReverseEngineeringUtil.getTempFileBuildCompilePath());
+		Project p2 = new Project();
+		p2.setUserProperty("ant.file", buildFile2.getAbsolutePath());
+		DefaultLogger consoleLogger2 = new DefaultLogger();
+		consoleLogger2.setErrorPrintStream(System.err);
+		consoleLogger2.setOutputPrintStream(System.out);
+		consoleLogger2.setMessageOutputLevel(Project.MSG_INFO);
+		p2.addBuildListener(consoleLogger2);
+
+		try {
+			p2.fireBuildStarted();
+			p2.init();
+			ProjectHelper helper2 = ProjectHelper.getProjectHelper();
+			p2.addReference("ant.projectHelper", helper2);
+			helper2.parse(p2, buildFile2);
+			p2.executeTarget(p2.getDefaultTarget());
+			p2.fireBuildFinished(null);
+		} catch (BuildException e) {
+			p2.fireBuildFinished(e);
+		}
 		log.info("End Ant");
 	}
-	
+
 	private void doBuildCompile(VelocityContext context) {
 		log.info("Begin doBuildCompile");
 		try {
@@ -356,6 +351,6 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		} catch (Exception e) {
 			log.info("Error doBuildCompile");
 		}
-	}	
+	}
 
 }

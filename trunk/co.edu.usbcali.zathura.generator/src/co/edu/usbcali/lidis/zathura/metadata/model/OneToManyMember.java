@@ -1,19 +1,19 @@
 package co.edu.usbcali.lidis.zathura.metadata.model;
 
 /**
- * Powered by jpa2web
- * Zathura Generator
+ * Powered by jpa2web Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
-public class OneToManyMember extends Member{
+public class OneToManyMember extends Member {
 
 	private Class collectionType;
 	private String mappedBy;
-	
-	public OneToManyMember(String name,String showName, Class type,Class collectionType,int order) {
-		super(name,showName, type,order);
-		this.collectionType=collectionType;
+
+	public OneToManyMember(String name, String showName, Class type, Class collectionType, int order) {
+		super(name, showName, type, order);
+		this.collectionType = collectionType;
 	}
 
 	/**
@@ -39,6 +39,5 @@ public class OneToManyMember extends Member{
 	public void setMappedBy(String mappedBy) {
 		this.mappedBy = mappedBy;
 	}
-	
 
 }

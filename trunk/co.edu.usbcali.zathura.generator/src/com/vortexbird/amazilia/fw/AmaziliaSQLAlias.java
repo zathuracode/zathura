@@ -8,17 +8,14 @@ import net.sourceforge.squirrel_sql.fw.sql.ISQLAlias;
 import net.sourceforge.squirrel_sql.fw.sql.SQLDriverPropertyCollection;
 
 public class AmaziliaSQLAlias implements ISQLAlias {
-	
+
 	private String url;
 	private String name;
 	private String password;
 	private String userName;
 	private boolean autoLogon;
 	private boolean valid;
-	
 
-	
-	
 	@Override
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		// TODO Auto-generated method stub
@@ -45,7 +42,7 @@ public class AmaziliaSQLAlias implements ISQLAlias {
 
 	@Override
 	public String getName() {
-		
+
 		return name;
 	}
 
@@ -56,7 +53,7 @@ public class AmaziliaSQLAlias implements ISQLAlias {
 
 	@Override
 	public String getUrl() {
-		
+
 		return url;
 	}
 
@@ -92,7 +89,7 @@ public class AmaziliaSQLAlias implements ISQLAlias {
 
 	@Override
 	public void setAutoLogon(boolean value) {
-		this.autoLogon=value;
+		this.autoLogon = value;
 
 	}
 
@@ -103,8 +100,7 @@ public class AmaziliaSQLAlias implements ISQLAlias {
 	}
 
 	@Override
-	public void setDriverIdentifier(IIdentifier data)
-			throws ValidationException {
+	public void setDriverIdentifier(IIdentifier data) throws ValidationException {
 		// TODO Auto-generated method stub
 
 	}
@@ -117,19 +113,19 @@ public class AmaziliaSQLAlias implements ISQLAlias {
 
 	@Override
 	public void setName(String name) throws ValidationException {
-		this.name=name;
+		this.name = name;
 
 	}
 
 	@Override
 	public void setPassword(String password) throws ValidationException {
-		this.password=password;
+		this.password = password;
 
 	}
 
 	@Override
 	public void setUrl(String url) throws ValidationException {
-		this.url=url;
+		this.url = url;
 	}
 
 	@Override
@@ -140,7 +136,7 @@ public class AmaziliaSQLAlias implements ISQLAlias {
 
 	@Override
 	public void setUserName(String userName) throws ValidationException {
-		this.userName=userName;
+		this.userName = userName;
 
 	}
 

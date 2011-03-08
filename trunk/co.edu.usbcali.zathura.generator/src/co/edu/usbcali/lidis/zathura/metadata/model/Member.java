@@ -3,24 +3,25 @@ package co.edu.usbcali.lidis.zathura.metadata.model;
 import java.util.HashMap;
 
 /**
- * Powered by jpa2web
- * Zathura Generator
+ * Powered by jpa2web Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class Member implements Comparable {
-	
+
 	private String name;
 	private Class type;
-	private int order=-1;
+	private int order = -1;
 	private String showName;
-	
+
 	private Long precision;
 	private Long scale;
 	Boolean nullable;
 	private Long length;
-	
+
 	private HashMap<String, Member> hashMapIdsProperties = new HashMap<String, Member>();
+
 	/**
 	 * 
 	 */
@@ -33,77 +34,76 @@ public class Member implements Comparable {
 	 * @param type
 	 * @param order
 	 */
-	
-	public String getRealClassName(){
+
+	public String getRealClassName() {
 		String typeComplete = type.getName();
-		String []tmp=(typeComplete.replace(".", "%")).split("%");
-		String realName=tmp[tmp.length-1];
+		String[] tmp = (typeComplete.replace(".", "%")).split("%");
+		String realName = tmp[tmp.length - 1];
 		return realName;
 	}
-	
-	public String getRealClassVariableName(){
+
+	public String getRealClassVariableName() {
 		String typeComplete = type.getName();
-		String []tmp=(typeComplete.replace(".", "%")).split("%");
-		String realName=tmp[tmp.length-1];
-		return (realName.substring(0,1)).toLowerCase()+realName.substring(1,realName.length());
-	}	
-	
-	public String getGetNameOfPrimaryName(){
-		String build = name.substring(0,1).toUpperCase();
-		String build2 = name.substring(1,name.length());
-		return build+build2;
+		String[] tmp = (typeComplete.replace(".", "%")).split("%");
+		String realName = tmp[tmp.length - 1];
+		return (realName.substring(0, 1)).toLowerCase() + realName.substring(1, realName.length());
 	}
-	
-	public Member(String name, String showName,Class type, int order) {
+
+	public String getGetNameOfPrimaryName() {
+		String build = name.substring(0, 1).toUpperCase();
+		String build2 = name.substring(1, name.length());
+		return build + build2;
+	}
+
+	public Member(String name, String showName, Class type, int order) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.order = order;
-		this.showName=showName;
+		this.showName = showName;
 	}
-	
-	public boolean isPrimiaryKeyAComposeKey(){
+
+	public boolean isPrimiaryKeyAComposeKey() {
 		boolean ret = false;
-		
+
 		String firstLetters = type.getName();
-		String []tmp=(firstLetters.replace(".", "%")).split("%");
-		
-		
-		if(tmp!=null){
-			if(tmp.length>1){
-				//Is possible are java.lang.*, or java.util.* or java.math
-				
-				if( (tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("lang")) || 
-						(tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("util")) ||
-						(tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("math"))){
-					
+		String[] tmp = (firstLetters.replace(".", "%")).split("%");
+
+		if (tmp != null) {
+			if (tmp.length > 1) {
+				// Is possible are java.lang.*, or java.util.* or java.math
+
+				if ((tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("lang"))
+						|| (tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("util"))
+						|| (tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("math"))) {
+
 					ret = false;
-				}else{
+				} else {
 					ret = true;
 				}
-			}else{
+			} else {
 				ret = false;
 			}
 		}
-		
+
 		return ret;
 	}
-	
-	public boolean isSimpleMember(){
+
+	public boolean isSimpleMember() {
 		boolean ret = false;
-		
+
 		try {
-			if(this instanceof SimpleMember)
+			if (this instanceof SimpleMember)
 				ret = true;
 			else
 				ret = false;
 		} catch (Exception e) {
 			ret = false;
 		}
-		
+
 		return ret;
 	}
-	
+
 	public int getOrder() {
 		return order;
 	}
@@ -129,23 +129,20 @@ public class Member implements Comparable {
 	}
 
 	public int compareTo(Object o) {
-		
-		Member m =(Member)o;
-		if ((order==-1)&&(m.getOrder()==-1)) {
-			return getName().compareTo(m.getName()); 
-		}
-		else if (m.getOrder()==-1) {
+
+		Member m = (Member) o;
+		if ((order == -1) && (m.getOrder() == -1)) {
+			return getName().compareTo(m.getName());
+		} else if (m.getOrder() == -1) {
 			return -1;
-		}
-		else if (getOrder()==-1) {
+		} else if (getOrder() == -1) {
 			return 1;
-		}
-		else {
+		} else {
 			return new Integer(order).compareTo(new Integer(m.getOrder()));
 		}
-			
+
 	}
-	
+
 	public String getShowName() {
 		return showName;
 	}

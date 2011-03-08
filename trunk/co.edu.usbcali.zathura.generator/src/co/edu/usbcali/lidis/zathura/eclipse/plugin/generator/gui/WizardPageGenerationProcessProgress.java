@@ -6,8 +6,10 @@ import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
+
 /**
  * Zathura Generator
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see WizardPage
@@ -15,6 +17,7 @@ import org.eclipse.swt.widgets.Text;
 public class WizardPageGenerationProcessProgress extends WizardPage {
 
 	private Text txtSummary;
+
 	/**
 	 * Create the wizard
 	 */
@@ -22,11 +25,13 @@ public class WizardPageGenerationProcessProgress extends WizardPage {
 		super("wizardPage");
 		setTitle("Generation Process Progress");
 		setDescription("blabla");
-		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
+		// setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(),
+		// "icons/balvardi-Robotic7070.png"));
 	}
 
 	/**
 	 * Create contents of the wizard
+	 * 
 	 * @param parent
 	 */
 	public void createControl(Composite parent) {

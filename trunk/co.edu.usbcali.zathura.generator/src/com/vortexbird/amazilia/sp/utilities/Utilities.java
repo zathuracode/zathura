@@ -10,8 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Utilities 
-{
+public class Utilities {
 	public static String pathProjectRepositorio = null;
 	public static String pathXsl = null;
 	public static String pathProject = null;
@@ -21,9 +20,8 @@ public class Utilities
 	/**
 	 * Constructor of the class
 	 */
-	public Utilities() 
-	{
-		super();		
+	public Utilities() {
+		super();
 	}
 
 	/**
@@ -100,8 +98,7 @@ public class Utilities
 	 * @return true if the folder was created
 	 * @throws Exception
 	 */
-	public static boolean createFolder(String strPath, String strNameFolder)
-			throws Exception {
+	public static boolean createFolder(String strPath, String strNameFolder) throws Exception {
 		boolean wasCreated = false;
 		try {
 			strPath = strPath + strNameFolder;
@@ -122,8 +119,7 @@ public class Utilities
 	 * @return full package path
 	 * @throws Exception
 	 */
-	public static String createPackage(String strPath, String strPackageName)
-			throws Exception {
+	public static String createPackage(String strPath, String strPackageName) throws Exception {
 		try {
 			strPath = strPath + replaceAll(strPackageName, ".", File.separator);
 			strPath = strPath + File.separator;
@@ -147,15 +143,13 @@ public class Utilities
 	 *            new string for change in the original string
 	 * @return string replaced
 	 */
-	public static String replaceAll(String strStringSource,
-			String strOldString, String strNewString) {
+	public static String replaceAll(String strStringSource, String strOldString, String strNewString) {
 		StringBuffer strBufReplace = new StringBuffer();
 		String strAux;
 
 		for (int i = 0; i < strStringSource.length(); i++) {
 			if ((i + strOldString.length()) < strStringSource.length()) {
-				strAux = strStringSource
-						.substring(i, i + strOldString.length());
+				strAux = strStringSource.substring(i, i + strOldString.length());
 				if (strAux.equals(strOldString)) {
 					strBufReplace.append(strNewString);
 					i += strOldString.length() - 1;
@@ -189,16 +183,15 @@ public class Utilities
 				strBufTmp.append(strTmp + "\n");
 			}
 
-			DataOutputStream out = new DataOutputStream(new FileOutputStream(
-					strPath));
+			DataOutputStream out = new DataOutputStream(new FileOutputStream(strPath));
 			out.writeBytes(strBufTmp.toString());
 			out.flush();
 			out.close();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-	}	
-		
+	}
+
 	/**
 	 * @return the pathProject
 	 */

@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class extract the metadata of the store procedure or function
- * Only Oracle 8i and 9i are supported
+ * This class extract the metadata of the store procedure or function Only
+ * Oracle 8i and 9i are supported
+ * 
  * @author Hassan Hammad
  */
 public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProcedureHandler {
@@ -22,26 +23,24 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 		super();
 	}
 
-	
-	
 	/**
 	 * 
 	 */
-	public List<String> getStoredProcedureNames(Connection connection,String strSchema,String filter) {
+	public List<String> getStoredProcedureNames(Connection connection, String strSchema, String filter) {
 		DatabaseMetaData dbmt = null;
-		ResultSet resultSet =null;
+		ResultSet resultSet = null;
 		List<String> procedureNames = new ArrayList<String>();
-		
+
 		try {
-			
+
 			dbmt = connection.getMetaData();
-			
-			if(filter==null || filter.equals("")==true){
+
+			if (filter == null || filter.equals("") == true) {
 				resultSet = dbmt.getProcedures(null, strSchema, "%");
-			}else{
+			} else {
 				resultSet = dbmt.getProcedures(null, strSchema, filter);
 			}
-			
+
 			while (resultSet.next()) {
 				String procName = resultSet.getString(3);
 				procedureNames.add(procName);
@@ -52,7 +51,7 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 		}
 		return procedureNames;
 	}
-	
+
 	/**
 	 * 
 	 */
@@ -73,18 +72,19 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 		return schemaNames;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.geniar.metadata.MetadataHandler#getStoredProceduresArgumentNames(java.sql.Connection, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.geniar.metadata.MetadataHandler#getStoredProceduresArgumentNames(
+	 * java.sql.Connection, java.lang.String)
 	 */
-	public List<String> getStoredProceduresArgumentNames(Connection connection,
-			String strProcedureName) {
+	public List<String> getStoredProceduresArgumentNames(Connection connection, String strProcedureName) {
 		List<String> procedureArguments = new ArrayList<String>();
 		PreparedStatement ps;
 		ResultSet rs;
 		try {
-			String sqlQuery = "select USER_ARGUMENTS.ARGUMENT_NAME "
-					+ "from USER_ARGUMENTS "
-					+ "where USER_ARGUMENTS.OBJECT_NAME = ?";
+			String sqlQuery = "select USER_ARGUMENTS.ARGUMENT_NAME " + "from USER_ARGUMENTS " + "where USER_ARGUMENTS.OBJECT_NAME = ?";
 			ps = connection.prepareStatement(sqlQuery);
 			ps.setString(1, strProcedureName);
 			rs = ps.executeQuery();
@@ -101,18 +101,19 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 		return procedureArguments;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.geniar.metadata.MetadataHandler#getStoredProceduresArgumentTypeNames(java.sql.Connection, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.geniar.metadata.MetadataHandler#getStoredProceduresArgumentTypeNames
+	 * (java.sql.Connection, java.lang.String)
 	 */
-	public List<String> getStoredProceduresArgumentTypeNames(
-			Connection connection, String strProcedureName) {
+	public List<String> getStoredProceduresArgumentTypeNames(Connection connection, String strProcedureName) {
 		List<String> procedureArguments = new ArrayList<String>();
 		PreparedStatement ps;
 		ResultSet rs;
 		try {
-			String sqlQuery = "select USER_ARGUMENTS.DATA_TYPE "
-					+ "from USER_ARGUMENTS "
-					+ "where USER_ARGUMENTS.OBJECT_NAME = ?";
+			String sqlQuery = "select USER_ARGUMENTS.DATA_TYPE " + "from USER_ARGUMENTS " + "where USER_ARGUMENTS.OBJECT_NAME = ?";
 			ps = connection.prepareStatement(sqlQuery);
 			ps.setString(1, strProcedureName);
 			rs = ps.executeQuery();
@@ -129,18 +130,19 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 		return procedureArguments;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.geniar.metadata.MetadataHandler#getStoredProceduresIsInOutArgument(java.sql.Connection, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.geniar.metadata.MetadataHandler#getStoredProceduresIsInOutArgument
+	 * (java.sql.Connection, java.lang.String)
 	 */
-	public List<String> getStoredProceduresIsInOutArgument(
-			Connection connection, String strProcedureName) {
+	public List<String> getStoredProceduresIsInOutArgument(Connection connection, String strProcedureName) {
 		List<String> procedureArguments = new ArrayList<String>();
 		PreparedStatement ps;
 		ResultSet rs;
 		try {
-			String sqlQuery = "select USER_ARGUMENTS.IN_OUT "
-					+ "from USER_ARGUMENTS "
-					+ "where USER_ARGUMENTS.OBJECT_NAME = ?";
+			String sqlQuery = "select USER_ARGUMENTS.IN_OUT " + "from USER_ARGUMENTS " + "where USER_ARGUMENTS.OBJECT_NAME = ?";
 			ps = connection.prepareStatement(sqlQuery);
 			ps.setString(1, strProcedureName);
 			rs = ps.executeQuery();
@@ -157,11 +159,14 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 		return procedureArguments;
 	}
 
-	/* (non-Javadoc)
-	 * @see net.geniar.metadata.MetadataHandler#getProcedureMetadata(java.sql.Connection, java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.geniar.metadata.MetadataHandler#getProcedureMetadata(java.sql.Connection
+	 * , java.lang.String)
 	 */
-	public ProcedureBean getProcedureMetadata(Connection connection,
-			String strProcedureName) {
+	public ProcedureBean getProcedureMetadata(Connection connection, String strProcedureName) {
 		ProcedureBean procedureBean = null;
 		List<String> columnNames = new ArrayList<String>();
 		List<String> columnTypeNames = new ArrayList<String>();
@@ -175,21 +180,16 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 		ResultSet rs;
 		try {
 			procedureBean = new ProcedureBean();
-			argumentsNames = getStoredProceduresArgumentNames(connection,
-					strProcedureName);
-			argumentsTypeNames = getStoredProceduresArgumentTypeNames(
-					connection, strProcedureName);
-			isInOutArgument = getStoredProceduresIsInOutArgument(connection,
-					strProcedureName);
+			argumentsNames = getStoredProceduresArgumentNames(connection, strProcedureName);
+			argumentsTypeNames = getStoredProceduresArgumentTypeNames(connection, strProcedureName);
+			isInOutArgument = getStoredProceduresIsInOutArgument(connection, strProcedureName);
 
 			// Construct call string to call the function or procedure
 			strCallString = strCallString + strProcedureName + "(";
 
 			if (isInOutArgument.size() > 0) {
 				for (int j = 0; j < isInOutArgument.size(); j++) {
-					if (isInOutArgument.get(j).equalsIgnoreCase("IN")
-							|| isInOutArgument.get(j)
-									.equalsIgnoreCase("IN/OUT")) {
+					if (isInOutArgument.get(j).equalsIgnoreCase("IN") || isInOutArgument.get(j).equalsIgnoreCase("IN/OUT")) {
 						strCallString = strCallString + "?";
 						if (j + 1 < isInOutArgument.size()) {
 							strCallString = strCallString + ",";
@@ -210,73 +210,39 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 
 			// Register Out and In/Out parameters and set In parameters
 			if (isInOutArgument.size() > 0) {
-				// Ask if the first parameter is out and return a ref cursor				
-				if (isInOutArgument.get(0).equalsIgnoreCase("OUT")
-						&& argumentsTypeNames.get(0).equalsIgnoreCase(
-								"REF CURSOR")) {
+				// Ask if the first parameter is out and return a ref cursor
+				if (isInOutArgument.get(0).equalsIgnoreCase("OUT") && argumentsTypeNames.get(0).equalsIgnoreCase("REF CURSOR")) {
 					for (int i = 0; i < isInOutArgument.size(); i++) {
 						if (isInOutArgument.get(i).equalsIgnoreCase("OUT")) {
-							cs.registerOutParameter(
-											i + 1,
-											TypesConverterOracle
-													.parseOracleType(argumentsTypeNames
-															.get(i)));
+							cs.registerOutParameter(i + 1, TypesConverterOracle.parseOracleType(argumentsTypeNames.get(i)));
 						} else {
 							if (isInOutArgument.get(i).equalsIgnoreCase("IN")) {
-								if (argumentsTypeNames.get(i).equalsIgnoreCase(
-										"NUMBER")
-										|| argumentsTypeNames.get(i)
-												.equalsIgnoreCase("NUMERIC")) {
+								if (argumentsTypeNames.get(i).equalsIgnoreCase("NUMBER") || argumentsTypeNames.get(i).equalsIgnoreCase("NUMERIC")) {
 									cs.setInt(i + 1, 0);
 								}
-								if (argumentsTypeNames.get(i).equalsIgnoreCase(
-										"VARCHAR2")
-										|| argumentsTypeNames.get(i)
-												.equalsIgnoreCase("VARCHAR")) {
+								if (argumentsTypeNames.get(i).equalsIgnoreCase("VARCHAR2") || argumentsTypeNames.get(i).equalsIgnoreCase("VARCHAR")) {
 									cs.setString(i + 1, "");
 								}
-								if (argumentsTypeNames.get(i).equalsIgnoreCase(
-										"LONG")) {
+								if (argumentsTypeNames.get(i).equalsIgnoreCase("LONG")) {
 									cs.setLong(i + 1, 0);
 								}
-								if (argumentsTypeNames.get(i).equalsIgnoreCase(
-										"DATE")
-										|| argumentsTypeNames.get(i)
-												.equalsIgnoreCase("TIMESTAMP")) {
+								if (argumentsTypeNames.get(i).equalsIgnoreCase("DATE") || argumentsTypeNames.get(i).equalsIgnoreCase("TIMESTAMP")) {
 									cs.setTimestamp(i + 1, null);
 								}
 							} else {
-								if (isInOutArgument.get(i).equalsIgnoreCase(
-										"IN/OUT")) {
-									cs.registerOutParameter(
-													i + 1,
-													TypesConverterOracle
-															.parseOracleType(argumentsTypeNames
-																	.get(i)));
+								if (isInOutArgument.get(i).equalsIgnoreCase("IN/OUT")) {
+									cs.registerOutParameter(i + 1, TypesConverterOracle.parseOracleType(argumentsTypeNames.get(i)));
 
-									if (argumentsTypeNames.get(i)
-											.equalsIgnoreCase("NUMBER")
-											|| argumentsTypeNames
-													.get(i)
-													.equalsIgnoreCase("NUMERIC")) {
+									if (argumentsTypeNames.get(i).equalsIgnoreCase("NUMBER") || argumentsTypeNames.get(i).equalsIgnoreCase("NUMERIC")) {
 										cs.setInt(i + 1, 0);
 									}
-									if (argumentsTypeNames.get(i)
-											.equalsIgnoreCase("VARCHAR2")
-											|| argumentsTypeNames
-													.get(i)
-													.equalsIgnoreCase("VARCHAR")) {
+									if (argumentsTypeNames.get(i).equalsIgnoreCase("VARCHAR2") || argumentsTypeNames.get(i).equalsIgnoreCase("VARCHAR")) {
 										cs.setString(i + 1, "");
 									}
-									if (argumentsTypeNames.get(i)
-											.equalsIgnoreCase("LONG")) {
+									if (argumentsTypeNames.get(i).equalsIgnoreCase("LONG")) {
 										cs.setLong(i + 1, 0);
 									}
-									if (argumentsTypeNames.get(i)
-											.equalsIgnoreCase("DATE")
-											|| argumentsTypeNames.get(i)
-													.equalsIgnoreCase(
-															"TIMESTAMP")) {
+									if (argumentsTypeNames.get(i).equalsIgnoreCase("DATE") || argumentsTypeNames.get(i).equalsIgnoreCase("TIMESTAMP")) {
 										cs.setTimestamp(i + 1, null);
 									}
 								}
@@ -284,10 +250,7 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 						}
 					}
 				} else {
-					throw new SQLException(
-							"The first parameter of the Store Procedure or Functon "
-									+ strProcedureName
-									+ " must be OUT and return a REF CURSOR");
+					throw new SQLException("The first parameter of the Store Procedure or Functon " + strProcedureName + " must be OUT and return a REF CURSOR");
 				}
 			}
 
@@ -308,8 +271,7 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 				String columnTypeName = rs.getMetaData().getColumnTypeName(i);
 
 				// convert data type
-				columnTypeName = TypesConverterOracle
-						.parseJavaType(columnTypeName);
+				columnTypeName = TypesConverterOracle.parseJavaType(columnTypeName);
 				columnName = columnName.toLowerCase();
 
 				columnNames.add(columnName);

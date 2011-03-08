@@ -43,7 +43,6 @@ public class EclipseGeneratorUtil {
 	public static String webRootFolderPath;
 	public static String libFolderPath;
 	public static String fullPathProject;
-	
 
 	public static String zathuraGeneratorName;
 	public static int metaDataReader;
@@ -55,8 +54,7 @@ public class EclipseGeneratorUtil {
 	public static String connectionPassword;
 	public static String connectionDriverJarPath;
 	public static String connectionDriverTemplate;
-	
-	
+
 	public static String companyDomainName;
 	public static String destinationDirectory;
 	public static String catalog;
@@ -65,11 +63,9 @@ public class EclipseGeneratorUtil {
 	public static List<String> tablesList;
 	public static Boolean makeItXml = false;
 	private static MetaDataModel metaDataModel = null;
-	
-	
-	public static boolean copyDBdriverJars=true;
-	public static String []jarList;
-	
+
+	public static boolean copyDBdriverJars = true;
+	public static String[] jarList;
 
 	public static WizardMainZathura wizardMain;
 
@@ -98,7 +94,7 @@ public class EclipseGeneratorUtil {
 		connectionDriverJarPath = null;
 		destinationDirectory = null;
 		schema = null;
-		catalogAndSchema=null;
+		catalogAndSchema = null;
 		tablesList = null;
 		makeItXml = false;
 	}
@@ -109,8 +105,7 @@ public class EclipseGeneratorUtil {
 	 * @throws MetaDataReaderNotFoundException
 	 * @throws GeneratorNotFoundException
 	 */
-	public static void generate() throws MetaDataReaderNotFoundException,
-			GeneratorNotFoundException {
+	public static void generate() throws MetaDataReaderNotFoundException, GeneratorNotFoundException {
 
 		EclipseGeneratorUtil.metaDataReader = MetaDataReaderFactory.JPAEntityLoaderEngine;
 		String jpaPath = EclipseGeneratorUtil.javaClassFolderPath;
@@ -125,10 +120,8 @@ public class EclipseGeneratorUtil {
 
 		if (metaDataModel == null) {
 			IMetaDataReader entityLoader = null;
-			entityLoader = MetaDataReaderFactory
-					.createMetaDataReader(MetaDataReaderFactory.JPAEntityLoaderEngine);
-			metaDataModel = entityLoader
-					.loadMetaDataModel(jpaPath, jpaPckgName);
+			entityLoader = MetaDataReaderFactory.createMetaDataReader(MetaDataReaderFactory.JPAEntityLoaderEngine);
+			metaDataModel = entityLoader.loadMetaDataModel(jpaPath, jpaPckgName);
 		}
 
 		// Variables para el properties
@@ -140,9 +133,8 @@ public class EclipseGeneratorUtil {
 		properties.put("libFolderPath", libFolderPath);
 		properties.put("folderProjectPath", folderProjectPath);
 
-		IZathuraGenerator zathuraGenerator = ZathuraGeneratorFactory
-				.createZathuraGenerator(EclipseGeneratorUtil.zathuraGeneratorName);
-		zathuraGenerator.toGenerate(metaDataModel, projectName,folderProjectPath, properties);
+		IZathuraGenerator zathuraGenerator = ZathuraGeneratorFactory.createZathuraGenerator(EclipseGeneratorUtil.zathuraGeneratorName);
+		zathuraGenerator.toGenerate(metaDataModel, projectName, folderProjectPath, properties);
 
 	}
 
@@ -164,23 +156,21 @@ public class EclipseGeneratorUtil {
 
 		Properties connectionProperties = new Properties();
 
-		destinationDirectory = workspaceFolderPath + destinationDirectory
-				+ File.separatorChar;
+		destinationDirectory = workspaceFolderPath + destinationDirectory + File.separatorChar;
 
-		connectionProperties
-				.put("connectionDriverClass", connectionDriverClass);
+		connectionProperties.put("connectionDriverClass", connectionDriverClass);
 		connectionProperties.put("connectionUrl", connectionUrl);
-		
+
 		connectionProperties.put("connectionUsername", connectionUsername);
 		connectionProperties.put("connectionPassword", connectionPassword);
 		connectionProperties.put("companyDomainName", companyDomainName);
-		
-		connectionProperties.put("connectionDriverJarPath",connectionDriverJarPath);
+
+		connectionProperties.put("connectionDriverJarPath", connectionDriverJarPath);
 		connectionProperties.put("destinationDirectory", destinationDirectory);
-		connectionProperties.put("makeItXml", makeItXml == true ? "True": false);
+		connectionProperties.put("makeItXml", makeItXml == true ? "True" : false);
 		connectionProperties.put("catalogAndSchema", catalogAndSchema == null ? "" : catalogAndSchema);
-		connectionProperties.put("schema",schema == null ? "" : schema);
-		connectionProperties.put("catalog", catalog == null ? "": catalog);
+		connectionProperties.put("schema", schema == null ? "" : schema);
+		connectionProperties.put("catalog", catalog == null ? "" : catalog);
 
 		// Borrar carpeta de temporales
 		GeneratorUtil.deleteFiles(destinationDirectory);
@@ -201,19 +191,18 @@ public class EclipseGeneratorUtil {
 
 		destinationDirectory = ZathuraReverseEngineeringUtil.getTempFilesPath();
 
-		connectionProperties
-				.put("connectionDriverClass", connectionDriverClass);
+		connectionProperties.put("connectionDriverClass", connectionDriverClass);
 		connectionProperties.put("connectionUrl", connectionUrl);
 		connectionProperties.put("connectionUsername", connectionUsername);
 		connectionProperties.put("connectionPassword", connectionPassword);
 		connectionProperties.put("companyDomainName", companyDomainName);
-		connectionProperties.put("connectionDriverJarPath",connectionDriverJarPath);
+		connectionProperties.put("connectionDriverJarPath", connectionDriverJarPath);
 		connectionProperties.put("destinationDirectory", destinationDirectory);
-		//Genera JPA para poder usar el EntityLoader
+		// Genera JPA para poder usar el EntityLoader
 		connectionProperties.put("makeItXml", false);
 		connectionProperties.put("catalogAndSchema", catalogAndSchema == null ? "" : catalogAndSchema);
-		connectionProperties.put("schema",schema == null ? "" : schema);
-		connectionProperties.put("catalog", catalog == null ? "": catalog);
+		connectionProperties.put("schema", schema == null ? "" : schema);
+		connectionProperties.put("catalog", catalog == null ? "" : catalog);
 
 		ZathuraReverseEngineeringUtil.resetTempFiles(destinationDirectory);
 
@@ -223,10 +212,8 @@ public class EclipseGeneratorUtil {
 		try {
 			EclipseGeneratorUtil.javaClassFolderPath = destinationDirectory;
 			IMetaDataReader entityLoader = null;
-			entityLoader = MetaDataReaderFactory
-					.createMetaDataReader(MetaDataReaderFactory.JPAEntityLoaderEngine);
-			metaDataModel = entityLoader.loadMetaDataModel(
-					destinationDirectory, companyDomainName);
+			entityLoader = MetaDataReaderFactory.createMetaDataReader(MetaDataReaderFactory.JPAEntityLoaderEngine);
+			metaDataModel = entityLoader.loadMetaDataModel(destinationDirectory, companyDomainName);
 
 		} catch (MetaDataReaderNotFoundException e) {
 			// Ignore
@@ -247,8 +234,7 @@ public class EclipseGeneratorUtil {
 		// appß
 
 		try {
-			Method addURL = URLClassLoader.class.getDeclaredMethod("addURL",
-					new Class[] { URL.class });
+			Method addURL = URLClassLoader.class.getDeclaredMethod("addURL", new Class[] { URL.class });
 			addURL.setAccessible(true);// you're telling the JVM to override the
 			// default visibility
 			File[] files = getExternalJars(jarLocation);// some method returning
@@ -271,10 +257,6 @@ public class EclipseGeneratorUtil {
 			// throw e;
 		}
 	}
-
-	
-
-	
 
 	private static File[] getExternalJars(String jarLocation) {
 		File[] files = new File[1];
@@ -311,18 +293,19 @@ public class EclipseGeneratorUtil {
 	private EclipseGeneratorUtil() {
 
 	}
-	
-	public static void copyDriverJars(){
-		if(copyDBdriverJars==true && jarList!=null && jarList.length>0){
+
+	public static void copyDriverJars() {
+		if (copyDBdriverJars == true && jarList != null && jarList.length > 0) {
 			for (String path : jarList) {
-				String jarName=jarName(path);
-				GeneratorUtil.copy(path, libFolderPath+jarName);
+				String jarName = jarName(path);
+				GeneratorUtil.copy(path, libFolderPath + jarName);
 			}
 		}
 	}
-	private static String jarName(String path){
-		int lastIndex=path.lastIndexOf(File.separatorChar);
-		String nameJar=path.substring(lastIndex+1, path.length());
+
+	private static String jarName(String path) {
+		int lastIndex = path.lastIndexOf(File.separatorChar);
+		String nameJar = path.substring(lastIndex + 1, path.length());
 		return nameJar;
 	}
 
