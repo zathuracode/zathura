@@ -206,7 +206,9 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 			    wizardMainNewPackageWizardPage.setiProject(project);
 			    
 			    
+			   
 				 WizardDialog dlg = new WizardDialog(getShell(),wizardMainNewPackageWizardPage);
+				 
 				 wizardMainNewPackageWizardPage.getNewPackageWizardPage().setPageComplete(false);
 				 wizardMainNewPackageWizardPage.getNewPackageWizardPage().setPackageText("",true);
 				 
@@ -263,33 +265,19 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 		
 	}
 	private void handleBrowseSourceFolder() {
-		String arrayPath[]=null;
-		
 		
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), project, false,	"Choose a source folder:");	
 		dialog.showClosedProjects(false);
 		
-		
-		//ResourceSelectionDialog dialog=new ResourceSelectionDialog(getShell(), project, "Select source file container");
-		
-		
-		
-		
+
 		if (dialog.open() == Window.OK) {
 		
 			Object[] result = dialog.getResult();
 			if (result.length == 1) {
-				txtJavaSourceFolder.setText(((Path) result[0]).toString());				
-				if(txtJavaSourceFolder.getText()!=null && txtJavaSourceFolder.getText().contains("\\")){
-					arrayPath = EclipseGeneratorUtil.replaceAll(txtJavaSourceFolder.getText(), "\\", "-").split("-");
-				}else if(txtJavaSourceFolder.getText()!=null && txtJavaSourceFolder.getText().contains("/")){
-					arrayPath = EclipseGeneratorUtil.replaceAll(txtJavaSourceFolder.getText(), "/", "-").split("-");
-				}
 				
-				if (arrayPath != null && arrayPath.length > 0) {
-					// Obtiene el nombre del proyecto
-					project = ResourcesPlugin.getWorkspace().getRoot().getProject(arrayPath[1]);
-					String fullPathWorkspace = project.getLocation().toString().replaceAll(project.getFullPath().toString(), "");
+				    txtJavaSourceFolder.setText(((Path) result[0]).toString());
+					String fullPathWorkspace = GeneratorUtil.replaceAll(project.getLocation().toString(), project.getFullPath().toString(), "");
+					//String fullPathWorkspace = project.getLocation().toString().replaceAll(project.getFullPath().toString(), "");
 					EclipseGeneratorUtil.fullPathProject=project.getLocation().toString();
 					EclipseGeneratorUtil.project=project;
 					EclipseGeneratorUtil.projectName=EclipseGeneratorUtil.project.getName();
@@ -298,8 +286,7 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 					EclipseGeneratorUtil.javaSourceFolderPath = EclipseGeneratorUtil.workspaceFolderPath+txtJavaSourceFolder.getText()+GeneratorUtil.slash;
 					btnPackage.setEnabled(true);
 					btnNewPackage.setEnabled(true);
-					
-				}
+				
 			}
 		}
 	}
