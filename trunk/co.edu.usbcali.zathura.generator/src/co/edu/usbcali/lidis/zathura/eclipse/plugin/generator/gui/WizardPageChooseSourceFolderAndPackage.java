@@ -276,8 +276,8 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 			if (result.length == 1) {
 				
 				    txtJavaSourceFolder.setText(((Path) result[0]).toString());
-					String fullPathWorkspace = GeneratorUtil.replaceAll(project.getLocation().toString(), project.getFullPath().toString(), "");
-					//String fullPathWorkspace = project.getLocation().toString().replaceAll(project.getFullPath().toString(), "");
+					//String fullPathWorkspace = GeneratorUtil.replaceAll(project.getLocation().toString(), project.getFullPath().toString(), "");
+					String fullPathWorkspace = project.getLocation().toString().replaceAll(project.getFullPath().toString(), "");
 					EclipseGeneratorUtil.fullPathProject=project.getLocation().toString();
 					EclipseGeneratorUtil.project=project;
 					EclipseGeneratorUtil.projectName=EclipseGeneratorUtil.project.getName();
