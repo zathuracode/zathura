@@ -54,6 +54,9 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 
 			monitor.subTask("Building " + EclipseGeneratorUtil.projectName + " project...");
 			EclipseGeneratorUtil.project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+			
+			//TODO Hacer el componentes para formatear el codigo con el componente de eclipse http://www.eclipsezone.com/eclipse/forums/t88960.html
+			
 
 		} catch (CoreException e) {
 			monitor.setCanceled(true);

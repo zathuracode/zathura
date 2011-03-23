@@ -2,7 +2,6 @@ package co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
