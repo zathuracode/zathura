@@ -87,5 +87,15 @@ public class JalopyCodeFormatter {
 			System.out.println("Fallo Formateo de Codigo con Jalopy:" + e.toString());
 		}
 	}
+	
+	public static void main(String[] args) {
+		
+		try {
+			formatJavaCodeFile("C:\\Workspaces\\runtime-EclipseApplication\\demo-spring\\src\\com\\vortexbird\\demo\\presentation\\businessDelegate\\BusinessDelegatorView.java");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }
