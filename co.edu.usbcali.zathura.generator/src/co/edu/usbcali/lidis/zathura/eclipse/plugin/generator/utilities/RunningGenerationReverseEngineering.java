@@ -6,18 +6,23 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.widgets.Shell;
 
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 public class RunningGenerationReverseEngineering implements IRunnableWithProgress {
+	
+	
 
+	private org.eclipse.swt.widgets.Shell shell;
 	/**
 	 * RunningGeneration constructor
 	 * 
 	 */
-	public RunningGenerationReverseEngineering() {
-
+	public RunningGenerationReverseEngineering(Shell shell) {
+		this.shell=shell;
 	}
 
 	/**
@@ -54,6 +59,8 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 			monitor.setCanceled(true);
 			e.printStackTrace();
 			ZathuraGeneratorLog.logError(e);
+			
+			MessageDialog.openError(getShell(), "Error",e.getMessage());
 			throw new InterruptedException(e.getMessage());
 		}
 		monitor.done();
@@ -61,4 +68,14 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 			throw new InterruptedException("The generation was cancelled");
 		}
 	}
+
+	public org.eclipse.swt.widgets.Shell getShell() {
+		return shell;
+	}
+
+	public void setShell(org.eclipse.swt.widgets.Shell shell) {
+		this.shell = shell;
+	}
+	
+	
 }
