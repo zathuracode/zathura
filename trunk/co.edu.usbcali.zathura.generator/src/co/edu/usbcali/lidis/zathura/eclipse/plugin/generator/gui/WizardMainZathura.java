@@ -65,7 +65,7 @@ public class WizardMainZathura extends Wizard {
 		try {
 			
 			ProgressMonitorDialog progressMonitorDialogReverseEngineering=new ProgressMonitorDialog(getShell());
-			progressMonitorDialogReverseEngineering.run(true, true,new co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.RunningGenerationReverseEngineering());
+			progressMonitorDialogReverseEngineering.run(true, true,new co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.RunningGenerationReverseEngineering(getShell()));
 			
 			ProgressMonitorDialog progressMonitorDialogGeneration=new ProgressMonitorDialog(getShell());
 			progressMonitorDialogGeneration.run(true, true,new RunningGeneration());
