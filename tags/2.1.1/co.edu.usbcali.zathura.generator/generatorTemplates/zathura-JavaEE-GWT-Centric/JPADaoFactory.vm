@@ -1,0 +1,36 @@
+package  ${virginPackage}.server.dataaccess.daofactory;
+import ${virginPackage}.server.dataaccess.dao.*;
+/**
+* Factory for Data Access Objects Strategy The DAO pattern can be made highly flexible 
+* by adopting the Abstract Factory [GoF] and the Factory Method [GoF] patterns.
+* When the underlying storage is not subject to change from one implementation to another, 
+* this strategy can be implemented using the Factory Method pattern to produce a number of DAOs needed by the application. 
+* This class is a Factory Method pattern
+*
+* @author Zathura Code Generator http://code.google.com/p/zathura/
+*/
+public class JPADaoFactory {
+private static JPADaoFactory instance = null;
+/**
+* 
+* @return JPADaoFactory
+*/
+public static JPADaoFactory getInstance(){
+if(instance == null){
+instance = new JPADaoFactory();
+}
+return instance;
+}	
+private JPADaoFactory(){
+}
+#foreach($metaData  in $dataModel.theMetaData)
+    /**
+    * This method instantiates the I${metaData.getRealClassName()}DAO class for JPA 
+    * that is used in this applications deployment environment to access the data. 
+    * @return I${metaData.getRealClassName()}DAO implementation
+    */
+    public I${metaData.getRealClassName()}DAO get${metaData.getRealClassName()}DAO() {
+    return new ${metaData.getRealClassName()}DAO();
+    }
+#end
+}
