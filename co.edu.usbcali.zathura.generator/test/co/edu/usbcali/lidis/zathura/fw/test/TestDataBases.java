@@ -13,10 +13,16 @@ import net.sourceforge.squirrel_sql.fw.sql.SQLDriverManager;
 
 import com.vortexbird.amazilia.fw.AmaziliaSQLAlias;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestDataBases.
+ */
 public class TestDataBases {
 
 	/**
-	 * @param args
+	 * The main method.
+	 *
+	 * @param args the args
 	 */
 	public static void main(String[] args) {
 
@@ -67,6 +73,20 @@ public class TestDataBases {
 		}
 	}
 
+	/**
+	 * Test meta data.
+	 *
+	 * @param className the class name
+	 * @param url the url
+	 * @param user the user
+	 * @param password the password
+	 * @throws ValidationException the validation exception
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws IllegalAccessException the illegal access exception
+	 * @throws InstantiationException the instantiation exception
+	 * @throws MalformedURLException the malformed url exception
+	 * @throws SQLException the SQL exception
+	 */
 	private static void testMetaData(String className, String url, String user, String password) throws ValidationException, ClassNotFoundException,
 			IllegalAccessException, InstantiationException, MalformedURLException, SQLException {
 		/** Alias we are going to connect to. */

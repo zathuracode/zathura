@@ -10,13 +10,19 @@ import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 import co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader;
 import co.edu.usbcali.lidis.zathura.metadata.reader.MetaDataReaderFactory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestZathuraJavaEE_HibernateCore_Web_Spring_Centric.
+ */
 public class TestZathuraJavaEE_HibernateCore_Web_Spring_Centric {
 
 	// private static Logger log =
 	// Logger.getLogger(TestZathuraJavaEE_Web_Centric.class);
 
 	/**
-	 * @param args
+	 * The main method.
+	 *
+	 * @param args the args
 	 */
 	public static void main(String[] args) {
 		try {

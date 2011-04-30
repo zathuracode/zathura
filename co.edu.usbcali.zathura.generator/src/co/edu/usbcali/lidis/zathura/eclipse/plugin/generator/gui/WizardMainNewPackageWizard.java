@@ -10,13 +10,23 @@ import org.eclipse.jface.wizard.Wizard;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import co.edu.usbcali.lidis.zathura.swt.utilities.ResourceManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WizardMainNewPackageWizard.
+ */
 public class WizardMainNewPackageWizard extends Wizard {
 
 	
+	/** The i project. */
 	private IProject iProject;
+	
+	/** The new package wizard page. */
 	private NewPackageWizardPage newPackageWizardPage=null;
 	
 	
+	/**
+	 * The Constructor.
+	 */
 	public WizardMainNewPackageWizard() {
 		super();
 		
@@ -26,6 +36,9 @@ public class WizardMainNewPackageWizard extends Wizard {
 		newPackageWizardPage.setPageComplete(false);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#addPages()
+	 */
 	@Override
 	public void addPages() {		
 
@@ -35,6 +48,9 @@ public class WizardMainNewPackageWizard extends Wizard {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
 	@Override
 	public boolean performFinish() {
 		try {
@@ -53,6 +69,9 @@ public class WizardMainNewPackageWizard extends Wizard {
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#canFinish()
+	 */
 	@Override
 	public boolean canFinish() {
 		IWizardPage page = getContainer().getCurrentPage();
@@ -66,6 +85,8 @@ public class WizardMainNewPackageWizard extends Wizard {
 
 
 	/**
+	 * Gets the new package wizard page.
+	 *
 	 * @return the newPackageWizardPage
 	 */
 	public NewPackageWizardPage getNewPackageWizardPage() {
@@ -74,6 +95,8 @@ public class WizardMainNewPackageWizard extends Wizard {
 
 
 	/**
+	 * Sets the new package wizard page.
+	 *
 	 * @param newPackageWizardPage the newPackageWizardPage to set
 	 */
 	public void setNewPackageWizardPage(NewPackageWizardPage newPackageWizardPage) {
@@ -81,11 +104,21 @@ public class WizardMainNewPackageWizard extends Wizard {
 	}
 
 
+	/**
+	 * Geti project.
+	 *
+	 * @return the i project
+	 */
 	public IProject getiProject() {
 		return iProject;
 	}
 
 
+	/**
+	 * Seti project.
+	 *
+	 * @param iProject the i project
+	 */
 	public void setiProject(IProject iProject) {
 		this.iProject = iProject;
 	}

@@ -27,37 +27,72 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ZathuraGe
 import co.edu.usbcali.lidis.zathura.reverse.utilities.DatabaseTypeModel;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see WizardPage
  */
 public class WizardPageDatabaseConnection extends WizardPage {
 
+	/** The zathura database types. */
 	private HashMap<String, DatabaseTypeModel> zathuraDatabaseTypes;
+	
+	/** The database type model. */
 	private DatabaseTypeModel databaseTypeModel;
+	
+	/** The txt connection url. */
 	private Text txtConnectionURL;
+	
+	/** The txt user name. */
 	private Text txtUserName;
+	
+	/** The txt password. */
 	private Text txtPassword;
+	
+	/** The cmb driver template. */
 	private Combo cmbDriverTemplate;
+	
+	/** The list ja rs. */
 	private List listJARs;
+	
+	/** The txt driver class name. */
 	private Text txtDriverClassName;
+	
+	/** The btn test driver. */
 	private Button btnTestDriver;
+	
+	/** The test connection. */
 	private boolean testConnection = false;
+	
+	/** The txt driver name. */
 	private Text txtDriverName;
 
+	/** The driver template. */
 	private String driverTemplate;
+	
+	/** The name. */
 	private String name;
+	
+	/** The url. */
 	private String url;
+	
+	/** The user. */
 	private String user;
+	
+	/** The password. */
 	private String password;
+	
+	/** The driver class name. */
 	private String driverClassName;
+	
+	/** The jar path. */
 	private String jarPath;
 
 	/**
-	 * Create the wizard
+	 * Create the wizard.
 	 */
 	public WizardPageDatabaseConnection() {
 		super("wizardPage");
@@ -67,9 +102,9 @@ public class WizardPageDatabaseConnection extends WizardPage {
 	}
 
 	/**
-	 * Create contents of the wizard
-	 * 
-	 * @param parent
+	 * Create contents of the wizard.
+	 *
+	 * @param parent the parent
 	 */
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
@@ -241,6 +276,9 @@ public class WizardPageDatabaseConnection extends WizardPage {
 
 	}
 
+	/**
+	 * Load edit values.
+	 */
 	private void loadEditValues() {
 		/*
 		 * private String driverTemplate; private String name; private String
@@ -265,6 +303,9 @@ public class WizardPageDatabaseConnection extends WizardPage {
 
 	}
 
+	/**
+	 * Validate page complete.
+	 */
 	private void validatePageComplete() {
 
 		try {
@@ -293,6 +334,9 @@ public class WizardPageDatabaseConnection extends WizardPage {
 		}
 	}
 
+	/**
+	 * Load cmb driver template.
+	 */
 	private void loadCmbDriverTemplate() {
 		try {
 			if (zathuraDatabaseTypes == null) {
@@ -325,6 +369,9 @@ public class WizardPageDatabaseConnection extends WizardPage {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.WizardPage#setPageComplete(boolean)
+	 */
 	@Override
 	public void setPageComplete(boolean complete) {
 		super.setPageComplete(complete);
@@ -334,114 +381,252 @@ public class WizardPageDatabaseConnection extends WizardPage {
 		}
 	}
 
+	/**
+	 * Gets the txt connection url.
+	 *
+	 * @return the txt connection url
+	 */
 	public Text getTxtConnectionURL() {
 		return txtConnectionURL;
 	}
 
+	/**
+	 * Sets the txt connection url.
+	 *
+	 * @param txtConnectionURL the txt connection url
+	 */
 	public void setTxtConnectionURL(Text txtConnectionURL) {
 		this.txtConnectionURL = txtConnectionURL;
 	}
 
+	/**
+	 * Gets the txt user name.
+	 *
+	 * @return the txt user name
+	 */
 	public Text getTxtUserName() {
 		return txtUserName;
 	}
 
+	/**
+	 * Sets the txt user name.
+	 *
+	 * @param txtUserName the txt user name
+	 */
 	public void setTxtUserName(Text txtUserName) {
 		this.txtUserName = txtUserName;
 	}
 
+	/**
+	 * Gets the txt password.
+	 *
+	 * @return the txt password
+	 */
 	public Text getTxtPassword() {
 		return txtPassword;
 	}
 
+	/**
+	 * Sets the txt password.
+	 *
+	 * @param txtPassword the txt password
+	 */
 	public void setTxtPassword(Text txtPassword) {
 		this.txtPassword = txtPassword;
 	}
 
+	/**
+	 * Gets the list ja rs.
+	 *
+	 * @return the list ja rs
+	 */
 	public List getListJARs() {
 		return listJARs;
 	}
 
+	/**
+	 * Sets the list ja rs.
+	 *
+	 * @param listJARs the list ja rs
+	 */
 	public void setListJARs(List listJARs) {
 		this.listJARs = listJARs;
 	}
 
+	/**
+	 * Gets the txt driver class name.
+	 *
+	 * @return the txt driver class name
+	 */
 	public Text getTxtDriverClassName() {
 		return txtDriverClassName;
 	}
 
+	/**
+	 * Sets the txt driver class name.
+	 *
+	 * @param txtDriverClassName the txt driver class name
+	 */
 	public void setTxtDriverClassName(Text txtDriverClassName) {
 		this.txtDriverClassName = txtDriverClassName;
 	}
 
+	/**
+	 * Gets the txt driver name.
+	 *
+	 * @return the txt driver name
+	 */
 	public Text getTxtDriverName() {
 		return txtDriverName;
 	}
 
+	/**
+	 * Sets the txt driver name.
+	 *
+	 * @param txtDriverName the txt driver name
+	 */
 	public void setTxtDriverName(Text txtDriverName) {
 		this.txtDriverName = txtDriverName;
 	}
 
+	/**
+	 * Gets the cmb driver template.
+	 *
+	 * @return the cmb driver template
+	 */
 	public Combo getCmbDriverTemplate() {
 		return cmbDriverTemplate;
 	}
 
+	/**
+	 * Sets the cmb driver template.
+	 *
+	 * @param cmbDriverTemplate the cmb driver template
+	 */
 	public void setCmbDriverTemplate(Combo cmbDriverTemplate) {
 		this.cmbDriverTemplate = cmbDriverTemplate;
 	}
 
+	/**
+	 * Gets the driver template.
+	 *
+	 * @return the driver template
+	 */
 	public String getDriverTemplate() {
 		return driverTemplate;
 	}
 
+	/**
+	 * Sets the driver template.
+	 *
+	 * @param driverTemplate the driver template
+	 */
 	public void setDriverTemplate(String driverTemplate) {
 		this.driverTemplate = driverTemplate;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.WizardPage#getName()
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
 	public String getUrl() {
 		return url;
 	}
 
+	/**
+	 * Sets the url.
+	 *
+	 * @param url the url
+	 */
 	public void setUrl(String url) {
 		this.url = url;
 	}
 
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
 	public String getUser() {
 		return user;
 	}
 
+	/**
+	 * Sets the user.
+	 *
+	 * @param user the user
+	 */
 	public void setUser(String user) {
 		this.user = user;
 	}
 
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Sets the password.
+	 *
+	 * @param password the password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * Gets the driver class name.
+	 *
+	 * @return the driver class name
+	 */
 	public String getDriverClassName() {
 		return driverClassName;
 	}
 
+	/**
+	 * Sets the driver class name.
+	 *
+	 * @param driverClassName the driver class name
+	 */
 	public void setDriverClassName(String driverClassName) {
 		this.driverClassName = driverClassName;
 	}
 
+	/**
+	 * Gets the jar path.
+	 *
+	 * @return the jar path
+	 */
 	public String getJarPath() {
 		return jarPath;
 	}
 
+	/**
+	 * Sets the jar path.
+	 *
+	 * @param jarPath the jar path
+	 */
 	public void setJarPath(String jarPath) {
 		this.jarPath = jarPath;
 	}

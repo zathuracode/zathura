@@ -10,18 +10,22 @@ import co.edu.usbcali.lidis.zathura.metadata.model.OneToManyMember;
 import co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader;
 import co.edu.usbcali.lidis.zathura.metadata.reader.MetaDataReaderFactory;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class TestJPAEntityLoaderEngine {
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(TestJPAEntityLoaderEngine.class);
 
 	/**
-	 * @param args
+	 * The main method.
+	 *
+	 * @param args the args
 	 */
 	public static void main(String[] args) {
 

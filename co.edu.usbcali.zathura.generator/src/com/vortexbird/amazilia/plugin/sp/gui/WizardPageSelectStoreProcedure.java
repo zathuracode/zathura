@@ -21,31 +21,54 @@ import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringU
 import com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandler;
 import com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandlerFactory;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see WizardPage
  */
 public class WizardPageSelectStoreProcedure extends WizardPage {
 
+	/** The cmb catlog schema. */
 	private Combo cmbCatlogSchema;
+	
+	/** The list available store procedures. */
 	private List listAvailableStoreProcedures;
+	
+	/** The list selected store procedures. */
 	private List listSelectedStoreProcedures;
+	
+	/** The txt store procedures filter. */
 	private Text txtStoreProceduresFilter;
+	
+	/** The lbl catalog schema. */
 	private Label lblCatalogSchema;
 
+	/** The btn store procedure filter search. */
 	private Button btnStoreProcedureFilterSearch;
+	
+	/** The list catalogs. */
 	private String[] listCatalogs = null;
+	
+	/** The list schemas. */
 	private String[] listSchemas = null;
+	
+	/** The catalog name. */
 	private String catalogName = null;
+	
+	/** The is schema. */
 	private Boolean isSchema = null;
 
 	// /Se debe cambiar por fabrica de obejtos para la version 2.1.1
 	// TODO revisar esta locura
+	/** The db. */
 	public static String db = null;
 
+	/**
+	 * The Constructor.
+	 */
 	public WizardPageSelectStoreProcedure() {
 		super("wizardPage");
 		setTitle("Zathura Reverse Engineering");
@@ -53,6 +76,9 @@ public class WizardPageSelectStoreProcedure extends WizardPage {
 		setPageComplete(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
+	 */
 	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
@@ -250,6 +276,9 @@ public class WizardPageSelectStoreProcedure extends WizardPage {
 
 	}
 
+	/**
+	 * Validate page complete.
+	 */
 	private void validatePageComplete() {
 
 		try {
@@ -299,6 +328,11 @@ public class WizardPageSelectStoreProcedure extends WizardPage {
 
 	}
 
+	/**
+	 * Load tables list.
+	 *
+	 * @return the list< string>
+	 */
 	private java.util.List<String> loadTablesList() {
 		java.util.List<String> tablesList = new ArrayList<String>();
 		String[] tableItems = listSelectedStoreProcedures.getItems();
@@ -308,6 +342,9 @@ public class WizardPageSelectStoreProcedure extends WizardPage {
 		return tablesList;
 	}
 
+	/**
+	 * Reset form.
+	 */
 	public void resetForm() {
 		txtStoreProceduresFilter.setText("%");
 		cmbCatlogSchema.removeAll();

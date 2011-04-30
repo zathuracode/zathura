@@ -7,10 +7,18 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.gui.WizardPageSelec
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.swt.utilities.ResourceManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WizardMainStoreProcedure.
+ */
 public class WizardMainStoreProcedure extends Wizard {
 
+	/** The wizard select db connection. */
 	private WizardPageSelectDBConnection wizardSelectDBConnection;
 
+	/**
+	 * The Constructor.
+	 */
 	public WizardMainStoreProcedure() {
 		setWindowTitle("Zathura Store Procedure V1.0.0");
 		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/Edit_Connection.gif"));
@@ -31,6 +39,9 @@ public class WizardMainStoreProcedure extends Wizard {
 		 */
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#addPages()
+	 */
 	@Override
 	public void addPages() {
 		super.addPages();
@@ -43,6 +54,9 @@ public class WizardMainStoreProcedure extends Wizard {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
 	@Override
 	public boolean performFinish() {
 		// TODO Auto-generated method stub

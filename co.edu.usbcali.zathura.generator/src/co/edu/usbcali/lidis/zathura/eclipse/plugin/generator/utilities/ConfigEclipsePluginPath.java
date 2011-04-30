@@ -9,23 +9,30 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorAct
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class ConfigEclipsePluginPath {
 
+	/** The plugin path. */
 	private String pluginPath = null;
+	
+	/** The me. */
 	private static ConfigEclipsePluginPath me = null;
 
+	/**
+	 * The Constructor.
+	 */
 	private ConfigEclipsePluginPath() {
 		configPath();
 	}
 
 	/**
-	 * 
+	 * Config path.
 	 */
 	private void configPath() {
 		URL bundleRootURL = ZathuraGeneratorActivator.getDefault().getBundle().getEntry("/");
@@ -40,6 +47,11 @@ public class ConfigEclipsePluginPath {
 		}
 	}
 
+	/**
+	 * Gets the instance.
+	 *
+	 * @return the instance
+	 */
 	public static ConfigEclipsePluginPath getInstance() {
 		if (me == null) {
 			me = new ConfigEclipsePluginPath();

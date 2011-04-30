@@ -37,32 +37,53 @@ import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see WizardPage
  */
 @SuppressWarnings("restriction")
 public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
+	
+	/** The txt package. */
 	private Text txtPackage;
+	
+	/** The txt java source folder. */
 	private Text txtJavaSourceFolder;
 	
+	/** The project. */
 	private IProject project;
 	
+	/** The btn package. */
 	private Button btnPackage; 
+	
+	/** The txt web root. */
 	private Text txtWebRoot;
+	
+	/** The txt lib. */
 	private Text txtLib;
+	
+	/** The cmb project. */
 	private Combo cmbProject;
 	
+	/** The wizard main new package wizard page. */
 	private  WizardMainNewPackageWizard wizardMainNewPackageWizardPage;
+	
+	/** The btn new package. */
 	private Button btnNewPackage;
+	
+	/** The btn web root. */
 	private Button btnWebRoot;
+	
+	/** The btn lib. */
 	private Button btnLib;
 	
 	
 	/**
-	 * Create the wizard
+	 * Create the wizard.
 	 */
 	public WizardPageChooseSourceFolderAndPackage() {
 		super("wizardPage");
@@ -77,8 +98,9 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 	}
 
 	/**
-	 * Create contents of the wizard
-	 * @param parent
+	 * Create contents of the wizard.
+	 *
+	 * @param parent the parent
 	 */
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
@@ -264,6 +286,10 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 		
 		
 	}
+	
+	/**
+	 * Handle browse source folder.
+	 */
 	private void handleBrowseSourceFolder() {
 		
 		ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), project, false,	"Choose a source folder:");	
@@ -290,6 +316,10 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 			}
 		}
 	}
+	
+	/**
+	 * Handle browse package.
+	 */
 	private void handleBrowsePackage() {
 
 		
@@ -342,6 +372,9 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 	
 	
 		//Se usa para validar si la pagina se completo y poder activar el next o el finish segun sea necesario	
+		/**
+		 * Validate page complete.
+		 */
 		private void validatePageComplete(){			
 			try {
 				if(txtJavaSourceFolder==null || txtJavaSourceFolder.getText().equals("")==true){
@@ -378,6 +411,9 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 	}
 		
 		
+		/**
+		 * Handle browse web root folder.
+		 */
 		private void handleBrowseWebRootFolder() {
 			ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), project, false,	"Choose a WebContent folder:");
 			dialog.showClosedProjects(false);
@@ -391,6 +427,10 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 				}
 			}
 		}
+		
+		/**
+		 * Handle browse lib folder.
+		 */
 		private void handleBrowseLibFolder() {
 			ContainerSelectionDialog dialog = new ContainerSelectionDialog(getShell(), project, false,	"Choose a Libraries folder:");
 			dialog.showClosedProjects(false);
@@ -404,6 +444,9 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 			}
 		}
 		
+		/**
+		 * Load list generators next wizard.
+		 */
 		private void loadListGeneratorsNextWizard(){
 			Object object=getNextPage();
 			if(object instanceof WizardPageChooseGenerator){

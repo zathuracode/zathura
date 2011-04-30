@@ -12,24 +12,32 @@ import org.eclipse.swt.widgets.Shell;
 
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RunningGenerationReverseEngineering.
+ */
 public class RunningGenerationReverseEngineering implements IRunnableWithProgress {
 	
 	
 
+	/** The shell. */
 	private org.eclipse.swt.widgets.Shell shell;
+	
 	/**
-	 * RunningGeneration constructor
-	 * 
+	 * RunningGeneration constructor.
+	 *
+	 * @param shell the shell
 	 */
 	public RunningGenerationReverseEngineering(Shell shell) {
 		this.shell=shell;
 	}
 
 	/**
-	 * Runs the long running operation
-	 * 
-	 * @param monitor
-	 *            the progress monitor
+	 * Runs the long running operation.
+	 *
+	 * @param monitor the progress monitor
+	 * @throws InvocationTargetException the invocation target exception
+	 * @throws InterruptedException the interrupted exception
 	 */
 	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 		monitor.setTaskName("Generating Entity Artifacts");
@@ -72,10 +80,20 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 		}
 	}
 
+	/**
+	 * Gets the shell.
+	 *
+	 * @return the shell
+	 */
 	public org.eclipse.swt.widgets.Shell getShell() {
 		return shell;
 	}
 
+	/**
+	 * Sets the shell.
+	 *
+	 * @param shell the shell
+	 */
 	public void setShell(org.eclipse.swt.widgets.Shell shell) {
 		this.shell = shell;
 	}

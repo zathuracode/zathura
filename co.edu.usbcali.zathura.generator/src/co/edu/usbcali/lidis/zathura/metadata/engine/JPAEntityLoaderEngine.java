@@ -40,16 +40,21 @@ import co.edu.usbcali.lidis.zathura.metadata.model.SimpleMember;
 import co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader;
 import co.edu.usbcali.lidis.zathura.metadata.utilities.MetaDataUtil;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class JPAEntityLoaderEngine implements IMetaDataReader {
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(JPAEntityLoaderEngine.class);
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader#loadMetaDataModel(java.lang.String, java.lang.String)
+	 */
 	@SuppressWarnings("unchecked")
 	public MetaDataModel loadMetaDataModel(String path, String pckgName) {
 		log.info("Loading JPA Entity Data Model");
@@ -86,6 +91,16 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 		return metaDataModel;
 	}
 
+	/**
+	 * Load meta data.
+	 *
+	 * @param clazz the clazz
+	 * @return the meta data
+	 * @throws IllegalAccessException the illegal access exception
+	 * @throws InvocationTargetException the invocation target exception
+	 * @throws NoSuchMethodException the no such method exception
+	 * @throws InstantiationException the instantiation exception
+	 */
 	private MetaData loadMetaData(Class clazz) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
 
 		MetaData metaData = new MetaData();
@@ -118,6 +133,14 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 		return metaData;
 	}
 
+	/**
+	 * Load meta data in field.
+	 *
+	 * @param clazz the clazz
+	 * @param metaData the meta data
+	 * @param theMembers the members
+	 * @param memberName the member name
+	 */
 	private void loadMetaDataInField(Class clazz, MetaData metaData, List<Member> theMembers, String memberName) {
 
 		for (Field field : clazz.getDeclaredFields()) {
@@ -245,6 +268,14 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 		}
 	}
 
+	/**
+	 * Load meta data in method.
+	 *
+	 * @param clazz the clazz
+	 * @param metaData the meta data
+	 * @param theMembers the members
+	 * @param memberName the member name
+	 */
 	private void loadMetaDataInMethod(Class clazz, MetaData metaData, List<Member> theMembers, String memberName) {
 		if (clazz.getSimpleName().equalsIgnoreCase("NodoProduccion"))
 			System.out.println("NodoProduccion");

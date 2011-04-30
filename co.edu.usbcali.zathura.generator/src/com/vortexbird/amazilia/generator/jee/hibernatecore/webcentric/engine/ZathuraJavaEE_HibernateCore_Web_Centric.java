@@ -26,22 +26,33 @@ import com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.utils.Stri
 import com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.utils.StringBuilderForId;
 import com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.utils.Utilities;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerator, IZathuraTemplate {
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(ZathuraJavaEE_HibernateCore_Web_Centric.class);
 
+	/** The Constant webCentric. */
 	private final static String webCentric = GeneratorUtil.getTemplatesZathuraJavaEEHibernateCoreWebCentric();
 
+	/** The virgin package in hd. */
 	public String virginPackageInHd = new String();
+	
+	/** The properties. */
 	private Properties properties;
+	
+	/** The ve. */
 	private VelocityEngine ve;
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.model.IZathuraGenerator#toGenerate(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String, java.lang.String, java.util.Properties)
+	 */
 	public void toGenerate(MetaDataModel metaDataModel, String projectName, String folderProjectPath, Properties propiedades) {
 		log.info("Begin Zathura JavaEE HibernateCore Web Centric generation");
 
@@ -56,9 +67,8 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	/**
 	 * Copia las librerias y los archivos necesarios para que funcion lo
-	 * generado
-	 * 
-	 * @param propiedades
+	 * generado.
+	 *
 	 */
 	private void copyLibreriasExt() {
 
@@ -111,6 +121,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doTemplate(java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String, java.lang.String, java.lang.Integer)
+	 */
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel, String jpaPckgName, String projectName, Integer specificityLevel) {
 		try {
 			ve = new VelocityEngine();
@@ -292,6 +305,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 		doJspFacelets(context, hdLocation);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doLogicXMLHibernate(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String)
+	 */
 	public void doLogicXMLHibernate(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doLogicXMLHibernate");
 
@@ -351,6 +367,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doDto(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String)
+	 */
 	public void doDto(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doDTO");
 
@@ -399,6 +418,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doUtilites(org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String)
+	 */
 	public void doUtilites(VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doUtilites");
 
@@ -488,6 +510,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doExceptions(org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doExceptions(VelocityContext context, String hdLocation) {
 		log.info("Begin doException");
 
@@ -533,6 +558,14 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/**
+	 * Do back end beans.
+	 *
+	 * @param metaData the meta data
+	 * @param context the context
+	 * @param hdLocation the hd location
+	 * @param dataModel the data model
+	 */
 	public void doBackEndBeans(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel) {
 		log.info("Begin doBackEndBeans");
 
@@ -585,6 +618,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doJsp(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel)
+	 */
 	public void doJsp(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel) {
 		log.info("Begin doJsp");
 
@@ -652,6 +688,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doJspFacelets(org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doJspFacelets(VelocityContext context, String hdLocation) {
 		log.info("Begin doJspFacelets");
 
@@ -717,6 +756,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doBusinessDelegator(org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel)
+	 */
 	public void doBusinessDelegator(VelocityContext context, String hdLocation, MetaDataModel dataModel) {
 
 		log.info("Begin doBusinessDelegator");
@@ -764,6 +806,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doDaoXMLHibernate(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doDaoXMLHibernate(MetaData metaData, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doDaoXMLHibernate");
@@ -823,6 +868,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doXMLHibernateDaoFactory(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doXMLHibernateDaoFactory(MetaDataModel metaData, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doXMLHibernateDaoFactory");
@@ -869,6 +917,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doHibernateSessionFactory(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doHibernateSessionFactory(MetaDataModel dataModel, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doHibernateSessionFactory");
@@ -915,6 +966,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doJspInitialMenu(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doJspInitialMenu(MetaDataModel dataModel, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doJspInitialMenu");
@@ -958,6 +1012,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.IZathuraTemplate#doFacesConfig(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doFacesConfig(MetaDataModel dataModel, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doFacesConfig");

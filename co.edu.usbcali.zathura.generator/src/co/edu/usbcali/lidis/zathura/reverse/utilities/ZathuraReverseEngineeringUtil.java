@@ -30,54 +30,81 @@ import org.apache.log4j.Logger;
 
 import com.vortexbird.amazilia.fw.AmaziliaSQLAlias;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @author William Altuzarra Noriega Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class ZathuraReverseEngineeringUtil {
 
+	/** The full path. */
 	private static String fullPath = "";
+	
+	/** The slash. */
 	public static String slash = System.getProperty("file.separator");
 
+	/** The rev eng file name. */
 	public static String revEngFileName = "hibernate.reveng.xml";
+	
+	/** The database types file name. */
 	public static String databaseTypesFileName = "database-types.xml";
+	
+	/** The build xml file name. */
 	public static String buildXmlFileName = "build.xml";
+	
+	/** The build compile xml file name. */
 	public static String buildCompileXmlFileName = "buildCompile.xml";
 
+	/** The reverse templates. */
 	private static String reverseTemplates = "reverseTemplates" + ZathuraReverseEngineeringUtil.slash;
+	
+	/** The temp files. */
 	private static String tempFiles = "tempFiles" + ZathuraReverseEngineeringUtil.slash;
+	
+	/** The ant rev eng. */
 	private static String antRevEng = "antBuild-revEng" + ZathuraReverseEngineeringUtil.slash;
 
+	/** The xml database types path. */
 	private static String xmlDatabaseTypesPath = "config" + ZathuraReverseEngineeringUtil.slash + databaseTypesFileName;
+	
+	/** The temp file build path. */
 	private static String tempFileBuildPath = tempFiles + buildXmlFileName;
+	
+	/** The temp file build compile path. */
 	private static String tempFileBuildCompilePath = tempFiles + buildCompileXmlFileName;
 
+	/** The sql connection. */
 	private static ISQLConnection sqlConnection = null;
+	
+	/** The alias. */
 	private static ISQLAlias alias = null;
+	
+	/** The sql driver. */
 	private static ISQLDriver sqlDriver = null;
 	// private static SQLDriverPropertyCollection driverProperties =null;
+	/** The sql driver manager. */
 	private static SQLDriverManager sqlDriverManager = null;
 
+	/** The types. */
 	String[] types = { "TABLE", "VIEW", "SYNONYM", "ALIAS" };
 
-	/**
-	 * Log4j
-	 */
+	/** Log4j. */
 	private static Logger log = Logger.getLogger(ZathuraReverseEngineeringUtil.class);
 
-	/**
-	 * Generator Model
-	 */
+	/** Generator Model. */
 	private static HashMap<String, DatabaseTypeModel> theZathuraDataBaseTypes = null;
 
-	/**
-	 * The names of generators
-	 */
+	/** The names of generators. */
 	private static java.util.List<String> theZathuraDataBaseNames = new ArrayList<String>();
 
+	/**
+	 * Gets the temp file build path.
+	 *
+	 * @return the temp file build path
+	 */
 	public static String getTempFileBuildPath() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + tempFileBuildPath;
@@ -85,6 +112,11 @@ public class ZathuraReverseEngineeringUtil {
 		return tempFileBuildPath;
 	}
 
+	/**
+	 * Gets the temp file build compile path.
+	 *
+	 * @return the temp file build compile path
+	 */
 	public static String getTempFileBuildCompilePath() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + tempFileBuildCompilePath;
@@ -92,6 +124,11 @@ public class ZathuraReverseEngineeringUtil {
 		return tempFileBuildCompilePath;
 	}
 
+	/**
+	 * Gets the xml database types path.
+	 *
+	 * @return the xml database types path
+	 */
 	public static String getXmlDatabaseTypesPath() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + xmlDatabaseTypesPath;
@@ -99,10 +136,20 @@ public class ZathuraReverseEngineeringUtil {
 		return xmlDatabaseTypesPath;
 	}
 
+	/**
+	 * Gets the full path.
+	 *
+	 * @return the full path
+	 */
 	public static String getFullPath() {
 		return fullPath;
 	}
 
+	/**
+	 * Sets the full path.
+	 *
+	 * @param fullPath the full path
+	 */
 	public static void setFullPath(String fullPath) {
 
 		if (fullPath != null && fullPath.startsWith("/") && System.getProperty("os.name").toUpperCase().contains("WINDOWS") == true) {
@@ -127,6 +174,11 @@ public class ZathuraReverseEngineeringUtil {
 		ZathuraReverseEngineeringUtil.fullPath = fullPath;
 	}
 
+	/**
+	 * Gets the reverse templates.
+	 *
+	 * @return the reverse templates
+	 */
 	public static String getReverseTemplates() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + reverseTemplates;
@@ -134,6 +186,11 @@ public class ZathuraReverseEngineeringUtil {
 		return reverseTemplates;
 	}
 
+	/**
+	 * Gets the temp files path.
+	 *
+	 * @return the temp files path
+	 */
 	public static String getTempFilesPath() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + tempFiles;
@@ -141,6 +198,11 @@ public class ZathuraReverseEngineeringUtil {
 		return tempFiles;
 	}
 
+	/**
+	 * Gets the ant build rev eng path.
+	 *
+	 * @return the ant build rev eng path
+	 */
 	public static String getAntBuildRevEngPath() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + antRevEng;
@@ -148,6 +210,12 @@ public class ZathuraReverseEngineeringUtil {
 		return reverseTemplates;
 	}
 
+	/**
+	 * Fix domain.
+	 *
+	 * @param domainName the domain name
+	 * @return the string
+	 */
 	public static String fixDomain(String domainName) {
 		String retFixDomian = null;
 		if (domainName == null) {
@@ -160,11 +228,12 @@ public class ZathuraReverseEngineeringUtil {
 	}
 
 	/**
-	 * 
-	 * @param cadena
-	 * @param old
-	 * @param snew
-	 * @return
+	 * Replace all.
+	 *
+	 * @param cadena the cadena
+	 * @param old the old
+	 * @param snew the snew
+	 * @return the string
 	 */
 	public static String replaceAll(String cadena, String old, String snew) {
 		StringBuffer replace = new StringBuffer();
@@ -185,6 +254,11 @@ public class ZathuraReverseEngineeringUtil {
 		return replace.toString();
 	}
 
+	/**
+	 * Project path in console.
+	 *
+	 * @return the string
+	 */
 	public static String projectPathInConsole() {
 		URL url = ZathuraReverseEngineeringUtil.class.getResource("ReverseUtil.class");
 		String classPath = url.getPath().substring(1);
@@ -202,6 +276,12 @@ public class ZathuraReverseEngineeringUtil {
 		return projectPath;
 	}
 
+	/**
+	 * Validations list.
+	 *
+	 * @param list the list
+	 * @return true, if validations list
+	 */
 	public static boolean validationsList(List list) {
 		if (list != null) {
 			if (!list.isEmpty() && list.size() > 0) {
@@ -214,6 +294,16 @@ public class ZathuraReverseEngineeringUtil {
 		}
 	}
 
+	/**
+	 * Load zathura database types.
+	 *
+	 * @return the hash map< string, database type model>
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws XMLStreamException the XML stream exception
+	 * @throws InstantiationException the instantiation exception
+	 * @throws IllegalAccessException the illegal access exception
+	 * @throws ClassNotFoundException the class not found exception
+	 */
 	public static HashMap<String, DatabaseTypeModel> loadZathuraDatabaseTypes() throws FileNotFoundException, XMLStreamException, InstantiationException,
 			IllegalAccessException, ClassNotFoundException {
 
@@ -288,6 +378,12 @@ public class ZathuraReverseEngineeringUtil {
 		return theZathuraDataBaseTypes;
 	}
 
+	/**
+	 * Gets the database type model.
+	 *
+	 * @param name the name
+	 * @return the database type model
+	 */
 	public static DatabaseTypeModel getDatabaseTypeModel(String name) {
 		if (theZathuraDataBaseTypes == null) {
 			try {
@@ -312,6 +408,11 @@ public class ZathuraReverseEngineeringUtil {
 		return theZathuraDataBaseTypes.get(name);
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the args
+	 */
 	public static void main(String[] args) {
 		try {
 			HashMap<String, DatabaseTypeModel> theZathuraDataBaseTypes = loadZathuraDatabaseTypes();
@@ -340,6 +441,12 @@ public class ZathuraReverseEngineeringUtil {
 		}
 	}
 
+	/**
+	 * Validar package.
+	 *
+	 * @param packageName the package name
+	 * @throws Exception the exception
+	 */
 	public static void validarPackage(String packageName) throws Exception {
 		if (packageName.startsWith(".") || packageName.endsWith(".")) {
 			throw new Exception("A package name cannot start or end with a dot");
@@ -347,8 +454,9 @@ public class ZathuraReverseEngineeringUtil {
 	}
 
 	/**
-	 * 
-	 * @param path
+	 * Delete files.
+	 *
+	 * @param path the path
 	 */
 	public static void deleteFiles(String path) {
 		File file = new File(path);
@@ -356,8 +464,9 @@ public class ZathuraReverseEngineeringUtil {
 	}
 
 	/**
-	 * 
-	 * @param file
+	 * Delete files.
+	 *
+	 * @param file the file
 	 */
 	public static void deleteFiles(File file) {
 		File fileAux = null;
@@ -376,10 +485,10 @@ public class ZathuraReverseEngineeringUtil {
 	}
 
 	/**
-	 * 
-	 * @param path
-	 * @param nameFolder
-	 * @return
+	 * Creates the folder.
+	 *
+	 * @param path the path
+	 * @return the file
 	 */
 	public static File createFolder(String path) {
 		File aFile = new File(path);
@@ -388,9 +497,9 @@ public class ZathuraReverseEngineeringUtil {
 	}
 
 	/**
-	 * Borrar los archivos de la carpeta tempFiles
-	 * 
-	 * @param path
+	 * Borrar los archivos de la carpeta tempFiles.
+	 *
+	 * @param path the path
 	 */
 	public static void resetTempFiles(String path) {
 		// Borrar carpeta de temporales
@@ -400,14 +509,15 @@ public class ZathuraReverseEngineeringUtil {
 	}
 
 	/**
-	 * 
-	 * @param url
-	 * @param driverClassName
-	 * @param user
-	 * @param password
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 * @throws Exception
+	 * Test driver.
+	 *
+	 * @param url the url
+	 * @param driverClassName the driver class name
+	 * @param user the user
+	 * @param password the password
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws SQLException the SQL exception
+	 * @throws Exception the exception
 	 */
 	public static void testDriver(String url, String driverClassName, String user, String password) throws ClassNotFoundException, SQLException, Exception {
 
@@ -425,6 +535,18 @@ public class ZathuraReverseEngineeringUtil {
 
 	}
 
+	/**
+	 * Gets the connection.
+	 *
+	 * @param url the url
+	 * @param driverClassName the driver class name
+	 * @param user the user
+	 * @param password the password
+	 * @return the connection
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws SQLException the SQL exception
+	 * @throws Exception the exception
+	 */
 	public static Connection getConnection(String url, String driverClassName, String user, String password) throws ClassNotFoundException, SQLException,
 			Exception {
 
@@ -443,6 +565,9 @@ public class ZathuraReverseEngineeringUtil {
 
 	}
 
+	/**
+	 * Close all.
+	 */
 	public static void closeAll() {
 
 		try {
@@ -459,10 +584,23 @@ public class ZathuraReverseEngineeringUtil {
 
 	}
 
+	/**
+	 * Gets the catalogs.
+	 *
+	 * @return the catalogs
+	 * @throws SQLException the SQL exception
+	 */
 	public static String[] getCatalogs() throws SQLException {
 		return sqlConnection.getSQLMetaData().getCatalogs();
 	}
 
+	/**
+	 * Gets the schemas.
+	 *
+	 * @return the schemas
+	 * @throws SQLException the SQL exception
+	 * @throws Exception the exception
+	 */
 	public static String[] getSchemas() throws SQLException, Exception {
 		return sqlConnection.getSQLMetaData().getSchemas();
 	}
@@ -470,6 +608,15 @@ public class ZathuraReverseEngineeringUtil {
 	// public synchronized ITableInfo[] getTables(String catalog, String
 	// schemaPattern, String tableNamePattern,String[] types, ProgressCallBack
 	// progressCallBack)
+	/**
+	 * Gets the tables.
+	 *
+	 * @param catalog the catalog
+	 * @param schemaPattern the schema pattern
+	 * @param tableNamePattern the table name pattern
+	 * @return the tables
+	 * @throws SQLException the SQL exception
+	 */
 	public static ITableInfo[] getTables(String catalog, String schemaPattern, String tableNamePattern) throws SQLException {
 		String[] types = { "TABLE", "VIEW", "SYNONYM", "ALIAS" };
 		ITableInfo[] tableInfo = null;
@@ -482,6 +629,8 @@ public class ZathuraReverseEngineeringUtil {
 	}
 
 	/**
+	 * Gets the sql connection.
+	 *
 	 * @return the sqlConnection
 	 */
 	public static ISQLConnection getSqlConnection() {

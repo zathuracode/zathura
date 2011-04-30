@@ -7,19 +7,21 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see WizardPage
  */
 public class WizardPageGenerationProcessProgress extends WizardPage {
 
+	/** The txt summary. */
 	private Text txtSummary;
 
 	/**
-	 * Create the wizard
+	 * Create the wizard.
 	 */
 	public WizardPageGenerationProcessProgress() {
 		super("wizardPage");
@@ -30,9 +32,9 @@ public class WizardPageGenerationProcessProgress extends WizardPage {
 	}
 
 	/**
-	 * Create contents of the wizard
-	 * 
-	 * @param parent
+	 * Create contents of the wizard.
+	 *
+	 * @param parent the parent
 	 */
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);

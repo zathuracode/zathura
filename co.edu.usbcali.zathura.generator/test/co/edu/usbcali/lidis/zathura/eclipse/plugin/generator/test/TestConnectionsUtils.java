@@ -7,10 +7,16 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.Connectio
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ConnectionsUtils;
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestConnectionsUtils.
+ */
 public class TestConnectionsUtils {
 
 	/**
-	 * @param args
+	 * The main method.
+	 *
+	 * @param args the args
 	 */
 	public static void main(String[] args) {
 
@@ -31,6 +37,9 @@ public class TestConnectionsUtils {
 
 	}
 
+	/**
+	 * Save connection.
+	 */
 	private static void saveConnection() {
 		// ConnectionModel connectionModel=new ConnectionModel("as/400",
 		// "urlas400", "dgomez", "sadjasdk","com.vortexbird.Connection",
@@ -42,6 +51,11 @@ public class TestConnectionsUtils {
 		}
 	}
 
+	/**
+	 * Removes the connection.
+	 *
+	 * @param name the name
+	 */
 	private static void removeConnection(String name) {
 		try {
 			ConnectionsUtils.removeConnectionModel(name);

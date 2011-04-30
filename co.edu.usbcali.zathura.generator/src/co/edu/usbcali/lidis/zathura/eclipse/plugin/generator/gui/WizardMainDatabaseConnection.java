@@ -8,10 +8,18 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.Connectio
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ConnectionsUtils;
 import co.edu.usbcali.lidis.zathura.swt.utilities.ResourceManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WizardMainDatabaseConnection.
+ */
 public class WizardMainDatabaseConnection extends Wizard {
 
+	/** The wizard database connection. */
 	private WizardPageDatabaseConnection wizardDatabaseConnection;
 
+	/**
+	 * The Constructor.
+	 */
 	public WizardMainDatabaseConnection() {
 		super();
 		setWindowTitle("Zathura Code Generator V2.1.1 - Powered By AmaziliaSource www.vortexbird.com");
@@ -25,6 +33,11 @@ public class WizardMainDatabaseConnection extends Wizard {
 	 * txtPassword; private Combo cmbDriverTemplate; private List listJARs;
 	 * private Text txtDriverClassName; private Button btnTestDriver; private
 	 * boolean testConnection=false; private Text txtDriverName;
+	 */
+	/**
+	 * The Constructor.
+	 *
+	 * @param connectionName the connection name
 	 */
 	public WizardMainDatabaseConnection(String connectionName) {
 		super();
@@ -45,12 +58,18 @@ public class WizardMainDatabaseConnection extends Wizard {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#addPages()
+	 */
 	@Override
 	public void addPages() {
 
 		addPage(wizardDatabaseConnection);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
 	@Override
 	public boolean performFinish() {
 		try {
@@ -69,10 +88,20 @@ public class WizardMainDatabaseConnection extends Wizard {
 		return true;
 	}
 
+	/**
+	 * Gets the wizard database connection.
+	 *
+	 * @return the wizard database connection
+	 */
 	public WizardPageDatabaseConnection getWizardDatabaseConnection() {
 		return wizardDatabaseConnection;
 	}
 
+	/**
+	 * Sets the wizard database connection.
+	 *
+	 * @param wizardDatabaseConnection the wizard database connection
+	 */
 	public void setWizardDatabaseConnection(WizardPageDatabaseConnection wizardDatabaseConnection) {
 		this.wizardDatabaseConnection = wizardDatabaseConnection;
 	}

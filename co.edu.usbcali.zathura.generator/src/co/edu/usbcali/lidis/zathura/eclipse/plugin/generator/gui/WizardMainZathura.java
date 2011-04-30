@@ -13,8 +13,11 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGe
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.RunningGeneration;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
 import co.edu.usbcali.lidis.zathura.swt.utilities.ResourceManager;
+// TODO: Auto-generated Javadoc
+
 /**
- * Zathura Generator
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see Wizard
@@ -22,17 +25,28 @@ import co.edu.usbcali.lidis.zathura.swt.utilities.ResourceManager;
 public class WizardMainZathura extends Wizard {
 	
 	//WizardPage
+	/** The wizard generator chose. */
 	public WizardPageChooseGenerator wizardGeneratorChose;
 	
 	//WizardPage Generator
+	/** The wizard select db connection. */
 	public WizardPageSelectDBConnection wizardSelectDBConnection;
+	
+	/** The wizard database connection. */
 	public WizardPageDatabaseConnection wizardDatabaseConnection;
+	
+	/** The wizard select tables. */
 	public WizardPageSelectTables wizardSelectTables;
+	
+	/** The wizard choose source folder and package. */
 	public WizardPageChooseSourceFolderAndPackage wizardChooseSourceFolderAndPackage;
 	
 	
 
 
+	/**
+	 * The Constructor.
+	 */
 	public WizardMainZathura() {
 		super();
 		setWindowTitle("Zathura Code Generator V2.1.1 - Powered By AmaziliaSource www.vortexbird.com");
@@ -41,6 +55,9 @@ public class WizardMainZathura extends Wizard {
 		EclipseGeneratorUtil.wizardMain=this;		
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#addPages()
+	 */
 	@Override
 	public void addPages() {
 		super.addPages();
@@ -60,6 +77,9 @@ public class WizardMainZathura extends Wizard {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
 	@Override
 	public boolean performFinish() {
 		try {
@@ -84,7 +104,9 @@ public class WizardMainZathura extends Wizard {
 	}
 	
 	/**
-	 * Se usa para saber si se puede finalizar el Wizard
+	 * Se usa para saber si se puede finalizar el Wizard.
+	 *
+	 * @return true, if can finish
 	 */
 	@Override
 	public boolean canFinish(){

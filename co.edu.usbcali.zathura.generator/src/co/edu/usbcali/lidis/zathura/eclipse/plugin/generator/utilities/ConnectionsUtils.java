@@ -12,27 +12,29 @@ import org.apache.log4j.Logger;
 
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConnectionsUtils.
+ */
 public class ConnectionsUtils {
 
+	/**
+	 * The Constructor.
+	 */
 	private ConnectionsUtils() {
 
 	}
 
+	/** The properties. */
 	private static Properties properties = new java.util.Properties();
 
-	/**
-	 * Log4j
-	 */
+	/** Log4j. */
 	private static Logger log = Logger.getLogger(ConnectionsUtils.class);
 
-	/**
-	 * xml file path
-	 */
+	/** xml file path. */
 	private static String xmlConfigConnections = GeneratorUtil.getXmlConfig() + "zathura-connections.properties";
 
-	/**
-	 * Generator Model
-	 */
+	/** Generator Model. */
 	private static HashMap<String, ConnectionModel> theZathuraConnections = null;
 
 	static {
@@ -45,6 +47,12 @@ public class ConnectionsUtils {
 		}
 	}
 
+	/**
+	 * Load zathura connections.
+	 *
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException the IO exception
+	 */
 	private static void loadZathuraConnections() throws FileNotFoundException, IOException {
 		log.info("Reading:" + xmlConfigConnections);
 		theZathuraConnections = new HashMap<String, ConnectionModel>();
@@ -79,20 +87,28 @@ public class ConnectionsUtils {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the the zathura connections.
+	 *
+	 * @return the the zathura connections
 	 */
 	public static HashMap<String, ConnectionModel> getTheZathuraConnections() {
 		return theZathuraConnections;
 	}
 
+	/**
+	 * Gets the the zathura connection model.
+	 *
+	 * @param name the name
+	 * @return the the zathura connection model
+	 */
 	public static ConnectionModel getTheZathuraConnectionModel(String name) {
 		return theZathuraConnections.get(name);
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the connection names.
+	 *
+	 * @return the connection names
 	 */
 	public static java.util.List<String> getConnectionNames() {
 
@@ -112,10 +128,10 @@ public class ConnectionsUtils {
 	}
 
 	/**
-	 * Remove a ConnectionModel
-	 * 
-	 * @param name
-	 * @throws Exception
+	 * Remove a ConnectionModel.
+	 *
+	 * @param connectionName the connection name
+	 * @throws Exception the exception
 	 */
 	public static void removeConnectionModel(String connectionName) throws Exception {
 		properties.remove(connectionName + "-name");
@@ -132,10 +148,10 @@ public class ConnectionsUtils {
 	}
 
 	/**
-	 * Save a connection Model
-	 * 
-	 * @param connectionModel
-	 * @throws Exception
+	 * Save a connection Model.
+	 *
+	 * @param connectionModel the connection model
+	 * @throws Exception the exception
 	 */
 	public static void saveConnectionModel(ConnectionModel connectionModel) throws Exception {
 		if (connectionModel == null) {
@@ -184,10 +200,10 @@ public class ConnectionsUtils {
 	}
 
 	/**
-	 * Save properties information in the file
-	 * 
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 * Save properties information in the file.
+	 *
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException the IO exception
 	 */
 	private static void store() throws FileNotFoundException, IOException {
 		properties.store(new java.io.FileOutputStream(xmlConfigConnections), "");

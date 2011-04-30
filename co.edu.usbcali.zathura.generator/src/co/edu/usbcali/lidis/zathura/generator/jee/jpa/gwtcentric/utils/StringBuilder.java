@@ -10,16 +10,24 @@ import org.apache.commons.collections.ListUtils;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class StringBuilder implements IStringBuilder {
 
+	/** The string builder for id. */
 	StringBuilderForId stringBuilderForId;
 
+	/**
+	 * The Constructor.
+	 *
+	 * @param list the list
+	 * @param stringBuilderForId the string builder for id
+	 */
 	public StringBuilder(List<MetaData> list, StringBuilderForId stringBuilderForId) {
 		this.stringBuilderForId = stringBuilderForId;
 	}
@@ -1619,6 +1627,13 @@ public class StringBuilder implements IStringBuilder {
 		return finalParam;
 	}
 
+	/**
+	 * Gets the strings to dto for many to one properties.
+	 *
+	 * @param manyToOne the many to one
+	 * @param theMetaData the meta data
+	 * @return the strings to dto for many to one properties
+	 */
 	public List<String> getStringsToDTOForManyToOneProperties(List<Member> manyToOne, List<MetaData> theMetaData) {
 		List<String> finalParam = new ArrayList<String>();
 
@@ -1669,6 +1684,9 @@ public class StringBuilder implements IStringBuilder {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.utils.IStringBuilder#getStringsToEntityForManyToOneProperties(java.util.List, java.util.List)
+	 */
 	public List<String> getStringsToEntityForManyToOneProperties(List<Member> manyToOne, List<MetaData> theMetaData) {
 		List<String> finalParam = new ArrayList<String>();
 
@@ -1718,6 +1736,9 @@ public class StringBuilder implements IStringBuilder {
 		return finalParam;
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.utils.IStringBuilder#finalParamForDtoForSetsVariablesInListGWT(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	 */
 	@Override
 	public List<String> finalParamForDtoForSetsVariablesInListGWT(List<MetaData> theMetaData, MetaData metaData) {
 

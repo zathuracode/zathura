@@ -9,16 +9,23 @@ import co.edu.usbcali.lidis.zathura.metadata.model.ManyToOneMember;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class StringBuilderForId implements IStringBuilderForId {
 
+	/** The hash map ids. */
 	public HashMap<String, String> hashMapIds;
 
+	/**
+	 * The Constructor.
+	 *
+	 * @param list the list
+	 */
 	public StringBuilderForId(List<MetaData> list) {
 		hashMapIds = new HashMap<String, String>();
 		neededIds(list);
@@ -407,6 +414,9 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.utils.IStringBuilderForId#finalParamForIdForViewForSetsVariablesInListGWT(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	 */
 	public List<String> finalParamForIdForViewForSetsVariablesInListGWT(List<MetaData> theMetaData, MetaData metaData) {
 
 		List<String> finalParam2 = new ArrayList<String>();
@@ -492,6 +502,9 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.utils.IStringBuilderForId#finalParamForIdForDtoForSetsVariablesInListGWT(java.util.List, co.edu.usbcali.lidis.zathura.metadata.model.MetaData)
+	 */
 	public List<String> finalParamForIdForDtoForSetsVariablesInListGWT(List<MetaData> theMetaData, MetaData metaData) {
 
 		List<String> finalParam2 = new ArrayList<String>();

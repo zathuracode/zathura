@@ -5,57 +5,63 @@ import org.eclipse.core.runtime.Status;
 
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.ZathuraGeneratorActivator;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class ZathuraGeneratorLog.
+ *
  * @author Diego Armando Gomez Mosquera dgomez@vortexbird.com
- * 
  */
 
 public class ZathuraGeneratorLog {
 
 	/**
-	 * 
-	 * @param message
+	 * Log info.
+	 *
+	 * @param message the message
 	 */
 	public static void logInfo(String message) {
 		log(IStatus.INFO, IStatus.OK, message, null);
 	}
 
 	/**
-	 * 
-	 * @param exception
+	 * Log error.
+	 *
+	 * @param exception the exception
 	 */
 	public static void logError(Throwable exception) {
 		logError("Unexpected Exception", exception);
 	}
 
 	/**
-	 * 
-	 * @param message
-	 * @param exception
+	 * Log error.
+	 *
+	 * @param message the message
+	 * @param exception the exception
 	 */
 	public static void logError(String message, Throwable exception) {
 		log(IStatus.ERROR, IStatus.OK, message, exception);
 	}
 
 	/**
-	 * 
-	 * @param severity
-	 * @param code
-	 * @param message
-	 * @param exception
+	 * Log.
+	 *
+	 * @param severity the severity
+	 * @param code the code
+	 * @param message the message
+	 * @param exception the exception
 	 */
 	public static void log(int severity, int code, String message, Throwable exception) {
 		log(createStatus(severity, code, message, exception));
 	}
 
 	/**
-	 * 
-	 * @param severity
-	 * @param code
-	 * @param message
-	 * @param exception
-	 * @return
+	 * Creates the status.
+	 *
+	 * @param severity the severity
+	 * @param code the code
+	 * @param message the message
+	 * @param exception the exception
+	 * @return the i status
 	 */
 	public static IStatus createStatus(int severity, int code, String message, Throwable exception) {
 		IStatus status = new Status(severity, ZathuraGeneratorActivator.PLUGIN_ID, code, message, exception);
@@ -63,8 +69,9 @@ public class ZathuraGeneratorLog {
 	}
 
 	/**
-	 * 
-	 * @param status
+	 * Log.
+	 *
+	 * @param status the status
 	 */
 	public static void log(IStatus status) {
 		ZathuraGeneratorActivator.getDefault().getLog().log(status);

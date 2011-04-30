@@ -13,30 +13,34 @@ import org.eclipse.swt.widgets.Shell;
 import co.edu.usbcali.lidis.zathura.generator.exceptions.GeneratorNotFoundException;
 import co.edu.usbcali.lidis.zathura.metadata.exceptions.MetaDataReaderNotFoundException;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see IRunnableWithProgress
  */
 public class RunningGeneration implements IRunnableWithProgress {
 	
+	/** The shell. */
 	private org.eclipse.swt.widgets.Shell shell;
 
 	/**
-	 * RunningGeneration constructor
-	 * 
+	 * RunningGeneration constructor.
+	 *
+	 * @param shell the shell
 	 */
 	public RunningGeneration(Shell shell) {
 		this.shell=shell;
 	}
 
 	/**
-	 * Runs the long running operation
-	 * 
-	 * @param monitor
-	 *            the progress monitor
+	 * Runs the long running operation.
+	 *
+	 * @param monitor the progress monitor
+	 * @throws InvocationTargetException the invocation target exception
+	 * @throws InterruptedException the interrupted exception
 	 */
 	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 		monitor.setTaskName("Generating Artifacts");
@@ -76,10 +80,20 @@ public class RunningGeneration implements IRunnableWithProgress {
 		}
 	}
 	
+	/**
+	 * Gets the shell.
+	 *
+	 * @return the shell
+	 */
 	public org.eclipse.swt.widgets.Shell getShell() {
 		return shell;
 	}
 
+	/**
+	 * Sets the shell.
+	 *
+	 * @param shell the shell
+	 */
 	public void setShell(org.eclipse.swt.widgets.Shell shell) {
 		this.shell = shell;
 	}

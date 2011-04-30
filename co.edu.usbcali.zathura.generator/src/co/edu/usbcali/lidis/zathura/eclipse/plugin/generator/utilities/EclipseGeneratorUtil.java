@@ -23,52 +23,108 @@ import co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraReverseEngineering;
 import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraReverseEngineering;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class EclipseGeneratorUtil {
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(EclipseGeneratorUtil.class);
 
+	/** The project. */
 	public static IProject project;
+	
+	/** The project name. */
 	public static String projectName;
+	
+	/** The java entity package. */
 	public static String javaEntityPackage;
 
+	/** The workspace folder path. */
 	public static String workspaceFolderPath;
+	
+	/** The java class folder path. */
 	public static String javaClassFolderPath;
+	
+	/** The java source folder path. */
 	public static String javaSourceFolderPath;
+	
+	/** The web root folder path. */
 	public static String webRootFolderPath;
+	
+	/** The lib folder path. */
 	public static String libFolderPath;
+	
+	/** The full path project. */
 	public static String fullPathProject;
 
+	/** The zathura generator name. */
 	public static String zathuraGeneratorName;
+	
+	/** The meta data reader. */
 	public static int metaDataReader;
 
+	/** The connection driver class. */
 	public static String connectionDriverClass;
+	
+	/** The connection driver name. */
 	public static String connectionDriverName;
+	
+	/** The connection url. */
 	public static String connectionUrl;
+	
+	/** The connection username. */
 	public static String connectionUsername;
+	
+	/** The connection password. */
 	public static String connectionPassword;
+	
+	/** The connection driver jar path. */
 	public static String connectionDriverJarPath;
+	
+	/** The connection driver template. */
 	public static String connectionDriverTemplate;
 
+	/** The company domain name. */
 	public static String companyDomainName;
+	
+	/** The destination directory. */
 	public static String destinationDirectory;
+	
+	/** The catalog. */
 	public static String catalog;
+	
+	/** The schema. */
 	public static String schema;
+	
+	/** The catalog and schema. */
 	public static String catalogAndSchema;
+	
+	/** The tables list. */
 	public static List<String> tablesList;
+	
+	/** The make it xml. */
 	public static Boolean makeItXml = false;
+	
+	/** The meta data model. */
 	private static MetaDataModel metaDataModel = null;
 
+	/** The copy d bdriver jars. */
 	public static boolean copyDBdriverJars = true;
+	
+	/** The jar list. */
 	public static String[] jarList;
 
+	/** The wizard main. */
 	public static WizardMainZathura wizardMain;
 
+	/**
+	 * Reset.
+	 */
 	public static void reset() {
 		project = null;
 		projectName = null;
@@ -100,10 +156,10 @@ public class EclipseGeneratorUtil {
 	}
 
 	/**
-	 * Se usa para generar cuando termina el wizard
-	 * 
-	 * @throws MetaDataReaderNotFoundException
-	 * @throws GeneratorNotFoundException
+	 * Se usa para generar cuando termina el wizard.
+	 *
+	 * @throws MetaDataReaderNotFoundException the meta data reader not found exception
+	 * @throws GeneratorNotFoundException the generator not found exception
 	 */
 	public static void generate() throws MetaDataReaderNotFoundException, GeneratorNotFoundException {
 
@@ -139,9 +195,10 @@ public class EclipseGeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param packageName
-	 * @throws Exception
+	 * Validar package.
+	 *
+	 * @param packageName the package name
+	 * @throws Exception the exception
 	 */
 	public static void validarPackage(String packageName) throws Exception {
 		if (packageName.startsWith(".") || packageName.endsWith(".")) {
@@ -150,7 +207,7 @@ public class EclipseGeneratorUtil {
 	}
 
 	/**
-	 * 
+	 * Generate jpa reverse engineering.
 	 */
 	public static void generateJPAReverseEngineering() {
 
@@ -183,7 +240,7 @@ public class EclipseGeneratorUtil {
 	}
 
 	/**
-	 * 
+	 * Generate jpa reverse engineering tmp.
 	 */
 	public static void generateJPAReverseEngineeringTMP() {
 
@@ -223,9 +280,10 @@ public class EclipseGeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param jarLocation
-	 * @throws Exception
+	 * Load jar system.
+	 *
+	 * @param jarLocation the jar location
+	 * @throws Exception the exception
 	 */
 	@SuppressWarnings("deprecation")
 	public static void loadJarSystem(String jarLocation) throws Exception {
@@ -258,6 +316,12 @@ public class EclipseGeneratorUtil {
 		}
 	}
 
+	/**
+	 * Gets the external jars.
+	 *
+	 * @param jarLocation the jar location
+	 * @return the external jars
+	 */
 	private static File[] getExternalJars(String jarLocation) {
 		File[] files = new File[1];
 		files[0] = new File(jarLocation);
@@ -265,11 +329,12 @@ public class EclipseGeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param cadena
-	 * @param old
-	 * @param snew
-	 * @return
+	 * Replace all.
+	 *
+	 * @param cadena the cadena
+	 * @param old the old
+	 * @param snew the snew
+	 * @return the string
 	 */
 	public static String replaceAll(String cadena, String old, String snew) {
 		StringBuffer replace = new StringBuffer();
@@ -290,10 +355,16 @@ public class EclipseGeneratorUtil {
 		return replace.toString();
 	}
 
+	/**
+	 * The Constructor.
+	 */
 	private EclipseGeneratorUtil() {
 
 	}
 
+	/**
+	 * Copy driver jars.
+	 */
 	public static void copyDriverJars() {
 		if (copyDBdriverJars == true && jarList != null && jarList.length > 0) {
 			for (String path : jarList) {
@@ -303,6 +374,12 @@ public class EclipseGeneratorUtil {
 		}
 	}
 
+	/**
+	 * Jar name.
+	 *
+	 * @param path the path
+	 * @return the string
+	 */
 	private static String jarName(String path) {
 		int lastIndex = path.lastIndexOf(File.separatorChar);
 		String nameJar = path.substring(lastIndex + 1, path.length());
