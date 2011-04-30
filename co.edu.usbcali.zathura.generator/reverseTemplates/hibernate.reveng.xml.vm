@@ -42,6 +42,12 @@
 		</sql-type>		
 		#end
 		#if(${makeItXml} == false)
+		<sql-type jdbc-type="CHAR" hibernate-type="String">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="String">
+		</sql-type>
+		<sql-type jdbc-type="LONGVARCHAR" hibernate-type="String">
+		</sql-type>
 		<sql-type jdbc-type="NUMERIC" scale="0" hibernate-type="Long">
 		</sql-type>
 		<sql-type jdbc-type="NUMERIC" hibernate-type="Double">
@@ -65,7 +71,7 @@
 		<sql-type jdbc-type="DOUBLE" hibernate-type="Double">
 		</sql-type>
 		<sql-type jdbc-type="BOOLEAN" hibernate-type="Boolean">
-		</sql-type>				
+		</sql-type>	
 		#end	
 		
 	</type-mapping>
