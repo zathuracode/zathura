@@ -6,23 +6,29 @@ import org.apache.log4j.Logger;
 
 import de.hunsicker.jalopy.Jalopy;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class JalopyCodeFormatter {
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(JalopyCodeFormatter.class);
 
+	/**
+	 * The Constructor.
+	 */
 	private JalopyCodeFormatter() {
 
 	}
 
 	/**
-	 * 
-	 * @param pathFolder
+	 * Format java code folder.
+	 *
+	 * @param pathFolder the path folder
 	 */
 	public static void formatJavaCodeFolder(String pathFolder) {
 		log.info("formatJavaCodeFolder");
@@ -57,8 +63,9 @@ public class JalopyCodeFormatter {
 	}
 
 	/**
-	 * 
-	 * @param pathFiles
+	 * Format java code file.
+	 *
+	 * @param pathFiles the path files
 	 */
 	public static void formatJavaCodeFile(String pathFiles) {
 		log.info("formatJavaCodeFile");
@@ -88,6 +95,11 @@ public class JalopyCodeFormatter {
 		}
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the args
+	 */
 	public static void main(String[] args) {
 		
 		try {

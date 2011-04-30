@@ -22,9 +22,10 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseJarLoader;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @author William Altuzarra Noriega Noriega (williamaltu@gmail.com)
  * @version 1.0
@@ -32,36 +33,69 @@ import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseJarLoader;
 public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 	// MYSQL, SQLSERVER
+	/** The Constant CATALOG. */
 	public final static String CATALOG = "1";
 	// ORACLE, POSTGRES,
+	/** The Constant SCHEMA. */
 	public final static String SCHEMA = "2";
 	// DB2 AS400
+	/** The Constant CATALOG_SCHEMA. */
 	public final static String CATALOG_SCHEMA = "3";
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(ZathuraReverseEngineering.class);
 
+	/** The Constant reverseTemplatesPath. */
 	private final static String reverseTemplatesPath = ZathuraReverseEngineeringUtil.getReverseTemplates();
 
+	/** The Constant tempFiles. */
 	private final static String tempFiles = ZathuraReverseEngineeringUtil.getTempFilesPath();
 
+	/** The connection driver class. */
 	private String connectionDriverClass;
+	
+	/** The connection url. */
 	private String connectionUrl;
+	
+	/** The connection username. */
 	private String connectionUsername;
 
+	/** The connection password. */
 	private String connectionPassword;
+	
+	/** The company domain name. */
 	private String companyDomainName;
+	
+	/** The company domain name for pojo location. */
 	private String companyDomainNameForPojoLocation;
+	
+	/** The connection driver jar path. */
 	private String connectionDriverJarPath;
+	
+	/** The destination directory. */
 	private String destinationDirectory;
+	
+	/** The make it xml. */
 	private Boolean makeItXml;
 
+	/** The catalog. */
 	private String catalog;
+	
+	/** The schema. */
 	private String schema;
+	
+	/** The catalog and schema. */
 	private String catalogAndSchema;
 
+	/** The tables list. */
 	private List<String> tablesList;
+	
+	/** The ve. */
 	private VelocityEngine ve;
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraReverseEngineering#makePojosJPA_V1_0(java.util.Properties, java.util.List)
+	 */
 	public void makePojosJPA_V1_0(Properties connectionProperties, List<String> tables) {
 
 		log.info("Begin ZathuraReverseMappingTool (Pojo Making & compilation)");
@@ -101,6 +135,9 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		log.info("End ZathuraReverseMappingTool (Pojo Making & compilation)");
 	}
 
+	/**
+	 * Do template.
+	 */
 	private void doTemplate() {
 
 		try {
@@ -151,6 +188,11 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 	}
 
+	/**
+	 * Do cfg.
+	 *
+	 * @param context the context
+	 */
 	private void doCfg(VelocityContext context) {
 		log.info("Begin doCfg");
 		try {
@@ -188,8 +230,9 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	}
 
 	/**
-	 * 
-	 * @param context
+	 * Do build.
+	 *
+	 * @param context the context
 	 */
 	private void doBuild(VelocityContext context) {
 		log.info("Begin doBuild");
@@ -228,8 +271,9 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	}
 
 	/**
-	 * 
-	 * @param context
+	 * Do rev eng.
+	 *
+	 * @param context the context
 	 */
 	private void doRevEng(VelocityContext context) {
 		log.info("Begin doRevEng");
@@ -268,7 +312,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	}
 
 	/**
-	 * 
+	 * Call ant process.
 	 */
 	public static void callAntProcess() {
 		log.info("Begin Ant");
@@ -317,6 +361,11 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		log.info("End Ant");
 	}
 
+	/**
+	 * Do build compile.
+	 *
+	 * @param context the context
+	 */
 	private void doBuildCompile(VelocityContext context) {
 		log.info("Begin doBuildCompile");
 		try {

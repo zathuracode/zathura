@@ -10,16 +10,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MetadataStoreProcedureHandlerOracle10g.
+ */
 public class MetadataStoreProcedureHandlerOracle10g implements MetadataStoreProcedureHandler {
+	
 	/**
-	 * 
+	 * The Constructor.
 	 */
 	public MetadataStoreProcedureHandlerOracle10g() {
 		super();
 	}
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandler#getStoredProcedureNames(java.sql.Connection, java.lang.String, java.lang.String)
 	 */
 	public List<String> getStoredProcedureNames(Connection connection, String strSchema, String filter) {
 		DatabaseMetaData dbmt = null;

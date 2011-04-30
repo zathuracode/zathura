@@ -22,16 +22,30 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.Connectio
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WizardPageSelectDBConnection.
+ */
 public class WizardPageSelectDBConnection extends WizardPage {
 	
 	
 	
+	/** The wizard database connection. */
 	public WizardPageDatabaseConnection wizardDatabaseConnection;
+	
+	/** The list connections. */
 	private static List listConnections;
+	
+	/** The link edit connection. */
 	private Link linkEditConnection;
+	
+	/** The link remove connection. */
 	private Link linkRemoveConnection;
 	
 	
+	/**
+	 * The Constructor.
+	 */
 	public WizardPageSelectDBConnection() {
 		super("wizardPage");
 		setTitle("Select DB Connection");
@@ -40,6 +54,9 @@ public class WizardPageSelectDBConnection extends WizardPage {
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
+	 */
 	@Override
 	public void createControl(Composite parent) {
 		
@@ -194,6 +211,9 @@ public class WizardPageSelectDBConnection extends WizardPage {
 
 	}
 	
+	/**
+	 * Load connections.
+	 */
 	public static void loadConnections(){
 		java.util.List<String> theConnections=ConnectionsUtils.getConnectionNames();
 		if(theConnections!=null && listConnections!=null){
@@ -206,6 +226,9 @@ public class WizardPageSelectDBConnection extends WizardPage {
 		
 	}
 	
+	/**
+	 * Validate page complete.
+	 */
 	private void validatePageComplete(){			
 		try {		
 			setErrorMessage(null);

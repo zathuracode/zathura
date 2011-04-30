@@ -9,22 +9,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class extract the metadata of the store procedure or function Only
- * Oracle 8i and 9i are supported
- * 
+ * Oracle 8i and 9i are supported.
+ *
  * @author Hassan Hammad
  */
 public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProcedureHandler {
+	
 	/**
-	 * Constructor Method of class (Empty)
+	 * Constructor Method of class (Empty).
 	 */
 	public MetadataStoreProcedureHandlerOracle9i() {
 		super();
 	}
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandler#getStoredProcedureNames(java.sql.Connection, java.lang.String, java.lang.String)
 	 */
 	public List<String> getStoredProcedureNames(Connection connection, String strSchema, String filter) {
 		DatabaseMetaData dbmt = null;
@@ -52,8 +54,8 @@ public class MetadataStoreProcedureHandlerOracle9i implements MetadataStoreProce
 		return procedureNames;
 	}
 
-	/**
-	 * 
+	/* (non-Javadoc)
+	 * @see com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandler#getSchemaNames(java.sql.Connection)
 	 */
 	public List<String> getSchemaNames(Connection connection) {
 		List<String> schemaNames = new ArrayList<String>();

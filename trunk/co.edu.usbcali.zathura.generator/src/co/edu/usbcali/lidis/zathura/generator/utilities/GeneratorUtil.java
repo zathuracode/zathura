@@ -8,54 +8,95 @@ import java.io.IOException;
 
 import org.apache.log4j.Logger;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class GeneratorUtil {
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(GeneratorUtil.class);
 
+	/** The slash. */
 	public static String slash = System.getProperty("file.separator");
+	
+	/** The File name. */
 	public static String FileName = "zathura-generator-factory-config.xml";
 
+	/** The full path. */
 	private static String fullPath = "";
+	
+	/** The xml config factory path. */
 	private static String xmlConfigFactoryPath = "config" + slash + FileName;
+	
+	/** The xml config. */
 	private static String xmlConfig = "config" + slash;
 
 	// JavaEEJPAWebCentric
+	/** The web centric templates. */
 	private static String webCentricTemplates = "generatorTemplates" + GeneratorUtil.slash + "zathura-JavaEE-Web-Centric" + GeneratorUtil.slash;
+	
+	/** The generator libraries zathura java ee web centric. */
 	private static String generatorLibrariesZathuraJavaEEWebCentric = "generatorLibraries" + GeneratorUtil.slash;
+	
+	/** The generator ext zathura java ee web centric. */
 	private static String generatorExtZathuraJavaEEWebCentric = "generatorExt" + GeneratorUtil.slash + "zathura-JavaEE-Web-Centric" + GeneratorUtil.slash;
 
 	// JavaEE-HibernateCore-Spring-WebCentric
+	/** The spring centric templates. */
 	private static String springCentricTemplates = "generatorTemplates" + GeneratorUtil.slash + "zathura-JavaEE-hibernateCore-Spring-Centric"
 			+ GeneratorUtil.slash;
+	
+	/** The generator libraries zathura java ee spring web centric. */
 	private static String generatorLibrariesZathuraJavaEESpringWebCentric = "generatorLibraries" + GeneratorUtil.slash;
+	
+	/** The generator ext zathura java ee spring web centric. */
 	private static String generatorExtZathuraJavaEESpringWebCentric = "generatorExt" + GeneratorUtil.slash + "zathura-JavaEE-hibernateCore-Spring-Centric"
 			+ GeneratorUtil.slash;
 
 	// JavaEE-HibernateCore-WebCentric
+	/** The templates zathura java ee hibernate core web centric. */
 	private static String templatesZathuraJavaEEHibernateCoreWebCentric = "generatorTemplates" + GeneratorUtil.slash
 			+ "zathura-JavaEE-hibernateCore-Web-Centric" + GeneratorUtil.slash;
+	
+	/** The generator libraries zathura java ee hibernate core web centric. */
 	private static String generatorLibrariesZathuraJavaEEHibernateCoreWebCentric = "generatorLibraries" + GeneratorUtil.slash;
+	
+	/** The generator ext zathura java ee hibernate core web centric. */
 	private static String generatorExtZathuraJavaEEHibernateCoreWebCentric = "generatorExt" + GeneratorUtil.slash + "zathura-JavaEE-hibernateCore-Web-Centric"
 			+ GeneratorUtil.slash;
 
 	// JavaEEGwtCentric
+	/** The gwt centric templates. */
 	private static String gwtCentricTemplates = "generatorTemplates" + GeneratorUtil.slash + "zathura-JavaEE-GWT-Centric" + GeneratorUtil.slash;
+	
+	/** The generator libraries zathura java ee gwt centric. */
 	private static String generatorLibrariesZathuraJavaEEGwtCentric = "generatorLibraries";
+	
+	/** The generator ext zathura java ee gwt centric. */
 	private static String generatorExtZathuraJavaEEGwtCentric = "generatorExt" + GeneratorUtil.slash + "zathura-JavaEE-GWT-Centric" + GeneratorUtil.slash;
 
 	// SP Store Procedure
+	/** The store procedure templates. */
 	private static String storeProcedureTemplates = "generatorTemplates" + GeneratorUtil.slash + "amazilia-storeProcedure" + GeneratorUtil.slash;
 
+	/**
+	 * Gets the full path.
+	 *
+	 * @return the full path
+	 */
 	public static String getFullPath() {
 		return fullPath;
 	}
 
+	/**
+	 * Sets the full path.
+	 *
+	 * @param fullPath the full path
+	 */
 	public static void setFullPath(String fullPath) {
 		// System.err.println(fullPath);
 		if (fullPath != null && fullPath.startsWith("/") && System.getProperty("os.name").toUpperCase().contains("WINDOWS") == true) {
@@ -83,6 +124,11 @@ public class GeneratorUtil {
 		GeneratorUtil.fullPath = fullPath;
 	}
 
+	/**
+	 * Gets the xml config factory path.
+	 *
+	 * @return the xml config factory path
+	 */
 	public static String getXmlConfigFactoryPath() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + xmlConfigFactoryPath;
@@ -90,6 +136,11 @@ public class GeneratorUtil {
 		return xmlConfigFactoryPath;
 	}
 
+	/**
+	 * Gets the xml config.
+	 *
+	 * @return the xml config
+	 */
 	public static String getXmlConfig() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + xmlConfig + slash;
@@ -98,6 +149,11 @@ public class GeneratorUtil {
 	}
 
 	// JavaEEWebCentric
+	/**
+	 * Gets the generator libraries zathura java ee web centric.
+	 *
+	 * @return the generator libraries zathura java ee web centric
+	 */
 	public static String getGeneratorLibrariesZathuraJavaEEWebCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + generatorLibrariesZathuraJavaEEWebCentric;
@@ -105,6 +161,11 @@ public class GeneratorUtil {
 		return generatorLibrariesZathuraJavaEEWebCentric;
 	}
 
+	/**
+	 * Gets the generator ext zathura java ee web centric.
+	 *
+	 * @return the generator ext zathura java ee web centric
+	 */
 	public static String getGeneratorExtZathuraJavaEEWebCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + generatorExtZathuraJavaEEWebCentric;
@@ -112,6 +173,11 @@ public class GeneratorUtil {
 		return generatorExtZathuraJavaEEWebCentric;
 	}
 
+	/**
+	 * Gets the web centric templates.
+	 *
+	 * @return the web centric templates
+	 */
 	public static String getWebCentricTemplates() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + webCentricTemplates;
@@ -120,6 +186,11 @@ public class GeneratorUtil {
 	}
 
 	// JavaEESpringWebCentric
+	/**
+	 * Gets the generator libraries zathura java ee spring web centric.
+	 *
+	 * @return the generator libraries zathura java ee spring web centric
+	 */
 	public static String getGeneratorLibrariesZathuraJavaEESpringWebCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + generatorLibrariesZathuraJavaEESpringWebCentric;
@@ -127,6 +198,11 @@ public class GeneratorUtil {
 		return generatorLibrariesZathuraJavaEESpringWebCentric;
 	}
 
+	/**
+	 * Gets the generator ext zathura java ee spring web centric.
+	 *
+	 * @return the generator ext zathura java ee spring web centric
+	 */
 	public static String getGeneratorExtZathuraJavaEESpringWebCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + generatorExtZathuraJavaEESpringWebCentric;
@@ -134,6 +210,11 @@ public class GeneratorUtil {
 		return generatorExtZathuraJavaEESpringWebCentric;
 	}
 
+	/**
+	 * Gets the spring web centric templates.
+	 *
+	 * @return the spring web centric templates
+	 */
 	public static String getSpringWebCentricTemplates() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + springCentricTemplates;
@@ -142,6 +223,11 @@ public class GeneratorUtil {
 	}
 
 	// JavaEEWebCentric
+	/**
+	 * Gets the templates zathura java ee hibernate core web centric.
+	 *
+	 * @return the templates zathura java ee hibernate core web centric
+	 */
 	public static String getTemplatesZathuraJavaEEHibernateCoreWebCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + templatesZathuraJavaEEHibernateCoreWebCentric;
@@ -149,6 +235,11 @@ public class GeneratorUtil {
 		return templatesZathuraJavaEEHibernateCoreWebCentric;
 	}
 
+	/**
+	 * Gets the generator libraries zathura java ee hibernate core web centric.
+	 *
+	 * @return the generator libraries zathura java ee hibernate core web centric
+	 */
 	public static String getGeneratorLibrariesZathuraJavaEEHibernateCoreWebCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + generatorLibrariesZathuraJavaEEHibernateCoreWebCentric;
@@ -156,6 +247,11 @@ public class GeneratorUtil {
 		return generatorLibrariesZathuraJavaEEHibernateCoreWebCentric;
 	}
 
+	/**
+	 * Gets the generator ext zathura java ee hibernate core web centric.
+	 *
+	 * @return the generator ext zathura java ee hibernate core web centric
+	 */
 	public static String getGeneratorExtZathuraJavaEEHibernateCoreWebCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + generatorExtZathuraJavaEEHibernateCoreWebCentric;
@@ -164,6 +260,11 @@ public class GeneratorUtil {
 	}
 
 	// JavaEEGwtCentric
+	/**
+	 * Gets the generator libraries zathura java ee gwt centric.
+	 *
+	 * @return the generator libraries zathura java ee gwt centric
+	 */
 	public static String getGeneratorLibrariesZathuraJavaEEGwtCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + generatorLibrariesZathuraJavaEEGwtCentric;
@@ -171,6 +272,11 @@ public class GeneratorUtil {
 		return generatorLibrariesZathuraJavaEEGwtCentric;
 	}
 
+	/**
+	 * Gets the generator ext zathura java ee gwt centric.
+	 *
+	 * @return the generator ext zathura java ee gwt centric
+	 */
 	public static String getGeneratorExtZathuraJavaEEGwtCentric() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + generatorExtZathuraJavaEEGwtCentric;
@@ -178,6 +284,11 @@ public class GeneratorUtil {
 		return generatorExtZathuraJavaEEGwtCentric;
 	}
 
+	/**
+	 * Gets the gwt centric templates.
+	 *
+	 * @return the gwt centric templates
+	 */
 	public static String getGwtCentricTemplates() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + gwtCentricTemplates;
@@ -185,6 +296,11 @@ public class GeneratorUtil {
 		return gwtCentricTemplates;
 	}
 
+	/**
+	 * Getstore procedure templates.
+	 *
+	 * @return the store procedure templates
+	 */
 	public static String getstoreProcedureTemplates() {
 		if (fullPath != null && fullPath.equals("") != true) {
 			return fullPath + storeProcedureTemplates;
@@ -193,10 +309,10 @@ public class GeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param path
-	 * @param nameFolder
-	 * @return
+	 * Creates the folder.
+	 *
+	 * @param path the path
+	 * @return the file
 	 */
 	public static File createFolder(String path) {
 		File aFile = new File(path);
@@ -205,9 +321,10 @@ public class GeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param source
-	 * @param Target
+	 * Copy.
+	 *
+	 * @param source the source
+	 * @param Target the Target
 	 */
 	public static void copy(String source, String Target) {
 		FileInputStream fIn = null;
@@ -231,8 +348,9 @@ public class GeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param path
+	 * Delete files.
+	 *
+	 * @param path the path
 	 */
 	public static void deleteFiles(String path) {
 		File file = new File(path);
@@ -240,8 +358,9 @@ public class GeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param file
+	 * Delete files.
+	 *
+	 * @param file the file
 	 */
 	public static void deleteFiles(File file) {
 		File fileAux = null;
@@ -260,8 +379,9 @@ public class GeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param path
+	 * Delete file.
+	 *
+	 * @param path the path
 	 */
 	public static void deleteFile(String path) {
 		File file = new File(path);
@@ -269,8 +389,9 @@ public class GeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param file
+	 * Delete file.
+	 *
+	 * @param file the file
 	 */
 	public static void deleteFile(File file) {
 		file.delete();
@@ -284,9 +405,9 @@ public class GeneratorUtil {
 	 * filesLib.add(s); } return filesLib; } catch (Exception e) { //TODO Poner
 	 * log4j System.out.println("Error copy all files of folder:"+e.toString());
 	 * } return null; }
-	 * 
-	 * @param source
-	 * @param target
+	 *
+	 * @param source the source
+	 * @param target the target
 	 */
 	public static void copyFolder(String source, String target) {
 		try {
@@ -319,6 +440,10 @@ public class GeneratorUtil {
 	 * iPos++){ fileAux = listFiles[iPos]; if(fileAux.isDirectory())
 	 * deleteFiles(listFiles[iPos]); listFiles[iPos].delete(); }
 	 * if(file.listFiles().length == 0) file.delete();
+	 *
+	 * @param path the path
+	 * @param pck the pck
+	 * @return the string
 	 */
 
 	public static String createFolderOfPackage(String path, String pck) {
@@ -335,11 +460,12 @@ public class GeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param packageName
-	 * @param location
-	 * @return
-	 * @throws IOException
+	 * Validate directory.
+	 *
+	 * @param packageName the package name
+	 * @param location the location
+	 * @return true, if validate directory
+	 * @throws IOException the IO exception
 	 */
 	public static boolean validateDirectory(String packageName, String location) throws IOException {
 
@@ -364,11 +490,12 @@ public class GeneratorUtil {
 	}
 
 	/**
-	 * 
-	 * @param cadena
-	 * @param old
-	 * @param snew
-	 * @return
+	 * Replace all.
+	 *
+	 * @param cadena the cadena
+	 * @param old the old
+	 * @param snew the snew
+	 * @return the string
 	 */
 	public static String replaceAll(String cadena, String old, String snew) {
 		StringBuffer replace = new StringBuffer();

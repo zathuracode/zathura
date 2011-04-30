@@ -2,17 +2,23 @@ package com.vortexbird.amazilia.sp.metadata;
 
 import oracle.jdbc.OracleTypes;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TypesConverterOracle.
+ */
 public class TypesConverterOracle {
 
+	/**
+	 * The Constructor.
+	 */
 	public TypesConverterOracle() {
 		super();
 	}
 
 	/**
-	 * Convert an oracle data type in an java datatype
-	 * 
-	 * @param OracleType
-	 *            oracle type to parse
+	 * Convert an oracle data type in an java datatype.
+	 *
+	 * @param OracleType oracle type to parse
 	 * @return java type
 	 */
 	public static String parseJavaType(String OracleType) {
@@ -47,6 +53,12 @@ public class TypesConverterOracle {
 		return javaType;
 	}
 
+	/**
+	 * Parses the oracle type.
+	 *
+	 * @param strOracleType the str oracle type
+	 * @return the int
+	 */
 	public static int parseOracleType(String strOracleType) {
 		int iRetorno = 0;
 		if (strOracleType.equalsIgnoreCase("REF CURSOR")) {

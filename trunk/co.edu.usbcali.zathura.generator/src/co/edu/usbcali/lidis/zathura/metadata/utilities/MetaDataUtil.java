@@ -14,20 +14,23 @@ import org.apache.log4j.Logger;
 import co.edu.usbcali.lidis.zathura.metadata.engine.JPAEntityLoaderEngine;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class MetaDataUtil {
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(JPAEntityLoaderEngine.class);
 
 	/**
-	 * 
-	 * @param theMembers
-	 * @param memberName
+	 * Removes the member.
+	 *
+	 * @param theMembers the members
+	 * @param memberName the member name
 	 */
 	public static void removeMember(List<Member> theMembers, String memberName) {
 		for (Member member : theMembers) {
@@ -39,10 +42,11 @@ public class MetaDataUtil {
 	}
 
 	/**
-	 * 
-	 * @param pckgname
-	 * @return
-	 * @throws ClassNotFoundException
+	 * Find entity in package.
+	 *
+	 * @param pckgName the pckg name
+	 * @return the list< class>
+	 * @throws ClassNotFoundException the class not found exception
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<Class> findEntityInPackage(final String pckgName) throws ClassNotFoundException {
@@ -73,12 +77,13 @@ public class MetaDataUtil {
 	}
 
 	/**
-	 * 
-	 * @param pathName
-	 * @param pckgName
-	 * @return
-	 * @throws ClassNotFoundException
-	 * @throws MalformedURLException
+	 * Find entity in folder.
+	 *
+	 * @param pathName the path name
+	 * @param pckgName the pckg name
+	 * @return the list< class>
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws MalformedURLException the malformed url exception
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<Class> findEntityInFolder(final String pathName, final String pckgName) throws ClassNotFoundException, MalformedURLException {
@@ -104,6 +109,16 @@ public class MetaDataUtil {
 		return ret;
 	}
 
+	/**
+	 * Find class id in folder.
+	 *
+	 * @param pathName the path name
+	 * @param pckgName the pckg name
+	 * @param className the class name
+	 * @return the class
+	 * @throws ClassNotFoundException the class not found exception
+	 * @throws MalformedURLException the malformed url exception
+	 */
 	@SuppressWarnings("unchecked")
 	public static Class findClassIdInFolder(final String pathName, final String pckgName, final String className) throws ClassNotFoundException,
 			MalformedURLException {
@@ -122,10 +137,11 @@ public class MetaDataUtil {
 	}
 
 	/**
-	 * 
-	 * @param pathName
-	 * @param clazzName
-	 * @return
+	 * Load class in jar.
+	 *
+	 * @param pathName the path name
+	 * @param clazzName the clazz name
+	 * @return the class
 	 */
 	@SuppressWarnings( { "deprecation", "unchecked" })
 	public static Class loadClassInJar(String pathName, String clazzName) {
@@ -152,10 +168,11 @@ public class MetaDataUtil {
 	}
 
 	/**
-	 * 
-	 * @param pathName
-	 * @param clazzName
-	 * @return
+	 * Load class in folder.
+	 *
+	 * @param pathName the path name
+	 * @param clazzName the clazz name
+	 * @return the class
 	 */
 	@SuppressWarnings( { "unchecked", "deprecation" })
 	public static Class loadClassInFolder(String pathName, String clazzName) {

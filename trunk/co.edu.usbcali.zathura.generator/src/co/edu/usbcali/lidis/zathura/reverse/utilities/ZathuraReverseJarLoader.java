@@ -10,15 +10,23 @@ import java.net.URLClassLoader;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @author William Altuzarra Noriega Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class ZathuraReverseJarLoader {
 
+	/**
+	 * Load jar.
+	 *
+	 * @param jarLocation the jar location
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException the IO exception
+	 */
 	public static void loadJar(String jarLocation) throws FileNotFoundException, IOException {
 
 		String jarName = jarLocation;
@@ -58,10 +66,22 @@ public class ZathuraReverseJarLoader {
 		// ZathuraReverseMappingTool.callAntProcess();
 	}
 
+	/**
+	 * Gets the url class loader.
+	 *
+	 * @param jarURL the jar url
+	 * @return the URL class loader
+	 */
 	private static URLClassLoader getURLClassLoader(URL jarURL) {
 		return new URLClassLoader(new URL[] { jarURL });
 	}
 
+	/**
+	 * Load jar2.
+	 *
+	 * @param jarLocation the jar location
+	 * @throws Exception the exception
+	 */
 	public static void loadJar2(String jarLocation) throws Exception {
 		Method addURL = URLClassLoader.class.getDeclaredMethod("addURL", new Class[] { URL.class });
 		addURL.setAccessible(true);// you're telling the JVM to override the
@@ -80,6 +100,12 @@ public class ZathuraReverseJarLoader {
 		// indicated
 	}
 
+	/**
+	 * Gets the external jars.
+	 *
+	 * @param jarLocation the jar location
+	 * @return the external jars
+	 */
 	private static File[] getExternalJars(String jarLocation) {
 		File[] files = new File[1];
 		files[0] = new File(jarLocation);

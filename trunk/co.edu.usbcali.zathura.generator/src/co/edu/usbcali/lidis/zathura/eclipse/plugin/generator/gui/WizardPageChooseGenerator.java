@@ -15,23 +15,28 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGe
 import co.edu.usbcali.lidis.zathura.generator.factory.ZathuraGeneratorFactory;
 import co.edu.usbcali.lidis.zathura.generator.model.GeneratorModel;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see WizardPage
  */
 public class WizardPageChooseGenerator extends WizardPage {
 
+	/** The list generators. */
 	private List listGenerators;
+	
+	/** The bwr description. */
 	private Browser bwrDescription;
 
 	// Load the zathura Generators names
+	/** The generators. */
 	private HashMap<String, GeneratorModel> theGenerators = ZathuraGeneratorFactory.getTheZathuraGenerators();
 
 	/**
-	 * Create the wizard
+	 * Create the wizard.
 	 */
 	public WizardPageChooseGenerator() {
 		super("wizardPage");
@@ -43,9 +48,9 @@ public class WizardPageChooseGenerator extends WizardPage {
 	}
 
 	/**
-	 * Create contents of the wizard
-	 * 
-	 * @param parent
+	 * Create contents of the wizard.
+	 *
+	 * @param parent the parent
 	 */
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
@@ -78,7 +83,7 @@ public class WizardPageChooseGenerator extends WizardPage {
 	}
 
 	/**
-	 * 
+	 * Load list generators.
 	 */
 	public void loadListGenerators() {
 		if (listGenerators != null) {

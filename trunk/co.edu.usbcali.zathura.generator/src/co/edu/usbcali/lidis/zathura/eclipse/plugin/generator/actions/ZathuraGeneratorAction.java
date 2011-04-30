@@ -9,6 +9,7 @@ import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.gui.WizardMainZathura;
 import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ConfigEclipsePluginPath;
 
+// TODO: Auto-generated Javadoc
 /**
  * Zathura Generator
  * 
@@ -22,6 +23,8 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.ConfigEcl
  * @see IWorkbenchWindowActionDelegate
  */
 public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
+	
+	/** The window. */
 	private IWorkbenchWindow window;
 
 	/**
@@ -34,7 +37,8 @@ public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 	/**
 	 * The action has been activated. The argument of the method represents the
 	 * 'real' action sitting in the workbench UI.
-	 * 
+	 *
+	 * @param action the action
 	 * @see IWorkbenchWindowActionDelegate#run
 	 */
 	public void run(IAction action) {
@@ -49,7 +53,9 @@ public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 	 * Selection in the workbench has been changed. We can change the state of
 	 * the 'real' action here if we want, but this can only happen after the
 	 * delegate has been created.
-	 * 
+	 *
+	 * @param action the action
+	 * @param selection the selection
 	 * @see IWorkbenchWindowActionDelegate#selectionChanged
 	 */
 	public void selectionChanged(IAction action, ISelection selection) {
@@ -67,7 +73,8 @@ public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 	/**
 	 * We will cache window object in order to be able to provide parent shell
 	 * for the message dialog.
-	 * 
+	 *
+	 * @param window the window
 	 * @see IWorkbenchWindowActionDelegate#init
 	 */
 	public void init(IWorkbenchWindow window) {

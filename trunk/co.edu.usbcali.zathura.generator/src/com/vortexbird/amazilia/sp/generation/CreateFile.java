@@ -9,14 +9,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class alows create a files and folders, copy and delete files.
  * 
  * @author Hassan Hammad
  */
 public class CreateFile {
+	
 	/**
-	 * Constructor of the class
+	 * Constructor of the class.
 	 */
 	public CreateFile() {
 		super();
@@ -25,16 +27,12 @@ public class CreateFile {
 	/**
 	 * Create a file in the specific path, with the given name, extention and
 	 * text.
-	 * 
-	 * @param strPath
-	 *            path to create the file
-	 * @param strFileName
-	 *            name of the file
-	 * @param strExtention
-	 *            extention of the file (txt, java, xml..)
-	 * @param strText
-	 *            content of the file
-	 * @throws IOException
+	 *
+	 * @param strPath path to create the file
+	 * @param strFileName name of the file
+	 * @param strExtention extention of the file (txt, java, xml..)
+	 * @param strText content of the file
+	 * @throws IOException the IO exception
 	 */
 	public static void createFile(String strPath, String strFileName, String strExtention, String strText) throws IOException {
 		try {
@@ -65,14 +63,11 @@ public class CreateFile {
 	/**
 	 * Create a file in the default path (root folder), with the given name,
 	 * extention and text.
-	 * 
-	 * @param strFileName
-	 *            name of the file
-	 * @param strExtention
-	 *            extention of the file (txt, java, xml..)
-	 * @param strText
-	 *            content of the file
-	 * @throws IOException
+	 *
+	 * @param strFileName name of the file
+	 * @param strExtention extention of the file (txt, java, xml..)
+	 * @param strText content of the file
+	 * @throws IOException the IO exception
 	 */
 	public static void createFile(String strFileName, String strExtention, String strText) throws IOException {
 		try {
@@ -101,12 +96,10 @@ public class CreateFile {
 	}
 
 	/**
-	 * Create an folder in the given path with given name
-	 * 
-	 * @param strPath
-	 *            path to new folder
-	 * @param strFolderName
-	 *            name of the folder
+	 * Create an folder in the given path with given name.
+	 *
+	 * @param strPath path to new folder
+	 * @param strFolderName name of the folder
 	 * @return true if the file was created
 	 */
 	public static boolean createFolder(String strPath, String strFolderName) {
@@ -157,10 +150,9 @@ public class CreateFile {
 	}
 
 	/**
-	 * Delete given file
-	 * 
-	 * @param file
-	 *            to delete
+	 * Delete given file.
+	 *
+	 * @param file to delete
 	 */
 	public static void deleteFiles(File file) {
 		File fileAux = null;

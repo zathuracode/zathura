@@ -20,31 +20,54 @@ import co.edu.usbcali.lidis.zathura.eclipse.plugin.generator.utilities.EclipseGe
 import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraReverseEngineering;
 import co.edu.usbcali.lidis.zathura.reverse.utilities.ZathuraReverseEngineeringUtil;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  * @see WizardPage
  */
 public class WizardPageSelectTables extends WizardPage {
 
+	/** The cmb catlog schema. */
 	private Combo cmbCatlogSchema;
+	
+	/** The list available tables. */
 	private List listAvailableTables;
+	
+	/** The list selected tables. */
 	private List listSelectedTables;
+	
+	/** The txt table filter. */
 	private Text txtTableFilter;
+	
+	/** The lbl catalog schema. */
 	private Label lblCatalogSchema;
+	
+	/** The btn table filter search. */
 	private Button btnTableFilterSearch = null;
+	
+	/** The list catalogs. */
 	private String[] listCatalogs = null;
+	
+	/** The list schemas. */
 	private String[] listSchemas = null;
+	
+	/** The catalog name. */
 	private String catalogName = null;
 	// private String schemaName=null;
+	/** The is schema. */
 	private Boolean isSchema = null;
 
 	// /Se debe cambiar por fabrica de obejtos para la version 2.1.1
 	// TODO revisar esta locura
+	/** The db. */
 	public static String db = null;
 
+	/**
+	 * The Constructor.
+	 */
 	public WizardPageSelectTables() {
 		super("wizardPage");
 		setTitle("Zathura Reverse Engineering");
@@ -52,6 +75,9 @@ public class WizardPageSelectTables extends WizardPage {
 		setPageComplete(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
+	 */
 	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
@@ -239,6 +265,9 @@ public class WizardPageSelectTables extends WizardPage {
 
 	}
 
+	/**
+	 * Validate page complete.
+	 */
 	private void validatePageComplete() {
 
 		try {
@@ -288,6 +317,11 @@ public class WizardPageSelectTables extends WizardPage {
 
 	}
 
+	/**
+	 * Load tables list.
+	 *
+	 * @return the list< string>
+	 */
 	private java.util.List<String> loadTablesList() {
 		java.util.List<String> tablesList = new ArrayList<String>();
 		String[] tableItems = listSelectedTables.getItems();
@@ -297,6 +331,9 @@ public class WizardPageSelectTables extends WizardPage {
 		return tablesList;
 	}
 
+	/**
+	 * Reset form.
+	 */
 	public void resetForm() {
 		txtTableFilter.setText("%");
 		cmbCatlogSchema.removeAll();

@@ -7,15 +7,21 @@ import java.util.Properties;
 import co.edu.usbcali.lidis.zathura.reverse.engine.IZathuraReverseEngineering;
 import co.edu.usbcali.lidis.zathura.reverse.engine.ZathuraReverseEngineering;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class TestZathuraReverseEngineering {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the args
+	 */
 	public static void main(String[] args) {
 		Properties connectionProperties = new Properties();
 
@@ -63,6 +69,11 @@ public class TestZathuraReverseEngineering {
 
 	}
 
+	/**
+	 * Fill table list.
+	 *
+	 * @return the list< string>
+	 */
 	public static List<String> fillTableList() {
 		List<String> tablesList = new ArrayList<String>();
 
@@ -77,6 +88,9 @@ public class TestZathuraReverseEngineering {
 		return tablesList;
 	}
 
+	/**
+	 * Main.
+	 */
 	public static void main() {
 		// ConfigEclipsePluginPath.getInstance();
 		main(null);

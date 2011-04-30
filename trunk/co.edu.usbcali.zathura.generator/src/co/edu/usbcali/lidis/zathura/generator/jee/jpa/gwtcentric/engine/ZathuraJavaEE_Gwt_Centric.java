@@ -25,21 +25,32 @@ import co.edu.usbcali.lidis.zathura.generator.utilities.JalopyCodeFormatter;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class ZathuraJavaEE_Gwt_Centric.
+ *
  * @author Ricardo Alberto Chiriboga, Juan Manuel Caicedo
- * 
  */
 public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTemplate {
 
+	/** The log. */
 	private static Logger log = Logger.getLogger(ZathuraJavaEE_Gwt_Centric.class);
 
+	/** The Constant gwtCentric. */
 	private final static String gwtCentric = GeneratorUtil.getGwtCentricTemplates();
 
+	/** The virgin package in hd. */
 	public String virginPackageInHd = new String();
+	
+	/** The properties. */
 	private Properties properties;
+	
+	/** The ve. */
 	private VelocityEngine ve;
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.model.IZathuraGenerator#toGenerate(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String, java.lang.String, java.util.Properties)
+	 */
 	public void toGenerate(MetaDataModel metaDataModel, String projectName, String folderProjectPath, Properties propiedades) {
 		log.info("Begin ZathuraJavaEE_GWT_Centric generation");
 
@@ -54,9 +65,8 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	/**
 	 * Copia las librerias y los archivos necesarios para que funcion lo
-	 * generado
-	 * 
-	 * @param propiedades
+	 * generado.
+	 *
 	 */
 	private void copyLibreriasExt() {
 
@@ -103,6 +113,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doTemplate(java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String, java.lang.String, java.lang.Integer)
+	 */
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel, String jpaPckgName, String projectName, Integer specificityLevel) {
 		try {
 			ve = new VelocityEngine();
@@ -307,6 +320,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doLogic(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String)
+	 */
 	public void doLogic(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doLogic");
 
@@ -367,6 +383,15 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/**
+	 * Do data service.
+	 *
+	 * @param metaData the meta data
+	 * @param context the context
+	 * @param hdLocation the hd location
+	 * @param dataModel the data model
+	 * @param modelName the model name
+	 */
 	public void doDataService(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doDataServices");
 
@@ -416,6 +441,15 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/**
+	 * Do data service async.
+	 *
+	 * @param metaData the meta data
+	 * @param context the context
+	 * @param hdLocation the hd location
+	 * @param dataModel the data model
+	 * @param modelName the model name
+	 */
 	public void doDataServiceAsync(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doDataServicesAsync");
 
@@ -465,6 +499,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doDto(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel)
+	 */
 	public void doDto(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel) {
 		log.info("Begin doDTO");
 
@@ -514,6 +551,14 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/**
+	 * Do abstract data source.
+	 *
+	 * @param context the context
+	 * @param hdLocation the hd location
+	 * @param dataModel the data model
+	 * @param modelName the model name
+	 */
 	public void doAbstractDataSource(VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doAbstractDataSource");
 
@@ -560,6 +605,15 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/**
+	 * Do smart gwt data source.
+	 *
+	 * @param metaData the meta data
+	 * @param context the context
+	 * @param hdLocation the hd location
+	 * @param dataModel the data model
+	 * @param modelName the model name
+	 */
 	public void doSmartGWTDataSource(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doSmartGWTDataSource");
 
@@ -606,6 +660,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doUtilites(org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String)
+	 */
 	public void doUtilites(VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName) {
 		log.info("Begin doUtilites");
 
@@ -693,6 +750,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doExceptions(org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doExceptions(VelocityContext context, String hdLocation) {
 		log.info("Begin doException");
 
@@ -739,6 +799,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doBusinessDelegator(org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel)
+	 */
 	public void doBusinessDelegator(VelocityContext context, String hdLocation, MetaDataModel dataModel) {
 
 		log.info("Begin doBusinessDelegator");
@@ -787,6 +850,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doDao(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doDao(MetaData metaData, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doDao");
@@ -846,6 +912,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doDaoFactory(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doDaoFactory(MetaDataModel metaData, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doDaoFactory");
@@ -892,6 +961,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doPersitenceXml(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doPersitenceXml(MetaDataModel dataModel, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doPersitenceXml");
@@ -933,6 +1005,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doEntityManager(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	public void doEntityManager(MetaDataModel dataModel, VelocityContext context, String hdLocation) {
 
 		log.info("Begin doEntityManager");
@@ -979,6 +1054,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doWebXML(co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, org.apache.velocity.VelocityContext, java.lang.String)
+	 */
 	@Override
 	public void doWebXML(MetaDataModel dataModel, VelocityContext context, String hdLocation) {
 		log.info("Begin doWebXML");
@@ -1022,6 +1100,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doGeneralEntryPoint(org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String)
+	 */
 	@Override
 	public void doGeneralEntryPoint(VelocityContext context, String hdLocation, MetaDataModel dataModel, String projectName) {
 		log.info("Begin doGeneralEntryPoint");
@@ -1067,6 +1148,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doEntryPoint(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String)
+	 */
 	@Override
 	public void doEntryPoint(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String projectName) {
 		log.info("Begin doEntryPoint");
@@ -1111,6 +1195,15 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 		}
 	}
 
+	/**
+	 * Do gwt xml.
+	 *
+	 * @param metaData the meta data
+	 * @param context the context
+	 * @param hdLocation the hd location
+	 * @param dataModel the data model
+	 * @param projectName the project name
+	 */
 	public void doGwtXml(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String projectName) {
 
 		log.info("Begin doGwtXml");
@@ -1152,6 +1245,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doHTML(org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel, java.lang.String)
+	 */
 	@Override
 	public void doHTML(VelocityContext context, String hdLocation, MetaDataModel dataModel, String projectName) {
 
@@ -1194,6 +1290,9 @@ public class ZathuraJavaEE_Gwt_Centric implements IZathuraGenerator, IZathuraTem
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.IZathuraTemplate#doDataServiceImpl(co.edu.usbcali.lidis.zathura.metadata.model.MetaData, org.apache.velocity.VelocityContext, java.lang.String, co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel)
+	 */
 	@Override
 	public void doDataServiceImpl(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel) {
 		log.info("Begin doDataServiceImpl");

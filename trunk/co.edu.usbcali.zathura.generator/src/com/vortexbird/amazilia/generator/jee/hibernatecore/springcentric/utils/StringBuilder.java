@@ -12,16 +12,24 @@ import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class StringBuilder implements IStringBuilder {
 
+	/** The string builder for id. */
 	StringBuilderForId stringBuilderForId;
 
+	/**
+	 * The Constructor.
+	 *
+	 * @param list the list
+	 * @param stringBuilderForId the string builder for id
+	 */
 	public StringBuilder(List<MetaData> list, StringBuilderForId stringBuilderForId) {
 		this.stringBuilderForId = stringBuilderForId;
 	}
@@ -1599,6 +1607,12 @@ public class StringBuilder implements IStringBuilder {
 
 	}
 
+	/**
+	 * Gets the real numbers.
+	 *
+	 * @param stringList the string list
+	 * @return the real numbers
+	 */
 	public List<String> getRealNumbers(List<String> stringList) {
 		List<String> stringReturn = new ArrayList<String>();
 		if (stringList != null) {

@@ -10,9 +10,10 @@ import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 import co.edu.usbcali.lidis.zathura.metadata.reader.IMetaDataReader;
 import co.edu.usbcali.lidis.zathura.metadata.reader.MetaDataReaderFactory;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
@@ -22,7 +23,9 @@ public class TestZathuraJavaEE_Web_Centric {
 	// Logger.getLogger(TestZathuraJavaEE_Web_Centric.class);
 
 	/**
-	 * @param args
+	 * The main method.
+	 *
+	 * @param args the args
 	 */
 	public static void main(String[] args) {
 		try {
@@ -51,7 +54,7 @@ public class TestZathuraJavaEE_Web_Centric {
 			// String libFolderPath =
 			// "E:/ZATHURA EXAMPLE(landed)/hpcontactlist/webRoot/lib/";
 
-			String jpaPath = "E:/WORKSPACE/banco/WebRoot/WEB-INF/classes/";
+			String jpaPath = "E:/WORKSPACE/hco/WebRoot/WEB-INF/classes/";
 			String jpaPckgName = "co.edu.usb.banco.domain";
 			String projectName = "banco";
 			String folderProjectPath = "E:/WORKSPACE/banco/src/";

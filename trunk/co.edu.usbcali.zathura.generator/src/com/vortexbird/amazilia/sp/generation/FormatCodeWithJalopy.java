@@ -5,12 +5,17 @@ import java.io.FilenameFilter;
 
 import de.hunsicker.jalopy.Jalopy;
 
+// TODO: Auto-generated Javadoc
 /**
- * This class allows format code of java files (classes)
- * 
+ * This class allows format code of java files (classes).
+ *
  * @author Hassan Hammad
  */
 public class FormatCodeWithJalopy {
+	
+	/**
+	 * The Constructor.
+	 */
 	public FormatCodeWithJalopy() {
 		super();
 	}
@@ -52,6 +57,11 @@ public class FormatCodeWithJalopy {
 		}
 	}
 
+	/**
+	 * Format general folder.
+	 *
+	 * @param path the path
+	 */
 	public static void FormatGeneralFolder(String path) {
 		try {
 			Jalopy jalopy = new Jalopy();
@@ -83,6 +93,11 @@ public class FormatCodeWithJalopy {
 		}
 	}
 
+	/**
+	 * Format general one.
+	 *
+	 * @param path the path
+	 */
 	public static void FormatGeneralOne(String path) {
 		Jalopy jalopy = new Jalopy();
 		try {
@@ -110,9 +125,9 @@ public class FormatCodeWithJalopy {
 	}
 
 	/**
-	 * Format the given String to other String like: caSAnoVa to Casanova
-	 * 
-	 * @param strName
+	 * Format the given String to other String like: caSAnoVa to Casanova.
+	 *
+	 * @param strName the str name
 	 * @return strName formatted
 	 */
 	public static String formatNameFile(String strName) {

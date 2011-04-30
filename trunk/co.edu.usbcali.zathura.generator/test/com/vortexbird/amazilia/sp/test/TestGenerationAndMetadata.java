@@ -11,10 +11,18 @@ import com.vortexbird.amazilia.sp.generation.GenerateXmlAndJavaFiles;
 import com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandler;
 import com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandlerFactory;
 
+// TODO: Auto-generated Javadoc
 /**
- * Class to test genetation and metadata
+ * Class to test genetation and metadata.
  */
 public class TestGenerationAndMetadata {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the args
+	 * @throws Exception the exception
+	 */
 	public static void main(String args[]) throws Exception {
 		try {
 			String DATA_BASE_TYPE = "Oracle 10g (Thin driver)";

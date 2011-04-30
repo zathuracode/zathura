@@ -21,32 +21,25 @@ import co.edu.usbcali.lidis.zathura.generator.model.GeneratorModel;
 import co.edu.usbcali.lidis.zathura.generator.model.IZathuraGenerator;
 import co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class ZathuraGeneratorFactory {
 
-	/**
-	 * Log4j
-	 */
+	/** Log4j. */
 	private static Logger log = Logger.getLogger(ZathuraGeneratorFactory.class);
 
-	/**
-	 * xml file path
-	 */
+	/** xml file path. */
 	private static String xmlConfigFactoryPath = GeneratorUtil.getXmlConfigFactoryPath();
 
-	/**
-	 * Generator Model
-	 */
+	/** Generator Model. */
 	private static HashMap<String, GeneratorModel> theZathuraGenerators = null;
 
-	/**
-	 * The names of generators
-	 */
+	/** The names of generators. */
 	private static java.util.List<String> generatorNames = new ArrayList<String>();
 
 	static {
@@ -70,15 +63,19 @@ public class ZathuraGeneratorFactory {
 		}
 	}
 
+	/**
+	 * The Constructor.
+	 */
 	private ZathuraGeneratorFactory() {
 
 	}
 
 	/**
-	 * 
-	 * @param generatorName
-	 * @return
-	 * @throws GeneratorNotFoundException
+	 * Creates the zathura generator.
+	 *
+	 * @param generatorName the generator name
+	 * @return the i zathura generator
+	 * @throws GeneratorNotFoundException the generator not found exception
 	 */
 	public static IZathuraGenerator createZathuraGenerator(String generatorName) throws GeneratorNotFoundException {
 		IZathuraGenerator zathuraGenerator;
@@ -94,12 +91,13 @@ public class ZathuraGeneratorFactory {
 	}
 
 	/**
-	 * @throws XMLStreamException
-	 * @throws FileNotFoundException
-	 * @throws ClassNotFoundException
-	 * @throws IllegalAccessException
-	 * @throws InstantiationException
-	 * 
+	 * Load zathura generators.
+	 *
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws XMLStreamException the XML stream exception
+	 * @throws InstantiationException the instantiation exception
+	 * @throws IllegalAccessException the illegal access exception
+	 * @throws ClassNotFoundException the class not found exception
 	 */
 	public static void loadZathuraGenerators() throws FileNotFoundException, XMLStreamException, InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
@@ -195,21 +193,29 @@ public class ZathuraGeneratorFactory {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the the zathura generators.
+	 *
+	 * @return the the zathura generators
 	 */
 	public static HashMap<String, GeneratorModel> getTheZathuraGenerators() {
 		return theZathuraGenerators;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * Gets the generator names.
+	 *
+	 * @return the generator names
 	 */
 	public static java.util.List<String> getGeneratorNames() {
 		return generatorNames;
 	}
 
+	/**
+	 * Gets the generator name for gui name.
+	 *
+	 * @param guiName the gui name
+	 * @return the generator name for gui name
+	 */
 	public static String getGeneratorNameForGuiName(String guiName) {
 		for (GeneratorModel generatorModel : theZathuraGenerators.values()) {
 			if (generatorModel.getGuiName().equals(guiName) == true) {

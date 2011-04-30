@@ -12,19 +12,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class DatabaseUtilities.
+ *
  * @author Diego
- * 
  */
 public class DatabaseUtilities {
 
 	/**
-	 * Consulta los catalogos de una base de datos
-	 * 
-	 * @param connection
-	 * @return
-	 * @throws SQLException
+	 * Consulta los catalogos de una base de datos.
+	 *
+	 * @param connection the connection
+	 * @return the catalogs
+	 * @throws SQLException the SQL exception
 	 */
 	public static List<String> getCatalogs(Connection connection) throws SQLException {
 		DatabaseMetaData databaseMetaData = null;
@@ -49,12 +50,12 @@ public class DatabaseUtilities {
 	}
 
 	/**
-	 * Consulta los schemas de una base de datos
-	 * 
-	 * @param connection
-	 * @return
-	 * @throws SQLException
-	 * @throws Exception
+	 * Consulta los schemas de una base de datos.
+	 *
+	 * @param connection the connection
+	 * @return the schemas
+	 * @throws SQLException the SQL exception
+	 * @throws Exception the exception
 	 */
 	public static List<String> getSchemas(Connection connection) throws SQLException, Exception {
 		DatabaseMetaData databaseMetaData = null;
@@ -98,14 +99,14 @@ public class DatabaseUtilities {
 	}
 
 	/**
-	 * Consulta las tablas de una base de datos por catalogo o schema
-	 * 
-	 * @param connection
-	 * @param catalog
-	 * @param schema
-	 * @param tablePattern
-	 * @return
-	 * @throws SQLException
+	 * Consulta las tablas de una base de datos por catalogo o schema.
+	 *
+	 * @param connection the connection
+	 * @param catalog the catalog
+	 * @param schema the schema
+	 * @param tablePattern the table pattern
+	 * @return the tables
+	 * @throws SQLException the SQL exception
 	 */
 	public static List<String> getTables(Connection connection, String catalog, String schema, String tablePattern) throws SQLException {
 		DatabaseMetaData databaseMetaData = null;
@@ -129,14 +130,14 @@ public class DatabaseUtilities {
 	}
 
 	/**
-	 * Consulta las ForeignKey de una tabla
-	 * 
-	 * @param connection
-	 * @param catalog
-	 * @param schema
-	 * @param table
-	 * @return
-	 * @throws SQLException
+	 * Consulta las ForeignKey de una tabla.
+	 *
+	 * @param connection the connection
+	 * @param catalog the catalog
+	 * @param schema the schema
+	 * @param table the table
+	 * @return the foreign key columns
+	 * @throws SQLException the SQL exception
 	 */
 	public static Set<String> getForeignKeyColumns(Connection connection, String catalog, String schema, String table) throws SQLException {
 		DatabaseMetaData databaseMetaData = connection.getMetaData();

@@ -15,6 +15,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 
+// TODO: Auto-generated Javadoc
 /**
  * Utility class for managing OS resources associated with SWT/JFace controls
  * such as colors, fonts, images, etc.
@@ -50,38 +51,31 @@ public class ResourceManager extends SWTResourceManager {
 	// Image support
 	// ////////////////////////////
 
-	/**
-	 * Maps image descriptors to images
-	 */
+	/** Maps image descriptors to images. */
 	private static HashMap<ImageDescriptor, Image> m_DescriptorImageMap = new HashMap<ImageDescriptor, Image>();
 
-	/**
-	 * Maps images to image decorators
-	 */
+	/** Maps images to image decorators. */
 	private static HashMap<Image, HashMap<Image, Image>> m_ImageToDecoratorMap = new HashMap<Image, HashMap<Image, Image>>();
 
 	/**
 	 * Returns an image descriptor stored in the file at the specified path
-	 * relative to the specified class
-	 * 
-	 * @param clazz
-	 *            Class The class relative to which to find the image descriptor
-	 * @param path
-	 *            String The path to the image file
+	 * relative to the specified class.
+	 *
+	 * @param clazz Class The class relative to which to find the image descriptor
+	 * @param path String The path to the image file
 	 * @return ImageDescriptor The image descriptor stored in the file at the
-	 *         specified path
+	 * specified path
 	 */
 	public static ImageDescriptor getImageDescriptor(Class<?> clazz, String path) {
 		return ImageDescriptor.createFromFile(clazz, path);
 	}
 
 	/**
-	 * Returns an image descriptor stored in the file at the specified path
-	 * 
-	 * @param path
-	 *            String The path to the image file
+	 * Returns an image descriptor stored in the file at the specified path.
+	 *
+	 * @param path String The path to the image file
 	 * @return ImageDescriptor The image descriptor stored in the file at the
-	 *         specified path
+	 * specified path
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		try {
@@ -92,10 +86,9 @@ public class ResourceManager extends SWTResourceManager {
 	}
 
 	/**
-	 * Returns an image based on the specified image descriptor
-	 * 
-	 * @param descriptor
-	 *            ImageDescriptor The image descriptor for the image
+	 * Returns an image based on the specified image descriptor.
+	 *
+	 * @param descriptor ImageDescriptor The image descriptor for the image
 	 * @return Image The image based on the specified image descriptor
 	 */
 	public static Image getImage(ImageDescriptor descriptor) {
@@ -110,14 +103,11 @@ public class ResourceManager extends SWTResourceManager {
 	}
 
 	/**
-	 * Returns an image composed of a base image decorated by another image
-	 * 
-	 * @param baseImage
-	 *            Image The base image that should be decorated
-	 * @param decorator
-	 *            Image The image to decorate the base image
-	 * @param corner
-	 *            The corner to place decorator image
+	 * Returns an image composed of a base image decorated by another image.
+	 *
+	 * @param baseImage Image The base image that should be decorated
+	 * @param decorator Image The image to decorate the base image
+	 * @param corner The corner to place decorator image
 	 * @return Image The resulting decorated image
 	 */
 	public static Image decorateImage(final Image baseImage, final Image decorator, final int corner) {
@@ -156,7 +146,7 @@ public class ResourceManager extends SWTResourceManager {
 	}
 
 	/**
-	 * Dispose all of the cached images
+	 * Dispose all of the cached images.
 	 */
 	public static void disposeImages() {
 		SWTResourceManager.disposeImages();
@@ -186,18 +176,14 @@ public class ResourceManager extends SWTResourceManager {
 	// Plugin images support
 	// ////////////////////////////
 
-	/**
-	 * Maps URL to images
-	 */
+	/** Maps URL to images. */
 	private static HashMap<URL, Image> m_URLImageMap = new HashMap<URL, Image>();
 
 	/**
-	 * Retuns an image based on a plugin and file path
-	 * 
-	 * @param plugin
-	 *            Object The plugin containing the image
-	 * @param name
-	 *            String The path to th eimage within the plugin
+	 * Retuns an image based on a plugin and file path.
+	 *
+	 * @param plugin Object The plugin containing the image
+	 * @param name String The path to th eimage within the plugin
 	 * @return Image The image stored in the file at the specified path
 	 */
 	public static Image getPluginImage(Object plugin, String name) {
@@ -225,14 +211,12 @@ public class ResourceManager extends SWTResourceManager {
 	}
 
 	/**
-	 * Retuns an image descriptor based on a plugin and file path
-	 * 
-	 * @param plugin
-	 *            Object The plugin containing the image
-	 * @param name
-	 *            String The path to th eimage within the plugin
+	 * Retuns an image descriptor based on a plugin and file path.
+	 *
+	 * @param plugin Object The plugin containing the image
+	 * @param name String The path to th eimage within the plugin
 	 * @return ImageDescriptor The image descriptor stored in the file at the
-	 *         specified path
+	 * specified path
 	 */
 	public static ImageDescriptor getPluginImageDescriptor(Object plugin, String name) {
 		try {
@@ -249,14 +233,12 @@ public class ResourceManager extends SWTResourceManager {
 	}
 
 	/**
-	 * Retuns an URL based on a plugin and file path
-	 * 
-	 * @param plugin
-	 *            Object The plugin containing the file path
-	 * @param name
-	 *            String The file path
+	 * Retuns an URL based on a plugin and file path.
+	 *
+	 * @param plugin Object The plugin containing the file path
+	 * @param name String The file path
 	 * @return URL The URL representing the file at the specified path
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	private static URL getPluginImageURL(Object plugin, String name) throws Exception {
 		// try to work with 'plugin' as with OSGI BundleContext

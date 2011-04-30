@@ -9,16 +9,23 @@ import co.edu.usbcali.lidis.zathura.metadata.model.ManyToOneMember;
 import co.edu.usbcali.lidis.zathura.metadata.model.Member;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class StringBuilderForId implements IStringBuilderForId {
 
+	/** The hash map ids. */
 	public HashMap<String, String> hashMapIds;
 
+	/**
+	 * The Constructor.
+	 *
+	 * @param list the list
+	 */
 	public StringBuilderForId(List<MetaData> list) {
 		hashMapIds = new HashMap<String, String>();
 		neededIds(list);

@@ -10,27 +10,39 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Utilities.
+ */
 public class Utilities {
+	
+	/** The path project repositorio. */
 	public static String pathProjectRepositorio = null;
+	
+	/** The path xsl. */
 	public static String pathXsl = null;
+	
+	/** The path project. */
 	public static String pathProject = null;
+	
+	/** The project name. */
 	public static String projectName = null;
+	
+	/** The oracle version. */
 	public String oracleVersion = null;
 
 	/**
-	 * Constructor of the class
+	 * Constructor of the class.
 	 */
 	public Utilities() {
 		super();
 	}
 
 	/**
-	 * copy the source file to the given path strTarget
-	 * 
-	 * @param source
-	 *            InputStream for the source file
-	 * @param strTarget
-	 *            where the file will be copied
+	 * copy the source file to the given path strTarget.
+	 *
+	 * @param source InputStream for the source file
+	 * @param strTarget where the file will be copied
 	 */
 	public static void copy(java.io.InputStream source, String strTarget) {
 		InputStream fIn = null;
@@ -57,12 +69,10 @@ public class Utilities {
 	}
 
 	/**
-	 * Copy an existing file from source (path origen) to target (path target)
-	 * 
-	 * @param strSource
-	 *            path of the file to copy
-	 * @param strTarget
-	 *            path where the file will be copied
+	 * Copy an existing file from source (path origen) to target (path target).
+	 *
+	 * @param strSource path of the file to copy
+	 * @param strTarget path where the file will be copied
 	 */
 	public static void copy(String strSource, String strTarget) {
 		FileInputStream fIn = null;
@@ -89,14 +99,12 @@ public class Utilities {
 	}
 
 	/**
-	 * Create an folder in he given path with the given name
-	 * 
-	 * @param strPath
-	 *            path where the folder will be created
-	 * @param strNameFolder
-	 *            name of the folder
+	 * Create an folder in he given path with the given name.
+	 *
+	 * @param strPath path where the folder will be created
+	 * @param strNameFolder name of the folder
 	 * @return true if the folder was created
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public static boolean createFolder(String strPath, String strNameFolder) throws Exception {
 		boolean wasCreated = false;
@@ -112,12 +120,12 @@ public class Utilities {
 	}
 
 	/**
-	 * Create a package in the folder in the given path
-	 * 
-	 * @param strPath
-	 * @param strPackageName
+	 * Create a package in the folder in the given path.
+	 *
+	 * @param strPath the str path
+	 * @param strPackageName the str package name
 	 * @return full package path
-	 * @throws Exception
+	 * @throws Exception the exception
 	 */
 	public static String createPackage(String strPath, String strPackageName) throws Exception {
 		try {
@@ -133,14 +141,11 @@ public class Utilities {
 
 	/**
 	 * replace all characters given in the ol string for the new string in the
-	 * string source
-	 * 
-	 * @param strStringSource
-	 *            original string
-	 * @param strOldString
-	 *            string to replace
-	 * @param strNewString
-	 *            new string for change in the original string
+	 * string source.
+	 *
+	 * @param strStringSource original string
+	 * @param strOldString string to replace
+	 * @param strNewString new string for change in the original string
 	 * @return string replaced
 	 */
 	public static String replaceAll(String strStringSource, String strOldString, String strNewString) {
@@ -165,10 +170,9 @@ public class Utilities {
 	/**
 	 * Remove comma from the constructors method in the files (specially java
 	 * files) finded in the given path Example: change myMethod(param a, param
-	 * b, param c,) to myMethod(param a, param b, param c)
-	 * 
-	 * @param strPath
-	 *            path where the files are be changed
+	 * b, param c,) to myMethod(param a, param b, param c).
+	 *
+	 * @param strPath path where the files are be changed
 	 */
 	public static void commaSolution(String strPath) {
 		try {
@@ -193,6 +197,8 @@ public class Utilities {
 	}
 
 	/**
+	 * Gets the path project.
+	 *
 	 * @return the pathProject
 	 */
 	public static String getPathProject() {
@@ -200,14 +206,17 @@ public class Utilities {
 	}
 
 	/**
-	 * @param pathProject
-	 *            the pathProject to set
+	 * Sets the path project.
+	 *
+	 * @param pathProject the pathProject to set
 	 */
 	public static void setPathProject(String pathProject) {
 		Utilities.pathProject = pathProject;
 	}
 
 	/**
+	 * Gets the path project repositorio.
+	 *
 	 * @return the pathProjectRepositorio
 	 */
 	public static String getPathProjectRepositorio() {
@@ -215,14 +224,17 @@ public class Utilities {
 	}
 
 	/**
-	 * @param pathProjectRepositorio
-	 *            the pathProjectRepositorio to set
+	 * Sets the path project repositorio.
+	 *
+	 * @param pathProjectRepositorio the pathProjectRepositorio to set
 	 */
 	public static void setPathProjectRepositorio(String pathProjectRepositorio) {
 		Utilities.pathProjectRepositorio = pathProjectRepositorio;
 	}
 
 	/**
+	 * Gets the path xsl.
+	 *
 	 * @return the pathXsl
 	 */
 	public static String getPathXsl() {
@@ -230,14 +242,17 @@ public class Utilities {
 	}
 
 	/**
-	 * @param pathXsl
-	 *            the pathXsl to set
+	 * Sets the path xsl.
+	 *
+	 * @param pathXsl the pathXsl to set
 	 */
 	public static void setPathXsl(String pathXsl) {
 		Utilities.pathXsl = pathXsl;
 	}
 
 	/**
+	 * Gets the project name.
+	 *
 	 * @return the projectName
 	 */
 	public static String getProjectName() {
@@ -245,8 +260,9 @@ public class Utilities {
 	}
 
 	/**
-	 * @param projectName
-	 *            the projectName to set
+	 * Sets the project name.
+	 *
+	 * @param projectName the projectName to set
 	 */
 	public static void setProjectName(String projectName) {
 		Utilities.projectName = projectName;

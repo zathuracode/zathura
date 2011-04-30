@@ -17,19 +17,29 @@ import co.edu.usbcali.lidis.zathura.metadata.model.MetaData;
 import co.edu.usbcali.lidis.zathura.metadata.model.MetaDataModel;
 import co.edu.usbcali.lidis.zathura.metadata.model.SimpleMember;
 
+// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator
- * 
+ * Zathura Generator.
+ *
  * @author William Altuzarra Noriega (williamaltu@gmail.com)
  * @version 1.0
  */
 public class Utilities {
 
+	/** The instance. */
 	private static Utilities instance = null;
 
+	/**
+	 * The Constructor.
+	 */
 	private Utilities() {
 	}
 
+	/**
+	 * Gets the instance.
+	 *
+	 * @return the instance
+	 */
 	public static Utilities getInstance() {
 		if (instance == null) {
 			instance = new Utilities();
@@ -38,24 +48,56 @@ public class Utilities {
 		return instance;
 	}
 
+	/** The length. */
 	public Long length;
+	
+	/** The precision. */
 	public Long precision;
+	
+	/** The scale. */
 	public Long scale;
+	
+	/** The nullable. */
 	public Boolean nullable;
 
+	/** The ifcondition. */
 	public String ifcondition = "if(";
+	
+	/** The ifcondition close. */
 	public String ifconditionClose = "){";
+	
+	/** The throw exception null. */
 	public String throwExceptionNull = "throw new ZMessManager().new EmptyFieldException(";
+	
+	/** The throw exception length. */
 	public String throwExceptionLength = "throw new ZMessManager().new NotValidFormatException(";
+	
+	/** The throw exception close. */
 	public String throwExceptionClose = ");}";
 
+	/** The dates. */
 	public List<String> dates;
+	
+	/** The dates jsp. */
 	public List<String> datesJSP;
+	
+	/** The dates id. */
 	public List<String> datesId;
+	
+	/** The dates id jsp. */
 	public List<String> datesIdJSP;
+	
+	/** The many to one temp hash. */
 	public HashMap<String, Member> manyToOneTempHash;
 
 	// getTypeAndvariableForManyToOneProperties
+	/**
+	 * Gets the type andvariable for many to one properties.
+	 *
+	 * @param strClass the str class
+	 * @param theMetaData the meta data
+	 * @return the type andvariable for many to one properties
+	 */
 	public String[] getTypeAndvariableForManyToOneProperties(String strClass, List<MetaData> theMetaData) {
 		String ret[] = new String[50];
 
@@ -108,6 +150,15 @@ public class Utilities {
 
 	}
 
+	/**
+	 * Adds the variables values to list depending on data type for id.
+	 *
+	 * @param finalParam2 the final param2
+	 * @param field the field
+	 * @param variableName the variable name
+	 * @param clazz the clazz
+	 * @return the list< string>
+	 */
 	public List<String> addVariablesValuesToListDependingOnDataTypeForID(List<String> finalParam2, Field field, String variableName, Class clazz) {
 
 		String realClassName = field.getType().getSimpleName();
@@ -150,6 +201,13 @@ public class Utilities {
 		return finalParam2;
 	}
 
+	/**
+	 * Builds the string to check lengths.
+	 *
+	 * @param field the field
+	 * @param clazz the clazz
+	 * @param realClassName the real class name
+	 */
 	public void buildStringToCheckLengths(Field field, Class clazz, String realClassName) {
 
 		if (field.getAnnotations() != null && field.getAnnotations().length > 0) {
@@ -208,6 +266,17 @@ public class Utilities {
 
 	}
 
+	/**
+	 * Adds the variables values to list depending on data type.
+	 *
+	 * @param finalParam2 the final param2
+	 * @param realClassName the real class name
+	 * @param variableName the variable name
+	 * @param precision the precision
+	 * @param scale the scale
+	 * @param length the length
+	 * @return the list< string>
+	 */
 	public List<String> addVariablesValuesToListDependingOnDataType(List<String> finalParam2, String realClassName, String variableName, String precision,
 			String scale, String length) {
 
@@ -247,6 +316,13 @@ public class Utilities {
 		return finalParam2;
 	}
 
+	/**
+	 * Gets the related classes.
+	 *
+	 * @param metaData the meta data
+	 * @param dataModel the data model
+	 * @return the related classes
+	 */
 	public List<String> getRelatedClasses(MetaData metaData, MetaDataModel dataModel) {
 		List<String> imports = null;
 		Member member = null;
@@ -274,6 +350,13 @@ public class Utilities {
 		return imports;
 	}
 
+	/**
+	 * Gets the related classes.
+	 *
+	 * @param dataModel the data model
+	 * @param member the member
+	 * @param imports the imports
+	 */
 	public void getRelatedClasses(MetaDataModel dataModel, Member member, List<String> imports) {
 
 		for (MetaData metaDataInList : dataModel.getTheMetaData()) {
@@ -286,6 +369,12 @@ public class Utilities {
 
 	}
 
+	/**
+	 * Checks if is composed key.
+	 *
+	 * @param type the type
+	 * @return true, if checks if is composed key
+	 */
 	public boolean isComposedKey(Class type) {
 		boolean ret = false;
 
@@ -303,6 +392,11 @@ public class Utilities {
 		return ret;
 	}
 
+	/**
+	 * Checks if is final param for view dates in list.
+	 *
+	 * @return true, if checks if is final param for view dates in list
+	 */
 	public boolean isFinalParamForViewDatesInList() {
 		if (Utilities.getInstance().dates != null) {
 			if (!Utilities.getInstance().dates.isEmpty() && Utilities.getInstance().dates.size() > 0) {
@@ -315,6 +409,11 @@ public class Utilities {
 		}
 	}
 
+	/**
+	 * Checks if is final param for id for view dates in list.
+	 *
+	 * @return true, if checks if is final param for id for view dates in list
+	 */
 	public boolean isFinalParamForIdForViewDatesInList() {
 		if (Utilities.getInstance().datesId != null) {
 			if (!Utilities.getInstance().datesId.isEmpty() && Utilities.getInstance().datesId.size() > 0) {
@@ -327,6 +426,11 @@ public class Utilities {
 		}
 	}
 
+	/**
+	 * Checks if is final param for id class as variables for dates.
+	 *
+	 * @return the object
+	 */
 	public Object isFinalParamForIdClassAsVariablesForDates() {
 		if (Utilities.getInstance().datesIdJSP != null) {
 			if (!Utilities.getInstance().datesIdJSP.isEmpty() && Utilities.getInstance().datesIdJSP.size() > 0) {
@@ -339,6 +443,11 @@ public class Utilities {
 		}
 	}
 
+	/**
+	 * Checks if is final param dates as list.
+	 *
+	 * @return the object
+	 */
 	public Object isFinalParamDatesAsList() {
 		if (Utilities.getInstance().datesJSP != null) {
 			if (!Utilities.getInstance().datesJSP.isEmpty() && Utilities.getInstance().datesJSP.size() > 0) {
@@ -351,6 +460,11 @@ public class Utilities {
 		}
 	}
 
+	/**
+	 * Biuld hash to get id values lengths.
+	 *
+	 * @param list the list
+	 */
 	public void biuldHashToGetIdValuesLengths(List<MetaData> list) {
 
 		for (MetaData metaData : list) {
@@ -399,6 +513,15 @@ public class Utilities {
 		}
 	}
 
+	/**
+	 * Builds the folders.
+	 *
+	 * @param packageName the package name
+	 * @param hardDiskLocation the hard disk location
+	 * @param specificityLevel the specificity level
+	 * @param packageOriginal the package original
+	 * @param properties the properties
+	 */
 	public void buildFolders(String packageName, String hardDiskLocation, Integer specificityLevel, String packageOriginal, Properties properties) {
 
 		// / se construye paquete
@@ -460,12 +583,24 @@ public class Utilities {
 
 	}
 
+	/**
+	 * Gets the get name of primary name.
+	 *
+	 * @param name the name
+	 * @return the gets the name of primary name
+	 */
 	public String getGetNameOfPrimaryName(String name) {
 		String build = name.substring(0, 1).toUpperCase();
 		String build2 = name.substring(1);
 		return build + build2;
 	}
 
+	/**
+	 * Gets the real class name.
+	 *
+	 * @param type the type
+	 * @return the real class name
+	 */
 	public String getRealClassName(String type) {
 		String typeComplete = type;
 		String[] tmp = (typeComplete.replace(".", "%")).split("%");

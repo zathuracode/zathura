@@ -4,8 +4,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestConnectionsUtilsProperties.
+ */
 public class TestConnectionsUtilsProperties {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the args
+	 * @throws FileNotFoundException the file not found exception
+	 * @throws IOException the IO exception
+	 */
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		Properties proper = new java.util.Properties();
 		try {

@@ -17,18 +17,20 @@ import com.vortexbird.amazilia.sp.metadata.MetadataStoreProcedureHandler;
 import com.vortexbird.amazilia.sp.metadata.ProcedureBean;
 import com.vortexbird.amazilia.sp.utilities.Utilities;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GenerateXmlAndJavaFiles.
+ */
 public class GenerateXmlAndJavaFiles {
 
 	/**
 	 * Generate xml.hbm files from given store procedures or functions in the
 	 * given path. Generate an xml.hbm for each store Procedure
-	 * 
-	 * @param connection
-	 *            oracle connection
-	 * @param strPath
-	 *            path to generate xml.hbm files
-	 * @param procedureNames
-	 *            List<String>with the names of the store procedures
+	 *
+	 * @param connection oracle connection
+	 * @param strPath path to generate xml.hbm files
+	 * @param procedureNames List<String>with the names of the store procedures
+	 * @param metadataHandler the metadata handler
 	 */
 	public void generateProcedureXmlHbmFile(Connection connection, String strPath, List<String> procedureNames, MetadataStoreProcedureHandler metadataHandler) {
 		try {
@@ -68,19 +70,12 @@ public class GenerateXmlAndJavaFiles {
 	/**
 	 * Generate xml files and transform this xml to java files using an xsl
 	 * file. Java classes are formatted and saved in the given package
-	 * 
-	 * @param connection
-	 *            oracle connection
-	 * @param strSchema
-	 *            name of the schema
-	 * @param xslPath
-	 *            path of the xsl file
-	 * @param strPath
-	 *            path for the generate files
-	 * @param strPackagePath
-	 *            path when the package will be created
-	 * @param strPackageName
-	 *            name of the package
+	 *
+	 * @param connection oracle connection
+	 * @param strPath path for the generate files
+	 * @param strPackageName name of the package
+	 * @param procedureNames the procedure names
+	 * @param metadataHandler the metadata handler
 	 */
 	public void generateJavaClasses(Connection connection, String strPath, String strPackageName, List<String> procedureNames,
 			MetadataStoreProcedureHandler metadataHandler) {
