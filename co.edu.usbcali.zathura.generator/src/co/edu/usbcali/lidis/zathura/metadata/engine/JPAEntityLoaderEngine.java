@@ -297,7 +297,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 
 			// Empieza con los miembros
 
-			if (memberName.equals(property)) {// Beging
+			if (memberName.equalsIgnoreCase(property)) {// Beging
 				// memberName.equals(property)
 
 				log.debug("working with:" + memberName);
