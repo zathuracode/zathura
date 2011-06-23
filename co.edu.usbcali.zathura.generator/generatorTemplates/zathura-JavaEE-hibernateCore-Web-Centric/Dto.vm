@@ -3,7 +3,7 @@ import javax.faces.event.ActionEvent;
 import java.util.Date;
 import java.io.Serializable;
 import ${package}.${metaData.getRealClassName()};
-import ${virginPackage}.presentation.backEndBeans.${metaData.getRealClassName()}View;
+import ${virginPackage}.presentation.backingBeans.${metaData.getRealClassName()}View;
 /**
 * 
 *  
@@ -68,7 +68,7 @@ rowSelected = !rowSelected;
 }
 /**
 * <p>Bound to commandLink actionListener in the ui that renders/unrenders
-    * the Customer details for editing.</p>
+    * the Object details for editing.</p>
     */
     public void toggleSelected(ActionEvent e) {
     #foreach($member2  in $finalParamForIdForDtoForSetsVariablesInList)

@@ -1,4 +1,4 @@
-package  ${virginPackage}.presentation.backEndBeans;
+package  ${virginPackage}.presentation.backingBeans;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,13 +21,14 @@ import com.icesoft.faces.async.render.Renderable;
 import  ${virginPackage}.exceptions.*;
 import ${package}.*;
 import ${packageOriginal}.dto.${metaData.getRealClassName()}DTO;
-import ${virginPackage}.presentation.businessDelegate.BusinessDelegatorView;
+import ${virginPackage}.presentation.businessDelegate.*;
 import ${virginPackage}.utilities.*;
 /**
- *   
- * @author Zathura Code Generator http://code.google.com/p/zathura/
- *
- */
+* 
+*  
+* @author Zathura Code Generator http://code.google.com/p/zathura/
+*
+*/
 public class ${metaData.getRealClassName()}View extends DataSource implements Renderable, DisposableBean{
 public ${metaData.getRealClassName()}View() {
 super("");
@@ -56,8 +57,12 @@ private boolean renderDataTable;
 private boolean flag = true;
 private RenderManager renderManager;
 private PersistentFacesState state = PersistentFacesState.getInstance();
+
 private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariable()};
     private List<${metaData.getRealClassName()}DTO> ${metaData.getRealClassNameAsVariable()}DTO;
+		
+		private IBusinessDelegatorView businessDelegatorView;
+		
         public String action_clear() {
         #foreach($member2  in $finalParamForViewVariablesInList)
             txt${member2}.setValue(null);
@@ -87,6 +92,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
         }
 		
 		
+		
         public void listener_txtId(ValueChangeEvent event){
         if (event.getNewValue() != null && !event.getNewValue().equals("")) {
         ${metaData.getRealClassName()} entity = null;
@@ -94,7 +100,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
         #foreach($member2  in $finalParamForIdForViewClass)
             $member2
         #end
-        entity = BusinessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+        entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
         } catch (Exception e) {
         // TODO: handle exception
         }
@@ -138,7 +144,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
 		
         public String action_save() {
         try {
-        BusinessDelegatorView.save${metaData.getRealClassName()}(${finalParamForView});
+        businessDelegatorView.save${metaData.getRealClassName()}(${finalParamForView});
         FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYSAVED);
 		action_clear();
         } catch (Exception e) {
@@ -151,7 +157,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
 		
         public String action_delete() {
         try {
-        BusinessDelegatorView.delete${metaData.getRealClassName()}($finalParamForIdClassAsVariablesAsString);
+        businessDelegatorView.delete${metaData.getRealClassName()}($finalParamForIdClassAsVariablesAsString);
         FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
 		action_clear();
         } catch (Exception e) {
@@ -164,7 +170,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
 		
         public String action_modify() {
         try {
-        BusinessDelegatorView.update${metaData.getRealClassName()}(${finalParamForView});
+        businessDelegatorView.update${metaData.getRealClassName()}(${finalParamForView});
 		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
 		action_clear();
         } catch (Exception e) {
@@ -175,10 +181,9 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
 		
 		
 		
-		
         public String action_modifyWitDTO(${finalParam}) throws Exception {
         try {
-        BusinessDelegatorView.update${metaData.getRealClassName()}(${finalParamForDtoUpdateOnlyVariables});
+        businessDelegatorView.update${metaData.getRealClassName()}(${finalParamForDtoUpdateOnlyVariables});
         renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").requestRender();
 		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
         } catch (Exception e) {
@@ -192,98 +197,96 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
 		
 		
         public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() {
-        if(flag){
-        try {
-        ${metaData.getRealClassNameAsVariable()} = BusinessDelegatorView.get${metaData.getRealClassName()}();
-        flag = false;
-        } catch (Exception e) {
-        flag = true;
-        FacesUtils.addErrorMessage(e.getMessage());
-        } 
-        }
-        return ${metaData.getRealClassNameAsVariable()};
-        }	
-		
-		
-        public boolean isFlag() {
-        return flag;
-        }
+            if(flag){
+            try {
+            ${metaData.getRealClassNameAsVariable()} = businessDelegatorView.get${metaData.getRealClassName()}();
+            flag = false;
+            } catch (Exception e) {
+            flag = true;
+            FacesUtils.addErrorMessage(e.getMessage());
+            } 
+            }
+            return ${metaData.getRealClassNameAsVariable()};
+            }
 			
 			
-		public void set${metaData.getRealClassName()}(List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariable()}) {
-        this.${metaData.getRealClassNameAsVariable()} = ${metaData.getRealClassNameAsVariable()};
-        }
-		
-		
-        public boolean isRenderDataTable() {
-        try {
-        if (flag) {
-        if (BusinessDelegatorView.findTotalNumber${metaData.getRealClassName()}()>0) {
-        renderDataTable = true;
-        } else {
-        renderDataTable = false;
-        }
-        }
-        flag = false;
-        } catch (Exception e) {
-        renderDataTable = false;
-        e.printStackTrace();
-        }
-        return renderDataTable;
-        }
+			
+            public boolean isFlag() {
+            return flag;
+            }
+			
+			
+			
+            public void set${metaData.getRealClassName()}(List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariable()}) {
+                this.${metaData.getRealClassNameAsVariable()} = ${metaData.getRealClassNameAsVariable()};
+                }
+                public boolean isRenderDataTable() {
+                try {
+                if (flag) {
+                if (businessDelegatorView.findTotalNumber${metaData.getRealClassName()}()>0) {
+                renderDataTable = true;
+                } else {
+                renderDataTable = false;
+                }
+                }
+                flag = false;
+                } catch (Exception e) {
+                renderDataTable = false;
+                e.printStackTrace();
+                }
+                return renderDataTable;
+                }
 				
 				
 				
-        public DataModel getData() {
-        state = PersistentFacesState.getInstance();
-        if (onePageDataModel == null) {
-        onePageDataModel = new LocalDataModel(pageSize);
-        }
-        return onePageDataModel;
-        }
-		
-		
-		
-        /**
-        * This is where the Object data is retrieved from the database and
-        * returned as a list of objects for display in the UI.
-        */
-        private DataPage<${metaData.getRealClassName()}> getDataPage(int startRow, int pageSize) {
-        // Retrieve the total number of objects from the database.  This
-        // number is required by the DataPage object so the paginator will know
-        // the relative location of the page data.
-        int totalNumber${metaData.getRealClassName()} = 0;
-        try {
-        totalNumber${metaData.getRealClassName()} = BusinessDelegatorView.findTotalNumber${metaData.getRealClassName()}().intValue();
-        } catch (Exception e) {
-        FacesUtils.addErrorMessage(e.getMessage());
-        }
-        // Calculate indices to be displayed in the ui.
-        int endIndex = startRow + pageSize;
-        if (endIndex > totalNumber${metaData.getRealClassName()}) {
-        endIndex = totalNumber${metaData.getRealClassName()};
-        }
-        try {
-        ${metaData.getRealClassNameAsVariable()} = BusinessDelegatorView.findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow, endIndex - startRow);
-        // Remove this Renderable from the existing render groups.
-        //leaveRenderGroups();        			
-        } catch (Exception e) {
-        FacesUtils.addErrorMessage(e.getMessage());
-        }
-        // Add this Renderable to the new render groups.
-        //joinRenderGroups();
-        // Reset the dirtyData flag.
-        onePageDataModel.setDirtyData(false);
-        // This is required when using Hibernate JPA.  If the EntityManager is not
-        // cleared or closed objects are cached and stale objects will show up
-        // in the table.
-        // This way, the detached objects are reread from the database.
-        // This call is not required with Hibernate, which uses a Query Hint
-        // to clear the cache in the DAO.
-        //EntityManagerHelper.getEntityManager().clear();
-        flag = true;
-        return new DataPage<${metaData.getRealClassName()}>(totalNumber${metaData.getRealClassName()}, startRow, 			${metaData.getRealClassNameAsVariable()});
-        }
+                public DataModel getData() {
+                state = PersistentFacesState.getInstance();
+                if (onePageDataModel == null) {
+                onePageDataModel = new LocalDataModel(pageSize);
+                }
+                return onePageDataModel;
+                }
+				
+				
+                /**
+                * This is where the Object data is retrieved from the database and
+                * returned as a list of objects for display in the UI.
+                */
+                private DataPage<${metaData.getRealClassName()}> getDataPage(int startRow, int pageSize) {
+                    // Retrieve the total number of objects from the database.  This
+                    // number is required by the DataPage object so the paginator will know
+                    // the relative location of the page data.
+                    int totalNumber${metaData.getRealClassName()} = 0;
+                    try {
+                    totalNumber${metaData.getRealClassName()} = businessDelegatorView.findTotalNumber${metaData.getRealClassName()}().intValue();
+                    } catch (Exception e) {
+                    FacesUtils.addErrorMessage(e.getMessage());
+                    }
+                    // Calculate indices to be displayed in the ui.
+                    int endIndex = startRow + pageSize;
+                    if (endIndex > totalNumber${metaData.getRealClassName()}) {
+                    endIndex = totalNumber${metaData.getRealClassName()};
+                    }
+                    try {
+                    ${metaData.getRealClassNameAsVariable()} = businessDelegatorView.findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow, endIndex - startRow);
+                    // Remove this Renderable from the existing render groups.
+                    //leaveRenderGroups();        			
+                    } catch (Exception e) {
+                    FacesUtils.addErrorMessage(e.getMessage());
+                    }
+                    // Add this Renderable to the new render groups.
+                    //joinRenderGroups();
+                    // Reset the dirtyData flag.
+                    onePageDataModel.setDirtyData(false);
+                    // This is required when using Hibernate.  If the SessionManager is not
+                    // cleared or closed objects are cached and stale objects will show up
+                    // in the table.
+                    // This way, the detached objects are reread from the database.
+                    // This call is not required with Hibernate, which uses a Query Hint
+                    // to clear the l2 cache in the DAO.
+                    flag = true;
+                    return new DataPage<${metaData.getRealClassName()}>(totalNumber${metaData.getRealClassName()}, startRow, 			${metaData.getRealClassNameAsVariable()});
+                        }
 						
 						
 						
@@ -294,6 +297,9 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                         }
                         return onePageDataModel;
                         }
+						
+						
+						
                         /**
                         * This is where the Object data is retrieved from the database and
                         * returned as a list of objects for display in the UI.
@@ -304,7 +310,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                             // the relative location of the page data.
                             int totalNumber${metaData.getRealClassName()} = 0;
                             try {
-                            totalNumber${metaData.getRealClassName()} = BusinessDelegatorView.findTotalNumber${metaData.getRealClassName()}().intValue();
+                            totalNumber${metaData.getRealClassName()} = businessDelegatorView.findTotalNumber${metaData.getRealClassName()}().intValue();
                             } catch (Exception e) {
                             FacesUtils.addErrorMessage(e.getMessage());
                             }
@@ -314,7 +320,7 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                             endIndex = totalNumber${metaData.getRealClassName()};
                             }
                             try {
-                            ${metaData.getRealClassNameAsVariable()} = BusinessDelegatorView.findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow, endIndex - startRow);
+                            ${metaData.getRealClassNameAsVariable()} = businessDelegatorView.findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow, endIndex - startRow);
                             if (Utilities.validationsList(			${metaData.getRealClassNameAsVariable()})) {
                             ${metaData.getRealClassNameAsVariable()}DTO = new ArrayList<${metaData.getRealClassName()}DTO>();
                                 for (${metaData.getRealClassName()} ${metaData.getRealClassNameAsVariable()}Tmp : ${metaData.getRealClassNameAsVariable()}) {
@@ -339,17 +345,15 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                                 joinRenderGroups();
                                 // Reset the dirtyData flag.
                                 onePageDataModel.setDirtyData(false);
-                                // This is required when using Hibernate JPA.  If the EntityManager is not
+                                // This is required when using Hibernate.  If the SessionManager is not
                                 // cleared or closed objects are cached and stale objects will show up
                                 // in the table.
                                 // This way, the detached objects are reread from the database.
                                 // This call is not required with Hibernate, which uses a Query Hint
-                                // to clear the cache in the DAO.
-                                //EntityManagerHelper.getEntityManager().clear();
+                                // to clear the l2 cache in the DAO.
                                 flag = true;
                                 return new DataPage<${metaData.getRealClassName()}DTO>(totalNumber${metaData.getRealClassName()}, startRow, 			${metaData.getRealClassNameAsVariable()}DTO);
                                     }    
-									
 									
 									
 									
@@ -366,8 +370,6 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                                     * method that the managed bean uses) to provide the data wrapped in
                                     * a DataPage object that provides info on the full size of the dataset.
                                     */
-									
-									
                                     private class LocalDataModel extends PagedListDataModel {
                                     public LocalDataModel(int pageSize) {
                                     super(pageSize);
@@ -418,9 +420,9 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                                             */
                                             private void leaveRenderGroups() {
                                             if (Utilities.validationsList(${metaData.getRealClassNameAsVariable()}DTO)) {
-											        	for (int i = 0; i < ${metaData.getRealClassNameAsVariable()}DTO.size(); i++) {
-                                                    		 renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").remove(this);
-                                            			}											
+                                            for (${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}Tmp : ${metaData.getRealClassNameAsVariable()}DTO) {
+                                            renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").remove(this);
+                                            }
                                             }
                                             }
                                             /**
@@ -429,9 +431,9 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                                             */
                                             private void joinRenderGroups() {
                                             if (Utilities.validationsList(${metaData.getRealClassNameAsVariable()}DTO)) {
-											        	for (int i = 0; i < ${metaData.getRealClassNameAsVariable()}DTO.size(); i++) {
-                                                    		 renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").add(this);
-                                            			}
+                                            for (${metaData.getRealClassName()}DTO ${metaData.getRealClassNameAsVariable()}Tmp : ${metaData.getRealClassNameAsVariable()}DTO) {
+                                            renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").add(this);
+                                            }
                                             }
                                             }
                                             public void dispose() throws Exception {
@@ -517,4 +519,12 @@ private List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariab
                                                     public TimeZone getTimeZone() {
                                                     return java.util.TimeZone.getDefault();
                                                     } 
-                                                    }
+	public IBusinessDelegatorView getBusinessDelegatorView() {
+		return businessDelegatorView;
+	}
+
+	public void setBusinessDelegatorView(IBusinessDelegatorView businessDelegator) {
+		this.businessDelegatorView = businessDelegator;
+	}
+	
+}												

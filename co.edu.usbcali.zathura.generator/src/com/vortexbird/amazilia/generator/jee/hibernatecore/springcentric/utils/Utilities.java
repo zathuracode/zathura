@@ -553,7 +553,7 @@ public class Utilities {
 
 		folderBuilder.add(model + "dto");
 
-		folderBuilder.add(presentation + "backEndBeans");
+		folderBuilder.add(presentation + "backingBeans");
 
 		folderBuilder.add(presentation + "businessDelegate");
 
