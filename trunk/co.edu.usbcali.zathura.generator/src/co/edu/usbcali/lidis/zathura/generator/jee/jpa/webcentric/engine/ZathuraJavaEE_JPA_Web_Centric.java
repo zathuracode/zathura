@@ -290,7 +290,7 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator, IZathur
 
 			doDao(metaData, context, hdLocation);
 
-			doBackEndBeans(metaData, context, hdLocation, dataModel);
+			doBackingBeans(metaData, context, hdLocation, dataModel);
 			doJsp(metaData, context, hdLocation, dataModel);
 			doLogic(metaData, context, hdLocation, dataModel, modelName);
 			doDto(metaData, context, hdLocation, dataModel, modelName);
@@ -568,15 +568,15 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator, IZathur
 	 * @param hdLocation the hd location
 	 * @param dataModel the data model
 	 */
-	public void doBackEndBeans(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel) {
-		log.info("Begin doBackEndBeans");
+	public void doBackingBeans(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel) {
+		log.info("Begin doBackingBeans");
 
-		Template backEndBeans = null;
+		Template backingBeans = null;
 
-		StringWriter swBackEndBeans = new StringWriter();
+		StringWriter swBackingBeans = new StringWriter();
 
 		try {
-			backEndBeans = ve.getTemplate("BackEndBeans.vm");
+			backingBeans = ve.getTemplate("BackingBeans.vm");
 
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
@@ -593,17 +593,17 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator, IZathur
 		}
 
 		try {
-			backEndBeans.merge(context, swBackEndBeans);
+			backingBeans.merge(context, swBackingBeans);
 
 			// System.out.println(swIdao);
 			// System.out.println(swdao);
 
 			String realLocation = hdLocation + GeneratorUtil.slash + virginPackageInHd + GeneratorUtil.slash + "presentation" + GeneratorUtil.slash
-					+ "backEndBeans" + GeneratorUtil.slash;
+					+ "backingBeans" + GeneratorUtil.slash;
 
 			FileWriter fstream = new FileWriter(realLocation + metaData.getRealClassName() + "View.java");
 			BufferedWriter out = new BufferedWriter(fstream);
-			out.write(swBackEndBeans.toString());
+			out.write(swBackingBeans.toString());
 			// Close the output stream
 			out.close();
 
@@ -612,7 +612,7 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator, IZathur
 			Utilities.getInstance().dates = null;
 			Utilities.getInstance().datesId = null;
 
-			log.info("End doBackEndBeans");
+			log.info("End doBackingBeans");
 
 		} catch (Exception e) {
 			log.info("Error: " + e.getMessage());

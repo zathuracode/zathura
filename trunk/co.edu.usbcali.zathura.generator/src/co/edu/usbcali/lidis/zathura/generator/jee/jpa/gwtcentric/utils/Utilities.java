@@ -732,7 +732,7 @@ public class Utilities {
 
 		folderBuilder.add(model + "dto");
 
-		folderBuilder.add(presentation + "backEndBeans");
+		folderBuilder.add(presentation + "backingBeans");
 
 		folderBuilder.add(presentation + "businessDelegate");
 
@@ -795,11 +795,6 @@ public class Utilities {
 		folderBuilder.add(pckgeClient + "dataservice");
 		folderBuilder.add(pckgeClient + "smartds");
 		folderBuilder.add(pckgeClient + "entrypoint");
-		// if (specificityLevel.intValue() == 2) {
-		// folderBuilder.add(model + "pojos");
-		// }
-		// folderBuilder.add(model + "dto");
-		// folderBuilder.add(presentation + "backEndBeans");
 		folderBuilder.add(pckgeServer + "businessdelegate");
 		folderBuilder.add(properties.getProperty("webRootFolderPath"));
 		for (String string : folderBuilder) {

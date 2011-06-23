@@ -22,7 +22,7 @@
     #foreach($metaData  in $dataModel.theMetaData)
         <managed-bean>
             <managed-bean-name>${metaData.getRealClassNameAsVariable()}View</managed-bean-name>
-            <managed-bean-class>${virginPackage}.presentation.backEndBeans.${metaData.getRealClassName()}View</managed-bean-class>
+            <managed-bean-class>${virginPackage}.presentation.backingBeans.${metaData.getRealClassName()}View</managed-bean-class>
             <managed-bean-scope>request</managed-bean-scope>
             <managed-property>
                 <property-name>renderManager</property-name>
