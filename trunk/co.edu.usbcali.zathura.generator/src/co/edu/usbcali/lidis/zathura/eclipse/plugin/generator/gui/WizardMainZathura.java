@@ -41,15 +41,14 @@ public class WizardMainZathura extends Wizard {
 	/** The wizard choose source folder and package. */
 	public WizardPageChooseSourceFolderAndPackage wizardChooseSourceFolderAndPackage;
 	
-	
-
+	public WizardPageChooseFrameworkTire wizardPageChooseFrameworkTire;
 
 	/**
 	 * The Constructor.
 	 */
 	public WizardMainZathura() {
 		super();
-		setWindowTitle("Zathura Code Generator V2.1.1 - Powered By AmaziliaSource www.vortexbird.com");
+		setWindowTitle("Zathura Code Generator V3.0 - Powered By Vortexbird www.vortexbird.com");
 		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
 		EclipseGeneratorUtil.reset();
 		EclipseGeneratorUtil.wizardMain=this;		
@@ -70,10 +69,14 @@ public class WizardMainZathura extends Wizard {
 		addPage(wizardSelectTables);
 		
 		wizardChooseSourceFolderAndPackage=new WizardPageChooseSourceFolderAndPackage();
-		addPage(wizardChooseSourceFolderAndPackage);		
+		addPage(wizardChooseSourceFolderAndPackage);
 		
-		wizardGeneratorChose=new WizardPageChooseGenerator();
-		addPage(wizardGeneratorChose);
+		
+		wizardPageChooseFrameworkTire =new WizardPageChooseFrameworkTire();
+		addPage(wizardPageChooseFrameworkTire);
+
+		//wizardGeneratorChose=new WizardPageChooseGenerator();
+		//addPage(wizardGeneratorChose);
 		
 	}
 
