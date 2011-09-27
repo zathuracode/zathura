@@ -83,6 +83,13 @@ public class GeneratorUtil {
 	/** The store procedure templates. */
 	private static String storeProcedureTemplates = "generatorTemplates" + GeneratorUtil.slash + "amazilia-storeProcedure" + GeneratorUtil.slash;
 
+	// Java EE Jpa + Spring
+	private static String springJpaTemplates="generatorTemplates" + GeneratorUtil.slash + "zathura-JavaEE-jpaCore-Spring-Centric" + GeneratorUtil.slash;
+	private static String generatorExtZathuraJavaEESpringJpa = "generatorExt" + GeneratorUtil.slash + "zathura-JavaEE-jpaCore-Spring-Centric"+ GeneratorUtil.slash;
+	private static String generatorLibrariesZathuraJavaEESpringJpa="generatorLibraries" + GeneratorUtil.slash;
+
+
+	
 	/**
 	 * Gets the full path.
 	 *
@@ -296,6 +303,41 @@ public class GeneratorUtil {
 		return gwtCentricTemplates;
 	}
 
+	
+	
+	//Spring + Jpa
+
+
+	public static String getSpringJpaTemplates() {
+		if(fullPath != null && fullPath.equals("")!= true){
+			return fullPath + springJpaTemplates;
+		}
+
+		return springJpaTemplates;
+	}
+
+
+	public static String getGeneratorExtZathuraJavaEESpringJpa() {
+		if(fullPath != null && fullPath.equals("")!=true){
+			return fullPath + generatorExtZathuraJavaEESpringJpa; 
+		}
+
+		return generatorExtZathuraJavaEESpringJpa;
+	}
+
+
+	public static String getGeneratorLibrariesZathuraJavaEESpringJpa() {
+
+		if(fullPath!=null && fullPath.equals("")!=true){
+			return fullPath + generatorLibrariesZathuraJavaEESpringJpa;
+		}
+		return generatorLibrariesZathuraJavaEESpringJpa;
+	}
+
+
+	
+	
+	
 	/**
 	 * Getstore procedure templates.
 	 *
