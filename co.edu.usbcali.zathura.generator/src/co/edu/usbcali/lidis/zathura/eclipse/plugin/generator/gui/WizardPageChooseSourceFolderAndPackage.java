@@ -87,8 +87,8 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 	 */
 	public WizardPageChooseSourceFolderAndPackage() {
 		super("wizardPage");
-		setTitle("Zathura Reverse Engineering");
-		setDescription("Generate JPA or Hibernate entity beans from database explorer tables");
+		setTitle("Base Package and Folders");
+		setDescription("Chose the base package and folders for the code");
 		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/NewRDBDatabaseWiz.gif"));
 		//setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.png"));
 		setPageComplete(false);
@@ -248,42 +248,6 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 		btnNewPackage.setBounds(393, 90, 87, 27);
 		btnNewPackage.setText("New...");
 		
-		Button bRadioJPAReverseEngineering = new Button(container, SWT.RADIO);
-		bRadioJPAReverseEngineering.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				setDescription("Generate JPA entity beans from database explorer tables");
-				EclipseGeneratorUtil.makeItXml=false;
-				loadListGeneratorsNextWizard();
-			}
-		});
-		bRadioJPAReverseEngineering.setBounds(10, 246, 189, 22);
-		bRadioJPAReverseEngineering.setText("JPA Reverse Engineering");
-		
-		Button bRadioHibernateReverseEngineering = new Button(container, SWT.RADIO);
-		bRadioHibernateReverseEngineering.setSelection(true);
-		bRadioHibernateReverseEngineering.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				setDescription("Generate Hibernate mapping and Java classes from database explorer tables");
-				EclipseGeneratorUtil.makeItXml=true;
-				loadListGeneratorsNextWizard();
-			}
-		});
-		bRadioHibernateReverseEngineering.setBounds(10, 218, 232, 22);
-		bRadioHibernateReverseEngineering.setText("Hibernate Reverse Engineering");
-		
-		Button bRadioPOJOReverseEngineering = new Button(container, SWT.RADIO);
-		bRadioPOJOReverseEngineering.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				loadListGeneratorsNextWizard();
-			}
-		});
-		bRadioPOJOReverseEngineering.setEnabled(false);
-		bRadioPOJOReverseEngineering.setBounds(10, 274, 189, 16);
-		bRadioPOJOReverseEngineering.setText("POJO Reverse Engineering");
-		
 		
 	}
 	
@@ -442,17 +406,5 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 					EclipseGeneratorUtil.libFolderPath=EclipseGeneratorUtil.workspaceFolderPath+txtLib.getText()+co.edu.usbcali.lidis.zathura.generator.utilities.GeneratorUtil.slash;				
 				}
 			}
-		}
-		
-		/**
-		 * Load list generators next wizard.
-		 */
-		private void loadListGeneratorsNextWizard(){
-			Object object=getNextPage();
-			if(object instanceof WizardPageChooseGenerator){
-				WizardPageChooseGenerator wizardChooseGenerator=(WizardPageChooseGenerator)object;
-				wizardChooseGenerator.loadListGenerators();				
-			}
-			
 		}
 }
