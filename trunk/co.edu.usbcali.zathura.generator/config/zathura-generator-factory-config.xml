@@ -8,54 +8,9 @@
 		<gui-name>IceFaces + JPA</gui-name>
 		<class>co.edu.usbcali.lidis.zathura.generator.jee.jpa.webcentric.engine.ZathuraJavaEE_JPA_Web_Centric</class>
 		<persistence>jpa</persistence>
-		<description>
-		<![CDATA[
-				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-				<HTML>
-				<HEAD>
-					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-					<TITLE></TITLE>
-					<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.4  (Linux)">
-					<META NAME="AUTHOR" CONTENT="Diego Gomez, William Altuzarra Noriega Noriega">
-					<META NAME="CREATED" CONTENT="20090304;10252100">
-					<META NAME="CHANGEDBY" CONTENT="Diego Gomez">
-					<META NAME="CHANGED" CONTENT="20090304;10523800">
-				</HEAD>
-				<BODY LANG="es-CO" DIR="LTR">
-				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
-				JavaEE JPA Web Centric </B></FONT>
-				</P>
-				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-				<FONT SIZE=2>This Generator is appropriate for Web applications that
-				using  the JavaEE Patterns. The next is a list the
-				generate files.</FONT></P>
-				<UL>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>JSF (IceFaces)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>ManageBeans</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Faces-config.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Bussines Delegate</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>POJO (Logic)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAOFactory</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>IDAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>persistence.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>web.xml</FONT></P>
-				</UL>
-				</BODY>
-				</HTML>
-		]]>
-		</description>
-		
+		<logic>pojo</logic>
+		<view>icefaces</view>
+		<description>Icefaces,pojo,jpa</description>
 	</generator>
 	
 	<generator>
@@ -63,54 +18,9 @@
 		<gui-name>IceFaces + HibernateCore</gui-name>
 		<class>com.vortexbird.amazilia.generator.jee.hibernatecore.webcentric.engine.ZathuraJavaEE_HibernateCore_Web_Centric</class>
 		<persistence>hibernateCore</persistence>
-		<description>
-		<![CDATA[
-				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-				<HTML>
-				<HEAD>
-					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-					<TITLE></TITLE>
-					<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.4  (Linux)">
-					<META NAME="AUTHOR" CONTENT="Diego Gomez, William Altuzarra Noriega Noriega">
-					<META NAME="CREATED" CONTENT="20100304;10252100">
-					<META NAME="CHANGEDBY" CONTENT="Diego Gomez">
-					<META NAME="CHANGED" CONTENT="20090304;10523800">
-				</HEAD>
-				<BODY LANG="es-CO" DIR="LTR">
-				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
-				JavaEE HibernateCore Web Centric </B></FONT>
-				</P>
-				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-				<FONT SIZE=2>This Generator is appropriate for Web applications that
-				using  the JavaEE Patterns. The next is a list the
-				generate files.</FONT></P>
-				<UL>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>JSF (IceFaces 1.8.1)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>ManageBeans</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Faces-config.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Bussines Delegate</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>POJO (Logic)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAOFactory</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>IDAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>hibernate.cfg.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>web.xml</FONT></P>
-				</UL>
-				</BODY>
-				</HTML>
-		]]>
-		</description>
-		
+		<logic>pojo</logic>
+		<view>icefaces</view>
+		<description></description>
 	</generator>
 	
 	
@@ -119,53 +29,9 @@
 		<gui-name>IceFaces + Hibernate Core + Spring</gui-name>
 		<class>com.vortexbird.amazilia.generator.jee.hibernatecore.springcentric.engine.ZathuraJavaEE_HibernateCore_Web_Spring_Centric</class>
 		<persistence>hibernateCore</persistence>
-		<description>
-		<![CDATA[
-				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-				<HTML>
-				<HEAD>
-					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-					<TITLE></TITLE>
-					<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.4  (Linux)">
-					<META NAME="AUTHOR" CONTENT="Diego Gomez, William Altuzarra Noriega Noriega">
-					<META NAME="CREATED" CONTENT="20100304;10252100">
-					<META NAME="CHANGEDBY" CONTENT="Diego Gomez">
-					<META NAME="CHANGED" CONTENT="20090304;10523800">
-				</HEAD>
-				<BODY LANG="es-CO" DIR="LTR">
-				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
-				JavaEE HibernateCore Spring Web Centric </B></FONT>
-				</P>
-				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-				<FONT SIZE=2>This Generator is appropriate for Web applications that
-				using  the JavaEE Patterns. The next is a list the
-				generate files.</FONT></P>
-				<UL>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>JSF (IceFaces 1.8.1)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>ManageBeans</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Faces-config.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Bussines Delegate</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>POJO (Logic)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAOFactory</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>IDAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>hibernate.cfg.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>web.xml</FONT></P>
-				</UL>
-				</BODY>
-				</HTML>
-		]]>
-		</description>
+		<logic>spring</logic>
+		<view>icefaces</view>
+		<description></description>
 	</generator>
 	
 	<generator>
@@ -173,54 +39,9 @@
 		<gui-name>GWT + JPA</gui-name>
 		<class>co.edu.usbcali.lidis.zathura.generator.jee.jpa.gwtcentric.engine.ZathuraJavaEE_Gwt_Centric</class>
 		<persistence>jpa</persistence>
-		<description>
-		<![CDATA[
-				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-				<HTML>
-				<HEAD>
-					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-					<TITLE></TITLE>
-					<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.4  (Linux)">
-					<META NAME="AUTHOR" CONTENT="Juan Manuel Caicedo, Ricardo Chiriboga">
-					<META NAME="CREATED" CONTENT="20090304;10252100">
-					<META NAME="CHANGEDBY" CONTENT="Diego Gomez">
-					<META NAME="CHANGED" CONTENT="20090304;10523800">
-				</HEAD>
-				<BODY LANG="es-CO" DIR="LTR">
-				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
-				JavaEE Web Centric </B></FONT>
-				</P>
-				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-				<FONT SIZE=2>This Generator is appropriate for Web applications that
-				using  the JEE Patterns of Sun Microsystems. The next is a list the
-				generate files.</FONT></P>
-				<UL>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>JSF (IceFaces)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>ManageBeans</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Faces-config.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Bussines Delegate</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>POJO (Logic)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAOFactory</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>IDAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>persistence.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>web.xml</FONT></P>
-				</UL>
-				</BODY>
-				</HTML>
-		]]>
-		</description>
-		
+		<logic>pojo</logic>
+		<view>gwt</view>
+		<description></description>
 	</generator>
 	
 </zathura-generator>
