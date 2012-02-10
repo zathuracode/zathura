@@ -2,7 +2,6 @@ package org.zathuracode.eclipse.plugin.generator.gui;
 
 import java.sql.SQLException;
 
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardDialog;
