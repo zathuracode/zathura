@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>	
+	</h:head>
+
+	<h:body>
+	     <ui:composition template="/XHTML/CommonColumnsContent.xhtml">
+			<ui:define name="header">
+				<ui:include src="/WEB-INF/facelets/header.jspx" />
+			</ui:define>
+        	<br/>
+        	<br/> 	
+		 <ui:define name="body">	
+			<f:view>
+		 
+	   <h:form>
+			<div align="center">
+               <h:link id="cmdBack" outcome="goInitialMenu" value="Back" style="color:blue;" />
+			 </div>
+			 <br />
+			 
+			<p:panel id="msgProjectClientesTitle" header="${metaData.getRealClassName()}Data">
+				
+				<p:dataTable value="#{${metaData.getRealClassNameAsVariable()}View.data}" var="${metaData.getRealClassNameAsVariable()}"
+					paginator="true" rows="5">
+					## foreach para construir  las columnas de la tabla con los campos que sean id 
+					#foreach($member  in $finalParamForIdClassAsVariables2)
+							<p:column filterBy="#{$metaData.getRealClassNameAsVariable().$member}" sortBy="#{$metaData.getRealClassNameAsVariable().$member}" >
+							 <f:facet name="header">
+							<h:outputText value="$member"/>
+							</f:facet>
+							 <h:outputText value="#{$metaData.getRealClassNameAsVariable().$member}"/>
+							 </p:column>
+                    #end	
+					## foreach para construir las columnas de la tabla con los campos que no son id
+					#foreach($member  in $finalParamVariablesAsList2)
+						 #set( $str = $member ) 
+                         #set( $lower = $str.toString().substring(0,1).toLowerCase())
+                         #set($str2 = $str.toString().substring(1))
+						
+							<p:column filterBy="#{$metaData.getRealClassNameAsVariable().${lower}${str2}}" sortBy="#{$metaData.getRealClassNameAsVariable().${lower}${str2}}" >
+							 <f:facet name="header">
+							<h:outputText value="$member"/>
+							</f:facet>
+							 <h:outputText value="#{$metaData.getRealClassNameAsVariable().${lower}${str2}}"/>
+							</p:column>   
+                    #end
+						
+					
+				
+				</p:dataTable>	
+					
+				
+			</p:panel>
+				
+	   </h:form>
+			</f:view>
+		</ui:define>	  
+		
+		<ui:define name="footer">
+		 <ui:include src="/WEB-INF/facelets/footer.jspx" />
+	    </ui:define>	
+	</ui:composition>
+				
+	</h:body>	
+	
+</html>	
