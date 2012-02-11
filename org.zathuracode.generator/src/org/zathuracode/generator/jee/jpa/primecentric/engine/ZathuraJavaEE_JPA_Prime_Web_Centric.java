@@ -62,6 +62,8 @@ public class ZathuraJavaEE_JPA_Prime_Web_Centric implements IZathuraTemplate,IZa
 				+ GeneratorUtil.slash;
 		String pathCss = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeCentric() + GeneratorUtil.slash + "css"
 		+ GeneratorUtil.slash;
+		String log4j = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeCentric() + GeneratorUtil.slash + "log4j"
+				+ GeneratorUtil.slash;
 		
 		String pathHibernate= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimefaces()+"core-hibernate3.3"+GeneratorUtil.slash;
 		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimefaces()+"primeFaces2.2.1"+GeneratorUtil.slash;
@@ -79,6 +81,9 @@ public class ZathuraJavaEE_JPA_Prime_Web_Centric implements IZathuraTemplate,IZa
 		//copy libraries
 		GeneratorUtil.copyFolder(pathHibernate, pathLib);
 		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+		// copy to Log4j
+		String folderProjectPath = properties.getProperty("folderProjectPath");
+		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
 		
 	}
 	
