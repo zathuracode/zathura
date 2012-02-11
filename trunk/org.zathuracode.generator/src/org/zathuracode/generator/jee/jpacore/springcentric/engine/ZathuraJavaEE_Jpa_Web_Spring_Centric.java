@@ -25,8 +25,8 @@ import org.zathuracode.metadata.model.MetaDataModel;
 
 /**
  * 
- * @author M@uricio
- *
+ * @author Andrés Mauricio Cárdenas Pérez
+ *	mauriciocardenasp@gmail.com
  */
 
 public class ZathuraJavaEE_Jpa_Web_Spring_Centric implements  IZathuraTemplate,IZathuraGenerator {
