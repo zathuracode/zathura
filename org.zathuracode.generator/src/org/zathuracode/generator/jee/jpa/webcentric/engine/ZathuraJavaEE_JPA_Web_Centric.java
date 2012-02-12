@@ -13,6 +13,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zathuracode.generator.jee.jpa.webcentric.utils.IStringBuilder;
 import org.zathuracode.generator.jee.jpa.webcentric.utils.IStringBuilderForId;
 import org.zathuracode.generator.jee.jpa.webcentric.utils.StringBuilder;
@@ -216,6 +217,11 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator, IZathur
 			log.info(Utilities.getInstance().isFinalParamForViewDatesInList());
 			log.info("prueba");
 			
+			// generacion persistence.xml
+			context.put("connectionUrl", EclipseGeneratorUtil.connectionUrl);
+			context.put("connectionDriverClass", EclipseGeneratorUtil.connectionDriverClass);
+			context.put("connectionUsername", EclipseGeneratorUtil.connectionUsername);
+			context.put("connectionPassword", EclipseGeneratorUtil.connectionPassword);
 			
 			context.put("finalParamForView", stringBuilder.finalParamForView(list, metaData));
 
