@@ -66,6 +66,8 @@ public class ZathuraJavaEE_HibernateCore_PrimeCentric implements IZathuraTemplat
 		String pathLib= properties.getProperty("libFolderPath");
 		String pathCss = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeHibernateCentric() + GeneratorUtil.slash + "css"
 		+ GeneratorUtil.slash;
+		String log4j = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeHibernateCentric() + GeneratorUtil.slash + "log4j"
+				+ GeneratorUtil.slash;
 		
 		// Copy Css
 		GeneratorUtil.createFolder(webRootPath + "css");
@@ -79,7 +81,10 @@ public class ZathuraJavaEE_HibernateCore_PrimeCentric implements IZathuraTemplat
 		//copy libraries
 		GeneratorUtil.copyFolder(pathHibernate, pathLib);
 		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
-
+		// copy to Log4j
+		String folderProjectPath = properties.getProperty("folderProjectPath");
+		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
+				
 
 	}
 
