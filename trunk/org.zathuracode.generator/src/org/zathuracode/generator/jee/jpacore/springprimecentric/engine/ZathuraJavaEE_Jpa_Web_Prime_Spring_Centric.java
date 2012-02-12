@@ -62,6 +62,8 @@ public class ZathuraJavaEE_Jpa_Web_Prime_Spring_Centric implements IZathuraTempl
 		String pathWebXml= GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeSpringJpaCentric()+"WEB-INF"+GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEWebSpringPrimeJpaCentricImages = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeSpringJpaCentric() + GeneratorUtil.slash + "images"
 		+ GeneratorUtil.slash;
+		String log4j = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeSpringJpaCentric() + GeneratorUtil.slash + "log4j"
+				+ GeneratorUtil.slash;
 		
 		String pathHibernate= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringJpa()+"core-hibernate3.3"+GeneratorUtil.slash;
 		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringJpa()+"primeFaces2.2.1"+GeneratorUtil.slash;
@@ -84,6 +86,9 @@ public class ZathuraJavaEE_Jpa_Web_Prime_Spring_Centric implements IZathuraTempl
 		GeneratorUtil.copyFolder(pathHibernate, pathLib);
 		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
 		GeneratorUtil.copyFolder(pathSpring, pathLib);
+		//copy log4j
+		String folderProjectPath = properties.getProperty("folderProjectPath");
+		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
 
 	}
 	
