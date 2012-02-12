@@ -71,6 +71,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric implements IZa
 		
 		String pathCss = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeSpringHibernateCentric() + GeneratorUtil.slash + "css"
 		+ GeneratorUtil.slash;
+		String log4j = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeSpringHibernateCentric()+ GeneratorUtil.slash + "log4j"
+				+ GeneratorUtil.slash;
+		
 		// Copy Css
 		GeneratorUtil.createFolder(webRootPath + "css");
 		GeneratorUtil.copyFolder(pathCss, webRootPath + "css" + GeneratorUtil.slash);
@@ -85,6 +88,9 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric implements IZa
 		GeneratorUtil.copyFolder(pathHibernate, pathLib);
 		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
 		GeneratorUtil.copyFolder(pathSpring, pathLib);
+		// copy to Log4j
+		String folderProjectPath = properties.getProperty("folderProjectPath");
+		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
 		
 	}
 
