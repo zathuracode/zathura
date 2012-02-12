@@ -119,8 +119,10 @@
 					#end
 						
 					<p:column headerText="Options" >
-						<p:rowEditor/>
-						<p:commandButton  action="#{${metaData.getRealClassNameAsVariable()}View.actionDeleteDataTableEditable}" onclick="return confirm('Do you really want to delete this Entry?')" image="ui-icon-trash" update="msg" >
+						<p:rowEditor id="row" />
+						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
+						<p:tooltip for="btnDelete" value="Delete" showEffect="fade" hideEffect="fade" />
+						<p:commandButton id="btnDelete" action="#{${metaData.getRealClassNameAsVariable()}View.actionDeleteDataTableEditable}" title="Delete" onclick="return confirm('Do you really want to delete this Entry?')" image="ui-icon-trash" update="msg" >
 						<f:setPropertyActionListener value="#{${metaData.getRealClassNameAsVariable()}}"  target="#{${metaData.getRealClassNameAsVariable()}View.selected${metaData.getRealClassName()}}" />  
 						</p:commandButton>
 						
