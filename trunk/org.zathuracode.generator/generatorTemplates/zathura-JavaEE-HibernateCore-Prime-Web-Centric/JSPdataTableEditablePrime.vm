@@ -1,6 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
@@ -26,8 +26,10 @@
 			 
 			<p:panel id="msgProjectClientesTitle" header="${metaData.getRealClassName()}Data">
 					<p:messages id="msg" showDetail="true"/>
-				<p:dataTable value="#{${metaData.getRealClassNameAsVariable()}View.data}" var="${metaData.getRealClassNameAsVariable()}"
-					paginator="true" rows="5" rowEditListener="#{${metaData.getRealClassNameAsVariable()}View.rowEventListener}" onRowEditUpdate=":form:msg" dynamic="true" >
+				<p:dataTable id ="tabla" value="#{${metaData.getRealClassNameAsVariable()}View.data}" var="${metaData.getRealClassNameAsVariable()}"
+					paginator="true" rows="5" editable="true" >
+					 
+					 <p:ajax event ="rowEdit" update=":form:msg,:form:tabla" listener="#{${metaData.getRealClassNameAsVariable()}View.rowEventListener}" />
 					 
 					#foreach($member  in $finalParamForIdClassAsVariables)
 					  <p:column filterBy="#{$metaData.getRealClassNameAsVariable().$member}" sortBy="#{$metaData.getRealClassNameAsVariable().$member}" 
@@ -122,7 +124,7 @@
 						<p:rowEditor id="row" />
 						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
 						<p:tooltip for="btnDelete" value="Delete" showEffect="fade" hideEffect="fade" />
-						<p:commandButton id="btnDelete" action="#{${metaData.getRealClassNameAsVariable()}View.actionDeleteDataTableEditable}" title="Delete" onclick="return confirm('Do you really want to delete this Entry?')" image="ui-icon-trash" update="msg" >
+						<p:commandButton id="btnDelete" action="#{${metaData.getRealClassNameAsVariable()}View.actionDeleteDataTableEditable}" title="Delete" onclick="return confirm('Do you really want to delete this Entry?')" icon="ui-icon-trash" update=":form:tabla" >
 						<f:setPropertyActionListener value="#{${metaData.getRealClassNameAsVariable()}}"  target="#{${metaData.getRealClassNameAsVariable()}View.selected${metaData.getRealClassName()}}" />  
 						</p:commandButton>
 						
