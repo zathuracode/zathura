@@ -65,7 +65,7 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric implements IZa
 		+ GeneratorUtil.slash;
 		
 		String pathHibernate= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringHibernate()+"core-hibernate3.3"+GeneratorUtil.slash;
-		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringHibernate()+"primeFaces2.2.1"+GeneratorUtil.slash;
+		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringHibernate()+"primeFaces3.2"+GeneratorUtil.slash;
 		String pathSpring= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringHibernate()+"spring3.0"+GeneratorUtil.slash;
 		String pathLib= properties.getProperty("libFolderPath");
 		
