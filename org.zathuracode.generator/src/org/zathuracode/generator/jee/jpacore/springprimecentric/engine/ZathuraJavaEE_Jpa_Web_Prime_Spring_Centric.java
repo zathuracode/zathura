@@ -66,7 +66,7 @@ public class ZathuraJavaEE_Jpa_Web_Prime_Spring_Centric implements IZathuraTempl
 				+ GeneratorUtil.slash;
 		
 		String pathHibernate= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringJpa()+"core-hibernate3.3"+GeneratorUtil.slash;
-		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringJpa()+"primeFaces2.2.1"+GeneratorUtil.slash;
+		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringJpa()+"primeFaces3.2"+GeneratorUtil.slash;
 		String pathSpring= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimeSpringJpa()+"spring3.0"+GeneratorUtil.slash;
 		String pathLib= properties.getProperty("libFolderPath");
 		
