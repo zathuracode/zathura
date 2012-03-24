@@ -66,7 +66,7 @@ public class ZathuraJavaEE_JPA_Prime_Web_Centric implements IZathuraTemplate,IZa
 				+ GeneratorUtil.slash;
 		
 		String pathHibernate= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimefaces()+"core-hibernate3.3"+GeneratorUtil.slash;
-		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimefaces()+"primeFaces2.2.1"+GeneratorUtil.slash;
+		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimefaces()+"primeFaces3.2"+GeneratorUtil.slash;
 		String pathLib= properties.getProperty("libFolderPath");
 		
 		// Copy Css
