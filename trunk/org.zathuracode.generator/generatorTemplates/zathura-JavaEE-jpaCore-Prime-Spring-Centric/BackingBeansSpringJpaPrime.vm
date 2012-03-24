@@ -292,7 +292,9 @@ private IBusinessDelegatorView businessDelegatorView;
 				txt${upper}${str2}.setValue(selected${metaData.getRealClassName()}.get${upper}${str2}());
 				#end
 			#end
-				action_delete();
+				businessDelegatorView.delete${metaData.getRealClassName()}($finalParamForIdClassAsVariablesAsString);
+        		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
+				action_clear();
 				data.remove(selected${metaData.getRealClassName()});
 			
 			}catch(Exception e ){
