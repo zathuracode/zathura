@@ -62,7 +62,7 @@ public class ZathuraJavaEE_HibernateCore_PrimeCentric implements IZathuraTemplat
 
 
 		String pathHibernate= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimefacesHibernate()+"core-hibernate3.3"+GeneratorUtil.slash;
-		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimefacesHibernate()+"primeFaces2.2.1"+GeneratorUtil.slash;
+		String pathPrimeFaces= GeneratorUtil.getGeneratorLibrariesZathuraJavaEEPrimefacesHibernate()+"primeFaces3.2"+GeneratorUtil.slash;
 		String pathLib= properties.getProperty("libFolderPath");
 		String pathCss = GeneratorUtil.getGeneratorExtZathuraJavaEEPrimeHibernateCentric() + GeneratorUtil.slash + "css"
 		+ GeneratorUtil.slash;
