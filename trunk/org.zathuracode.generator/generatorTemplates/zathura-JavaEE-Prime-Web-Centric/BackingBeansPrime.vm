@@ -293,8 +293,10 @@ private ${metaData.getRealClassName()}DTO selected${metaData.getRealClassName()}
 				txt${upper}${str2}.setValue(selected${metaData.getRealClassName()}.get${upper}${str2}());
 				#end
 			#end
-				action_delete();
+				BusinessDelegatorView.delete${metaData.getRealClassName()}($finalParamForIdClassAsVariablesAsString);
 				data.remove(selected${metaData.getRealClassName()});
+				FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
+				action_clear();
 			
 			}catch(Exception e ){
 			 FacesUtils.addErrorMessage(e.getMessage());
