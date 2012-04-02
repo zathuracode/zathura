@@ -10,7 +10,8 @@
         doctypeSystem="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
         <html>
             <head>
-                <title>.::Powered by Zathura Code Generator 2010::.</title>
+                <title>.::Zathuracode Generator 3.0::.</title>
+                <link REL="SHORTCUT ICON" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png"/>
                 <meta http-equiv="Content-Type"
                     content="text/html; charset=ISO-8859-1" />
                     <link rel="stylesheet" type="text/css"
@@ -19,7 +20,8 @@
                             href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
             </head>
             <body>
-                <div id="wrapper">
+                <!--Inicio div   container-->
+				<div id="container">
                     <ui:insert name="header">Header</ui:insert>
                     <div id="body">
                         <ui:insert name="body">Body</ui:insert>
