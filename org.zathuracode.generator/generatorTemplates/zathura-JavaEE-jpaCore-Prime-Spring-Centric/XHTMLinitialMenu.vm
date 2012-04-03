@@ -22,7 +22,7 @@
 			
 			<!-- Crud -->
 			<p:dialog width="600" height="600" widgetVar="crud"
-				header="Welcome to Zathura with PrimeFaces">
+				header="Welcome to Zathura with PrimeFaces" showEffect="explode" hideEffect="explode">
 
 				<div align="center">
 					<h:panelGrid columns="3">
@@ -35,7 +35,7 @@
 			
 			<!-- table -->
 			<p:dialog width="600" height="600" widgetVar="table"
-				header="Welcome to Zathura with PrimeFaces">
+				header="Welcome to Zathura with PrimeFaces" showEffect="explode" hideEffect="explode">
 			
 			<div align="center">	
 			   <h:panelGrid columns="3">
@@ -49,7 +49,7 @@
 			
 			<!-- TableEditable -->
 			<p:dialog width="600" height="600" widgetVar="tableEditable"
-				header="Welcome to Zathura with PrimeFaces">
+				header="Welcome to Zathura with PrimeFaces" showEffect="explode" hideEffect="explode">
 			
 			<div align="center">
 				<h:panelGrid columns="3">
