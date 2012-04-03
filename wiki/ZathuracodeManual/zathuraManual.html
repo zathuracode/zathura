@@ -1,0 +1,736 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Zathura Manual</title>
+
+		<meta http-equiv="keywords"
+			content="zathura, zathura manual, code generation">
+		<meta http-equiv="description" content="Zathura manual">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		 <link REL="SHORTCUT ICON" href="images/icon.png"/>
+
+		<!--		<link rel="stylesheet" type="text/css" href="images/styles.css">-->
+
+		<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 10px;
+}
+
+#basic-accordian {
+	border: 5px solid #EEE;
+	padding: 5px;
+	width: 350px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -175px;
+	z-index: 2;
+	margin-top: -100px;
+}
+
+.accordion_headings {
+	padding: 5px;
+	background: #99CC00;
+	color: #FFFFFF;
+	border: 1px solid #FFF;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.accordion_headings:hover {
+	background: #00CCFF;
+}
+
+.accordion_child {
+	padding: 15px;
+	background: #EEE;
+}
+
+.header_highlight {
+	background: #00CCFF;
+}
+</style>
+		<script type="text/javascript" src="images/accordian.pack.js">
+</script>
+	</head>
+
+	<body onload="new Accordian('basic-accordian',5,'header_highlight');">
+		<h1 style="font-family: Century Gothic">
+			Zathura manual
+		</h1>
+		<br />
+		<br />
+		<br />
+		<ul>
+			<li>
+				<p style="font-family: Century Gothic; font-size: 20px; color: red">
+					Please before doing anything on Eclipse, create a dynamic web
+					project making reference to a web server.(for this example we used
+					tomcat 6)
+				</p>
+			</li>
+		</ul>
+		<br />
+		<div id="basic-accordian" style="width: auto; left: 200px;">
+			<!--Parent of the Accordion-->
+
+			<!--Start of each accordion item-->
+			<div id="test1-header" class="accordion_headings header_highlight">
+				Step 1
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test1-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/01.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+
+			<!--Start of each accordion item-->
+			<div id="test2-header" class="accordion_headings">
+				Step 2
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test2-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/02.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+
+
+			<!--Start of each accordion item-->
+			<div id="test3-header" class="accordion_headings">
+				Step 3
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test3-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/03.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test4-header" class="accordion_headings">
+				Step 4
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test4-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/04.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test5-header" class="accordion_headings">
+				Step 5
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test5-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/05.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test6-header" class="accordion_headings">
+				Step 6
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test6-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/06.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test7-header" class="accordion_headings">
+				Step 7
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test7-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/07.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test8-header" class="accordion_headings">
+				Step 8
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test8-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/08.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test9-header" class="accordion_headings">
+				Step 9
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test9-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/09.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test10-header" class="accordion_headings">
+				Step 10
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test10-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/10.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test11-header" class="accordion_headings">
+				Step 11
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test11-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/11.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test12-header" class="accordion_headings">
+				Step 12
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test12-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<table>
+						<tr>
+							<td>
+								<img src="images/12.jpg" />
+							</td>
+							<td>
+								<img src="images/DataTable.jpg" />
+							</td>
+						</tr>
+					</table>
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test13-header" class="accordion_headings">
+				Step 13
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test13-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/13.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test14-header" class="accordion_headings">
+				Step 14
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test14-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/14.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test15-header" class="accordion_headings">
+				Step 15
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test15-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/15.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test16-header" class="accordion_headings">
+				Step 16
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test16-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/16.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test17-header" class="accordion_headings">
+				Step 17
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test17-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/17.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test18-header" class="accordion_headings">
+				Step 18
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test18-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/18.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+			<!--Start of each accordion item-->
+			<div id="test19-header" class="accordion_headings">
+				Step 19
+			</div>
+			<!--Heading of the accordion ( clicked to show n hide ) -->
+
+			<!--Prefix of heading (the DIV above this) and content (the DIV below this) to be same... eg. foo-header & foo-content-->
+
+			<div id="test19-content">
+				<!--DIV which show/hide on click of header-->
+
+				<!--This DIV is for inline styling like padding...-->
+				<div class="accordion_child">
+					<img src="images/19.jpg" />
+					<br />
+				</div>
+
+			</div>
+			<!--End of each accordion item-->
+
+		</div>
+		<!--End of accordion parent-->
+
+		<!--
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p
+						style="font-family: Century Gothic; font-size: 20px; color: red;">
+						Step 1
+					</p>
+				</li>
+			</ul>
+			<img src="images/01.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 2
+					</p>
+				</li>
+			</ul>
+			<img src="images/02.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 3
+					</p>
+				</li>
+			</ul>
+			<img src="images/03.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 4
+					</p>
+				</li>
+			</ul>
+			<img src="images/04.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 5
+					</p>
+				</li>
+			</ul>
+			<img src="images/05.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 6
+					</p>
+				</li>
+			</ul>
+			<img src="images/06.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 7
+					</p>
+				</li>
+			</ul>
+			<img src="images/07.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 8
+					</p>
+				</li>
+			</ul>
+			<img src="images/08.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 9
+					</p>
+				</li>
+			</ul>
+			<img src="images/09.jpg" />
+		</div>
+		<br />
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 10
+					</p>
+				</li>
+			</ul>
+			<img src="images/10.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 11
+					</p>
+				</li>
+			</ul>
+			<img src="images/11.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 12
+					</p>
+				</li>
+			</ul>
+			<table>
+				<tr>
+					<td>
+						<img src="images/12.jpg" />
+					</td>
+					<td>
+						<img src="images/DataTable.jpg" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 13
+					</p>
+				</li>
+			</ul>
+			<img src="images/13.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 14
+					</p>
+				</li>
+			</ul>
+			<img src="images/14.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 15
+					</p>
+				</li>
+			</ul>
+			<img src="images/15.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 16
+					</p>
+				</li>
+			</ul>
+			<img src="images/16.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 17
+					</p>
+				</li>
+			</ul>
+			<img src="images/17.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 18
+					</p>
+				</li>
+			</ul>
+			<img src="images/18.jpg" />
+		</div>
+		<br />
+
+
+		<div style="border: 2px solid red;">
+			<ul>
+				<li>
+					<p style="font-family: Century Gothic; font-size: 20px; color: red">
+						Step 19
+					</p>
+				</li>
+			</ul>
+			<img src="images/19.jpg" />
+		</div>
+-->
+	</body>
+</html>
