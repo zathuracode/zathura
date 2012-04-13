@@ -17,6 +17,7 @@ select * from dual;
 
 ALTER TABLE PIF_COMPROBANTE ADD CONSTRAINT CMP_ID PRIMARY KEY (CMP_ID);
 
+/*Cometario en el medio*/
 CREATE TABLE PIF_FACTURA(
 FAC_ID bigserial NOT NULL,
 CMP_ID  Integer NOT NULL,
