@@ -30,3 +30,5 @@ ALTER TABLE PIF_FACTURA ADD CONSTRAINT FACTURA_COMPROBANTE FOREIGN KEY (CMP_ID) 
 commit;
 
 select * from PIF;
+
+/*Comentario al final*/
