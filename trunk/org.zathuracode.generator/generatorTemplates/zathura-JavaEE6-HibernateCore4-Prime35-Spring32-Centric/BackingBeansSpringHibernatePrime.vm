@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;    
 import  ${virginPackage}.exceptions.*;
 import ${package}.*;
@@ -28,7 +28,7 @@ import ${virginPackage}.utilities.*;
  
 @Component
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class ${metaData.getRealClassName()}View {
 
 public ${metaData.getRealClassName()}View() {
