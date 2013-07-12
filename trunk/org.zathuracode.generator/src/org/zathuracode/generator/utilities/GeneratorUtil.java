@@ -16,6 +16,13 @@ import org.apache.log4j.Logger;
  * @version 1.0
  */
 public class GeneratorUtil {
+	
+	
+	
+	
+	private final static String generatorTemplatesPath="generatorTemplates";
+	private final static String generatorLibrariesPath="generatorLibraries";
+	private final static String generatorExtPath="generatorExt";
 
 	/** The log. */
 	private static Logger log = Logger.getLogger(GeneratorUtil.class);
@@ -106,6 +113,41 @@ public class GeneratorUtil {
 	private static String generatorExtZathuraJavaEEPrimeSpringJpaCentric= "generatorExt" +GeneratorUtil.slash+"zathura-JavaEE-jpaCore-Prime-Spring-Centric"+GeneratorUtil.slash;
 	private static String generatorLibrariesZathuraJavaEEPrimeSpringJpa="generatorLibraries"+ GeneratorUtil.slash;
 	
+
+		
+	/**
+	 * Retorna el path de los templates de velocity
+	 * @return
+	 */
+	public static String getGeneratorTemplatesPath() {
+		if(fullPath!=null && fullPath.equals("")!= true){
+			return fullPath +generatorTemplatesPath;
+		}
+		return generatorTemplatesPath;
+	}
+
+	/**
+	 * retorna el path de las librerias
+	 * @return
+	 */
+	public static String getGeneratorLibrariesPath() {
+		if(fullPath!=null && fullPath.equals("")!= true){
+			return fullPath +generatorLibrariesPath;
+		}
+		return generatorLibrariesPath;
+	}
+
+	/**
+	 * retorna el path de los extras del proyecto
+	 * @return
+	 */
+	public static String getGeneratorExtPath() {
+		if(fullPath!=null && fullPath.equals("")!= true){
+			return fullPath+generatorExtPath;
+		}
+		return generatorExtPath;
+	}
+
 	// Java JEE jpa+ prime
 	public static String getPrimeCentricTemplates() {
 		if(fullPath!=null && fullPath.equals("")!= true){
@@ -207,7 +249,9 @@ public class GeneratorUtil {
 		}
 		return generatorLibrariesZathuraJavaEEPrimeSpringJpa;
 	}
+//END
 	
+
 	/**
 	 * Gets the full path.
 	 *
