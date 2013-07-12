@@ -20,7 +20,7 @@ import ${virginPackage}.presentation.businessDelegate.*;
 import ${virginPackage}.utilities.*;
 /**
  * @author Zathura Code Generator http://code.google.com/p/zathura/
- * support Andrés Mauricio Cárdenas mauriciocardenasp@gmail.com
+ * 
  */
 public class ${metaData.getRealClassName()}View {
 

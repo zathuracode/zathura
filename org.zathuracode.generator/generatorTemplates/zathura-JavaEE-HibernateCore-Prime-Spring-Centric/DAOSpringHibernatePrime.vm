@@ -29,7 +29,7 @@ import $package.${metaData.getRealClassName()};
  * transactions or they can be augmented to handle user-managed Spring
  * transactions. Each of these methods provides additional information for how
  * to configure it for the desired type of transaction control.
- * support Andrés Mauricio Cárdenas mauriciocardenasp@gmail.com
+ * 
  * @see lidis.${metaData.getRealClassName()}
  */
 @Scope("singleton")
