@@ -2,7 +2,7 @@ package ${virginPackage}.exceptions;
 
 /**
  * @author Zathura Code Generator http://code.google.com/p/zathura/
- * support Andrés Mauricio Cárdenas mauriciocardenasp@gmail.com
+ * 
  */
 public class ZMessManager extends Exception {
 	private static final long serialVersionUID = 1L;

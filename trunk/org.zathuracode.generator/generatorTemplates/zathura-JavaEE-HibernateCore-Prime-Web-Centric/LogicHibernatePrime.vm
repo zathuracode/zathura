@@ -13,7 +13,7 @@ import ${package}.*;
 /**
  * interface ${metaData.getRealClassName()}Logic
  * @author Zathura Code Generator http://code.google.com/p/zathura
- * support Andrés Mauricio Cárdenas mauriciocardenasp@gmail.com
+ * 
  */
 public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealClassName()}Logic{
 

@@ -12,7 +12,7 @@ import org.apache.commons.validator.EmailValidator;
 
 /**
  * @author Zathura Code Generator http://code.google.com/p/zathura/
- * support Andrés Mauricio Cárdenas mauriciocardenasp@gmail.com
+ * 
  */
 public class Utilities {
 

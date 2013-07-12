@@ -21,7 +21,7 @@ public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealC
 
 	/**
 	 * DAO injected by Spring that manages ${metaData.getRealClassName()} entities
-	 * support Andrés Mauricio Cárdenas mauriciocardenasp@gmail.com
+	 * 
 	 */
 	@Autowired
 	private I${metaData.getRealClassName()}DAO ${metaData.getRealClassNameAsVariable()}DAO;

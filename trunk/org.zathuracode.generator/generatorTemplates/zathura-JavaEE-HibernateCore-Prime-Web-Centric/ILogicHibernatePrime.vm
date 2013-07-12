@@ -13,7 +13,7 @@ import ${package}.dto.${metaData.getRealClassName()}DTO;
 /**
  * interface ${metaData.getRealClassName()}Logic
  * @author Zathura Code Generator http://code.google.com/p/zathura
- * support Andrés Mauricio Cárdenas mauriciocardenasp@gmail.com
+ * 
  */
 public interface I${metaData.getRealClassName()}Logic {
 public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception;
