@@ -28,8 +28,8 @@ import org.zathuracode.metadata.model.MetaDataModel;
  * @author Diego Armando Gomez (dgomez@vortexbird.com)
  * @version 1.0
  */
-public class ZathuraJavaEE_HibernateCore4_Spring32_Prime_Centric implements IZathuraTemplate,IZathuraGenerator{
-	private static Logger log=Logger.getLogger(ZathuraJavaEE_HibernateCore4_Spring32_Prime_Centric.class);
+public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemplate,IZathuraGenerator{
+	private static Logger log=Logger.getLogger(ZathuraJavaEE_HibernateCore4_Spring32_Prime.class);
 	//private static String pathTemplates;
 	private Properties properties;
 	private String virginPackageInHd;
@@ -78,7 +78,6 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime_Centric implements IZat
 		String pathMojarra= librariesPath+"mojarra2.1.24"+GeneratorUtil.slash;
 		String pathApacheCommons= librariesPath+"apache-commons"+GeneratorUtil.slash;
 		String pathAopAlliance= librariesPath+"aopalliance1.0"+GeneratorUtil.slash;
-		
 		String pathLog4j=librariesPath+"log4j1.2"+GeneratorUtil.slash;
 		
 		String pathLib= properties.getProperty("libFolderPath");
@@ -86,11 +85,11 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime_Centric implements IZat
 		String pathCss = extPath + GeneratorUtil.slash + "css"+ GeneratorUtil.slash;
 		String log4j = extPath+ GeneratorUtil.slash + "log4j"+ GeneratorUtil.slash;
 		
+		
 		// Copy Css
 		GeneratorUtil.createFolder(webRootPath + "css");
-		GeneratorUtil.copyFolder(pathCss, webRootPath + "css" + GeneratorUtil.slash);
-		
-		GeneratorUtil.copyFolder(pathWebXml,webRootPath+"WEB-INF"+GeneratorUtil.slash);
+		GeneratorUtil.copyFolder(pathCss, webRootPath + "css" + GeneratorUtil.slash);		
+		GeneratorUtil.copyFolder(pathWebXml,webRootPath+"WEB-INF"+GeneratorUtil.slash);		
 		
 		//create folder images and insert .png
 		GeneratorUtil.createFolder(webRootPath + "images");
@@ -110,10 +109,6 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime_Centric implements IZat
 		GeneratorUtil.copyFolder(pathApacheCommons, pathLib);
 		GeneratorUtil.copyFolder(pathAopAlliance, pathLib);
 		GeneratorUtil.copyFolder(pathLog4j, pathLib);
-		
-		
-		
-		
 		
 		// copy to Log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
