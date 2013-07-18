@@ -18,18 +18,6 @@
                tooltip="Zathuracode Generator v 3.0">
          </action>
          
-         <!-- Carga la accion del plugin com.vortexbird.amazilia.plugin.sp.actions.AmaziliaStoreProcedureAction -->
-         
-         <!--
-         <action
-               class="com.vortexbird.amazilia.plugin.sp.actions.AmaziliaStoreProcedureAction"
-               icon="icons/Edit_Connection.gif"
-               id="com.vortexbird.amazilia.plugin.sp.actions.AmaziliaStoreProcedureAction"
-               label="&amp;Zathura Store Procedure Reverse Engineering"
-               toolbarPath="zathuraGroup"
-               tooltip="Zathura Store Procedure Reverse Engineering">
-         </action>
-         -->
       </actionSet>
    </extension>
 
