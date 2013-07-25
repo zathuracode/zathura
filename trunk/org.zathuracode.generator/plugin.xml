@@ -8,6 +8,7 @@
             label="&amp;Zathura"
             visible="true"
             id="org.zathuracode.eclipse.plugin.generator">
+            
         
          <action
                class="org.zathuracode.eclipse.plugin.generator.actions.ZathuraGeneratorAction"
@@ -15,7 +16,7 @@
                id="org.zathuracode.eclipse.plugin.generator.actions.ZathuraGeneratorAction"
                label="&amp;ZathuraCode Generator"               
                toolbarPath="zathuraGroup"
-               tooltip="Zathuracode Generator v 3.0">
+               tooltip="%action-tooltip">
          </action>
          
       </actionSet>
