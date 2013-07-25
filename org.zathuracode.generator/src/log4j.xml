@@ -7,7 +7,6 @@
     <layout class="org.apache.log4j.PatternLayout">
     	<param name="ConversionPattern" value="%-4r [%p] %-c %d{ISO8601}  %m%n"/>
     </layout>
-  
   </appender>
   
  

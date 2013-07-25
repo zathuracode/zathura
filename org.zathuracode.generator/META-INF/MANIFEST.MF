@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: org.zathuracode.generator;singleton:=true
-Bundle-Version: 3.0.0
+Bundle-Version: 3.0.1
 Bundle-Activator: org.zathuracode.eclipse.plugin.generator.ZathuraGeneratorActivator
 Bundle-Vendor: %Bundle-Vendor
 Eclipse-BuddyPolicy: app
