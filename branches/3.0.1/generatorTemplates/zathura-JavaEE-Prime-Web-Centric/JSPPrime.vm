@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	</h:head>		
+	
+	<h:body>
+		  <ui:composition template="/XHTML/CommonColumnsContent.xhtml">
+			<ui:define name="header">
+				<ui:include src="/WEB-INF/facelets/header.jspx" />
+			</ui:define>
+        	<br/>
+        	<br/> 	
+		 
+		 <ui:define name="body">	
+			<f:view>
+			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+		 
+		  <h:form>
+			<div align="center">
+               <h:link id="cmdBack" outcome="goInitialMenu" value="Back" style="color:blue;" />
+			 </div>
+			 <br />
+			<p:panel id="msgProject${metaData.getRealClassName()}Title" header="${metaData.getRealClassName()}" >
+			   <p:messages id="msg" showDetail="true"/>
+			   <p:growl id="men"/>
+			       <h:panelGrid columns="2" id="panel" >
+						#foreach($member  in $finalParamForIdClassAsVariables)
+						 #set( $str = $member ) 
+                         #set( $upper = $str.toString().substring(0,1).toUpperCase() )
+                         #set($str2 = $str.toString().substring(1))
+						 <h:outputText id="msg${upper}${str2}" value="${upper}${str2}"/>
+						 <p:inputText id="txt${upper}${str2}" binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}">
+						 <p:ajax update="panel,msg,panelBotones" listener="#{${metaData.getRealClassNameAsVariable()}View.listener_txtId}"/>
+						 </p:inputText>	
+						#end	
+						#if($isFinalParamForIdClassAsVariablesForDates)
+							#foreach($member  in $finalParamForIdClassAsVariablesForDates)	
+							#set( $str = $member ) 
+                            #set( $upper = $str.toString().substring(0,1).toUpperCase() )
+                            #set($str2 = $str.toString().substring(1))
+							<h:outputText id="msg${upper}${str2}" value=" ${upper}${str2}"/>
+							##OJO EN EL MANAGEBEAN HAY QUE CREAR UN ACTION PARA QUE EN EL EVENTO DE CAPTURAR LA FECHA SE ACTUALICE EL GROWL DE ID MEN 
+							<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}" >
+							<p:ajax event="dateSelect" listener="#{${metaData.getRealClassNameAsVariable()}View.listener_txt${upper}${str2}}" update="men" />
+							</p:calendar>
+							#end	
+						#end	
+						
+						#foreach($member  in $finalParamVariablesAsList)
+						#set( $str = $member ) 
+                        #set( $upper = $str.toString().substring(0,1).toUpperCase() )
+                        #set($str2 = $str.toString().substring(1))	
+						<h:outputText id="msg${upper}${str2}" value=" ${upper}${str2}"/>
+						<p:inputText id="txt${upper}${str2}" disabled="true" binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}"/>
+						#end	
+						
+						#if($isFinalParamDatesAsList)
+							#foreach($member  in $finalParamDatesAsList)
+							#set( $str = $member ) 
+                            #set( $upper = $str.toString().substring(0,1).toUpperCase() )
+                            #set($str2 = $str.toString().substring(1))	
+							<h:outputText id="msg${upper}${str2}" value=" ${upper}${str2}"/>
+							##OJO EN EL MANAGEBEAN HAY QUE CREAR UN ACTION PARA QUE EN EL EVENTO DE CAPTURAR LA FECHA SE ACTUALICE EL GROWL DE ID MEN 
+							<p:calendar showOn="button" navigator="true" locale="en" 
+							binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}" >
+							<p:ajax event="dateSelect" listener="#{${metaData.getRealClassNameAsVariable()}View.listener_txt${upper}${str2}}" update="men" />
+							</p:calendar>	
+							#end	
+						#end	
+						
+				   </h:panelGrid>
+				   
+				   <h:panelGrid id="panelBotones" columns="4">
+					
+						<p:commandButton id="btnSave" disabled="true" value="Save" action="#{${metaData.getRealClassNameAsVariable()}View.action_save}" update="msg,panel,panelBotones"          binding="#{${metaData.getRealClassNameAsVariable()}View.btnSave}" />
+						<p:commandButton id="btnModify" disabled="true" value="Modify" action="#{${metaData.getRealClassNameAsVariable()}View.action_modify}" update="msg,panel,panelBotones"    binding="#{${metaData.getRealClassNameAsVariable()}View.btnModify}" />
+						<p:commandButton id="btnDelete" disabled="true" value="Delete" action="#{${metaData.getRealClassNameAsVariable()}View.action_delete}" update="msg,panel,panelBotones"    binding="#{${metaData.getRealClassNameAsVariable()}View.btnDelete}" onclick="return confirm('Do you really want to delete this Entry?')" />
+						<p:commandButton id="btnClear" disabled="false" value="Clear" action="#{${metaData.getRealClassNameAsVariable()}View.action_clear}" update="msg,panel,panelBotones"      binding="#{${metaData.getRealClassNameAsVariable()}View.btnClear}" />
+				   
+				   </h:panelGrid>
+					
+			</p:panel>
+			
+		</h:form>	
+		  </f:view>
+	 </ui:define>	  
+	
+	  <ui:define name="footer">
+		 <ui:include src="/WEB-INF/facelets/footer.jspx" />
+	   </ui:define>	
+	</ui:composition>
+	</h:body>	
+
+</html>	

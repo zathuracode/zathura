@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <application>
+      <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+      <variable-resolver>org.springframework.web.jsf.DelegatingVariableResolver</variable-resolver>
+    </application>	
+	
+    #foreach($metaData  in $dataModel.theMetaData)
+        <managed-bean>
+            <managed-bean-name>${metaData.getRealClassNameAsVariable()}View</managed-bean-name>
+            <managed-bean-class>${virginPackage}.presentation.backingBeans.${metaData.getRealClassName()}View</managed-bean-class>
+            <managed-bean-scope>request</managed-bean-scope>
+				<managed-property>
+				 <property-name>businessDelegatorView</property-name>
+				 <value>#{BusinessDelegatorView}</value>	
+				</managed-property>
+        </managed-bean>
+    #end
+    #foreach($metaData  in $dataModel.theMetaData)
+        <navigation-rule>
+            <from-view-id>/XHTML/${metaData.getRealClassNameAsVariable()}.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goInitialMenu</from-outcome>
+                <to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/${metaData.getRealClassNameAsVariable()}ListDataTable.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goInitialMenu</from-outcome>
+                <to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/${metaData.getRealClassNameAsVariable()}ListDataTableEditable.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>goInitialMenu</from-outcome>
+                <to-view-id>/XHTML/initialMenu.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>go${metaData.getRealClassName()}</from-outcome>
+                <to-view-id>/XHTML/${metaData.getRealClassNameAsVariable()}.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>go${metaData.getRealClassName()}ListDataTable</from-outcome>
+                <to-view-id>/XHTML/${metaData.getRealClassNameAsVariable()}ListDataTable.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+        <navigation-rule>
+            <from-view-id>/XHTML/initialMenu.xhtml</from-view-id>
+            <navigation-case>
+                <from-outcome>go${metaData.getRealClassName()}ListDataTableEditable</from-outcome>
+                <to-view-id>/XHTML/${metaData.getRealClassNameAsVariable()}ListDataTableEditable.xhtml</to-view-id>
+                <redirect />
+            </navigation-case>
+        </navigation-rule>
+    #end
+</faces-config>
