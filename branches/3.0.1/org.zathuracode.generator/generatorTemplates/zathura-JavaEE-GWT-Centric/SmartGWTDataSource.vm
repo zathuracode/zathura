@@ -1,0 +1,451 @@
+package ${virginPackage}.client.smartds;
+
+import java.util.*;
+
+import ${virginPackage}.client.dataservice.DataService${metaData.getRealClassName()};
+import ${virginPackage}.client.dataservice.DataService${metaData.getRealClassName()}Async;
+import ${virginPackage}.client.dto.${metaData.getRealClassName()}DTO;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.Random;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import com.smartgwt.client.data.DSRequest;
+import com.smartgwt.client.data.DSResponse;
+import com.smartgwt.client.data.DataSourceField;
+import com.smartgwt.client.data.fields.*;
+import com.smartgwt.client.rpc.RPCResponse;
+import com.smartgwt.client.util.JSOHelper;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.Window;
+import com.smartgwt.client.widgets.events.CloseClickHandler;
+import com.smartgwt.client.widgets.events.CloseClientEvent;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+/**
+ * A SwagSwapGWT client helper that makes remote calls to ItemServiceGWTWrapper
+ * It conforms to the requirements of SwagSwapGWT components (which are a layer on top
+ * of the SmartClient javascript lib)
+ * 
+ * This is inspired by http://code.google.com/p/smartgwt-extensions/source/browse/trunk/src/main/java/com/smartgwt/extensions/gwtrpcds/client/example/SimpleGwtRPCDS.java
+ */
+public class SmartGWTDataSource${metaData.getRealClassName()} extends AbstractGWTRPCDataSource {
+
+	// TODO is singleton what we want here?
+	private static SmartGWTDataSource${metaData.getRealClassName()} instance = null;
+	
+	private static Integer totalRows;
+
+	public static SmartGWTDataSource${metaData.getRealClassName()} getInstance() {
+		if (instance == null) {
+			instance = new SmartGWTDataSource${metaData.getRealClassName()}();
+		}
+		return instance;
+	}
+
+	private SmartGWTDataSource${metaData.getRealClassName()}() {
+		#foreach(${member2}  in ${finalMemberForId})
+    		#if(${member2.getType().getSimpleName()} == "Date")
+    			DataSourceField key$velocityCount = new DataSourceDateField("${member2.getName()}");
+            #elseif(${member2.getType().getSimpleName()} == "String")
+    			DataSourceField key$velocityCount = new DataSourceTextField("${member2.getName()}");
+    		#elseif(${member2.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
+    			DataSourceField key$velocityCount = new DataSourceIntegerField("${member2.getName()}");
+    		#elseif(${member2.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
+    			DataSourceField key$velocityCount = new DataSourceIntegerField("${member2.getName()}");
+    		#elseif(${member2.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
+    			DataSourceField key$velocityCount = new DataSourceBooleanField("${member2.getName()}");
+    		#elseif(${member2.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
+    			DataSourceField key$velocityCount = new DataSourceFloatField("${member2.getName()}");
+    		#else
+    			DataSourceField key$velocityCount = new DataSourceIntegerField("${member2.getName()}");
+			#end
+			key${velocityCount}.setPrimaryKey(true);
+			// AutoIncrement on server.
+			key${velocityCount}.setRequired (true);
+			addField (key$velocityCount);
+		#end
+		
+		#foreach(${member2}  in ${finalMembersWithoutId})
+				#if(${member2.getType().getSimpleName()} == "Date")
+					#if(${member2.getLength()} && ${member2.getNullable()})
+						addField(new DataSourceDateField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+					#else
+						addField(new DataSourceDateField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+					#end
+        		#elseif(${member2.getType().getSimpleName()} == "String")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, false));
+						#else
+							addField(new DataSourceTextField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#elseif(${member2.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, false));
+						#else
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#elseif(${member2.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, false));
+						#else
+							addField(new DataSourceIntegerField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#elseif(${member2.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceBooleanField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceBooleanField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getLength()}, false));
+						#else
+							addField(new DataSourceBooleanField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#elseif(${member2.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
+						#if(${member2.getLength()} && ${member2.getNullable()})
+							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, ${member2.getNullable()}));
+						#elseif(${member2.getLength()})
+							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}", ${member2.getPrecision()}, false));
+						#else
+							addField(new DataSourceFloatField("${member2.getName()}", "${member2.getGetNameOfPrimaryName()}"));
+						#end
+				#end
+		#end
+	}
+
+	@Override
+	protected void executeFetch(final String requestId,
+			final DSRequest request, final DSResponse response) {
+		DataService${metaData.getRealClassName()}Async service = GWT
+				.create(DataService${metaData.getRealClassName()}.class);
+				
+		int startRow = request.getStartRow();
+        int finalRow = request.getEndRow();
+		
+		service.totalRows(new AsyncCallback<Long>() {
+			
+			@Override
+			public void onSuccess(Long result) {
+				totalRows = result.intValue();
+				
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+		        response.setStatus(RPCResponse.STATUS_FAILURE);
+
+                final Window window = new Window();
+                window.setWidth(360);
+                window.setHeight(115);
+                window.setTitle("Error");
+                window.setShowMinimizeButton(false);
+                window.setIsModal(true);
+                window.setShowModalMask(true);
+                window.centerInPage();
+                window.addCloseClickHandler(new CloseClickHandler() {
+                        @Override
+                        public void onCloseClick(CloseClientEvent event) {
+                            window.destroy();
+                        }
+                    });
+
+                Label label = new Label(caught.getMessage());
+                window.addItem(label);
+                window.show();
+
+                processResponse(requestId, response);
+	
+			}
+		});
+
+		
+		service.fetch(startRow,finalRow,new AsyncCallback<List<${metaData.getRealClassName()}DTO>>() {
+			public void onFailure(Throwable caught) {
+				response.setStatus(RPCResponse.STATUS_FAILURE);
+				 final Window window = new Window();
+                    window.setWidth(360);
+                    window.setHeight(115);
+                    window.setTitle("Error");
+                    window.setShowMinimizeButton(false);
+                    window.setIsModal(true);
+                    window.setShowModalMask(true);
+                    window.centerInPage();
+                    window.addCloseClickHandler(new CloseClickHandler() {
+						@Override
+						public void onCloseClick(CloseClientEvent event) {
+							window.destroy();
+							
+						}
+					});
+                    Label label = new Label(caught.getMessage());
+                    window.addItem(label);
+                    window.show();
+
+				processResponse(requestId, response);
+			}
+			public void onSuccess(List<${metaData.getRealClassName()}DTO> result) {
+				int size = result.size();
+				// Create list for return - it is just requested records
+				ListGridRecord[] list = new ListGridRecord[size];
+				if (size > 0) {
+					for (int i = 0; i < result.size(); i++) {
+						ListGridRecord record = new ListGridRecord();
+						copyValues(result.get(i), record);
+						list[i] = record;
+					}
+				}
+				response.setData(list);
+				response.setTotalRows(totalRows);
+				//response.setTotalRows(result.size());
+				processResponse(requestId, response);
+			}
+		});
+	}
+	
+	@Override
+	protected void executeAdd(final String requestId, final DSRequest request,
+			final DSResponse response) {
+		// Retrieve record which should be added.
+		JavaScriptObject data = request.getData();
+		ListGridRecord rec = new ListGridRecord(data);
+		${metaData.getRealClassName()}DTO testRec = new ${metaData.getRealClassName()}DTO();
+		copyValues(rec, testRec);
+		DataService${metaData.getRealClassName()}Async service = GWT
+				.create(DataService${metaData.getRealClassName()}.class);
+		
+		//get newImageBytes
+		//TODO figure out where request.getUploadedFile is
+//		Object newImageBytes = request.getAttribute("newImageBytes");
+		
+		service.add(testRec, new AsyncCallback<${metaData.getRealClassName()}DTO>() {
+			public void onFailure(Throwable caught) {
+				response.setStatus(RPCResponse.STATUS_FAILURE);
+				 final Window window = new Window();
+                    window.setWidth(360);
+                    window.setHeight(115);
+                    window.setTitle("Error");
+                    window.setShowMinimizeButton(false);
+                    window.setIsModal(true);
+                    window.setShowModalMask(true);
+                    window.centerInPage();
+                    window.addCloseClickHandler(new CloseClickHandler() {
+						@Override
+						public void onCloseClick(CloseClientEvent event) {
+							window.destroy();
+							
+						}
+					});
+                    Label label = new Label(caught.getMessage());
+                    window.addItem(label);
+                    window.show();
+
+				processResponse(requestId, response);
+			}
+
+			public void onSuccess(${metaData.getRealClassName()}DTO result) {
+				ListGridRecord[] list = new ListGridRecord[1];
+				ListGridRecord newRec = new ListGridRecord();
+				copyValues(result, newRec);
+				list[0] = newRec;
+				response.setData(list);
+				processResponse(requestId, response);
+			}
+		});
+	}
+
+	@Override
+	protected void executeUpdate(final String requestId,
+			final DSRequest request, final DSResponse response) {
+		// Retrieve record which should be updated.
+		// Next line would be nice to replace with line:
+		// ListGridRecord rec = request.getEditedRecord ();
+		ListGridRecord rec = getEditedRecord(request);
+		${metaData.getRealClassName()}DTO testRec = new ${metaData.getRealClassName()}DTO();
+		copyValues(rec, testRec);
+		DataService${metaData.getRealClassName()}Async service = GWT
+				.create(DataService${metaData.getRealClassName()}.class);
+		
+		//Just do a fetch to refresh the item
+		if (testRec.isFetchOnly()) {
+			service.fetch(
+				#foreach(${member2}  in ${finalMemberForId})
+					testRec.get${member2.getGetNameOfPrimaryName()}(),
+				#end
+			new UpdateOrFetchCallback(requestId, response));
+		}
+		else { //really do an update
+			service.update(testRec, new UpdateOrFetchCallback(requestId, response));
+		}
+		
+	}
+
+	/**
+	 * 
+	 * Used to trick the browser cache
+	 *
+	 */
+	final class UpdateOrFetchCallback implements AsyncCallback<${metaData.getRealClassName()}DTO> {
+		private final String requestId;
+		private final DSResponse response;
+
+		private UpdateOrFetchCallback(String requestId, DSResponse response) {
+			this.requestId = requestId;
+			this.response = response;
+		}
+		
+		public void onFailure(Throwable caught) {
+		final Window window = new Window();
+             window.setWidth(360);
+             window.setHeight(115);
+             window.setTitle("Error");
+             window.setShowMinimizeButton(false);
+             window.setIsModal(true);
+             window.setShowModalMask(true);
+             window.centerInPage();
+             window.addCloseClickHandler(new CloseClickHandler() {
+					@Override
+					public void onCloseClick(CloseClientEvent event) {
+						window.destroy();
+						
+					}
+				});
+             Label label = new Label(caught.getMessage());
+             window.addItem(label);
+             window.show();
+
+			throw new RuntimeException(caught);
+		}
+		
+		public void onSuccess(${metaData.getRealClassName()}DTO result) {
+			ListGridRecord[] list = new ListGridRecord[1];
+			ListGridRecord updRec = new ListGridRecord();
+			//Trick the cache so that the image updates in the TileGrid
+			copyValues(result, updRec);
+			list[0] = updRec;
+			response.setData(list);
+			processResponse(requestId, response);
+		}
+	}
+	
+	@Override
+	protected void executeRemove(final String requestId,
+			final DSRequest request, final DSResponse response) {
+		// Retrieve record which should be removed.
+		JavaScriptObject data = request.getData();
+		final ListGridRecord rec = new ListGridRecord(data);
+		${metaData.getRealClassName()}DTO testRec = new ${metaData.getRealClassName()}DTO();
+		copyValues(rec, testRec);
+		DataService${metaData.getRealClassName()}Async service = GWT
+				.create(DataService${metaData.getRealClassName()}.class);
+		service.remove(testRec, new AsyncCallback<Void>() {
+			public void onFailure(Throwable caught) {
+				response.setStatus(RPCResponse.STATUS_FAILURE);
+				final Window window = new Window();
+             window.setWidth(360);
+             window.setHeight(115);
+             window.setTitle("Error");
+             window.setShowMinimizeButton(false);
+             window.setIsModal(true);
+             window.setShowModalMask(true);
+             window.centerInPage();
+             window.addCloseClickHandler(new CloseClickHandler() {
+					@Override
+					public void onCloseClick(CloseClientEvent event) {
+						window.destroy();
+						
+					}
+				});
+             Label label = new Label(caught.getMessage());
+             window.addItem(label);
+             window.show();
+
+				processResponse(requestId, response);
+			}
+
+			public void onSuccess(Void result) {
+				ListGridRecord[] list = new ListGridRecord[1];
+				// We do not receive removed record from server.
+				// Return record from request.
+				list[0] = rec;
+				response.setData(list);
+				processResponse(requestId, response);
+			}
+
+		});
+	}
+
+	/**
+	 * Remove cache tricking side effect QueryString from imageKey 
+	 * see above: result.setImageKey(appendRandomQueryString(result.getImageKey()));
+	 * @param imageKey
+	 * @return imageKey without cache trick QueryString
+	 */
+	public static String removeQueryString(String imageKey) {
+		// if it's a new item there is no imageKey
+		if (imageKey==null) {
+			return null;
+		}
+		Integer queryStringSuffix = imageKey.indexOf("?");
+		if (queryStringSuffix == -1) {
+			queryStringSuffix = imageKey.length();
+		}
+		String imagekeyNoQueryString = imageKey.substring(0, queryStringSuffix);
+		return imagekeyNoQueryString;
+	}
+	
+	/**
+	 * Used to trick the browser cache
+	 * @param imageKey
+	 * @return imageKey with Random QueryString
+	 */
+	public static String appendRandomQueryString(String imageKey) {
+		String imageKeyNoQueryString = removeQueryString(imageKey);
+		if (imageKeyNoQueryString==null) {
+			return null;
+		}
+		String imageKeyWithRandomQueryString = imageKeyNoQueryString + "?" + Random.nextInt();
+		return imageKeyWithRandomQueryString;
+	}
+	
+	public static void copyValues(ListGridRecord from, ${metaData.getRealClassName()}DTO to) {
+        	#foreach(${member2}  in ${finalMembers})
+        		#if(${member2.getType().getSimpleName()} == "Date")
+        			to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsDate("${member2.getName()}"));
+        		#elseif(${member2.getType().getSimpleName()} == "String")
+        			to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsString("${member2.getName()}"));
+				#elseif(${member2.getType().getSimpleName()} == "Long" || ${member2.getType().getSimpleName()} == "long")
+					to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
+				#elseif(${member2.getType().getSimpleName()} == "int" || ${member2.getType().getSimpleName()} == "Integer")
+					to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsInt("${member2.getName()}"));
+				#elseif(${member2.getType().getSimpleName()} == "Boolean" || ${member2.getType().getSimpleName()} == "boolean")
+					to.set${member2.getGetNameOfPrimaryName()}(from.getAttributeAsBoolean("${member2.getName()}"));
+				#elseif(${member2.getType().getSimpleName()} == "Double" || ${member2.getType().getSimpleName()} == "double")
+					to.set${member2.getGetNameOfPrimaryName()}(new ${member2.getType().getSimpleName()}(from.getAttributeAsString("${member2.getName()}")));
+        		#end
+    		#end
+	}
+
+	public static void copyValues(${metaData.getRealClassName()}DTO from, ListGridRecord to) {
+	#foreach(${member2}  in ${finalMembers})
+    to.setAttribute("${member2.getName()}", from.get${member2.getGetNameOfPrimaryName()}());
+    #end
+	}
+
+	private ListGridRecord getEditedRecord(DSRequest request) {
+		// Retrieving values before edit
+		JavaScriptObject oldValues = request
+				.getAttributeAsJavaScriptObject("oldValues");
+		// Creating new record for combining old values with changes
+		ListGridRecord newRecord = new ListGridRecord();
+		// Copying properties from old record
+		JSOHelper.apply(oldValues, newRecord.getJsObj());
+		// Retrieving changed values
+		JavaScriptObject data = request.getData();
+		// Apply changes
+		JSOHelper.apply(data, newRecord.getJsObj());
+		return newRecord;
+	}
+}
