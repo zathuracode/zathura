@@ -1,0 +1,400 @@
+/* Main Layout Styles */
+body {
+	background: #EBEBEB;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #666;
+}
+
+
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+img {
+	border: none;
+}
+
+ul,li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: #0088B5;
+	font-weight: bold;
+}
+
+a:hover {
+	color: #0078A0;
+}
+
+#container {
+	width: 955px;
+	padding: 15px;
+	-moz-border-radius: 13px;
+	background: #fff;
+	margin: 10px auto;
+	overflow: auto;
+}
+
+#content {
+	width: 930px;
+	overflow: auto;
+}
+
+#header {
+	width: 930px;
+	height: 55px;
+}
+
+.logo {
+	
+}
+
+ul#toplinks {
+	float: right;
+	color: #999;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul#toplinks li {
+	float: right;
+	margin: 3px 0 0 10px;
+}
+
+ul#toplinks a {
+	color: #999;
+	font-weight: normal;
+}
+
+ul#toplinks a:hover {
+	color: #666;
+	font-weight: normal;
+}
+
+#nav {
+	padding: 0;
+	width: 910px;
+	background: #008DBC url(images/bg_nav.png) repeat-x bottom;
+	padding: 9px 0 10px 20px;
+	-moz-border-radius: 10px;
+	color: #fff;
+	height: 12px;
+	margin: 15px 0;
+}
+
+#nav li {
+	padding-right: 20px;
+	float: left;
+	display: block;
+}
+
+#nav a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+#nav a:hover {
+	color: #33CCFF;
+}
+
+#footer {
+	width: 960px;
+	text-align: center;
+	margin: 10px auto;
+	padding-bottom: 15px;
+	clear: both;
+}
+
+#footer ul {
+	width: 380px;
+	margin: 0 auto;
+}
+
+#footer li {
+	float: center;
+	margin-right: 20px;
+}
+
+#footer li a {
+	color: #999;
+}
+
+/* Homepage Styles */
+#topbox {
+	width: 890px;
+	padding: 20px;
+	-moz-border-radius: 10px;
+	background: #00ACE6 url(images/bg_fptopbox.png) repeat-x bottom;
+	overflow: auto;
+	color: #fff;
+}
+
+#topbox h4 {
+	color: #fff;
+	font-size: 12px;
+	letter-spacing: -1px;
+	margin: 0;
+	padding: 0 0 5px 0;
+}
+
+#topbox input {
+	border: 1px solid #0093C4;
+	padding: 3px 3px;
+	width: 230px;
+}
+
+#topbox select {
+	margin-left: 3px;
+}
+
+#topbox .btn {
+	padding: 3px 5px;
+	background: #004055;
+	color: #fff;
+	border: none;
+	-moz-border-radius: 3px;
+	position: absolute;
+	margin-left: 5px;
+	cursor: pointer;
+	width: 60px;
+	font-size: 12px;
+}
+
+#topbox .btn:hover {
+	background: #005773;
+}
+
+#tbleft {
+	float: left;
+	width: 450px;
+	padding: 15px 0 0 10px;
+}
+
+#tbleft .tld {
+	width: 75px;
+}
+
+#tbright {
+	font-size: 12px;
+	float: right;
+	width: 390px;
+	border-left: 1px solid #00ACE5;
+	padding-left: 15px;
+}
+
+#tbright #boxleft {
+	float: left;
+	width: 225px;
+}
+
+#tbright input {
+	width: 145px;
+	margin: 5px 0 0 5px;
+}
+
+#tbright p {
+	float: right;
+	margin: 0;
+	padding: 0;
+}
+
+#tbright p.link {
+	float: left;
+	margin: 13px 0 0 10px;
+	font-size: 12px;
+	padding: 0;
+}
+
+#tbright a {
+	color: #fff;
+	text-decoration: underline;
+}
+
+ul#promobox {
+	width: 930px;
+	position: relative;
+	float: left;
+	margin-bottom: 15px;
+}
+
+ul#promobox p {
+	margin: 0;
+	padding: 0;
+}
+
+ul#promobox li {
+	width: 270px;
+	padding: 20px 10px 20px 20px;
+	float: left;
+	background: #008DBC url(images/bg_promo1.png) repeat-x bottom;
+	margin: 15px 15px 0 0;
+	-moz-border-radius: 10px;
+	color: #fff;
+}
+
+ul#promobox ul {
+	margin: 0 0 10px 0;
+}
+
+ul#promobox li ul li {
+	margin: 5px 0 0 0;
+	background: url(images/bullet.png) no-repeat left center;
+	padding: 0 0 0 10px;
+	width: 250px;
+}
+
+ul#promobox li h3 {
+	line-height: 1;
+	color: #fff;
+	letter-spacing: -1px;
+	font-size: 12px;
+	float: left;
+	margin: 0;
+	padding: 0 0 3px 0;
+}
+
+ul#promobox li .pricebox {
+	line-height: 1;
+	float: right;
+	text-align: center;
+	padding-right: 10px;
+}
+
+ul#promobox li .pricebox .lrg {
+	line-height: 1;
+	letter-spacing: -1px;
+	font-size: 12px;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+
+ul#promobox a {
+	background: #004055;
+	color: #fff;
+	float: left;
+	margin: 15px 10px 0 0;
+	padding: 5px 10px;
+	text-decoration: none;
+	-moz-border-radius: 5px;
+	font-weight: normal;
+}
+
+ul#promobox a:hover {
+	background: #005773;
+}
+
+ul#promobox li.two {
+	background: #00ACE6 url(images/bg_promo2.png) repeat-x bottom;
+}
+
+ul#promobox li.three {
+	margin-right: 0;
+	background: #09C1FF url(images/bg_promo3.png) repeat-x bottom;
+}
+
+#newsbox {
+	width: 575px;
+	padding: 20px;
+	background: #f7f7f7;
+	float: left;
+	-moz-border-radius: 10px;
+}
+
+#newsbox p {
+	margin: 0;
+	padding: 0;
+}
+
+#newsbox h5 {
+	font-size: 12px;
+	letter-spacing: -1px;
+	color: #006C91;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}
+
+#newsbox h6 a {
+	font-size: 12px;
+	letter-spacing: -1px;
+	color: #006C91;
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+}
+
+#newsbox h6 {
+	margin-bottom: 2px;
+	padding: 0;
+	line-height: 1;
+}
+
+#newsbox li {
+	margin-top: 15px;
+	line-height: 1.5em;
+}
+
+#newsbox .rss a {
+	float: right;
+	margin: 3px 8px 0 0;
+	color: #999;
+	font-weight: normal;
+}
+
+#quotes {
+	width: 260px;
+	padding: 20px;
+	float: right;
+	background: #09C1FF url(images/bg_promo3.png) repeat-x bottom;
+	-moz-border-radius: 10px;
+	color: #fff;
+}
+
+#quotes p {
+	margin: 0;
+	padding: 0;
+}
+
+#quotes h3 {
+	line-height: 1;
+	letter-spacing: -1px;
+	font-size: 25px;
+	margin: 0;
+	padding: 0;
+}
+
+#quotes li {
+	margin-top: 17px;
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: -1px;
+}
+
+#quotes a {
+	float: left;
+	color: #fff;
+	padding: 0;
+	margin-top: 15px;
+}
+
+/*  Para que se vean pequenos los componentes*/
+th,td {
+	font-size: 12px;
+}

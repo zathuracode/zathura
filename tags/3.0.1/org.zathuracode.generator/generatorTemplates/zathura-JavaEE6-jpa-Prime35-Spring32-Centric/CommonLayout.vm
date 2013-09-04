@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	
+	
+	 <h:head>
+                <title>.::Zathuracode Generator 3.0::.</title>
+                <link REL="SHORTCUT ICON" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png"/>
+                <link rel="stylesheet" type="text/css"
+                            href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
+     </h:head>
+
+	<h:body>
+		<!-- beging  container -->
+		<div id="container">
+			<ui:insert name="content" />
+		</div>
+		<!-- end  container -->
+	</h:body>
+</html>
