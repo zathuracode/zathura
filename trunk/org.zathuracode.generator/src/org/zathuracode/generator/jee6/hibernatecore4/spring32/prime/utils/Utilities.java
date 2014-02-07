@@ -164,7 +164,7 @@ public class Utilities {
 	 * @param clazz the clazz
 	 * @return the list< string>
 	 */
-	public List<String> addVariablesValuesToListDependingOnDataTypeForID(List<String> finalParam2, Field field, String variableName, Class clazz) {
+	public List<String> addVariablesValuesToListDependingOnDataTypeForID(List<String> finalParam2, Field field, String variableName, String methodAccesorName, Class clazz) {
 
 		String realClassName = field.getType().getSimpleName();
 
@@ -174,32 +174,32 @@ public class Utilities {
 
 		if (realClassName.equalsIgnoreCase("String")) {
 			if (!length.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkWordAndCheckWithlength(" + variableName + "," + length + ")==false"
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkWordAndCheckWithlength(" + methodAccesorName + "," + length + ")==false"
 						+ ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 
 		}
 
 		if (realClassName.equalsIgnoreCase("Integer")) {
 			if (!precision.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + methodAccesorName + ","
 						+ precision + "," + 0 + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Double")) {
 			if (!precision.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + methodAccesorName + ","
 						+ precision + "," + scale + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Long")) {
 			if (!precision.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + methodAccesorName + ","
 						+ precision + "," + 0 + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Float")) {
 			if (!precision.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + methodAccesorName + ","
 						+ precision + "," + scale + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
@@ -282,38 +282,38 @@ public class Utilities {
 	 * @param length the length
 	 * @return the list< string>
 	 */
-	public List<String> addVariablesValuesToListDependingOnDataType(List<String> finalParam2, String realClassName, String variableName, String precision,
+	public List<String> addVariablesValuesToListDependingOnDataType(List<String> finalParam2, String realClassName, String variableName, String methodAccesorName, String precision,
 			String scale, String length) {
 
 		if (realClassName.equalsIgnoreCase("String")) {
 			if (!length.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkWordAndCheckWithlength(" + variableName + "," + length + ")==false"
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkWordAndCheckWithlength(" + methodAccesorName + "," + length + ")==false"
 						+ ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 
 		}
 
 		if (realClassName.equalsIgnoreCase("Integer")) {
 			if (!precision.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + methodAccesorName + ","
 						+ precision + "," + 0 + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Double")) {
 			if (!precision.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + methodAccesorName + ","
 						+ (new Integer(precision) - new Integer(scale)) + "," + scale + ")==false" + ifconditionClose + throwExceptionLength + "\""
 						+ variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Long")) {
 			if (!precision.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + methodAccesorName + ","
 						+ precision + "," + 0 + ")==false" + ifconditionClose + throwExceptionLength + "\"" + variableName + "\"" + throwExceptionClose);
 		}
 
 		if (realClassName.equalsIgnoreCase("Float")) {
 			if (!precision.equals("0"))
-				finalParam2.add(ifcondition + variableName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + variableName + ","
+				finalParam2.add(ifcondition + methodAccesorName + "!=null && " + "Utilities.checkNumberAndCheckWithPrecisionAndScale(\"\"+" + methodAccesorName + ","
 						+ (new Integer(precision) - new Integer(scale)) + "," + scale + ")==false" + ifconditionClose + throwExceptionLength + "\""
 						+ variableName + "\"" + throwExceptionClose);
 		}
@@ -537,6 +537,7 @@ public class Utilities {
 		String model = modelPckg;
 		String presentation = pckge + "presentation_";
 		String dao = dataAcces + "dao_";
+		String api = dataAcces + "api_";
 
 		List<String> folderBuilder = new ArrayList<String>();
 
@@ -547,6 +548,8 @@ public class Utilities {
 		folderBuilder.add(pckge + "utilities");
 
 		folderBuilder.add(dao);
+		
+		folderBuilder.add(api);
 
 		//folderBuilder.add(dataAcces + "daoFactory");
 		//folderBuilder.add(dataAcces + "sessionFactory");
