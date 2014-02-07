@@ -82,10 +82,15 @@ public class ZathuraJavaEE_Jpa_Web_Prime_Spring_Centric implements IZathuraTempl
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebSpringPrimeJpaCentricImages, webRootPath + "images" + GeneratorUtil.slash);
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
-		//copy libraries
-		GeneratorUtil.copyFolder(pathHibernate, pathLib);
-		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
-		GeneratorUtil.copyFolder(pathSpring, pathLib);
+		
+		if (!EclipseGeneratorUtil.isMavenProject) {
+			//copy libraries
+			log.info("Copy libraries files ZathuraJavaEE_Jpa_Spring_PrimeFaces_Web_Centric");
+			GeneratorUtil.copyFolder(pathHibernate, pathLib);
+			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+			GeneratorUtil.copyFolder(pathSpring, pathLib);
+		}
+
 		//copy log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
 		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
@@ -158,6 +163,7 @@ public class ZathuraJavaEE_Jpa_Web_Prime_Spring_Centric implements IZathuraTempl
 			velocityContext.put("projectName", projectName);
 			velocityContext.put("domainName", domainName);
 			velocityContext.put("modelName", modelName);
+
 			//Variables para generar el persistence.xml
 			velocityContext.put("connectionUrl", EclipseGeneratorUtil.connectionUrl);
 			velocityContext.put("connectionDriverClass", EclipseGeneratorUtil.connectionDriverClass);
@@ -259,15 +265,18 @@ public class ZathuraJavaEE_Jpa_Web_Prime_Spring_Centric implements IZathuraTempl
 				doJsp(metaData, velocityContext, hdLocation, metaDataModel);
 			}
 
+			if (EclipseGeneratorUtil.isMavenProject) {
+				GeneratorUtil.doPomXml(velocityContext, ve);
+			}
 
-					    doExceptions(velocityContext, hdLocation);
-						doUtilites(velocityContext, hdLocation, metaDataModel, modelName);
-						doPersitenceXml(metaDataModel, velocityContext, hdLocation);
-						doSpringContextConfFiles(velocityContext, hdLocation, metaDataModel, modelName);
-						doBusinessDelegator(velocityContext, hdLocation, metaDataModel);
-						doFacesConfig(metaDataModel, velocityContext, hdLocation);
-						doJspFacelets(velocityContext, hdLocation);
-						doJspInitialMenu(metaDataModel, velocityContext, hdLocation);
+		    doExceptions(velocityContext, hdLocation);
+			doUtilites(velocityContext, hdLocation, metaDataModel, modelName);
+			doPersitenceXml(metaDataModel, velocityContext, hdLocation);
+			doSpringContextConfFiles(velocityContext, hdLocation, metaDataModel, modelName);
+			doBusinessDelegator(velocityContext, hdLocation, metaDataModel);
+			doFacesConfig(metaDataModel, velocityContext, hdLocation);
+			doJspFacelets(velocityContext, hdLocation);
+			doJspInitialMenu(metaDataModel, velocityContext, hdLocation);
 
 
 		} catch (Exception e) {

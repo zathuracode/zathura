@@ -13,6 +13,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zathuracode.generator.jee.hibernatecore.springcentric.utils.IStringBuilder;
 import org.zathuracode.generator.jee.hibernatecore.springcentric.utils.IStringBuilderForId;
 import org.zathuracode.generator.jee.hibernatecore.springcentric.utils.StringBuilder;
@@ -94,15 +95,16 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Centric implements IZathuraG
 		String generatorLibrariesZathuraJavaEESpringWebCentricSpring3 = GeneratorUtil.getGeneratorLibrariesZathuraJavaEESpringWebCentric()
 				+ GeneratorUtil.slash + "spring3.0" + GeneratorUtil.slash;
 
-		log.info("Copy Libraries files ZathuraJavaEE_Web_Centric generation");
+		if (!EclipseGeneratorUtil.isMavenProject) {
+			log.info("Copy Libraries files ZathuraJavaEE_Web_Centric generation");
+			// Copy Libraries
+			String libFolderPath = properties.getProperty("libFolderPath");
+			GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEESpringWebCentricIceFaces, libFolderPath);
+			GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEESpringWebCentricHibernate, libFolderPath);
+			GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEESpringWebCentricSpring3, libFolderPath);
 
-		// Copy Libraries
-
-		String libFolderPath = properties.getProperty("libFolderPath");
-		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEESpringWebCentricIceFaces, libFolderPath);
-		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEESpringWebCentricHibernate, libFolderPath);
-		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEESpringWebCentricSpring3, libFolderPath);
-
+		}
+		
 		// Copy Ext web.xml
 		String webRootFolderPath = properties.getProperty("webRootFolderPath");
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEESpringWebCentricWEBXML, webRootFolderPath + "WEB-INF" + GeneratorUtil.slash);
@@ -196,7 +198,7 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Centric implements IZathuraG
 		context.put("modelName", modelName);
 		context.put("projectNameClass", projectNameClass);
 		context.put("domainName", domainName);
-
+		
 		this.virginPackageInHd = GeneratorUtil.replaceAll(virginPackage, ".", GeneratorUtil.slash);
 
 		Utilities.getInstance().buildFolders(virginPackage, hdLocation, specificityLevel, packageOriginal, properties);
@@ -303,6 +305,10 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Centric implements IZathuraG
 			doLogicSpringXMLHibernate(metaData, context, hdLocation, dataModel, modelName);
 			doDto(metaData, context, hdLocation, dataModel, modelName);
 			doExceptions(context, hdLocation);
+		}
+		
+		if (EclipseGeneratorUtil.isMavenProject) {
+			GeneratorUtil.doPomXml(context, ve);
 		}
 
 		doUtilites(context, hdLocation, dataModel, modelName);

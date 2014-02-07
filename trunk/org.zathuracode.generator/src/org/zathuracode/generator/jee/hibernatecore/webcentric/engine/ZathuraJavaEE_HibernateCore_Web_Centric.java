@@ -13,6 +13,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zathuracode.generator.jee.hibernatecore.webcentric.utils.IStringBuilder;
 import org.zathuracode.generator.jee.hibernatecore.webcentric.utils.IStringBuilderForId;
 import org.zathuracode.generator.jee.hibernatecore.webcentric.utils.StringBuilder;
@@ -89,13 +90,16 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 		String generatorLibrariesZathuraJavaEEHibernateCoreWebCentricJpaHibernate = GeneratorUtil.getGeneratorLibrariesZathuraJavaEEHibernateCoreWebCentric()
 				+ GeneratorUtil.slash + "core-hibernate3.3" + GeneratorUtil.slash;
 
-		log.info("Copy Libraries files ZathuraJavaEE_Web_Centric generation");
+		if (!EclipseGeneratorUtil.isMavenProject) {
+			log.info("Copy Libraries files ZathuraJavaEE_Web_Centric generation");
+			// Copy Libraries
+			String libFolderPath = properties.getProperty("libFolderPath");
+			GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEHibernateCoreWebCentricIceFaces, libFolderPath);
+			GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEHibernateCoreWebCentricJpaHibernate, libFolderPath);
+		}
 
-		// Copy Libraries
-		String libFolderPath = properties.getProperty("libFolderPath");
-		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEHibernateCoreWebCentricIceFaces, libFolderPath);
-		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEHibernateCoreWebCentricJpaHibernate, libFolderPath);
-
+		log.info("Copy External files ZathuraJavaEE_Web_Centric generation");
+		
 		// Copy Ext web.xml
 		String webRootFolderPath = properties.getProperty("webRootFolderPath");
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEHibernateCoreWebCentricWEBXML, webRootFolderPath + "WEB-INF" + GeneratorUtil.slash);
@@ -296,6 +300,10 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 			doExceptions(context, hdLocation);
 		}
 
+		if (EclipseGeneratorUtil.isMavenProject) {
+			GeneratorUtil.doPomXml(context, ve);
+		}
+		
 		doUtilites(context, hdLocation, dataModel, modelName);
 		doBusinessDelegator(context, hdLocation, dataModel);
 		doXMLHibernateDaoFactory(dataModel, context, hdLocation);
@@ -1055,5 +1063,6 @@ public class ZathuraJavaEE_HibernateCore_Web_Centric implements IZathuraGenerato
 		}
 
 	}
+
 
 }
