@@ -1,5 +1,6 @@
 package org.zathuracode.eclipse.plugin.generator.gui;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.eclipse.core.resources.IProject;
@@ -81,6 +82,9 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 	/** The btn lib. */
 	private Button btnLib;
 	
+	/** The lbl lib.*/
+	private Label lblLibraries;
+	
 	
 	/**
 	 * Create the wizard.
@@ -157,7 +161,7 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 		lblWebRoot.setText("WebContent:");
 		lblWebRoot.setBounds(10, 135, 99, 17);
 		
-		Label lblLibraries = new Label(choosePathGroup, SWT.NONE);
+		lblLibraries = new Label(choosePathGroup, SWT.NONE);
 		lblLibraries.setText("Libraries:");
 		lblLibraries.setBounds(10, 173, 99, 17);
 		
@@ -202,9 +206,23 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 				if(project!=null){
 					btnJavaSourceFolder.setEnabled(true);
 					btnWebRoot.setEnabled(true);
-					btnLib.setEnabled(true);
-				}
-				
+					
+					String pathFilePOM = project.getLocation().toString() + GeneratorUtil.slash + GeneratorUtil.pomFile;
+					EclipseGeneratorUtil.pomXmlFile = new File(pathFilePOM);
+					EclipseGeneratorUtil.isMavenProject = EclipseGeneratorUtil.pomXmlFile.exists();
+					
+					if (EclipseGeneratorUtil.isMavenProject) {						
+						txtLib.setText("pom.xml");
+						btnLib.setEnabled(false);
+						lblLibraries.setText("Maven Config File:");
+						EclipseGeneratorUtil.libFolderPath = "";
+						
+					}else {
+						txtLib.setText("");
+						btnLib.setEnabled(true);
+						lblLibraries.setText("Libraries:");
+					}
+				}			
 			}
 		});
 		cmbProject.setBounds(115, 15, 363, 36);
@@ -396,11 +414,11 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 				//Valida si el paquete esta bien escrito porque el generador lo crea si no existe
 				ZathuraReverseEngineeringUtil.validarPackage(txtPackage.getText());				
 				
-				EclipseGeneratorUtil.companyDomainName		=txtPackage.getText();
-				EclipseGeneratorUtil.destinationDirectory	=txtJavaSourceFolder.getText();
+				EclipseGeneratorUtil.companyDomainName = txtPackage.getText();
+				EclipseGeneratorUtil.destinationDirectory = txtJavaSourceFolder.getText();
+				
 				setPageComplete(true);
 				setErrorMessage(null);
-				
 				
 			} catch (Exception e) {
 				setPageComplete(false);
@@ -451,7 +469,8 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 			Object object=getNextPage();
 			if(object instanceof WizardPageChooseGenerator){
 				WizardPageChooseGenerator wizardChooseGenerator=(WizardPageChooseGenerator)object;
-				wizardChooseGenerator.loadListGenerators();				
+				wizardChooseGenerator.loadListGenerators();	
+				//wizardChooseGenerator.loadComboGenerators();
 			}
 			
 		}
