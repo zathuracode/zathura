@@ -10,6 +10,9 @@ import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.utils.IStringBuilder;
 import org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.utils.IStringBuilderForId;
@@ -98,17 +101,21 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 		
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
-		
-		//copy libraries
-		GeneratorUtil.copyFolder(pathHibernate, pathLib);
-		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
-		GeneratorUtil.copyFolder(pathSpring, pathLib);
-		GeneratorUtil.copyFolder(pathSL4J, pathLib);
-		GeneratorUtil.copyFolder(pathJamon, pathLib);
-		GeneratorUtil.copyFolder(pathMojarra, pathLib);
-		GeneratorUtil.copyFolder(pathApacheCommons, pathLib);
-		GeneratorUtil.copyFolder(pathAopAlliance, pathLib);
-		GeneratorUtil.copyFolder(pathLog4j, pathLib);
+		//Se valida si el proyecto no es maven, para empezar a copiar las librerias
+		if(!EclipseGeneratorUtil.isMavenProject){
+			//copy libraries
+			log.info("Copy Libraries files Zathura Primefaces3.5 Hibernate4.2.3 Spring3.2.3");
+			GeneratorUtil.copyFolder(pathHibernate, pathLib);
+			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+			GeneratorUtil.copyFolder(pathSpring, pathLib);
+			GeneratorUtil.copyFolder(pathSL4J, pathLib);
+			GeneratorUtil.copyFolder(pathJamon, pathLib);
+			GeneratorUtil.copyFolder(pathMojarra, pathLib);
+			GeneratorUtil.copyFolder(pathApacheCommons, pathLib);
+			GeneratorUtil.copyFolder(pathAopAlliance, pathLib);
+			GeneratorUtil.copyFolder(pathLog4j, pathLib);
+		}
+
 		
 		// copy to Log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
@@ -119,10 +126,10 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 	@Override
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel,
 			String jpaPckgName, String projectName, Integer specificityLevel,
-			String domainName) {
+			String domainName) {		
 
 		try {
-
+	
 			ve = new VelocityEngine();
 			Properties propiedades = new Properties();
 			propiedades.setProperty("file.resource.loader.description", "Velocity File Resource Loader");
@@ -131,26 +138,26 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 			propiedades.setProperty("file.resource.loader.cache", "false");
 			propiedades.setProperty("file.resource.loader.modificationCheckInterval", "2");
 			ve.init(propiedades);
-
-
+	
+	
 			VelocityContext context = new VelocityContext();
 			MetaDataModel dataModel = metaDataModel;
 			List<MetaData> list = dataModel.getTheMetaData();
-
+	
 			IStringBuilderForId stringBuilderForId = new StringBuilderForId(list);
 			IStringBuilder stringBuilder = new StringBuilder(list, (StringBuilderForId) stringBuilderForId);
 			String packageOriginal = null;
 			String virginPackage = null;
 			String modelName = null;
-
+	
 			if (specificityLevel.intValue() == 2) {
 				try {
 					int lastIndexOf = jpaPckgName.lastIndexOf(".");
 					packageOriginal = jpaPckgName.substring(0, lastIndexOf);
-
+	
 					int lastIndexOf2 = packageOriginal.lastIndexOf(".") + 1;
 					modelName = packageOriginal.substring(lastIndexOf2);
-
+	
 					int virginLastIndexOf = packageOriginal.lastIndexOf(".");
 					virginPackage = packageOriginal.substring(0, virginLastIndexOf);
 				} catch (Exception e) {
@@ -159,17 +166,17 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 			} else {
 				try {
 					packageOriginal = jpaPckgName;
-
+	
 					int lastIndexOf2 = packageOriginal.lastIndexOf(".") + 1;
 					modelName = jpaPckgName.substring(lastIndexOf2);
-
+	
 					int virginLastIndexOf = packageOriginal.lastIndexOf(".");
 					virginPackage = packageOriginal.substring(0, virginLastIndexOf);
 				} catch (Exception e) {
 					log.error(e.getMessage());
 				}
 			}
-
+	
 			String projectNameClass = (projectName.substring(0, 1)).toUpperCase() + projectName.substring(1, projectName.length());
 			context.put("packageOriginal", packageOriginal);
 			context.put("virginPackage", virginPackage);
@@ -178,14 +185,15 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 			context.put("modelName", modelName);
 			context.put("projectNameClass", projectNameClass);
 			context.put("domainName", domainName);
+			
 			this.virginPackageInHd = GeneratorUtil.replaceAll(virginPackage, ".", GeneratorUtil.slash);
 			Utilities.getInstance().buildFolders(virginPackage, hdLocation, specificityLevel, packageOriginal, properties);
 			Utilities.getInstance().biuldHashToGetIdValuesLengths(list);
-
+	
 			for (MetaData metaData : list) {
-
+	
 				List<String> imports = Utilities.getInstance().getRelatedClasses(metaData, dataModel);
-
+	
 				if (imports != null) {
 					if (imports.size() > 0 && !imports.isEmpty()) {
 						context.put("isImports", true);
@@ -196,7 +204,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 				} else {
 					context.put("isImports", false);
 				}
-
+	
 				// generacion de nuevos dto
 				context.put("variableDto", stringBuilder.getPropertiesDto(list, metaData));
 				context.put("propertiesDto",Utilities.getInstance().dtoProperties);
@@ -204,7 +212,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 				// generacion de la nueva logica 
 				context.put("dtoConvert", stringBuilderForId.dtoConvert(list,metaData));
 				context.put("dtoConvert2", stringBuilder.dtoConvert2(list, metaData));
-
+	
 				context.put("finalParamForView", stringBuilder.finalParamForView(list, metaData));
 				context.put("finalParamForDtoUpdate", stringBuilder.finalParamForDtoUpdate(list, metaData));
 				context.put("finalParamForDtoUpdateOnlyVariables", stringBuilder.finalParamForDtoUpdateOnlyVariables(list, metaData));
@@ -214,6 +222,8 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 				context.put("finalParamForIdForViewVariablesInList", stringBuilderForId.finalParamForIdForViewVariablesInList(list, metaData));
 				context.put("isFinalParamForIdForViewDatesInList", Utilities.getInstance().isFinalParamForIdForViewDatesInList());
 				context.put("finalParamForIdForViewDatesInList", Utilities.getInstance().datesId);
+				context.put("finalParamForGetIdForViewClass", stringBuilder.finalParamForGetIdForViewClass(list, metaData));
+				context.put("finalParamForGetIdByDtoForViewClass", stringBuilder.finalParamForGetIdByDtoForViewClass(list, metaData));
 				context.put("finalParamForIdForViewClass", stringBuilderForId.finalParamForIdForViewClass(list, metaData));
 				context.put("finalParamForIdClassAsVariablesAsString", stringBuilderForId.finalParamForIdClassAsVariablesAsString(list, metaData));
 				context.put("finalParamForViewForSetsVariablesInList", stringBuilder.finalParamForViewForSetsVariablesInList(list, metaData));
@@ -223,44 +233,48 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 				context.put("finalParamForDtoInViewForSetsVariablesInList", stringBuilder.finalParamForDtoInViewForSetsVariablesInList(list, metaData));
 				context.put("finalParamForIdForViewForSetsVariablesInList", stringBuilderForId.finalParamForIdForViewForSetsVariablesInList(list, metaData));
 				context.put("finalParamForIdVariablesAsList", stringBuilderForId.finalParamForIdVariablesAsList(list, metaData));
-
+				context.put("finalParamForIdForViewForSetsVariablesDtoInList", stringBuilderForId.finalParamForIdForViewForSetsVariablesDtoInList(list, metaData));
+				context.put("finalParamForViewForSetsVariablesDtoInList", stringBuilder.finalParamForViewForSetsVariablesDtoInList(list, metaData));
+				context.put("finalParamForGetManyToOneForViewClass", stringBuilder.finalParamForGetManyToOneForViewClass(list, metaData));
+				
+	
 				String finalParam = stringBuilder.finalParam(list, metaData);
 				context.put("finalParam", finalParam);
 				metaData.setFinamParam(finalParam);
-
+	
 				String finalParamVariables = stringBuilder.finalParamVariables(list, metaData);
 				context.put("finalParamVariables", finalParamVariables);
 				metaData.setFinamParamVariables(finalParamVariables);
-
+	
 				String finalParamForId = stringBuilderForId.finalParamForId(list, metaData);
 				context.put("finalParamForId", stringBuilderForId.finalParamForId(list, metaData));
 				metaData.setFinalParamForId(finalParamForId);
-
+	
 				String finalParamForIdVariables = stringBuilderForId.finalParamForIdVariables(list, metaData);
 				context.put("finalParamForIdVariables", stringBuilderForId.finalParamForIdVariables(list, metaData));
 				metaData.setFinalParamForIdVariables(finalParamForIdVariables);
-
+	
 				context.put("finalParamVariablesAsList", stringBuilder.finalParamVariablesAsList(list, metaData));
 				context.put("finalParamVariablesAsList2", stringBuilder.finalParamVariablesAsList2(list, metaData));
 				context.put("finalParamVariablesDatesAsList2", stringBuilder.finalParamVariablesDatesAsList2(list, metaData));
 				context.put("isFinalParamDatesAsList", Utilities.getInstance().isFinalParamDatesAsList());
 				context.put("finalParamDatesAsList", Utilities.getInstance().datesJSP);
-
+	
 				context.put("finalParamForIdClassAsVariables", stringBuilderForId.finalParamForIdClassAsVariables(list, metaData));
 				context.put("finalParamForIdClassAsVariables2", stringBuilderForId.finalParamForIdClassAsVariables2(list, metaData));
 				context.put("isFinalParamForIdClassAsVariablesForDates", Utilities.getInstance().isFinalParamForIdClassAsVariablesForDates());
 				context.put("finalParamForIdClassAsVariablesForDates", Utilities.getInstance().datesIdJSP);
-
+	
 				context.put("finalParamForVariablesDataTablesAsList", stringBuilder.finalParamForVariablesDataTablesAsList(list, metaData));
 				context.put("finalParamForVariablesDataTablesForIdAsList", stringBuilderForId.finalParamForVariablesDataTablesForIdAsList(list, metaData));
-
+	
 				if (metaData.isGetManyToOneProperties()) {
 					context.put("getVariableForManyToOneProperties", stringBuilder.getVariableForManyToOneProperties(metaData.getManyToOneProperties(), list));
 					context.put("getStringsForManyToOneProperties", stringBuilder.getStringsForManyToOneProperties(metaData.getManyToOneProperties(), list));
 				}
-
+	
 				context.put("composedKey", false);
-
+	
 				if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 					context.put("composedKey", true);
 					context.put("finalParamForIdClass", stringBuilderForId.finalParamForIdClass(list, metaData));
@@ -275,33 +289,33 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 				context.put("connectionDriverClass", EclipseGeneratorUtil.connectionDriverClass);
 				context.put("connectionUsername", EclipseGeneratorUtil.connectionUsername);
 				context.put("connectionPassword", EclipseGeneratorUtil.connectionPassword);
-
-
-				doDaoSpringXMLHibernate(metaData, context, hdLocation);
+	
+				
+				doDaoSpringHibernate(metaData, context, hdLocation);
 				doBackingBeans(metaData, context, hdLocation, dataModel);
 				doJsp(metaData, context, hdLocation, dataModel);
 				doLogicSpringXMLHibernate(metaData, context, hdLocation, dataModel, modelName);
 				doDto(metaData, context, hdLocation, dataModel, modelName);
 				
-
 			}
-
-							doUtilites(context, hdLocation, dataModel, modelName);
-							doExceptions(context, hdLocation);
-							doBusinessDelegator(context, hdLocation, dataModel);
-							doJspInitialMenu(dataModel, context, hdLocation);
-							doFacesConfig(dataModel, context, hdLocation);
-							doJspFacelets(context, hdLocation);
-							doSpringContextConfFiles(context, hdLocation, dataModel, modelName);
-
-
+	
+			if (EclipseGeneratorUtil.isMavenProject) {
+				GeneratorUtil.doPomXml(context, ve);
+			}
+			
+			doApiSpringHibernate(context, hdLocation);
+			doUtilites(context, hdLocation, dataModel, modelName);
+			doExceptions(context, hdLocation);
+			doBusinessDelegator(context, hdLocation, dataModel);
+			doJspInitialMenu(dataModel, context, hdLocation);
+			doFacesConfig(dataModel, context, hdLocation);
+			doJspFacelets(context, hdLocation);
+			doSpringContextConfFiles(context, hdLocation, dataModel, modelName);
+		
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
-
-
 	}
-
 
 	@Override
 	public void doBusinessDelegator(VelocityContext context, String hdLocation,
@@ -341,7 +355,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 	}
 
 	@Override
-	public void doDaoSpringXMLHibernate(MetaData metaData,
+	public void doDaoSpringHibernate(MetaData metaData,
 			VelocityContext context, String hdLocation) {
 
 		try {
@@ -372,6 +386,64 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 			
 			JalopyCodeFormatter.formatJavaCodeFile(path + "I" + metaData.getRealClassName() + "DAO.java");
 			JalopyCodeFormatter.formatJavaCodeFile(path + metaData.getRealClassName() + "DAO.java");
+			
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+
+	}
+	
+	@Override
+	public void doApiSpringHibernate(VelocityContext context, String hdLocation) {
+
+		try {
+
+			String path=hdLocation + virginPackageInHd + GeneratorUtil.slash + "dataaccess" + GeneratorUtil.slash + "api"+ GeneratorUtil.slash;
+
+			log.info("Begin api Spring+PrimeFaces+Hibernate");
+			
+			Template apiSpringPrimeHibernateTemplate = ve.getTemplate("Dao.vm");
+			StringWriter stringWriter = new StringWriter();
+			apiSpringPrimeHibernateTemplate.merge(context, stringWriter);
+			FileWriter fileWriter = new FileWriter(path+"Dao.java");
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(stringWriter.toString());
+			bufferedWriter.close();
+			fileWriter.close();
+			
+			apiSpringPrimeHibernateTemplate = ve.getTemplate("DaoException.vm");
+			stringWriter = new StringWriter();
+			apiSpringPrimeHibernateTemplate.merge(context, stringWriter);
+			fileWriter = new FileWriter(path+"DaoException.java");
+			bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(stringWriter.toString());
+			bufferedWriter.close();
+			fileWriter.close();
+			
+			apiSpringPrimeHibernateTemplate = ve.getTemplate("HibernateDaoImpl.vm");
+			stringWriter = new StringWriter();
+			apiSpringPrimeHibernateTemplate.merge(context, stringWriter);
+			fileWriter = new FileWriter(path+"HibernateDaoImpl.java");
+			bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(stringWriter.toString());
+			bufferedWriter.close();
+			fileWriter.close();
+			
+			apiSpringPrimeHibernateTemplate = ve.getTemplate("Paginator.vm");
+			stringWriter = new StringWriter();
+			apiSpringPrimeHibernateTemplate.merge(context, stringWriter);
+			fileWriter = new FileWriter(path+"Paginator.java");
+			bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(stringWriter.toString());
+			bufferedWriter.close();
+			fileWriter.close();
+			
+			log.info("End api Spring+PrimeFaces+Hibernate");
+			
+			JalopyCodeFormatter.formatJavaCodeFile(path + "Dao.java");
+			JalopyCodeFormatter.formatJavaCodeFile(path + "DaoException.java");
+			JalopyCodeFormatter.formatJavaCodeFile(path + "HibernateDaoImpl.java");
+			JalopyCodeFormatter.formatJavaCodeFile(path + "Paginator.java");
 			
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -737,6 +809,5 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 		}
 
 	}
-
-
+	
 }
