@@ -30,13 +30,21 @@ public class ZMessManager extends RuntimeException {
 			super("The value for the field: \"" + info + "\" is not valid");
 		}
 	}
+	
+	public class NullEntityExcepcion extends ZMessManager {
+		private static final long serialVersionUID = 1L;
+
+		public NullEntityExcepcion(String info) {
+			super("The " + info + " Entity can not be null or empty");
+		}
+	}
 
 	public class EmptyFieldException extends ZMessManager {
 		private static final long serialVersionUID = 1L;
 
 		public EmptyFieldException(String info) {
 			super("The value for the field: \"" + info
-					+ "\" cant be null or empty");
+					+ "\" can not be null or empty");
 		}
 	}
 

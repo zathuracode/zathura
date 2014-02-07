@@ -21,7 +21,7 @@
 		<h:form>
 			
 			<!-- Crud -->
-			<p:dialog width="600" height="600" widgetVar="crud"
+			<!--<p:dialog width="600" height="600" widgetVar="crud"
 				header="Welcome to Zathura with PrimeFaces" showEffect="explode" hideEffect="explode">
 
 				<div align="center">
@@ -31,7 +31,7 @@
 					#end	
 					</h:panelGrid>
 				</div>
-			</p:dialog>
+			</p:dialog>-->
 			
 			<!-- table -->
 			<p:dialog width="600" height="600" widgetVar="table"
@@ -48,7 +48,7 @@
 			</p:dialog>	
 			
 			<!-- TableEditable -->
-			<p:dialog width="600" height="600" widgetVar="tableEditable"
+			<!--<p:dialog width="600" height="600" widgetVar="tableEditable"
 				header="Welcome to Zathura with PrimeFaces" showEffect="explode" hideEffect="explode">
 			
 			<div align="center">
@@ -58,15 +58,15 @@
 				  #end
 				</h:panelGrid>	
 			</div>	
-			</p:dialog>	
+			</p:dialog>	-->
 			
 			<!-- cambiar las rutas de las imagenes -->
 			<p:stack icon="/images/home.png">
-				<p:menuitem value="Crud" icon="/images/crud.png"
-					onclick="crud.show();" oncomplete="table.hide();tableEditable.hide();" />
+				<!--<p:menuitem value="Crud" icon="/images/crud.png"
+					onclick="crud.show();" oncomplete="table.hide();tableEditable.hide();" />-->
 				<p:menuitem value="DataTable" icon="/images/dataTable.png"
 					onclick="table.show();" oncomplete="crud.hide();tableEditable.hide();" />
-				<p:menuitem value="DataTableEditable" icon="/images/dataTableEditable.png" onclick="tableEditable.show();" oncomplete="table.hide();crud.hide();"/>
+				<!--<p:menuitem value="DataTableEditable" icon="/images/dataTableEditable.png" onclick="tableEditable.show();" oncomplete="table.hide();crud.hide();"/>-->
 			</p:stack>
 
 			
