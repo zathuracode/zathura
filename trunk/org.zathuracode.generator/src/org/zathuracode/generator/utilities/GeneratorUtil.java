@@ -1,12 +1,31 @@
 package org.zathuracode.generator.utilities;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.StringWriter;
+
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
 import org.apache.log4j.Logger;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
+import org.zathuracode.eclipse.plugin.generator.utilities.ConnectionsUtils;
+import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -29,6 +48,8 @@ public class GeneratorUtil {
 
 	/** The slash. */
 	public static String slash = System.getProperty("file.separator");
+	
+	public static String pomFile = "pom.xml";
 
 	/** The File name. */
 	public static String FileName = "zathura-generator-factory-config.xml";
@@ -113,8 +134,6 @@ public class GeneratorUtil {
 	private static String generatorExtZathuraJavaEEPrimeSpringJpaCentric= "generatorExt" +GeneratorUtil.slash+"zathura-JavaEE-jpaCore-Prime-Spring-Centric"+GeneratorUtil.slash;
 	private static String generatorLibrariesZathuraJavaEEPrimeSpringJpa="generatorLibraries"+ GeneratorUtil.slash;
 	
-
-		
 	/**
 	 * Retorna el path de los templates de velocity
 	 * @return
@@ -610,7 +629,7 @@ public class GeneratorUtil {
 	 * List<String> filesLib =new ArrayList<String>(); try { File dir = new
 	 * File(source); String[] fileNames = dir.list(); for (int i = 0; i <
 	 * fileNames.length; i++) { String s=fileNames[i]; copy(source+s,target+s);
-	 * filesLib.add(s); } return filesLib; } catch (Exception e) { //TODO Poner
+	 * filesLib.add(s); } return filesLib; } catch (Exception e) { //
 	 * log4j System.out.println("Error copy all files of folder:"+e.toString());
 	 * } return null; }
 	 *
@@ -728,7 +747,190 @@ public class GeneratorUtil {
 		}
 		return replace.toString();
 	}
-
-
 	
+	
+	public static void doPomXml(VelocityContext context,VelocityEngine ve){
+		log.info("Begin doPomXml");
+		
+		Template pomTemplate = null;
+		StringWriter swPom = new StringWriter();
+		
+		try {
+			pomTemplate = ve.getTemplate("pom.xml.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			// couldn't find the template
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+
+			String pomLocation = EclipseGeneratorUtil.fullPathProject + GeneratorUtil.slash + GeneratorUtil.pomFile;
+			
+			XMLInputFactory factory = XMLInputFactory.newInstance();
+			XMLEventReader r = factory.createXMLEventReader(new FileInputStream(pomLocation));
+			
+			boolean isModelVersion = false;
+			boolean isGroupId = false;
+			boolean isArtifactId = false;
+			boolean isVersion = false;
+			boolean isPackaging = false;
+			boolean isName = false;
+			boolean isDescription = false;
+			boolean hasParentProject = false;
+			boolean isParentGroupId = false;
+			boolean isParentArtifactId = false;
+			boolean isParentVersion = false;
+
+			
+			String modelVersion = "";			
+			String groupId = "";						
+			String artifactId = "";						
+			String version = "";	
+			String packaging = "";
+			String name = "";
+			String description = "";
+			String parentGroupId = "";
+			String parentArtifactId = "";
+			String parentVersion = "";			
+			
+			while (r.hasNext()) {
+				XMLEvent e = r.nextEvent();
+				
+				if (e.isStartElement()) {
+					StartElement startElement = (StartElement) e;
+					QName qname = startElement.getName();
+					String localName = qname.getLocalPart();
+
+					if (localName.equals("modelVersion")) {
+						isModelVersion = true;
+					}else if (localName.equals("parent")) {
+						hasParentProject = true;
+					}else if (hasParentProject && localName.equals("groupId")) {
+						isParentGroupId = true;
+					}else if (hasParentProject && localName.equals("artifactId")) {
+						isParentArtifactId = true;
+					}else if (hasParentProject && localName.equals("version")) {
+						isParentVersion = true;
+					}else if (localName.equals("groupId")) {
+						isGroupId = true;
+					}else if (localName.equals("artifactId")) {
+						isArtifactId = true;
+					}else if (localName.equals("version")) {
+						isVersion = true;
+					}else if (localName.equals("packaging")) {
+						isPackaging = true;
+					}else if (localName.equals("name")) {
+						isName = true;
+					}else if (localName.equals("description")) {
+						isDescription = true;
+					}
+					
+				} else if (e.isCharacters()) {					
+					Characters characters = (Characters) e;
+					String cadena = characters.getData().toString().trim();
+
+					if (isModelVersion) {
+						modelVersion = cadena;
+						isModelVersion = false;
+					}else if (isParentGroupId) {
+						parentGroupId = cadena;
+						isParentGroupId = false;
+					}else if (isParentArtifactId) {
+						parentArtifactId = cadena;
+						isParentArtifactId = false;
+					}else if (isParentVersion) {
+						parentVersion = cadena;
+						isParentVersion = false;
+					}else if (isGroupId) {
+						groupId = cadena;
+						isGroupId = false;
+					}else if (isArtifactId) {
+						artifactId = cadena;
+						isArtifactId = false;
+					}else if (isVersion) {
+						version = cadena;
+						isVersion = false;
+					}else if (isPackaging) {
+						packaging = cadena;
+						isPackaging = false;
+					}else if (isName) {
+						name = cadena;
+						isName = false;
+					}else if (isDescription) {
+						description = cadena;
+						isDescription = false;
+					}
+					
+				} else if (e.isEndElement() == true) {
+					EndElement endElement = (EndElement) e;
+					QName qname = endElement.getName();
+					String localName = qname.getLocalPart();
+					
+					if (localName.equals("parent")) {
+						hasParentProject = false;
+					}
+				}
+			}
+									
+			context.put("modelVersion", modelVersion);
+			context.put("groupId", groupId);
+			context.put("artifactId", artifactId);
+			context.put("version", version);
+			context.put("packaging", packaging);
+			context.put("name", name);
+			context.put("description", description);
+			context.put("parentGroupId", parentGroupId);
+			context.put("parentArtifactId", parentArtifactId);
+			context.put("parentVersion", parentVersion);
+			
+			String groupIdConnector = "";
+			String artifactIdConnector = "";
+			String versionConnector = "";			
+			
+			/** Se obtiene la dependencia del driver de la base de datos*/
+			if (EclipseGeneratorUtil.connectionDriverClass.toLowerCase().contains("oracle")) {
+				groupIdConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("oracle-connector-groupId");
+				artifactIdConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("oracle-connector-artifactId");
+				versionConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("oracle-connector-version");			
+			}else if (EclipseGeneratorUtil.connectionDriverClass.toLowerCase().contains("postgresql")) {
+				groupIdConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("postgres-connector-groupId");
+				artifactIdConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("postgres-connector-artifactId");
+				versionConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("postgres-connector-version");
+			}else if (EclipseGeneratorUtil.connectionDriverClass.toLowerCase().contains("mysql")) {
+				groupIdConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("mysql-connector-groupId");
+				artifactIdConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("mysql-connector-artifactId");
+				versionConnector = ConnectionsUtils.propertiesConfigPOM.getProperty("mysql-connector-version");
+			}
+			
+			context.put("groupIdConnector", groupIdConnector);
+			context.put("artifactIdConnector", artifactIdConnector);
+			context.put("versionConnector", versionConnector);
+			
+			pomTemplate.merge(context, swPom);			
+			
+			FileWriter fstream = new FileWriter(pomLocation);
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swPom.toString());
+			// Close the output stream
+			out.close();
+			
+			JalopyCodeFormatter.formatJavaCodeFile(pomLocation);
+
+			log.info("End doPomXml");
+			
+		} catch (Exception e) {
+			log.info("Error: " + e.getMessage());
+		}
+		
+	}	
+		
 }
