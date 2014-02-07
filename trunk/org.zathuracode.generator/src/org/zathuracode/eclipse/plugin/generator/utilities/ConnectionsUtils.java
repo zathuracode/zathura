@@ -1,5 +1,6 @@
 package org.zathuracode.eclipse.plugin.generator.utilities;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,15 +37,27 @@ public class ConnectionsUtils {
 
 	/** Generator Model. */
 	private static HashMap<String, ConnectionModel> theZathuraConnections = null;
+	
+	/** The properties config pom. */
+	public static final Properties propertiesConfigPOM = new java.util.Properties();
+	
+	/** properties POM file path. */
+	private static String xmlConfigConnectionsPOM = GeneratorUtil.getXmlConfig() + "zathura-config-pom.properties";
 
 	static {
 		try {
 			loadZathuraConnections();
+			loadZathuraConnectionsPOMFile();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static void loadZathuraConnectionsPOMFile() throws FileNotFoundException, IOException {
+		log.info("Reading:" + xmlConfigConnectionsPOM);
+		propertiesConfigPOM.load(new FileInputStream(xmlConfigConnectionsPOM));
 	}
 
 	/**
