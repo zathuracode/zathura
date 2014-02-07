@@ -121,6 +121,14 @@ public class EclipseGeneratorUtil {
 
 	/** The wizard main. */
 	public static WizardMainZathura wizardMain;
+	
+	public static boolean isMavenProject;
+	
+	public static File pomXmlFile;
+	
+	public static String groupIdMavenPoject;
+	
+	public static String artifactIdMavenProject;
 
 	/**
 	 * Reset.
@@ -153,6 +161,11 @@ public class EclipseGeneratorUtil {
 		catalogAndSchema = null;
 		tablesList = null;
 		makeItXml = false;
+		
+		isMavenProject = false;
+		pomXmlFile = null;
+		groupIdMavenPoject = null;
+		artifactIdMavenProject = null;
 	}
 
 	/**
@@ -170,6 +183,7 @@ public class EclipseGeneratorUtil {
 		String folderProjectPath = EclipseGeneratorUtil.javaSourceFolderPath;
 		String webRootFolderPath = EclipseGeneratorUtil.webRootFolderPath;
 		String libFolderPath = EclipseGeneratorUtil.libFolderPath;
+		File pomFile = EclipseGeneratorUtil.pomXmlFile;
 
 		// Para que no corte los nombres de los paquetes
 		int specificityLevel = 1;
@@ -188,10 +202,11 @@ public class EclipseGeneratorUtil {
 		properties.put("webRootFolderPath", webRootFolderPath);
 		properties.put("libFolderPath", libFolderPath);
 		properties.put("folderProjectPath", folderProjectPath);
-
+		properties.put("isMavenProject", isMavenProject);
+		properties.put("pomFile", pomFile);
+		
 		IZathuraGenerator zathuraGenerator = ZathuraGeneratorFactory.createZathuraGenerator(EclipseGeneratorUtil.zathuraGeneratorName);
 		zathuraGenerator.toGenerate(metaDataModel, projectName, folderProjectPath, properties);
-
 	}
 
 	/**
