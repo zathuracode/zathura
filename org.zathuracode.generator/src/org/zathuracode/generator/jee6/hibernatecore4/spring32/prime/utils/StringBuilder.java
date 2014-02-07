@@ -612,7 +612,7 @@ public class StringBuilder implements IStringBuilder {
 				String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,
 						(field2.getType().toString()).length());
 
-				finalParam = finalParam + "FacesUtils.check" + realType + "(txt" + nameWithCapitalOnFirst + "), ";
+				finalParam = finalParam + ("entity.set" + nameWithCapitalOnFirst + "(FacesUtils.check" + realType + "(txt" + nameWithCapitalOnFirst + ")); \""); 
 
 			}
 		}
@@ -621,7 +621,7 @@ public class StringBuilder implements IStringBuilder {
 			for (Member member : metaData.getSimpleProperties()) {
 				if (member.isPrimiaryKeyAComposeKey() == false) {
 
-					finalParam = finalParam + "FacesUtils.check" + member.getRealClassName() + "(txt" + member.getGetNameOfPrimaryName() + "), ";
+					finalParam = finalParam + ("entity." + member.getMethodSetterName() +  "(FacesUtils.check" + member.getRealClassName() + "(txt" + member.getGetNameOfPrimaryName() + ")); \"");
 				}
 			}
 		}
@@ -1591,9 +1591,14 @@ public class StringBuilder implements IStringBuilder {
 						cont++;
 
 					} else {
+						
+						String name =  metaData1.getPrimaryKey().getName();
+						
+						String methodAccesorName =  "entity.get" + (name.substring(0, 1)).toUpperCase() + name.substring(1) + "()";
+						
 						finalParam.add(member.getRealClassName() + " " + member.getName() + "Class = logic" + member.getRealClassName()
 								/* + "%" */
-								+ cont + ".get" + member.getRealClassName() + "(" + metaData1.getPrimaryKey().getName() + "_" + metaData1.getRealClassName() + ");");
+								+ cont + ".get" + member.getRealClassName() + "(" + methodAccesorName + ");");
 						cont++;
 
 					}
@@ -1947,4 +1952,292 @@ public class StringBuilder implements IStringBuilder {
 		
 			
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeorg.zathuracode.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForGetIdForViewClass(java.util.List,
+	 * org.zathuracode.metadata.model.MetaData)
+	 */
+	public List<String> finalParamForGetIdForViewClass(List<MetaData> list, MetaData metaData) {
+		List<String> finalParam = new ArrayList<String>();
+
+		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {			
+			String getEntityComposeKey = "";
+			
+			// se obtienen los campos que componene la llave primaria compuesta
+			Field[] field = metaData.getComposeKey().getDeclaredFields();
+			
+			// se obtienen los miembros de clase que pertenencen a la llave compuesta
+			for (Member member : metaData.getManyToOneProperties()) {
+				String params = getTypeAndvariableForManyToOneProperties(member
+						.getType().getSimpleName(), list)[1].split("_")[0];
+				
+				for (Field field2 : field) {
+					String name = field2.getName();
+					if (name.toLowerCase().contains(params.toLowerCase())) {
+						String memberId = name.substring(0, 1).toUpperCase() + name.substring(1);
+						
+						getEntityComposeKey = "entity."
+								+ member.getMethodSetterName()
+								+ "(businessDelegatorView.get"
+								+ member.getGetNameOfPrimaryName()
+								+ "(entity.get"
+								+ metaData.getPrimaryKey().getGetNameOfPrimaryName()
+								+ "().get"
+								+ memberId + "()));";
+						
+						finalParam.add(getEntityComposeKey);
+					}
+				}
+			}
+		}
+
+		return finalParam;
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeorg.zathuracode.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForGetManyToOneForViewClass(java.util.List,
+	 * org.zathuracode.metadata.model.MetaData)
+	 */
+	public List<String> finalParamForGetManyToOneForViewClass(List<MetaData> list, MetaData metaData) {
+		List<String> finalParam = new ArrayList<String>();
+		String getEntityManyToOne =  new String();
+		
+		for (Member member : metaData.getManyToOneProperties()) {
+
+			String params[] = getTypeAndvariableForManyToOneProperties(member
+					.getType().getSimpleName(), list);
+			
+			String paramClass = params[0];
+			String paramFieldName = params[1];
+			boolean memberBelongToComposeKey = false;
+			
+			if(metaData.hasComposeKey()){				
+				Field[] field = metaData.getComposeKey().getDeclaredFields();
+				for (Field field2 : field) {
+					if (field2.getName().toLowerCase().contains(paramFieldName.split("_")[0].toLowerCase())) {
+						memberBelongToComposeKey = true;
+					}
+				}
+			}
+			
+			if (!memberBelongToComposeKey) {
+				getEntityManyToOne = "entity." + member.getMethodSetterName()
+						+ "(businessDelegatorView.get"
+						+ member.getGetNameOfPrimaryName()
+						+ "(FacesUtils.check" + paramClass + "(txt"
+						+ paramFieldName.substring(0, 1).toUpperCase()
+						+ paramFieldName.substring(1) + ")));";
+				finalParam.add(getEntityManyToOne);
+			}
+		}
+		return finalParam;
+
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeorg.zathuracode.generator.jeewebcentric.utils.
+	 * IStringBuilderForId#finalParamForGetIdByDtoForViewClass(java.util.List,
+	 * org.zathuracode.metadata.model.MetaData)
+	 */
+	public List<String> finalParamForGetIdByDtoForViewClass(List<MetaData> list, MetaData metaData) {
+		List<String> finalParam = new ArrayList<String>();
+
+		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+			String id = metaData.getPrimaryKey().getRealClassName() + " " + metaData.getPrimaryKey().getName() + " = " + "new "
+					+ metaData.getPrimaryKey().getRealClassName() + "();";
+			
+			finalParam.add(id);
+			Field[] field = metaData.getComposeKey().getDeclaredFields();
+			for (Field field2 : field) {
+				String name = field2.getName();
+
+				String nameFragment = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+				String setToId = new String();
+
+				setToId = metaData.getPrimaryKey().getName() + ".set" + nameFragment + "(selected" + metaData.getRealClassName() + ".get" + nameFragment + "());";
+
+				finalParam.add(setToId);
+			}
+		} else {
+			String setToId = new String();
+
+			setToId = metaData.getPrimaryKey().getRealClassName() + " " + metaData.getPrimaryKey().getName() + " = new "
+					+ metaData.getPrimaryKey().getRealClassName() + "(selected" + metaData.getRealClassName() + ".get" + metaData.getPrimaryKey().getGetNameOfPrimaryName()	+ "());";
+
+			finalParam.add(setToId);
+		}
+
+		return finalParam;
+	}
+	
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.zathuracode.generator.jeewebcentric.utils.IStringBuilder
+	 * #finalParamForViewForSetsVariablesDtoInList(java.util.List,
+	 * org.zathuracode.metadata.model.MetaData)
+	 */
+	public List<String> finalParamForViewForSetsVariablesDtoInList(List<MetaData> theMetaData, MetaData metaData) {
+
+		List<String> finalParam2 = new ArrayList<String>();
+		String finalParam = new String();
+
+		if (metaData.isGetSimpleProperties()) {
+			for (Member member : metaData.getSimpleProperties()) {
+				if (!member.getName().equalsIgnoreCase(metaData.getPrimaryKey().getName())) {
+
+					finalParam = finalParam + member.getRealClassName() + " " + member.getName();
+					String tmp2 = "txt"
+							+ (member.getName().substring(0, 1)).toUpperCase()
+							+ member.getName().substring(1) + ".setValue("
+							+ "selected" + metaData.getRealClassName() + ".get"
+							+ (member.getName().substring(0, 1)).toUpperCase()
+							+ member.getName().substring(1) + "()" + ");"
+							+ "txt"
+							+ (member.getName().substring(0, 1)).toUpperCase()
+							+ (member.getName().substring(1))
+							+ ".setDisabled(false);";
+					finalParam2.add(tmp2);
+
+				}
+			}
+		}
+
+		// txtCliCedula.setValue(entity.getClientes().getCliCedula());
+		if (metaData.isGetManyToOneProperties()) {
+			for (Member member : metaData.getManyToOneProperties()) {
+
+				String params[] = getTypeAndvariableForManyToOneProperties(member.getType().getSimpleName(), theMetaData);
+
+				String tmpFinalParam = "";
+				String tmpFinalParam1 = "";
+				String tmpFinalParam2 = "";
+				if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+					if (params != null) {
+						int cont = 0;
+						for (int i = 0; i < params.length; i++) {
+
+							tmpFinalParam = params[cont];
+
+							tmpFinalParam1 = params[cont];
+
+							if (tmpFinalParam != null) {
+								if (cont > params.length)
+									cont = params.length;
+								else
+									cont++;
+
+								tmpFinalParam2 = params[cont];
+
+								tmpFinalParam = tmpFinalParam + " " + params[cont];
+
+								if (cont > params.length)
+									cont = params.length;
+								else
+									cont++;
+
+								if (!finalParam.contains(tmpFinalParam)) {
+									finalParam = finalParam + tmpFinalParam + ", ";
+
+									HashMap<String, String> map = stringBuilderForId.hashMapIds;
+
+									String hashMapProve = "";
+									String hashMapProve1 = "";
+									try {
+
+										hashMapProve = (stringBuilderForId.hashMapIds.get(tmpFinalParam2));
+
+									} catch (Exception e) {
+										// TODO: handle exception
+									}
+									String tmp3 = "";
+
+									if (hashMapProve == null) {
+										tmp3 = "txt" + (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setValue("
+										+ "selected" + metaData.getRealClassName() + ".get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+										+ tmpFinalParam2.substring(1) + "()" + ");" + "txt"
+										+ (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setDisabled(false);";
+									} else {
+										if (hashMapProve.equals("")) {
+
+											tmp3 = "txt" + (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setValue("
+											+ "selected" + metaData.getRealClassName() + ".get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+											+ tmpFinalParam2.substring(1) + "()" + ");" + "txt"
+											+ (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setDisabled(false);";
+
+										} else {
+
+											tmp3 = "txt" + (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setValue("
+											+ "selected" + metaData.getRealClassName() + ".get" + hashMapProve.substring(0, 1).toUpperCase()
+											+ hashMapProve.substring(1) + "().get" + (tmpFinalParam2.substring(0, 1)).toUpperCase()
+											+ tmpFinalParam2.substring(1) + "()" + ");" + "txt"
+											+ (tmpFinalParam2.substring(0, 1)).toUpperCase() + tmpFinalParam2.substring(1) + ".setDisabled(false);";
+
+										}
+									}
+
+									finalParam2.add(tmp3);
+								}
+							}
+
+						}
+					}
+
+				} else {
+
+					if (params != null) {
+						int cont = 0;
+						for (int i = 0; i < params.length; i++) {
+
+							tmpFinalParam = params[cont];
+
+							if (tmpFinalParam != null) {
+								if (cont > params.length)
+									cont = params.length;
+								else
+									cont++;
+
+								tmpFinalParam = tmpFinalParam + " " + params[cont];
+
+								tmpFinalParam1 = params[cont];
+
+								if (cont > params.length)
+									cont = params.length;
+								else
+									cont++;
+
+								if (!finalParam.contains(tmpFinalParam)) {
+									finalParam = finalParam + tmpFinalParam;
+
+									String tmp3 = "txt" + (tmpFinalParam1.substring(0, 1)).toUpperCase() + tmpFinalParam1.substring(1) + ".setValue("
+									+ "selected" + metaData.getRealClassName() + ".get" + tmpFinalParam1.substring(0, 1).toUpperCase()
+									+ tmpFinalParam1.substring(1) + "()" + ");" + "txt"
+									+ (tmpFinalParam1.substring(0, 1)).toUpperCase() + tmpFinalParam1.substring(1) + ".setDisabled(false);";
+
+									finalParam2.add(tmp3);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		List primaryKey = stringBuilderForId.finalParamForIdForViewForSetsVariablesInList(theMetaData, metaData);
+
+		return ListUtils.subtract(finalParam2, primaryKey);
+	}
+	
+	
 }
