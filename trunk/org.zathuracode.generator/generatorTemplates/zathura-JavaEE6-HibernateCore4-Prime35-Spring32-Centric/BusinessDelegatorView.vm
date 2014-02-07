@@ -70,14 +70,14 @@ public class BusinessDelegatorView implements IBusinessDelegatorView{
     public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception{
         return ${metaData.getRealClassNameAsVariable()}Logic.get${metaData.getRealClassName()}();
         }
-        public void save${metaData.getRealClassName()}(${metaData.getFinamParam()}) throws Exception{
-        ${metaData.getRealClassNameAsVariable()}Logic.save${metaData.getRealClassName()}(${metaData.getFinamParamVariables()});
+        public void save${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception{
+        ${metaData.getRealClassNameAsVariable()}Logic.save${metaData.getRealClassName()}(entity);
         }
-        public void delete${metaData.getRealClassName()}(${metaData.getFinalParamForId()}) throws Exception{
-        ${metaData.getRealClassNameAsVariable()}Logic.delete${metaData.getRealClassName()}(${metaData.getFinalParamForIdVariables()});		
+        public void delete${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception{
+        ${metaData.getRealClassNameAsVariable()}Logic.delete${metaData.getRealClassName()}(entity);		
         }
-        public void update${metaData.getRealClassName()}(${metaData.getFinamParam()}) throws Exception{
-        ${metaData.getRealClassNameAsVariable()}Logic.update${metaData.getRealClassName()}(${metaData.getFinamParamVariables()});
+        public void update${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception{
+        ${metaData.getRealClassNameAsVariable()}Logic.update${metaData.getRealClassName()}(entity);
         }
         public ${metaData.getRealClassName()} get${metaData.getRealClassName()}(${metaData.primaryKey.getRealClassName()} ${metaData.primaryKey.getShowName()}) throws Exception{
         ${metaData.getRealClassName()} ${metaData.getRealClassNameAsVariable()} = null;

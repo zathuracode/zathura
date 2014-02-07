@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;    
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import  ${virginPackage}.exceptions.*;
 import ${package}.*;
 import ${packageOriginal}.dto.${metaData.getRealClassName()}DTO;
@@ -56,7 +57,9 @@ private CommandButton btnDelete;
 private CommandButton btnClear;
 private List<${metaData.getRealClassName()}DTO> data;
 private ${metaData.getRealClassName()}DTO selected${metaData.getRealClassName()};
-
+private ${metaData.getRealClassName()} entity;
+private boolean showDialog;
+    
 @Autowired	
 private IBusinessDelegatorView businessDelegatorView;
 
@@ -115,10 +118,19 @@ private IBusinessDelegatorView businessDelegatorView;
 			}
 		
 		}
+		
+	public String action_new(){
+		action_clear();
+		selected${metaData.getRealClassName()} = null;
+		setShowDialog(true);
+		return "";
+	}
 
-
-
-		public String action_clear() {
+	public String action_clear() {
+		
+		entity = null;
+		selected${metaData.getRealClassName()} = null;
+		
         #foreach($member2  in $finalParamForViewVariablesInList)
             if(txt${member2} != null){
 			 txt${member2}.setValue(null);
@@ -150,18 +162,6 @@ private IBusinessDelegatorView businessDelegatorView;
         if(btnSave != null){
 		  btnSave.setDisabled(true);
 		}
-		
-		if(btnDelete != null){
-		   btnDelete.setDisabled(true);
-		}
-		
-		if(btnModify != null){
-			btnModify.setDisabled(true);
-		}
-        
-		if(btnClear != null){
-		  btnClear.setDisabled(false);
-		}
 			
         return "";
         }
@@ -187,136 +187,208 @@ private IBusinessDelegatorView businessDelegatorView;
 			#end
 		#end		
 		
-		public void listener_txtId(){
-        
-        ${metaData.getRealClassName()} entity = null;
-        try {
-        #foreach($member2  in $finalParamForIdForViewClass)
-            $member2
-        #end
-        entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
-        } catch (Exception e) {
-        // TODO: handle exception
-        }
-        
+	public void listener_txtId(){
+    
+	    try {
+	    #foreach($member2  in $finalParamForIdForViewClass)
+	        $member2
+	    #end
+	    	entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+	    } catch (Exception e) {
+	    // TODO: handle exception
+	    }
+	    
 		if(entity==null){
-        #foreach($member2  in $finalParamForViewVariablesInList)
-            txt${member2}.setDisabled(false);
-        #end
-        #if(${isFinalParamForViewDatesInList})
-            #foreach($member2  in $finalParamForViewDatesInList)
-                txt${member2}.setDisabled(false);
-            #end
-        #end
-        #foreach($member2  in $finalParamForIdForViewVariablesInList)
-            txt${member2}.setDisabled(false);
-        #end
-        #if(${isFinalParamForIdForViewDatesInList})
-            #foreach($member2  in $finalParamForIdForViewDatesInList)
-                txt${member2}.setDisabled(false);
-            #end
-        #end
-        btnSave.setDisabled(false);
-        btnDelete.setDisabled(true);
-        btnModify.setDisabled(true);
-        btnClear.setDisabled(false);
-        }else{
-        #foreach($member2  in $finalParamForViewForSetsVariablesInList)
-            ${member2}
-        #end
-        #foreach($member2  in $finalParamForIdForViewForSetsVariablesInList)
-            ${member2}
-        #end
-        btnSave.setDisabled(true);
-        btnDelete.setDisabled(false);
-        btnModify.setDisabled(false);
-        btnClear.setDisabled(false);
-        }
-        }
+	    #foreach($member2  in $finalParamForViewVariablesInList)
+	        txt${member2}.setDisabled(false);
+	    #end
+	    #if(${isFinalParamForViewDatesInList})
+	        #foreach($member2  in $finalParamForViewDatesInList)
+	            txt${member2}.setDisabled(false);
+	        #end
+	    #end
+	    #foreach($member2  in $finalParamForIdForViewVariablesInList)
+	        txt${member2}.setDisabled(false);
+	    #end
+	    #if(${isFinalParamForIdForViewDatesInList})
+	        #foreach($member2  in $finalParamForIdForViewDatesInList)
+	            txt${member2}.setDisabled(false);
+	        #end
+	    #end
+		    btnSave.setDisabled(false);
+		    }else{
+		    #foreach($member2  in $finalParamForViewForSetsVariablesInList)
+		        ${member2}
+		    #end
+		    #foreach($member2  in $finalParamForIdForViewForSetsVariablesInList)
+		        ${member2}
+		    #end
+		    btnSave.setDisabled(false);
+	    }
+    }
         
-		
-		
-		
-        public String action_save() {
-        try {
-        businessDelegatorView.save${metaData.getRealClassName()}(${finalParamForView});
-        FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYSAVED);
-		action_clear();
+	public String action_edit(ActionEvent evt){
+    	
+    	selected${metaData.getRealClassName()} = (${metaData.getRealClassName()}DTO)(evt.getComponent().getAttributes().get("selected${metaData.getRealClassName()}"));		
+    #foreach($member2  in $finalParamForViewForSetsVariablesDtoInList)
+        ${member2}
+    #end
+    #foreach($member2  in $finalParamForIdForViewForSetsVariablesDtoInList)
+        ${member2}
+    #end
+        btnSave.setDisabled(false);
+    	setShowDialog(true);
+
+    	return "";
+    }
+    
+    public String action_save(){    	
+        try {        	
+        	if(selected${metaData.getRealClassName()} == null && entity==null){
+        		action_create();
+        	}else{
+        		action_modify();
+        	}
+        	data = null;
         } catch (Exception e) {
-        FacesUtils.addErrorMessage(e.getMessage());
+            FacesUtils.addErrorMessage(e.getMessage());
+        }
+
+        return "";
+    	
+    }
+    
+    public String action_create() {
+        try {
+        	entity = new ${metaData.getRealClassName()}();
+
+	    #foreach($member2  in $finalParamForIdForViewClass)
+	        $member2
+	    #end
+
+#if(${metaData.isGetSimpleProperties()})
+    #foreach($member  in ${metaData.getSimpleProperties()})
+        #if(${member.getRealClassName()}==${metaData.getPrimaryKey().getRealClassName()})
+            #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
+            	entity.${member.getMethodSetterName()}(${metaData.getPrimaryKey().getName()});
+            #else
+            	#if(${member.getName()}==${metaData.getPrimaryKey().getName()})
+            		entity.${member.getMethodSetterName()}(${metaData.getPrimaryKey().getName()});
+            	#else
+            		entity.${member.getMethodSetterName()}(FacesUtils.check${member.getRealClassName()}(txt${member.getGetNameOfPrimaryName()}));
+            	#end
+            #end           
+        #else
+            entity.${member.getMethodSetterName()}(FacesUtils.check${member.getRealClassName()}(txt${member.getGetNameOfPrimaryName()}));
+        #end
+    #end
+#end
+    #foreach($member2  in $finalParamForGetIdForViewClass)
+        $member2
+    #end
+    #foreach($member2  in $finalParamForGetManyToOneForViewClass)
+        $member2
+    #end
+    #foreach($member in ${metaData.getManyToManyProperties()})
+        entity.${member.getMethodSetterName()}(FacesUtils.check${member.getRealClassName()}(txt${member.getGetNameOfPrimaryName()}));
+    #end    
+	        businessDelegatorView.save${metaData.getRealClassName()}(entity);
+	        FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYSAVED);
+			action_clear();
+        } catch (Exception e) {
+        	FacesUtils.addErrorMessage(e.getMessage());
         }
         return "";
-        }
+    }
 		
-		
-		
-        public String action_delete() {
+	public String action_modify() {
         try {
-        businessDelegatorView.delete${metaData.getRealClassName()}($finalParamForIdClassAsVariablesAsString);
-        FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
-		action_clear();
-        } catch (Exception e) {
-		FacesUtils.addErrorMessage(e.getMessage());
-        }
-        return "";
-        }
-		
-		
-		
-        public String action_modify() {
-        try {
-        businessDelegatorView.update${metaData.getRealClassName()}(${finalParamForView});
-		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
-		action_clear();
+        	if(entity==null){
+		    #foreach($member2  in $finalParamForGetIdByDtoForViewClass)
+		        $member2
+		    #end
+	    		entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+    		}
+    		
+#if(${metaData.isGetSimpleProperties()})
+    #foreach($member  in ${metaData.getSimpleProperties()})
+    	#if(${member.getName()}!=${metaData.getPrimaryKey().getName()})
+    		entity.${member.getMethodSetterName()}(FacesUtils.check${member.getRealClassName()}(txt${member.getGetNameOfPrimaryName()}));
+    	#end         
+    #end
+#end
+	    #foreach($member2  in $finalParamForGetManyToOneForViewClass)
+	        $member2
+	    #end
+    #foreach($member in ${metaData.getManyToManyProperties()})
+        entity.${member.getMethodSetterName()}(FacesUtils.check${member.getRealClassName()}(txt${member.getGetNameOfPrimaryName()}));
+    #end    	    
+	        businessDelegatorView.update${metaData.getRealClassName()}(entity);
+			FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
         } catch (Exception e) {
 		   data=null;
            FacesUtils.addErrorMessage(e.getMessage());
         }
         return "";
-        }
+	}
+	
+	public String action_delete(ActionEvent evt) {
+		try{
+			selected${metaData.getRealClassName()} = (${metaData.getRealClassName()}DTO)(evt.getComponent().getAttributes().get("selected${metaData.getRealClassName()}"));		
+	    #foreach($member2  in $finalParamForGetIdByDtoForViewClass)
+	        $member2
+	    #end
+    		entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+			businessDelegatorView.delete${metaData.getRealClassName()}(entity);
+    		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
+			action_clear();
+            data= null;
+		}catch(Exception e ){
+		 FacesUtils.addErrorMessage(e.getMessage());
+		}  
+		
+		return "";
+	}	
+	
+    public String action_closeDialog(){
+    	setShowDialog(false);
+    	action_clear();    	
+    	return "";
+    }	
 		
 		
 		## Action to modify DataTableEditable
 		
-		public String actionDeleteDataTableEditable(){
-			
-			try{
-			  #foreach($member2  in $finalParamForIdForViewVariablesInList)
-				#set( $str = $member2 ) 
-				#set( $upper = $str.toString().substring(0,1).toUpperCase())
-				#set($str2 = $str.toString().substring(1))
-				if(txt${upper}${str2} == null){
-					txt${upper}${str2} = new InputText ();
-				}
-				txt${upper}${str2}.setValue(selected${metaData.getRealClassName()}.get${upper}${str2}());
-			#end
-			
-			#if(${isFinalParamForIdForViewDatesInList})
-				#foreach($member2  in $finalParamForIdForViewDatesInList)
-				#set( $str = $member2 ) 
-				#set( $upper = $str.toString().substring(0,1).toUpperCase())
-				#set($str2 = $str.toString().substring(1))
-				if(txt${upper}${str2} == null){
-					txt${upper}${str2} = new Calendar ();
-				}
-				txt${upper}${str2}.setValue(selected${metaData.getRealClassName()}.get${upper}${str2}());
-				#end
-			#end
-				businessDelegatorView.delete${metaData.getRealClassName()}($finalParamForIdClassAsVariablesAsString);
-        		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
-				action_clear();
-				data.remove(selected${metaData.getRealClassName()});
-			
-			}catch(Exception e ){
-			 FacesUtils.addErrorMessage(e.getMessage());
-			}  
-			
-			return "";
-		}
+	public String actionDeleteDataTableEditable(ActionEvent evt){
+		
+		try{
+			selected${metaData.getRealClassName()} = (${metaData.getRealClassName()}DTO)(evt.getComponent().getAttributes().get("selected${metaData.getRealClassName()}"));		
+	    #foreach($member2  in $finalParamForGetIdByDtoForViewClass)
+	        $member2
+	    #end
+    		entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+			businessDelegatorView.delete${metaData.getRealClassName()}(entity);
+    		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
+			action_clear();
+			data.remove(selected${metaData.getRealClassName()});
+		}catch(Exception e ){
+		 FacesUtils.addErrorMessage(e.getMessage());
+		}  
+		
+		return "";
+	}
 		
         public String action_modifyWitDTO(${finalParam}) throws Exception {
         try {
-        businessDelegatorView.update${metaData.getRealClassName()}(${finalParamForDtoUpdateOnlyVariables});
+        
+#if(${metaData.isGetSimpleProperties()})
+    #foreach($member  in ${metaData.getSimpleProperties()})
+    	#if(${member.getName()}!=${metaData.getPrimaryKey().getName()})
+    		entity.${member.getMethodSetterName()}(FacesUtils.check${member.getRealClassName()}(${member.getName()}));
+    	#end         
+    #end
+#end
+        businessDelegatorView.update${metaData.getRealClassName()}(entity);
 		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
         } catch (Exception e) {
         //renderManager.getOnDemandRenderer("${metaData.getRealClassName()}View").requestRender();
@@ -429,6 +501,14 @@ private IBusinessDelegatorView businessDelegatorView;
 
 											public void setBusinessDelegatorView(IBusinessDelegatorView businessDelegatorView) {
 											this.businessDelegatorView = businessDelegatorView;
-											} 
+											}
+											
+											public boolean isShowDialog() {
+												return showDialog;
+											}
+										
+											public void setShowDialog(boolean showDialog) {
+												this.showDialog = showDialog;
+											}											
                                              
 									}

@@ -74,54 +74,27 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			
 			@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
-            public void save${metaData.getRealClassName()}(${finalParam}) throws Exception {
-            ${metaData.getRealClassName()} entity = null;
+            public void save${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
+
             try {
-            #foreach($member2  in ${finalParamForIdVariablesAsList})
-                ${member2}
-            #end
+            
             #if(${metaData.isGetManyToOneProperties()})
-                #foreach($member  in $getStringsForManyToOneProperties)
-                    $member
-                #end
                 #foreach($member  in ${metaData.getManyToOneProperties()})
-                    if(${member.getShowName()}Class==null){
+                    if(entity.${member.getMethodGetterName()}==null){
                     throw new ZMessManager().new ForeignException("${member.getShowName()}");
                     }
                 #end
             #end
-            #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-                #foreach($idString  in $finalParamForIdClass)
-                    $idString
-                #end
+            
+            #foreach($member2  in ${finalParamForIdVariablesAsList})
+                ${member2}
             #end
-            #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-                entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()}Class);
-                #else
-                    entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()});
-            #end
-            if(entity != null){
+
+
+            if(get${metaData.getRealClassName()}(entity.get${metaData.primaryKey.getGetNameOfPrimaryName()}()) != null){
             throw new ZMessManager(ZMessManager.ENTITY_WITHSAMEKEY);
             }
-            entity = new 		${metaData.getRealClassName()}();	
-            #if(${metaData.isGetSimpleProperties()})
-                #foreach($member2  in ${metaData.getSimpleProperties()})
-                    #if(${member2.getRealClassName()}==${metaData.getPrimaryKey().getRealClassName()})
-                        #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-                            entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()}Class);
-                            #else
-                                entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()});
-                        #end
-                        #else
-                            entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()});
-                    #end
-                #end
-            #end
-            #if(${metaData.isGetManyToOneProperties()})
-                #foreach($member  in ${metaData.getManyToOneProperties()})
-                    entity.set${member.getGetNameOfPrimaryName()}(${member.getName()}Class);
-                #end
-            #end
+
             ${metaData.getRealClassNameAsVariable()}DAO.save(entity);
             } catch (Exception e) {
             throw e;
@@ -132,19 +105,18 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			
 			@Transactional(readOnly=false , propagation=Propagation.REQUIRED)
-            public void delete${metaData.getRealClassName()}(${finalParamForId}) throws Exception {
-            ${metaData.getRealClassName()} entity = null;
+            public void delete${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
+            
+	            if(entity==null){
+	    			throw new ZMessManager().new NullEntityExcepcion("${metaData.getRealClassName()}");
+	    		}
+    	
             #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
                 #foreach($idStringAsVariable  in $finalParamForIdClassAsVariables)
-                    if($idStringAsVariable==null){
-                    throw new ZMessManager().new EmptyFieldException("$idStringAsVariable");
-                    }
+                    $idStringAsVariable
                 #end
-                #foreach($idString  in $finalParamForIdClass)
-                    $idString
-                #end
-                #else
-                    if(${metaData.primaryKey.getShowName()}==null){
+            #else
+                    if(entity.get${metaData.primaryKey.getGetNameOfPrimaryName()}()==null){
                     throw new ZMessManager().new EmptyFieldException("${metaData.primaryKey.getShowName()}");
                     }
             #end
@@ -153,24 +125,17 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     List<${member.getRealClassName()}> ${member.name} = null;
                 #end
             #end
-            #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-                entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()}Class);
-                #else
-                    entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()});
-            #end
-            if (entity == null) {
-            throw new ZMessManager().new EmptyFieldException("${metaData.getRealClassName()}");
-            }
+
             try {
             #if(${metaData.isGetOneToManyProperties()})
                 #foreach($member  in ${metaData.getOneToManyProperties()})
                     #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-                        ${member.name}= ${member.getRealClassVariableName()}DAO.findByProperty("${metaData.getRealClassNameAsVariable()}.${metaData.primaryKey.getShowName()}", ${metaData.primaryKey.getShowName()}Class);
+                        ${member.name}= ${member.getRealClassVariableName()}DAO.findByProperty("${metaData.getRealClassNameAsVariable()}.${metaData.primaryKey.getShowName()}", entity.get${metaData.primaryKey.getGetNameOfPrimaryName()}());
                         if(Utilities.validationsList(${member.name})==true){
                         throw new ZMessManager().new DeletingException("${member.name}");
                         }
                         #else
-                            ${member.name}= ${member.getRealClassVariableName()}DAO.findByProperty("${metaData.getRealClassNameAsVariable()}.${metaData.primaryKey.getShowName()}", ${metaData.primaryKey.getShowName()});
+                            ${member.name}= ${member.getRealClassVariableName()}DAO.findByProperty("${metaData.getRealClassNameAsVariable()}.${metaData.primaryKey.getShowName()}", entity.get${metaData.primaryKey.getGetNameOfPrimaryName()}());
                             if(Utilities.validationsList(${member.name})==true){
                             throw new ZMessManager().new DeletingException("${member.name}");
                             }
@@ -188,53 +153,26 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			
 			@Transactional(readOnly=false , propagation=Propagation.REQUIRED)
-            public void update${metaData.getRealClassName()}(${finalParam}) throws Exception {
-            ${metaData.getRealClassName()} entity = null;
+            public void update${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
+
             try {
-            #foreach($member2  in ${finalParamForIdVariablesAsList})
-                ${member2}
-            #end
+            
+            	if(entity==null){
+	    			throw new ZMessManager().new NullEntityExcepcion("${metaData.getRealClassName()}");
+	    		}
+	    		
             #if(${metaData.isGetManyToOneProperties()})
-                #foreach($member  in $getStringsForManyToOneProperties)
-                	$member
-                #end
                 #foreach($member  in ${metaData.getManyToOneProperties()})
-                    if(${member.getShowName()}Class==null){
+                    if(entity.${member.getMethodGetterName()}==null){
                     throw new ZMessManager().new ForeignException("${member.getShowName()}");
                     }
                 #end
             #end
-            #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-                #foreach($idString  in $finalParamForIdClass)
-                    $idString
-                #end
+            	    		
+            #foreach($member2  in ${finalParamForIdVariablesAsList})
+                ${member2}
             #end
-            #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-                entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()}Class);
-                #else
-                    entity = get${metaData.getRealClassName()}(${metaData.primaryKey.getShowName()});
-            #end
-            if(entity == null){
-             throw new ZMessManager(ZMessManager.ENTITY_NOENTITYTOUPDATE);
-            }
-            #if(${metaData.isGetSimpleProperties()})
-                #foreach($member2  in ${metaData.getSimpleProperties()})
-                    #if(${member2.getRealClassName()}==${metaData.getPrimaryKey().getRealClassName()})
-                        #if(${metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()})
-                            entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()}Class);
-                            #else
-                                entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()});
-                        #end
-                        #else
-                            entity.set${member2.getGetNameOfPrimaryName()}(${member2.getName()});
-                    #end
-                #end
-            #end
-            #if(${metaData.isGetManyToOneProperties()})
-                #foreach($member  in ${metaData.getManyToOneProperties()})
-                    entity.set${member.getGetNameOfPrimaryName()}(${member.getName()}Class);
-                #end
-            #end
+
             ${metaData.getRealClassNameAsVariable()}DAO.update(entity);
             } catch (Exception e) {
             throw e;
@@ -290,7 +228,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                 List<${metaData.getRealClassName()}> entity = null;
                     try {
                     entity = ${metaData.getRealClassNameAsVariable()}DAO
-                    .findPage${metaData.getRealClassName()}(sortColumnName, sortAscending, startRow,
+                    .findPage(sortColumnName, sortAscending, startRow,
                     maxResults);
                     } catch (Exception e) {
                     throw new ZMessManager().new FindingException("${metaData.getRealClassName()} Count");
@@ -305,8 +243,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     public Long findTotalNumber${metaData.getRealClassName()}() throws Exception {
                     Long entity = null;
                     try {
-                    entity = ${metaData.getRealClassNameAsVariable()}DAO
-                    .findTotalNumber${metaData.getRealClassName()}();
+                    entity = ${metaData.getRealClassNameAsVariable()}DAO.count();
                     } catch (Exception e) {
                      throw new ZMessManager().new FindingException("${metaData.getRealClassName()} Count");
                     } finally {
