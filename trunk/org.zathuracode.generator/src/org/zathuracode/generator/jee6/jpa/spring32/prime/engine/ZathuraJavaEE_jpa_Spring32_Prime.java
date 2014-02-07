@@ -96,18 +96,22 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
 		
-		//copy libraries
-		GeneratorUtil.copyFolder(pathHibernate, pathLib);
-		GeneratorUtil.copyFolder(pathJPA, pathLib);
-		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
-		GeneratorUtil.copyFolder(pathSpring, pathLib);
-		GeneratorUtil.copyFolder(pathSL4J, pathLib);
-		GeneratorUtil.copyFolder(pathJamon, pathLib);
-		GeneratorUtil.copyFolder(pathMojarra, pathLib);
-		GeneratorUtil.copyFolder(pathApacheCommons, pathLib);
-		GeneratorUtil.copyFolder(pathAopAlliance, pathLib);
-		GeneratorUtil.copyFolder(pathLog4j, pathLib);
-		
+		if (!EclipseGeneratorUtil.isMavenProject) {
+			//copy libraries
+			log.info("Copy Libraries files Zathura Primefaces3.5 JPA Spring3.2.3");
+			GeneratorUtil.copyFolder(pathHibernate, pathLib);
+			GeneratorUtil.copyFolder(pathJPA, pathLib);
+			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+			GeneratorUtil.copyFolder(pathSpring, pathLib);
+			GeneratorUtil.copyFolder(pathSL4J, pathLib);
+			GeneratorUtil.copyFolder(pathJamon, pathLib);
+			GeneratorUtil.copyFolder(pathMojarra, pathLib);
+			GeneratorUtil.copyFolder(pathApacheCommons, pathLib);
+			GeneratorUtil.copyFolder(pathAopAlliance, pathLib);
+			GeneratorUtil.copyFolder(pathLog4j, pathLib);
+			
+		}
+
 		
 		
 		//copy log4j
@@ -182,6 +186,7 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 			velocityContext.put("projectName", projectName);
 			velocityContext.put("domainName", domainName);
 			velocityContext.put("modelName", modelName);
+			
 			//Variables para generar el persistence.xml
 			velocityContext.put("connectionUrl", EclipseGeneratorUtil.connectionUrl);
 			velocityContext.put("connectionDriverClass", EclipseGeneratorUtil.connectionDriverClass);
@@ -289,18 +294,18 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 				doJsp(metaData, velocityContext, hdLocation, metaDataModel);
 			}
 			
-			
+			if (EclipseGeneratorUtil.isMavenProject) {
+				GeneratorUtil.doPomXml(velocityContext, ve);
+			}
 
-
-					    doExceptions(velocityContext, hdLocation);
-						doUtilites(velocityContext, hdLocation, metaDataModel, modelName);
-						doPersitenceXml(metaDataModel, velocityContext, hdLocation);						
-						doBusinessDelegator(velocityContext, hdLocation, metaDataModel);
-						doFacesConfig(metaDataModel, velocityContext, hdLocation);
-						doJspFacelets(velocityContext, hdLocation);
-						doJspInitialMenu(metaDataModel, velocityContext, hdLocation);
-						doSpringContextConfFiles(velocityContext, hdLocation, metaDataModel, modelName);
-
+		    doExceptions(velocityContext, hdLocation);
+			doUtilites(velocityContext, hdLocation, metaDataModel, modelName);
+			doPersitenceXml(metaDataModel, velocityContext, hdLocation);						
+			doBusinessDelegator(velocityContext, hdLocation, metaDataModel);
+			doFacesConfig(metaDataModel, velocityContext, hdLocation);
+			doJspFacelets(velocityContext, hdLocation);
+			doJspInitialMenu(metaDataModel, velocityContext, hdLocation);
+			doSpringContextConfFiles(velocityContext, hdLocation, metaDataModel, modelName);
 
 		} catch (Exception e) {
 			log.error(e.getMessage()); 
