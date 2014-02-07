@@ -137,8 +137,10 @@ public interface IStringBuilderForId {
 	 */
 	public void neededIds(List<MetaData> list);
 	
+		
+	public List<String> dtoConvert(List<MetaData> theMetaData, MetaData metaData);
 	
+	public List<String> finalParamForIdForViewForSetsVariablesDtoInList(List<MetaData> theMetaData, MetaData metaData);
 	
-	public List<String> dtoConvert(List<MetaData> theMetaData, MetaData metaData); 
 
 }
