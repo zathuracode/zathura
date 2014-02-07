@@ -170,5 +170,14 @@ public interface IStringBuilder {
 	 * get properties to generate  the method getData 
 	 * */
 	public List<String>  dtoConvert2(List<MetaData> theMetaData, MetaData metaData);
+	
+	
+	public List<String> finalParamForGetIdForViewClass(List<MetaData> list, MetaData metaData);
+	
+	public List<String> finalParamForGetIdByDtoForViewClass(List<MetaData> list, MetaData metaData);
+	
+	public List<String> finalParamForViewForSetsVariablesDtoInList(List<MetaData> theMetaData, MetaData metaData);
+	
+	public List<String> finalParamForGetManyToOneForViewClass(List<MetaData> list, MetaData metaData);
 
 }
