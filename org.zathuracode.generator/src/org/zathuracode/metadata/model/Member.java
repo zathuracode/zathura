@@ -80,6 +80,16 @@ public class Member implements Comparable {
 		String build2 = name.substring(1, name.length());
 		return build + build2;
 	}
+	
+	public String getMethodGetterName(){
+		String methodGetterName = "get" + (name.substring(0, 1)).toUpperCase() + name.substring(1) + "()";
+		return methodGetterName;
+	}
+	
+	public String getMethodSetterName(){
+		String methodGetterName = "set" + (name.substring(0, 1)).toUpperCase() + name.substring(1);
+		return methodGetterName;
+	}
 
 	/**
 	 * The Constructor.
