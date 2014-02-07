@@ -88,12 +88,13 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator, IZathur
 		String generatorLibrariesZathuraJavaEEWebCentricJpaHibernate = GeneratorUtil.getGeneratorLibrariesZathuraJavaEEWebCentric() + GeneratorUtil.slash
 				+ "jpa-hibernate3.2" + GeneratorUtil.slash;
 
-		log.info("Copy Libraries files ZathuraJavaEE_Web_Centric generation");
-
-		// Copy Libraries
-		String libFolderPath = properties.getProperty("libFolderPath");
-		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEWebCentricIceFaces, libFolderPath);
-		GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEWebCentricJpaHibernate, libFolderPath);
+		if (!EclipseGeneratorUtil.isMavenProject) {
+			log.info("Copy Libraries files ZathuraJavaEE_Web_Centric generation");
+			// Copy Libraries
+			String libFolderPath = properties.getProperty("libFolderPath");
+			GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEWebCentricIceFaces, libFolderPath);
+			GeneratorUtil.copyFolder(generatorLibrariesZathuraJavaEEWebCentricJpaHibernate, libFolderPath);
+		}
 
 		// Copy Ext web.xml
 		String webRootFolderPath = properties.getProperty("webRootFolderPath");
@@ -189,7 +190,7 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator, IZathur
 		context.put("projectName", projectName);
 		context.put("modelName", modelName);
 		context.put("projectNameClass", projectNameClass);
-
+		
 		this.virginPackageInHd = GeneratorUtil.replaceAll(virginPackage, ".", GeneratorUtil.slash);
 
 		Utilities.getInstance().buildFolders(virginPackage, hdLocation, specificityLevel, packageOriginal, properties);
@@ -309,6 +310,10 @@ public class ZathuraJavaEE_JPA_Web_Centric implements IZathuraGenerator, IZathur
 			doDto(metaData, context, hdLocation, dataModel, modelName);
 		}
 
+		if (EclipseGeneratorUtil.isMavenProject) {
+			GeneratorUtil.doPomXml(context, ve);
+		}
+		
 		doUtilites(context, hdLocation, dataModel, modelName);
 		doBusinessDelegator(context, hdLocation, dataModel);
 		doDaoFactory(dataModel, context, hdLocation);

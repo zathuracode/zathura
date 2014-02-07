@@ -78,9 +78,14 @@ public class ZathuraJavaEE_JPA_Prime_Web_Centric implements IZathuraTemplate,IZa
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebPrimeCentricImages, webRootPath + "images" + GeneratorUtil.slash);
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
-		//copy libraries
-		GeneratorUtil.copyFolder(pathHibernate, pathLib);
-		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+		
+		if (!EclipseGeneratorUtil.isMavenProject) {
+			//copy libraries
+			logPrime.info("Copy libraries files ZathuraJavaEE__Jpa_Prime_Web_Centric");
+			GeneratorUtil.copyFolder(pathHibernate, pathLib);
+			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+		}
+
 		// copy to Log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
 		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
@@ -95,13 +100,13 @@ public class ZathuraJavaEE_JPA_Prime_Web_Centric implements IZathuraTemplate,IZa
 		try {
 
 			ve= new VelocityEngine();
-			Properties properties =new Properties();
-			properties.setProperty("file.resource.loader.description", "Velocity File Resource Loader");
-			properties.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
-			properties.setProperty("file.resource.loader.path", primeCentric);
-			properties.setProperty("file.resource.loader.cache", "false");
-			properties.setProperty("file.resource.loader.modificationCheckInterval", "2");
-			ve.init(properties);
+			Properties propiedadesVelocity =new Properties();
+			propiedadesVelocity.setProperty("file.resource.loader.description", "Velocity File Resource Loader");
+			propiedadesVelocity.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
+			propiedadesVelocity.setProperty("file.resource.loader.path", primeCentric);
+			propiedadesVelocity.setProperty("file.resource.loader.cache", "false");
+			propiedadesVelocity.setProperty("file.resource.loader.modificationCheckInterval", "2");
+			ve.init(propiedadesVelocity);
 			
 			VelocityContext context =new VelocityContext();
 
@@ -160,7 +165,6 @@ public class ZathuraJavaEE_JPA_Prime_Web_Centric implements IZathuraTemplate,IZa
 			context.put("projectName", projectName);
 			context.put("modelName", modelName);
 			context.put("projectNameClass", projectNameClass);
-
 
 			this.virginPackageInHd = GeneratorUtil.replaceAll(virginPackage, ".", GeneratorUtil.slash);
 			//Contruye los folder del proyect (dataacces.dao,exception,model,modelo.control,model.dto,presentation.backendbean,presentation.bussinessDelegator,utilities)
@@ -277,6 +281,9 @@ public class ZathuraJavaEE_JPA_Prime_Web_Centric implements IZathuraTemplate,IZa
 				
 			}
 
+			if (EclipseGeneratorUtil.isMavenProject) {
+				GeneratorUtil.doPomXml(context, ve);
+			}
 			doPersitenceXml(metaDataModel, context, hdLocation);
 			doEntityManager(metaDataModel, context, hdLocation);
 			doDaoFactory(metaDataModel, context, hdLocation);

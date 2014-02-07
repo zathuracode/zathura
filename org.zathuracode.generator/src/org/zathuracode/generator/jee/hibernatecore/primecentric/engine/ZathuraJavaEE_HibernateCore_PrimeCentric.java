@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zathuracode.generator.model.IZathuraGenerator;
 import org.zathuracode.generator.utilities.GeneratorUtil;
 import org.zathuracode.generator.utilities.JalopyCodeFormatter;
@@ -78,9 +79,15 @@ public class ZathuraJavaEE_HibernateCore_PrimeCentric implements IZathuraTemplat
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebPrimeHibernateCentricImages, webRootPath + "images" + GeneratorUtil.slash);
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
-		//copy libraries
-		GeneratorUtil.copyFolder(pathHibernate, pathLib);
-		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+		
+		//valida si no es un proyecto maven, para iniciar la copia de librerias
+		if (!EclipseGeneratorUtil.isMavenProject) {			
+			//copy libraries
+			logPrimeHibernate.info("Copy libraries files Zathura+Primefaces3.2+Hibernate3.3");
+			GeneratorUtil.copyFolder(pathHibernate, pathLib);
+			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+		}
+
 		// copy to Log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
 		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
@@ -147,6 +154,7 @@ public class ZathuraJavaEE_HibernateCore_PrimeCentric implements IZathuraTemplat
 			context.put("projectName", projectName);
 			context.put("modelName", modelName);
 			context.put("projectNameClass", projectNameClass);
+			
 			virginPackageInHd = GeneratorUtil.replaceAll(virginPackage, ".", GeneratorUtil.slash);
 			Utilities.getInstance().buildFolders(virginPackage, hdLocation, specificityLevel, packageOriginal, this.properties);
 			// stringBuilderForId.neededIds(list);
@@ -248,6 +256,10 @@ public class ZathuraJavaEE_HibernateCore_PrimeCentric implements IZathuraTemplat
 				doLogicXMLHibernate(metaData, context, hdLocation, dataModel, modelName);
 				doDto(metaData, context, hdLocation, dataModel, modelName);
 
+			}
+			
+			if (EclipseGeneratorUtil.isMavenProject) {
+				GeneratorUtil.doPomXml(context, ve);
 			}
 
 			doUtilites(context, hdLocation, dataModel, modelName);

@@ -14,6 +14,10 @@ import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.exception.MethodInvocationException;
+import org.apache.velocity.exception.ParseErrorException;
+import org.apache.velocity.exception.ResourceNotFoundException;
+import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zathuracode.generator.jee.hibernatecore.springprime.utils.IStringBuilder;
 import org.zathuracode.generator.jee.hibernatecore.springprime.utils.IStringBuilderForId;
 import org.zathuracode.generator.jee.hibernatecore.springprime.utils.StringBuilder;
@@ -84,10 +88,16 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric implements IZa
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages, webRootPath + "images" + GeneratorUtil.slash);
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
-		//copy libraries
-		GeneratorUtil.copyFolder(pathHibernate, pathLib);
-		GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
-		GeneratorUtil.copyFolder(pathSpring, pathLib);
+		
+		//valida si no es un proyecto maven, para iniciar la copia de librerias
+		if (!EclipseGeneratorUtil.isMavenProject) {
+			//copy libraries
+			log.info("Copy libraries files Zathura+Primefaces+Hibernate+Spring");
+			GeneratorUtil.copyFolder(pathHibernate, pathLib);
+			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
+			GeneratorUtil.copyFolder(pathSpring, pathLib);
+		}
+
 		// copy to Log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
 		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
@@ -156,6 +166,7 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric implements IZa
 			context.put("modelName", modelName);
 			context.put("projectNameClass", projectNameClass);
 			context.put("domainName", domainName);
+			
 			this.virginPackageInHd = GeneratorUtil.replaceAll(virginPackage, ".", GeneratorUtil.slash);
 			Utilities.getInstance().buildFolders(virginPackage, hdLocation, specificityLevel, packageOriginal, properties);
 			Utilities.getInstance().biuldHashToGetIdValuesLengths(list);
@@ -257,14 +268,18 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric implements IZa
 
 			}
 
-							doUtilites(context, hdLocation, dataModel, modelName);
-							doExceptions(context, hdLocation);
-							doBusinessDelegator(context, hdLocation, dataModel);
-							doJspInitialMenu(dataModel, context, hdLocation);
-							doFacesConfig(dataModel, context, hdLocation);
-							doJspFacelets(context, hdLocation);
-							doSpringContextConfFiles(context, hdLocation, dataModel, modelName);
-
+			if (EclipseGeneratorUtil.isMavenProject) {
+				GeneratorUtil.doPomXml(context, ve);
+			}
+	
+			doUtilites(context, hdLocation, dataModel, modelName);
+			doExceptions(context, hdLocation);
+			doBusinessDelegator(context, hdLocation, dataModel);
+			doJspInitialMenu(dataModel, context, hdLocation);
+			doFacesConfig(dataModel, context, hdLocation);
+			doJspFacelets(context, hdLocation);
+			doSpringContextConfFiles(context, hdLocation, dataModel, modelName);
+	
 
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -696,6 +711,51 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric implements IZa
 		}
 
 	}
+	
+	/* (non-Javadoc)
+	 * @see org.zathuracode.generator.jee.hibernatecore.springprime.engine.IZathuraTemplate#doFacesConfig(org.apache.velocity.VelocityContext, java.lang.String)
+	 */
+	/*public void doPomXml(VelocityContext context){
+		log.info("Begin doPomXml");
+		
+		Template pomTemplate = null;
+		StringWriter swPom = new StringWriter();
+		
+		try {
+			pomTemplate = ve.getTemplate("pom.xml.vm");
+		} catch (ResourceNotFoundException rnfe) {
+			// couldn't find the template
+			rnfe.printStackTrace();
+		} catch (ParseErrorException pee) {
+			// syntax error: problem parsing the template
+			pee.printStackTrace();
+		} catch (MethodInvocationException mie) {
+			// something invoked in the template
+			// threw an exception
+			mie.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			
+			pomTemplate.merge(context, swPom);
+			
+			String pomLocation = EclipseGeneratorUtil.fullPathProject + GeneratorUtil.slash + GeneratorUtil.pomFile;
+			FileWriter fstream = new FileWriter(pomLocation);
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(swPom.toString());
+			// Close the output stream
+			out.close();
+			
+			JalopyCodeFormatter.formatJavaCodeFile(pomLocation);
 
+			log.info("End doPomXml");
+			
+		} catch (Exception e) {
+			log.info("Error: " + e.getMessage());
+		}
+		
+	}*/
 
 }

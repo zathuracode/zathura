@@ -132,10 +132,14 @@ public class ZathuraJavaEE_Jpa_Web_Spring_Centric implements  IZathuraTemplate,I
 		GeneratorUtil.createFolder(webRootPath+"xmlhttp");
 		GeneratorUtil.copyFolder(pathXmlhttp, webRootPath+"xmlhttp"+GeneratorUtil.slash);
 
-		//copy libraries
-		GeneratorUtil.copyFolder(pathHibernate, pathLib);
-		GeneratorUtil.copyFolder(pathIceFaces, pathLib);
-		GeneratorUtil.copyFolder(pathSpring, pathLib);
+		if (!EclipseGeneratorUtil.isMavenProject) {
+			//copy libraries
+			log.info("Copy Libraries files ZathuraJavaEE__Jpa_Spring_Web_Centric generation");
+			GeneratorUtil.copyFolder(pathHibernate, pathLib);
+			GeneratorUtil.copyFolder(pathIceFaces, pathLib);
+			GeneratorUtil.copyFolder(pathSpring, pathLib);
+		}
+
 		
 		// copy index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
@@ -214,6 +218,7 @@ public class ZathuraJavaEE_Jpa_Web_Spring_Centric implements  IZathuraTemplate,I
 			velocityContext.put("projectName", projectName);
 			velocityContext.put("domainName", domainName);
 			velocityContext.put("modelName", modelName);
+			
 			//Variables para generar el persistence.xml
 			velocityContext.put("connectionUrl", EclipseGeneratorUtil.connectionUrl);
 			velocityContext.put("connectionDriverClass", EclipseGeneratorUtil.connectionDriverClass);
@@ -314,6 +319,9 @@ public class ZathuraJavaEE_Jpa_Web_Spring_Centric implements  IZathuraTemplate,I
 			}
 
 
+			if (EclipseGeneratorUtil.isMavenProject) {
+				GeneratorUtil.doPomXml(velocityContext, ve);
+			}
 
 			doExceptions(velocityContext, hdLocation);
 			doUtilites(velocityContext, hdLocation, metaDataModel, modelName);
