@@ -110,6 +110,7 @@ public class ZathuraGeneratorFactory {
 		boolean className = false;
 		boolean guiName = false;
 		boolean persistence = false;
+		boolean zathuraVersion = false;
 
 		theZathuraGenerators = new HashMap<String, GeneratorModel>();
 
@@ -153,6 +154,9 @@ public class ZathuraGeneratorFactory {
 				} else if (localName.equals("persistence") == true) {
 					persistence = true;
 					log.info(localName);
+				} else if (localName.equals("zathuraVersion") == true) {
+					zathuraVersion = true;
+					log.info(localName);
 				}
 			} else if (e.isCharacters()) {
 				Characters characters = (Characters) e;
@@ -178,6 +182,10 @@ public class ZathuraGeneratorFactory {
 					generatorModel.setPersistence(cadena);
 					persistence = false;
 					log.info(cadena);
+				} else if (zathuraVersion == true) {
+					generatorModel.setZathuraVersion(cadena);
+					zathuraVersion = false;
+					log.info(cadena);
 				}
 			} else if (e.isEndElement() == true) {
 				EndElement endElement = (EndElement) e;
@@ -187,7 +195,6 @@ public class ZathuraGeneratorFactory {
 					theZathuraGenerators.put(generatorModel.getName(), generatorModel);
 				}
 			}
-
 		}
 		log.debug("Generator length:" + theZathuraGenerators.size());
 	}
@@ -223,6 +230,10 @@ public class ZathuraGeneratorFactory {
 			}
 		}
 		return "";
+	}
+	
+	public static String pathConfigXML(){
+		return xmlConfigFactoryPath;
 	}
 
 }
