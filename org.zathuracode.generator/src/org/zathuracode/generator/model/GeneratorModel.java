@@ -21,6 +21,9 @@ public class GeneratorModel {
 	/** The persistence. */
 	private String persistence;
 	
+	/** The Zathura version belong. */
+	private String zathuraVersion;
+	
 	/** The zathura generator. */
 	private IZathuraGenerator zathuraGenerator;
 
@@ -112,6 +115,24 @@ public class GeneratorModel {
 	 */
 	public void setZathuraGenerator(IZathuraGenerator zathuraGenerator) {
 		this.zathuraGenerator = zathuraGenerator;
+	}
+
+	/**
+	 * Gets the zathura version.
+	 *
+	 * @return the zathura version
+	 */
+	public String getZathuraVersion() {
+		return zathuraVersion;
+	}
+
+	/**
+	 * Sets the zathura version.
+	 *
+	 * @param zathuraVersion the zathura version
+	 */
+	public void setZathuraVersion(String zathuraVersion) {
+		this.zathuraVersion = zathuraVersion;
 	}
 
 }
