@@ -7,11 +7,10 @@ import org.zathuracode.metadata.model.Member;
 import org.zathuracode.metadata.model.MetaData;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator.
- *
- * @author Andrés Mauricio Cárdenas Pérez (mauriciocardenasp@gmail.com)
+ * Zathuracode Generator
+ * www.zathuracode.org
+ * @author Diego Armando Gomez (dgomez@vortexbird.com)
  * @version 1.0
  */
 public interface IStringBuilder {
@@ -171,5 +170,14 @@ public interface IStringBuilder {
 	 * get properties to generate  the method getData 
 	 * */
 	public List<String>  dtoConvert2(List<MetaData> theMetaData, MetaData metaData);
+	
+	
+	public List<String> finalParamForGetIdForViewClass(List<MetaData> list, MetaData metaData);
+	
+	public List<String> finalParamForGetIdByDtoForViewClass(List<MetaData> list, MetaData metaData);
+	
+	public List<String> finalParamForViewForSetsVariablesDtoInList(List<MetaData> theMetaData, MetaData metaData);
+	
+	public List<String> finalParamForGetManyToOneForViewClass(List<MetaData> list, MetaData metaData);
 
 }

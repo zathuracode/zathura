@@ -10,11 +10,10 @@ import org.zathuracode.metadata.model.Member;
 import org.zathuracode.metadata.model.MetaData;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator.
- *
- * @author Andrés Mauricio Cárdenas Pérez(mauriciocardenasp@gmail.com)
+ * Zathuracode Generator
+ * www.zathuracode.org
+ * @author Diego Armando Gomez (dgomez@vortexbird.com)
  * @version 1.0
  */
 public class StringBuilderForId implements IStringBuilderForId {
@@ -81,16 +80,28 @@ public class StringBuilderForId implements IStringBuilderForId {
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
 			for (Field field2 : field) {
 				String name = field2.getName();
+				String methodAccesorName = "entity.getId().get" + (name.substring(0, 1)).toUpperCase() + name.substring(1) + "()";
 				String realType = Utilities.getInstance().getRealClassName(field2.getType().getName());
 
 				if (realType.equalsIgnoreCase("date")) {
-					Utilities.getInstance().datesIdJSP.add(name);
+					Utilities.getInstance().datesIdJSP.add(methodAccesorName);
 				} else {
-					finalParam.add(name);
+					
+					String stringAsVariable = Utilities.getInstance().ifcondition + methodAccesorName + "==null" + Utilities.getInstance().ifconditionClose
+												+ Utilities.getInstance().throwExceptionNull + "\"" + name + "\"" + Utilities.getInstance().throwExceptionClose;
+					
+					finalParam.add(stringAsVariable);
 				}
 			}
 		} else {
-			finalParam.add(metaData.getPrimaryKey().getName());
+			
+			String name = metaData.getPrimaryKey().getName();			
+			String methodAccesorName = "entity.get" + name + "()";
+			
+			String stringAsVariable = Utilities.getInstance().ifcondition + methodAccesorName + "==null" + Utilities.getInstance().ifconditionClose
+										+ Utilities.getInstance().throwExceptionNull + "\"" + name + "\"" + Utilities.getInstance().throwExceptionClose;
+			
+			finalParam.add(stringAsVariable);
 		}
 
 		return finalParam;
@@ -140,12 +151,13 @@ public class StringBuilderForId implements IStringBuilderForId {
 			for (Field field2 : field) {
 
 				String name = field2.getName();
+				String methodAccesorName = "entity.getId().get" + (name.substring(0, 1)).toUpperCase() + name.substring(1) + "()";
 
 				finalParam = finalParam + name + ", ";
-				finalParam2.add(Utilities.getInstance().ifcondition + name + "==null" + Utilities.getInstance().ifconditionClose
-						+ Utilities.getInstance().throwExceptionNull + "\"" + name + "\"" + Utilities.getInstance().throwExceptionClose);
+				finalParam2.add(Utilities.getInstance().ifcondition + methodAccesorName + "==null" + Utilities.getInstance().ifconditionClose
+						+ Utilities.getInstance().throwExceptionNull + "\"" + name + "\"" + Utilities.getInstance().throwExceptionClose);				
 
-				finalParam2 = Utilities.getInstance().addVariablesValuesToListDependingOnDataTypeForID(finalParam2, field2, name, metaData.getComposeKey());
+				finalParam2 = Utilities.getInstance().addVariablesValuesToListDependingOnDataTypeForID(finalParam2, field2, name, methodAccesorName, metaData.getComposeKey());
 
 			}
 		}
@@ -154,18 +166,18 @@ public class StringBuilderForId implements IStringBuilderForId {
 			for (Member member : metaData.getSimpleProperties()) {
 				if (member.isPrimiaryKeyAComposeKey() == false) {
 
+					String name = member.getName();
+					String methodAccesorName = "entity." + member.getMethodGetterName();
+					
 					try {
 						if (member.getNullable() == false) {
-							String name = member.getName();
-
 							finalParam = finalParam + name + ", ";
-							finalParam2.add(Utilities.getInstance().ifcondition + name + "==null" + Utilities.getInstance().ifconditionClose
+							finalParam2.add(Utilities.getInstance().ifcondition + methodAccesorName + "==null" + Utilities.getInstance().ifconditionClose
 									+ Utilities.getInstance().throwExceptionNull + "\"" + name + "\"" + Utilities.getInstance().throwExceptionClose);
-
 						}
 
 						finalParam2 = Utilities.getInstance().addVariablesValuesToListDependingOnDataType(finalParam2, member.getRealClassName(),
-								member.getName(), member.getPrecision().toString(), member.getScale().toString(), member.getLength().toString());
+								name, methodAccesorName, member.getPrecision().toString(), member.getScale().toString(), member.getLength().toString());
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
@@ -195,6 +207,8 @@ public class StringBuilderForId implements IStringBuilderForId {
 							String tmp = params[cont];
 
 							tmpFinalParam = finalParam + tmp + ", ";
+							
+							
 
 							if (!finalParam.contains(tmpFinalParam)) {
 
@@ -202,8 +216,8 @@ public class StringBuilderForId implements IStringBuilderForId {
 								// (ManyToOneMember) member;
 
 								String variableNames = (tmp.split("_"))[0];
-								// String className = (tmp.split("_"))[1];
-
+								//String className = (tmp.split("_"))[1];
+								
 								// Boolean nullable = null;
 								//
 								// try {
@@ -226,9 +240,11 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 								Member primarySimple = Utilities.getInstance().manyToOneTempHash.get(variableNames);
 
+								String methodAccesorName = "entity.get" + member.getRealClassName() + "()." + primarySimple.getMethodGetterName();
+								
 								// try {
 								// if (nullable == false) {
-								finalParam2.add(Utilities.getInstance().ifcondition + tmp + "==null" + Utilities.getInstance().ifconditionClose
+								finalParam2.add(Utilities.getInstance().ifcondition + methodAccesorName + "==null" + Utilities.getInstance().ifconditionClose
 										+ Utilities.getInstance().throwExceptionNull + "\"" + tmp + "\"" + Utilities.getInstance().throwExceptionClose);
 								// }
 								// } catch (Exception e) {
@@ -238,7 +254,7 @@ public class StringBuilderForId implements IStringBuilderForId {
 								try {
 
 									finalParam2 = Utilities.getInstance().addVariablesValuesToListDependingOnDataType(finalParam2,
-											primarySimple.getRealClassName(), tmp, primarySimple.getPrecision().toString(),
+											primarySimple.getRealClassName(), tmp, methodAccesorName, primarySimple.getPrecision().toString(),
 											primarySimple.getScale().toString(), primarySimple.getLength().toString());
 								} catch (Exception e) {
 									// TODO: handle exception
@@ -269,9 +285,11 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 								Member primarySimple = Utilities.getInstance().manyToOneTempHash.get(variableNames2);
 
+								String methodAccesorName = "entity.get" + member.getRealClassName() + "()." + primarySimple.getMethodGetterName();
+								
 								try {
 									if (nullable == false) {
-										finalParam2.add(Utilities.getInstance().ifcondition + tmp + "==null" + Utilities.getInstance().ifconditionClose
+										finalParam2.add(Utilities.getInstance().ifcondition + methodAccesorName + "==null" + Utilities.getInstance().ifconditionClose
 												+ Utilities.getInstance().throwExceptionNull + "\"" + tmp + "\"" + Utilities.getInstance().throwExceptionClose);
 									}
 								} catch (Exception e) {
@@ -281,7 +299,7 @@ public class StringBuilderForId implements IStringBuilderForId {
 								try {
 
 									finalParam2 = Utilities.getInstance().addVariablesValuesToListDependingOnDataType(finalParam2,
-											primarySimple.getRealClassName(), tmp, primarySimple.getPrecision().toString(),
+											primarySimple.getRealClassName(), tmp, methodAccesorName, primarySimple.getPrecision().toString(),
 											primarySimple.getScale().toString(), primarySimple.getLength().toString());
 								} catch (Exception e) {
 									// TODO: handle exception
@@ -573,10 +591,12 @@ public class StringBuilderForId implements IStringBuilderForId {
 		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
 			String id = metaData.getPrimaryKey().getRealClassName() + " " + metaData.getPrimaryKey().getName() + " = " + "new "
 					+ metaData.getPrimaryKey().getRealClassName() + "();";
+			
 			finalParam.add(id);
 			Field[] field = metaData.getComposeKey().getDeclaredFields();
 			for (Field field2 : field) {
 				String name = field2.getName();
+				
 
 				String nameFragment = name.substring(0, 1).toUpperCase() + name.substring(1);
 
@@ -592,7 +612,7 @@ public class StringBuilderForId implements IStringBuilderForId {
 					setToId = metaData.getPrimaryKey().getName() + ".set" + nameFragment + "((txt" + nameFragment + ".getValue())==null||(txt" + nameFragment
 							+ ".getValue()).equals(\"\")?null:new " + realType + "(txt" + nameFragment + ".getValue().toString()));";
 				}
-
+				
 				// String setToId = metaData.getPrimaryKey().getName() + ".set"
 				// + nameFragment + "(new " + realType + "((String) txt"
 				// + nameFragment + ".getValue()));";
@@ -612,6 +632,8 @@ public class StringBuilderForId implements IStringBuilderForId {
 		return finalParam;
 	}
 
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -741,6 +763,49 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 	}
 	
-	
-	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seeorg.zathuracode.generator.jeewebcentric.utils.
+	 * IStringBuilderForId
+	 * #finalParamForIdForViewForSetsVariablesDtoInList(java.util.List,
+	 * org.zathuracode.metadata.model.MetaData)
+	 */
+	public List<String> finalParamForIdForViewForSetsVariablesDtoInList(List<MetaData> theMetaData, MetaData metaData) {
+
+		List<String> finalParam2 = new ArrayList<String>();
+		String finalParam = new String();
+
+		if (metaData.getPrimaryKey().isPrimiaryKeyAComposeKey()) {
+			Field[] field = metaData.getComposeKey().getDeclaredFields();
+			for (Field field2 : field) {
+				String name = field2.getName();
+				finalParam = finalParam + name;
+
+				String tmp1 = "txt" + (name.substring(0, 1)).toUpperCase()
+						+ name.substring(1) + ".setValue(" + "selected"
+						+ metaData.getRealClassName() + ".get"
+						+ (name.substring(0, 1)).toUpperCase()
+						+ name.substring(1) + "()" + ");" + "txt"
+						+ (name.substring(0, 1)).toUpperCase()
+						+ name.substring(1) + ".setDisabled(true);";
+
+				finalParam2.add(tmp1);
+			}
+
+		} else {
+			finalParam = metaData.getPrimaryKey().getName();
+			String tmp1 = "txt" + (finalParam.substring(0, 1)).toUpperCase()
+					+ finalParam.substring(1) + ".setValue(" + "selected"
+					+ metaData.getRealClassName() + ".get"
+					+ (finalParam.substring(0, 1)).toUpperCase()
+					+ finalParam.substring(1) + "()" + ");" + "txt"
+					+ (finalParam.substring(0, 1)).toUpperCase()
+					+ finalParam.substring(1) + ".setDisabled(true);";
+			finalParam2.add(tmp1);
+		}
+
+		return finalParam2;
+
+	}
 }
