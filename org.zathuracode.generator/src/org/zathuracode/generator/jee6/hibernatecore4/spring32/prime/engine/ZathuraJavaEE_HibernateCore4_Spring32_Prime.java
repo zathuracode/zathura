@@ -82,6 +82,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 		String pathApacheCommons= librariesPath+"apache-commons"+GeneratorUtil.slash;
 		String pathAopAlliance= librariesPath+"aopalliance1.0"+GeneratorUtil.slash;
 		String pathLog4j=librariesPath+"log4j1.2"+GeneratorUtil.slash;
+		String pathServlet=librariesPath+"servlet3.1.1"+GeneratorUtil.slash;
 		
 		String pathLib= properties.getProperty("libFolderPath");
 		
@@ -114,6 +115,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 			GeneratorUtil.copyFolder(pathApacheCommons, pathLib);
 			GeneratorUtil.copyFolder(pathAopAlliance, pathLib);
 			GeneratorUtil.copyFolder(pathLog4j, pathLib);
+			GeneratorUtil.copyFolder(pathServlet, pathLib);
 		}
 
 		
@@ -222,8 +224,6 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 				context.put("finalParamForIdForViewVariablesInList", stringBuilderForId.finalParamForIdForViewVariablesInList(list, metaData));
 				context.put("isFinalParamForIdForViewDatesInList", Utilities.getInstance().isFinalParamForIdForViewDatesInList());
 				context.put("finalParamForIdForViewDatesInList", Utilities.getInstance().datesId);
-				context.put("finalParamForGetIdForViewClass", stringBuilder.finalParamForGetIdForViewClass(list, metaData));
-				context.put("finalParamForGetIdByDtoForViewClass", stringBuilder.finalParamForGetIdByDtoForViewClass(list, metaData));
 				context.put("finalParamForIdForViewClass", stringBuilderForId.finalParamForIdForViewClass(list, metaData));
 				context.put("finalParamForIdClassAsVariablesAsString", stringBuilderForId.finalParamForIdClassAsVariablesAsString(list, metaData));
 				context.put("finalParamForViewForSetsVariablesInList", stringBuilder.finalParamForViewForSetsVariablesInList(list, metaData));
@@ -233,6 +233,10 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 				context.put("finalParamForDtoInViewForSetsVariablesInList", stringBuilder.finalParamForDtoInViewForSetsVariablesInList(list, metaData));
 				context.put("finalParamForIdForViewForSetsVariablesInList", stringBuilderForId.finalParamForIdForViewForSetsVariablesInList(list, metaData));
 				context.put("finalParamForIdVariablesAsList", stringBuilderForId.finalParamForIdVariablesAsList(list, metaData));
+				
+				//listas nuevas para el manejo de tablas maestro detalle AndresPuerta
+				context.put("finalParamForGetIdForViewClass", stringBuilder.finalParamForGetIdForViewClass(list, metaData));				
+				context.put("finalParamForGetIdByDtoForViewClass", stringBuilder.finalParamForGetIdByDtoForViewClass(list, metaData));
 				context.put("finalParamForIdForViewForSetsVariablesDtoInList", stringBuilderForId.finalParamForIdForViewForSetsVariablesDtoInList(list, metaData));
 				context.put("finalParamForViewForSetsVariablesDtoInList", stringBuilder.finalParamForViewForSetsVariablesDtoInList(list, metaData));
 				context.put("finalParamForGetManyToOneForViewClass", stringBuilder.finalParamForGetManyToOneForViewClass(list, metaData));
