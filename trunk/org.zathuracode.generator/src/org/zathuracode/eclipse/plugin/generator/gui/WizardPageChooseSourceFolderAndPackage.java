@@ -469,8 +469,8 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 			Object object=getNextPage();
 			if(object instanceof WizardPageChooseGenerator){
 				WizardPageChooseGenerator wizardChooseGenerator=(WizardPageChooseGenerator)object;
-				wizardChooseGenerator.loadListGenerators();	
-				//wizardChooseGenerator.loadComboGenerators();
+				wizardChooseGenerator.loadListGeneratorsVersion3_0();
+				wizardChooseGenerator.loadListGeneratorsVersion3_1();
 			}
 			
 		}
