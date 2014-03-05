@@ -30,6 +30,14 @@ public interface IZathuraTemplate {
 	 */
 	public void doDaoSpringXMLHibernate(MetaData metaData, VelocityContext context, String hdLocation);
 
+	/**
+	 * Do dao spring xml hibernate.
+	 *
+	 * @param metaData the meta data
+	 * @param context the context
+	 * @param hdLocation the hd location
+	 */
+	public void doApiSpringHibernate(VelocityContext context, String hdLocation);
 
 	/**
 	 * Do logic spring xml hibernate.

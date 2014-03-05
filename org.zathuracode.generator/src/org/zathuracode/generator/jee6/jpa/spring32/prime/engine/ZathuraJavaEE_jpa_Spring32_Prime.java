@@ -10,11 +10,11 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
-import org.zathuracode.generator.jee.jpacore.springprimecentric.utils.IStringBuilder;
-import org.zathuracode.generator.jee.jpacore.springprimecentric.utils.IStringBuilderForId;
-import org.zathuracode.generator.jee.jpacore.springprimecentric.utils.StringBuilder;
-import org.zathuracode.generator.jee.jpacore.springprimecentric.utils.StringBuilderForId;
-import org.zathuracode.generator.jee.jpacore.springprimecentric.utils.Utilities;
+import org.zathuracode.generator.jee6.jpa.spring32.prime.utils.IStringBuilder;
+import org.zathuracode.generator.jee6.jpa.spring32.prime.utils.IStringBuilderForId;
+import org.zathuracode.generator.jee6.jpa.spring32.prime.utils.StringBuilder;
+import org.zathuracode.generator.jee6.jpa.spring32.prime.utils.StringBuilderForId;
+import org.zathuracode.generator.jee6.jpa.spring32.prime.utils.Utilities;
 import org.zathuracode.generator.model.IZathuraGenerator;
 import org.zathuracode.generator.utilities.GeneratorUtil;
 import org.zathuracode.generator.utilities.JalopyCodeFormatter;
@@ -70,12 +70,14 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 		String pathJPA=librariesPath+"jpa-hibernate4.2.3"+GeneratorUtil.slash;
 		String pathPrimeFaces= librariesPath+"primeFaces3.5"+GeneratorUtil.slash;
 		String pathSpring= librariesPath+"spring3.2.3"+GeneratorUtil.slash;
+		String pathHibernateJpa = librariesPath+"hibernate-jpa2.1"+GeneratorUtil.slash;
 		String pathSL4J= librariesPath+"slf4j1.7.5"+GeneratorUtil.slash;
 		String pathJamon= librariesPath+"jamon2.74"+GeneratorUtil.slash;
 		String pathMojarra= librariesPath+"mojarra2.1.24"+GeneratorUtil.slash;
 		String pathApacheCommons= librariesPath+"apache-commons"+GeneratorUtil.slash;
 		String pathAopAlliance= librariesPath+"aopalliance1.0"+GeneratorUtil.slash;
 		String pathLog4j=librariesPath+"log4j1.2"+GeneratorUtil.slash;
+		String pathServlet=librariesPath+"servlet3.1.1"+GeneratorUtil.slash;
 		
 		String pathLib= properties.getProperty("libFolderPath");
 		
@@ -103,17 +105,16 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 			GeneratorUtil.copyFolder(pathJPA, pathLib);
 			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
 			GeneratorUtil.copyFolder(pathSpring, pathLib);
+			GeneratorUtil.copyFolder(pathHibernateJpa, pathLib);			
 			GeneratorUtil.copyFolder(pathSL4J, pathLib);
 			GeneratorUtil.copyFolder(pathJamon, pathLib);
 			GeneratorUtil.copyFolder(pathMojarra, pathLib);
 			GeneratorUtil.copyFolder(pathApacheCommons, pathLib);
 			GeneratorUtil.copyFolder(pathAopAlliance, pathLib);
 			GeneratorUtil.copyFolder(pathLog4j, pathLib);
-			
+			GeneratorUtil.copyFolder(pathServlet, pathLib);
 		}
 
-		
-		
 		//copy log4j
 		String folderProjectPath = properties.getProperty("folderProjectPath");
 		GeneratorUtil.copyFolder(log4j, folderProjectPath + GeneratorUtil.slash);
@@ -262,6 +263,14 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 				velocityContext.put("finalParamForVariablesDataTablesAsList", stringBuilder.finalParamForVariablesDataTablesAsList(listMetaData, metaData));
 				velocityContext.put("finalParamForIdForViewForSetsVariablesInList", stringBuilderForId.finalParamForIdForViewForSetsVariablesInList(listMetaData, metaData));
 				velocityContext.put("finalParamVariablesDatesAsList2", stringBuilder.finalParamVariablesDatesAsList2(listMetaData, metaData));
+				
+				//listas nuevas para el manejo de tablas maestro detalle AndresPuerta
+				velocityContext.put("finalParamForGetIdForViewClass", stringBuilder.finalParamForGetIdForViewClass(listMetaData, metaData));
+				velocityContext.put("finalParamForGetIdByDtoForViewClass", stringBuilder.finalParamForGetIdByDtoForViewClass(listMetaData, metaData));
+				velocityContext.put("finalParamForIdForViewForSetsVariablesDtoInList", stringBuilderForId.finalParamForIdForViewForSetsVariablesDtoInList(listMetaData, metaData));
+				velocityContext.put("finalParamForViewForSetsVariablesDtoInList", stringBuilder.finalParamForViewForSetsVariablesDtoInList(listMetaData, metaData));
+				velocityContext.put("finalParamForGetManyToOneForViewClass", stringBuilder.finalParamForGetManyToOneForViewClass(listMetaData, metaData));
+				
 				velocityContext.put("dataModel", metaDataModel);
 				velocityContext.put("metaData", metaData);
 
@@ -298,6 +307,7 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 				GeneratorUtil.doPomXml(velocityContext, ve);
 			}
 
+			doApiSpringHibernate(velocityContext, hdLocation);
 		    doExceptions(velocityContext, hdLocation);
 			doUtilites(velocityContext, hdLocation, metaDataModel, modelName);
 			doPersitenceXml(metaDataModel, velocityContext, hdLocation);						
@@ -347,6 +357,64 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			
+		}
+
+	}
+	
+	@Override
+	public void doApiSpringHibernate(VelocityContext context, String hdLocation) {
+
+		try {
+
+			String path=hdLocation + paqueteVirgen + GeneratorUtil.slash + "dataaccess" + GeneratorUtil.slash + "api"+ GeneratorUtil.slash;
+
+			log.info("Begin api Spring+PrimeFaces+Hibernate");
+			
+			Template apiSpringPrimeHibernateTemplate = ve.getTemplate("Dao.vm");
+			StringWriter stringWriter = new StringWriter();
+			apiSpringPrimeHibernateTemplate.merge(context, stringWriter);
+			FileWriter fileWriter = new FileWriter(path+"Dao.java");
+			BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(stringWriter.toString());
+			bufferedWriter.close();
+			fileWriter.close();
+			
+			apiSpringPrimeHibernateTemplate = ve.getTemplate("DaoException.vm");
+			stringWriter = new StringWriter();
+			apiSpringPrimeHibernateTemplate.merge(context, stringWriter);
+			fileWriter = new FileWriter(path+"DaoException.java");
+			bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(stringWriter.toString());
+			bufferedWriter.close();
+			fileWriter.close();
+			
+			apiSpringPrimeHibernateTemplate = ve.getTemplate("JpaDaoImpl.vm");
+			stringWriter = new StringWriter();
+			apiSpringPrimeHibernateTemplate.merge(context, stringWriter);
+			fileWriter = new FileWriter(path+"JpaDaoImpl.java");
+			bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(stringWriter.toString());
+			bufferedWriter.close();
+			fileWriter.close();
+			
+			apiSpringPrimeHibernateTemplate = ve.getTemplate("Paginator.vm");
+			stringWriter = new StringWriter();
+			apiSpringPrimeHibernateTemplate.merge(context, stringWriter);
+			fileWriter = new FileWriter(path+"Paginator.java");
+			bufferedWriter = new BufferedWriter(fileWriter);
+			bufferedWriter.write(stringWriter.toString());
+			bufferedWriter.close();
+			fileWriter.close();
+			
+			log.info("End api Spring+PrimeFaces+Hibernate");
+			
+			JalopyCodeFormatter.formatJavaCodeFile(path + "Dao.java");
+			JalopyCodeFormatter.formatJavaCodeFile(path + "DaoException.java");
+			JalopyCodeFormatter.formatJavaCodeFile(path + "JpaDaoImpl.java");
+			JalopyCodeFormatter.formatJavaCodeFile(path + "Paginator.java");
+			
+		} catch (Exception e) {
+			log.error(e.getMessage());
 		}
 
 	}
