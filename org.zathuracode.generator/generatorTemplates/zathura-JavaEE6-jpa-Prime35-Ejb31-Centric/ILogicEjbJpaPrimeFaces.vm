@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.Date;
 import java.math.BigDecimal;
+
+import javax.ejb.Local;
+
 import $package.${metaData.getRealClassName()};
 #if($composedKey)
     import $package.${metaData.primaryKey.getRealClassName()};
@@ -13,6 +16,7 @@ import $package.${metaData.getRealClassName()};
 * @author Zathura Code Generator http://code.google.com/p/zathura/
 * 
 */
+@Local
 public interface I${metaData.getRealClassName()}Logic {
 public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception;
 	

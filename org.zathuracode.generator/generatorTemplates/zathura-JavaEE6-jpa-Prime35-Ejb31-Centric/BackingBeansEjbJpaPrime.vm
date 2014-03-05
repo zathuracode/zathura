@@ -11,10 +11,12 @@ import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.calendar.*;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.event.RowEditEvent;
+import javax.ejb.EJB;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import  ${virginPackage}.exceptions.*;
@@ -33,7 +35,7 @@ import ${virginPackage}.utilities.*;
 public class ${metaData.getRealClassName()}View implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	
+
 public ${metaData.getRealClassName()}View() {
 super();
 }
@@ -62,7 +64,7 @@ private ${metaData.getRealClassName()}DTO selected${metaData.getRealClassName()}
 private ${metaData.getRealClassName()} entity;
 private boolean showDialog;
     
-@ManagedProperty(value="#{BusinessDelegatorView}")
+@EJB	
 private IBusinessDelegatorView businessDelegatorView;
 
 

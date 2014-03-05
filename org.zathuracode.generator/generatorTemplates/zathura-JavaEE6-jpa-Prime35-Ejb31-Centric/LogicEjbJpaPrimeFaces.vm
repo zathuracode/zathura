@@ -5,30 +5,30 @@ import java.util.List;
 import java.util.Date;
 import java.util.Set;
 import java.math.BigDecimal;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+
 import  ${virginPackage}.exceptions.*;
 import 	${virginPackage}.dataaccess.dao.*;
 import  ${virginPackage}.utilities.Utilities;
 import ${package}.*;
 
+
 /**
 * @author Zathura Code Generator http://code.google.com/p/zathura/
 * 
 */
-
-@Scope("singleton")
-@Service("${metaData.getRealClassName()}Logic")
+@Stateless
 public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealClassName()}Logic{
 
 	/**
 	 * DAO injected by Spring that manages ${metaData.getRealClassName()} entities
 	 * 
 	 */
-	@Autowired
+	@EJB
 	private I${metaData.getRealClassName()}DAO ${metaData.getRealClassNameAsVariable()}DAO;
 	
     #if(${metaData.isGetOneToManyProperties()})
@@ -37,7 +37,7 @@ public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealC
 	 		 * DAO injected by Spring that manages ${member.getRealClassName()} entities
 	 		 * 
 	 		 */
-			@Autowired
+			@EJB
 			private I${member.getRealClassName()}DAO ${member.getRealClassVariableName()}DAO;
 			
 			
@@ -50,7 +50,7 @@ public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealC
 		 	* Logic injected by Spring that manages ${member.getRealClassName()} entities
 		 	* 
 		 	*/
-			@Autowired
+			@EJB
 			I${member.getRealClassName()}Logic logic${member.getRealClassName()}$velocityCount;
 		#end
     #end
@@ -59,7 +59,7 @@ public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealC
 	
 	
 
-	@Transactional(readOnly=true)
+	@TransactionAttribute
 public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception{
     List<${metaData.getRealClassName()}> list = new ArrayList<${metaData.getRealClassName()}>();
             try {
@@ -73,7 +73,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			
 			
-			@Transactional(readOnly=false, propagation=Propagation.REQUIRED)
+			@TransactionAttribute(TransactionAttributeType.REQUIRED)
             public void save${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
 
             try {
@@ -104,7 +104,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			
 			
-			@Transactional(readOnly=false , propagation=Propagation.REQUIRED)
+			@TransactionAttribute(TransactionAttributeType.REQUIRED)
             public void delete${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
             
 	            if(entity==null){
@@ -152,7 +152,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			
 			
-			@Transactional(readOnly=false , propagation=Propagation.REQUIRED)
+			@TransactionAttribute(TransactionAttributeType.REQUIRED)
             public void update${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
 
             try {
@@ -181,7 +181,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             }
 			
 			## get Data for ListDataTable y ListDataTableEditable
-			@Transactional(readOnly=true)
+			@TransactionAttribute
 			public List<${metaData.getRealClassName()}DTO>getData${metaData.getRealClassName()}()throws Exception{
 				try{
 				List<${metaData.getRealClassName()}> ${metaData.getRealClassNameAsVariable()} = 
@@ -209,7 +209,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			}
 			
 			
-			@Transactional(readOnly=true)
+			@TransactionAttribute
             public ${metaData.getRealClassName()} get${metaData.getRealClassName()}(${metaData.primaryKey.getRealClassName()} ${metaData.primaryKey.getShowName()}) throws Exception {
             ${metaData.getRealClassName()} entity = null;
             try {
@@ -222,7 +222,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             }
 			
 			
-			@Transactional(readOnly=true)
+			@TransactionAttribute
             public List<${metaData.getRealClassName()}> findPage${metaData.getRealClassName()}(String sortColumnName, boolean sortAscending,
                 int startRow, int maxResults) throws Exception {
                 List<${metaData.getRealClassName()}> entity = null;
@@ -239,7 +239,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 					
 					
 					
-					@Transactional(readOnly=true)
+					@TransactionAttribute
                     public Long findTotalNumber${metaData.getRealClassName()}() throws Exception {
                     Long entity = null;
                     try {
@@ -311,7 +311,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                                             * @return lista con los objetos que se necesiten
                                             * @throws Exception
                                             */
-											@Transactional(readOnly=true)
+											 @TransactionAttribute
                                             public List<${metaData.getRealClassName()}> findByCriteria(Object[] variables, Object[] variablesBetween,
                                                 Object[] variablesBetweenDates) throws Exception {
                                                 List<${metaData.getRealClassName()}> list = new ArrayList<${metaData.getRealClassName()}>();

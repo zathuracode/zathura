@@ -67,11 +67,6 @@
 		  <version>${hibernate.version}</version>
 		</dependency>
 		<dependency>
-		  <groupId>org.hibernate.javax.persistence</groupId>
-		  <artifactId>hibernate-jpa-2.0-api</artifactId>
-		  <version>1.0.1.Final</version>
-		</dependency>
-		<dependency>
 		  <groupId>org.hibernate</groupId>
 		  <artifactId>hibernate-proxool</artifactId>
 		  <version>${hibernate.version}</version>
@@ -112,6 +107,21 @@
 		  <artifactId>primefaces</artifactId>
 		  <version>${primefaces.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.servlet.jsp.jstl</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.servlet.jsp</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.servlet</artifactId>
+			<version>3.1.1</version>
+		</dependency>		
 		<dependency>
 		  <groupId>org.springframework</groupId>
 		  <artifactId>spring-aop</artifactId>
