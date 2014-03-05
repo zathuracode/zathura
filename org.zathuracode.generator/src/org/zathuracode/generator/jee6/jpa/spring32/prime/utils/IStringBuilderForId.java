@@ -5,11 +5,10 @@ import java.util.List;
 import org.zathuracode.metadata.model.MetaData;
 
 
-// TODO: Auto-generated Javadoc
 /**
- * Zathura Generator.
- *
- * @author Andrés Mauricio Cárdenas  (mauriciocardenasp@gmail.com)
+ * Zathuracode Generator
+ * www.zathuracode.org
+ * @author Diego Armando Gomez (dgomez@vortexbird.com)
  * @version 1.0
  */
 public interface IStringBuilderForId {
@@ -138,8 +137,10 @@ public interface IStringBuilderForId {
 	 */
 	public void neededIds(List<MetaData> list);
 	
+		
+	public List<String> dtoConvert(List<MetaData> theMetaData, MetaData metaData);
 	
+	public List<String> finalParamForIdForViewForSetsVariablesDtoInList(List<MetaData> theMetaData, MetaData metaData);
 	
-	public List<String> dtoConvert(List<MetaData> theMetaData, MetaData metaData); 
 
 }
