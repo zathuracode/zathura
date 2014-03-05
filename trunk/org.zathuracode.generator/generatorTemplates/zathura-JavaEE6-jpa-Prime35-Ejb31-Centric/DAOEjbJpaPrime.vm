@@ -3,9 +3,7 @@ package  ${virginPackage}.dataaccess.dao;
 import ${virginPackage}.dataaccess.api.JpaDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Repository;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -25,16 +23,13 @@ import $package.${metaData.getRealClassName()};
  * 
  * @see lidis.${metaData.getRealClassName()}
  */
-@Scope("singleton")
-@Repository("${metaData.getRealClassName()}DAO")
+@Stateless
 public class ${metaData.getRealClassName()}DAO extends JpaDaoImpl<${metaData.getRealClassName()}, ${metaData.getPrimaryKey().getType().getSimpleName()}> implements I${metaData.getRealClassName()}DAO {
 
 	private static final Logger log = LoggerFactory.getLogger(${metaData.getRealClassName()}DAO.class);
 	
 	@PersistenceContext
     private EntityManager entityManager;
-    
-	public static I${metaData.getRealClassName()}DAO getFromApplicationContext(ApplicationContext ctx) {
-        return (I${metaData.getRealClassName()}DAO) ctx.getBean("${metaData.getRealClassName()}DAO");
-    }  
+	
  }
+ 

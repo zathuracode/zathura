@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.Set;
 import java.math.BigDecimal;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import ${virginPackage}.presentation.businessDelegate.IBusinessDelegatorView;
 
 
@@ -59,12 +58,11 @@ import ${virginPackage}.presentation.businessDelegate.IBusinessDelegatorView;
 * @author Zathura Code Generator http://code.google.com/p/zathura/
 * 
 */
-@Scope("singleton")
-@Service("BusinessDelegatorView")
+@Stateless
 public class BusinessDelegatorView implements IBusinessDelegatorView{
 #foreach($metaData  in $dataModel.theMetaData)
 	
-	@Autowired
+	@EJB
 	private I${metaData.getRealClassName()}Logic ${metaData.getRealClassNameAsVariable()}Logic;
 	
     public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception{

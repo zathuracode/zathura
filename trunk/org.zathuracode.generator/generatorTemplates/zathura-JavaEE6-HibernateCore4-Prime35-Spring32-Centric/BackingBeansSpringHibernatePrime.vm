@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
+import java.io.Serializable;
 import org.primefaces.component.inputtext.InputText;
 import org.primefaces.component.calendar.*;
 import org.primefaces.component.commandbutton.CommandButton;
@@ -29,7 +30,9 @@ import ${virginPackage}.utilities.*;
 
 @ManagedBean
 @ViewScoped
-public class ${metaData.getRealClassName()}View {
+public class ${metaData.getRealClassName()}View implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 public ${metaData.getRealClassName()}View() {
 super();
