@@ -8,18 +8,40 @@
 		<gui-name>IceFaces + JPA</gui-name>
 		<class>org.zathuracode.generator.jee.jpa.webcentric.engine.ZathuraJavaEE_JPA_Web_Centric</class>
 		<persistence>jpa</persistence>
+		<zathuraVersion>3.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
-					
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE JPA Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD colspan="2">
+								<DIV ALIGN=CENTER STYLE="width:280px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jpa.png" ID="jpaLogo"/>
+								</DIV>
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>				
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\icefaces.png" ID="icefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -59,18 +81,40 @@
 		<gui-name>IceFaces + HibernateCore</gui-name>
 		<class>org.zathuracode.generator.jee.hibernatecore.webcentric.engine.ZathuraJavaEE_HibernateCore_Web_Centric</class>
 		<persistence>hibernateCore</persistence>
+		<zathuraVersion>3.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
-					
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE HibernateCore Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD colspan="2">
+								<DIV ALIGN=CENTER STYLE="width:280px;">
+									<IMG SRC="${RELATIVE_PATH}icons\hibernate.png" ID="hibernateLogo"/>
+								</DIV>
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>				
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\icefaces.png" ID="icefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>									
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -111,18 +155,45 @@
 		<gui-name>IceFaces + Spring + HibernateCore</gui-name>
 		<class>org.zathuracode.generator.jee.hibernatecore.springcentric.engine.ZathuraJavaEE_HibernateCore_Web_Spring_Centric</class>
 		<persistence>hibernateCore</persistence>
+		<zathuraVersion>3.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
-					
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE HibernateCore Spring Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\hibernate.png" ID="hibernateLogo"/>
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\spring.png"  ID="springLogo"/>
+								</DIV>									
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>				
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\icefaces.png" ID="icefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>					
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -218,18 +289,45 @@
 		<gui-name>IceFaces + Spring + JPA</gui-name>
 		<class>org.zathuracode.generator.jee.jpacore.springcentric.engine.ZathuraJavaEE_Jpa_Web_Spring_Centric</class>
 		<persistence>jpa</persistence>
+		<zathuraVersion>3.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
-					
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE JpaCore Spring Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jpa.png" ID="jpaLogo"/>
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\spring.png"  ID="springLogo"/>
+								</DIV>									
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>				
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\icefaces.png" ID="icefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>				
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -271,17 +369,40 @@
 		<gui-name>PrimeFaces + JPA</gui-name>
 		<class>org.zathuracode.generator.jee.jpa.primecentric.engine.ZathuraJavaEE_JPA_Prime_Web_Centric</class>
 		<persistence>jpa</persistence>
+		<zathuraVersion>3.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE JpaCore PrimeFaces Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD colspan="2">
+								<DIV ALIGN=CENTER STYLE="width:280px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jpa.png" ID="jpaLogo"/>
+								</DIV>
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>								
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\primefaces.png" ID="primefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>				
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -321,17 +442,40 @@
 		<gui-name>PrimeFaces + HibernateCore</gui-name>
 		<class>org.zathuracode.generator.jee.hibernatecore.primecentric.engine.ZathuraJavaEE_HibernateCore_PrimeCentric</class>
 		<persistence>hibernateCore</persistence>
+		<zathuraVersion>3.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE HibernateCore PrimeFaces Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD colspan="2">
+								<DIV ALIGN=CENTER STYLE="width:280px;">
+									<IMG SRC="${RELATIVE_PATH}icons\hibernate.png" ID="hibernateLogo"/>
+								</DIV>
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>					
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\primefaces.png" ID="primefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>				
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -371,17 +515,45 @@
 		<gui-name>PrimeFaces + Spring + HibernateCore</gui-name>
 		<class>org.zathuracode.generator.jee.hibernatecore.springprime.engine.ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric</class>
 		<persistence>hibernateCore</persistence>
+		<zathuraVersion>3.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE HibernateCore Spring PrimeFaces Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\hibernate.png" ID="hibernateLogo"/>
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\spring.png"  ID="springLogo"/>
+								</DIV>									
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>				
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\primefaces.png" ID="primefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>	
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -420,17 +592,45 @@
 		<gui-name>PrimeFaces + Spring + JPA</gui-name>
 		<class>org.zathuracode.generator.jee.jpacore.springprimecentric.engine.ZathuraJavaEE_Jpa_Web_Prime_Spring_Centric</class>
 		<persistence>jpa</persistence>
+		<zathuraVersion>3.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE JpaCore Spring Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jpa.png" ID="jpaLogo"/>
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\spring.png"  ID="springLogo"/>
+								</DIV>									
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>			
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\primefaces.png" ID="primefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>					
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
@@ -463,29 +663,83 @@
 	</generator>
 	
 	<generator>
-		<name>ZathuraJavaEE_HibernateCore4_Spring32_PrimeFaces_Web_Centric</name>
+		<name>ZathuraJavaEE_HibernateCore4_Spring32_PrimeFaces35_Web_Centric</name>
 		<gui-name>PrimeFaces3.5 + Spring3.2.3 + HibernateCore4.2.3</gui-name>
 		<class>org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.engine.ZathuraJavaEE_HibernateCore4_Spring32_Prime</class>
 		<persistence>hibernateCore</persistence>
+		<zathuraVersion>3.1</zathuraVersion>
 		<description>
+		<![CDATA[
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
 				JavaEE HibernateCore Spring PrimeFaces Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\hibernate.png" ID="hibernateLogo"/>
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\spring.png"  ID="springLogo"/>
+								</DIV>									
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>	
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\primefaces.png" ID="primefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>								
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
-				using  the JavaEE Patterns. The next is a list the
+				using  the JavaEE Patterns. </BR>
+				Includes:</FONT></P>
+				<TABLE>
+					<TR>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>HibernateCore 4.2.3</FONT></P>
+						</TD>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>Spring 3.2.3</FONT></P>								
+						</TD>						
+					</TR>
+					<TR>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>JSF 2.1</FONT></P>
+						</TD>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>PrimeFaces 3.5</FONT></P>									
+						</TD>
+					</TR>						
+				</TABLE>				
+				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+				<FONT SIZE=2>The next is a list the
 				generate files.</FONT></P>
 				<UL>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2> JSF 2.1 (PrimeFaces 3.5)</FONT></P>
+					<FONT SIZE=2>XHTML Views</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 					<FONT SIZE=2>ManageBeans</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
@@ -495,7 +749,7 @@
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 					<FONT SIZE=2>POJO (Logic)</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAOFactory</FONT></P>
+					<FONT SIZE=2>Generic HibernateDao</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 					<FONT SIZE=2>DAO</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
@@ -511,31 +765,83 @@
 		</description>
 	</generator>
 	
-	
 	<generator>
-		<name>ZathuraJavaEE_HibernateCore4_Spring32_Prime</name>
+		<name>ZathuraJavaEE_JPA_Spring32_Prime35</name>
 		<gui-name>PrimeFaces3.5 + Spring3.2.3 + JPA2</gui-name>
 		<class>org.zathuracode.generator.jee6.jpa.spring32.prime.engine.ZathuraJavaEE_jpa_Spring32_Prime</class>
 		<persistence>jpa</persistence>
+		<zathuraVersion>3.1</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 				<HTML>
 				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
 					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 					<TITLE></TITLE>
 				</HEAD>
 				<BODY LANG="es-CO" DIR="LTR">
 				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
-				JavaEE HibernateCore Spring PrimeFaces Web Centric </B></FONT>
+				JavaEE JpaCore Spring PrimeFaces Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jpa.png" ID="jpaLogo"/>
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\spring.png"  ID="springLogo"/>
+								</DIV>									
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>	
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\primefaces.png" ID="primefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>
 				</P>
 				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 				<FONT SIZE=2>This Generator is appropriate for Web applications that
-				using  the JavaEE Patterns. The next is a list the
+				using  the JavaEE Patterns. </BR>
+				Includes:</FONT></P>
+				<TABLE>
+					<TR>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2> JPA 2.1</FONT></P>
+						</TD>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>Spring 3.2.3</FONT></P>								
+						</TD>						
+					</TR>
+					<TR>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>JSF 2.1</FONT></P>
+						</TD>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>PrimeFaces 3.5</FONT></P>									
+						</TD>
+					</TR>						
+				</TABLE>				
+				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+				<FONT SIZE=2>The next is a list the
 				generate files.</FONT></P>
 				<UL>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2> JSF 2.1 (PrimeFaces 3.5)</FONT></P>
+					<FONT SIZE=2>XHTML Views</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 					<FONT SIZE=2>ManageBeans</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
@@ -545,13 +851,11 @@
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 					<FONT SIZE=2>POJO (Logic)</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAOFactory</FONT></P>
+					<FONT SIZE=2>Generic JpaDao</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 					<FONT SIZE=2>DAO</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 					<FONT SIZE=2>IDAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>hibernate.cfg.xml</FONT></P>
 					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
 					<FONT SIZE=2>web.xml</FONT></P>
 				</UL>
@@ -561,6 +865,104 @@
 		</description>
 	</generator>
 	
-	
+	<generator>
+		<name>ZathuraJavaEE_JPA_EJB31_Prime35</name>
+		<gui-name>PrimeFaces3.5 + EJB 3.1 + JPA2</gui-name>
+		<class>org.zathuracode.generator.jee6.jpacore.ejb31.prime35.engine.ZathuraJavaEE_JpaCore_Ejb31_Prime35</class>
+		<persistence>jpa</persistence>
+		<zathuraVersion>3.1</zathuraVersion>
+		<description>
+		<![CDATA[
+				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+				<HTML>
+				<HEAD>
+					<LINK TYPE="text/css" HREF="${RELATIVE_PATH}css\form.css" REL="stylesheet" />
+					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+					<TITLE></TITLE>
+				</HEAD>
+				<BODY LANG="es-CO" DIR="LTR">
+				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
+				JavaEE JpaCore EJB PrimeFaces Web Centric </B></FONT>
+					<TABLE>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jpa.png" ID="jpaLogo"/>
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\ejb.png"  ID="ejbLogo"/>
+								</DIV>									
+							</TD>						
+						</TR>
+						<TR>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\jsf.png" ID="jsfLogo"/>		
+								</DIV>
+							</TD>
+							<TD>
+								<DIV ALIGN=CENTER STYLE="width:140px;">
+									<IMG SRC="${RELATIVE_PATH}icons\primefaces.png" ID="primefacesLogo"/>
+								</DIV>									
+							</TD>
+						</TR>						
+					</TABLE>					
+				</P>
+				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+				<FONT SIZE=2>This Generator is appropriate for Web applications that
+				using  the JavaEE Patterns. </BR>
+				Includes:</FONT></P>
+				<TABLE>
+					<TR>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2> JPA 2.1</FONT></P>
+						</TD>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>EJB 3.1</FONT></P>								
+						</TD>						
+					</TR>
+					<TR>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>JSF 2.1</FONT></P>
+						</TD>
+						<TD>
+							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+							<FONT SIZE=2>PrimeFaces 3.5</FONT></P>									
+						</TD>
+					</TR>						
+				</TABLE>						
+				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+				<FONT SIZE=2>The next is a list the
+				generate files.</FONT></P>				
+				<UL>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>XHTML Views</FONT></P>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>ManageBeans</FONT></P>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>Faces-config.xml</FONT></P>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>Bussines Delegate</FONT></P>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>POJO (Logic)</FONT></P>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>Generic JpaDao</FONT></P>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>DAO</FONT></P>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>IDAO</FONT></P>
+					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
+					<FONT SIZE=2>web.xml</FONT></P>
+				</UL>
+				</BODY>
+				</HTML>
+		]]>
+		</description>
+	</generator>
 
 </zathura-generator>
