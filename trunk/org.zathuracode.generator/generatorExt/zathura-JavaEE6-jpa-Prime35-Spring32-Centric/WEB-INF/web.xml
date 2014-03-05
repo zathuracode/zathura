@@ -8,14 +8,6 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<listener>
-		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-	</listener>
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/classes/applicationContext.xml</param-value>
@@ -34,15 +26,6 @@
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>Resource Servlet</servlet-name>
-		<servlet-class>org.primefaces.resource.ResourceServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Resource Servlet</servlet-name>
-		<url-pattern>/primefaces_resource/*</url-pattern>
 	</servlet-mapping>
 
 	<context-param>
