@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.Properties;
+
 import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -687,13 +688,12 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 	@Override
 	public void doJspFacelets(VelocityContext context, String hdLocation) {
 		try {
-			String pathFaceletes =  properties.getProperty("webRootFolderPath") + "WEB-INF" + GeneratorUtil.slash + "facelets" + GeneratorUtil.slash;
-			
 			log.info("Begin Header");
+			String pathFacelets = properties.getProperty("webRootFolderPath") + "WEB-INF" + GeneratorUtil.slash + "facelets" + GeneratorUtil.slash;
 			Template templateHeader = ve.getTemplate("JSPheader.vm");
 			StringWriter swHeader = new StringWriter();
 			templateHeader.merge(context, swHeader);
-			FileWriter fwHeader = new FileWriter(pathFaceletes+"header.jspx");
+			FileWriter fwHeader = new FileWriter(pathFacelets+"header.jspx");
 			BufferedWriter bwHeader = new BufferedWriter(fwHeader);
 			bwHeader.write(swHeader.toString());
 			bwHeader.close();
@@ -704,46 +704,35 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 			Template templateFooter = ve.getTemplate("JSPfooter.vm");
 			StringWriter swFooter = new StringWriter();
 			templateFooter.merge(context, swFooter);
-			FileWriter fwFooter = new FileWriter(pathFaceletes+ "footer.jspx");
+			FileWriter fwFooter = new FileWriter(pathFacelets+"footer.jspx");
 			BufferedWriter bwFooter = new BufferedWriter(fwFooter);
 			bwFooter.write(swFooter.toString());
 			bwFooter.close();
 			fwFooter.close();
 			log.info("End Footer");
 			
-			log.info("Begin Footer initialMenu");
-			Template footerInitialMenu = ve.getTemplate("footerInitialMenu.vm");
-			StringWriter swFooterInitialMenu = new StringWriter();
-			footerInitialMenu.merge(context, swFooterInitialMenu);
-			FileWriter fwFooterInitialMenu = new FileWriter(pathFaceletes+"footerInitialMenu.jspx");
-			BufferedWriter bwFooterInitialMenu = new BufferedWriter(fwFooterInitialMenu);
-			bwFooterInitialMenu.write(swFooterInitialMenu.toString());
-			bwFooterInitialMenu.close();
-			fwFooterInitialMenu.close();
-			log.info("End Footer initialMenu");
+
+			log.info("Begin menu");
+			Template templateCommonsColumns = ve.getTemplate("menu.vm");
+			StringWriter swCommonColumns = new StringWriter();
+			templateCommonsColumns.merge(context, swCommonColumns);
+			FileWriter fwCommonColumns = new FileWriter(pathFacelets+"menu.jspx");
+			BufferedWriter bwCommonColumns = new BufferedWriter(fwCommonColumns);
+			bwCommonColumns.write(swCommonColumns.toString());
+			bwCommonColumns.close();
+			swCommonColumns.close();
+			log.info("End menu");
 			
-			String pathCommons= properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
-			log.info("Begin CommonsColumsContent");
-			Template templateCommonsColumns = ve.getTemplate("CommonColumnsContent.vm");
-			StringWriter swCommonsColumns = new StringWriter();
-			templateCommonsColumns.merge(context, swCommonsColumns);
-			FileWriter fwCommonsColumns = new FileWriter(pathCommons+"CommonColumnsContent.xhtml");
-			BufferedWriter bwCommonsColumns = new BufferedWriter(fwCommonsColumns);
-			bwCommonsColumns.write(swCommonsColumns.toString());
-			bwCommonsColumns.close();
-			fwCommonsColumns.close();
-			log.info("End CommonColumsContent");
-			
-			log.info("Begin CommonLayout");
-			Template templateCommonLayout = ve.getTemplate("CommonLayout.vm");
+			log.info("Begin template");
+			Template templateCommonLayout = ve.getTemplate("template.vm");
 			StringWriter swCommonLayout = new StringWriter();
 			templateCommonLayout.merge(context, swCommonLayout);
-			FileWriter fwCommonLayout = new FileWriter(pathCommons+"CommonLayout.xhtml");
+			FileWriter fwCommonLayout = new FileWriter(pathFacelets+"template.xhtml");
 			BufferedWriter bwCommonLayout = new BufferedWriter(fwCommonLayout);
 			bwCommonLayout.write(swCommonLayout.toString());
 			bwCommonLayout.close();
 			fwCommonLayout.close();
-			log.info("End CommonLayout");
+			log.info("End template");
 			
 		} catch (Exception e) {
 			log.error(e.getMessage());

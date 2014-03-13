@@ -9,76 +9,18 @@
 	</h:head>
 	
     <h:body>
-		 <ui:composition template="/XHTML/CommonColumnsContent.xhtml">
-			<ui:define name="header">
-				<ui:include src="/WEB-INF/facelets/header.jspx" />
-			</ui:define>
-        	<br/>
-        	<br/> 	
-			
-			<ui:define name="body">	
-			<f:view>
-		<h:form>
-			
-			<!-- Crud -->
-			<!--<p:dialog width="600" height="600" widgetVar="crud"
-				header="Welcome to Zathura with PrimeFaces" showEffect="explode" hideEffect="explode">
-
-				<div align="center">
-					<h:panelGrid columns="3">
-					 #foreach($metaData  in $dataModel.theMetaData)		
-					<h:link outcome="go${metaData.getRealClassName()}" value="${metaData.getRealClassName()}" style="color:blue;" />	
-					#end	
-					</h:panelGrid>
-				</div>
-			</p:dialog>-->
-			
-			<!-- table -->
-			<p:dialog width="600" height="600" widgetVar="table"
-				header="Welcome to Zathura with PrimeFaces" showEffect="explode" hideEffect="explode">
-			
-			<div align="center">	
-			   <h:panelGrid columns="3">
-				  #foreach($metaData  in $dataModel.theMetaData)
-				  <h:link outcome="go${metaData.getRealClassName()}ListDataTable" value="${metaData.getRealClassName()}-Data" style="color:blue;" />
-				  #end	
-				</h:panelGrid>
-				
-			</div>	
-			</p:dialog>	
-			
-			<!-- TableEditable -->
-			<!--<p:dialog width="600" height="600" widgetVar="tableEditable"
-				header="Welcome to Zathura with PrimeFaces" showEffect="explode" hideEffect="explode">
-			
-			<div align="center">
-				<h:panelGrid columns="3">
-				  #foreach($metaData  in $dataModel.theMetaData)
-				  <h:link outcome="go${metaData.getRealClassName()}ListDataTableEditable" value="${metaData.getRealClassName()}-Data-Editable" style="color:blue;" />
-				  #end
-				</h:panelGrid>	
-			</div>	
-			</p:dialog>	-->
-			
-			<!-- cambiar las rutas de las imagenes -->
-			<p:stack icon="/images/home.png">
-				<!--<p:menuitem value="Crud" icon="/images/crud.png"
-					onclick="crud.show();" oncomplete="table.hide();tableEditable.hide();" />-->
-				<p:menuitem value="DataTable" icon="/images/dataTable.png"
-					onclick="table.show();" oncomplete="crud.hide();tableEditable.hide();" />
-				<!--<p:menuitem value="DataTableEditable" icon="/images/dataTableEditable.png" onclick="tableEditable.show();" oncomplete="table.hide();crud.hide();"/>-->
-			</p:stack>
-
-			
-		</h:form>
-          </f:view>
-	    </ui:define>    
-		
-	  <ui:define name="footer">
-		 <ui:include src="/WEB-INF/facelets/footerInitialMenu.jspx" />
-	   </ui:define>		
-			
-   </ui:composition>	
+		 <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
+					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>               
+					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
+   						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
+					</p:dialog>
+		  			<div style="height:600px"></div> 
+				</f:view>
+			</ui:define>		
+		</ui:composition>	
 	</h:body>
 									
  </html>
