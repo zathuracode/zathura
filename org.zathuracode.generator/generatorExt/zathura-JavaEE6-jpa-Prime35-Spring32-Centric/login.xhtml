@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head>
+		<title>Signin Zathuracode</title>
+		<meta name="content-type" content="text/html; charset=UTF-8"/>
+		<link REL="SHORTCUT ICON" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png"/>
+		<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/stylelogin.css" />
+    </h:head>
+	<h:body>
+		<div class="container">
+
+	      <form class="form-signin" action="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/XHTML/initialMenu.xhtml">
+	        <h2 class="form-signin-heading">Please sign in</h2>
+	        <input type="text" class="form-control" placeholder="User default admin"/>
+	        <input type="password" class="form-control" placeholder="Password default admin"/>
+	        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	      </form>
+	      
+    	</div>
+	</h:body>
+</html>

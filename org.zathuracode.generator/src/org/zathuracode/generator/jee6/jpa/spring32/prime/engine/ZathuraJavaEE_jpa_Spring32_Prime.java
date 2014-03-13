@@ -63,12 +63,13 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 	
 	public void copyLibraries(){		
 		String pathIndexJsp = extPath+"index.jsp";
+		String pathLogin = extPath+"login.xhtml";
 		String pathWebXml= extPath+"WEB-INF"+GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEWebSpringPrimeJpaCentricImages = extPath + GeneratorUtil.slash + "images"	+ GeneratorUtil.slash;
 		
 		String pathHibernate= librariesPath+"core-hibernate4.2.3"+GeneratorUtil.slash;
 		String pathJPA=librariesPath+"jpa-hibernate4.2.3"+GeneratorUtil.slash;
-		String pathPrimeFaces= librariesPath+"primeFaces3.5"+GeneratorUtil.slash;
+		String pathPrimeFaces= librariesPath+"primeFaces4.0"+GeneratorUtil.slash;
 		String pathSpring= librariesPath+"spring3.2.3"+GeneratorUtil.slash;
 		String pathHibernateJpa = librariesPath+"hibernate-jpa2.1"+GeneratorUtil.slash;
 		String pathSL4J= librariesPath+"slf4j1.7.5"+GeneratorUtil.slash;
@@ -95,12 +96,15 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebSpringPrimeJpaCentricImages, webRootPath + "images" + GeneratorUtil.slash);
 		
 		
+		
+		// create login.xhtml
+		GeneratorUtil.copy(pathLogin,webRootPath+"login.xhtml" );
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
 		
 		if (!EclipseGeneratorUtil.isMavenProject) {
 			//copy libraries
-			log.info("Copy Libraries files Zathura Primefaces3.5 JPA Spring3.2.3");
+			log.info("Copy Libraries files Zathura Primefaces4.0 JPA Spring3.2.3");
 			GeneratorUtil.copyFolder(pathHibernate, pathLib);
 			GeneratorUtil.copyFolder(pathJPA, pathLib);
 			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);

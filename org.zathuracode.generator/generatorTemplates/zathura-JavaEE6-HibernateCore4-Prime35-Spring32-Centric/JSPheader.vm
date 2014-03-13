@@ -3,29 +3,20 @@
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:p="http://primefaces.org/ui"
     xmlns:fn="http://java.sun.com/jsp/jstl/functions">
    
    <html>
 		<body>
 			<f:view>
 				<ui:composition>
-		
 					<!-- Beging header -->
-					<div id="header">
-						<a href="http://www.zathuracode.org/" title="Zathuracode 3.0"> <img
-							src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logo.png"
-							alt="Zathuracode 3.0" class="logo"  /> </a>
-						
-						<ul id="toplinks">
-							<li><a href="http://code.google.com/p/zathura/">Google Code</a></li>
-                			<li><a href="http://www.zathuracode.org">Zathuracode</a></li>
-                			<li><a href="http://www.vortexbird.com">Vortexbird</a></li>
-            			</ul>		
-					</div>
-					<br />
-		
-					<br />
-		
+						<div class="jumbotron">
+					      <div class="container">
+					        <h1>Zathuracode</h1>
+					        <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+					      </div>
+    					</div>
 					<!-- end header -->
 				</ui:composition>
 			</f:view>

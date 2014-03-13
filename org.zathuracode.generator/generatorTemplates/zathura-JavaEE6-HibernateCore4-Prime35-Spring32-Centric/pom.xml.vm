@@ -21,7 +21,7 @@
 	
 	<properties>
         <hibernate.version>4.2.3.Final</hibernate.version>
-        <primefaces.version>3.5</primefaces.version>
+        <primefaces.version>4.0</primefaces.version>
 		<spring.version>3.2.3.RELEASE</spring.version>
     </properties>
 	
@@ -99,8 +99,8 @@
 		</dependency>
 		<dependency>
 		  <groupId>org.primefaces.themes</groupId>
-		  <artifactId>aristo</artifactId>
-		  <version>1.0.1</version>
+		  <artifactId>bootstrap</artifactId>
+		  <version>1.0.10</version>
 		</dependency>
 		<dependency>
 		  <groupId>org.primefaces</groupId>

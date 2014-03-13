@@ -21,14 +21,14 @@
 	
 	<properties>
         <ejb.version>3.1.1</ejb.version>
-        <primefaces.version>3.5</primefaces.version>
+        <primefaces.version>4.0</primefaces.version>
     </properties>
 	
 	<dependencies>
 		<dependency>
 		  <groupId>org.primefaces.themes</groupId>
-		  <artifactId>aristo</artifactId>
-		  <version>1.0.1</version>
+		  <artifactId>bootstrap</artifactId>
+		  <version>1.0.10</version>
 		</dependency>
 		<dependency>
 		  <groupId>org.primefaces</groupId>

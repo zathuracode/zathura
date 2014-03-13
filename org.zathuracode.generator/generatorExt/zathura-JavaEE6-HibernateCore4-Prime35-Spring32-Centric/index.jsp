@@ -9,9 +9,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>.::Powered by Zathura Code Generator 2012::.</title>
+<title>.::Powered by Zathuracode  2014::.</title>
 </head>
 <body>
-	<jsp:forward page="XHTML/initialMenu.xhtml"/>
+	<jsp:forward page="login.xhtml"/>
 </body>
 </html>
