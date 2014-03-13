@@ -25,7 +25,7 @@ public class WizardMainDatabaseConnection extends Wizard {
 	 */
 	public WizardMainDatabaseConnection() {
 		super();
-		setWindowTitle("Zathuracode Generator V3.0.1 - Powered By Vortexbird and UsbCali www.zathuracode.org");
+		setWindowTitle("Zathuracode Generator V4.0 Beta - Powered By Vortexbird and UsbCali www.zathuracode.org");
 		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
 		wizardDatabaseConnection = new WizardPageDatabaseConnection();
 	}
@@ -44,7 +44,7 @@ public class WizardMainDatabaseConnection extends Wizard {
 	 */
 	public WizardMainDatabaseConnection(String connectionName) {
 		super();
-		setWindowTitle("Zathuracode Generator V3.0.1 - Powered By Vortexbird and UsbCali www.zathuracode.org");
+		setWindowTitle("Zathuracode Generator V4.0 Beta  - Powered By Vortexbird and UsbCali www.zathuracode.org");
 		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
 		ConnectionModel connectionModel = ConnectionsUtils.getTheZathuraConnectionModel(connectionName);
 

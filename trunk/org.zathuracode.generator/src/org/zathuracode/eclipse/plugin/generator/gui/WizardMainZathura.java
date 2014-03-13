@@ -48,7 +48,7 @@ public class WizardMainZathura extends Wizard {
 	 */
 	public WizardMainZathura() {
 		super();
-		setWindowTitle("Zathuracode Generator V3.0.1 - Powered By Vortexbird and UsbCali www.zathuracode.org");
+		setWindowTitle("Zathuracode Generator V4.0 Beta - Powered By Vortexbird and UsbCali www.zathuracode.org");
 		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
 		EclipseGeneratorUtil.reset();
 		EclipseGeneratorUtil.wizardMain=this;		
