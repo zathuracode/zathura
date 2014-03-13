@@ -614,39 +614,28 @@ public class ZathuraJavaEE_JpaCore_Ejb31_Prime35 implements IZathuraTemplate,IZa
 			fwFooter.close();
 			log.info("End Footer");
 			
-			log.info("Begin Footer InitialMenu");
-			Template footerInitialMenu = ve.getTemplate("footerInitialMenu.vm");
-			StringWriter swFooterInitialMenu = new StringWriter();
-			footerInitialMenu.merge(context, swFooterInitialMenu);
-			FileWriter fwFooterInitialMenu = new FileWriter(pathFacelets+"footerInitialMenu.jspx");
-			BufferedWriter bwFooterInitialMenu = new BufferedWriter(fwFooterInitialMenu);
-			bwFooterInitialMenu.write(swFooterInitialMenu.toString());
-			bwFooterInitialMenu.close();
-			fwFooterInitialMenu.close();
-			log.info("End Footer InitialMenu");
-			
-			String pathCommon= properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
-			log.info("Begin CommonColumnsContens");
-			Template templateCommonsColumns = ve.getTemplate("CommonColumnsContent.vm");
+
+			log.info("Begin menu");
+			Template templateCommonsColumns = ve.getTemplate("menu.vm");
 			StringWriter swCommonColumns = new StringWriter();
 			templateCommonsColumns.merge(context, swCommonColumns);
-			FileWriter fwCommonColumns = new FileWriter(pathCommon+"CommonColumnsContent.xhtml");
+			FileWriter fwCommonColumns = new FileWriter(pathFacelets+"menu.jspx");
 			BufferedWriter bwCommonColumns = new BufferedWriter(fwCommonColumns);
 			bwCommonColumns.write(swCommonColumns.toString());
 			bwCommonColumns.close();
 			swCommonColumns.close();
-			log.info("End CommonColumnsContens");
+			log.info("End menu");
 			
-			log.info("Begin CommonLayout");
-			Template templateCommonLayout = ve.getTemplate("CommonLayout.vm");
+			log.info("Begin template");
+			Template templateCommonLayout = ve.getTemplate("template.vm");
 			StringWriter swCommonLayout = new StringWriter();
 			templateCommonLayout.merge(context, swCommonLayout);
-			FileWriter fwCommonLayout = new FileWriter(pathCommon+"CommonLayout.xhtml");
+			FileWriter fwCommonLayout = new FileWriter(pathFacelets+"template.xhtml");
 			BufferedWriter bwCommonLayout = new BufferedWriter(fwCommonLayout);
 			bwCommonLayout.write(swCommonLayout.toString());
 			bwCommonLayout.close();
 			fwCommonLayout.close();
-			log.info("End CommonLayout");
+			log.info("End template");
 			
 		} catch (Exception e) {
 			log.error(e.getMessage());

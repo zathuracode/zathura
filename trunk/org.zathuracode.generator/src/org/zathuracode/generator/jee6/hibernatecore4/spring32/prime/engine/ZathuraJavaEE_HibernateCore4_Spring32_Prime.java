@@ -606,18 +606,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 			fwFooter.close();
 			log.info("End Footer");
 			
-			log.info("Begin Footer InitialMenu");
-			Template footerInitialMenu = ve.getTemplate("footerInitialMenu.vm");
-			StringWriter swFooterInitialMenu = new StringWriter();
-			footerInitialMenu.merge(context, swFooterInitialMenu);
-			FileWriter fwFooterInitialMenu = new FileWriter(pathFacelets+"footerInitialMenu.jspx");
-			BufferedWriter bwFooterInitialMenu = new BufferedWriter(fwFooterInitialMenu);
-			bwFooterInitialMenu.write(swFooterInitialMenu.toString());
-			bwFooterInitialMenu.close();
-			fwFooterInitialMenu.close();
-			log.info("End Footer InitialMenu");
-			
-			String pathCommon= properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
+
 			log.info("Begin menu");
 			Template templateCommonsColumns = ve.getTemplate("menu.vm");
 			StringWriter swCommonColumns = new StringWriter();
