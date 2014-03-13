@@ -57,22 +57,23 @@ public class ZathuraJavaEE_JpaCore_Ejb31_Prime35 implements IZathuraTemplate,IZa
 		properties = propiedades;
 		webRootPath=(propiedades.getProperty("webRootFolderPath"));
 		
-		log.info("Begin Zathura Primefaces3.5 JPA Ejb 3.1");
+		log.info("Begin Zathura Primefaces4.0 JPA Ejb 3.1");
 		doTemplate(folderProjectPath, metaDataModel, jpaPckgName, projectName, specificityLevel, domainName);
 		copyLibraries();
-		log.info("End Zathura Primefaces3.5 JPA Ejb 3.1");
+		log.info("End Zathura Primefaces4.0 JPA Ejb 3.1");
 
 
 	}
 	
 	public void copyLibraries(){
 		String pathIndexJsp = extPath+"index.jsp";
+		String pathLogin = extPath+"login.xhtml";
 		String pathWebXml= extPath+"WEB-INF"+GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages = extPath + GeneratorUtil.slash + "images"	+ GeneratorUtil.slash;
 		
 		String pathEjb= librariesPath+"ejb-3.1"+GeneratorUtil.slash;
 		String pathJpa= librariesPath+"hibernate-jpa2.1"+GeneratorUtil.slash;
-		String pathPrimeFaces= librariesPath+"primeFaces3.5"+GeneratorUtil.slash;
+		String pathPrimeFaces= librariesPath+"primeFaces4.0"+GeneratorUtil.slash;
 		String pathSL4J= librariesPath+"slf4j1.7.5"+GeneratorUtil.slash;
 		String pathJamon= librariesPath+"jamon2.74"+GeneratorUtil.slash;
 		String pathMojarra= librariesPath+"mojarra2.1.24"+GeneratorUtil.slash;
@@ -97,13 +98,14 @@ public class ZathuraJavaEE_JpaCore_Ejb31_Prime35 implements IZathuraTemplate,IZa
 		GeneratorUtil.createFolder(webRootPath + "images");
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages, webRootPath + "images" + GeneratorUtil.slash);
 		
-		
+		// create login.xhtml
+		GeneratorUtil.copy(pathLogin,webRootPath+"login.xhtml" );
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
 		//Se valida si el proyecto no es maven, para empezar a copiar las librerias
 		if(!EclipseGeneratorUtil.isMavenProject){
 			//copy libraries
-			log.info("Copy Libraries files Zathura Primefaces3.5 Jpa Ejb3.1");
+			log.info("Copy Libraries files Zathura Primefaces4.0 Jpa Ejb3.1");
 			GeneratorUtil.copyFolder(pathEjb, pathLib);
 			GeneratorUtil.copyFolder(pathJpa, pathLib);			
 			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);

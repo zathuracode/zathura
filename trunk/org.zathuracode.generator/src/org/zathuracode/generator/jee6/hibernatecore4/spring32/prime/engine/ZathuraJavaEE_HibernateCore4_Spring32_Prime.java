@@ -60,21 +60,23 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 		properties = propiedades;
 		webRootPath=(propiedades.getProperty("webRootFolderPath"));
 		
-		log.info("Begin Zathura Primefaces3.5 Hibernate4.2.3 Spring3.2.3");
+		log.info("Begin Zathura Primefaces4.0 Hibernate4.2.3 Spring3.2.3");
 		doTemplate(folderProjectPath, metaDataModel, jpaPckgName, projectName, specificityLevel, domainName);
 		copyLibraries();
-		log.info("End Zathura Primefaces3.5 Hibernate4.2.3 Spring3.2.3");
+		log.info("End Zathura Primefaces4.0 Hibernate4.2.3 Spring3.2.3");
 
 
 	}
 	
 	public void copyLibraries(){
 		String pathIndexJsp = extPath+"index.jsp";
+		String pathLogin = extPath+"login.xhtml";
 		String pathWebXml= extPath+"WEB-INF"+GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages = extPath + GeneratorUtil.slash + "images"	+ GeneratorUtil.slash;
 		
 		String pathHibernate= librariesPath+"core-hibernate4.2.3"+GeneratorUtil.slash;
-		String pathPrimeFaces= librariesPath+"primeFaces3.5"+GeneratorUtil.slash;
+		String pathJpaHibernate=librariesPath+"hibernate-jpa2.0"+GeneratorUtil.slash;
+		String pathPrimeFaces= librariesPath+"primeFaces4.0"+GeneratorUtil.slash;
 		String pathSpring= librariesPath+"spring3.2.3"+GeneratorUtil.slash;
 		String pathSL4J= librariesPath+"slf4j1.7.5"+GeneratorUtil.slash;
 		String pathJamon= librariesPath+"jamon2.74"+GeneratorUtil.slash;
@@ -100,13 +102,16 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages, webRootPath + "images" + GeneratorUtil.slash);
 		
 		
+		// create login.xhtml
+		GeneratorUtil.copy(pathLogin,webRootPath+"login.xhtml" );
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
 		//Se valida si el proyecto no es maven, para empezar a copiar las librerias
 		if(!EclipseGeneratorUtil.isMavenProject){
 			//copy libraries
-			log.info("Copy Libraries files Zathura Primefaces3.5 Hibernate4.2.3 Spring3.2.3");
+			log.info("Copy Libraries files Zathura Primefaces4.0 Hibernate4.2.3 Spring3.2.3");
 			GeneratorUtil.copyFolder(pathHibernate, pathLib);
+			GeneratorUtil.copyFolder(pathJpaHibernate, pathLib);
 			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
 			GeneratorUtil.copyFolder(pathSpring, pathLib);
 			GeneratorUtil.copyFolder(pathSL4J, pathLib);
@@ -613,27 +618,27 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 			log.info("End Footer InitialMenu");
 			
 			String pathCommon= properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
-			log.info("Begin CommonColumnsContens");
-			Template templateCommonsColumns = ve.getTemplate("CommonColumnsContent.vm");
+			log.info("Begin menu");
+			Template templateCommonsColumns = ve.getTemplate("menu.vm");
 			StringWriter swCommonColumns = new StringWriter();
 			templateCommonsColumns.merge(context, swCommonColumns);
-			FileWriter fwCommonColumns = new FileWriter(pathCommon+"CommonColumnsContent.xhtml");
+			FileWriter fwCommonColumns = new FileWriter(pathFacelets+"menu.jspx");
 			BufferedWriter bwCommonColumns = new BufferedWriter(fwCommonColumns);
 			bwCommonColumns.write(swCommonColumns.toString());
 			bwCommonColumns.close();
 			swCommonColumns.close();
-			log.info("End CommonColumnsContens");
+			log.info("End menu");
 			
-			log.info("Begin CommonLayout");
-			Template templateCommonLayout = ve.getTemplate("CommonLayout.vm");
+			log.info("Begin template");
+			Template templateCommonLayout = ve.getTemplate("template.vm");
 			StringWriter swCommonLayout = new StringWriter();
 			templateCommonLayout.merge(context, swCommonLayout);
-			FileWriter fwCommonLayout = new FileWriter(pathCommon+"CommonLayout.xhtml");
+			FileWriter fwCommonLayout = new FileWriter(pathFacelets+"template.xhtml");
 			BufferedWriter bwCommonLayout = new BufferedWriter(fwCommonLayout);
 			bwCommonLayout.write(swCommonLayout.toString());
 			bwCommonLayout.close();
 			fwCommonLayout.close();
-			log.info("End CommonLayout");
+			log.info("End template");
 			
 		} catch (Exception e) {
 			log.error(e.getMessage());

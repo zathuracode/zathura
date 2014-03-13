@@ -9,24 +9,17 @@
 	</h:head>
 
 	<h:body>
-	    <ui:composition template="/XHTML/CommonColumnsContent.xhtml">
-			<ui:define name="header">
-				<ui:include src="/WEB-INF/facelets/header.jspx" />
-			</ui:define>
-        	<br/>
-        	<br/> 
-		<ui:define name="body">	
-			<f:view>
+		 <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		 
+		 	<ui:define name="body">	
+				<f:view>
 			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>               
 					<p:dialog modal="true" widgetVar="statusDialog" header="Loading"  draggable="false" closable="false">  
    						<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />   
 					</p:dialog>
 		 
 		 <h:form id="form">
-			<div align="center">
-               <h:link id="cmdBack" outcome="goInitialMenu" value="Back" style="color:blue;" />
-			 </div>
-			 <br />
+			
 			 
 			<p:panel id="msgProjectClientesTitle" header="${metaData.getRealClassName()}Data">
 					<p:messages id="msg" showDetail="true"/>
@@ -140,13 +133,9 @@
 			</p:panel>
 				
 	   </h:form>
-		  </f:view>
-	 </ui:define>	
-	 
-	  <ui:define name="footer">
-		 <ui:include src="/WEB-INF/facelets/footer.jspx" />
-	   </ui:define>	
-	</ui:composition>
+		 </f:view>
+			</ui:define>		
+		</ui:composition>	
 	
 	</h:body>	
 	
