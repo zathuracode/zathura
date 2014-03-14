@@ -724,6 +724,18 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 			log.info("End aopContext.xml");
 			
 			
+			log.info("Begin securityContext.xml");
+			Template secContext= ve.getTemplate("securityContext.xml.vm");
+			StringWriter swSecContext = new StringWriter();
+			secContext.merge(context, swSecContext);
+			FileWriter fwSecContext = new FileWriter(hdLocation+"securityContext.xml");
+			BufferedWriter bwSecContext = new BufferedWriter(fwSecContext);
+			bwSecContext.write(swSecContext.toString());
+			bwSecContext.close();
+			fwSecContext.close();
+			log.info("End securityContext.xml");
+			
+			
 			log.info("Begin dataSourceContext.xml");
 			Template dataSourceContext= ve.getTemplate("dataSourceContext.xml.vm");
 			StringWriter swDataSourceContext = new StringWriter();
