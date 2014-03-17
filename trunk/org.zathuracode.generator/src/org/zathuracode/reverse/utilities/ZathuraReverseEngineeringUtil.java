@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,21 +21,20 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+/*
 import net.sourceforge.squirrel_sql.fw.sql.ISQLAlias;
 import net.sourceforge.squirrel_sql.fw.sql.ISQLConnection;
 import net.sourceforge.squirrel_sql.fw.sql.ISQLDriver;
 import net.sourceforge.squirrel_sql.fw.sql.ITableInfo;
 import net.sourceforge.squirrel_sql.fw.sql.SQLDriver;
 import net.sourceforge.squirrel_sql.fw.sql.SQLDriverManager;
-
+*/
 import org.apache.log4j.Logger;
-import org.zathuracode.fw.AmaziliaSQLAlias;
-
 
 // TODO: Auto-generated Javadoc
 /**
  * Zathura Generator.
- *
+ * 
  * @author Diego Armando Gomez Mosquera (dgomez@vortexbird.com)
  * @author William Altuzarra Noriega Noriega (williamaltu@gmail.com)
  * @version 1.0
@@ -42,57 +43,67 @@ public class ZathuraReverseEngineeringUtil {
 
 	/** The full path. */
 	private static String fullPath = "";
-	
+
 	/** The slash. */
 	public static String slash = System.getProperty("file.separator");
 
 	/** The rev eng file name. */
 	public static String revEngFileName = "hibernate.reveng.xml";
-	
+
 	/** The database types file name. */
 	public static String databaseTypesFileName = "database-types.xml";
-	
+
 	/** The build xml file name. */
 	public static String buildXmlFileName = "build.xml";
-	
+
 	/** The build compile xml file name. */
 	public static String buildCompileXmlFileName = "buildCompile.xml";
 
 	/** The reverse templates. */
-	private static String reverseTemplates = "reverseTemplates" + ZathuraReverseEngineeringUtil.slash;
-	
+	private static String reverseTemplates = "reverseTemplates"
+			+ ZathuraReverseEngineeringUtil.slash;
+
 	/** The temp files. */
-	private static String tempFiles = "tempFiles" + ZathuraReverseEngineeringUtil.slash;
-	
+	private static String tempFiles = "tempFiles"
+			+ ZathuraReverseEngineeringUtil.slash;
+
 	/** The ant rev eng. */
-	private static String antRevEng = "antBuild-revEng" + ZathuraReverseEngineeringUtil.slash;
+	private static String antRevEng = "antBuild-revEng"
+			+ ZathuraReverseEngineeringUtil.slash;
 
 	/** The xml database types path. */
-	private static String xmlDatabaseTypesPath = "config" + ZathuraReverseEngineeringUtil.slash + databaseTypesFileName;
-	
+	private static String xmlDatabaseTypesPath = "config"
+			+ ZathuraReverseEngineeringUtil.slash + databaseTypesFileName;
+
 	/** The temp file build path. */
 	private static String tempFileBuildPath = tempFiles + buildXmlFileName;
-	
-	/** The temp file build compile path. */
-	private static String tempFileBuildCompilePath = tempFiles + buildCompileXmlFileName;
 
-	/** The sql connection. */
-	private static ISQLConnection sqlConnection = null;
+	/** The temp file build compile path. */
+	private static String tempFileBuildCompilePath = tempFiles
+			+ buildCompileXmlFileName;
+
+//	
+//	/** The sql connection. */
+//	private static ISQLConnection sqlConnection = null;
+//
+//	/** The alias. */
+//	private static ISQLAlias alias = null;
+//
+//	/** The sql driver. */
+//	private static ISQLDriver sqlDriver = null;
+//	// private static SQLDriverPropertyCollection driverProperties =null;
+//	/** The sql driver manager. */
+//	private static SQLDriverManager sqlDriverManager = null;
 	
-	/** The alias. */
-	private static ISQLAlias alias = null;
 	
-	/** The sql driver. */
-	private static ISQLDriver sqlDriver = null;
-	// private static SQLDriverPropertyCollection driverProperties =null;
-	/** The sql driver manager. */
-	private static SQLDriverManager sqlDriverManager = null;
+	private static Connection connection;
 
 	/** The types. */
 	String[] types = { "TABLE", "VIEW", "SYNONYM", "ALIAS" };
 
 	/** Log4j. */
-	private static Logger log = Logger.getLogger(ZathuraReverseEngineeringUtil.class);
+	private static Logger log = Logger
+			.getLogger(ZathuraReverseEngineeringUtil.class);
 
 	/** Generator Model. */
 	private static HashMap<String, DatabaseTypeModel> theZathuraDataBaseTypes = null;
@@ -102,7 +113,7 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the temp file build path.
-	 *
+	 * 
 	 * @return the temp file build path
 	 */
 	public static String getTempFileBuildPath() {
@@ -114,7 +125,7 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the temp file build compile path.
-	 *
+	 * 
 	 * @return the temp file build compile path
 	 */
 	public static String getTempFileBuildCompilePath() {
@@ -126,7 +137,7 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the xml database types path.
-	 *
+	 * 
 	 * @return the xml database types path
 	 */
 	public static String getXmlDatabaseTypesPath() {
@@ -138,7 +149,7 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the full path.
-	 *
+	 * 
 	 * @return the full path
 	 */
 	public static String getFullPath() {
@@ -147,12 +158,16 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Sets the full path.
-	 *
-	 * @param fullPath the full path
+	 * 
+	 * @param fullPath
+	 *            the full path
 	 */
 	public static void setFullPath(String fullPath) {
 
-		if (fullPath != null && fullPath.startsWith("/") && System.getProperty("os.name").toUpperCase().contains("WINDOWS") == true) {
+		if (fullPath != null
+				&& fullPath.startsWith("/")
+				&& System.getProperty("os.name").toUpperCase()
+						.contains("WINDOWS") == true) {
 			fullPath = fullPath.substring(1, fullPath.length());
 		}
 		if (fullPath != null) {
@@ -176,7 +191,7 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the reverse templates.
-	 *
+	 * 
 	 * @return the reverse templates
 	 */
 	public static String getReverseTemplates() {
@@ -188,7 +203,7 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the temp files path.
-	 *
+	 * 
 	 * @return the temp files path
 	 */
 	public static String getTempFilesPath() {
@@ -200,7 +215,7 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the ant build rev eng path.
-	 *
+	 * 
 	 * @return the ant build rev eng path
 	 */
 	public static String getAntBuildRevEngPath() {
@@ -212,8 +227,9 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Fix domain.
-	 *
-	 * @param domainName the domain name
+	 * 
+	 * @param domainName
+	 *            the domain name
 	 * @return the string
 	 */
 	public static String fixDomain(String domainName) {
@@ -222,17 +238,21 @@ public class ZathuraReverseEngineeringUtil {
 			return "";
 		}
 		if (domainName.length() > 0) {
-			retFixDomian = replaceAll(domainName, ".", ZathuraReverseEngineeringUtil.slash);
+			retFixDomian = replaceAll(domainName, ".",
+					ZathuraReverseEngineeringUtil.slash);
 		}
 		return retFixDomian;
 	}
 
 	/**
 	 * Replace all.
-	 *
-	 * @param cadena the cadena
-	 * @param old the old
-	 * @param snew the snew
+	 * 
+	 * @param cadena
+	 *            the cadena
+	 * @param old
+	 *            the old
+	 * @param snew
+	 *            the snew
 	 * @return the string
 	 */
 	public static String replaceAll(String cadena, String old, String snew) {
@@ -256,11 +276,12 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Project path in console.
-	 *
+	 * 
 	 * @return the string
 	 */
 	public static String projectPathInConsole() {
-		URL url = ZathuraReverseEngineeringUtil.class.getResource("ReverseUtil.class");
+		URL url = ZathuraReverseEngineeringUtil.class
+				.getResource("ReverseUtil.class");
 		String classPath = url.getPath().substring(1);
 		int tmp = classPath.indexOf("zathura-ReverseMappingTool") + 26;
 
@@ -269,7 +290,8 @@ public class ZathuraReverseEngineeringUtil {
 		String projectPath = null;
 
 		if (cPath.equals("2")) {
-			projectPath = inconmpletePath + "2" + ZathuraReverseEngineeringUtil.slash;
+			projectPath = inconmpletePath + "2"
+					+ ZathuraReverseEngineeringUtil.slash;
 		} else {
 			projectPath = inconmpletePath + ZathuraReverseEngineeringUtil.slash;
 		}
@@ -278,8 +300,9 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Validations list.
-	 *
-	 * @param list the list
+	 * 
+	 * @param list
+	 *            the list
 	 * @return true, if validations list
 	 */
 	public static boolean validationsList(List list) {
@@ -296,18 +319,26 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Load zathura database types.
-	 *
+	 * 
 	 * @return the hash map< string, database type model>
-	 * @throws FileNotFoundException the file not found exception
-	 * @throws XMLStreamException the XML stream exception
-	 * @throws InstantiationException the instantiation exception
-	 * @throws IllegalAccessException the illegal access exception
-	 * @throws ClassNotFoundException the class not found exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws XMLStreamException
+	 *             the XML stream exception
+	 * @throws InstantiationException
+	 *             the instantiation exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
 	 */
-	public static HashMap<String, DatabaseTypeModel> loadZathuraDatabaseTypes() throws FileNotFoundException, XMLStreamException, InstantiationException,
-			IllegalAccessException, ClassNotFoundException {
+	public static HashMap<String, DatabaseTypeModel> loadZathuraDatabaseTypes()
+			throws FileNotFoundException, XMLStreamException,
+			InstantiationException, IllegalAccessException,
+			ClassNotFoundException {
 
-		log.info("Reading:" + ZathuraReverseEngineeringUtil.xmlDatabaseTypesPath);
+		log.info("Reading:"
+				+ ZathuraReverseEngineeringUtil.xmlDatabaseTypesPath);
 
 		DatabaseTypeModel databaseTypeModel = null;
 		boolean boolName = false;
@@ -318,14 +349,17 @@ public class ZathuraReverseEngineeringUtil {
 
 		// Get the factory instace first.
 		XMLInputFactory factory = XMLInputFactory.newInstance();
-		factory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, Boolean.TRUE);
-		factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
+		factory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES,
+				Boolean.TRUE);
+		factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES,
+				Boolean.FALSE);
 		factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, Boolean.TRUE);
 		factory.setProperty(XMLInputFactory.IS_COALESCING, Boolean.TRUE);
 
 		log.debug("FACTORY: " + factory);
 
-		XMLEventReader r = factory.createXMLEventReader(new FileInputStream(getXmlDatabaseTypesPath()));
+		XMLEventReader r = factory.createXMLEventReader(new FileInputStream(
+				getXmlDatabaseTypesPath()));
 
 		// iterate as long as there are more events on the input stream
 		while (r.hasNext()) {
@@ -369,7 +403,8 @@ public class ZathuraReverseEngineeringUtil {
 				QName qname = endElement.getName();
 				String localName = qname.getLocalPart();
 				if (localName.equals("database") == true) {
-					theZathuraDataBaseTypes.put(databaseTypeModel.getName(), databaseTypeModel);
+					theZathuraDataBaseTypes.put(databaseTypeModel.getName(),
+							databaseTypeModel);
 				}
 			}
 
@@ -380,8 +415,9 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the database type model.
-	 *
-	 * @param name the name
+	 * 
+	 * @param name
+	 *            the name
 	 * @return the database type model
 	 */
 	public static DatabaseTypeModel getDatabaseTypeModel(String name) {
@@ -410,14 +446,16 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * The main method.
-	 *
-	 * @param args the args
+	 * 
+	 * @param args
+	 *            the args
 	 */
 	public static void main(String[] args) {
 		try {
 			HashMap<String, DatabaseTypeModel> theZathuraDataBaseTypes = loadZathuraDatabaseTypes();
 
-			for (DatabaseTypeModel databaseTypeModel : theZathuraDataBaseTypes.values()) {
+			for (DatabaseTypeModel databaseTypeModel : theZathuraDataBaseTypes
+					.values()) {
 				System.out.println(databaseTypeModel.getName());
 				System.out.println(databaseTypeModel.getUrl());
 				System.out.println(databaseTypeModel.getDriverClassName());
@@ -443,9 +481,11 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Validar package.
-	 *
-	 * @param packageName the package name
-	 * @throws Exception the exception
+	 * 
+	 * @param packageName
+	 *            the package name
+	 * @throws Exception
+	 *             the exception
 	 */
 	public static void validarPackage(String packageName) throws Exception {
 		if (packageName.startsWith(".") || packageName.endsWith(".")) {
@@ -455,8 +495,9 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Delete files.
-	 *
-	 * @param path the path
+	 * 
+	 * @param path
+	 *            the path
 	 */
 	public static void deleteFiles(String path) {
 		File file = new File(path);
@@ -465,8 +506,9 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Delete files.
-	 *
-	 * @param file the file
+	 * 
+	 * @param file
+	 *            the file
 	 */
 	public static void deleteFiles(File file) {
 		File fileAux = null;
@@ -486,8 +528,9 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Creates the folder.
-	 *
-	 * @param path the path
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the file
 	 */
 	public static File createFolder(String path) {
@@ -498,8 +541,9 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Borrar los archivos de la carpeta tempFiles.
-	 *
-	 * @param path the path
+	 * 
+	 * @param path
+	 *            the path
 	 */
 	public static void resetTempFiles(String path) {
 		// Borrar carpeta de temporales
@@ -510,74 +554,82 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Test driver.
-	 *
-	 * @param url the url
-	 * @param driverClassName the driver class name
-	 * @param user the user
-	 * @param password the password
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws SQLException the SQL exception
-	 * @throws Exception the exception
+	 * 
+	 * @param url
+	 *            the url
+	 * @param driverClassName
+	 *            the driver class name
+	 * @param user
+	 *            the user
+	 * @param password
+	 *            the password
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 * @throws SQLException
+	 *             the SQL exception
+	 * @throws Exception
+	 *             the exception
 	 */
-	public static void testDriver(String url, String driverClassName, String user, String password) throws ClassNotFoundException, SQLException, Exception {
+	public static void testDriver(String url, String driverClassName,String user, String password) throws ClassNotFoundException,SQLException, Exception {
 
-		sqlDriverManager = new SQLDriverManager();
-		sqlDriver = new SQLDriver();
-		alias = new AmaziliaSQLAlias();
-
-		sqlDriver.setDriverClassName(driverClassName);
-		sqlDriver.setUrl(url);
-		alias.setUrl(url);
-		alias.setUserName(user);
-		alias.setPassword(password);
-
-		sqlConnection = sqlDriverManager.getConnection(sqlDriver, alias, user, password);
+		connection = getConnection(url, driverClassName, user, password);
 
 	}
 
 	/**
 	 * Gets the connection.
-	 *
-	 * @param url the url
-	 * @param driverClassName the driver class name
-	 * @param user the user
-	 * @param password the password
+	 * 
+	 * @param url
+	 *            the url
+	 * @param driverClassName
+	 *            the driver class name
+	 * @param user
+	 *            the user
+	 * @param password
+	 *            the password
 	 * @return the connection
-	 * @throws ClassNotFoundException the class not found exception
-	 * @throws SQLException the SQL exception
-	 * @throws Exception the exception
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 * @throws SQLException
+	 *             the SQL exception
+	 * @throws Exception
+	 *             the exception
 	 */
-	public static Connection getConnection(String url, String driverClassName, String user, String password) throws ClassNotFoundException, SQLException,
-			Exception {
 
-		sqlDriverManager = new SQLDriverManager();
-		sqlDriver = new SQLDriver();
-		alias = new AmaziliaSQLAlias();
+	public static Connection getConnection(String url, String driverClassName,String user, String password) throws ClassNotFoundException,
+			SQLException, Exception {
 
-		sqlDriver.setDriverClassName(driverClassName);
-		sqlDriver.setUrl(url);
-		alias.setUrl(url);
-		alias.setUserName(user);
-		alias.setPassword(password);
-
-		sqlConnection = sqlDriverManager.getConnection(sqlDriver, alias, user, password);
-		return sqlConnection.getConnection();
+		connection=DriverManager.getConnection(url, user, password);
+		
+		return connection;
 
 	}
 
+	/*
+	 * public static Connection getConnection(String url, String
+	 * driverClassName, String user, String password) throws
+	 * ClassNotFoundException, SQLException, Exception {
+	 * 
+	 * sqlDriverManager = new SQLDriverManager(); sqlDriver = new SQLDriver();
+	 * alias = new AmaziliaSQLAlias();
+	 * 
+	 * sqlDriver.setDriverClassName(driverClassName); sqlDriver.setUrl(url);
+	 * alias.setUrl(url); alias.setUserName(user); alias.setPassword(password);
+	 * 
+	 * sqlConnection = sqlDriverManager.getConnection(sqlDriver, alias, user,
+	 * password); return sqlConnection.getConnection();
+	 * 
+	 * }
+	 */
 	/**
 	 * Close all.
 	 */
 	public static void closeAll() {
 
 		try {
-			if (sqlConnection != null) {
-				sqlConnection.close();
+			if (connection != null) {
+				connection.close();
 			}
-			alias = null;
-			sqlDriver = null;
-			sqlConnection = null;
-			sqlDriverManager = null;
 		} catch (SQLException e) {
 			// Ignore
 		}
@@ -586,23 +638,48 @@ public class ZathuraReverseEngineeringUtil {
 
 	/**
 	 * Gets the catalogs.
-	 *
+	 * 
 	 * @return the catalogs
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
-	public static String[] getCatalogs() throws SQLException {
-		return sqlConnection.getSQLMetaData().getCatalogs();
+	public static List<String> getCatalogs() throws SQLException {
+		
+		List<String> listCatalogs=new ArrayList<String>();
+		
+		if(connection.getMetaData()==null){
+			throw new SQLException("Data Base MetaData is not Supported");
+		}
+		
+		ResultSet catalogs=connection.getMetaData().getCatalogs();
+		while (catalogs.next()) {
+			listCatalogs.add(catalogs.getString(1));
+		}
+		return listCatalogs;
 	}
 
 	/**
 	 * Gets the schemas.
-	 *
+	 * 
 	 * @return the schemas
-	 * @throws SQLException the SQL exception
-	 * @throws Exception the exception
+	 * @throws SQLException
+	 *             the SQL exception
+	 * @throws Exception
+	 *             the exception
 	 */
-	public static String[] getSchemas() throws SQLException, Exception {
-		return sqlConnection.getSQLMetaData().getSchemas();
+	public static List<String> getSchemas() throws SQLException, Exception {
+		List<String> listSchemas=new ArrayList<String>();
+		
+		if(connection.getMetaData()==null){
+			throw new SQLException("Data Base MetaData is not Supported");
+		}
+		
+		ResultSet schemas=connection.getMetaData().getSchemas();
+		while (schemas.next()) {
+			listSchemas.add(schemas.getString(1));
+		}
+		schemas.close();
+		return listSchemas;
 	}
 
 	// public synchronized ITableInfo[] getTables(String catalog, String
@@ -610,31 +687,32 @@ public class ZathuraReverseEngineeringUtil {
 	// progressCallBack)
 	/**
 	 * Gets the tables.
-	 *
-	 * @param catalog the catalog
-	 * @param schemaPattern the schema pattern
-	 * @param tableNamePattern the table name pattern
+	 * 
+	 * @param catalog
+	 *            the catalog
+	 * @param schemaPattern
+	 *            the schema pattern
+	 * @param tableNamePattern
+	 *            the table name pattern
 	 * @return the tables
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
-	public static ITableInfo[] getTables(String catalog, String schemaPattern, String tableNamePattern) throws SQLException {
+	public static List<String> getTables(String catalog, String schemaPattern,String tableNamePattern) throws SQLException {
 		String[] types = { "TABLE", "VIEW", "SYNONYM", "ALIAS" };
-		ITableInfo[] tableInfo = null;
+		List<String> listTables=new ArrayList<String>();
 		try {
-			tableInfo = sqlConnection.getSQLMetaData().getTables(catalog, schemaPattern, tableNamePattern, types, null);
+			ResultSet tables=connection.getMetaData().getTables(catalog, schemaPattern, tableNamePattern, types);
+			while (tables.next()) {
+				listTables.add(tables.getString("TABLE_NAME"));
+			}
+			tables.close();
 		} catch (Exception e) { // Ignore
 			e.printStackTrace();
 		}
-		return tableInfo;
+		return listTables;
 	}
 
-	/**
-	 * Gets the sql connection.
-	 *
-	 * @return the sqlConnection
-	 */
-	public static ISQLConnection getSqlConnection() {
-		return sqlConnection;
-	}
+
 
 }

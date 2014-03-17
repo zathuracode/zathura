@@ -19,7 +19,7 @@ import org.zathuracode.eclipse.plugin.generator.utilities.ConnectionsUtils;
 import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zathuracode.reverse.utilities.ZathuraReverseEngineeringUtil;
 
-import com.vortexbird.amazilia.plugin.sp.gui.WizardPageSelectStoreProcedure;
+//import com.vortexbird.amazilia.plugin.sp.gui.WizardPageSelectStoreProcedure;
 
 
 // TODO: Auto-generated Javadoc
@@ -122,10 +122,10 @@ public class WizardPageSelectDBConnection extends WizardPage {
 					if(getNextPage() instanceof WizardPageSelectTables){
 						WizardPageSelectTables wizardSelectTables=(WizardPageSelectTables)getNextPage();						
 						wizardSelectTables.resetForm();					
-					}else if(getNextPage() instanceof WizardPageSelectStoreProcedure){
-						WizardPageSelectStoreProcedure wizardPageSelectStoreProcedure=(WizardPageSelectStoreProcedure)getNextPage();
-						wizardPageSelectStoreProcedure.resetForm();
-					}
+//					}else if(getNextPage() instanceof WizardPageSelectStoreProcedure){
+//						WizardPageSelectStoreProcedure wizardPageSelectStoreProcedure=(WizardPageSelectStoreProcedure)getNextPage();
+//						wizardPageSelectStoreProcedure.resetForm();
+				}
 					
 					
 					validatePageComplete();
