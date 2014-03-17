@@ -191,11 +191,7 @@
         <url>jdbc:db2:&lt;dbname&gt;</url>
     </database>
     
-     <database>
-		<driverClassName>net.sourceforge.jtds.jdbc.Driver</driverClassName>
-		<name>Microsoft SQL Server (jTDS driver)</name>
-		<url>jdbc:jtds:sqlserver://&lt;hostname&gt;[:&lt;port&gt;]/&lt;dbname&gt;</url>
-	</database>
+    
 	
 	 <database>
 		<name>Oracle (OCI driver)</name>
@@ -203,6 +199,14 @@
 		<url>jdbc:oracle:oci8:@&lt;database_name&gt;</url>
 	</database>
      -->
+     
+     <database>
+		<driverClassName>net.sourceforge.jtds.jdbc.Driver</driverClassName>
+		<name>Microsoft SQL Server (jTDS driver)</name>
+		<url>jdbc:jtds:sqlserver://&lt;hostname&gt;[:&lt;port&gt;]/&lt;dbname&gt;</url>
+	</database>
+     
+     
     <database>	
 		<name>MySQL Connector/J</name>
 		<driverClassName>com.mysql.jdbc.Driver</driverClassName>
