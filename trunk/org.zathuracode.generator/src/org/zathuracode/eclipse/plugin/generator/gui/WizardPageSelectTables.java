@@ -156,8 +156,10 @@ public class WizardPageSelectTables extends WizardPage {
 
 					validatePageComplete();
 				} catch (SQLException e1) {
+					e1.printStackTrace();
 					setPageComplete(false);
 				} catch (Exception ex) {
+					ex.printStackTrace();
 					setPageComplete(false);
 				}
 			}
