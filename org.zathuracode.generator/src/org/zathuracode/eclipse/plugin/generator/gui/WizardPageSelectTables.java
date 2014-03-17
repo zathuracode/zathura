@@ -3,7 +3,7 @@ package org.zathuracode.eclipse.plugin.generator.gui;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import net.sourceforge.squirrel_sql.fw.sql.ITableInfo;
+
 
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -49,10 +49,10 @@ public class WizardPageSelectTables extends WizardPage {
 	private Button btnTableFilterSearch = null;
 	
 	/** The list catalogs. */
-	private String[] listCatalogs = null;
+	private java.util.List<String> listCatalogs = null;
 	
 	/** The list schemas. */
-	private String[] listSchemas = null;
+	private java.util.List<String> listSchemas = null;
 	
 	/** The catalog name. */
 	private String catalogName = null;
@@ -129,9 +129,9 @@ public class WizardPageSelectTables extends WizardPage {
 					listCatalogs = ZathuraReverseEngineeringUtil.getCatalogs();
 					listSchemas = ZathuraReverseEngineeringUtil.getSchemas();
 
-					if (listSchemas != null && listSchemas.length > 1) {
-						if (listCatalogs != null && listCatalogs.length == 1) {
-							catalogName = listCatalogs[0];
+					if (listSchemas != null && listSchemas.size() > 1) {
+						if (listCatalogs != null && listCatalogs.size() == 1) {
+							catalogName = listCatalogs.get(0);
 						} else {
 							catalogName = null;
 						}
@@ -141,7 +141,7 @@ public class WizardPageSelectTables extends WizardPage {
 						for (String catalogSchemaName : listSchemas) {
 							cmbCatlogSchema.add(catalogSchemaName);
 						}
-					} else if (listCatalogs != null && listCatalogs.length > 0) {
+					} else if (listCatalogs != null && listCatalogs.size() > 0) {
 						isSchema = false;
 						lblCatalogSchema.setText("Catalogs:");
 						for (String catalogSchemaName : listCatalogs) {
@@ -246,14 +246,14 @@ public class WizardPageSelectTables extends WizardPage {
 					listSelectedTables.removeAll();
 
 					if (isSchema == true) {
-						ITableInfo[] tableInfos = ZathuraReverseEngineeringUtil.getTables(catalogName, cmbCatlogSchema.getText(), txtTableFilter.getText());
-						for (ITableInfo tableInfo : tableInfos) {
-							listAvailableTables.add(tableInfo.getSimpleName());
+						java.util.List<String> tableInfos = ZathuraReverseEngineeringUtil.getTables(catalogName, cmbCatlogSchema.getText(), txtTableFilter.getText());
+						for (String tableInfo : tableInfos) {
+							listAvailableTables.add(tableInfo);
 						}
 					} else {
-						ITableInfo[] tableInfos = ZathuraReverseEngineeringUtil.getTables(cmbCatlogSchema.getText(), null, txtTableFilter.getText());
-						for (ITableInfo tableInfo : tableInfos) {
-							listAvailableTables.add(tableInfo.getSimpleName());
+						java.util.List<String> tableInfos = ZathuraReverseEngineeringUtil.getTables(cmbCatlogSchema.getText(), null, txtTableFilter.getText());
+						for (String tableInfo : tableInfos) {
+							listAvailableTables.add(tableInfo);
 						}
 					}
 				} catch (Exception e2) {
@@ -277,7 +277,7 @@ public class WizardPageSelectTables extends WizardPage {
 				setPageComplete(true);
 
 				// Si es por Catalogs
-				if (listCatalogs != null && listCatalogs.length > 0) {
+				if (listCatalogs != null && listCatalogs.size() > 0) {
 
 					EclipseGeneratorUtil.catalog = cmbCatlogSchema.getText();
 					EclipseGeneratorUtil.schema = null;
@@ -287,7 +287,7 @@ public class WizardPageSelectTables extends WizardPage {
 
 				}
 				// Si es por schema
-				if (listSchemas != null && listSchemas.length > 0) {
+				if (listSchemas != null && listSchemas.size() > 0) {
 
 					EclipseGeneratorUtil.catalog = null;
 					EclipseGeneratorUtil.schema = cmbCatlogSchema.getText();
@@ -297,7 +297,7 @@ public class WizardPageSelectTables extends WizardPage {
 				}
 
 				// Ambos para db2/400 usa catalog y schema
-				if (listCatalogs != null && listCatalogs.length > 0 && listSchemas != null && listSchemas.length > 0 && db.equals("JTOpen(AS/400)") == true) {
+				if (listCatalogs != null && listCatalogs.size() > 0 && listSchemas != null && listSchemas.size() > 0 && db.equals("JTOpen(AS/400)") == true) {
 
 					EclipseGeneratorUtil.catalog = catalogName;
 					EclipseGeneratorUtil.schema = cmbCatlogSchema.getText();

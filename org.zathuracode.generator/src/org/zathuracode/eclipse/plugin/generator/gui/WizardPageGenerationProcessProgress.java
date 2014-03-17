@@ -26,7 +26,7 @@ public class WizardPageGenerationProcessProgress extends WizardPage {
 	public WizardPageGenerationProcessProgress() {
 		super("wizardPage");
 		setTitle("Generation Process Progress");
-		setDescription("blabla");
+		
 		// setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(),
 		// "icons/balvardi-Robotic7070.png"));
 	}
