@@ -10,6 +10,7 @@ import org.zathuracode.metadata.model.Member;
 import org.zathuracode.metadata.model.MetaData;
 
 
+
 /**
  * Zathuracode Generator
  * www.zathuracode.org
@@ -607,10 +608,10 @@ public class StringBuilderForId implements IStringBuilderForId {
 
 				if (realType.equalsIgnoreCase("date")) {
 					setToId = metaData.getPrimaryKey().getName() + ".set" + nameFragment + "((txt" + nameFragment + ".getValue())==null||(txt" + nameFragment
-							+ ".getValue()).equals(\"\")?null:" + "(" + realType + ")txt" + nameFragment + ".getValue());";
+							+ ".getValue()).equals(\"\")?null:" + " FacesUtils.check" + realType + "(txt" + nameFragment + ".getValue()));";
 				} else {
 					setToId = metaData.getPrimaryKey().getName() + ".set" + nameFragment + "((txt" + nameFragment + ".getValue())==null||(txt" + nameFragment
-							+ ".getValue()).equals(\"\")?null:new " + realType + "(txt" + nameFragment + ".getValue().toString()));";
+							+ ".getValue()).equals(\"\")?null: FacesUtils.check" + realType + "(txt" + nameFragment + "));";
 				}
 				
 				// String setToId = metaData.getPrimaryKey().getName() + ".set"
@@ -622,9 +623,9 @@ public class StringBuilderForId implements IStringBuilderForId {
 		} else {
 			String setToId = new String();
 
-			setToId = metaData.getPrimaryKey().getRealClassName() + " " + metaData.getPrimaryKey().getName() + " = new "
+			setToId = metaData.getPrimaryKey().getRealClassName() + " " + metaData.getPrimaryKey().getName() + " = FacesUtils.check"
 					+ metaData.getPrimaryKey().getRealClassName() + "(" + "txt" + metaData.getPrimaryKey().getGetNameOfPrimaryName()
-					+ ".getValue().toString());";
+					+ ");";
 
 			finalParam.add(setToId);
 		}

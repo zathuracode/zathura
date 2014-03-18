@@ -13,6 +13,7 @@ import org.zathuracode.metadata.model.Member;
 import org.zathuracode.metadata.model.MetaData;
 
 
+
 /**
  * Zathuracode Generator
  * www.zathuracode.org
@@ -2027,12 +2028,15 @@ public class StringBuilder implements IStringBuilder {
 			}
 			
 			if (!memberBelongToComposeKey) {
-				getEntityManyToOne = "entity." + member.getMethodSetterName()
-						+ "(businessDelegatorView.get"
+				getEntityManyToOne =  "entity." + member.getMethodSetterName()
+						+ "(FacesUtils.check" + paramClass + "(txt"
+						+ paramFieldName.substring(0, 1).toUpperCase()
+						+ paramFieldName.substring(1) + ") != null ? "
+						+ "businessDelegatorView.get"
 						+ member.getGetNameOfPrimaryName()
 						+ "(FacesUtils.check" + paramClass + "(txt"
 						+ paramFieldName.substring(0, 1).toUpperCase()
-						+ paramFieldName.substring(1) + ")));";
+						+ paramFieldName.substring(1) + ")) : null );";
 				finalParam.add(getEntityManyToOne);
 			}
 		}
