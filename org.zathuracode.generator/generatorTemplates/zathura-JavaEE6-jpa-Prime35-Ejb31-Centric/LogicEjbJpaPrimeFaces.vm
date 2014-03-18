@@ -142,7 +142,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
                     #end
 				#end
 			#end
-            ${metaData.getRealClassNameAsVariable()}DAO.delete(entity);
+            ${metaData.getRealClassNameAsVariable()}DAO.deleteById(entity.get${metaData.primaryKey.getGetNameOfPrimaryName()}());
             } catch (Exception e) {
             throw e;
             }
