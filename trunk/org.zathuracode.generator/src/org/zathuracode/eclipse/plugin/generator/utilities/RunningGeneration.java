@@ -51,8 +51,12 @@ public class RunningGeneration implements IRunnableWithProgress {
 			monitor.subTask("Refresh " + EclipseGeneratorUtil.projectName + " project...");
 			EclipseGeneratorUtil.project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 			
+			 //TODO mirar que comando se puede ejecutar para organizar los import
+			
 			monitor.subTask("Building " + EclipseGeneratorUtil.projectName + " project...");
 			EclipseGeneratorUtil.project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+			
+			
 			
 			//monitor.subTask("Building " + EclipseGeneratorUtil.projectName + " project...");
 			
