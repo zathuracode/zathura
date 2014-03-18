@@ -11,11 +11,11 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
-import org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.utils.IStringBuilder;
-import org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.utils.IStringBuilderForId;
-import org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.utils.StringBuilder;
-import org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.utils.StringBuilderForId;
-import org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.utils.Utilities;
+import org.zathuracode.generator.jee6.jpacore.ejb31.prime35.utils.IStringBuilder;
+import org.zathuracode.generator.jee6.jpacore.ejb31.prime35.utils.IStringBuilderForId;
+import org.zathuracode.generator.jee6.jpacore.ejb31.prime35.utils.StringBuilder;
+import org.zathuracode.generator.jee6.jpacore.ejb31.prime35.utils.StringBuilderForId;
+import org.zathuracode.generator.jee6.jpacore.ejb31.prime35.utils.Utilities;
 import org.zathuracode.generator.model.IZathuraGenerator;
 import org.zathuracode.generator.utilities.GeneratorUtil;
 import org.zathuracode.generator.utilities.JalopyCodeFormatter;
@@ -67,7 +67,7 @@ public class ZathuraJavaEE_JpaCore_Ejb31_Prime35 implements IZathuraTemplate,IZa
 	
 	public void copyLibraries(){
 		String pathIndexJsp = extPath+"index.jsp";
-		String pathLogin = extPath+"login.xhtml";
+		
 		String pathWebXml= extPath+"WEB-INF"+GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages = extPath + GeneratorUtil.slash + "images"	+ GeneratorUtil.slash;
 		
@@ -97,9 +97,7 @@ public class ZathuraJavaEE_JpaCore_Ejb31_Prime35 implements IZathuraTemplate,IZa
 		//create folder images and insert .png
 		GeneratorUtil.createFolder(webRootPath + "images");
 		GeneratorUtil.copyFolder(generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages, webRootPath + "images" + GeneratorUtil.slash);
-		
-		// create login.xhtml
-		GeneratorUtil.copy(pathLogin,webRootPath+"login.xhtml" );
+
 		// create index.jsp
 		GeneratorUtil.copy(pathIndexJsp,webRootPath+"index.jsp" );
 		//Se valida si el proyecto no es maven, para empezar a copiar las librerias
