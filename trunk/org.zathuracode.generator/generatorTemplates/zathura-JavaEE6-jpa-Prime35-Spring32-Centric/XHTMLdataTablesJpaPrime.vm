@@ -9,7 +9,7 @@
 	</h:head>
 
 	<h:body>
-		 <ui:composition template="/WEB-INF/facelets/template.xhtml">	
+		  <ui:composition template="/WEB-INF/facelets/template.xhtml">	
 		 
 		 	<ui:define name="body">	
 				<f:view>
@@ -53,7 +53,7 @@
 										<f:attribute name="selected${metaData.getRealClassName()}" value="#{${metaData.getRealClassNameAsVariable()}}" />
 									</p:commandButton>
 									<p:commandButton id="btnDelete"									
-										title="Delete" actionListener="#{${metaData.getRealClassNameAsVariable()}View.action_delete}"
+										title="Delete" actionListener="#{${metaData.getRealClassNameAsVariable()}View.action_delete_datatable}"
 										onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}"
 										icon="ui-icon-trash" update="@form">
 										<f:attribute name="selected${metaData.getRealClassName()}" value="#{${metaData.getRealClassNameAsVariable()}}" />
