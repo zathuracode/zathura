@@ -114,7 +114,12 @@ private IBusinessDelegatorView businessDelegatorView;
 				txt${upper}${str2}.setValue(${metaData.getRealClassNameAsVariable()}DTO.get${upper}${str2}());
 				#end
 			#end	
-				
+			
+			#foreach($member2  in $finalParamForIdForViewClass)
+		        $member2
+		    #end
+			entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+			
 			action_modify();
 			
 			}catch (Exception ex) {
@@ -166,7 +171,9 @@ private IBusinessDelegatorView businessDelegatorView;
         if(btnSave != null){
 		  btnSave.setDisabled(true);
 		}
-			
+		if (btnDelete != null) {
+        	btnDelete.setDisabled(true);
+        }
         return "";
         }
 
@@ -197,9 +204,9 @@ private IBusinessDelegatorView businessDelegatorView;
 	    #foreach($member2  in $finalParamForIdForViewClass)
 	        $member2
 	    #end
-	    	entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+	    	entity = ${metaData.primaryKey.getName()} != null ? businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()}) : null;
 	    } catch (Exception e) {
-	    // TODO: handle exception
+	    	entity = null;
 	    }
 	    
 		if(entity==null){
@@ -228,6 +235,9 @@ private IBusinessDelegatorView businessDelegatorView;
 		        ${member2}
 		    #end
 		    btnSave.setDisabled(false);
+		    if(btnDelete!=null){
+		    	btnDelete.setDisabled(false);
+		    }
 	    }
     }
         
@@ -300,6 +310,7 @@ private IBusinessDelegatorView businessDelegatorView;
 	        FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYSAVED);
 			action_clear();
         } catch (Exception e) {
+        	entity = null;
         	FacesUtils.addErrorMessage(e.getMessage());
         }
         return "";
@@ -336,22 +347,42 @@ private IBusinessDelegatorView businessDelegatorView;
         return "";
 	}
 	
-	public String action_delete(ActionEvent evt) {
+	public String action_delete_datatable(ActionEvent evt){
 		try{
-			selected${metaData.getRealClassName()} = (${metaData.getRealClassName()}DTO)(evt.getComponent().getAttributes().get("selected${metaData.getRealClassName()}"));		
-	    #foreach($member2  in $finalParamForGetIdByDtoForViewClass)
-	        $member2
-	    #end
-    		entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+        	selected${metaData.getRealClassName()} = (${metaData.getRealClassName()}DTO)(evt.getComponent().getAttributes().get("selected${metaData.getRealClassName()}"));
+    		#foreach($member2  in $finalParamForGetIdByDtoForViewClass)
+				$member2
+			#end
+			entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+        	action_delete();
+        }catch(Exception e ){
+		 FacesUtils.addErrorMessage(e.getMessage());
+		}    
+        return "";
+    }
+	
+	public String action_delete_master(){
+		try{
+			#foreach($member2  in $finalParamForIdForViewClass)
+		        $member2
+		    #end
+		    entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
+        	action_delete();
+        }catch(Exception e ){
+		 FacesUtils.addErrorMessage(e.getMessage());
+		}    
+        return "";
+    }
+    
+	public void action_delete() throws Exception{
+		try{
 			businessDelegatorView.delete${metaData.getRealClassName()}(entity);
     		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
 			action_clear();
             data= null;
 		}catch(Exception e ){
-		 FacesUtils.addErrorMessage(e.getMessage());
+			throw e;
 		}  
-		
-		return "";
 	}	
 	
     public String action_closeDialog(){
@@ -372,9 +403,9 @@ private IBusinessDelegatorView businessDelegatorView;
 	    #end
     		entity = businessDelegatorView.get${metaData.getRealClassName()}(${metaData.primaryKey.getName()});
 			businessDelegatorView.delete${metaData.getRealClassName()}(entity);
+			data.remove(selected${metaData.getRealClassName()});
     		FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
 			action_clear();
-			data.remove(selected${metaData.getRealClassName()});
 		}catch(Exception e ){
 		 FacesUtils.addErrorMessage(e.getMessage());
 		}  

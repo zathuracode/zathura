@@ -62,15 +62,15 @@ public class JpaDaoImpl<T, PK extends Serializable> implements Dao<T, PK> {
 	public void deleteByProperty(String tableName, String propertyName,
 			Object value) throws DaoException {
 		String queryString = "delete from " + tableName
-				+ " as model where model." + propertyName + "= ?";
-		Query queryObject = entityManager.createNamedQuery(queryString);
+				+ " as model where model." + propertyName + "= ?0";
+		Query queryObject = entityManager.createQuery(queryString);
 		queryObject.setParameter(0, value);
 		queryObject.executeUpdate();
 	}
 
 	public void deleteAll() throws DaoException {
 		String queryString = "delete from " + entityClass.getName();
-		Query queryObject = entityManager.createNamedQuery(queryString);
+		Query queryObject = entityManager.createQuery(queryString);
 		queryObject.executeUpdate();
 	}
 
@@ -114,7 +114,7 @@ public class JpaDaoImpl<T, PK extends Serializable> implements Dao<T, PK> {
 						+ sortColumnName + " "
 						+ (sortAscending ? "asc" : "desc");
 
-				Query queryObject = entityManager.createNamedQuery(queryString);
+				Query queryObject = entityManager.createQuery(queryString);
 				queryObject.setFirstResult(startRow);
 				queryObject.setMaxResults(maxResults);
 
@@ -128,7 +128,7 @@ public class JpaDaoImpl<T, PK extends Serializable> implements Dao<T, PK> {
 				String queryString = "select model from "
 						+ entityClass.getName() + " model";
 				
-				Query queryObject = entityManager.createNamedQuery(queryString);
+				Query queryObject = entityManager.createQuery(queryString);
 				queryObject.setFirstResult(startRow);
 				queryObject.setMaxResults(maxResults);
 
@@ -150,7 +150,7 @@ public class JpaDaoImpl<T, PK extends Serializable> implements Dao<T, PK> {
 			final String queryString = "select model from "
 					+ entityClass.getName() + " model " + where;
 
-			Query queryObject = entityManager.createNamedQuery(queryString);
+			Query queryObject = entityManager.createQuery(queryString);
 
 			return queryObject.getResultList();
 		} catch (RuntimeException re) {
@@ -165,9 +165,9 @@ public class JpaDaoImpl<T, PK extends Serializable> implements Dao<T, PK> {
 				+ value);
 
 		try {
-			String queryString = "from " + entityClass.getName()
-					+ " as model where model." + propertyName + "= ?";
-			Query queryObject = entityManager.createNamedQuery(queryString);
+			String queryString = "select model from " + entityClass.getName()
+					+ " as model where model." + propertyName + "= ?0";
+			Query queryObject = entityManager.createQuery(queryString);
 			queryObject.setParameter(0, value);
 
 			return queryObject.getResultList();

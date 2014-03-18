@@ -27,24 +27,20 @@
 					paginator="true" rows="5"  editable="true" >
 					 
 					 <p:ajax event ="rowEdit" update=":form:msg,:form:tabla" listener="#{${metaData.getRealClassNameAsVariable()}View.rowEventListener}" />
-					 
-					#foreach($member  in $finalParamForIdClassAsVariables)
-					  <p:column filterBy="#{$metaData.getRealClassNameAsVariable().$member}" sortBy="#{$metaData.getRealClassNameAsVariable().$member}" 
-							headerText="$member">
-							
-								<p:cellEditor>
-								
-								<f:facet name="output">
-									<h:outputText value="#{$metaData.getRealClassNameAsVariable().$member}"/>
-								</f:facet>
-							
-								<f:facet name="input">
-									<p:inputText value="#{$metaData.getRealClassNameAsVariable().$member}"/>
-								</f:facet>
-								</p:cellEditor>	
-							</p:column>
-					#end
 					
+					## foreach para construir  las columnas de la tabla con los campos que sean id 
+					#foreach($member  in $finalParamForIdClassAsVariables2)
+					<p:column filterBy="#{$metaData.getRealClassNameAsVariable().$member}" sortBy="#{$metaData.getRealClassNameAsVariable().$member}" headerText="$member">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{$metaData.getRealClassNameAsVariable().$member}"/>
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{$metaData.getRealClassNameAsVariable().$member}"/>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+                    #end					
 					#if($isFinalParamForIdClassAsVariablesForDates)
 						#foreach($member  in $finalParamForIdClassAsVariablesForDates)
 						  <p:column filterBy="#{$metaData.getRealClassNameAsVariable().$member}" sortBy="#{$metaData.getRealClassNameAsVariable().$member}" 
@@ -121,8 +117,8 @@
 						<p:rowEditor id="row"/>
 						<p:tooltip for="row" value="Edit" showEffect="fade" hideEffect="fade" />
 						<p:tooltip for="btnDelete" value="Delete" showEffect="fade" hideEffect="fade" />
-						<p:commandButton id="btnDelete" action="#{${metaData.getRealClassNameAsVariable()}View.actionDeleteDataTableEditable}" title="Delete" onclick="return confirm('Do you really want to delete this Entry?')" icon="ui-icon-trash" update=":form:msg" >
-						<f:setPropertyActionListener value="#{${metaData.getRealClassNameAsVariable()}}"  target="#{${metaData.getRealClassNameAsVariable()}View.selected${metaData.getRealClassName()}}" />  
+						<p:commandButton id="btnDelete" actionListener="#{${metaData.getRealClassNameAsVariable()}View.actionDeleteDataTableEditable}" title="Delete" onclick="if(!confirm('Do you really want to delete this Entry?')){return false;}" icon="ui-icon-trash" update=":form:msg,:form:tabla" >
+							<f:attribute name="selected${metaData.getRealClassName()}" value="#{${metaData.getRealClassNameAsVariable()}}" />  
 						</p:commandButton>
 						
 					</p:column>	
