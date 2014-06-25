@@ -39,7 +39,7 @@
 							##OJO EN EL MANAGEBEAN HAY QUE CREAR UN ACTION PARA QUE EN EL EVENTO DE CAPTURAR LA FECHA SE ACTUALICE EL GROWL DE ID MEN 
 							<p:calendar showOn="button" navigator="true" locale="en" 
 							binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}" >
-								<p:ajax event="dateSelect" listener="#{${metaData.getRealClassNameAsVariable()}View.listener_txt${upper}${str2}}" update="men" />
+								<p:ajax event="dateSelect" listener="#{${metaData.getRealClassNameAsVariable()}View.listener_txt${upper}${str2}}" />
 							</p:calendar>
 							#end	
 						#end	
@@ -61,7 +61,7 @@
 							##OJO EN EL MANAGEBEAN HAY QUE CREAR UN ACTION PARA QUE EN EL EVENTO DE CAPTURAR LA FECHA SE ACTUALICE EL GROWL DE ID MEN 
 							<p:calendar showOn="button" navigator="true" locale="en" 
 							binding="#{${metaData.getRealClassNameAsVariable()}View.txt${upper}${str2}}" >
-								<p:ajax event="dateSelect" listener="#{${metaData.getRealClassNameAsVariable()}View.listener_txt${upper}${str2}}" update="men" />
+								<p:ajax event="dateSelect" listener="#{${metaData.getRealClassNameAsVariable()}View.listener_txt${upper}${str2}}" />
 							</p:calendar>
 							#end	
 						#end
