@@ -196,6 +196,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 				listJARs.add(selected);
 				try {
 					EclipseGeneratorUtil.loadJarSystem(selected);
+					EclipseGeneratorUtil.loadJarSystem(selected);
 					validatePageComplete();
 				} catch (Exception e1) {
 					ZathuraGeneratorLog.logError(e1);
