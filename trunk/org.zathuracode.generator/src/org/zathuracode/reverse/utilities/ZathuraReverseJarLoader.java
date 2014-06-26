@@ -10,6 +10,8 @@ import java.net.URLClassLoader;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
+import org.apache.log4j.Logger;
+
 // TODO: Auto-generated Javadoc
 /**
  * Zathura Generator.
@@ -19,6 +21,8 @@ import java.util.jar.JarInputStream;
  * @version 1.0
  */
 public class ZathuraReverseJarLoader {
+	
+	private static Logger log= Logger.getLogger(ZathuraReverseJarLoader.class);
 
 	/**
 	 * Load jar.
@@ -43,26 +47,26 @@ public class ZathuraReverseJarLoader {
 				totalCount++;
 				name = name.substring(0, name.length() - 6);
 				name = name.replace('/', '.');
-				System.out.print("> " + name);
+				log.info("> " + name);
 
 				try {
 					urlLoader.loadClass(name);
-					System.out.println("\t- loaded");
+					log.info("\t- loaded");
 					loadedCount++;
 				} catch (Throwable e) {
-					System.out.println("\t- not loaded");
-					System.out.println("\t " + e.getClass().getName() + ": " + e.getMessage());
+					log.info("\t- not loaded");
+					log.info("\t " + e.getClass().getName() + ": " + e.getMessage());
 				}
 
 			}
 			entry = jis.getNextJarEntry();
 		}
 
-		System.out.println("\n---------------------");
-		System.out.println("Summary:");
-		System.out.println("\tLoaded:\t" + loadedCount);
-		System.out.println("\tFailed:\t" + (totalCount - loadedCount));
-		System.out.println("\tTotal:\t" + totalCount);
+		log.info("\n---------------------");
+		log.info("Summary:");
+		log.info("\tLoaded:\t" + loadedCount);
+		log.info("\tFailed:\t" + (totalCount - loadedCount));
+		log.info("\tTotal:\t" + totalCount);
 		// ZathuraReverseMappingTool.callAntProcess();
 	}
 
