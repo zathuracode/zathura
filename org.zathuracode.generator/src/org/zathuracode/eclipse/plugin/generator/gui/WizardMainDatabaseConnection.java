@@ -2,6 +2,7 @@ package org.zathuracode.eclipse.plugin.generator.gui;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.osgi.util.NLS;
 import org.zathuracode.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import org.zathuracode.eclipse.plugin.generator.utilities.ConnectionModel;
 import org.zathuracode.eclipse.plugin.generator.utilities.ConnectionsUtils;
@@ -25,6 +26,7 @@ public class WizardMainDatabaseConnection extends Wizard {
 	 */
 	public WizardMainDatabaseConnection() {
 		super();
+		
 		setWindowTitle("Zathuracode Generator V4.0 Beta - Powered By Vortexbird and UsbCali www.zathuracode.org");
 		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
 		wizardDatabaseConnection = new WizardPageDatabaseConnection();

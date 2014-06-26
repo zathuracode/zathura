@@ -108,6 +108,7 @@ public class WizardPageSelectDBConnection extends WizardPage {
 					EclipseGeneratorUtil.jarList=arrayJarList;
 					
 					EclipseGeneratorUtil.loadJarSystem(EclipseGeneratorUtil.connectionDriverJarPath);
+					EclipseGeneratorUtil.loadJarSystem(EclipseGeneratorUtil.connectionDriverJarPath);
 					
 					ZathuraReverseEngineeringUtil.testDriver(EclipseGeneratorUtil.connectionUrl, 
 															 EclipseGeneratorUtil.connectionDriverClass,
