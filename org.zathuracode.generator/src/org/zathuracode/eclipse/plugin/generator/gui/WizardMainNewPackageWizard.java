@@ -34,8 +34,8 @@ public class WizardMainNewPackageWizard extends Wizard {
 	public WizardMainNewPackageWizard() {
 		super();
 		
-		setWindowTitle("Zathura Code Generator V2.1.1 - Powered By AmaziliaSource www.vortexbird.com");
-		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
+		setWindowTitle(Messages.title);
+		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), Messages.WizardMainNewPackageWizard_1));
 		newPackageWizardPage=new NewPackageWizardPage();
 		newPackageWizardPage.setPageComplete(false);
 	}
@@ -48,7 +48,7 @@ public class WizardMainNewPackageWizard extends Wizard {
 
 		addPage(newPackageWizardPage);
 		newPackageWizardPage.setPageComplete(false);
-		newPackageWizardPage.setPackageText("",true);
+		newPackageWizardPage.setPackageText("",true); //$NON-NLS-1$
 		
 	}
 	
@@ -58,7 +58,7 @@ public class WizardMainNewPackageWizard extends Wizard {
 	@Override
 	public boolean performFinish() {
 		try {
-			if(newPackageWizardPage.getPackageText().trim().equals("")==true){
+			if(newPackageWizardPage.getPackageText().trim().equals("")==true){ //$NON-NLS-1$
 				return false;
 			}
 				
@@ -66,9 +66,9 @@ public class WizardMainNewPackageWizard extends Wizard {
 			newPackageWizardPage.createPackage(null);
 			return true;
 		} catch (CoreException e) {
-			MessageDialog.openError(getShell(),"Error",e.getMessage());
+			MessageDialog.openError(getShell(),Messages.WizardMainNewPackageWizard_4,e.getMessage());
 		} catch (InterruptedException e) {
-			MessageDialog.openError(getShell(),"Error",e.getMessage());
+			MessageDialog.openError(getShell(),Messages.WizardMainNewPackageWizard_5,e.getMessage());
 		}
 		return false;
 	}

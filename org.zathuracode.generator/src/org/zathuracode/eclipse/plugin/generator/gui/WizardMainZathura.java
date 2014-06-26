@@ -48,8 +48,8 @@ public class WizardMainZathura extends Wizard {
 	 */
 	public WizardMainZathura() {
 		super();
-		setWindowTitle("Zathuracode Generator V4.0 Beta - Powered By Vortexbird and UsbCali www.zathuracode.org");
-		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
+		setWindowTitle(Messages.title);
+		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg")); //$NON-NLS-1$
 		EclipseGeneratorUtil.reset();
 		EclipseGeneratorUtil.wizardMain=this;		
 	}
@@ -93,10 +93,10 @@ public class WizardMainZathura extends Wizard {
 			
 			
 		} catch (InvocationTargetException e) {
-          MessageDialog.openError(getShell(), "Error", e.getMessage());
+          MessageDialog.openError(getShell(), Messages.WizardMainZathura_2, e.getMessage());
           ZathuraGeneratorLog.logError(e);
         } catch (InterruptedException e) {
-          MessageDialog.openInformation(getShell(), "Cancelled", e.getMessage());
+          MessageDialog.openInformation(getShell(), Messages.WizardMainZathura_3, e.getMessage());
           ZathuraGeneratorLog.logError(e);
         }			
 		return true;

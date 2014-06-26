@@ -2,6 +2,7 @@ package org.zathuracode.eclipse.plugin.generator.gui;
 
 
 import java.util.HashMap;
+
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
@@ -50,9 +51,9 @@ public class WizardPageChooseGenerator extends WizardPage {
 	 * Create the wizard.
 	 */
 	public WizardPageChooseGenerator() {
-		super("wizardPage");
-		setTitle("Zathura Java Code Generator");
-		setDescription("Generate Java Application based on Open Standards and JavaEE Design Patterns");
+		super("wizardPage"); //$NON-NLS-1$
+		setTitle(Messages.title);
+		setDescription(Messages.WizardPageChooseGenerator_2);
 		setPageComplete(false);
 	}
 
@@ -67,11 +68,11 @@ public class WizardPageChooseGenerator extends WizardPage {
 		setControl(container);
 
 		final Group generatorChoiseGroup = new Group(container, SWT.NONE);
-		generatorChoiseGroup.setText("Choose Generator");
+		generatorChoiseGroup.setText(Messages.WizardPageChooseGenerator_3);
 		generatorChoiseGroup.setBounds(10, 10, 583, 400);
 		
 		final Label lblGeneratorVersion3_0 = new Label(generatorChoiseGroup, SWT.NONE);
-		lblGeneratorVersion3_0.setText("Old:");
+		lblGeneratorVersion3_0.setText(Messages.WizardPageChooseGenerator_4);
 		lblGeneratorVersion3_0.setBounds(10, 23, 99, 17);
 		
 		listGeneratorsVersion3_0 = new List(generatorChoiseGroup, SWT.BORDER);
@@ -87,7 +88,7 @@ public class WizardPageChooseGenerator extends WizardPage {
 					//Se reemplaza el texto ${RELATIVE_PATH} por la ruta relativa del proyecto,
 					//para que al momento de mostrar el html, se muestren las imagenes
 					//Andres Puerta
-					String descriptionHTML = generatorModel.getDescription().replace("${RELATIVE_PATH}", GeneratorUtil.getFullPath());					
+					String descriptionHTML = generatorModel.getDescription().replace("${RELATIVE_PATH}", GeneratorUtil.getFullPath());					 //$NON-NLS-1$
 					bwrDescription.setText(descriptionHTML);
 					setPageComplete(true);
 				}
@@ -97,7 +98,7 @@ public class WizardPageChooseGenerator extends WizardPage {
 		
 		
 		final Label lblGeneratorVersion3_1 = new Label(generatorChoiseGroup, SWT.NONE);
-		lblGeneratorVersion3_1.setText("New:");
+		lblGeneratorVersion3_1.setText(Messages.WizardPageChooseGenerator_6);
 		lblGeneratorVersion3_1.setBounds(10, 130, 99, 17);
 		
 		listGeneratorsVersion3_1 = new List(generatorChoiseGroup, SWT.BORDER);
@@ -113,7 +114,7 @@ public class WizardPageChooseGenerator extends WizardPage {
 					//Se reemplaza el texto ${RELATIVE_PATH} por la ruta relativa del proyecto,
 					//para que al momento de mostrar el html, se muestren las imagenes
 					//Andres Puerta
-					String descriptionHTML = generatorModel.getDescription().replace("${RELATIVE_PATH}", GeneratorUtil.getFullPath());
+					String descriptionHTML = generatorModel.getDescription().replace("${RELATIVE_PATH}", GeneratorUtil.getFullPath()); //$NON-NLS-1$
 					bwrDescription.setText(descriptionHTML);
 					setPageComplete(true);
 				}
@@ -136,10 +137,10 @@ public class WizardPageChooseGenerator extends WizardPage {
 		if (listGeneratorsVersion3_0 != null) {
 			listGeneratorsVersion3_0.removeAll();
 			for (GeneratorModel generatorModel : theGenerators.values()) {
-				if (generatorModel.getZathuraVersion().equals("3.0")) {
-					if (EclipseGeneratorUtil.makeItXml == true && generatorModel.getPersistence().equals("hibernateCore") == true) {
+				if (generatorModel.getZathuraVersion().equals("3.0")) { //$NON-NLS-1$
+					if (EclipseGeneratorUtil.makeItXml == true && generatorModel.getPersistence().equals("hibernateCore") == true) { //$NON-NLS-1$
 						listGeneratorsVersion3_0.add(generatorModel.getGuiName());
-					} else if (EclipseGeneratorUtil.makeItXml == false && generatorModel.getPersistence().equals("jpa") == true) {
+					} else if (EclipseGeneratorUtil.makeItXml == false && generatorModel.getPersistence().equals("jpa") == true) { //$NON-NLS-1$
 						listGeneratorsVersion3_0.add(generatorModel.getGuiName());
 					}
 				}
@@ -147,7 +148,7 @@ public class WizardPageChooseGenerator extends WizardPage {
 		}
 
 		if (bwrDescription != null) {
-			bwrDescription.setText("");
+			bwrDescription.setText(""); //$NON-NLS-1$
 		}
 	}
 	
@@ -158,10 +159,10 @@ public class WizardPageChooseGenerator extends WizardPage {
 		if (listGeneratorsVersion3_1 != null) {
 			listGeneratorsVersion3_1.removeAll();
 			for (GeneratorModel generatorModel : theGenerators.values()) {
-				if (generatorModel.getZathuraVersion().equals("3.1")) {
-					if (EclipseGeneratorUtil.makeItXml == true && generatorModel.getPersistence().equals("hibernateCore") == true) {
+				if (generatorModel.getZathuraVersion().equals("3.1")) { //$NON-NLS-1$
+					if (EclipseGeneratorUtil.makeItXml == true && generatorModel.getPersistence().equals("hibernateCore") == true) { //$NON-NLS-1$
 						listGeneratorsVersion3_1.add(generatorModel.getGuiName());
-					} else if (EclipseGeneratorUtil.makeItXml == false && generatorModel.getPersistence().equals("jpa") == true) {
+					} else if (EclipseGeneratorUtil.makeItXml == false && generatorModel.getPersistence().equals("jpa") == true) { //$NON-NLS-1$
 						listGeneratorsVersion3_1.add(generatorModel.getGuiName());
 					}
 				}
@@ -169,7 +170,7 @@ public class WizardPageChooseGenerator extends WizardPage {
 		}
 
 		if (bwrDescription != null) {
-			bwrDescription.setText("");
+			bwrDescription.setText(""); //$NON-NLS-1$
 		}
 	}
 	

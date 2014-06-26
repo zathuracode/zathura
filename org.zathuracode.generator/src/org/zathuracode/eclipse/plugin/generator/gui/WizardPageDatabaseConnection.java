@@ -100,9 +100,9 @@ public class WizardPageDatabaseConnection extends WizardPage {
 	 * Create the wizard.
 	 */
 	public WizardPageDatabaseConnection() {
-		super("wizardPage");
-		setTitle("New Database Connection");
-		setDescription("Create a new connection driver");
+		super("wizardPage"); //$NON-NLS-1$
+		setTitle(Messages.WizardPageDatabaseConnection_1);
+		setDescription(Messages.WizardPageDatabaseConnection_2);
 		setPageComplete(false);
 	}
 
@@ -117,7 +117,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 
 		Label lblDriverTemplate = new Label(container, SWT.NONE);
 		lblDriverTemplate.setBounds(10, 13, 128, 17);
-		lblDriverTemplate.setText("Driver template:");
+		lblDriverTemplate.setText(Messages.WizardPageDatabaseConnection_3);
 
 		cmbDriverTemplate = new Combo(container, SWT.NONE);
 		cmbDriverTemplate.addSelectionListener(new SelectionAdapter() {
@@ -128,7 +128,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 				databaseTypeModel = zathuraDatabaseTypes.get(driverSelected);
 				if (databaseTypeModel != null) {
 					txtConnectionURL.setText(databaseTypeModel.getUrl());
-					txtDriverClassName.setText("");
+					txtDriverClassName.setText(""); //$NON-NLS-1$
 					txtDriverClassName.setText(databaseTypeModel.getDriverClassName());
 					// TODO Cambiar esto para la version 2.1.1
 					WizardPageSelectTables.db = databaseTypeModel.getName();
@@ -141,7 +141,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 
 		Label lblConnectionUrl = new Label(container, SWT.NONE);
 		lblConnectionUrl.setBounds(10, 71, 128, 17);
-		lblConnectionUrl.setText("Connection URL:");
+		lblConnectionUrl.setText(Messages.WizardPageDatabaseConnection_5);
 
 		txtConnectionURL = new Text(container, SWT.BORDER);
 		txtConnectionURL.addFocusListener(new FocusAdapter() {
@@ -161,18 +161,18 @@ public class WizardPageDatabaseConnection extends WizardPage {
 
 		Label lblUserName = new Label(container, SWT.NONE);
 		lblUserName.setBounds(10, 99, 128, 17);
-		lblUserName.setText("User name:");
+		lblUserName.setText(Messages.WizardPageDatabaseConnection_6);
 
 		Label lblPassword = new Label(container, SWT.NONE);
 		lblPassword.setBounds(10, 127, 128, 17);
-		lblPassword.setText("Password:");
+		lblPassword.setText(Messages.WizardPageDatabaseConnection_7);
 
 		Label lineSeparatorJar = new Label(container, SWT.SEPARATOR | SWT.HORIZONTAL);
 		lineSeparatorJar.setBounds(10, 152, 568, 2);
 
 		Label lblDriverJar = new Label(container, SWT.NONE);
 		lblDriverJar.setBounds(10, 182, 90, 17);
-		lblDriverJar.setText("Driver JARs");
+		lblDriverJar.setText(Messages.WizardPageDatabaseConnection_8);
 
 		final ScrolledComposite scrolledComposite = new ScrolledComposite(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setBounds(10, 205, 451, 84);
@@ -188,9 +188,9 @@ public class WizardPageDatabaseConnection extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				testConnection = false;
 				FileDialog fd = new FileDialog(getShell(), SWT.OPEN);
-				fd.setText("");
-				fd.setFilterPath("");
-				String[] filterExt = { "*.jar", "*.zip", "*.*" };
+				fd.setText(""); //$NON-NLS-1$
+				fd.setFilterPath(""); //$NON-NLS-1$
+				String[] filterExt = { "*.jar", "*.zip", "*.*" }; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				fd.setFilterExtensions(filterExt);
 				String selected = fd.open();
 				listJARs.add(selected);
@@ -200,14 +200,14 @@ public class WizardPageDatabaseConnection extends WizardPage {
 					validatePageComplete();
 				} catch (Exception e1) {
 					ZathuraGeneratorLog.logError(e1);
-					MessageDialog.openError(getShell(), "Error", e1.getMessage());
+					MessageDialog.openError(getShell(), Messages.WizardPageDatabaseConnection_14, e1.getMessage());
 					log.info(e1.getMessage());
 				}
 
 			}
 		});
 		btnAddJar.setBounds(467, 205, 97, 25);
-		btnAddJar.setText("Add JARs");
+		btnAddJar.setText(Messages.WizardPageDatabaseConnection_15);
 
 		Button btnRemove = new Button(container, SWT.NONE);
 		btnRemove.addSelectionListener(new SelectionAdapter() {
@@ -221,11 +221,11 @@ public class WizardPageDatabaseConnection extends WizardPage {
 
 		});
 		btnRemove.setBounds(467, 236, 97, 25);
-		btnRemove.setText("Remove");
+		btnRemove.setText(Messages.WizardPageDatabaseConnection_16);
 
 		Label lblDriverClassName = new Label(container, SWT.NONE);
 		lblDriverClassName.setBounds(10, 306, 128, 17);
-		lblDriverClassName.setText("Driver classname:");
+		lblDriverClassName.setText(Messages.WizardPageDatabaseConnection_17);
 
 		btnTestDriver = new Button(container, SWT.NONE);
 		btnTestDriver.setEnabled(false);
@@ -238,7 +238,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 				String password = txtPassword.getText();
 				try {
 					ZathuraReverseEngineeringUtil.testDriver(url, driverClassName, user, password);
-					MessageDialog.openInformation(getShell(), "Driver Test", "Database connection successfully established");
+					MessageDialog.openInformation(getShell(), Messages.WizardPageDatabaseConnection_18, Messages.WizardPageDatabaseConnection_19);
 
 					EclipseGeneratorUtil.connectionDriverName = txtDriverName.getText();
 					EclipseGeneratorUtil.connectionDriverClass = txtDriverClassName.getText();
@@ -251,7 +251,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 					validatePageComplete();
 
 				} catch (Exception e1) {
-					MessageDialog.openError(getShell(), "Error", e1.getMessage());
+					MessageDialog.openError(getShell(), Messages.WizardPageDatabaseConnection_20, e1.getMessage());
 					log.info(e1.getMessage());
 
 				}
@@ -259,14 +259,14 @@ public class WizardPageDatabaseConnection extends WizardPage {
 			}
 		});
 		btnTestDriver.setBounds(10, 329, 88, 25);
-		btnTestDriver.setText("Test Driver");
+		btnTestDriver.setText(Messages.WizardPageDatabaseConnection_21);
 
 		txtDriverClassName = new Text(container, SWT.BORDER);
 		txtDriverClassName.setBounds(144, 301, 420, 27);
 
 		Label lblDriverName = new Label(container, SWT.NONE);
 		lblDriverName.setBounds(10, 42, 128, 17);
-		lblDriverName.setText("Driver name:");
+		lblDriverName.setText(Messages.WizardPageDatabaseConnection_22);
 
 		txtDriverName = new Text(container, SWT.BORDER);
 		txtDriverName.addFocusListener(new FocusAdapter() {
@@ -292,9 +292,9 @@ public class WizardPageDatabaseConnection extends WizardPage {
 		 * url; private String user; private String password; private String
 		 * driverClassName; private String jarPath;
 		 */
-		if (driverTemplate != null && driverTemplate.equals("") != true && name != null && name.equals("") != true && url != null && url.equals("") != true
-				&& user != null && user.equals("") != true && password != null && password.equals("") != true && driverClassName != null
-				&& driverClassName.equals("") != true && jarPath != null && jarPath.equals("") != true) {
+		if (driverTemplate != null && driverTemplate.equals("") != true && name != null && name.equals("") != true && url != null && url.equals("") != true //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				&& user != null && user.equals("") != true && password != null && password.equals("") != true && driverClassName != null //$NON-NLS-1$ //$NON-NLS-2$
+				&& driverClassName.equals("") != true && jarPath != null && jarPath.equals("") != true) { //$NON-NLS-1$ //$NON-NLS-2$
 
 			getCmbDriverTemplate().setText(driverTemplate);
 			getTxtDriverName().setText(name);
@@ -317,18 +317,18 @@ public class WizardPageDatabaseConnection extends WizardPage {
 
 		try {
 
-			if (txtDriverName.getText() == null || txtDriverName.getText().equals("") == true) {
-				throw new Exception("No driver name specified");
+			if (txtDriverName.getText() == null || txtDriverName.getText().equals("") == true) { //$NON-NLS-1$
+				throw new Exception(Messages.WizardPageDatabaseConnection_31);
 			}
-			if (ConnectionsUtils.connectionExist(txtDriverName.getText()) == true && (name == null || name.equals("") == true)) {
-				throw new Exception("A driver with that name already exists");
+			if (ConnectionsUtils.connectionExist(txtDriverName.getText()) == true && (name == null || name.equals("") == true)) { //$NON-NLS-1$
+				throw new Exception(Messages.WizardPageDatabaseConnection_33);
 			}
 			if (listJARs.getItems() == null || listJARs.getItems().length == 0) {
-				throw new Exception("Driver class not found");
+				throw new Exception(Messages.WizardPageDatabaseConnection_34);
 			}
 			if (testConnection == false) {
 				btnTestDriver.setEnabled(true);
-				throw new Exception("Pleace Test Connection");
+				throw new Exception(Messages.WizardPageDatabaseConnection_35);
 			}
 
 			setErrorMessage(null);
@@ -355,28 +355,28 @@ public class WizardPageDatabaseConnection extends WizardPage {
 				cmbDriverTemplate.add(databaseTypeModel.getName());
 			}
 		} catch (FileNotFoundException e) {
-			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
-			ZathuraGeneratorLog.logError("Driver Template", e);
+			MessageDialog.openInformation(getShell(), Messages.WizardPageDatabaseConnection_36, e.getMessage());
+			ZathuraGeneratorLog.logError(Messages.WizardPageDatabaseConnection_37, e);
 			e.printStackTrace();
 			log.info(e.getMessage());
 		} catch (XMLStreamException e) {
-			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
-			ZathuraGeneratorLog.logError("Driver Template", e);
+			MessageDialog.openInformation(getShell(), Messages.WizardPageDatabaseConnection_38, e.getMessage());
+			ZathuraGeneratorLog.logError(Messages.WizardPageDatabaseConnection_39, e);
 			e.printStackTrace();
 			log.info(e.getMessage());
 		} catch (InstantiationException e) {
-			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
-			ZathuraGeneratorLog.logError("Driver Template", e);
+			MessageDialog.openInformation(getShell(), Messages.WizardPageDatabaseConnection_40, e.getMessage());
+			ZathuraGeneratorLog.logError(Messages.WizardPageDatabaseConnection_41, e);
 			e.printStackTrace();
 			log.info(e.getMessage());
 		} catch (IllegalAccessException e) {
-			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
-			ZathuraGeneratorLog.logError("Driver Template", e);
+			MessageDialog.openInformation(getShell(), Messages.WizardPageDatabaseConnection_42, e.getMessage());
+			ZathuraGeneratorLog.logError(Messages.WizardPageDatabaseConnection_43, e);
 			e.printStackTrace();
 			log.info(e.getMessage());
 		} catch (ClassNotFoundException e) {
-			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
-			ZathuraGeneratorLog.logError("Driver Template", e);
+			MessageDialog.openInformation(getShell(), Messages.WizardPageDatabaseConnection_44, e.getMessage());
+			ZathuraGeneratorLog.logError(Messages.WizardPageDatabaseConnection_45, e);
 			e.printStackTrace();
 			log.info(e.getMessage());
 		}
