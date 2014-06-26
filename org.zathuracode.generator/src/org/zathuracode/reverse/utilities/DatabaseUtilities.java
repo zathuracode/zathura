@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class DatabaseUtilities.
@@ -19,6 +21,8 @@ import java.util.Set;
  * @author Diego
  */
 public class DatabaseUtilities {
+	
+	private static Logger log=Logger.getLogger(DatabaseUtilities.class);
 
 	/**
 	 * Consulta los catalogos de una base de datos.
@@ -38,6 +42,7 @@ public class DatabaseUtilities {
 			catalogsList = new ArrayList<String>();
 			while (resultSet.next()) {
 				catalogsList.add(resultSet.getString(1));
+				log.info("Catalog:"+resultSet.getString(1));
 			}
 			return catalogsList;
 		} catch (SQLException e) {
@@ -72,6 +77,7 @@ public class DatabaseUtilities {
 				String catalog = null;
 				if (resultSet.getMetaData().getColumnCount() > 1) {
 					catalog = resultSet.getString(2);
+					
 				}
 
 				schemasList = (List<String>) schemasMap.get(catalog);
@@ -87,6 +93,7 @@ public class DatabaseUtilities {
 			for (List<String> list : collections) {
 				for (String schemasName : list) {
 					schemasList.add(schemasName);
+					log.info("Schema:"+schemasName);
 				}
 			}
 
@@ -121,6 +128,7 @@ public class DatabaseUtilities {
 			tableList = new ArrayList<String>();
 			while (resultSet.next()) {
 				tableList.add(resultSet.getString(3));
+				log.info("Table:"+resultSet.getString(3));
 			}
 			return tableList;
 		} finally {

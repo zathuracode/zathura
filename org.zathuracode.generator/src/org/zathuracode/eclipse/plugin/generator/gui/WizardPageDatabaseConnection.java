@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.xml.stream.XMLStreamException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -25,6 +26,7 @@ import org.zathuracode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zathuracode.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
 import org.zathuracode.reverse.utilities.DatabaseTypeModel;
 import org.zathuracode.reverse.utilities.ZathuraReverseEngineeringUtil;
+import org.zathuracode.reverse.utilities.ZathuraReverseJarLoader;
 
 
 // TODO: Auto-generated Javadoc
@@ -36,6 +38,9 @@ import org.zathuracode.reverse.utilities.ZathuraReverseEngineeringUtil;
  * @see WizardPage
  */
 public class WizardPageDatabaseConnection extends WizardPage {
+	
+	private static Logger log= Logger.getLogger(WizardPageDatabaseConnection.class);
+
 
 	/** The zathura database types. */
 	private HashMap<String, DatabaseTypeModel> zathuraDatabaseTypes;
@@ -195,6 +200,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 				} catch (Exception e1) {
 					ZathuraGeneratorLog.logError(e1);
 					MessageDialog.openError(getShell(), "Error", e1.getMessage());
+					log.info(e1.getMessage());
 				}
 
 			}
@@ -245,7 +251,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 
 				} catch (Exception e1) {
 					MessageDialog.openError(getShell(), "Error", e1.getMessage());
-					// ZathuraGeneratorLog.logError(e1);
+					log.info(e1.getMessage());
 
 				}
 				validatePageComplete();
@@ -331,6 +337,7 @@ public class WizardPageDatabaseConnection extends WizardPage {
 		} catch (Exception e) {
 			setPageComplete(false);
 			setErrorMessage(e.getMessage());
+			log.info(e.getMessage());
 		}
 	}
 
@@ -350,22 +357,27 @@ public class WizardPageDatabaseConnection extends WizardPage {
 			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
 			ZathuraGeneratorLog.logError("Driver Template", e);
 			e.printStackTrace();
+			log.info(e.getMessage());
 		} catch (XMLStreamException e) {
 			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
 			ZathuraGeneratorLog.logError("Driver Template", e);
 			e.printStackTrace();
+			log.info(e.getMessage());
 		} catch (InstantiationException e) {
 			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
 			ZathuraGeneratorLog.logError("Driver Template", e);
 			e.printStackTrace();
+			log.info(e.getMessage());
 		} catch (IllegalAccessException e) {
 			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
 			ZathuraGeneratorLog.logError("Driver Template", e);
 			e.printStackTrace();
+			log.info(e.getMessage());
 		} catch (ClassNotFoundException e) {
 			MessageDialog.openInformation(getShell(), "Driver Template", e.getMessage());
 			ZathuraGeneratorLog.logError("Driver Template", e);
 			e.printStackTrace();
+			log.info(e.getMessage());
 		}
 	}
 

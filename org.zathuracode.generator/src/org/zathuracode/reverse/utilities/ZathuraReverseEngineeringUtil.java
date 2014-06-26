@@ -21,6 +21,7 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+
 /*
 import net.sourceforge.squirrel_sql.fw.sql.ISQLAlias;
 import net.sourceforge.squirrel_sql.fw.sql.ISQLConnection;
@@ -40,6 +41,8 @@ import org.apache.log4j.Logger;
  * @version 1.0
  */
 public class ZathuraReverseEngineeringUtil {
+	
+	
 
 	/** The full path. */
 	private static String fullPath = "";
@@ -651,10 +654,15 @@ public class ZathuraReverseEngineeringUtil {
 			throw new SQLException("Data Base MetaData is not Supported");
 		}
 		
-		ResultSet catalogs=connection.getMetaData().getCatalogs();
-		while (catalogs.next()) {
-			listCatalogs.add(catalogs.getString(1));
+		listCatalogs=DatabaseUtilities.getCatalogs(connection);
+		/**
+		ResultSet resultSet=connection.getMetaData().getCatalogs();
+		while (resultSet.next()) {
+			listCatalogs.add(resultSet.getString(1));
+			log.info("Catalog:"+resultSet.getString(1));
 		}
+		**/
+		
 		return listCatalogs;
 	}
 
@@ -673,12 +681,7 @@ public class ZathuraReverseEngineeringUtil {
 		if(connection.getMetaData()==null){
 			throw new SQLException("Data Base MetaData is not Supported");
 		}
-		
-		ResultSet schemas=connection.getMetaData().getSchemas();
-		while (schemas.next()) {
-			listSchemas.add(schemas.getString(1));
-		}
-		schemas.close();
+		listSchemas=DatabaseUtilities.getSchemas(connection);
 		return listSchemas;
 	}
 
@@ -699,17 +702,7 @@ public class ZathuraReverseEngineeringUtil {
 	 *             the SQL exception
 	 */
 	public static List<String> getTables(String catalog, String schemaPattern,String tableNamePattern) throws SQLException {
-		String[] types = { "TABLE", "VIEW", "SYNONYM", "ALIAS" };
-		List<String> listTables=new ArrayList<String>();
-		try {
-			ResultSet tables=connection.getMetaData().getTables(catalog, schemaPattern, tableNamePattern, types);
-			while (tables.next()) {
-				listTables.add(tables.getString("TABLE_NAME"));
-			}
-			tables.close();
-		} catch (Exception e) { // Ignore
-			e.printStackTrace();
-		}
+		List<String> listTables=DatabaseUtilities.getTables(connection, catalog, schemaPattern, tableNamePattern);
 		return listTables;
 	}
 
