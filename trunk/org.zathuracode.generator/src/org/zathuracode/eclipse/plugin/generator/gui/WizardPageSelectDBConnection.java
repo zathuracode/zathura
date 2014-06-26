@@ -51,9 +51,9 @@ public class WizardPageSelectDBConnection extends WizardPage {
 	 * The Constructor.
 	 */
 	public WizardPageSelectDBConnection() {
-		super("wizardPage");
-		setTitle("Select DB Connection");
-		setDescription("Select the database connection for accessing DB schema");
+		super("wizardPage"); //$NON-NLS-1$
+		setTitle(Messages.WizardPageSelectDBConnection_1);
+		setDescription(Messages.WizardPageSelectDBConnection_2);
 		setPageComplete(false);
 
 	}
@@ -69,7 +69,7 @@ public class WizardPageSelectDBConnection extends WizardPage {
 		
 		Label lblEspecifyTheLocation = new Label(container, SWT.NONE);
 		lblEspecifyTheLocation.setBounds(10, 0, 534, 15);
-		lblEspecifyTheLocation.setText("Specify the location of the database schema by selecting database connection");
+		lblEspecifyTheLocation.setText(Messages.WizardPageSelectDBConnection_3);
 		
 		ScrolledComposite scrolledComposite = new ScrolledComposite(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
 		scrolledComposite.setBounds(10, 21, 554, 149);
@@ -115,7 +115,7 @@ public class WizardPageSelectDBConnection extends WizardPage {
 															 EclipseGeneratorUtil.connectionUsername,
 															 EclipseGeneratorUtil.connectionPassword);
 					
-					MessageDialog.openInformation(getShell(), "Driver Test", "Database connection successfully established");
+					MessageDialog.openInformation(getShell(), Messages.WizardPageSelectDBConnection_4, Messages.WizardPageSelectDBConnection_5);
 					
 					//TODO Cambiar esta locura por la fabrica
 					WizardPageSelectTables.db=EclipseGeneratorUtil.connectionDriverTemplate;
@@ -133,13 +133,13 @@ public class WizardPageSelectDBConnection extends WizardPage {
 					
 				} catch (ClassNotFoundException e1) {					
 					setPageComplete(false);
-					MessageDialog.openError(getShell(), "Error", e1.getMessage());
+					MessageDialog.openError(getShell(), Messages.WizardPageSelectDBConnection_6, e1.getMessage());
 				} catch (SQLException e1) {
 					setPageComplete(false);
-					MessageDialog.openError(getShell(), "Error", e1.getMessage());
+					MessageDialog.openError(getShell(), Messages.WizardPageSelectDBConnection_7, e1.getMessage());
 				} catch (Exception e1) {
 					setPageComplete(false);
-					MessageDialog.openError(getShell(), "Error", e1.getMessage());
+					MessageDialog.openError(getShell(), Messages.WizardPageSelectDBConnection_8, e1.getMessage());
 				}
 			}
 		});
@@ -149,7 +149,7 @@ public class WizardPageSelectDBConnection extends WizardPage {
 		
 		Label lblDescription = new Label(container, SWT.NONE);
 		lblDescription.setBounds(10, 208, 554, 30);
-		lblDescription.setText("The  selected  DB  connection  will  also  be  used  for  configuring  the  persistence  connection  of  the \r\napplication");
+		lblDescription.setText(Messages.WizardPageSelectDBConnection_9);
 		
 		Link linkCreateNewConnection = new Link(container, SWT.NONE);
 		linkCreateNewConnection.addSelectionListener(new SelectionAdapter() {
@@ -163,7 +163,7 @@ public class WizardPageSelectDBConnection extends WizardPage {
 		});
 		
 		linkCreateNewConnection.setBounds(52, 176, 124, 15);
-		linkCreateNewConnection.setText("<a>Create new Connection</a>");
+		linkCreateNewConnection.setText(Messages.WizardPageSelectDBConnection_10);
 		
 		linkEditConnection = new Link(container, SWT.NONE);
 		linkEditConnection.setEnabled(false);
@@ -174,7 +174,7 @@ public class WizardPageSelectDBConnection extends WizardPage {
 					
 					String conectionSelected[]=listConnections.getSelection()!=null?listConnections.getSelection():null;
 					if(conectionSelected==null || conectionSelected.length==0){
-						throw new Exception("Not DB connection selected");
+						throw new Exception(Messages.WizardPageSelectDBConnection_11);
 					}
 					String connectionName=listConnections.getSelection()[0];
 					WizardMainDatabaseConnection wizardMainSelectDBConnection=new WizardMainDatabaseConnection(connectionName);
@@ -184,12 +184,12 @@ public class WizardPageSelectDBConnection extends WizardPage {
 					
 					
 				} catch (Exception e2) {
-					MessageDialog.openError(getShell(), "Error", e2.getMessage());
+					MessageDialog.openError(getShell(), Messages.WizardPageSelectDBConnection_12, e2.getMessage());
 				}			
 			}
 		});
 		linkEditConnection.setBounds(228, 176, 124, 15);
-		linkEditConnection.setText("<a>Edit Connection</a>");
+		linkEditConnection.setText(Messages.WizardPageSelectDBConnection_13);
 		
 		linkRemoveConnection = new Link(container, SWT.NONE);
 		linkRemoveConnection.setEnabled(false);
@@ -199,18 +199,18 @@ public class WizardPageSelectDBConnection extends WizardPage {
 				try{
 					String conectionSelected[]=listConnections.getSelection()!=null?listConnections.getSelection():null;
 					if(conectionSelected==null || conectionSelected.length==0){
-						throw new Exception("Not DB connection selected");
+						throw new Exception(Messages.WizardPageSelectDBConnection_14);
 					}
 					String connectionName=listConnections.getSelection()[0];
 					ConnectionsUtils.removeConnectionModel(connectionName);
 					loadConnections();
 				} catch (Exception e2) {
-					MessageDialog.openError(getShell(), "Error", e2.getMessage());
+					MessageDialog.openError(getShell(), Messages.WizardPageSelectDBConnection_15, e2.getMessage());
 				}	
 			}
 		});
 		linkRemoveConnection.setBounds(404, 177, 124, 13);
-		linkRemoveConnection.setText("<a>Remove Connection</a>");
+		linkRemoveConnection.setText(Messages.WizardPageSelectDBConnection_16);
 		
 		loadConnections();
 

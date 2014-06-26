@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 
 
+
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -69,9 +70,9 @@ public class WizardPageSelectTables extends WizardPage {
 	 * The Constructor.
 	 */
 	public WizardPageSelectTables() {
-		super("wizardPage");
-		setTitle("Zathura Reverse Engineering");
-		setDescription("Generate entity beans from database explorer tables");
+		super("wizardPage"); //$NON-NLS-1$
+		setTitle(Messages.WizardPageSelectTables_1);
+		setDescription(Messages.WizardPageSelectTables_2);
 		setPageComplete(false);
 	}
 
@@ -85,7 +86,7 @@ public class WizardPageSelectTables extends WizardPage {
 
 		lblCatalogSchema = new Label(container, SWT.NONE);
 		lblCatalogSchema.setBounds(10, 13, 112, 17);
-		lblCatalogSchema.setText("Catalogs/Schemas:");
+		lblCatalogSchema.setText(Messages.WizardPageSelectTables_3);
 
 		cmbCatlogSchema = new Combo(container, SWT.NONE);
 		cmbCatlogSchema.setEnabled(false);
@@ -93,7 +94,7 @@ public class WizardPageSelectTables extends WizardPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				txtTableFilter.setText("%");
+				txtTableFilter.setText(Messages.WizardPageSelectTables_4);
 				listAvailableTables.removeAll();
 				listSelectedTables.removeAll();
 				btnTableFilterSearch.setEnabled(true);
@@ -109,14 +110,14 @@ public class WizardPageSelectTables extends WizardPage {
 
 		Label lblAvailableTables = new Label(container, SWT.NONE);
 		lblAvailableTables.setBounds(10, 78, 154, 17);
-		lblAvailableTables.setText("Available tables:");
+		lblAvailableTables.setText(Messages.WizardPageSelectTables_5);
 
 		listSelectedTables = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.MULTI);
 		listSelectedTables.setBounds(383, 101, 195, 206);
 
 		Label lblSelectedTables = new Label(container, SWT.NONE);
 		lblSelectedTables.setBounds(384, 78, 194, 17);
-		lblSelectedTables.setText("Selected tables:");
+		lblSelectedTables.setText(Messages.WizardPageSelectTables_6);
 
 		Button btnUpdateList = new Button(container, SWT.NONE);
 		btnUpdateList.addSelectionListener(new SelectionAdapter() {
@@ -137,13 +138,13 @@ public class WizardPageSelectTables extends WizardPage {
 						}
 
 						isSchema = true;
-						lblCatalogSchema.setText("Schemas:");
+						lblCatalogSchema.setText(Messages.WizardPageSelectTables_7);
 						for (String catalogSchemaName : listSchemas) {
 							cmbCatlogSchema.add(catalogSchemaName);
 						}
 					} else if (listCatalogs != null && listCatalogs.size() > 0) {
 						isSchema = false;
-						lblCatalogSchema.setText("Catalogs:");
+						lblCatalogSchema.setText(Messages.WizardPageSelectTables_8);
 						for (String catalogSchemaName : listCatalogs) {
 							cmbCatlogSchema.add(catalogSchemaName);
 						}
@@ -166,7 +167,7 @@ public class WizardPageSelectTables extends WizardPage {
 
 		});
 		btnUpdateList.setBounds(466, 10, 98, 25);
-		btnUpdateList.setText("Update List");
+		btnUpdateList.setText(Messages.WizardPageSelectTables_9);
 
 		Button btnAdd = new Button(container, SWT.NONE);
 		btnAdd.addSelectionListener(new SelectionAdapter() {
@@ -181,7 +182,7 @@ public class WizardPageSelectTables extends WizardPage {
 			}
 		});
 		btnAdd.setBounds(237, 137, 112, 29);
-		btnAdd.setText("Add -->");
+		btnAdd.setText(Messages.WizardPageSelectTables_10);
 
 		Button btnAddAll = new Button(container, SWT.NONE);
 		btnAddAll.addSelectionListener(new SelectionAdapter() {
@@ -196,7 +197,7 @@ public class WizardPageSelectTables extends WizardPage {
 			}
 		});
 		btnAddAll.setBounds(237, 172, 112, 29);
-		btnAddAll.setText("Add All -->");
+		btnAddAll.setText(Messages.WizardPageSelectTables_11);
 
 		Button btnRemove = new Button(container, SWT.NONE);
 		btnRemove.addSelectionListener(new SelectionAdapter() {
@@ -211,7 +212,7 @@ public class WizardPageSelectTables extends WizardPage {
 			}
 		});
 		btnRemove.setBounds(237, 207, 112, 29);
-		btnRemove.setText("<-- Remove");
+		btnRemove.setText(Messages.WizardPageSelectTables_12);
 
 		Button btnRemoveAll = new Button(container, SWT.NONE);
 		btnRemoveAll.addSelectionListener(new SelectionAdapter() {
@@ -226,15 +227,15 @@ public class WizardPageSelectTables extends WizardPage {
 			}
 		});
 		btnRemoveAll.setBounds(237, 242, 112, 29);
-		btnRemoveAll.setText("<-- Remove All");
+		btnRemoveAll.setText(Messages.WizardPageSelectTables_13);
 
 		txtTableFilter = new Text(container, SWT.BORDER);
-		txtTableFilter.setText("%");
+		txtTableFilter.setText(Messages.WizardPageSelectTables_14);
 		txtTableFilter.setBounds(128, 39, 332, 23);
 
 		Label lblTableFilter = new Label(container, SWT.NONE);
 		lblTableFilter.setBounds(10, 42, 112, 15);
-		lblTableFilter.setText("Table Filter:");
+		lblTableFilter.setText(Messages.WizardPageSelectTables_15);
 
 		btnTableFilterSearch = new Button(container, SWT.NONE);
 		btnTableFilterSearch.setEnabled(false);
@@ -263,7 +264,7 @@ public class WizardPageSelectTables extends WizardPage {
 			}
 		});
 		btnTableFilterSearch.setBounds(466, 37, 98, 25);
-		btnTableFilterSearch.setText("Search");
+		btnTableFilterSearch.setText(Messages.WizardPageSelectTables_16);
 
 	}
 
@@ -297,7 +298,7 @@ public class WizardPageSelectTables extends WizardPage {
 				}
 
 				// Ambos para db2/400 usa catalog y schema
-				if (listCatalogs != null && listCatalogs.size() > 0 && listSchemas != null && listSchemas.size() > 0 && db.equals("JTOpen(AS/400)") == true) {
+				if (listCatalogs != null && listCatalogs.size() > 0 && listSchemas != null && listSchemas.size() > 0 && db.equals("JTOpen(AS/400)") == true) { //$NON-NLS-1$
 
 					EclipseGeneratorUtil.catalog = catalogName;
 					EclipseGeneratorUtil.schema = cmbCatlogSchema.getText();
@@ -306,7 +307,7 @@ public class WizardPageSelectTables extends WizardPage {
 				}
 
 			} else {
-				throw new Exception("Table not selected");
+				throw new Exception(Messages.WizardPageSelectTables_18);
 			}
 
 			setPageComplete(true);
@@ -337,12 +338,12 @@ public class WizardPageSelectTables extends WizardPage {
 	 * Reset form.
 	 */
 	public void resetForm() {
-		txtTableFilter.setText("%");
+		txtTableFilter.setText(Messages.WizardPageSelectTables_19);
 		cmbCatlogSchema.removeAll();
 		listAvailableTables.removeAll();
 		listSelectedTables.removeAll();
 		cmbCatlogSchema.setEnabled(false);
-		lblCatalogSchema.setText("Catalogs/Schemas:");
+		lblCatalogSchema.setText(Messages.WizardPageSelectTables_20);
 		setPageComplete(false);
 		btnTableFilterSearch.setEnabled(false);
 	}

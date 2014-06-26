@@ -27,8 +27,8 @@ public class WizardMainDatabaseConnection extends Wizard {
 	public WizardMainDatabaseConnection() {
 		super();
 		
-		setWindowTitle("Zathuracode Generator V4.0 Beta - Powered By Vortexbird and UsbCali www.zathuracode.org");
-		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
+		setWindowTitle(Messages.title);
+		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg")); //$NON-NLS-1$
 		wizardDatabaseConnection = new WizardPageDatabaseConnection();
 	}
 
@@ -46,8 +46,8 @@ public class WizardMainDatabaseConnection extends Wizard {
 	 */
 	public WizardMainDatabaseConnection(String connectionName) {
 		super();
-		setWindowTitle("Zathuracode Generator V4.0 Beta  - Powered By Vortexbird and UsbCali www.zathuracode.org");
-		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg"));
+		setWindowTitle(Messages.title);
+		setDefaultPageImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(), "icons/balvardi-Robotic7070.jpg")); //$NON-NLS-1$
 		ConnectionModel connectionModel = ConnectionsUtils.getTheZathuraConnectionModel(connectionName);
 
 		wizardDatabaseConnection = new WizardPageDatabaseConnection();
@@ -58,8 +58,8 @@ public class WizardMainDatabaseConnection extends Wizard {
 		wizardDatabaseConnection.setPassword(connectionModel.getPassword());
 		wizardDatabaseConnection.setDriverClassName(connectionModel.getDriverClassName());
 		wizardDatabaseConnection.setJarPath(connectionModel.getJarPath());
-		wizardDatabaseConnection.setTitle("Edit Database Connection");
-		wizardDatabaseConnection.setDescription("Edit a connection driver");
+		wizardDatabaseConnection.setTitle(Messages.WizardMainDatabaseConnection_4);
+		wizardDatabaseConnection.setDescription(Messages.WizardMainDatabaseConnection_5);
 
 	}
 
@@ -86,7 +86,7 @@ public class WizardMainDatabaseConnection extends Wizard {
 			ConnectionsUtils.saveConnectionModel(connectionModel);
 			WizardPageSelectDBConnection.loadConnections();
 		} catch (Exception e) {
-			MessageDialog.openError(getShell(), "Error", e.getMessage());
+			MessageDialog.openError(getShell(), Messages.WizardMainDatabaseConnection_6, e.getMessage());
 			return false;
 		}
 

@@ -24,8 +24,8 @@ public class WizardPageGenerationProcessProgress extends WizardPage {
 	 * Create the wizard.
 	 */
 	public WizardPageGenerationProcessProgress() {
-		super("wizardPage");
-		setTitle("Generation Process Progress");
+		super("wizardPage"); //$NON-NLS-1$
+		setTitle(Messages.WizardPageGenerationProcessProgress_1);
 		
 		// setImageDescriptor(ResourceManager.getPluginImageDescriptor(ZathuraGeneratorActivator.getDefault(),
 		// "icons/balvardi-Robotic7070.png"));
@@ -42,7 +42,7 @@ public class WizardPageGenerationProcessProgress extends WizardPage {
 		setControl(container);
 
 		final Group generationProcessProgressGroup = new Group(container, SWT.NONE);
-		generationProcessProgressGroup.setText("Generation Process Progress");
+		generationProcessProgressGroup.setText(Messages.WizardPageGenerationProcessProgress_2);
 		generationProcessProgressGroup.setBounds(10, 10, 581, 288);
 
 		final ScrolledComposite scrolledComposite = new ScrolledComposite(generationProcessProgressGroup, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
