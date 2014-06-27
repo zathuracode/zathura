@@ -8,17 +8,28 @@
     	<param name="ConversionPattern" value="%-4r [%p] %-c %d{ISO8601}  %m%n"/>
     </layout>
   </appender>
-  
- 
-
+  <!-- 
+  <appender name="FILE" class="org.apache.log4j.FileAppender">
+	   <param name="file" value="/Users/dgomez/Developer/zathuraLog.log"/>
+	   <param name="immediateFlush" value="true"/>
+	   <param name="threshold" value="debug"/>
+	   <param name="append" value="false"/>
+	   <layout class="org.apache.log4j.PatternLayout">
+	      <param name="ConversionPattern" value="%-4r [%p] %-c %d{ISO8601}  %m%n"/>
+	   </layout>
+	</appender>
+  -->
   <root>
-  	<priority value="info"/>
+  	<priority value="all"/>
    <!-- 	
      	<priority value="off"/>
      	<priority value ="debug" />
     	<priority value ="fatal" />
     -->
     <appender-ref ref="ConsoleAppender"/>
+    <!-- 
+    <appender-ref ref="FILE"/>
+     -->
   </root>
 
 </log4j:configuration> 
