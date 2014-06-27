@@ -125,6 +125,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 		try {
 			ZathuraReverseJarLoader.loadJar2(connectionDriverJarPath);
+			ZathuraReverseJarLoader.loadJar2(connectionDriverJarPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

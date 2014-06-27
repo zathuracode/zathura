@@ -80,7 +80,7 @@ public class ZathuraJavaEE_JpaCore_Ejb31_Prime35 implements IZathuraTemplate,IZa
 		String pathApacheCommons= librariesPath+"apache-commons"+GeneratorUtil.slash;
 		String pathAopAlliance= librariesPath+"aopalliance1.0"+GeneratorUtil.slash;
 		String pathLog4j=librariesPath+"log4j1.2"+GeneratorUtil.slash;
-		String pathServlet=librariesPath+"servlet3.1.1"+GeneratorUtil.slash;
+		//String pathServlet=librariesPath+"servlet3.1.1"+GeneratorUtil.slash;
 		
 		
 		String pathLib= properties.getProperty("libFolderPath");
@@ -113,7 +113,7 @@ public class ZathuraJavaEE_JpaCore_Ejb31_Prime35 implements IZathuraTemplate,IZa
 			GeneratorUtil.copyFolder(pathApacheCommons, pathLib);
 			GeneratorUtil.copyFolder(pathAopAlliance, pathLib);
 			GeneratorUtil.copyFolder(pathLog4j, pathLib);
-			GeneratorUtil.copyFolder(pathServlet, pathLib);
+			//GeneratorUtil.copyFolder(pathServlet, pathLib);
 		}
 
 		
