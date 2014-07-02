@@ -153,13 +153,13 @@ public class WizardPageChooseGenerator extends WizardPage {
 	}
 	
 	/**
-	 * Load list generators version 3.1.
+	 * Load list generators version 4.0.
 	 */
 	public void loadListGeneratorsVersion3_1() {
 		if (listGeneratorsVersion3_1 != null) {
 			listGeneratorsVersion3_1.removeAll();
 			for (GeneratorModel generatorModel : theGenerators.values()) {
-				if (generatorModel.getZathuraVersion().equals("3.1")) { //$NON-NLS-1$
+				if (generatorModel.getZathuraVersion().equals("4.0")) { //$NON-NLS-1$
 					if (EclipseGeneratorUtil.makeItXml == true && generatorModel.getPersistence().equals("hibernateCore") == true) { //$NON-NLS-1$
 						listGeneratorsVersion3_1.add(generatorModel.getGuiName());
 					} else if (EclipseGeneratorUtil.makeItXml == false && generatorModel.getPersistence().equals("jpa") == true) { //$NON-NLS-1$
