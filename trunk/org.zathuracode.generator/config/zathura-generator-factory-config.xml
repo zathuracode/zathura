@@ -226,63 +226,7 @@
 		]]>
 		</description>
 	</generator>
-<!-- 
-	<generator>
-		<name>ZathuraJavaEE_GWT_Centric</name>
-		<gui-name>GWT + JPA</gui-name>
-		<class>org.zathuracode.generator.jee.jpa.gwtcentric.engine.ZathuraJavaEE_Gwt_Centric</class>
-		<persistence>jpa</persistence>
-		<description>
-		<![CDATA[
-				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-				<HTML>
-				<HEAD>
-					<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-					<TITLE></TITLE>
-					<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.4  (Linux)">
-					<META NAME="AUTHOR" CONTENT="Juan Manuel Caicedo, Ricardo Chiriboga">
-					<META NAME="CREATED" CONTENT="20090304;10252100">
-					<META NAME="CHANGEDBY" CONTENT="Diego Gomez">
-					<META NAME="CHANGED" CONTENT="20090304;10523800">
-				</HEAD>
-				<BODY LANG="es-CO" DIR="LTR">
-				<P LANG="en-US" ALIGN=CENTER STYLE="font-style: normal"><FONT SIZE=3><B>The
-				JavaEE Web Centric </B></FONT>
-				</P>
-				<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-				<FONT SIZE=2>This Generator is appropriate for Web applications that
-				using  the JEE Patterns of Sun Microsystems. The next is a list the
-				generate files.</FONT></P>
-				<UL>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>JSF (IceFaces)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>ManageBeans</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Faces-config.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>Bussines Delegate</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>POJO (Logic)</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAOFactory</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>DAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>IDAO</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>persistence.xml</FONT></P>
-					<LI><P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-					<FONT SIZE=2>web.xml</FONT></P>
-				</UL>
-				</BODY>
-				</HTML>
-		]]>
-		</description>
 
-	</generator>
-
- -->
 
 	<generator>
 		<name>ZathuraJavaEE__Jpa_Spring_Web_Centric</name>
@@ -664,10 +608,10 @@
 	
 	<generator>
 		<name>ZathuraJavaEE_HibernateCore4_Spring32_PrimeFaces35_Web_Centric</name>
-		<gui-name>PrimeFaces3.5 + Spring3.2.3 + HibernateCore4.2.3</gui-name>
+		<gui-name>PrimeFaces4 + Spring3.2.3 + HibernateCore4.2.3</gui-name>
 		<class>org.zathuracode.generator.jee6.hibernatecore4.spring32.prime.engine.ZathuraJavaEE_HibernateCore4_Spring32_Prime</class>
 		<persistence>hibernateCore</persistence>
-		<zathuraVersion>3.1</zathuraVersion>
+		<zathuraVersion>4.0</zathuraVersion>
 		<description>
 		<![CDATA[
 		<![CDATA[
@@ -730,7 +674,7 @@
 						</TD>
 						<TD>
 							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-							<FONT SIZE=2>PrimeFaces 3.5</FONT></P>									
+							<FONT SIZE=2>PrimeFaces 4</FONT></P>									
 						</TD>
 					</TR>						
 				</TABLE>				
@@ -767,10 +711,10 @@
 	
 	<generator>
 		<name>ZathuraJavaEE_JPA_Spring32_Prime35</name>
-		<gui-name>PrimeFaces3.5 + Spring3.2.3 + JPA2</gui-name>
+		<gui-name>PrimeFaces4 + Spring3.2.3 + JPA2</gui-name>
 		<class>org.zathuracode.generator.jee6.jpa.spring32.prime.engine.ZathuraJavaEE_jpa_Spring32_Prime</class>
 		<persistence>jpa</persistence>
-		<zathuraVersion>3.1</zathuraVersion>
+		<zathuraVersion>4.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -832,7 +776,7 @@
 						</TD>
 						<TD>
 							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-							<FONT SIZE=2>PrimeFaces 3.5</FONT></P>									
+							<FONT SIZE=2>PrimeFaces 4</FONT></P>									
 						</TD>
 					</TR>						
 				</TABLE>				
@@ -867,10 +811,10 @@
 	
 	<generator>
 		<name>ZathuraJavaEE_JPA_EJB31_Prime35</name>
-		<gui-name>PrimeFaces3.5 + EJB 3.1 + JPA2</gui-name>
+		<gui-name>PrimeFaces4 + EJB 3.1 + JPA2</gui-name>
 		<class>org.zathuracode.generator.jee6.jpacore.ejb31.prime35.engine.ZathuraJavaEE_JpaCore_Ejb31_Prime35</class>
 		<persistence>jpa</persistence>
-		<zathuraVersion>3.1</zathuraVersion>
+		<zathuraVersion>4.0</zathuraVersion>
 		<description>
 		<![CDATA[
 				<DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -932,7 +876,7 @@
 						</TD>
 						<TD>
 							<P LANG="en-US" ALIGN=LEFT STYLE="font-style: normal; font-weight: medium">
-							<FONT SIZE=2>PrimeFaces 3.5</FONT></P>									
+							<FONT SIZE=2>PrimeFaces 4</FONT></P>									
 						</TD>
 					</TR>						
 				</TABLE>						
