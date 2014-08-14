@@ -54,7 +54,7 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Centric implements IZathuraG
 	/* (non-Javadoc)
 	 * @see org.zathuracode.generator.model.IZathuraGenerator#toGenerate(org.zathuracode.metadata.model.MetaDataModel, java.lang.String, java.lang.String, java.util.Properties)
 	 */
-	public void toGenerate(MetaDataModel metaDataModel, String projectName, String folderProjectPath, Properties propiedades) {
+	public void toGenerate(MetaDataModel metaDataModel, String projectName, String folderProjectPath, Properties propiedades) throws Exception{
 		log.info("Begin ZathuraJavaEE_Web_Centric generation");
 
 		String jpaPckgName = propiedades.getProperty("jpaPckgName");

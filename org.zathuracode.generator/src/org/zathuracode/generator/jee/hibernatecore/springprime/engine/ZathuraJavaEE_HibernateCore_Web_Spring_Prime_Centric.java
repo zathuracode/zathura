@@ -46,7 +46,7 @@ public class ZathuraJavaEE_HibernateCore_Web_Spring_Prime_Centric implements IZa
 
 	@Override
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades) {
+			String folderProjectPath, Properties propiedades) throws Exception{
 
 		String jpaPckgName = propiedades.getProperty("jpaPckgName");
 		String domainName = jpaPckgName.substring(0, jpaPckgName.indexOf("."));

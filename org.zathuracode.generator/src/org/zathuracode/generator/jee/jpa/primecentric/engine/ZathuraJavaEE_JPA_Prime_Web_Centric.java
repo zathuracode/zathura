@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.Properties;
+
 import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -43,7 +44,7 @@ public class ZathuraJavaEE_JPA_Prime_Web_Centric implements IZathuraTemplate,IZa
 
 	@Override
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades) {
+			String folderProjectPath, Properties propiedades)throws Exception {
 		
 		webRootPath=(propiedades.getProperty("webRootFolderPath"));
 		properties=propiedades;
