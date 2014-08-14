@@ -93,6 +93,8 @@ public class TestZathuraJavaEE_HibernateCore_Web_Centric {
 				metaDataModel = entityLoader.loadMetaDataModel(jpaPath, jpaPckgName);
 			} catch (MetaDataReaderNotFoundException e) {
 				e.printStackTrace();
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
 
 			// Variables para el properties
@@ -116,6 +118,8 @@ public class TestZathuraJavaEE_HibernateCore_Web_Centric {
 			 */
 
 		} catch (GeneratorNotFoundException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

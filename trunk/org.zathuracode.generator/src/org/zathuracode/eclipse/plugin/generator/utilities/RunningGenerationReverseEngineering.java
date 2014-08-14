@@ -73,6 +73,13 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 			
 			MessageDialog.openError(getShell(), "Error",e.getMessage());
 			throw new InterruptedException(e.getMessage());
+		}catch (Exception e) {
+			monitor.setCanceled(true);
+			e.printStackTrace();
+			ZathuraGeneratorLog.logError(e);
+			
+			MessageDialog.openError(getShell(), "Error",e.getMessage());
+			throw new InterruptedException(e.getMessage());
 		}
 		monitor.done();
 		if (monitor.isCanceled()) {

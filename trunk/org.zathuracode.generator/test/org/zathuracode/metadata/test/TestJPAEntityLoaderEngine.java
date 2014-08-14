@@ -29,8 +29,8 @@ public class TestJPAEntityLoaderEngine {
 	 */
 	public static void main(String[] args) {
 
-		String path = "E:/WORKSPACE/zathura-demoBancoJPA/bin/";
-		String pckgName = "co.edu.usbcali.modelo";
+		String path = "/Users/dgomez/Workspaces/runtime-EclipseApplication/pqrsWeb/build/classes/";
+		String pckgName = "com.vortexbird.demo.modelo";
 
 		IMetaDataReader entityLoader;
 		try {
@@ -54,6 +54,8 @@ public class TestJPAEntityLoaderEngine {
 				}
 			}
 		} catch (MetaDataReaderNotFoundException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

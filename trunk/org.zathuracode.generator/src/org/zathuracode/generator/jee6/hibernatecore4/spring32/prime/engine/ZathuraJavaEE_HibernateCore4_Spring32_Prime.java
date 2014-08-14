@@ -52,7 +52,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 
 	@Override
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades) {
+			String folderProjectPath, Properties propiedades) throws Exception{
 
 		String jpaPckgName = propiedades.getProperty("jpaPckgName");
 		String domainName = jpaPckgName.substring(0, jpaPckgName.indexOf("."));
@@ -133,7 +133,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 	@Override
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel,
 			String jpaPckgName, String projectName, Integer specificityLevel,
-			String domainName) {		
+			String domainName)throws Exception {		
 
 		try {
 	
@@ -323,6 +323,7 @@ public class ZathuraJavaEE_HibernateCore4_Spring32_Prime implements IZathuraTemp
 		
 		} catch (Exception e) {
 			log.error(e.getMessage());
+			throw e;
 		}
 	}
 

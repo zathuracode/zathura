@@ -25,7 +25,7 @@ public interface IZathuraTemplate {
 	 * @param specificityLevel the specificity level
 	 * @param domainName the domain name
 	 */
-	public void doTemplate(String hdLocation, MetaDataModel metaDataModel, String jpaPckgName, String projectName, Integer specificityLevel, String domainName);
+	public void doTemplate(String hdLocation, MetaDataModel metaDataModel, String jpaPckgName, String projectName, Integer specificityLevel, String domainName)throws Exception;
 
 	/**
 	 * Do dao spring xml hibernate.

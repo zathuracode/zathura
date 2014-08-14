@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.collections.ListUtils;
+import org.apache.log4j.Logger;
 import org.zathuracode.generator.utilities.GeneratorUtil;
+import org.zathuracode.metadata.engine.JPAEntityLoaderEngine;
 import org.zathuracode.metadata.model.ManyToOneMember;
 import org.zathuracode.metadata.model.Member;
 import org.zathuracode.metadata.model.MetaData;
@@ -21,6 +23,9 @@ import org.zathuracode.metadata.model.MetaData;
  * @version 1.0
  */
 public class StringBuilder implements IStringBuilder {
+	
+	
+	private static Logger log = Logger.getLogger(StringBuilder.class);
 
 	/** The string builder for id. */
 	StringBuilderForId stringBuilderForId;
@@ -1650,6 +1655,8 @@ public class StringBuilder implements IStringBuilder {
 		Utilities.getInstance().nameMemberToDto = new ArrayList<String>();
 
 		for (Member member : metaData.getSimpleProperties()) {
+			
+			log.info(member.getName());
 
 			if (member.isPrimiaryKeyAComposeKey() == false) {
 				String realType = member.getType().toString().substring((member.getType().toString()).lastIndexOf(".") + 1,(member.getType().toString()).length());
@@ -1660,16 +1667,18 @@ public class StringBuilder implements IStringBuilder {
 
 			}
 			else{
-				Field[] field = metaData.getComposeKey().getDeclaredFields();
-				for (Field field2 : field) {
-					String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,(field2.getType().toString()).length());
-					String memberClass = realType + " "+field2.getName();
-					parameterOut.add(memberClass);
-					composeKey.add(field2.getName());
-					Utilities.getInstance().dtoProperties.put(field2.getName(),realType);
-					Utilities.getInstance().nameMemberToDto.add(field2.getName());
-				}	
-
+				
+				if(metaData!=null && metaData.getComposeKey()!=null && metaData.getComposeKey().getDeclaredFields()!=null && metaData.getComposeKey().getDeclaredFields().length>0){
+					Field[] field = metaData.getComposeKey().getDeclaredFields();
+					for (Field field2 : field) {
+						String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,(field2.getType().toString()).length());
+						String memberClass = realType + " "+field2.getName();
+						parameterOut.add(memberClass);
+						composeKey.add(field2.getName());
+						Utilities.getInstance().dtoProperties.put(field2.getName(),realType);
+						Utilities.getInstance().nameMemberToDto.add(field2.getName());
+					}	
+				}
 			}
 		}
 

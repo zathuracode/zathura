@@ -56,7 +56,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 	 * @see org.zathuracode.metadata.reader.IMetaDataReader#loadMetaDataModel(java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	public MetaDataModel loadMetaDataModel(String path, String pckgName) {
+	public MetaDataModel loadMetaDataModel(String path, String pckgName) throws Exception{
 		log.info("Loading JPA Entity Data Model");
 		MetaDataModel metaDataModel = new MetaDataModel();
 		metaDataModel.setTheMetaData(new ArrayList<MetaData>());
@@ -76,17 +76,17 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 				}
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			throw e;
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		return metaDataModel;
 	}
@@ -101,7 +101,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 	 * @throws NoSuchMethodException the no such method exception
 	 * @throws InstantiationException the instantiation exception
 	 */
-	private MetaData loadMetaData(Class clazz) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException {
+	private MetaData loadMetaData(Class clazz) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException, InstantiationException, Exception {
 
 		MetaData metaData = new MetaData();
 		metaData.setMainClass(clazz);
@@ -115,21 +115,26 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 
 		log.info("Properties Entity:" + members);
 
-		for (String memberName : members) {// Begin Member
-			if (!memberName.equals("class")) {// Begin if Member //Solo para
-				// miembros las clases no se
-				// tiene en cuenta
-				loadMetaDataInMethod(clazz, metaData, theMembers, memberName);
-				loadMetaDataInField(clazz, metaData, theMembers, memberName);
-			}// End if Member
-		}// End Member
+		try {
+			for (String memberName : members) {// Begin Member
+				if (!memberName.equals("class")) {// Begin if Member //Solo para
+					// miembros las clases no se
+					// tiene en cuenta
+					loadMetaDataInMethod(clazz, metaData, theMembers, memberName);
+					loadMetaDataInField(clazz, metaData, theMembers, memberName);
+				}// End if Member
+			}// End Member
 
-		Collections.sort(metaData.getProperties());
+			Collections.sort(metaData.getProperties());
 
-		for (Member m : metaData.getProperties()) {
-			log.debug("Entity Member:" + m.getName());
+			for (Member m : metaData.getProperties()) {
+				log.debug("Entity Member:" + m.getName());
+			}
+		} catch (RuntimeException e) {
+			throw e;
+		}catch (Exception e) {
+			throw e;
 		}
-
 		return metaData;
 	}
 
@@ -141,7 +146,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 	 * @param theMembers the members
 	 * @param memberName the member name
 	 */
-	private void loadMetaDataInField(Class clazz, MetaData metaData, List<Member> theMembers, String memberName) {
+	private void loadMetaDataInField(Class clazz, MetaData metaData, List<Member> theMembers, String memberName)throws Exception {
 
 		for (Field field : clazz.getDeclaredFields()) {
 			int order = -1;
@@ -276,157 +281,164 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 	 * @param theMembers the members
 	 * @param memberName the member name
 	 */
-	private void loadMetaDataInMethod(Class clazz, MetaData metaData, List<Member> theMembers, String memberName) {
-		if (clazz.getSimpleName().equalsIgnoreCase("NodoProduccion"))
-			System.out.println("NodoProduccion");
-		log.info("Read in Method:" + memberName);
-		for (Method method : clazz.getDeclaredMethods()) {// Begin for Method
-			int order = -1;
-			String property = "";
+	private void loadMetaDataInMethod(Class clazz, MetaData metaData, List<Member> theMembers, String memberName)throws Exception {
+		try {
+			
+			log.info("Read in Method:" + memberName);
+			for (Method method : clazz.getDeclaredMethods()) {// Begin for Method
+				int order = -1;
+				String property = "";
 
-			// Lee los metodos get o is
-			if (method.getAnnotation(Transient.class) == null && method.getAnnotation(Override.class) == null) {
-				if (method.getName().startsWith("is")) {
-					property = method.getName().substring(3);
-					property = method.getName().substring(2, 3).toLowerCase() + property;
-				} else if (method.getName().startsWith("get")) {
-					property = method.getName().substring(4);
-					property = method.getName().substring(3, 4).toLowerCase() + property;
+				// Lee los metodos get o is
+				if (method.getAnnotation(Transient.class) == null && method.getAnnotation(Override.class) == null) {
+					if (method.getName().startsWith("is")) {
+						property = method.getName().substring(3);
+						property = method.getName().substring(2, 3).toLowerCase() + property;
+					} else if (method.getName().startsWith("get")) {
+						property = method.getName().substring(4);
+						property = method.getName().substring(3, 4).toLowerCase() + property;
+					}
 				}
-			}
 
-			// Empieza con los miembros
+				// Empieza con los miembros
 
-			if (memberName.equalsIgnoreCase(property)) {// Beging
-				// memberName.equals(property)
+				if (memberName.equalsIgnoreCase(property)) {// Beging
+					// memberName.equals(property)
 
-				log.debug("working with:" + memberName);
+					log.debug("working with:" + memberName);
 
-				String showName = property;
+					String showName = property;
 
-				if (method.getAnnotation(OneToMany.class) != null) {
-					// es one-to-many
-					log.info("one to many:" + memberName);
-					ParameterizedType rettype = (ParameterizedType) method.getGenericReturnType();
-					log.debug(rettype.getActualTypeArguments()[0].toString());
+					if (method.getAnnotation(OneToMany.class) != null) {
+						// es one-to-many
+						log.info("one to many:" + memberName);
+						ParameterizedType rettype = (ParameterizedType) method.getGenericReturnType();
+						log.debug(rettype.getActualTypeArguments()[0].toString());
 
-					OneToManyMember oneToManyMember = new OneToManyMember(memberName, showName, (Class) rettype.getActualTypeArguments()[0], method
-							.getReturnType(), order);
-					oneToManyMember.setMappedBy(method.getAnnotation(OneToMany.class).mappedBy());
+						OneToManyMember oneToManyMember = new OneToManyMember(memberName, showName, (Class) rettype.getActualTypeArguments()[0], method
+								.getReturnType(), order);
+						oneToManyMember.setMappedBy(method.getAnnotation(OneToMany.class).mappedBy());
 
-					theMembers.add(oneToManyMember);
+						theMembers.add(oneToManyMember);
 
-				} else if (method.getAnnotation(OneToOne.class) != null) {
-					// es one-to-many
-					log.info("one to one:" + memberName);
-					theMembers.add(new OneToOneMember(memberName, showName, method.getReturnType(), order));
-				} else if (method.getAnnotation(ManyToOne.class) != null) {
-					// many to one
-					log.info("many to one:" + memberName);
+					} else if (method.getAnnotation(OneToOne.class) != null) {
+						// es one-to-many
+						log.info("one to one:" + memberName);
+						theMembers.add(new OneToOneMember(memberName, showName, method.getReturnType(), order));
+					} else if (method.getAnnotation(ManyToOne.class) != null) {
+						// many to one
+						log.info("many to one:" + memberName);
 
-					ManyToOneMember manyToOneMember = new ManyToOneMember(memberName, showName, method.getReturnType(), order);
+						ManyToOneMember manyToOneMember = new ManyToOneMember(memberName, showName, method.getReturnType(), order);
 
-					JoinColumn joinColumn = method.getAnnotation(JoinColumn.class);
-					JoinColumns joinColumns = method.getAnnotation(JoinColumns.class);
+						JoinColumn joinColumn = method.getAnnotation(JoinColumn.class);
+						JoinColumns joinColumns = method.getAnnotation(JoinColumns.class);
 
-					if (joinColumn != null) {
+						if (joinColumn != null) {
 
-						Boolean nullable = joinColumn.nullable();
-						nullable = nullable == null ? !method.getAnnotation(ManyToOne.class).optional() : nullable;
+							Boolean nullable = joinColumn.nullable();
+							nullable = nullable == null ? !method.getAnnotation(ManyToOne.class).optional() : nullable;
 
-						HashMap<String, Boolean> hashMapNullableColumn = new HashMap<String, Boolean>();
-
-						hashMapNullableColumn.put(property.toUpperCase(), nullable);
-
-						manyToOneMember.setHashMapNullableColumn(hashMapNullableColumn);
-					} else {
-						if (joinColumns != null) {
-							JoinColumn[] joinColumnFromColumns = joinColumns.value();
 							HashMap<String, Boolean> hashMapNullableColumn = new HashMap<String, Boolean>();
 
-							int cont = 0;
-							for (JoinColumn joinColumn2 : joinColumnFromColumns) {
+							hashMapNullableColumn.put(property.toUpperCase(), nullable);
 
-								String name = joinColumn2.name();
+							manyToOneMember.setHashMapNullableColumn(hashMapNullableColumn);
+						} else {
+							if (joinColumns != null) {
+								JoinColumn[] joinColumnFromColumns = joinColumns.value();
+								HashMap<String, Boolean> hashMapNullableColumn = new HashMap<String, Boolean>();
 
-								String neededName = new String();
+								int cont = 0;
+								for (JoinColumn joinColumn2 : joinColumnFromColumns) {
 
-								try {
-									if (name.split("_").length > 1) {
-										String[] tmp = name.split("_");
-										for (int i = 0; i < tmp.length; i++) {
-											neededName = neededName + tmp[i];
+									String name = joinColumn2.name();
+
+									String neededName = new String();
+
+									try {
+										if (name.split("_").length > 1) {
+											String[] tmp = name.split("_");
+											for (int i = 0; i < tmp.length; i++) {
+												neededName = neededName + tmp[i];
+											}
+										} else {
+											neededName = name;
 										}
-									} else {
+									} catch (Exception e) {
 										neededName = name;
 									}
-								} catch (Exception e) {
-									neededName = name;
+
+									neededName = neededName.toUpperCase();
+
+									Boolean nullable = joinColumn2.nullable();
+
+									if (hashMapNullableColumn.get(neededName) == null) {
+										hashMapNullableColumn.put(neededName, nullable);
+									} else {
+										hashMapNullableColumn.put(neededName + cont, nullable);
+									}
+
+									cont++;
 								}
-
-								neededName = neededName.toUpperCase();
-
-								Boolean nullable = joinColumn2.nullable();
-
-								if (hashMapNullableColumn.get(neededName) == null) {
-									hashMapNullableColumn.put(neededName, nullable);
-								} else {
-									hashMapNullableColumn.put(neededName + cont, nullable);
-								}
-
-								cont++;
+								manyToOneMember.setHashMapNullableColumn(hashMapNullableColumn);
 							}
-							manyToOneMember.setHashMapNullableColumn(hashMapNullableColumn);
 						}
-					}
 
-					theMembers.add(manyToOneMember);
-				} else if (method.getAnnotation(ManyToMany.class) != null) {
-					// many to many
-					log.info("many to many:" + memberName);
-					ParameterizedType rettype = (ParameterizedType) method.getGenericReturnType();
-					log.debug(rettype.getActualTypeArguments()[0].toString());
-					theMembers.add(new ManyToManyMember(memberName, showName, (Class) rettype.getActualTypeArguments()[0], order));
-				} else {
-
-					Member mb = null;
-					log.info("regular:" + memberName);
-					if (method.getAnnotation(GeneratedValue.class) != null) {
-						mb = new GeneratedValueMember(memberName, showName, method.getReturnType(), order);
+						theMembers.add(manyToOneMember);
+					} else if (method.getAnnotation(ManyToMany.class) != null) {
+						// many to many
+						log.info("many to many:" + memberName);
+						ParameterizedType rettype = (ParameterizedType) method.getGenericReturnType();
+						log.debug(rettype.getActualTypeArguments()[0].toString());
+						theMembers.add(new ManyToManyMember(memberName, showName, (Class) rettype.getActualTypeArguments()[0], order));
 					} else {
-						mb = new SimpleMember(memberName, showName, method.getReturnType(), order);
-						if (method.getAnnotation(Column.class) != null) {
-							Column column = method.getAnnotation(Column.class);
-							Long lenght = new Long(column.length());
-							Long precision = new Long(column.precision());
-							Long scale = new Long(column.scale());
-							Boolean nullable = new Boolean(column.nullable());
-							nullable = nullable == null ? !method.getAnnotation(Basic.class).optional() : nullable;
 
-							mb.setLength(lenght);
-							mb.setPrecision(precision);
-							mb.setScale(scale);
-							mb.setNullable(nullable);
+						Member mb = null;
+						log.info("regular:" + memberName);
+						if (method.getAnnotation(GeneratedValue.class) != null) {
+							mb = new GeneratedValueMember(memberName, showName, method.getReturnType(), order);
+						} else {
+							mb = new SimpleMember(memberName, showName, method.getReturnType(), order);
+							if (method.getAnnotation(Column.class) != null) {
+								Column column = method.getAnnotation(Column.class);
+								Long lenght = new Long(column.length());
+								Long precision = new Long(column.precision());
+								Long scale = new Long(column.scale());
+								Boolean nullable = new Boolean(column.nullable());
+								nullable = nullable == null ? !method.getAnnotation(Basic.class).optional() : nullable;
+
+								mb.setLength(lenght);
+								mb.setPrecision(precision);
+								mb.setScale(scale);
+								mb.setNullable(nullable);
+							}
+
 						}
+						theMembers.add(mb);
 
+						if (method.getAnnotation(Id.class) != null) {
+							log.debug("@id");
+							log.info("primary key:" + memberName);
+							metaData.setPrimaryKey(mb);
+						} else if (method.getAnnotation(EmbeddedId.class) != null) {
+
+							log.debug("@EmbeddedId");
+							log.info("primary key:" + memberName);
+							metaData.setPrimaryKey(mb);
+						}// TODO El @IdClass se debe mirar que pasa cuando sea
+						// @IdClass
 					}
-					theMembers.add(mb);
-
-					if (method.getAnnotation(Id.class) != null) {
-						log.debug("@id");
-						log.info("primary key:" + memberName);
-						metaData.setPrimaryKey(mb);
-					} else if (method.getAnnotation(EmbeddedId.class) != null) {
-
-						log.debug("@EmbeddedId");
-						log.info("primary key:" + memberName);
-						metaData.setPrimaryKey(mb);
-					}// TODO El @IdClass se debe mirar que pasa cuando sea
-					// @IdClass
-				}
-				break;// rompe el ciclo si ya agrego el miembro a la lista es
-				// para que sea mas rapido
-			}// End memberName.equals(property)
-		}// End for Method
+					break;// rompe el ciclo si ya agrego el miembro a la lista es
+					// para que sea mas rapido
+				}// End memberName.equals(property)
+			}// End for Method
+			
+		}catch (RuntimeException e) {
+			throw e;
+		}catch (Exception e) {
+			throw e;
+		}
+		
 	}
 }
