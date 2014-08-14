@@ -49,7 +49,7 @@ public class ZathuraJavaEE_JpaCore_Ejb31_Prime35 implements IZathuraTemplate,IZa
 
 	@Override
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades) {
+			String folderProjectPath, Properties propiedades)throws Exception {
 
 		String jpaPckgName = propiedades.getProperty("jpaPckgName");
 		String domainName = jpaPckgName.substring(0, jpaPckgName.indexOf("."));

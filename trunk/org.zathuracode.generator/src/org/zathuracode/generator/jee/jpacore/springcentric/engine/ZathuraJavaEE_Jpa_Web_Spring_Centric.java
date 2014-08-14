@@ -40,7 +40,7 @@ public class ZathuraJavaEE_Jpa_Web_Spring_Centric implements  IZathuraTemplate,I
 
 	@Override
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades) {
+			String folderProjectPath, Properties propiedades)throws Exception {
 
 		try {
 

@@ -44,7 +44,7 @@ public class ZathuraJavaEE_HibernateCore_PrimeCentric implements IZathuraTemplat
 
 	@Override
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades) {
+			String folderProjectPath, Properties propiedades) throws Exception{
 
 		logPrimeHibernate.info("Begin generation to Primefaces + Hibernate ");
 		properties=propiedades;

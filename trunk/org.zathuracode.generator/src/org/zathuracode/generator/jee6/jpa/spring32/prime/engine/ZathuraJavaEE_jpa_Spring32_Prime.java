@@ -49,7 +49,7 @@ public class ZathuraJavaEE_jpa_Spring32_Prime implements IZathuraTemplate,IZathu
 
 	@Override
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades) {
+			String folderProjectPath, Properties propiedades)throws Exception {
 
 		webRootPath=(propiedades.getProperty("webRootFolderPath"));					
 		properties=propiedades;
