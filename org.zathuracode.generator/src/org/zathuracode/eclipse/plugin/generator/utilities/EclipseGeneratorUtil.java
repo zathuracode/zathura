@@ -174,7 +174,7 @@ public class EclipseGeneratorUtil {
 	 * @throws MetaDataReaderNotFoundException the meta data reader not found exception
 	 * @throws GeneratorNotFoundException the generator not found exception
 	 */
-	public static void generate() throws MetaDataReaderNotFoundException, GeneratorNotFoundException {
+	public static void generate() throws MetaDataReaderNotFoundException, GeneratorNotFoundException,Exception {
 
 		EclipseGeneratorUtil.metaDataReader = MetaDataReaderFactory.JPAEntityLoaderEngine;
 		String jpaPath = EclipseGeneratorUtil.javaClassFolderPath;
@@ -257,7 +257,7 @@ public class EclipseGeneratorUtil {
 	/**
 	 * Generate jpa reverse engineering tmp.
 	 */
-	public static void generateJPAReverseEngineeringTMP() {
+	public static void generateJPAReverseEngineeringTMP()throws Exception {
 
 		Properties connectionProperties = new Properties();
 

@@ -77,6 +77,11 @@ public class RunningGeneration implements IRunnableWithProgress {
 			ZathuraGeneratorLog.logError(e);
 			MessageDialog.openError(getShell(), "Error",e.getMessage());
 			throw new InterruptedException(e.getMessage());
+		}catch (Exception e) {
+			monitor.setCanceled(true);
+			ZathuraGeneratorLog.logError(e);
+			MessageDialog.openError(getShell(), "Error","The generation was cancellede"+e.getMessage());
+			throw new InterruptedException("The generation was cancelled:"+e.getMessage());
 		}
 		monitor.done();
 		if (monitor.isCanceled()) {

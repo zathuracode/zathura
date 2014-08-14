@@ -22,5 +22,5 @@ public interface IZathuraGenerator {
 	 * @param folderProjectPath the folder project path
 	 * @param propiedades the propiedades
 	 */
-	public void toGenerate(MetaDataModel metaDataModel, String projectName, String folderProjectPath, Properties propiedades);
+	public void toGenerate(MetaDataModel metaDataModel, String projectName, String folderProjectPath, Properties propiedades)throws Exception;
 }

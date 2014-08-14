@@ -18,5 +18,5 @@ public interface IMetaDataReader {
 	 * @param pckgName the pckg name
 	 * @return the meta data model
 	 */
-	public MetaDataModel loadMetaDataModel(String path, String pckgName);
+	public MetaDataModel loadMetaDataModel(String path, String pckgName)throws Exception;
 }
