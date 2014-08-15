@@ -1,6 +1,7 @@
 package ${virginPackage}. ${modelName}.dto;
 import java.util.Date;
 import java.io.Serializable;
+import java.sql.*;
 import ${package}.${metaData.getRealClassName()};
 
 /**

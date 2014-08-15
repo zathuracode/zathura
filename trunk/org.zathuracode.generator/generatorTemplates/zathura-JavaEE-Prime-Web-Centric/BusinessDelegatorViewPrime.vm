@@ -2,6 +2,7 @@ package ${virginPackage}.presentation.businessDelegate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.sql.*;
 import java.math.BigDecimal;
 import ${packageOriginal}.dto.*;
 #foreach($metaData  in $dataModel.theMetaData)

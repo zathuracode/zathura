@@ -3,6 +3,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.math.BigDecimal;
+import java.sql.*;
 #foreach($metaData  in $dataModel.theMetaData)
     import ${packageOriginal}.control.${metaData.getRealClassName()}Logic;
     import ${packageOriginal}.control.I${metaData.getRealClassName()}Logic;
