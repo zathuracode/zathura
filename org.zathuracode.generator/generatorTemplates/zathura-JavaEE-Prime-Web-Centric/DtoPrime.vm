@@ -2,6 +2,7 @@ package ${virginPackage}. ${modelName}.dto;
 import javax.faces.event.ActionEvent;
 import java.util.Date;
 import java.io.Serializable;
+import java.sql.*;
 import ${package}.${metaData.getRealClassName()};
 
 /**

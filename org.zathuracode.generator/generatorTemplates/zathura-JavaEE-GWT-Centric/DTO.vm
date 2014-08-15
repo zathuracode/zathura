@@ -1,6 +1,7 @@
 package  ${virginPackage}.client.dto;
 
 import java.util.*;
+import java.sql.*;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 

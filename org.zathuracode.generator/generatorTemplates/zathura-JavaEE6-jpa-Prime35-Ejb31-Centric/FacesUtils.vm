@@ -35,6 +35,8 @@ package ${virginPackage}.utilities;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+import java.sql.Blob;
+import javax.sql.rowset.serial.SerialBlob;
 
 import javax.faces.FactoryFinder;
 import javax.faces.application.Application;
@@ -442,4 +444,31 @@ public class FacesUtils {
 					.getId());
 		}
 	}
+	
+	public static Blob checkBlob(Object input){
+		
+		Blob blob = null;
+		byte[] bytesFile = null;
+		
+		
+		if (input == null) {
+			return null;
+		}
+		UIInput inputValue = (UIInput) input;
+		if (inputValue.getValue() == null) {
+			return null;
+		}
+		if ((inputValue.getValue()).equals("")) {
+			return null;
+		}
+		try {
+			bytesFile=((String)inputValue.getValue()).getBytes();
+			blob=new SerialBlob(bytesFile);
+		} catch (Exception e) {
+			throw new ZMessManager().new NotValidFieldException(inputValue.getId());
+		}
+		return blob;
+		
+	}
+	
 }
