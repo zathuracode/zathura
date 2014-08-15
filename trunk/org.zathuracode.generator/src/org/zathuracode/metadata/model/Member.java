@@ -122,9 +122,12 @@ public class Member implements Comparable {
 			if (tmp.length > 1) {
 				// Is possible are java.lang.*, or java.util.* or java.math
 
+				
 				if ((tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("lang"))
 						|| (tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("util"))
-						|| (tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("math"))) {
+						|| (tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("math"))
+						|| (tmp[0].equalsIgnoreCase("java") && tmp[1].equalsIgnoreCase("sql"))
+					) {
 
 					ret = false;
 				} else {
