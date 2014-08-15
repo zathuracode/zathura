@@ -1659,16 +1659,18 @@ public class StringBuilder implements IStringBuilder {
 
 			}
 			else{
-				Field[] field = metaData.getComposeKey().getDeclaredFields();
-				for (Field field2 : field) {
-					String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,(field2.getType().toString()).length());
-					String memberClass = realType + " "+field2.getName();
-					parameterOut.add(memberClass);
-					composeKey.add(field2.getName());
-					Utilities.getInstance().dtoProperties.put(field2.getName(),realType);
-					Utilities.getInstance().nameMemberToDto.add(field2.getName());
-				}	
-
+				if(metaData!=null && metaData.getComposeKey()!=null && metaData.getComposeKey().getDeclaredFields()!=null && metaData.getComposeKey().getDeclaredFields().length>0){
+					Field[] field = metaData.getComposeKey().getDeclaredFields();
+					for (Field field2 : field) {
+						String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,(field2.getType().toString()).length());
+						String memberClass = realType + " "+field2.getName();
+						parameterOut.add(memberClass);
+						composeKey.add(field2.getName());
+						Utilities.getInstance().dtoProperties.put(field2.getName(),realType);
+						Utilities.getInstance().nameMemberToDto.add(field2.getName());
+					}	
+	
+				}
 			}
 		}
 
