@@ -1,0 +1,51 @@
+package  ${virginPackage}.client.dto;
+
+import java.util.*;
+import java.sql.*;
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+
+
+public class ${metaData.getRealClassName()}DTO implements IsSerializable{
+
+	private static final long serialVersionUID = 1L;
+
+	public ${metaData.getRealClassName()}DTO() {
+		super();
+	}
+	
+	
+	public ${metaData.getRealClassName()}DTO(#set( $count = 0 )
+		#foreach($member  in ${finalMembers})    	
+			#set( $count = $count + 1 )
+			#if( $count < ${finalMembers.size()})
+				${member.getType().getSimpleName()} ${member.getName()},
+			#else
+				${member.getType().getSimpleName()} ${member.getName()}
+			#end
+        #end) {
+           #foreach($member  in ${finalMembers})
+                this.${member.getName()} = ${member.getName()};
+           #end
+	}
+           #foreach($member2  in ${finalMembers})
+                private ${member2.getType().getSimpleName()} ${member2.getName()};
+           #end
+	private boolean isFetchOnly;
+
+#foreach(${member2}  in ${finalMembers})
+        public ${member2.getType().getSimpleName()} get${member2.getGetNameOfPrimaryName()}() {
+        return ${member2.getName()};
+        }
+        public void set${member2.getGetNameOfPrimaryName()}(${member2.getType().getSimpleName()} ${member2.getName()}) {
+        this.${member2.getName()} = ${member2.getName()};
+        }
+#end
+	public void setFetchOnly(boolean isFetchOnly) {
+		this.isFetchOnly = isFetchOnly;
+	}
+
+	public boolean isFetchOnly() {
+		return isFetchOnly;
+	}
+}

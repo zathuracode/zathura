@@ -1,0 +1,39 @@
+body {
+	background: none repeat scroll 0px 0px rgb(238, 255, 255);
+}
+
+#jpaLogo{
+	 width: auto;
+	height: auto;
+}
+
+#hibernateLogo{
+	width: 69px;
+	height: 57px;
+}
+
+#springLogo{
+	width: 90px;
+	height: 55px;
+}
+
+#ejbLogo{
+	width: auto;
+	height: auto; 
+}
+
+#jsfLogo{
+	width: 99px;
+	height: 45px; 
+}
+
+#primefacesLogo{ 
+	width: 160px; 
+	height: 38px;
+}
+
+#icefacesLogo{ 
+	width: 75px; 
+	height: 55px;
+}
+	
