@@ -3,6 +3,7 @@ package org.zathuracode.reverse.utilities;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FilePermission;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
@@ -22,6 +24,9 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 
+
+
+
 /*
 import net.sourceforge.squirrel_sql.fw.sql.ISQLAlias;
 import net.sourceforge.squirrel_sql.fw.sql.ISQLConnection;
@@ -31,6 +36,8 @@ import net.sourceforge.squirrel_sql.fw.sql.SQLDriver;
 import net.sourceforge.squirrel_sql.fw.sql.SQLDriverManager;
 */
 import org.apache.log4j.Logger;
+
+import com.sun.tools.javac.util.Paths;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -537,9 +544,42 @@ public class ZathuraReverseEngineeringUtil {
 	 * @return the file
 	 */
 	public static File createFolder(String path) {
-		File aFile = new File(path);
-		aFile.mkdirs();
-		return aFile;
+		
+		File file = new File(path);
+		
+		
+        
+        //set application user permissions to 455
+        file.setExecutable(false);
+        file.setReadable(true);
+        file.setWritable(true);
+         
+        //change permission to 777 for all the users
+        //no option for group and others
+        file.setExecutable(false, false);
+        file.setReadable(true, false);
+        file.setWritable(true, false);
+        
+        /*
+        //using PosixFilePermission to set file permissions 777
+        Set<PosixFilePermission> perms = new HashSet<PosixFilePermission>();
+        //add owners permission
+        perms.add(PosixFilePermission.OWNER_READ);
+        perms.add(PosixFilePermission.OWNER_WRITE);
+        perms.add(PosixFilePermission.OWNER_EXECUTE);
+        //add group permissions
+        perms.add(PosixFilePermission.GROUP_READ);
+        perms.add(PosixFilePermission.GROUP_WRITE);
+        perms.add(PosixFilePermission.GROUP_EXECUTE);
+        //add others permissions
+        perms.add(PosixFilePermission.OTHERS_READ);
+        perms.add(PosixFilePermission.OTHERS_WRITE);
+        perms.add(PosixFilePermission.OTHERS_EXECUTE);
+         
+        Files.setPosixFilePermissions(Paths.get(path), perms);
+		*/
+        file.mkdirs();
+		return file;
 	}
 
 	/**
