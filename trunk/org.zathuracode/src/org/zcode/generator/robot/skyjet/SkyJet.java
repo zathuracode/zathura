@@ -31,7 +31,7 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 	private Properties properties;
 	private String webRootPath;
 	
-	private final static String mainFolder="robotTwo";
+	private final static String mainFolder="skyJet";
 	
 	
 	/// final static String pathTemplates;
