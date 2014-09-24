@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zathura-generator xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xmlns='http://lidis.usbcali.edu.co/schema/zathura-generator-factory-config'
+	xsi:schemaLocation='http://lidis.usbcali.edu.co/schema/zathura-generator-factory-config zathura-generator-factory-config.xsd'>
+
+
+	<generator>
+		<name>Jender</name>
+		<gui-name>Jender</gui-name>
+		<class>org.zcode.generator.robot.jender.JenderRobot</class>
+		<persistence>hibernateCore</persistence>
+		<zathuraVersion>4.0</zathuraVersion>
+		<description>
+		<![CDATA[
+			<html>
+			    <head>
+			        <title>Jender</title>
+			        <meta charset="UTF-8">
+			        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+			    </head>
+			    <body>
+			        <h3>The Jender Robot</h3>
+			        <p>Built JavaEE applications using the following frameworks</p>
+			        <ul>
+			            <li>Primefaces 5.0</li>
+			            <li>Mojarra 2.2.6</li>
+			            <li>Spring Framework 4.1.0</li>			           
+			            <li>Hibernate 4.3.6</li>
+			        </ul>
+			    </body>
+			</html>
+		]]>
+		</description>
+	</generator>
+	
+	<generator>
+		<name>SkyJet</name>
+		<gui-name>SkyJet</gui-name>
+		<class>org.zcode.generator.robot.skyjet.SkyJet</class>
+		<persistence>jpa</persistence>
+		<zathuraVersion>4.0</zathuraVersion>
+		<description>
+		<![CDATA[
+				<html>
+				    <head>
+				        <title>SkyJet</title>
+				        <meta charset="UTF-8">
+				        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+				    </head>
+				    <body>
+				        <h3>The SkyJet Robot</h3>
+				        <p>Built JavaEE applications using the following frameworks</p>
+				        <ul>
+				           	<li>Primefaces 5.0</li>
+				           	<li>Mojarra 2.2.6</li>
+			            	<li>Spring Framework 4.1.0</li>
+			            	<li>Hibernate 4.3.6</li>
+				            <li>JPA 2.0</li>
+				        </ul>
+				    </body>
+				</html>
+		]]>
+		</description>
+	</generator>
+	
+	<generator>
+		<name>RobotThree</name>
+		<gui-name>Wall-J</gui-name>
+		<class>org.zcode.generator.robot.wallj.WallJ</class>
+		<persistence>jpa</persistence>
+		<zathuraVersion>4.0</zathuraVersion>
+		<description>
+		<![CDATA[
+				<html>
+				    <head>
+				        <title>Wall-J</title>
+				        <meta charset="UTF-8">
+				        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+				    </head>
+				    <body>
+				        <h3>The Wall-J Robot</h3>
+				        <p>Built JavaEE applications using the following frameworks</p>
+				        <ul>
+				            <li>Primefaces 5.0</li>
+				            <li>Mojarra 2.2.6</li>
+				            <li>EJB 3.1 Lite</li>
+				            <li>JPA 2.0</li>
+				        </ul>
+				    </body>
+				</html>
+		]]>
+		</description>
+	</generator>
+
+</zathura-generator>
