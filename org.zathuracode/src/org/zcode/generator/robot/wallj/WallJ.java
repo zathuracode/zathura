@@ -31,7 +31,7 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 	private VelocityEngine ve;
 	private String webRootPath;
 	
-	private final static String mainFolder="robotThree";
+	private final static String mainFolder="wallJ";
 	
 	
 	/// final static String pathTemplates;

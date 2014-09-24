@@ -32,7 +32,7 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 	private VelocityEngine ve;
 	private String webRootPath;
 	
-	private final static String mainFolder="robotOne";
+	private final static String mainFolder="jender";
 	
 	
 	/// final static String pathTemplates;
