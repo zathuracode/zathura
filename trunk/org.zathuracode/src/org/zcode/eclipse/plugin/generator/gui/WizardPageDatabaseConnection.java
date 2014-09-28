@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
+import org.zcode.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import org.zcode.eclipse.plugin.generator.utilities.ConnectionsUtils;
 import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zcode.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
@@ -195,8 +196,8 @@ public class WizardPageDatabaseConnection extends WizardPage {
 				String selected = fd.open();
 				listJARs.add(selected);
 				try {
-					EclipseGeneratorUtil.loadJarSystem(selected);
-					EclipseGeneratorUtil.loadJarSystem(selected);
+					EclipseGeneratorUtil.loadJarSystem(selected,txtDriverClassName.getText());
+					EclipseGeneratorUtil.loadJarSystem(selected,txtDriverClassName.getText());
 					validatePageComplete();
 				} catch (Exception e1) {
 					ZathuraGeneratorLog.logError(e1);
@@ -236,7 +237,12 @@ public class WizardPageDatabaseConnection extends WizardPage {
 				String driverClassName = txtDriverClassName.getText();
 				String user = txtUserName.getText();
 				String password = txtPassword.getText();
-				try {
+				
+				try {			
+					
+					EclipseGeneratorUtil.loadJarSystem(listJARs.getItems(),txtDriverClassName.getText());
+					
+					
 					ZathuraReverseEngineeringUtil.testDriver(url, driverClassName, user, password);
 					MessageDialog.openInformation(getShell(), Messages.WizardPageDatabaseConnection_18, Messages.WizardPageDatabaseConnection_19);
 
