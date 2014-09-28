@@ -4,11 +4,14 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.sql.Driver;
+import java.sql.DriverManager;
 import java.util.List;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
+import org.zcode.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import org.zcode.eclipse.plugin.generator.gui.WizardMainZathura;
 import org.zcode.generator.exceptions.GeneratorNotFoundException;
 import org.zcode.generator.factory.ZathuraGeneratorFactory;
@@ -301,7 +304,7 @@ public class EclipseGeneratorUtil {
 	 * @throws Exception the exception
 	 */
 	@SuppressWarnings("deprecation")
-	public static void loadJarSystem(String jarLocation) throws Exception {
+	public static void loadJarSystem(String jarLocation,String driverClassName) throws Exception {
 
 		// Para que funcione con el RPC JDP se debe poner Eclipse-BuddyPolicy:
 		// appﬂ
@@ -319,16 +322,64 @@ public class EclipseGeneratorUtil {
 			for (int i = 0; i < files.length; i++) {
 				URL url = files[i].toURL();
 				addURL.invoke(cl, new Object[] { url });
-				log.info("Summary:");
-				log.info("\tLoaded:\t" + files[i].getName());
+				
+				URLClassLoader classLoader = new URLClassLoader(new URL[]{url}, cl);
+				Driver driver = (Driver) Class.forName(driverClassName, true, classLoader).newInstance();
+				DriverManager.registerDriver(driver);
+				
+				
+				log.info("Loaded JRE:" + files[i].getName());
 			}
 
 			// at this point, the default class loader has all the jars you
 			// indicated
+			//TODO debo hacer la carga de jars en el Bundle
+			
+			ClassLoader bundleClassLoader =  ZathuraGeneratorActivator.getDefault().getBundle().getClass().getClassLoader();
+			
+			for (int i = 0; i < files.length; i++) {
+				URL url = files[i].toURL();
+				addURL.invoke(bundleClassLoader, new Object[] { url });				
+			
+				
+			
+				URLClassLoader classLoader = new URLClassLoader(new URL[]{url}, bundleClassLoader);
+				Driver driver = (Driver) Class.forName(driverClassName, true, classLoader).newInstance();
+				DriverManager.registerDriver(driver);
+				ZathuraGeneratorActivator.getDefault().getBundle().loadClass(driverClassName);
+				
+				
+				log.info("Loaded Bundle:" + files[i].getName());
+			}
+			
+			
+			
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			// throw e;
+			throw e;
 		}
+	}
+	
+	/**
+	 * Carga una lista de Jars en el JRE y El bundle del Plugin
+	 * @param jarLocation
+	 * @throws Exception
+	 */
+	public static void loadJarSystem(String []jarLocation,String driverClassName) throws Exception {
+		for (String path : jarLocation) {
+			loadJarSystem(path,driverClassName);
+		}
+	}
+
+	
+	
+	/**
+	 * Carga una clase en el Bundle del plugin de eclipse
+	 * @param className
+	 * @throws Exception
+	 */
+	public static void loadDriverJarBundle(String className)throws Exception{
+		ZathuraGeneratorActivator.getDefault().getBundle().loadClass(className);
 	}
 
 	/**

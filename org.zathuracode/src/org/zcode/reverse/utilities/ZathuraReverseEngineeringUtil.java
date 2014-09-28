@@ -639,8 +639,7 @@ public class ZathuraReverseEngineeringUtil {
 	 *             the exception
 	 */
 
-	public static Connection getConnection(String url, String driverClassName,String user, String password) throws ClassNotFoundException,
-			SQLException, Exception {
+	public static Connection getConnection(String url, String driverClassName,String user, String password) throws ClassNotFoundException,SQLException, Exception {
 
 		connection=DriverManager.getConnection(url, user, password);
 		

@@ -246,6 +246,7 @@ public class ResourceManager extends SWTResourceManager {
 			Class<?> bundleClass = Class.forName("org.osgi.framework.Bundle"); //$NON-NLS-1$
 			Class<?> bundleContextClass = Class.forName("org.osgi.framework.BundleContext"); //$NON-NLS-1$
 			if (bundleContextClass.isAssignableFrom(plugin.getClass())) {
+				
 				Method getBundleMethod = bundleContextClass.getMethod("getBundle", new Class[0]); //$NON-NLS-1$
 				Object bundle = getBundleMethod.invoke(plugin, new Object[0]);
 				//

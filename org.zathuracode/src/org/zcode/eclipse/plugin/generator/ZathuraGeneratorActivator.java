@@ -38,8 +38,9 @@ public class ZathuraGeneratorActivator extends AbstractUIPlugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-
+		
 		plugin = this;
+		
 	}
 
 	/*
@@ -61,6 +62,7 @@ public class ZathuraGeneratorActivator extends AbstractUIPlugin {
 	 * @return the shared instance
 	 */
 	public static ZathuraGeneratorActivator getDefault() {
+		
 		return plugin;
 	}
 
