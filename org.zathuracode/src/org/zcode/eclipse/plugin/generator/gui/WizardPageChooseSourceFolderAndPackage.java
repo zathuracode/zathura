@@ -34,6 +34,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zcode.generator.utilities.GeneratorUtil;
+import org.zcode.generator.utilities.JalopyCodeFormatter;
 import org.zcode.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 
@@ -210,6 +211,7 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 					String pathFilePOM = project.getLocation().toString() + GeneratorUtil.slash + GeneratorUtil.pomFile;
 					EclipseGeneratorUtil.pomXmlFile = new File(pathFilePOM);
 					EclipseGeneratorUtil.isMavenProject = EclipseGeneratorUtil.pomXmlFile.exists();
+					EclipseGeneratorUtil.project=project;
 					
 					if (EclipseGeneratorUtil.isMavenProject) {						
 						txtLib.setText("pom.xml"); //$NON-NLS-1$
@@ -245,7 +247,7 @@ public class WizardPageChooseSourceFolderAndPackage extends WizardPage {
 				wizardMainNewPackageWizardPage=new WizardMainNewPackageWizard();
 			    wizardMainNewPackageWizardPage.setiProject(project);
 			    
-			    
+			   	    
 			   
 				 WizardDialog dlg = new WizardDialog(getShell(),wizardMainNewPackageWizardPage);
 				 
