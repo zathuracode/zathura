@@ -2,10 +2,6 @@ package org.zcode.generator.utilities;
 
 import java.io.File;
 
-
-
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +17,8 @@ import de.hunsicker.jalopy.Jalopy;
 public class JalopyCodeFormatter {
 
 	/** The log. */
-	private static Logger log = LoggerFactory.getLogger(JalopyCodeFormatter.class);
+	private static Logger log = LoggerFactory
+			.getLogger(JalopyCodeFormatter.class);
 
 	/**
 	 * The Constructor.
@@ -33,7 +30,8 @@ public class JalopyCodeFormatter {
 	/**
 	 * Format java code folder.
 	 *
-	 * @param pathFolder the path folder
+	 * @param pathFolder
+	 *            the path folder
 	 */
 	public static void formatJavaCodeFolder(String pathFolder) {
 		log.info("formatJavaCodeFolder");
@@ -63,17 +61,18 @@ public class JalopyCodeFormatter {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("Fallo Formateo de Codigo con Jalopy:" + e.toString());
+			log.info("Error in formatJavaCodeFolder:"+ e.toString());
 		}
 	}
 
 	/**
 	 * Format java code file.
 	 *
-	 * @param pathFiles the path files
+	 * @param pathFiles
+	 *            the path files
 	 */
 	public static void formatJavaCodeFile(String pathFiles) {
-		log.info("formatJavaCodeFile");
+		log.info("formatJavaCodeFile in file:"+pathFiles);
 		Jalopy jalopy = new Jalopy();
 		try {
 			if (pathFiles.endsWith(".java")) {
@@ -96,23 +95,24 @@ public class JalopyCodeFormatter {
 				System.gc();
 			}
 		} catch (Exception e) {
-			System.out.println("Fallo Formateo de Codigo con Jalopy:" + e.toString());
+			log.info("Error in formatJavaCodeFile:"	+ e.toString());
 		}
 	}
-	
+
 	/**
 	 * The main method.
 	 *
-	 * @param args the args
+	 * @param args
+	 *            the args
 	 */
 	public static void main(String[] args) {
-		
+
 		try {
 			formatJavaCodeFile("C:\\Workspaces\\runtime-EclipseApplication\\demo-spring\\src\\com\\vortexbird\\demo\\presentation\\businessDelegate\\BusinessDelegatorView.java");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }
