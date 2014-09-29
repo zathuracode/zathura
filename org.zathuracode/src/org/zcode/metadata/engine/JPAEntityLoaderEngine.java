@@ -26,7 +26,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.metadata.model.GeneratedValueMember;
 import org.zcode.metadata.model.ManyToManyMember;
 import org.zcode.metadata.model.ManyToOneMember;
@@ -50,7 +51,7 @@ import org.zcode.metadata.utilities.MetaDataUtil;
 public class JPAEntityLoaderEngine implements IMetaDataReader {
 
 	/** The log. */
-	private static Logger log = Logger.getLogger(JPAEntityLoaderEngine.class);
+	private static final Logger log = LoggerFactory.getLogger(JPAEntityLoaderEngine.class);
 
 	/* (non-Javadoc)
 	 * @see org.zathuracode.metadata.reader.IMetaDataReader#loadMetaDataModel(java.lang.String, java.lang.String)
@@ -266,7 +267,7 @@ public class JPAEntityLoaderEngine implements IMetaDataReader {
 							log.info("primary key:" + memberName);
 							metaData.setPrimaryKey(mb);
 						}// TODO El @IdClass se debe mirar que pasa cuando
-						// sea @IdClass
+						
 					}
 				}
 			}

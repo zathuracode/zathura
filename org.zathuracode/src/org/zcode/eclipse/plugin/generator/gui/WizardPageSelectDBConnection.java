@@ -127,10 +127,8 @@ public class WizardPageSelectDBConnection extends WizardPage {
 					if(getNextPage() instanceof WizardPageSelectTables){
 						WizardPageSelectTables wizardSelectTables=(WizardPageSelectTables)getNextPage();						
 						wizardSelectTables.resetForm();					
-//					}else if(getNextPage() instanceof WizardPageSelectStoreProcedure){
-//						WizardPageSelectStoreProcedure wizardPageSelectStoreProcedure=(WizardPageSelectStoreProcedure)getNextPage();
-//						wizardPageSelectStoreProcedure.resetForm();
-				}
+
+					}
 					
 					
 					validatePageComplete();

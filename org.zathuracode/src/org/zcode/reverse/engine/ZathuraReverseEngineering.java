@@ -7,7 +7,9 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+
+
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
@@ -18,6 +20,8 @@ import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.reverse.utilities.ZathuraReverseEngineeringUtil;
 import org.zcode.reverse.utilities.ZathuraReverseJarLoader;
 
@@ -43,7 +47,8 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	public final static String CATALOG_SCHEMA = "3";
 
 	/** The log. */
-	private static Logger log = Logger.getLogger(ZathuraReverseEngineering.class);
+    private static final Logger log = LoggerFactory.getLogger(ZathuraReverseEngineering.class);
+
 
 	/** The Constant reverseTemplatesPath. */
 	private final static String reverseTemplatesPath = ZathuraReverseEngineeringUtil.getReverseTemplates();
@@ -124,8 +129,8 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		doTemplate();
 
 		try {
-			ZathuraReverseJarLoader.loadJar2(connectionDriverJarPath);
-			ZathuraReverseJarLoader.loadJar2(connectionDriverJarPath);
+			ZathuraReverseJarLoader.loadJarSystem(connectionDriverJarPath, connectionDriverClass);
+			ZathuraReverseJarLoader.loadJarSystem(connectionDriverJarPath, connectionDriverClass);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

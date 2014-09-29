@@ -14,7 +14,8 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.generator.exceptions.GeneratorNotFoundException;
 import org.zcode.generator.model.GeneratorModel;
 import org.zcode.generator.model.IZathuraGenerator;
@@ -31,7 +32,7 @@ import org.zcode.generator.utilities.GeneratorUtil;
 public class ZathuraGeneratorFactory {
 
 	/** Log4j. */
-	private static Logger log = Logger.getLogger(ZathuraGeneratorFactory.class);
+	private static final Logger log = LoggerFactory.getLogger(ZathuraGeneratorFactory.class);
 
 	/** xml file path. */
 	private static String xmlConfigFactoryPath = GeneratorUtil.getXmlConfigFactoryPath();
@@ -46,19 +47,19 @@ public class ZathuraGeneratorFactory {
 		try {
 			loadZathuraGenerators();
 		} catch (FileNotFoundException e) {
-			log.fatal(e.getMessage());
+			log.error(e.getMessage());
 			e.printStackTrace();
 		} catch (XMLStreamException e) {
-			log.fatal(e.getMessage());
+			log.error(e.getMessage());
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			log.fatal(e.getMessage());
+			log.error(e.getMessage());
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			log.fatal(e.getMessage());
+			log.error(e.getMessage());
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			log.fatal(e.getMessage());
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 	}

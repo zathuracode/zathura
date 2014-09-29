@@ -9,8 +9,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 
-import org.apache.log4j.Logger;
-import org.zcode.metadata.engine.JPAEntityLoaderEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.metadata.model.Member;
 
 
@@ -24,7 +24,7 @@ import org.zcode.metadata.model.Member;
 public class MetaDataUtil {
 
 	/** The log. */
-	private static Logger log = Logger.getLogger(JPAEntityLoaderEngine.class);
+	private static Logger log = LoggerFactory.getLogger(MetaDataUtil.class);
 
 	/**
 	 * Removes the member.

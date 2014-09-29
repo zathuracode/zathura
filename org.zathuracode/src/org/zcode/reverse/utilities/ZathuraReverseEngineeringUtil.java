@@ -35,7 +35,12 @@ import net.sourceforge.squirrel_sql.fw.sql.ITableInfo;
 import net.sourceforge.squirrel_sql.fw.sql.SQLDriver;
 import net.sourceforge.squirrel_sql.fw.sql.SQLDriverManager;
 */
-import org.apache.log4j.Logger;
+
+
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.tools.javac.util.Paths;
 
@@ -112,8 +117,8 @@ public class ZathuraReverseEngineeringUtil {
 	String[] types = { "TABLE", "VIEW", "SYNONYM", "ALIAS" };
 
 	/** Log4j. */
-	private static Logger log = Logger
-			.getLogger(ZathuraReverseEngineeringUtil.class);
+    private static final Logger log = LoggerFactory.getLogger(ZathuraReverseEngineeringUtil.class);
+
 
 	/** Generator Model. */
 	private static HashMap<String, DatabaseTypeModel> theZathuraDataBaseTypes = null;
@@ -454,40 +459,7 @@ public class ZathuraReverseEngineeringUtil {
 		return theZathuraDataBaseTypes.get(name);
 	}
 
-	/**
-	 * The main method.
-	 * 
-	 * @param args
-	 *            the args
-	 */
-	public static void main(String[] args) {
-		try {
-			HashMap<String, DatabaseTypeModel> theZathuraDataBaseTypes = loadZathuraDatabaseTypes();
-
-			for (DatabaseTypeModel databaseTypeModel : theZathuraDataBaseTypes
-					.values()) {
-				System.out.println(databaseTypeModel.getName());
-				System.out.println(databaseTypeModel.getUrl());
-				System.out.println(databaseTypeModel.getDriverClassName());
-			}
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (XMLStreamException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 
 	/**
 	 * Validar package.
