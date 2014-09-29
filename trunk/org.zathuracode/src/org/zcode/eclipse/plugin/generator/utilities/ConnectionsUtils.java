@@ -9,7 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.generator.utilities.GeneratorUtil;
 
 
@@ -30,7 +34,7 @@ public class ConnectionsUtils {
 	private static Properties properties = new java.util.Properties();
 
 	/** Log4j. */
-	private static Logger log = Logger.getLogger(ConnectionsUtils.class);
+	private static final Logger log = LoggerFactory.getLogger(ConnectionsUtils.class);
 
 	/** xml file path. */
 	private static String xmlConfigConnections = GeneratorUtil.getXmlConfig() + "zathura-connections.properties";

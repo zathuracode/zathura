@@ -9,8 +9,9 @@ import java.sql.DriverManager;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import org.zcode.eclipse.plugin.generator.gui.WizardMainZathura;
 import org.zcode.generator.exceptions.GeneratorNotFoundException;
@@ -36,7 +37,7 @@ import org.zcode.reverse.utilities.ZathuraReverseEngineeringUtil;
 public class EclipseGeneratorUtil {
 
 	/** The log. */
-	private static Logger log = Logger.getLogger(EclipseGeneratorUtil.class);
+	private static final Logger log = LoggerFactory.getLogger(EclipseGeneratorUtil.class);
 
 	/** The project. */
 	public static IProject project;
@@ -333,7 +334,7 @@ public class EclipseGeneratorUtil {
 
 			// at this point, the default class loader has all the jars you
 			// indicated
-			//TODO debo hacer la carga de jars en el Bundle
+			//Carga de jars en el Bundle del contenedor OSGI
 			
 			ClassLoader bundleClassLoader =  ZathuraGeneratorActivator.getDefault().getBundle().getClass().getClassLoader();
 			

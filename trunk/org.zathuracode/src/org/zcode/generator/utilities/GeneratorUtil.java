@@ -17,13 +17,14 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.eclipse.plugin.generator.utilities.ConnectionsUtils;
 import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 
@@ -44,7 +45,7 @@ public class GeneratorUtil {
 	private final static String generatorExtPath="ext";
 
 	/** The log. */
-	private static Logger log = Logger.getLogger(GeneratorUtil.class);
+	private static final Logger log = LoggerFactory.getLogger(GeneratorUtil.class);
 
 	/** The slash. */
 	public static String slash = System.getProperty("file.separator");
@@ -651,7 +652,7 @@ public class GeneratorUtil {
 					copyFolder(fileSource.getAbsolutePath() + slash, target + fileSource.getName() + slash);
 				} else {
 					copy(fileSource.getAbsolutePath(), target + fileSource.getName());
-					log.debug(fileSource);
+					log.debug(fileSource.toString());
 				}
 			}
 

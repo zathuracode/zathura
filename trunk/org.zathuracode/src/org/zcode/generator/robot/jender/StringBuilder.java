@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.collections.ListUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.generator.utilities.GeneratorUtil;
-import org.zcode.metadata.engine.JPAEntityLoaderEngine;
 import org.zcode.metadata.model.ManyToOneMember;
 import org.zcode.metadata.model.Member;
 import org.zcode.metadata.model.MetaData;
@@ -25,7 +25,7 @@ import org.zcode.metadata.model.MetaData;
 public class StringBuilder implements IStringBuilder {
 	
 	
-	private static Logger log = Logger.getLogger(StringBuilder.class);
+	private static final Logger log = LoggerFactory.getLogger(StringBuilder.class);
 
 	/** The string builder for id. */
 	StringBuilderForId stringBuilderForId;

@@ -6,10 +6,11 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zcode.generator.model.IZathuraGenerator;
 import org.zcode.generator.utilities.GeneratorUtil;
@@ -24,7 +25,8 @@ import org.zcode.metadata.model.MetaDataModel;
  * @version 1.0
  */
 public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
-	private static Logger log= Logger.getLogger(SkyJet.class);
+	
+	private static final Logger log = LoggerFactory.getLogger(SkyJet.class);
 	//private static String pathTemplates;
 	private String paqueteVirgen;
 	private VelocityEngine ve;
@@ -210,7 +212,7 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			for (MetaData metaData : listMetaData) {
 
 				log.info(metaData.getRealClassName());
-				log.info(Utilities.getInstance().isFinalParamForViewDatesInList());
+			
 				log.info("prueba");
 
 

@@ -2,7 +2,12 @@ package org.zcode.generator.utilities;
 
 import java.io.File;
 
-import org.apache.log4j.Logger;
+
+
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.hunsicker.jalopy.Jalopy;
 
@@ -16,7 +21,7 @@ import de.hunsicker.jalopy.Jalopy;
 public class JalopyCodeFormatter {
 
 	/** The log. */
-	private static Logger log = Logger.getLogger(JalopyCodeFormatter.class);
+	private static Logger log = LoggerFactory.getLogger(JalopyCodeFormatter.class);
 
 	/**
 	 * The Constructor.

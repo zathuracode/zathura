@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -22,7 +24,7 @@ import org.apache.log4j.Logger;
  */
 public class DatabaseUtilities {
 	
-	private static Logger log=Logger.getLogger(DatabaseUtilities.class);
+    private static final Logger log = LoggerFactory.getLogger(DatabaseUtilities.class);
 
 	/**
 	 * Consulta los catalogos de una base de datos.

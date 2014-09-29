@@ -6,10 +6,14 @@ import java.io.StringWriter;
 import java.util.List;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+
+
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zcode.generator.model.IZathuraGenerator;
 import org.zcode.generator.utilities.GeneratorUtil;
@@ -25,7 +29,8 @@ import org.zcode.metadata.model.MetaDataModel;
  * @version 1.0
  */
 public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
-	private static Logger log=Logger.getLogger(JenderRobot.class);
+	
+	private static final Logger log = LoggerFactory.getLogger(JenderRobot.class);
 	//private static String pathTemplates;
 	private Properties properties;
 	private String virginPackageInHd;

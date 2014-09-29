@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import javax.xml.stream.XMLStreamException;
 
-import org.apache.log4j.Logger;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -21,6 +20,8 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import org.zcode.eclipse.plugin.generator.utilities.ConnectionsUtils;
 import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
@@ -40,7 +41,7 @@ import org.zcode.reverse.utilities.ZathuraReverseJarLoader;
  */
 public class WizardPageDatabaseConnection extends WizardPage {
 	
-	private static Logger log= Logger.getLogger(WizardPageDatabaseConnection.class);
+	private static final Logger log = LoggerFactory.getLogger(WizardPageDatabaseConnection.class);
 
 
 	/** The zathura database types. */
