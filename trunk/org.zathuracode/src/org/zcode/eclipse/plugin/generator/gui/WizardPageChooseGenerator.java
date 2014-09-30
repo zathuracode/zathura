@@ -66,12 +66,12 @@ public class WizardPageChooseGenerator extends WizardPage {
 
 		final Group generatorChoiseGroup = new Group(container, SWT.NONE);
 		generatorChoiseGroup.setText(Messages.WizardPageChooseGenerator_3);
-		generatorChoiseGroup.setBounds(10, 10, 583, 400);
+		generatorChoiseGroup.setBounds(10, 10, 580, 348);
 		
 		
 		final Label lblGeneratorVersion3_1 = new Label(generatorChoiseGroup, SWT.NONE);
 		lblGeneratorVersion3_1.setText(Messages.WizardPageChooseGenerator_6);
-		lblGeneratorVersion3_1.setBounds(10, 10, 99, 17);
+		lblGeneratorVersion3_1.setBounds(10, 22, 99, 17);
 		
 		listGeneratorsVersion3_1 = new List(generatorChoiseGroup, SWT.BORDER);
 		listGeneratorsVersion3_1.addSelectionListener(new SelectionAdapter() {
@@ -92,10 +92,10 @@ public class WizardPageChooseGenerator extends WizardPage {
 				}
 			}
 		});
-		listGeneratorsVersion3_1.setBounds(10, 23, 213, 299);
+		listGeneratorsVersion3_1.setBounds(10, 45, 204, 277);
 
 		bwrDescription = new Browser(generatorChoiseGroup, SWT.NONE);
-		bwrDescription.setBounds(227, 23, 342, 299);
+		bwrDescription.setBounds(227, 45, 342, 277);
 
 		//loadListGeneratorsVersion3_0();
 		loadListGeneratorsVersion3_1();
