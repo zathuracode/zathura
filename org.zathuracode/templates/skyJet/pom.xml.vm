@@ -20,10 +20,12 @@
 #end
 
 	<properties>
-       <hibernate.version>4.3.6.Final</hibernate.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+       	<hibernate.version>4.3.6.Final</hibernate.version>
         <primefaces.version>5.0</primefaces.version>
 		<spring.version>4.1.0.RELEASE</spring.version>
-		<spring.security.version>3.2.5.RELEASE</spring.security.version>	
+		<spring.security.version>3.2.5.RELEASE</spring.security.version>
+		<mojarra.version>2.2.6</mojarra.version>	
     </properties>
 	
 	<dependencies>
@@ -258,7 +260,7 @@
 		<dependency>
 		  <groupId>org.glassfish</groupId>
 		  <artifactId>javax.faces</artifactId>
-		  <version>2.1.24</version>
+		  <version>${mojarra.version}</version>
 		</dependency>
 		<dependency>
 		  <groupId>commons-beanutils</groupId>
