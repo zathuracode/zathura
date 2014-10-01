@@ -125,6 +125,10 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			String domainName) {		
 
 		try {
+			
+			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
+			GeneratorUtil.setContextClassLoader();
+			
 	
 			ve = new VelocityEngine();
 			Properties propiedades = new Properties();

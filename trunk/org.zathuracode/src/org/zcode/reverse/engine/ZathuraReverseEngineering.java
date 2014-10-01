@@ -151,9 +151,9 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	private void doTemplate() throws Exception{
 
 		try {
-			//TODO OJOJOJO
-			//Thread thread = Thread.currentThread();
-			//thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+			
+			Thread thread = Thread.currentThread();
+			thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
 			
 			ve = new VelocityEngine();
 
