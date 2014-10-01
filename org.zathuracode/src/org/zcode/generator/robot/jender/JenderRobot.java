@@ -86,7 +86,7 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 		String pathSpringSecurity= librariesPath+"spring-security3.2.5"+GeneratorUtil.slash;
 		
 		String pathSL4J= librariesPath+"slf4j1.7.5"+GeneratorUtil.slash;
-		String pathJamon= librariesPath+"jamon2.74"+GeneratorUtil.slash;
+		String pathJamon= librariesPath+"jamon2.79"+GeneratorUtil.slash;
 		String pathMojarra= librariesPath+"mojarra2.2.6"+GeneratorUtil.slash;
 		String pathApacheCommons= librariesPath+"apache-commons"+GeneratorUtil.slash;
 		String pathAopAlliance= librariesPath+"aopalliance1.0"+GeneratorUtil.slash;
