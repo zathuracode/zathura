@@ -750,7 +750,7 @@ public class GeneratorUtil {
 	}
 	
 	
-	public static void doPomXml(VelocityContext context,VelocityEngine ve){
+	public static void doPomXml(VelocityContext context,VelocityEngine ve)throws Exception{
 		log.info("Begin doPomXml");
 		
 		Template pomTemplate = null;
@@ -761,15 +761,20 @@ public class GeneratorUtil {
 		} catch (ResourceNotFoundException rnfe) {
 			// couldn't find the template
 			rnfe.printStackTrace();
+			log.info("doPomXml",rnfe);
 		} catch (ParseErrorException pee) {
 			// syntax error: problem parsing the template
 			pee.printStackTrace();
+			log.info("doPomXml",pee);
 		} catch (MethodInvocationException mie) {
 			// something invoked in the template
 			// threw an exception
 			mie.printStackTrace();
+			log.info("doPomXml",mie);
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.info("doPomXml",e);
+			throw e;
 		}
 		
 		try {
@@ -932,6 +937,24 @@ public class GeneratorUtil {
 			log.info("Error: " + e.getMessage());
 		}
 		
-	}	
+	}
+	
+	/**
+	 * Carga en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
+	 */
+	public static void setContextClassLoader(){
+		//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
+		if(EclipseGeneratorUtil.bundleClassLoader!=null){
+			Thread thread = Thread.currentThread();
+			thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+		}else{
+			Thread thread = Thread.currentThread();
+			thread.setContextClassLoader(GeneratorUtil.class.getClassLoader());
+		}
+		
+	}
+	
+	
+	
 		
 }

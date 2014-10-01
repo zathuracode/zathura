@@ -9,6 +9,7 @@ import java.util.Properties;
 
 
 
+
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -49,8 +50,12 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 
 
 	@Override
-	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades) throws Exception{
+	public void toGenerate(MetaDataModel metaDataModel, String projectName,	String folderProjectPath, Properties propiedades) throws Exception{
+		
+		
+		//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
+		GeneratorUtil.setContextClassLoader();
+		
 
 		String jpaPckgName = propiedades.getProperty("jpaPckgName");
 		String domainName = jpaPckgName.substring(0, jpaPckgName.indexOf("."));
@@ -139,7 +144,9 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 
 		try {
 	
-			
+			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
+			Thread thread = Thread.currentThread();
+			thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
 			
 			ve = new VelocityEngine();
 			Properties propiedades = new Properties();
