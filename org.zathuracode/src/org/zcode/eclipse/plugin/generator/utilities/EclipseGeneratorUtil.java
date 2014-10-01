@@ -42,6 +42,8 @@ public class EclipseGeneratorUtil {
 	/** The project. */
 	public static IProject project;
 	
+	public static ClassLoader bundleClassLoader =  ZathuraGeneratorActivator.getDefault().getBundle().getClass().getClassLoader();
+	
 	/** The project name. */
 	public static String projectName;
 	
@@ -228,8 +230,11 @@ public class EclipseGeneratorUtil {
 	/**
 	 * Generate jpa reverse engineering.
 	 */
-	public static void generateJPAReverseEngineering() {
+	public static void generateJPAReverseEngineering()throws Exception{
 
+		try {
+			
+		
 		Properties connectionProperties = new Properties();
 
 		destinationDirectory = workspaceFolderPath + destinationDirectory + File.separatorChar;
@@ -255,6 +260,11 @@ public class EclipseGeneratorUtil {
 
 		IZathuraReverseEngineering mappingTool = new ZathuraReverseEngineering();
 		mappingTool.makePojosJPA_V1_0(connectionProperties, tablesList);
+		
+		} catch (Exception e) {
+			log.error("generateJPAReverseEngineering",e);
+			throw e;
+		}
 
 	}
 
@@ -292,7 +302,8 @@ public class EclipseGeneratorUtil {
 			metaDataModel = entityLoader.loadMetaDataModel(destinationDirectory, companyDomainName);
 
 		} catch (MetaDataReaderNotFoundException e) {
-			// Ignore
+			log.error("generateJPAReverseEngineeringTMP",e);
+			throw e;
 		} finally {
 			ZathuraReverseEngineeringUtil.resetTempFiles(destinationDirectory);
 		}

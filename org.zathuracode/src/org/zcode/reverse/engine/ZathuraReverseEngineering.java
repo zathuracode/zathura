@@ -10,6 +10,8 @@ import java.util.Properties;
 
 
 
+
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
@@ -22,6 +24,8 @@ import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
+import org.zcode.generator.robot.jender.JenderRobot;
 import org.zcode.reverse.utilities.ZathuraReverseEngineeringUtil;
 import org.zcode.reverse.utilities.ZathuraReverseJarLoader;
 
@@ -35,6 +39,8 @@ import org.zcode.reverse.utilities.ZathuraReverseJarLoader;
  * @version 1.0
  */
 public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
+	
+	
 
 	// MYSQL, SQLSERVER
 	/** The Constant CATALOG. */
@@ -101,9 +107,9 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	/* (non-Javadoc)
 	 * @see org.zathuracode.reverse.engine.IZathuraReverseEngineering#makePojosJPA_V1_0(java.util.Properties, java.util.List)
 	 */
-	public void makePojosJPA_V1_0(Properties connectionProperties, List<String> tables) {
+	public void makePojosJPA_V1_0(Properties connectionProperties, List<String> tables)throws Exception {
 
-		log.info("Begin ZathuraReverseMappingTool (Pojo Making & compilation)");
+		log.info("Begin ZathuraReverseMappingTool (Pojo Making & compilation) with HibernateTools");
 
 		connectionDriverClass = connectionProperties.getProperty("connectionDriverClass");
 		connectionUrl = connectionProperties.getProperty("connectionUrl");
@@ -128,12 +134,10 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 		// HibernateTools
 		doTemplate();
 
-		try {
-			ZathuraReverseJarLoader.loadJarSystem(connectionDriverJarPath, connectionDriverClass);
-			ZathuraReverseJarLoader.loadJarSystem(connectionDriverJarPath, connectionDriverClass);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		ZathuraReverseJarLoader.loadJarSystem(connectionDriverJarPath, connectionDriverClass);
+		ZathuraReverseJarLoader.loadJarSystem(connectionDriverJarPath, connectionDriverClass);
+		
 
 		// LLama el proceso de ANT con los archivos generados
 		callAntProcess();
@@ -144,9 +148,13 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	/**
 	 * Do template.
 	 */
-	private void doTemplate() {
+	private void doTemplate() throws Exception{
 
 		try {
+			//TODO OJOJOJO
+			//Thread thread = Thread.currentThread();
+			//thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+			
 			ve = new VelocityEngine();
 
 			// Limpio las propiedades
@@ -166,8 +174,9 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			properties.setProperty("file.resource.loader.modificationCheckInterval", "2");
 
 			ve.init(properties);
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		} catch (Exception e) {
+			log.info(e.getMessage());
+			throw e;
 		}
 
 		VelocityContext context = new VelocityContext();
@@ -199,7 +208,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	 *
 	 * @param context the context
 	 */
-	private void doCfg(VelocityContext context) {
+	private void doCfg(VelocityContext context)throws Exception {
 		log.info("Begin doCfg");
 		try {
 			Template cfg = null;
@@ -209,15 +218,19 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 				cfg = ve.getTemplate("hibernate.cfg.xml.vm");
 			} catch (ResourceNotFoundException rnfe) {
 				rnfe.printStackTrace();
+				log.info("doCfg",rnfe);
 			} catch (ParseErrorException pee) {
 				// syntax error: problem parsing the template
 				pee.printStackTrace();
+				log.info("doCfg",pee);
 			} catch (MethodInvocationException mie) {
 				// something invoked in the template
 				// threw an exception
 				mie.printStackTrace();
+				log.info("doCfg",mie);
 			} catch (Exception e) {
 				e.printStackTrace();
+				log.info("doCfg",e);
 			}
 
 			cfg.merge(context, swCfg);
@@ -225,6 +238,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			FileWriter fstream = new FileWriter(tempFiles + "hibernate.cfg.xml");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swCfg.toString());
+			
 			// Close the output stream
 			out.close();
 
@@ -232,6 +246,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 		} catch (Exception e) {
 			log.error("Error doCfg", e);
+			throw e;
 		}
 	}
 
@@ -240,7 +255,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	 *
 	 * @param context the context
 	 */
-	private void doBuild(VelocityContext context) {
+	private void doBuild(VelocityContext context)throws Exception {
 		log.info("Begin doBuild");
 		try {
 			Template build = null;
@@ -250,15 +265,19 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 				build = ve.getTemplate("build.xml.vm");
 			} catch (ResourceNotFoundException rnfe) {
 				rnfe.printStackTrace();
+				log.info("doBuild",rnfe);				
 			} catch (ParseErrorException pee) {
 				// syntax error: problem parsing the template
 				pee.printStackTrace();
+				log.info("doBuild",pee);
 			} catch (MethodInvocationException mie) {
 				// something invoked in the template
 				// threw an exception
 				mie.printStackTrace();
+				log.info("doBuild",mie);
 			} catch (Exception e) {
 				e.printStackTrace();
+				log.info("doBuild",e);
 			}
 
 			build.merge(context, swBuild);
@@ -273,6 +292,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 		} catch (Exception e) {
 			log.error("Error doBuild", e);
+			throw e;
 		}
 	}
 
@@ -281,7 +301,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	 *
 	 * @param context the context
 	 */
-	private void doRevEng(VelocityContext context) {
+	private void doRevEng(VelocityContext context)throws Exception {
 		log.info("Begin doRevEng");
 		try {
 			Template revEng = null;
@@ -291,15 +311,19 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 				revEng = ve.getTemplate("hibernate.reveng.xml.vm");
 			} catch (ResourceNotFoundException rnfe) {
 				rnfe.printStackTrace();
+				log.info("doRevEng",rnfe);
 			} catch (ParseErrorException pee) {
 				// syntax error: problem parsing the template
 				pee.printStackTrace();
+				log.info("doRevEng",pee);
 			} catch (MethodInvocationException mie) {
 				// something invoked in the template
 				// threw an exception
 				mie.printStackTrace();
+				log.info("doRevEng",mie);
 			} catch (Exception e) {
 				e.printStackTrace();
+				log.info("doRevEng",e);
 			}
 
 			revEng.merge(context, swRevEng);
@@ -314,13 +338,14 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 		} catch (Exception e) {
 			log.error("Error doRevEng", e);
+			throw e;
 		}
 	}
 
 	/**
 	 * Call ant process.
 	 */
-	public static void callAntProcess() {
+	public static void callAntProcess() throws Exception{
 		log.info("Begin Ant");
 		File buildFile = new File(ZathuraReverseEngineeringUtil.getTempFileBuildPath());
 		Project p = new Project();
@@ -341,6 +366,8 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			p.fireBuildFinished(null);
 		} catch (BuildException e) {
 			p.fireBuildFinished(e);
+			log.info("callAntProcess",e);
+			throw e;
 		}
 
 		// Compile Pojos
@@ -363,6 +390,8 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			p2.fireBuildFinished(null);
 		} catch (BuildException e) {
 			p2.fireBuildFinished(e);
+			log.info("callAntProcess",e);
+			throw e;
 		}
 		log.info("End Ant");
 	}
@@ -372,7 +401,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	 *
 	 * @param context the context
 	 */
-	private void doBuildCompile(VelocityContext context) {
+	private void doBuildCompile(VelocityContext context)throws Exception {
 		log.info("Begin doBuildCompile");
 		try {
 			Template build = null;
@@ -382,15 +411,19 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 				build = ve.getTemplate("buildCompile.xml.vm");
 			} catch (ResourceNotFoundException rnfe) {
 				rnfe.printStackTrace();
+				log.info("doBuildCompile",rnfe);
 			} catch (ParseErrorException pee) {
 				// syntax error: problem parsing the template
 				pee.printStackTrace();
+				log.info("doBuildCompile",pee);
 			} catch (MethodInvocationException mie) {
 				// something invoked in the template
 				// threw an exception
 				mie.printStackTrace();
+				log.info("doBuildCompile",mie);
 			} catch (Exception e) {
 				e.printStackTrace();
+				log.info("doBuildCompile",e);
 			}
 
 			build.merge(context, swBuild);
@@ -404,7 +437,8 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			log.info("End doBuildCompile");
 
 		} catch (Exception e) {
-			log.info("Error doBuildCompile");
+			log.info("Error doBuildCompile",e);
+			throw e;
 		}
 	}
 
