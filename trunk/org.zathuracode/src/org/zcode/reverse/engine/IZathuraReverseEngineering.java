@@ -19,5 +19,5 @@ public interface IZathuraReverseEngineering {
 	 * @param connectionProperties the connection properties
 	 * @param tables the tables
 	 */
-	public void makePojosJPA_V1_0(Properties connectionProperties, List<String> tables);
+	public void makePojosJPA_V1_0(Properties connectionProperties, List<String> tables)throws Exception;
 }

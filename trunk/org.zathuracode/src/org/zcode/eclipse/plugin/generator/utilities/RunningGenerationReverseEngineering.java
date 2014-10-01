@@ -43,6 +43,10 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 		monitor.setTaskName("Generating Entity Artifacts");
 		monitor.beginTask("Generation in progress...", IProgressMonitor.UNKNOWN);
 		try {
+			
+			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
+			Thread thread = Thread.currentThread();
+			thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
 
 			// Genera los entity originales
 			EclipseGeneratorUtil.generateJPAReverseEngineering();

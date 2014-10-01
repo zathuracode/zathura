@@ -139,6 +139,8 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 
 		try {
 	
+			
+			
 			ve = new VelocityEngine();
 			Properties propiedades = new Properties();
 			propiedades.setProperty("file.resource.loader.description", "Velocity File Resource Loader");
