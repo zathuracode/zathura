@@ -2,7 +2,6 @@ package org.zcode.eclipse.plugin.generator.gui;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.osgi.util.NLS;
 import org.zcode.eclipse.plugin.generator.ZathuraGeneratorActivator;
 import org.zcode.eclipse.plugin.generator.utilities.ConnectionModel;
 import org.zcode.eclipse.plugin.generator.utilities.ConnectionsUtils;
