@@ -1,8 +1,13 @@
 package org.zcode.eclipse.plugin.generator;
 
+import java.util.Enumeration;
+import java.util.Properties;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -12,6 +17,10 @@ import org.osgi.framework.BundleContext;
  * @version 1.0
  */
 public class ZathuraGeneratorActivator extends AbstractUIPlugin {
+	
+	private static final Logger log = LoggerFactory.getLogger(ZathuraGeneratorActivator.class);
+	
+	
 
 	// The plug-in ID
 	/** The Constant PLUGIN_ID. */
@@ -40,6 +49,16 @@ public class ZathuraGeneratorActivator extends AbstractUIPlugin {
 		super.start(context);
 		
 		plugin = this;
+		
+		
+		Properties p = System.getProperties();
+		Enumeration keys = p.keys();
+		while (keys.hasMoreElements()) {
+		  String key = (String)keys.nextElement();
+		  String value = (String)p.get(key);
+		  log.info(key + ": " + value);
+		}
+		
 		
 	}
 

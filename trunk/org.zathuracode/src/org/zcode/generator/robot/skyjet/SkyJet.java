@@ -24,7 +24,7 @@ import org.zcode.metadata.model.MetaDataModel;
  * @author Diego Armando Gomez (dgomez@vortexbird.com)
  * @version 1.0
  */
-public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
+public class SkyJet implements IZathuraSkyJetTemplate,IZathuraGenerator {
 	
 	private static final Logger log = LoggerFactory.getLogger(SkyJet.class);
 	//private static String pathTemplates;
@@ -135,12 +135,13 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 	@Override
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel,
 			String jpaPckgName, String projectName, Integer specificityLevel,
-			String domainName) {
+			String domainName) throws Exception{
 
 		try {
 			
 			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
-			GeneratorUtil.setContextClassLoader();
+			GeneratorUtil.putBundleClassLoaderInCurrentThread();
+
 			
 			ve= new VelocityEngine();
 			VelocityContext velocityContext= new VelocityContext();
@@ -172,7 +173,7 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 					int virginLastIndexOf = packageOriginal.lastIndexOf(".");
 					virginPackage = packageOriginal.substring(0, virginLastIndexOf);
 				} catch (Exception e) {
-					log.error(e.getMessage());
+					log.error(e.toString());
 				}
 			} else {
 				try {
@@ -184,7 +185,7 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 					int virginLastIndexOf = packageOriginal.lastIndexOf(".");
 					virginPackage = packageOriginal.substring(0, virginLastIndexOf);
 				} catch (Exception e) {
-					log.error(e.getMessage());
+					log.error(e.toString());
 				}
 			}
 
@@ -333,7 +334,10 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			doSpringContextConfFiles(velocityContext, hdLocation, metaDataModel, modelName);
 
 		} catch (Exception e) {
-			log.error(e.getMessage()); 
+			log.error(e.toString());
+			throw e;
+		}finally{
+			GeneratorUtil.putThreadClassLoaderInCurrentThread();
 		}
 
 
@@ -341,7 +345,7 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 
 	@Override
 	public void doDaoSpringXMLHibernate(MetaData metaData,
-			VelocityContext context, String hdLocation) {
+			VelocityContext context, String hdLocation)throws Exception {
 		try {
 			
 			String path =hdLocation + paqueteVirgen + GeneratorUtil.slash + "dataaccess" + GeneratorUtil.slash + "dao"+ GeneratorUtil.slash;
@@ -370,14 +374,14 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			log.info("End Dao");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
-			
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 	
 	@Override
-	public void doApiSpringHibernate(VelocityContext context, String hdLocation) {
+	public void doApiSpringHibernate(VelocityContext context, String hdLocation) throws Exception{
 
 		try {
 
@@ -429,7 +433,8 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			JalopyCodeFormatter.formatJavaCodeFile(path + "Paginator.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
@@ -437,7 +442,7 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 	@Override
 	public void doLogicSpringXMLHibernate(MetaData metaData,
 			VelocityContext context, String hdLocation,
-			MetaDataModel dataModel, String modelName) {
+			MetaDataModel dataModel, String modelName)throws Exception {
 		try {
 			String path=hdLocation + paqueteVirgen + GeneratorUtil.slash + modelName + GeneratorUtil.slash +"control" + GeneratorUtil.slash;
 
@@ -471,7 +476,8 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 
 
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 
@@ -479,7 +485,7 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 
 	@Override
 	public void doBusinessDelegator(VelocityContext context, String hdLocation,
-			MetaDataModel dataModel) {
+			MetaDataModel dataModel)throws Exception {
 		try {
 			
 			String path = hdLocation + paqueteVirgen + GeneratorUtil.slash + "presentation"+ GeneratorUtil.slash + "businessDelegate" +GeneratorUtil.slash;
@@ -509,7 +515,8 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			JalopyCodeFormatter.formatJavaCodeFile(path + "BusinessDelegatorView.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 			
 		}
 
@@ -517,7 +524,7 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 
 	@Override
 	public void doJsp(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel) {
+			String hdLocation, MetaDataModel dataModel)throws Exception {
 		try {
 			
 			String path = properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
@@ -561,14 +568,15 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doJspInitialMenu(MetaDataModel dataModel,
-			VelocityContext context, String hdLocation) {
+			VelocityContext context, String hdLocation)throws Exception {
 		try {
 			String path = properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
 			
@@ -584,14 +592,15 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			log.info("Begin InitialMaenu");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doFacesConfig(MetaDataModel dataModel, VelocityContext context,
-			String hdLocation) {
+			String hdLocation) throws Exception{
 		try {
 			
 			String path = properties.getProperty("webRootFolderPath")+"WEB-INF"+ GeneratorUtil.slash;
@@ -608,14 +617,15 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			log.info("Begin FacesConfig");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doDto(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel, String modelName) {
+			String hdLocation, MetaDataModel dataModel, String modelName)throws Exception {
 		try {
 
 			log.info("Begin Dto");
@@ -633,13 +643,14 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			JalopyCodeFormatter.formatJavaCodeFile(path + metaData.getRealClassName() + "DTO.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
-	public void doExceptions(VelocityContext context, String hdLocation) {
+	public void doExceptions(VelocityContext context, String hdLocation)throws Exception {
 		try {
 
 			String path=hdLocation + paqueteVirgen + GeneratorUtil.slash + "exceptions" + GeneratorUtil.slash;
@@ -656,14 +667,15 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			JalopyCodeFormatter.formatJavaCodeFile(path+ "ZMessManager.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doUtilites(VelocityContext context, String hdLocation,
-			MetaDataModel dataModel, String modelName) {
+			MetaDataModel dataModel, String modelName)throws Exception {
 
 		try {
 			
@@ -690,13 +702,14 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			fwFacesUtils.close();
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
-	public void doJspFacelets(VelocityContext context, String hdLocation) {
+	public void doJspFacelets(VelocityContext context, String hdLocation)throws Exception {
 		try {
 			log.info("Begin Header");
 			String pathFacelets = properties.getProperty("webRootFolderPath") + "WEB-INF" + GeneratorUtil.slash + "facelets" + GeneratorUtil.slash;
@@ -745,14 +758,15 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			log.info("End template");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doSpringContextConfFiles(VelocityContext context,
-			String hdLocation, MetaDataModel dataModel, String modelName) {
+			String hdLocation, MetaDataModel dataModel, String modelName)throws Exception {
 		try {
 			log.info("Begin applicationContext.xml");
 			Template templateApplicationContext = ve.getTemplate("applicationContext.xml.vm");
@@ -800,14 +814,15 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			log.info("End dataSourceContext.xml");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doPersitenceXml(MetaDataModel dataModel,
-			VelocityContext context, String hdLocation) {
+			VelocityContext context, String hdLocation)throws Exception {
 		
 		try {
 			
@@ -824,14 +839,15 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 		
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doBackingBeans(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel) {
+			String hdLocation, MetaDataModel dataModel)throws Exception {
 		try {
 			String path =hdLocation + paqueteVirgen + GeneratorUtil.slash + "presentation" + GeneratorUtil.slash + "backingBeans" + GeneratorUtil.slash;
 			log.info("Begin BackEndBean ");
@@ -848,7 +864,8 @@ public class SkyJet implements IZathuraTemplate,IZathuraGenerator {
 			Utilities.getInstance().datesId = null;
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}

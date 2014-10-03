@@ -39,8 +39,11 @@ import net.sourceforge.squirrel_sql.fw.sql.SQLDriverManager;
 
 
 
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 
 import com.sun.tools.javac.util.Paths;
 
@@ -716,7 +719,6 @@ public class ZathuraReverseEngineeringUtil {
 		List<String> listTables=DatabaseUtilities.getTables(connection, catalog, schemaPattern, tableNamePattern);
 		return listTables;
 	}
-
 
 
 }
