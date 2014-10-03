@@ -43,6 +43,8 @@ public class EclipseGeneratorUtil {
 	public static IProject project;
 	
 	public static ClassLoader bundleClassLoader =  ZathuraGeneratorActivator.getDefault().getBundle().getClass().getClassLoader();
+
+	public static ClassLoader threadClassLoader =  Thread.currentThread().getContextClassLoader();
 	
 	/** The project name. */
 	public static String projectName;

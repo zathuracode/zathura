@@ -1,4 +1,4 @@
-package org.zcode.generator.robot.jender;
+package org.zcode.generator.robot.wallj;
 
 
 import org.apache.velocity.VelocityContext;
@@ -13,7 +13,7 @@ import org.zcode.metadata.model.MetaDataModel;
  * @author Diego Armando Gomez (dgomez@vortexbird.com)
  * @version 1.0
  */
-public interface IZathuraTemplate {
+public interface IZathuraWallJTemplate {
 
 	/**
 	 * Do template.
@@ -25,7 +25,7 @@ public interface IZathuraTemplate {
 	 * @param specificityLevel the specificity level
 	 * @param domainName the domain name
 	 */
-	public void doTemplate(String hdLocation, MetaDataModel metaDataModel, String jpaPckgName, String projectName, Integer specificityLevel, String domainName)throws Exception;
+	public void doTemplate(String hdLocation, MetaDataModel metaDataModel, String jpaPckgName, String projectName, Integer specificityLevel, String domainName)throws Exception;;
 
 	/**
 	 * Do dao spring xml hibernate.
@@ -34,16 +34,16 @@ public interface IZathuraTemplate {
 	 * @param context the context
 	 * @param hdLocation the hd location
 	 */
-	public void doDaoSpringHibernate(MetaData metaData, VelocityContext context, String hdLocation);
+	public void doDaoEjbJpa(MetaData metaData, VelocityContext context, String hdLocation)throws Exception;
 
 	/**
-	 * Do dao spring xml hibernate.
+	 * Do dao API EJB
 	 *
 	 * @param metaData the meta data
 	 * @param context the context
 	 * @param hdLocation the hd location
 	 */
-	public void doApiSpringHibernate(VelocityContext context, String hdLocation);
+	public void doApiEjbJpa(VelocityContext context, String hdLocation)throws Exception;
 	
 	/**
 	 * Do logic spring xml hibernate.
@@ -54,7 +54,7 @@ public interface IZathuraTemplate {
 	 * @param dataModel the data model
 	 * @param modelName the model name
 	 */
-	public void doLogicSpringXMLHibernate(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName);
+	public void doLogicEjbJpa(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName)throws Exception;
 
 	/**
 	 * Do business delegator.
@@ -63,7 +63,7 @@ public interface IZathuraTemplate {
 	 * @param hdLocation the hd location
 	 * @param dataModel the data model
 	 */
-	public void doBusinessDelegator(VelocityContext context, String hdLocation, MetaDataModel dataModel);
+	public void doBusinessDelegator(VelocityContext context, String hdLocation, MetaDataModel dataModel)throws Exception;
 
 	/**
 	 * Do jsp.
@@ -73,7 +73,7 @@ public interface IZathuraTemplate {
 	 * @param hdLocation the hd location
 	 * @param dataModel the data model
 	 */
-	public void doJsp(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel);
+	public void doJsp(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel)throws Exception;
 
 	/**
 	 * Do jsp initial menu.
@@ -82,7 +82,7 @@ public interface IZathuraTemplate {
 	 * @param context the context
 	 * @param hdLocation the hd location
 	 */
-	public void doJspInitialMenu(MetaDataModel dataModel, VelocityContext context, String hdLocation);
+	public void doJspInitialMenu(MetaDataModel dataModel, VelocityContext context, String hdLocation)throws Exception;
 
 	/**
 	 * Do faces config.
@@ -91,7 +91,7 @@ public interface IZathuraTemplate {
 	 * @param context the context
 	 * @param hdLocation the hd location
 	 */
-	public void doFacesConfig(MetaDataModel dataModel, VelocityContext context, String hdLocation);
+	public void doFacesConfig(MetaDataModel dataModel, VelocityContext context, String hdLocation)throws Exception;
 
 	/**
 	 * Do dto.
@@ -102,7 +102,7 @@ public interface IZathuraTemplate {
 	 * @param dataModel the data model
 	 * @param modelName the model name
 	 */
-	public void doDto(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName);
+	public void doDto(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName)throws Exception;
 
 	/**
 	 * Do exceptions.
@@ -110,7 +110,7 @@ public interface IZathuraTemplate {
 	 * @param context the context
 	 * @param hdLocation the hd location
 	 */
-	public void doExceptions(VelocityContext context, String hdLocation);
+	public void doExceptions(VelocityContext context, String hdLocation)throws Exception;
 
 	/**
 	 * Do utilites.
@@ -120,7 +120,7 @@ public interface IZathuraTemplate {
 	 * @param dataModel the data model
 	 * @param modelName the model name
 	 */
-	public void doUtilites(VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName);
+	public void doUtilites(VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName)throws Exception;
 
 	/**
 	 * Do jsp facelets.
@@ -128,17 +128,7 @@ public interface IZathuraTemplate {
 	 * @param context the context
 	 * @param hdLocation the hd location
 	 */
-	public void doJspFacelets(VelocityContext context, String hdLocation);
-
-	/**
-	 * Do spring context conf files.
-	 *
-	 * @param context the context
-	 * @param hdLocation the hd location
-	 * @param dataModel the data model
-	 * @param modelName the model name
-	 */
-	public void doSpringContextConfFiles(VelocityContext context, String hdLocation, MetaDataModel dataModel, String modelName);
+	public void doJspFacelets(VelocityContext context, String hdLocation)throws Exception;
 	
 	/**
 	 * do BackingBeans
@@ -147,6 +137,14 @@ public interface IZathuraTemplate {
 	 * @param hdLocation
 	 * @param dataModel
 	 */
-	public void doBackingBeans(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel);
+	public void doBackingBeans(MetaData metaData, VelocityContext context, String hdLocation, MetaDataModel dataModel)throws Exception;
+	
+	/**
+	 * 
+	 * @param dataModel
+	 * @param context
+	 * @param hdLocation
+	 */
+	public void doPersitenceXml(MetaDataModel dataModel, VelocityContext context, String hdLocation)throws Exception;
 	
 }

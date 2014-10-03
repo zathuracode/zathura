@@ -24,7 +24,7 @@ import org.zcode.metadata.model.MetaDataModel;
  * @author Diego Armando Gomez (dgomez@vortexbird.com)
  * @version 1.0
  */
-public class WallJ implements IZathuraTemplate,IZathuraGenerator{
+public class WallJ implements IZathuraWallJTemplate,IZathuraGenerator{
 	private static final Logger log = LoggerFactory.getLogger(WallJ.class);
 	//private static String pathTemplates;
 	private Properties properties;
@@ -61,7 +61,7 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 
 	}
 	
-	public void copyLibraries(){
+	public void copyLibraries()throws Exception{
 		String pathIndexJsp = extPath+"index.jsp";
 		
 		String pathWebXml= extPath+"WEB-INF"+GeneratorUtil.slash;
@@ -122,12 +122,12 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 	@Override
 	public void doTemplate(String hdLocation, MetaDataModel metaDataModel,
 			String jpaPckgName, String projectName, Integer specificityLevel,
-			String domainName) {		
+			String domainName)throws Exception {		
 
 		try {
 			
 			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
-			GeneratorUtil.setContextClassLoader();
+			GeneratorUtil.putBundleClassLoaderInCurrentThread();
 			
 	
 			ve = new VelocityEngine();
@@ -161,7 +161,7 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 					int virginLastIndexOf = packageOriginal.lastIndexOf(".");
 					virginPackage = packageOriginal.substring(0, virginLastIndexOf);
 				} catch (Exception e) {
-					log.error(e.getMessage());
+					log.error(e.toString());
 				}
 			} else {
 				try {
@@ -173,7 +173,7 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 					int virginLastIndexOf = packageOriginal.lastIndexOf(".");
 					virginPackage = packageOriginal.substring(0, virginLastIndexOf);
 				} catch (Exception e) {
-					log.error(e.getMessage());
+					log.error(e.toString());
 				}
 			}
 	
@@ -305,13 +305,16 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			doJspFacelets(context, hdLocation);
 		
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
+		}finally{
+			GeneratorUtil.putThreadClassLoaderInCurrentThread();
 		}
 	}
 
 	@Override
 	public void doBusinessDelegator(VelocityContext context, String hdLocation,
-			MetaDataModel dataModel) {
+			MetaDataModel dataModel) throws Exception{
 		try {
 			String path = hdLocation + virginPackageInHd + GeneratorUtil.slash + "presentation"+ GeneratorUtil.slash + "businessDelegate" +GeneratorUtil.slash;
 			
@@ -341,14 +344,15 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path + "BusinessDelegatorView.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 	
 	@Override
 	public void doPersitenceXml(MetaDataModel dataModel,
-			VelocityContext context, String hdLocation) {
+			VelocityContext context, String hdLocation)throws Exception {
 		try {
 			
 			log.info("Begin persistnece.xml");
@@ -364,14 +368,15 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 
 
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doDaoEjbJpa(MetaData metaData,
-			VelocityContext context, String hdLocation) {
+			VelocityContext context, String hdLocation)throws Exception {
 
 		try {
 
@@ -403,13 +408,14 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path + metaData.getRealClassName() + "DAO.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 	
 	@Override
-	public void doApiEjbJpa(VelocityContext context, String hdLocation) {
+	public void doApiEjbJpa(VelocityContext context, String hdLocation) throws Exception{
 
 		try {
 
@@ -461,14 +467,15 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path + "Paginator.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doDto(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel, String modelName) {
+			String hdLocation, MetaDataModel dataModel, String modelName) throws Exception{
 
 		try {
 
@@ -485,13 +492,14 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path+metaData.getRealClassName()+"DTO.java");
 
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
-	public void doExceptions(VelocityContext context, String hdLocation) {
+	public void doExceptions(VelocityContext context, String hdLocation)throws Exception {
 		try {
 			String path = hdLocation + virginPackageInHd + GeneratorUtil.slash + "exceptions" + GeneratorUtil.slash;
 			log.info("Begin ZMessManager");
@@ -507,14 +515,15 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			log.info("Begin ZMessManager");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doFacesConfig(MetaDataModel dataModel, VelocityContext context,
-			String hdLocation) {
+			String hdLocation)throws Exception {
 		try {
 			
 			String path =properties.getProperty("webRootFolderPath")+"WEB-INF"+ GeneratorUtil.slash;
@@ -531,14 +540,15 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			log.info("End FacesConfig");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doJsp(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel) {
+			String hdLocation, MetaDataModel dataModel)throws Exception {
 		try {
 			
 			String path=properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
@@ -581,13 +591,14 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			Utilities.getInstance().datesIdJSP = null;
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
-	public void doJspFacelets(VelocityContext context, String hdLocation) {
+	public void doJspFacelets(VelocityContext context, String hdLocation)throws Exception {
 		try {
 			log.info("Begin Header");
 			String pathFacelets = properties.getProperty("webRootFolderPath") + "WEB-INF" + GeneratorUtil.slash + "facelets" + GeneratorUtil.slash;
@@ -636,14 +647,15 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			log.info("End template");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doJspInitialMenu(MetaDataModel dataModel,
-			VelocityContext context, String hdLocation) {
+			VelocityContext context, String hdLocation) throws Exception{
 		try {
 			String path=properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
 			log.info("Begin Initial  XHTML");
@@ -658,7 +670,8 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			log.info("End Initial  XHTML");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
@@ -666,7 +679,7 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 	@Override
 	public void doLogicEjbJpa(MetaData metaData,
 			VelocityContext context, String hdLocation,
-			MetaDataModel dataModel, String modelName) {
+			MetaDataModel dataModel, String modelName)throws Exception {
 		try {
 			String path=hdLocation + virginPackageInHd + GeneratorUtil.slash + modelName + GeneratorUtil.slash +"control" + GeneratorUtil.slash;
 			
@@ -697,7 +710,8 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path+metaData.getRealClassName() + "Logic.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
@@ -705,7 +719,7 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 	
 	@Override
 	public void doUtilites(VelocityContext context, String hdLocation,
-			MetaDataModel dataModel, String modelName) {
+			MetaDataModel dataModel, String modelName)throws Exception {
 		try {
 			String path =hdLocation+virginPackageInHd+GeneratorUtil.slash+"utilities"+GeneratorUtil.slash;
 			
@@ -733,7 +747,8 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
@@ -741,7 +756,7 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 
 	@Override
 	public void doBackingBeans(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel) {
+			String hdLocation, MetaDataModel dataModel)throws Exception {
 		try {
 			
 			String path =hdLocation + virginPackageInHd + GeneratorUtil.slash + "presentation" + GeneratorUtil.slash + "backingBeans" + GeneratorUtil.slash;
@@ -763,7 +778,8 @@ public class WallJ implements IZathuraTemplate,IZathuraGenerator{
 			
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}

@@ -23,15 +23,15 @@ import org.zcode.metadata.model.MetaData;
 import org.zcode.metadata.model.MetaDataModel;
 
 /**
- * Bender
+ * Jender
  * Zathuracode Generator
  * www.zathuracode.org
  * @author Diego Armando Gomez (dgomez@vortexbird.com)
  * @version 1.0
  */
-public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
+public class Jender implements IZathuraJenderTemplate,IZathuraGenerator{
 	
-	private static final Logger log = LoggerFactory.getLogger(JenderRobot.class);
+	private static final Logger log = LoggerFactory.getLogger(Jender.class);
 	//private static String pathTemplates;
 	private Properties properties;
 	private String virginPackageInHd;
@@ -51,27 +51,22 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 
 	@Override
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,	String folderProjectPath, Properties propiedades) throws Exception{
-		
-		
-		//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
-		GeneratorUtil.setContextClassLoader();
-		
-
+	
 		String jpaPckgName = propiedades.getProperty("jpaPckgName");
 		String domainName = jpaPckgName.substring(0, jpaPckgName.indexOf("."));
 		Integer specificityLevel = (Integer) propiedades.get("specificityLevel");
 		properties = propiedades;
 		webRootPath=(propiedades.getProperty("webRootFolderPath"));
 		
-		log.info("Begin Zathura Bender");
+		log.info("Begin Zathura Jender");
 		doTemplate(folderProjectPath, metaDataModel, jpaPckgName, projectName, specificityLevel, domainName);
 		copyLibraries();
-		log.info("End Zathura Bender");
+		log.info("End Zathura Jender");
 
 
 	}
 	
-	public void copyLibraries(){
+	public void copyLibraries() throws Exception{
 		String pathIndexJsp = extPath+"index.jsp";
 		String pathLogin = extPath+"login.xhtml";
 		String pathWebXml= extPath+"WEB-INF"+GeneratorUtil.slash;
@@ -145,8 +140,7 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 		try {
 	
 			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
-			Thread thread = Thread.currentThread();
-			thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+			GeneratorUtil.putBundleClassLoaderInCurrentThread();
 			
 			ve = new VelocityEngine();
 			Properties propiedades = new Properties();
@@ -179,7 +173,7 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 					int virginLastIndexOf = packageOriginal.lastIndexOf(".");
 					virginPackage = packageOriginal.substring(0, virginLastIndexOf);
 				} catch (Exception e) {
-					log.error(e.getMessage());
+					log.error(e.toString());
 				}
 			} else {
 				try {
@@ -191,7 +185,7 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 					int virginLastIndexOf = packageOriginal.lastIndexOf(".");
 					virginPackage = packageOriginal.substring(0, virginLastIndexOf);
 				} catch (Exception e) {
-					log.error(e.getMessage());
+					log.error(e.toString());
 				}
 			}
 	
@@ -333,14 +327,16 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			doSpringContextConfFiles(context, hdLocation, dataModel, modelName);
 		
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
 			throw e;
+		}finally{
+			GeneratorUtil.putThreadClassLoaderInCurrentThread();
 		}
 	}
 
 	@Override
 	public void doBusinessDelegator(VelocityContext context, String hdLocation,
-			MetaDataModel dataModel) {
+			MetaDataModel dataModel) throws Exception{
 		try {
 			String path = hdLocation + virginPackageInHd + GeneratorUtil.slash + "presentation"+ GeneratorUtil.slash + "businessDelegate" +GeneratorUtil.slash;
 			
@@ -370,14 +366,15 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path + "BusinessDelegatorView.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doDaoSpringHibernate(MetaData metaData,
-			VelocityContext context, String hdLocation) {
+			VelocityContext context, String hdLocation) throws Exception{
 
 		try {
 
@@ -409,13 +406,14 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path + metaData.getRealClassName() + "DAO.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 	
 	@Override
-	public void doApiSpringHibernate(VelocityContext context, String hdLocation) {
+	public void doApiSpringHibernate(VelocityContext context, String hdLocation) throws Exception{
 
 		try {
 
@@ -467,14 +465,15 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path + "Paginator.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doDto(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel, String modelName) {
+			String hdLocation, MetaDataModel dataModel, String modelName) throws Exception{
 
 		try {
 
@@ -491,13 +490,14 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path+metaData.getRealClassName()+"DTO.java");
 
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
-	public void doExceptions(VelocityContext context, String hdLocation) {
+	public void doExceptions(VelocityContext context, String hdLocation) throws Exception{
 		try {
 			String path = hdLocation + virginPackageInHd + GeneratorUtil.slash + "exceptions" + GeneratorUtil.slash;
 			log.info("Begin ZMessManager");
@@ -513,14 +513,15 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			log.info("Begin ZMessManager");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doFacesConfig(MetaDataModel dataModel, VelocityContext context,
-			String hdLocation) {
+			String hdLocation) throws Exception{
 		try {
 			
 			String path =properties.getProperty("webRootFolderPath")+"WEB-INF"+ GeneratorUtil.slash;
@@ -537,14 +538,15 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			log.info("End FacesConfig");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doJsp(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel) {
+			String hdLocation, MetaDataModel dataModel) throws Exception{
 		try {
 			
 			String path=properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
@@ -587,13 +589,14 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			Utilities.getInstance().datesIdJSP = null;
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
-	public void doJspFacelets(VelocityContext context, String hdLocation) {
+	public void doJspFacelets(VelocityContext context, String hdLocation) throws Exception{
 		try {
 			log.info("Begin Header");
 			String pathFacelets = properties.getProperty("webRootFolderPath") + "WEB-INF" + GeneratorUtil.slash + "facelets" + GeneratorUtil.slash;
@@ -642,14 +645,15 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			log.info("End template");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doJspInitialMenu(MetaDataModel dataModel,
-			VelocityContext context, String hdLocation) {
+			VelocityContext context, String hdLocation) throws Exception{
 		try {
 			String path=properties.getProperty("webRootFolderPath") + "XHTML" + GeneratorUtil.slash;
 			log.info("Begin Initial  XHTML");
@@ -664,7 +668,8 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			log.info("End Initial  XHTML");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
@@ -672,7 +677,7 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 	@Override
 	public void doLogicSpringXMLHibernate(MetaData metaData,
 			VelocityContext context, String hdLocation,
-			MetaDataModel dataModel, String modelName) {
+			MetaDataModel dataModel, String modelName) throws Exception{
 		try {
 			String path=hdLocation + virginPackageInHd + GeneratorUtil.slash + modelName + GeneratorUtil.slash +"control" + GeneratorUtil.slash;
 			
@@ -703,14 +708,15 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			JalopyCodeFormatter.formatJavaCodeFile(path+metaData.getRealClassName() + "Logic.java");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
 
 	@Override
 	public void doSpringContextConfFiles(VelocityContext context,
-			String hdLocation, MetaDataModel dataModel, String modelName) {
+			String hdLocation, MetaDataModel dataModel, String modelName) throws Exception{
 		try {
 			
 			log.info("Begin ApplicationContext.xml");
@@ -760,7 +766,8 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			log.info("End dataSourceContext.xml");
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
@@ -769,7 +776,7 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 
 	@Override
 	public void doUtilites(VelocityContext context, String hdLocation,
-			MetaDataModel dataModel, String modelName) {
+			MetaDataModel dataModel, String modelName) throws Exception{
 		try {
 			String path =hdLocation+virginPackageInHd+GeneratorUtil.slash+"utilities"+GeneratorUtil.slash;
 			
@@ -797,7 +804,8 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
@@ -805,7 +813,7 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 
 	@Override
 	public void doBackingBeans(MetaData metaData, VelocityContext context,
-			String hdLocation, MetaDataModel dataModel) {
+			String hdLocation, MetaDataModel dataModel) throws Exception{
 		try {
 			
 			String path =hdLocation + virginPackageInHd + GeneratorUtil.slash + "presentation" + GeneratorUtil.slash + "backingBeans" + GeneratorUtil.slash;
@@ -827,7 +835,8 @@ public class JenderRobot implements IZathuraTemplate,IZathuraGenerator{
 			
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.toString());
+			throw e;
 		}
 
 	}
