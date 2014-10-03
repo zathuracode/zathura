@@ -9,6 +9,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.generator.exceptions.GeneratorNotFoundException;
 import org.zcode.metadata.exceptions.MetaDataReaderNotFoundException;
 
@@ -22,6 +24,8 @@ import org.zcode.metadata.exceptions.MetaDataReaderNotFoundException;
  * @see IRunnableWithProgress
  */
 public class RunningGeneration implements IRunnableWithProgress {
+	
+	private static final Logger log = LoggerFactory.getLogger(RunningGeneration.class);
 	
 	/** The shell. */
 	private org.eclipse.swt.widgets.Shell shell;
@@ -64,24 +68,28 @@ public class RunningGeneration implements IRunnableWithProgress {
 			
 		} catch (MetaDataReaderNotFoundException e) {
 			monitor.setCanceled(true);
+			log.error("Error  in run MetaDataReaderNotFoundException",e);
 			ZathuraGeneratorLog.logError(e);
-			MessageDialog.openError(getShell(), "Error","The generation was cancellede MetaDataReaderNotFoundException"+e.getMessage());
-			throw new InterruptedException("The generation was cancelled:"+e.getMessage());
+			//MessageDialog.openError(getShell(), "Error","The generation was canceled MetaDataReaderNotFoundException"+e.getMessage());
+			throw new InterruptedException("The generation was cancelled:"+e.toString());
 		} catch (GeneratorNotFoundException e) {
 			monitor.setCanceled(true);
+			log.error("Error  in run GeneratorNotFoundException",e);
 			ZathuraGeneratorLog.logError(e);
-			MessageDialog.openError(getShell(), "Error","The generation was cancellede GeneratorNotFoundException"+e.getMessage());
-			throw new InterruptedException("The generation was cancelled:"+e.getMessage());
+			//MessageDialog.openError(getShell(), "Error","The generation was canceled GeneratorNotFoundException"+e.getMessage());
+			throw new InterruptedException("The generation was cancelled:"+e.toString());
 		} catch (CoreException e) {
 			monitor.setCanceled(true);
+			log.error("Error  in run CoreException",e);
 			ZathuraGeneratorLog.logError(e);
-			MessageDialog.openError(getShell(), "Error","The generation was cancellede CoreException"+e.getMessage());
-			throw new InterruptedException("The generation was cancelled:"+e.getMessage());
+			//MessageDialog.openError(getShell(), "Error","The generation was canceled CoreException"+e.getMessage());
+			throw new InterruptedException("The generation was cancelled:"+e.toString());
 		}catch (Exception e) {
 			monitor.setCanceled(true);
+			log.error("Error  in run Exception",e);
 			ZathuraGeneratorLog.logError(e);
-			MessageDialog.openError(getShell(), "Error","The generation was cancellede Exception"+e.getMessage());
-			throw new InterruptedException("The generation was cancelled:"+e.getMessage());
+			//MessageDialog.openError(getShell(), "Error","The generation was canceled Exception"+e.getMessage());
+			throw new InterruptedException("The generation was cancelled:"+e.toString());
 		}
 		monitor.done();
 		if (monitor.isCanceled()) {

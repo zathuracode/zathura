@@ -8,6 +8,9 @@
     	<param name="ConversionPattern" value="%-4r [%p] %-c %d{ISO8601}  %m%n"/>
     </layout>
   </appender>
+  
+  
+  
 
   <appender name="FILE" class="org.apache.log4j.FileAppender">
 	   <param name="file" value="zathuraCode.log"/>

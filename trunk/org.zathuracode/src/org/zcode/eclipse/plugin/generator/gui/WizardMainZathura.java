@@ -93,10 +93,10 @@ public class WizardMainZathura extends Wizard {
 			
 			
 		} catch (InvocationTargetException e) {
-          MessageDialog.openError(getShell(), Messages.WizardMainZathura_2, e.getMessage());
+          MessageDialog.openError(getShell(), Messages.WizardMainZathura_2, e.toString());
           ZathuraGeneratorLog.logError(e);
         } catch (InterruptedException e) {
-          MessageDialog.openInformation(getShell(), Messages.WizardMainZathura_3, e.getMessage());
+          MessageDialog.openInformation(getShell(), Messages.WizardMainZathura_3, e.toString());
           ZathuraGeneratorLog.logError(e);
         }			
 		return true;
