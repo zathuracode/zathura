@@ -12,10 +12,13 @@ import java.util.Properties;
 
 
 
+
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
+import org.apache.tools.ant.listener.Log4jListener;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
@@ -152,6 +155,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 
 		try {
 			
+			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
 			Thread thread = Thread.currentThread();
 			thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
 			
@@ -347,14 +351,14 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	 */
 	public static void callAntProcess() throws Exception{
 		log.info("Begin Ant");
+		
 		File buildFile = new File(ZathuraReverseEngineeringUtil.getTempFileBuildPath());
 		Project p = new Project();
 		p.setUserProperty("ant.file", buildFile.getAbsolutePath());
-		DefaultLogger consoleLogger = new DefaultLogger();
-		consoleLogger.setErrorPrintStream(System.err);
-		consoleLogger.setOutputPrintStream(System.out);
-		consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
-		p.addBuildListener(consoleLogger);
+		
+		org.apache.tools.ant.listener.Log4jListener log4jListener=new Log4jListener();
+	
+		p.addBuildListener(log4jListener);
 
 		try {
 			p.fireBuildStarted();
@@ -366,7 +370,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			p.fireBuildFinished(null);
 		} catch (BuildException e) {
 			p.fireBuildFinished(e);
-			log.info("callAntProcess",e);
+			log.error("callAntProcess",e);
 			throw e;
 		}
 
@@ -390,7 +394,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			p2.fireBuildFinished(null);
 		} catch (BuildException e) {
 			p2.fireBuildFinished(e);
-			log.info("callAntProcess",e);
+			log.error("callAntProcess",e);
 			throw e;
 		}
 		log.info("End Ant");
@@ -411,19 +415,19 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 				build = ve.getTemplate("buildCompile.xml.vm");
 			} catch (ResourceNotFoundException rnfe) {
 				rnfe.printStackTrace();
-				log.info("doBuildCompile",rnfe);
+				log.error("doBuildCompile",rnfe);
 			} catch (ParseErrorException pee) {
 				// syntax error: problem parsing the template
 				pee.printStackTrace();
-				log.info("doBuildCompile",pee);
+				log.error("doBuildCompile",pee);
 			} catch (MethodInvocationException mie) {
 				// something invoked in the template
 				// threw an exception
 				mie.printStackTrace();
-				log.info("doBuildCompile",mie);
+				log.error("doBuildCompile",mie);
 			} catch (Exception e) {
 				e.printStackTrace();
-				log.info("doBuildCompile",e);
+				log.error("doBuildCompile",e);
 			}
 
 			build.merge(context, swBuild);
@@ -437,7 +441,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			log.info("End doBuildCompile");
 
 		} catch (Exception e) {
-			log.info("Error doBuildCompile",e);
+			log.error("Error doBuildCompile",e);
 			throw e;
 		}
 	}

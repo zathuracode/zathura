@@ -253,8 +253,10 @@ public class EclipseGeneratorUtil {
 		connectionProperties.put("schema", schema == null ? "" : schema);
 		connectionProperties.put("catalog", catalog == null ? "" : catalog);
 
+		log.info("Delete folder in "+destinationDirectory);
 		// Borrar carpeta de temporales
 		GeneratorUtil.deleteFiles(destinationDirectory);
+		log.info("Create folder in "+destinationDirectory);
 		// Crea carpeta de temporales
 		GeneratorUtil.createFolder(destinationDirectory);
 
@@ -367,7 +369,7 @@ public class EclipseGeneratorUtil {
 			
 			
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error("loadJarSystem",e);
 			throw e;
 		}
 	}

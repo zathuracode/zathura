@@ -9,6 +9,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Shell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zcode.reverse.utilities.ZathuraReverseEngineeringUtil;
 
 
@@ -17,6 +19,8 @@ import org.zcode.reverse.utilities.ZathuraReverseEngineeringUtil;
  * The Class RunningGenerationReverseEngineering.
  */
 public class RunningGenerationReverseEngineering implements IRunnableWithProgress {
+	
+	private static final Logger log = LoggerFactory.getLogger(RunningGenerationReverseEngineering.class);
 	
 	
 
@@ -44,9 +48,7 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 		monitor.beginTask("Generation in progress...", IProgressMonitor.UNKNOWN);
 		try {
 			
-			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
-			Thread thread = Thread.currentThread();
-			thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+			
 
 			// Genera los entity originales
 			EclipseGeneratorUtil.generateJPAReverseEngineering();
@@ -72,22 +74,20 @@ public class RunningGenerationReverseEngineering implements IRunnableWithProgres
 
 		} catch (CoreException e) {
 			monitor.setCanceled(true);
-			e.printStackTrace();
+			log.error("Error in run CoreException",e);
 			ZathuraGeneratorLog.logError(e);
-			
-			MessageDialog.openError(getShell(), "Error",e.getMessage());
-			throw new InterruptedException(e.getMessage());
+			//MessageDialog.openError(getShell(), "Error","The Reverse Engineering was canceled Exception"+e.toString());
+			throw new InterruptedException("The Reverse Engineering was cancelled:"+e.toString());
 		}catch (Exception e) {
 			monitor.setCanceled(true);
-			e.printStackTrace();
-			ZathuraGeneratorLog.logError(e);
-			
-			MessageDialog.openError(getShell(), "Error",e.getMessage());
-			throw new InterruptedException(e.getMessage());
+			log.error("Error in run Exception",e);
+			ZathuraGeneratorLog.logError(e);		
+			//MessageDialog.openError(getShell(), "Error","The Reverse Engineering was canceled Exception"+e.toString());
+			throw new InterruptedException("The Reverse Engineering was cancelled:"+e.toString());
 		}
 		monitor.done();
 		if (monitor.isCanceled()) {
-			throw new InterruptedException("The generation was cancelled");
+			throw new InterruptedException("The Reverse Engineering was cancelled");
 		}
 	}
 
