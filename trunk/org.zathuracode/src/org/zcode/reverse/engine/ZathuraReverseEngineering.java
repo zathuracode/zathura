@@ -193,6 +193,8 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			context.put("schema", schema);
 			context.put("catalog", catalog);
 			context.put("catalogAndSchema", catalogAndSchema);
+			context.put("javaVersion",EclipseGeneratorUtil.javaVersion);
+			
 
 			doCfg(context);
 			doBuild(context);
@@ -287,7 +289,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			}
 
 			build.merge(context, swBuild);
-
+			log.info(swBuild.toString());
 			FileWriter fstream = new FileWriter(tempFiles + "build.xml");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swBuild.toString());
@@ -381,7 +383,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			}
 
 			build.merge(context, swBuild);
-
+			log.info(swBuild.toString());
 			FileWriter fstream = new FileWriter(tempFiles + "buildCompile.xml");
 			BufferedWriter out = new BufferedWriter(fstream);
 			out.write(swBuild.toString());

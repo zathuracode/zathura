@@ -46,6 +46,8 @@ public class EclipseGeneratorUtil {
 
 	public static ClassLoader threadClassLoader =  Thread.currentThread().getContextClassLoader();
 	
+	public static String javaVersion;
+	
 	/** The project name. */
 	public static String projectName;
 	
