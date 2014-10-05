@@ -86,6 +86,8 @@ public class WizardPageDatabaseConnection extends WizardPage {
 	/** The url. */
 	private String url;
 	
+
+
 	/** The user. */
 	private String user;
 	
@@ -97,6 +99,12 @@ public class WizardPageDatabaseConnection extends WizardPage {
 	
 	/** The jar path. */
 	private String jarPath;
+	
+	private  String connectionGroupId;
+	
+	private  String connectionArtifactId;
+	
+	private  String connectionVersion;
 
 	/**
 	 * Create the wizard.
@@ -132,6 +140,17 @@ public class WizardPageDatabaseConnection extends WizardPage {
 					txtConnectionURL.setText(databaseTypeModel.getUrl());
 					txtDriverClassName.setText(""); //$NON-NLS-1$
 					txtDriverClassName.setText(databaseTypeModel.getDriverClassName());
+					
+					//Carga la configuracion de Maven
+					connectionArtifactId=databaseTypeModel.getArtifactId();
+					connectionGroupId=databaseTypeModel.getGroupId();
+					connectionVersion=databaseTypeModel.getVersion();
+					
+					
+					EclipseGeneratorUtil.connectionArtifactId=databaseTypeModel.getArtifactId();
+					EclipseGeneratorUtil.connectionGroupId=databaseTypeModel.getGroupId();
+					EclipseGeneratorUtil.connectionVersion=databaseTypeModel.getVersion();
+					
 					// TODO Cambiar esto para la version 2.1.1
 					WizardPageSelectTables.db = databaseTypeModel.getName();
 					// Valida que la paguina este completa
@@ -253,6 +272,16 @@ public class WizardPageDatabaseConnection extends WizardPage {
 					EclipseGeneratorUtil.connectionUsername = txtUserName.getText();
 					EclipseGeneratorUtil.connectionPassword = txtPassword.getText();
 					EclipseGeneratorUtil.connectionDriverJarPath = listJARs.getItem(0);
+					
+					//MAVEN
+					
+					if(databaseTypeModel!=null){
+						EclipseGeneratorUtil.connectionArtifactId=databaseTypeModel.getArtifactId();
+						EclipseGeneratorUtil.connectionGroupId=databaseTypeModel.getGroupId();
+						EclipseGeneratorUtil.connectionVersion=databaseTypeModel.getVersion();
+					}
+					
+					
 
 					testConnection = true;
 					validatePageComplete();
@@ -649,6 +678,30 @@ public class WizardPageDatabaseConnection extends WizardPage {
 	 */
 	public void setJarPath(String jarPath) {
 		this.jarPath = jarPath;
+	}
+	
+	public String getConnectionGroupId() {
+		return connectionGroupId;
+	}
+
+	public void setConnectionGroupId(String connectionGroupId) {
+		this.connectionGroupId = connectionGroupId;
+	}
+
+	public String getConnectionArtifactId() {
+		return connectionArtifactId;
+	}
+
+	public void setConnectionArtifactId(String connectionArtifactId) {
+		this.connectionArtifactId = connectionArtifactId;
+	}
+
+	public String getConnectionVersion() {
+		return connectionVersion;
+	}
+
+	public void setConnectionVersion(String connectionVersion) {
+		this.connectionVersion = connectionVersion;
 	}
 
 }

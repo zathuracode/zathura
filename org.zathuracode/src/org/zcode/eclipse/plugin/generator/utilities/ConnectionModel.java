@@ -26,6 +26,39 @@ public class ConnectionModel {
 	
 	/** The jar path. */
 	private String jarPath;
+	
+	private  String connectionGroupId;
+	
+	private  String connectionArtifactId;
+	
+	private  String connectionVersion;
+	
+	
+	
+
+	public String getConnectionGroupId() {
+		return connectionGroupId;
+	}
+
+	public void setConnectionGroupId(String connectionGroupId) {
+		this.connectionGroupId = connectionGroupId;
+	}
+
+	public String getConnectionArtifactId() {
+		return connectionArtifactId;
+	}
+
+	public void setConnectionArtifactId(String connectionArtifactId) {
+		this.connectionArtifactId = connectionArtifactId;
+	}
+
+	public String getConnectionVersion() {
+		return connectionVersion;
+	}
+
+	public void setConnectionVersion(String connectionVersion) {
+		this.connectionVersion = connectionVersion;
+	}
 
 	/**
 	 * The Constructor.

@@ -1,6 +1,5 @@
 package org.zcode.eclipse.plugin.generator.utilities;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,9 +7,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
-
-
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,16 +38,10 @@ public class ConnectionsUtils {
 	/** Generator Model. */
 	private static HashMap<String, ConnectionModel> theZathuraConnections = null;
 	
-	/** The properties config pom. */
-	public static final Properties propertiesConfigPOM = new java.util.Properties();
-	
-	/** properties POM file path. */
-	private static String xmlConfigConnectionsPOM = GeneratorUtil.getXmlConfig() + "zathura-config-pom.properties";
 
 	static {
 		try {
 			loadZathuraConnections();
-			loadZathuraConnectionsPOMFile();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -59,10 +49,7 @@ public class ConnectionsUtils {
 		}
 	}
 	
-	private static void loadZathuraConnectionsPOMFile() throws FileNotFoundException, IOException {
-		log.info("Reading:" + xmlConfigConnectionsPOM);
-		propertiesConfigPOM.load(new FileInputStream(xmlConfigConnectionsPOM));
-	}
+	
 
 	/**
 	 * Load zathura connections.
@@ -71,7 +58,7 @@ public class ConnectionsUtils {
 	 * @throws IOException the IO exception
 	 */
 	private static void loadZathuraConnections() throws FileNotFoundException, IOException {
-		log.info("Reading:" + xmlConfigConnections);
+		log.info("Reading connection config:" + xmlConfigConnections);
 		theZathuraConnections = new HashMap<String, ConnectionModel>();
 		try {
 			properties.load(new java.io.FileInputStream(xmlConfigConnections));
@@ -99,6 +86,12 @@ public class ConnectionsUtils {
 			connectionModel.setUrl(properties.getProperty(nameConnection + "-" + "url"));
 			connectionModel.setUser(properties.getProperty(nameConnection + "-" + "user"));
 			connectionModel.setDriverTemplate(properties.getProperty(nameConnection + "-" + "driverTemplate"));
+			
+			//Carga la configuracion de Maven
+			connectionModel.setConnectionArtifactId(properties.getProperty(nameConnection + "-" + "connectionArtifactId"));
+			connectionModel.setConnectionGroupId(   properties.getProperty(nameConnection + "-" + "connectionGroupId"));
+			connectionModel.setConnectionVersion(   properties.getProperty(nameConnection + "-" + "connectionVersion"));
+			
 			theZathuraConnections.put(nameConnection, connectionModel);
 		}
 	}
@@ -195,10 +188,16 @@ public class ConnectionsUtils {
 		if (connectionModel.getUser() == null || connectionModel.getUser().trim().equals("") == true) {
 			throw new Exception("User null");
 		}
-		/*
-		 * if(connectionExist(connectionModel.getName())==true){ throw new
-		 * Exception("A driver with that name already exists"); }
-		 */
+		if (connectionModel.getConnectionArtifactId() == null || connectionModel.getConnectionArtifactId().trim().equals("") == true) {
+			throw new Exception("Maven ArtifactId null");
+		}
+		
+		if (connectionModel.getConnectionGroupId() == null || connectionModel.getConnectionGroupId().trim().equals("") == true) {
+			throw new Exception("Maven GroupId null");
+		}
+		if (connectionModel.getConnectionVersion() == null || connectionModel.getConnectionVersion().trim().equals("") == true) {
+			throw new Exception("Maven Version null");
+		}
 
 		properties.put(connectionModel.getName() + "-name", connectionModel.getName());
 		properties.put(connectionModel.getName() + "-driverClass", connectionModel.getDriverClassName());
@@ -207,6 +206,13 @@ public class ConnectionsUtils {
 		properties.put(connectionModel.getName() + "-url", connectionModel.getUrl());
 		properties.put(connectionModel.getName() + "-user", connectionModel.getUser());
 		properties.put(connectionModel.getName() + "-driverTemplate", connectionModel.getDriverTemplate());
+		
+		//Maven
+		properties.put(connectionModel.getName() + "-connectionArtifactId", connectionModel.getConnectionArtifactId());
+		properties.put(connectionModel.getName() + "-connectionGroupId", connectionModel.getConnectionGroupId());
+		properties.put(connectionModel.getName() + "-connectionVersion", connectionModel.getConnectionVersion());
+		
+		
 
 		// Graba en el properties
 		store();

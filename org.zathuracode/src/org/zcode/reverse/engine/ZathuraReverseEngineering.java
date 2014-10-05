@@ -193,6 +193,9 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			context.put("schema", schema);
 			context.put("catalog", catalog);
 			context.put("catalogAndSchema", catalogAndSchema);
+			if(EclipseGeneratorUtil.javaVersion==null || EclipseGeneratorUtil.javaVersion.equals("")==true){
+				throw new Exception("The JavaVersion not Found for this reason is not posible generate");
+			}
 			context.put("javaVersion",EclipseGeneratorUtil.javaVersion);
 			
 

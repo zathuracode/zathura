@@ -98,6 +98,13 @@ public class EclipseGeneratorUtil {
 	
 	/** The connection driver template. */
 	public static String connectionDriverTemplate;
+	
+	public static String connectionGroupId;
+	
+	public static String connectionArtifactId;
+	
+	public static String connectionVersion;
+	
 
 	/** The company domain name. */
 	public static String companyDomainName;

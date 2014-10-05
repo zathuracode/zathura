@@ -23,7 +23,7 @@
 	</appender>
  
   <root>
-  	<priority value="debug"/>
+  	<priority value="info"/>
    <!-- 	
      	<priority value="off"/>
      	<priority value ="debug" />
