@@ -338,13 +338,16 @@ public class ZathuraReverseEngineeringUtil {
 			InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
 
-		log.info("Reading:"
-				+ ZathuraReverseEngineeringUtil.xmlDatabaseTypesPath);
+		log.info("Reading DatabaseTypes:"+ ZathuraReverseEngineeringUtil.xmlDatabaseTypesPath);
 
 		DatabaseTypeModel databaseTypeModel = null;
 		boolean boolName = false;
 		boolean boolUrl = false;
 		boolean boolDriverClassName = false;
+		boolean boolGroupId=false;
+		boolean boolArtifactId=false;
+		boolean boolVersion=false;
+		
 
 		theZathuraDataBaseTypes = new HashMap<String, DatabaseTypeModel>();
 
@@ -359,8 +362,7 @@ public class ZathuraReverseEngineeringUtil {
 
 		log.debug("FACTORY: " + factory);
 
-		XMLEventReader r = factory.createXMLEventReader(new FileInputStream(
-				getXmlDatabaseTypesPath()));
+		XMLEventReader r = factory.createXMLEventReader(new FileInputStream(getXmlDatabaseTypesPath()));
 
 		// iterate as long as there are more events on the input stream
 		while (r.hasNext()) {
@@ -380,7 +382,17 @@ public class ZathuraReverseEngineeringUtil {
 				} else if (localName.equals("driverClassName") == true) {
 					boolDriverClassName = true;
 					log.info(localName);
+				}else if (localName.equals("groupId") == true) {
+					boolGroupId = true;
+					log.info(localName);
+				}else if (localName.equals("artifactId") == true) {
+					boolArtifactId = true;
+					log.info(localName);
+				}else if (localName.equals("version") == true) {
+					boolVersion = true;
+					log.info(localName);
 				}
+				
 
 			} else if (e.isCharacters()) {
 				Characters characters = (Characters) e;
@@ -398,14 +410,25 @@ public class ZathuraReverseEngineeringUtil {
 					databaseTypeModel.setDriverClassName(cadena);
 					boolDriverClassName = false;
 					log.info(cadena);
+				}else if (boolGroupId == true) {
+					databaseTypeModel.setGroupId(cadena);
+					boolGroupId = false;
+					log.info(cadena);
+				}else if (boolArtifactId == true) {
+					databaseTypeModel.setArtifactId(cadena);
+					boolArtifactId = false;
+					log.info(cadena);
+				}else if (boolVersion == true) {
+					databaseTypeModel.setVersion(cadena);
+					boolVersion = false;
+					log.info(cadena);
 				}
 			} else if (e.isEndElement() == true) {
 				EndElement endElement = (EndElement) e;
 				QName qname = endElement.getName();
 				String localName = qname.getLocalPart();
 				if (localName.equals("database") == true) {
-					theZathuraDataBaseTypes.put(databaseTypeModel.getName(),
-							databaseTypeModel);
+					theZathuraDataBaseTypes.put(databaseTypeModel.getName(),databaseTypeModel);
 				}
 			}
 

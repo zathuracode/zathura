@@ -57,6 +57,13 @@ public class WizardMainDatabaseConnection extends Wizard {
 		wizardDatabaseConnection.setPassword(connectionModel.getPassword());
 		wizardDatabaseConnection.setDriverClassName(connectionModel.getDriverClassName());
 		wizardDatabaseConnection.setJarPath(connectionModel.getJarPath());
+		
+		//Maven
+		wizardDatabaseConnection.setConnectionArtifactId(connectionModel.getConnectionArtifactId());
+		wizardDatabaseConnection.setConnectionGroupId(connectionModel.getConnectionGroupId());
+		wizardDatabaseConnection.setConnectionVersion(connectionModel.getConnectionVersion());
+		
+		
 		wizardDatabaseConnection.setTitle(Messages.WizardMainDatabaseConnection_4);
 		wizardDatabaseConnection.setDescription(Messages.WizardMainDatabaseConnection_5);
 
@@ -81,7 +88,13 @@ public class WizardMainDatabaseConnection extends Wizard {
 					.getTxtDriverName().getText(), wizardDatabaseConnection.getTxtConnectionURL().getText(), wizardDatabaseConnection.getTxtUserName()
 					.getText(), wizardDatabaseConnection.getTxtPassword().getText(), wizardDatabaseConnection.getTxtDriverClassName().getText(),
 					wizardDatabaseConnection.getListJARs().getItem(0));
+			
+			//Pone la configuracion de Maven
+			connectionModel.setConnectionArtifactId(wizardDatabaseConnection.getConnectionArtifactId());
+			connectionModel.setConnectionGroupId(wizardDatabaseConnection.getConnectionGroupId());
+			connectionModel.setConnectionVersion(wizardDatabaseConnection.getConnectionVersion());
 
+			//Graba la configuracion de la nueva conexion si es exitosa
 			ConnectionsUtils.saveConnectionModel(connectionModel);
 			WizardPageSelectDBConnection.loadConnections();
 		} catch (Exception e) {

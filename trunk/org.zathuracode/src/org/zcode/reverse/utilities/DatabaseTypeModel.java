@@ -17,6 +17,12 @@ public class DatabaseTypeModel {
 	
 	/** The driver class name. */
 	private String driverClassName;
+	
+	private String groupId;
+	
+	private String artifactId;
+	
+	private String version;
 
 	/**
 	 * Gets the driver class name.
@@ -70,6 +76,30 @@ public class DatabaseTypeModel {
 	 */
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public String getArtifactId() {
+		return artifactId;
+	}
+
+	public void setArtifactId(String artifactId) {
+		this.artifactId = artifactId;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 }
