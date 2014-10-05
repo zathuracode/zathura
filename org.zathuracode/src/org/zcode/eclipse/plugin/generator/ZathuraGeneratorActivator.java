@@ -8,6 +8,9 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
+
+import com.sun.tools.javac.resources.version;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,6 +60,9 @@ public class ZathuraGeneratorActivator extends AbstractUIPlugin {
 		  String key = (String)keys.nextElement();
 		  String value = (String)p.get(key);
 		  log.info(key + ": " + value);
+		  if(key!=null && key.equalsIgnoreCase("java.version")==true){
+			  EclipseGeneratorUtil.javaVersion=value.substring(0,3);
+		  }
 		}
 		
 		
