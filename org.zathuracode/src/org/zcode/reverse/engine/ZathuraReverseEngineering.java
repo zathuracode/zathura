@@ -145,28 +145,35 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	 * Do template.
 	 */
 	private void doTemplate() throws Exception{
-
+		
+		//TODO https://github.com/whitesource/whitesource-bamboo-agent/issues/9
+		log.info("Execute init doTemplate");
+		
+		Thread thread = Thread.currentThread();
+		ClassLoader loader = thread.getContextClassLoader();
+		thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+		log.info("Chaged ContextClassLoader:"+EclipseGeneratorUtil.bundleClassLoader);
 		try {
-			
-			GeneratorUtil.putBundleClassLoaderInCurrentThread();
-			
+	
 			ve = new VelocityEngine();
-
+			
 			// Limpio las propiedades
-			ve.clearProperty("file.resource.loader.description");
+			
 			ve.clearProperty("file.resource.loader.description");
 			ve.clearProperty("file.resource.loader.class");
 			ve.clearProperty("file.resource.loader.path");
 			ve.clearProperty("file.resource.loader.cache");
 			ve.clearProperty("file.resource.loader.modificationCheckInterval");
-
+			
 			Properties properties = new Properties();
 
-			properties.setProperty("file.resource.loader.description", "Velocity File Resource Loader");
+			properties.setProperty("file.resource.loader.description", "Velocity File Resource Loader");															  		 
 			properties.setProperty("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.FileResourceLoader");
 			properties.setProperty("file.resource.loader.path", reverseTemplatesPath);
 			properties.setProperty("file.resource.loader.cache", "false");
 			properties.setProperty("file.resource.loader.modificationCheckInterval", "2");
+			
+			
 
 			ve.init(properties);
 			
@@ -191,11 +198,14 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			doBuild(context);
 			doRevEng(context);
 			doBuildCompile(context);
+			
+			log.info("Execute end doTemplate");
 		} catch (Exception e) {
 			log.info(e.getMessage());
 			throw e;
 		}finally{
-			GeneratorUtil.putThreadClassLoaderInCurrentThread();
+			log.info("Chaged ContextClassLoader:"+loader);
+			thread.setContextClassLoader(loader);
 		}
 	}
 
@@ -394,48 +404,58 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 	public static void callAntProcess() throws Exception{
 		log.info("Begin Ant");
 		
-		GeneratorUtil.putThreadClassLoaderInCurrentThread();
+		Thread thread = Thread.currentThread();
+		ClassLoader loader = thread.getContextClassLoader();
+		thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+		log.info("Chaged ContextClassLoader:"+EclipseGeneratorUtil.bundleClassLoader);
 		
-		File buildFile = new File(ZathuraReverseEngineeringUtil.getTempFileBuildPath());
-		Project p = new Project();
-		p.setUserProperty("ant.file", buildFile.getAbsolutePath());	
-		org.apache.tools.ant.listener.Log4jListener log4jListener=new Log4jListener();	
-		p.addBuildListener(log4jListener);
-
 		try {
-			p.fireBuildStarted();
-			p.init();
-			ProjectHelper helper = ProjectHelper.getProjectHelper();
-			p.addReference("ant.projectHelper", helper);
-			helper.parse(p, buildFile);
-			p.executeTarget(p.getDefaultTarget());
-			p.fireBuildFinished(null);
-		} catch (BuildException e) {
-			p.fireBuildFinished(e);
-			log.error("callAntProcess Helper 1 Build",e);
-			throw e;
-		}
+			File buildFile = new File(ZathuraReverseEngineeringUtil.getTempFileBuildPath());
+			Project p = new Project();
+			p.setUserProperty("ant.file", buildFile.getAbsolutePath());	
+			org.apache.tools.ant.listener.Log4jListener log4jListener=new Log4jListener();	
+			p.addBuildListener(log4jListener);
 
-		// Compile Pojos
-		File buildFile2 = new File(ZathuraReverseEngineeringUtil.getTempFileBuildCompilePath());
-		Project p2 = new Project();
-		p2.setUserProperty("ant.file", buildFile2.getAbsolutePath());
-		log4jListener=new Log4jListener();	
-		p2.addBuildListener(log4jListener);
-		
+			try {
+				p.fireBuildStarted();
+				p.init();
+				ProjectHelper helper = ProjectHelper.getProjectHelper();
+				p.addReference("ant.projectHelper", helper);
+				helper.parse(p, buildFile);
+				p.executeTarget(p.getDefaultTarget());
+				p.fireBuildFinished(null);
+			} catch (BuildException e) {
+				p.fireBuildFinished(e);
+				log.error("callAntProcess Helper 1 Build",e);
+				throw e;
+			}
 
-		try {
-			p2.fireBuildStarted();
-			p2.init();
-			ProjectHelper helper2 = ProjectHelper.getProjectHelper();
-			p2.addReference("ant.projectHelper", helper2);
-			helper2.parse(p2, buildFile2);
-			p2.executeTarget(p2.getDefaultTarget());
-			p2.fireBuildFinished(null);
-		} catch (BuildException e) {
-			p2.fireBuildFinished(e);
-			log.error("callAntProcess Helper 2 Compile Pojos",e);
+			// Compile Pojos
+			File buildFile2 = new File(ZathuraReverseEngineeringUtil.getTempFileBuildCompilePath());
+			Project p2 = new Project();
+			p2.setUserProperty("ant.file", buildFile2.getAbsolutePath());
+			log4jListener=new Log4jListener();	
+			p2.addBuildListener(log4jListener);
+			
+
+			try {
+				p2.fireBuildStarted();
+				p2.init();
+				ProjectHelper helper2 = ProjectHelper.getProjectHelper();
+				p2.addReference("ant.projectHelper", helper2);
+				helper2.parse(p2, buildFile2);
+				p2.executeTarget(p2.getDefaultTarget());
+				p2.fireBuildFinished(null);
+			} catch (BuildException e) {
+				p2.fireBuildFinished(e);
+				log.error("callAntProcess Helper 2 Compile Pojos",e);
+				throw e;
+			}
+		} catch (Exception e) {
 			throw e;
+		}finally{
+			log.info("Chaged ContextClassLoader:"+loader);
+			thread.setContextClassLoader(loader);
 		}
 		log.info("End Ant");
 	}

@@ -44,19 +44,31 @@ public class WallJ implements IZathuraWallJTemplate,IZathuraGenerator{
 
 
 	@Override
-	public void toGenerate(MetaDataModel metaDataModel, String projectName,
-			String folderProjectPath, Properties propiedades)throws Exception {
-
-		String jpaPckgName = propiedades.getProperty("jpaPckgName");
-		String domainName = jpaPckgName.substring(0, jpaPckgName.indexOf("."));
-		Integer specificityLevel = (Integer) propiedades.get("specificityLevel");
-		properties = propiedades;
-		webRootPath=(propiedades.getProperty("webRootFolderPath"));
+	public void toGenerate(MetaDataModel metaDataModel, String projectName,String folderProjectPath, Properties propiedades)throws Exception {
 		
-		log.info("Begin Zathura Primefaces4.0 JPA Ejb 3.1");
-		doTemplate(folderProjectPath, metaDataModel, jpaPckgName, projectName, specificityLevel, domainName);
-		copyLibraries();
-		log.info("End Zathura Primefaces4.0 JPA Ejb 3.1");
+		Thread thread = Thread.currentThread();
+		ClassLoader loader = thread.getContextClassLoader();
+		thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+		log.info("Chaged ContextClassLoader:"+EclipseGeneratorUtil.bundleClassLoader);
+		
+		try {
+			String jpaPckgName = propiedades.getProperty("jpaPckgName");
+			String domainName = jpaPckgName.substring(0, jpaPckgName.indexOf("."));
+			Integer specificityLevel = (Integer) propiedades.get("specificityLevel");
+			properties = propiedades;
+			webRootPath=(propiedades.getProperty("webRootFolderPath"));
+			
+			log.info("Begin Zathura Primefaces4.0 JPA Ejb 3.1");
+			doTemplate(folderProjectPath, metaDataModel, jpaPckgName, projectName, specificityLevel, domainName);
+			copyLibraries();
+			log.info("End Zathura Primefaces4.0 JPA Ejb 3.1");
+		} catch (Exception e) {
+			throw e;
+		}finally{
+			log.info("Chaged ContextClassLoader:"+loader);
+			thread.setContextClassLoader(loader);
+		}
+		
 
 
 	}
@@ -126,8 +138,6 @@ public class WallJ implements IZathuraWallJTemplate,IZathuraGenerator{
 
 		try {
 			
-			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
-			GeneratorUtil.putBundleClassLoaderInCurrentThread();
 			
 	
 			ve = new VelocityEngine();
@@ -308,7 +318,7 @@ public class WallJ implements IZathuraWallJTemplate,IZathuraGenerator{
 			log.error(e.toString());
 			throw e;
 		}finally{
-			GeneratorUtil.putThreadClassLoaderInCurrentThread();
+			
 		}
 	}
 

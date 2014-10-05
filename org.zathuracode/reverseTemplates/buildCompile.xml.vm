@@ -4,14 +4,13 @@
 	<path id="toolslib">
 		<path location="../lib/ant-1.9.4.jar"/>
 		<path location="../lib/ant-apache-log4j-1.9.4.jar"/>
-		<path location="../lib/ant-launcher-1.9.4.jar"/>
 		<path location="../lib/antlr-2.7.7.jar"/>
 		<path location="../lib/avalon-framework-4.1.3.jar"/>
 		<path location="../lib/classmate-0.5.4.jar"/>
 		<path location="../lib/commands-3.3.0-I20070605-0010.jar"/>
 		<path location="../lib/common-3.2.0-v20060603.jar"/>
 		<path location="../lib/commons-collections-3.2.1.jar"/>
-		<path location="../lib/commons-logging-1.1.jar"/>
+		<path location="../lib/commons-logging-1.1.1.jar"/>
 		<path location="../lib/contenttype-3.4.200-v20130326-1255.jar"/>
 		<path location="../lib/dom4j-1.6.1.jar"/>
 		<path location="../lib/freemarker-2.3.8.jar"/>
@@ -29,7 +28,6 @@
 		<path location="../lib/jtidy-r8-20060801.jar"/>
 		<path location="../lib/log4j-1.2.15.jar"/>
 		<path location="../lib/logkit-1.0.1.jar"/>
-		<path location="../lib/org.eclipse.jdt.core-3.8.0.v_C03.jar"/>
 		<path location="../lib/osgi-3.9.1-v20140110-1610.jar"/>
 		<path location="../lib/preferences-3.5.100-v20130422-1538.jar"/>
 		<path location="../lib/registry-3.5.301-v20130717-1549.jar"/>
@@ -45,7 +43,14 @@
 		
 		
 		<!-- Create the distribution directory -->
-		<javac classpathref="toolslib" srcdir="${destinationDirectory}${companyDomainNameForPojoLocation}" destdir="${destinationDirectory}" >			
+		<javac classpathref="toolslib" 
+			   srcdir="${destinationDirectory}${companyDomainNameForPojoLocation}" 
+			   destdir="${destinationDirectory}" 
+			   includeantruntime="false"
+			   fork="true"
+			   source="1.6"
+         	   target="1.7"
+         	   compiler="javac1.7">			
 			<include name="*.java" />
 		</javac>		
 	</target>

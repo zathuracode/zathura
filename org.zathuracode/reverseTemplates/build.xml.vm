@@ -62,23 +62,6 @@
 			<hbm2java jdk5="true" ejb3="true" />		
 		#end
 		
-		<!-- configuration for annotations hibernate
-		<jdbcconfiguration configurationfile="../tempFiles/hibernate.cfg.xml" packagename="${companyDomainName}.domain"
-			revengfile="../tempFiles/hibernate.reveng.xml">
-		</jdbcconfiguration>
-		<hbm2java jdk5="true" ejb3="true" />
-		-->
-		
-		<!-- configuration for XML hibernate
-		<jdbcconfiguration configurationfile="../tempFiles/hibernate.cfg.xml" packagename="${companyDomainName}.domain"
-			revengfile="../tempFiles/hibernate.reveng.xml">
-		</jdbcconfiguration>
-		<hbm2java jdk5="true"/>
-		<hbm2hbmxml/>
-		<hbm2cfgxml ejb3="false"/>
-		-->
-
-		
 	</hibernatetool>
 	
 	<target name="createPojos" >

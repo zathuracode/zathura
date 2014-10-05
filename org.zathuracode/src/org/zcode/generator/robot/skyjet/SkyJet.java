@@ -48,13 +48,25 @@ public class SkyJet implements IZathuraSkyJetTemplate,IZathuraGenerator {
 	public void toGenerate(MetaDataModel metaDataModel, String projectName,
 			String folderProjectPath, Properties propiedades)throws Exception {
 
-		webRootPath=(propiedades.getProperty("webRootFolderPath"));					
-		properties=propiedades;
-		String nombrePaquete= propiedades.getProperty("jpaPckgName");
-		Integer specificityLevel = (Integer) propiedades.get("specificityLevel");
-		String  domainName= nombrePaquete.substring(0, nombrePaquete.indexOf("."));
-		doTemplate(folderProjectPath, metaDataModel, nombrePaquete, projectName, specificityLevel, domainName);
-		copyLibraries();
+		Thread thread = Thread.currentThread();
+		ClassLoader loader = thread.getContextClassLoader();
+		thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+		log.info("Chaged ContextClassLoader:"+EclipseGeneratorUtil.bundleClassLoader);
+		
+		try {
+			webRootPath=(propiedades.getProperty("webRootFolderPath"));					
+			properties=propiedades;
+			String nombrePaquete= propiedades.getProperty("jpaPckgName");
+			Integer specificityLevel = (Integer) propiedades.get("specificityLevel");
+			String  domainName= nombrePaquete.substring(0, nombrePaquete.indexOf("."));
+			doTemplate(folderProjectPath, metaDataModel, nombrePaquete, projectName, specificityLevel, domainName);
+			copyLibraries();
+		} catch (Exception e) {
+			throw e;
+		}finally{
+			log.info("Chaged ContextClassLoader:"+loader);
+			thread.setContextClassLoader(loader);
+		}
 
 	}
 	
@@ -139,8 +151,7 @@ public class SkyJet implements IZathuraSkyJetTemplate,IZathuraGenerator {
 
 		try {
 			
-			//Mete en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
-			GeneratorUtil.putBundleClassLoaderInCurrentThread();
+			
 
 			
 			ve= new VelocityEngine();
@@ -337,7 +348,7 @@ public class SkyJet implements IZathuraSkyJetTemplate,IZathuraGenerator {
 			log.error(e.toString());
 			throw e;
 		}finally{
-			GeneratorUtil.putThreadClassLoaderInCurrentThread();
+			
 		}
 
 
