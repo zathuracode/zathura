@@ -7,7 +7,7 @@
 	<generator>
 		<name>Jender</name>
 		<gui-name>Jender</gui-name>
-		<class>org.zcode.generator.robot.jender.JenderRobot</class>
+		<class>org.zcode.generator.robot.jender.Jender</class>
 		<persistence>hibernateCore</persistence>
 		<zathuraVersion>4.0</zathuraVersion>
 		<description>

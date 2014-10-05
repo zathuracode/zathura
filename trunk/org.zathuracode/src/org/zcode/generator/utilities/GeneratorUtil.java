@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.zcode.eclipse.plugin.generator.utilities.ConnectionsUtils;
 import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Zathura Generator.
  *
@@ -943,18 +943,19 @@ public class GeneratorUtil {
 	 * Carga en el hilo de ejecucion el class loader del OSGI Esto resuleve probelemas de cargas de JAR
 	 */
 	
-	
+	/*
 	public static void putBundleClassLoaderInCurrentThread(){
-		log.info("putBundleClassLoaderInCurrentThread:"+EclipseGeneratorUtil.bundleClassLoader);
-		Thread thread = Thread.currentThread();
-		thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+		//log.info("putBundleClassLoaderInCurrentThread:"+EclipseGeneratorUtil.bundleClassLoader);
+		//Thread thread = Thread.currentThread();
+		//thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
 	}
 	
 	public static void putThreadClassLoaderInCurrentThread(){
-		log.info("putThreadClassLoaderInCurrentThread:"+EclipseGeneratorUtil.threadClassLoader);
-		Thread thread = Thread.currentThread();
-		thread.setContextClassLoader(EclipseGeneratorUtil.threadClassLoader);
+		//log.info("putThreadClassLoaderInCurrentThread:"+EclipseGeneratorUtil.threadClassLoader);
+		//Thread thread = Thread.currentThread();
+		//thread.setContextClassLoader(EclipseGeneratorUtil.threadClassLoader);
 	}
+	*/
 	
 		
 }
