@@ -4,6 +4,11 @@ import java.util.Enumeration;
 import java.util.Properties;
 
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
@@ -62,11 +67,14 @@ public class ZathuraGeneratorActivator extends AbstractUIPlugin {
 		  log.info(key + ": " + value);
 		  if(key!=null && key.equalsIgnoreCase("java.version")==true){
 			  EclipseGeneratorUtil.javaVersion=value.substring(0,3);
+		  }else if(key!=null && key.equalsIgnoreCase("java.runtime.version")==true){
+			  EclipseGeneratorUtil.javaVersion=value.substring(0,3);
 		  }
-		}
-		
+		}   
 		
 	}
+	
+	
 
 	/*
 	 * (non-Javadoc)

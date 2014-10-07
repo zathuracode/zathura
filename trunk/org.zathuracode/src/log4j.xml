@@ -9,6 +9,12 @@
     </layout>
   </appender>
   
+  <appender name="EclipseAppender" class="org.zcode.eclipse.plugin.log.EclipseAppender">
+    <layout class="org.apache.log4j.PatternLayout">
+    	<param name="ConversionPattern" value="%-4r [%p] %-c %d{ISO8601}  %m%n"/>
+    </layout>
+  </appender>
+  
   
   
 
@@ -30,6 +36,8 @@
     	<priority value ="fatal" />
     -->
     <appender-ref ref="ConsoleAppender"/>
+    
+    <appender-ref ref="EclipseAppender"/>
  
     <appender-ref ref="FILE"/>
   
