@@ -4,18 +4,11 @@ import java.util.Enumeration;
 import java.util.Properties;
 
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsole;
-import org.eclipse.ui.console.IConsoleManager;
-import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
-
-import com.sun.tools.javac.resources.version;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -58,20 +51,32 @@ public class ZathuraGeneratorActivator extends AbstractUIPlugin {
 		
 		plugin = this;
 		
-		
-		Properties p = System.getProperties();
-		Enumeration keys = p.keys();
-		while (keys.hasMoreElements()) {
-		  String key = (String)keys.nextElement();
-		  String value = (String)p.get(key);
-		  log.info(key + ": " + value);
-		  if(key!=null && key.equalsIgnoreCase("java.version")==true){
-			  EclipseGeneratorUtil.javaVersion=value.substring(0,3);
-		  }else if(key!=null && key.equalsIgnoreCase("java.runtime.version")==true){
-			  EclipseGeneratorUtil.javaVersion=value.substring(0,3);
-		  }
-		}   
-		
+		try {
+			Properties p = System.getProperties();
+			Enumeration keys = p.keys();
+			while (keys.hasMoreElements()) {
+			  
+				  Object keyObj = keys.nextElement();
+				  if(keyObj instanceof String){
+					  String key=(String)keyObj;
+					  Object valueObj =p.get(key);
+					  
+					  if(valueObj instanceof String){
+						  String value=(String)valueObj;
+						  log.info(key + ": " + value);
+						  if(key!=null && key.equalsIgnoreCase("java.version")==true){
+							  EclipseGeneratorUtil.javaVersion=value.substring(0,3);
+						  }else if(key!=null && key.equalsIgnoreCase("java.runtime.version")==true){
+							  EclipseGeneratorUtil.javaVersion=value.substring(0,3);
+						  }
+					  }					  
+				  }				 
+			}
+
+		} catch (Exception e) {
+			log.error("",e);
+		}
+
 	}
 	
 	

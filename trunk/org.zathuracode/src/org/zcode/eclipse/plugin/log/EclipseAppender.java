@@ -29,14 +29,17 @@ public class EclipseAppender extends AppenderSkeleton {
 		if(myConsole==null || out==null){
 			myConsole = findConsole(CONSOLE_NAME);
 			out = myConsole.newMessageStream();
-		    out.println("Zathuracode is Cool");
+		    out.println("=============== Wellcome to Zathuracode is Cool ===============");
+		    /*
+		     * 
+		     */
 		}
 		
 	}
 	
 	@Override
 	protected void append(LoggingEvent loggingEvent) {
-		out.println(getLayout().format(loggingEvent));
+		out.print(getLayout().format(loggingEvent));
 	}
 	
 	/*

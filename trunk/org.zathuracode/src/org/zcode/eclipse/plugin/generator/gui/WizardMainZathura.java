@@ -2,6 +2,9 @@ package org.zcode.eclipse.plugin.generator.gui;
 
 import java.lang.reflect.InvocationTargetException;
 
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
+
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.wizard.IWizardPage;
@@ -11,6 +14,8 @@ import org.zcode.eclipse.plugin.generator.utilities.EclipseGeneratorUtil;
 import org.zcode.eclipse.plugin.generator.utilities.RunningGeneration;
 import org.zcode.eclipse.plugin.generator.utilities.ZathuraGeneratorLog;
 import org.zcode.swt.utilities.ResourceManager;
+
+import com.sun.tools.internal.ws.wsdl.document.jaxws.Exception;
 
 
 
@@ -82,6 +87,8 @@ public class WizardMainZathura extends Wizard {
 	@Override
 	public boolean performFinish() {
 		try {
+			
+			
 			
 			ProgressMonitorDialog progressMonitorDialogReverseEngineering=new ProgressMonitorDialog(getShell());
 			progressMonitorDialogReverseEngineering.run(true, true,new org.zcode.eclipse.plugin.generator.utilities.RunningGenerationReverseEngineering(getShell()));
