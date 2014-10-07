@@ -1,23 +1,13 @@
+<!--Author Zathuracode Generator -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   
-	<modelVersion>${modelVersion}</modelVersion>	
-#if(!${parentGroupId.isEmpty()})
-	<parent>
-		<groupId>${parentGroupId}</groupId>
-		<artifactId>${parentArtifactId}</artifactId>
-		<version>${parentVersion}</version> 
-	</parent>
-#end
+	<modelVersion>4.0.0</modelVersion>	
 	<groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>
-	<version>${version}</version>
-	<packaging>${packaging}</packaging>
-#if(!${name.isEmpty()})	
+	<version>1.0.0</version>
+	<packaging>war</packaging>
 	<name>${name}</name>
-#end
-#if(!${description.isEmpty()})	
-	<description>${description}</description>	
-#end
+	<description>${description}</description>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
