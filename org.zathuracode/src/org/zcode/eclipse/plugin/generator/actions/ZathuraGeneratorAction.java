@@ -1,10 +1,15 @@
 package org.zcode.eclipse.plugin.generator.actions;
 
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
+
 import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
+import org.zcode.eclipse.plugin.generator.gui.Messages;
 import org.zcode.eclipse.plugin.generator.gui.WizardMainZathura;
 import org.zcode.eclipse.plugin.generator.utilities.ConfigEclipsePluginPath;
 
@@ -42,6 +47,16 @@ public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 	 * @see IWorkbenchWindowActionDelegate#run
 	 */
 	public void run(IAction action) {
+		
+		
+		
+		//Valida que este instalado un JDK
+		
+		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+		if(compiler==null){
+			 MessageDialog.openWarning(window.getShell(), Messages.WizardMainZathura_2, "Javac not found please configure a JDK on Eclipse. Preferences -> Java -> Installed JREs");
+			 return;
+		}
 
 		WizardMainZathura wizardMain = new WizardMainZathura();
 		WizardDialog dialog = new WizardDialog(window.getShell(), wizardMain);
