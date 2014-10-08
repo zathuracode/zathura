@@ -12,7 +12,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <ejb.version>3.1.1</ejb.version>
-        <primefaces.version>5.0</primefaces.version>
+        <primefaces.version>5.1</primefaces.version>
         <mojarra.version>2.2.6</mojarra.version>
     </properties>
     
@@ -49,67 +49,7 @@
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 			<version>1.0.0.Final</version>
 		</dependency>		
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.annotation</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.ejb</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.enterprise.deploy</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.jms</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>3.0-Prelude</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.management.j2ee</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.persistence</artifactId>
-			<version>3.0-Prelude</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.resource</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.security.auth.message</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.security.jacc</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.transaction</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.xml.rpc</artifactId>
-			<version>${ejb.version}</version>
-		</dependency>
+
 		<dependency>
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-api</artifactId>
