@@ -418,7 +418,7 @@ public class ZathuraReverseEngineering implements IZathuraReverseEngineering {
 			File buildFile = new File(ZathuraReverseEngineeringUtil.getTempFileBuildPath());
 			Project p = new Project();
 			p.setUserProperty("ant.file", buildFile.getAbsolutePath());	
-			org.apache.tools.ant.listener.Log4jListener log4jListener=new Log4jListener();	
+			org.apache.tools.ant.listener.Log4jListener log4jListener=new Log4jListener();
 			p.addBuildListener(log4jListener);
 
 			try {

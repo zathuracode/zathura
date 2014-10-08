@@ -142,22 +142,22 @@ public class ZathuraGeneratorFactory {
 					generatorModel = new GeneratorModel();
 				} else if (localName.equals("name") == true) {
 					boolName = true;
-					log.info(localName);
+					log.debug(localName);
 				} else if (localName.equals("description") == true) {
 					descriptionName = true;
-					log.info(localName);
+					log.debug(localName);
 				} else if (localName.equals("gui-name") == true) {
 					guiName = true;
-					log.info(localName);
+					log.debug(localName);
 				} else if (localName.equals("class") == true) {
 					className = true;
-					log.info(localName);
+					log.debug(localName);
 				} else if (localName.equals("persistence") == true) {
 					persistence = true;
-					log.info(localName);
+					log.debug(localName);
 				} else if (localName.equals("zathuraVersion") == true) {
 					zathuraVersion = true;
-					log.info(localName);
+					log.debug(localName);
 				}
 			} else if (e.isCharacters()) {
 				Characters characters = (Characters) e;
@@ -166,27 +166,27 @@ public class ZathuraGeneratorFactory {
 					generatorModel.setName(cadena);
 					generatorNames.add(cadena);
 					boolName = false;
-					log.info(cadena);
+					log.debug(cadena);
 				} else if (descriptionName == true) {
 					generatorModel.setDescription(cadena);
 					descriptionName = false;
-					log.info(cadena);
+					log.debug(cadena);
 				} else if (guiName == true) {
 					generatorModel.setGuiName(cadena);
 					guiName = false;
-					log.info(cadena);
+					log.debug(cadena);
 				} else if (className == true) {
 					generatorModel.setZathuraGenerator((IZathuraGenerator) Class.forName(cadena).newInstance());
 					className = false;
-					log.info(cadena);
+					log.debug(cadena);
 				} else if (persistence == true) {
 					generatorModel.setPersistence(cadena);
 					persistence = false;
-					log.info(cadena);
+					log.debug(cadena);
 				} else if (zathuraVersion == true) {
 					generatorModel.setZathuraVersion(cadena);
 					zathuraVersion = false;
-					log.info(cadena);
+					log.debug(cadena);
 				}
 			} else if (e.isEndElement() == true) {
 				EndElement endElement = (EndElement) e;
