@@ -92,7 +92,7 @@ public class Jender implements IZathuraJenderTemplate,IZathuraGenerator{
 		String pathHibernate= librariesPath+"core-hibernate4.3.6"+GeneratorUtil.slash;
 		String pathJpaHibernate=librariesPath+"hibernate-jpa2.1"+GeneratorUtil.slash;
 		
-		String pathPrimeFaces= librariesPath+"primeFaces5.0"+GeneratorUtil.slash;
+		String pathPrimeFaces= librariesPath+"primeFaces5.1"+GeneratorUtil.slash;
 		
 		String pathSpring= librariesPath+"spring4.1.0"+GeneratorUtil.slash;
 		String pathSpringSecurity= librariesPath+"spring-security3.2.5"+GeneratorUtil.slash;

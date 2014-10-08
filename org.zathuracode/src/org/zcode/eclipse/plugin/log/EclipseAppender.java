@@ -30,9 +30,8 @@ public class EclipseAppender extends AppenderSkeleton {
 			myConsole = findConsole(CONSOLE_NAME);
 			out = myConsole.newMessageStream();
 		    out.println("=============== Wellcome to Zathuracode is Cool ===============");
-		    /*
-		     * 
-		     */
+		}else{
+			System.out.println("Zathuracode EclipseAppender: The Eclipse Console was not finded");
 		}
 		
 	}

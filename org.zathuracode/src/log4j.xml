@@ -11,7 +11,7 @@
   
   <appender name="EclipseAppender" class="org.zcode.eclipse.plugin.log.EclipseAppender">
     <layout class="org.apache.log4j.PatternLayout">
-    	<param name="ConversionPattern" value="%-4r [%p] %-c %d{ISO8601}  %m%n"/>
+    	<param name="ConversionPattern" value="[%p] %-c %m%n"/>
     </layout>
   </appender>
   
@@ -29,7 +29,7 @@
 	</appender>
  
   <root>
-  	<priority value="debug"/>
+  	<priority value="info"/>
    <!-- 	
      	<priority value="off"/>
      	<priority value ="debug" />

@@ -54,7 +54,8 @@ public class ZathuraGeneratorAction implements IWorkbenchWindowActionDelegate {
 		
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		if(compiler==null){
-			 MessageDialog.openWarning(window.getShell(), Messages.WizardMainZathura_2, "Javac not found please configure a JDK for execute eclipse. The eclipse was executed with a JRE");
+			 MessageDialog.openWarning(window.getShell(),"Zathuracode Warning", "Javac not found. The eclipse was executed with a JRE. "
+			 		+ "Please configure a JDK for execute eclipse. Zathuracode not work without jdk because it is necessary to compile java code");
 			 return;
 		}
 

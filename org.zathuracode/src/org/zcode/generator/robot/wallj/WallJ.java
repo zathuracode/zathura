@@ -81,7 +81,7 @@ public class WallJ implements IZathuraWallJTemplate,IZathuraGenerator{
 		
 		String pathEjb= librariesPath+"ejb-3.1"+GeneratorUtil.slash;
 		String pathJpa= librariesPath+"hibernate-jpa2.1"+GeneratorUtil.slash;
-		String pathPrimeFaces= librariesPath+"primeFaces5.0"+GeneratorUtil.slash;
+		String pathPrimeFaces= librariesPath+"primeFaces5.1"+GeneratorUtil.slash;
 		String pathSL4J= librariesPath+"slf4j1.7.5"+GeneratorUtil.slash;
 		String pathJamon= librariesPath+"jamon2.79"+GeneratorUtil.slash;
 		String pathMojarra= librariesPath+"mojarra2.2.6"+GeneratorUtil.slash;
