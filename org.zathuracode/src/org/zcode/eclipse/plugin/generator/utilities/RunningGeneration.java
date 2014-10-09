@@ -47,24 +47,16 @@ public class RunningGeneration implements IRunnableWithProgress {
 	 * @throws InterruptedException the interrupted exception
 	 */
 	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
-		monitor.setTaskName("Generating Artifacts");
-		monitor.beginTask("Generation in progress...", IProgressMonitor.UNKNOWN);
+		
 		try {
+			
+			monitor.setTaskName("Generating Artifacts");
+			monitor.beginTask("Generation in progress...", IProgressMonitor.UNKNOWN);
+			
 			EclipseGeneratorUtil.generate();
 
 			monitor.subTask("Refresh " + EclipseGeneratorUtil.projectName + " project...");
-			EclipseGeneratorUtil.project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-			
-			 //TODO mirar que comando se puede ejecutar para organizar los import
-			
-			monitor.subTask("Building " + EclipseGeneratorUtil.projectName + " project...");
-			EclipseGeneratorUtil.project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
-			
-			
-			
-			//monitor.subTask("Building " + EclipseGeneratorUtil.projectName + " project...");
-			
-			
+			EclipseGeneratorUtil.project.refreshLocal(IResource.DEPTH_INFINITE, monitor);			
 			
 		} catch (MetaDataReaderNotFoundException e) {
 			monitor.setCanceled(true);
@@ -91,6 +83,24 @@ public class RunningGeneration implements IRunnableWithProgress {
 			//MessageDialog.openError(getShell(), "Error","The generation was canceled Exception"+e.getMessage());
 			throw new InterruptedException("The generation was cancelled:"+e.toString());
 		}
+		
+		
+		
+		
+		try {
+			monitor.subTask("Building " + EclipseGeneratorUtil.projectName + " project...");
+			EclipseGeneratorUtil.project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+		} catch (CoreException e) {
+			log.error("Error  in Building Exception The generation was successful but the compilation has errors",e);
+			ZathuraGeneratorLog.logError(e);
+			MessageDialog.openWarning(getShell(), "Warning Message","The generation was successful but the compilation has errors");
+			e.printStackTrace();
+		}catch (Exception e) {
+			monitor.setCanceled(true);
+			log.error("Error  in Building Exception The generation was successful but the compilation has errors",e);
+			ZathuraGeneratorLog.logError(e);
+		}
+		
 		monitor.done();
 		if (monitor.isCanceled()) {
 			throw new InterruptedException("The generation was cancelled");

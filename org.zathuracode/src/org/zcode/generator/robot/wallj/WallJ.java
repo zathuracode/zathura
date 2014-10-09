@@ -58,10 +58,10 @@ public class WallJ implements IZathuraWallJTemplate,IZathuraGenerator{
 			properties = propiedades;
 			webRootPath=(propiedades.getProperty("webRootFolderPath"));
 			
-			log.info("Begin Zathura Primefaces4.0 JPA Ejb 3.1");
+			log.info("===================== Begin WallJ Zathuracode =====================");
 			doTemplate(folderProjectPath, metaDataModel, jpaPckgName, projectName, specificityLevel, domainName);
 			copyLibraries();
-			log.info("End Zathura Primefaces4.0 JPA Ejb 3.1");
+			log.info("=====================  End WallJ Zathuracode  =====================");
 		} catch (Exception e) {
 			throw e;
 		}finally{
@@ -111,7 +111,7 @@ public class WallJ implements IZathuraWallJTemplate,IZathuraGenerator{
 		//Se valida si el proyecto no es maven, para empezar a copiar las librerias
 		if(!EclipseGeneratorUtil.isMavenProject){
 			//copy libraries
-			log.info("Copy Libraries files Zathura Primefaces4.0 Jpa Ejb3.1");
+			log.info("Copy Libraries");
 			GeneratorUtil.copyFolder(pathEjb, pathLib);
 			GeneratorUtil.copyFolder(pathJpa, pathLib);			
 			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
