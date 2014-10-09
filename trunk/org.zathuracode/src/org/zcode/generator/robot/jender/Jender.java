@@ -58,6 +58,7 @@ public class Jender implements IZathuraJenderTemplate,IZathuraGenerator{
 		Thread thread = Thread.currentThread();
 		ClassLoader loader = thread.getContextClassLoader();
 		thread.setContextClassLoader(EclipseGeneratorUtil.bundleClassLoader);
+		log.info("Chaged ContextClassLoader:"+EclipseGeneratorUtil.bundleClassLoader);
 		
 		try {
 			String jpaPckgName = propiedades.getProperty("jpaPckgName");
@@ -66,13 +67,10 @@ public class Jender implements IZathuraJenderTemplate,IZathuraGenerator{
 			properties = propiedades;
 			webRootPath=(propiedades.getProperty("webRootFolderPath"));
 			
-			log.info("Begin Zathura Jender");
-				
-			log.info("Chaged ContextClassLoader:"+EclipseGeneratorUtil.bundleClassLoader);
+			log.info("===================== Begin Jender Zathuracode =====================");				
 			doTemplate(folderProjectPath, metaDataModel, jpaPckgName, projectName, specificityLevel, domainName);
-			copyLibraries();
-				
-			log.info("End Zathura Jender");
+			copyLibraries();				
+			log.info("=====================  End Jender Zathuracode  =====================");
 		} catch (Exception e) {
 			throw e;
 		}finally{
@@ -128,7 +126,7 @@ public class Jender implements IZathuraJenderTemplate,IZathuraGenerator{
 		//Se valida si el proyecto no es maven, para empezar a copiar las librerias
 		if(!EclipseGeneratorUtil.isMavenProject){
 			//copy libraries
-			log.info("Copy Libraries files Zathura Primefaces4.0 Hibernate4.2.3 Spring3.2.3");
+			log.info("Copy Libraries files Zathuracode");
 			GeneratorUtil.copyFolder(pathHibernate, pathLib);
 			GeneratorUtil.copyFolder(pathJpaHibernate, pathLib);
 			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);

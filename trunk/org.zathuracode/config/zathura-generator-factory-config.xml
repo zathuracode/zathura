@@ -22,7 +22,7 @@
 			        <h3>The Jender Robot</h3>
 			        <p>Built JavaEE applications using the following frameworks</p>
 			        <ul>
-			            <li>Primefaces 5.0</li>
+			            <li>Primefaces 5.1</li>
 			            <li>Mojarra 2.2.6</li>
 			            <li>Spring Framework 4.1.0</li>			           
 			            <li>Hibernate 4.3.6</li>
@@ -51,7 +51,7 @@
 				        <h3>The SkyJet Robot</h3>
 				        <p>Built JavaEE applications using the following frameworks</p>
 				        <ul>
-				           	<li>Primefaces 5.0</li>
+				           	<li>Primefaces 5.1</li>
 				           	<li>Mojarra 2.2.6</li>
 			            	<li>Spring Framework 4.1.0</li>
 			            	<li>Hibernate 4.3.6</li>
@@ -81,7 +81,7 @@
 				        <h3>The Wall-J Robot</h3>
 				        <p>Built JavaEE applications using the following frameworks</p>
 				        <ul>
-				            <li>Primefaces 5.0</li>
+				            <li>Primefaces 5.1</li>
 				            <li>Mojarra 2.2.6</li>
 				            <li>EJB 3.1 Lite</li>
 				            <li>JPA 2.0</li>

@@ -59,8 +59,11 @@ public class SkyJet implements IZathuraSkyJetTemplate,IZathuraGenerator {
 			String nombrePaquete= propiedades.getProperty("jpaPckgName");
 			Integer specificityLevel = (Integer) propiedades.get("specificityLevel");
 			String  domainName= nombrePaquete.substring(0, nombrePaquete.indexOf("."));
+			
+			log.info("===================== Begin SkyJet Zathuracode =====================");
 			doTemplate(folderProjectPath, metaDataModel, nombrePaquete, projectName, specificityLevel, domainName);
 			copyLibraries();
+			log.info("=====================  End SkyJet Zathuracode  =====================");
 		} catch (Exception e) {
 			throw e;
 		}finally{
@@ -120,7 +123,7 @@ public class SkyJet implements IZathuraSkyJetTemplate,IZathuraGenerator {
 		
 		if (!EclipseGeneratorUtil.isMavenProject) {
 			//copy libraries
-			log.info("Copy Libraries files Zathura Primefaces4.0 JPA Spring3.2.3");
+			log.info("Copy Libraries files Zathuracode");
 			GeneratorUtil.copyFolder(pathHibernate, pathLib);
 			GeneratorUtil.copyFolder(pathJPA, pathLib);
 			GeneratorUtil.copyFolder(pathPrimeFaces, pathLib);
