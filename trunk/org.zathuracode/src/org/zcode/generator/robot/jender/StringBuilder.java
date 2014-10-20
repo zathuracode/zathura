@@ -1654,12 +1654,20 @@ public class StringBuilder implements IStringBuilder {
 		Utilities.getInstance().dtoProperties = new HashMap<String, String>();
 		Utilities.getInstance().nameMemberToDto = new ArrayList<String>();
 
+		
 		for (Member member : metaData.getSimpleProperties()) {
 			
 			log.info(member.getName());
 
 			if (member.isPrimiaryKeyAComposeKey() == false) {
-				String realType = member.getType().toString().substring((member.getType().toString()).lastIndexOf(".") + 1,(member.getType().toString()).length());
+				String realType="";
+				//Cuando son Arreglos
+				if(member.getType().isArray()==false){
+					realType = member.getType().toString().substring((member.getType().toString()).lastIndexOf(".") + 1,(member.getType().toString()).length());
+				}else{
+					realType=member.getRealClassName();
+				}
+			
 				String memberClass = realType + " "+member.getName();
 				parameterOut.add(memberClass);
 				Utilities.getInstance().dtoProperties.put(member.getName(),realType);
@@ -1670,8 +1678,8 @@ public class StringBuilder implements IStringBuilder {
 				
 				if(metaData!=null && metaData.getComposeKey()!=null && metaData.getComposeKey().getDeclaredFields()!=null && metaData.getComposeKey().getDeclaredFields().length>0){
 					Field[] field = metaData.getComposeKey().getDeclaredFields();
-					for (Field field2 : field) {
-						String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,(field2.getType().toString()).length());
+					for (Field field2 : field) {					
+						String realType = field2.getType().toString().substring((field2.getType().toString()).lastIndexOf(".") + 1,(field2.getType().toString()).length());						
 						String memberClass = realType + " "+field2.getName();
 						parameterOut.add(memberClass);
 						composeKey.add(field2.getName());

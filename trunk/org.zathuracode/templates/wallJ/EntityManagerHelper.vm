@@ -8,6 +8,7 @@ import javax.persistence.Query;
 /**
 *  
 * @author Zathura Code Generator http://code.google.com/p/zathura/
+* www.zathuracode.org
 *
 */
 public class EntityManagerHelper {
