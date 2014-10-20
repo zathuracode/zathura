@@ -1651,7 +1651,14 @@ public class StringBuilder implements IStringBuilder {
 		for (Member member : metaData.getSimpleProperties()) {
 
 			if (member.isPrimiaryKeyAComposeKey() == false) {
-				String realType = member.getType().toString().substring((member.getType().toString()).lastIndexOf(".") + 1,(member.getType().toString()).length());
+				//String realType = member.getType().toString().substring((member.getType().toString()).lastIndexOf(".") + 1,(member.getType().toString()).length());
+				String realType="";
+				//Cuando son Arreglos
+				if(member.getType().isArray()==false){
+					realType = member.getType().toString().substring((member.getType().toString()).lastIndexOf(".") + 1,(member.getType().toString()).length());
+				}else{
+					realType=member.getRealClassName();
+				}
 				String memberClass = realType + " "+member.getName();
 				parameterOut.add(memberClass);
 				Utilities.getInstance().dtoProperties.put(member.getName(),realType);

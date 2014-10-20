@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 #end
 /**
 * @author Zathura Code Generator http://code.google.com/p/zathura/
+* www.zathuracode.org
 * 
 */
 public interface IBusinessDelegatorView {

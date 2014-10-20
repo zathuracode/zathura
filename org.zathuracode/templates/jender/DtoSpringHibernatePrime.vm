@@ -2,11 +2,12 @@ package ${virginPackage}. ${modelName}.dto;
 import java.util.Date;
 import java.io.Serializable;
 import java.sql.*;
-import ${package}.${metaData.getRealClassName()};
+
 
 /**
 * 
 * @author Zathura Code Generator http://code.google.com/p/zathura/
+* www.zathuracode.org
 * 
 */
 public class ${metaData.getRealClassName()}DTO implements Serializable {

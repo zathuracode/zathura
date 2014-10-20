@@ -11,6 +11,7 @@ import $package.${metaData.getRealClassName()};
 #end
 /**
 * @author Zathura Code Generator http://code.google.com/p/zathura/
+* www.zathuracode.org
 * 
 */
 public interface I${metaData.getRealClassName()}Logic {

@@ -2,6 +2,7 @@ package ${virginPackage}.exceptions;
 
 /**
  * @author Zathura Code Generator http://code.google.com/p/zathura/
+ * www.zathuracode.org
  * 
  */
 public class ZMessManager extends RuntimeException {
