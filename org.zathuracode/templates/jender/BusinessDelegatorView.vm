@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 
 import java.sql.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -65,6 +68,9 @@ import ${virginPackage}.presentation.businessDelegate.IBusinessDelegatorView;
 @Scope("singleton")
 @Service("BusinessDelegatorView")
 public class BusinessDelegatorView implements IBusinessDelegatorView{
+
+private static final Logger log = LoggerFactory.getLogger(BusinessDelegatorView.class);
+
 #foreach($metaData  in $dataModel.theMetaData)
 	
 	@Autowired

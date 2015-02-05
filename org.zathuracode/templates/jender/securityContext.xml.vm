@@ -11,11 +11,11 @@
 	
 	<http auto-config="true" access-denied-page="/login.xhtml" access-decision-manager-ref="accessDecisionManager">
 		
-		<intercept-url pattern="/XHTML/*" access="ROLE_USER,Admin" />		
+		<intercept-url pattern="/XHTML/*" access="ROLE_USER,Admin" />
 
 		<form-login login-page="/login.xhtml" default-target-url="/XHTML/initialMenu.xhtml" always-use-default-target="false" authentication-failure-url="/login.xhtml?authfailed=true" />
 			
-		<logout invalidate-session="true" logout-success-url="/login.xhtml?loggedout=true" />
+		<logout invalidate-session="true" logout-success-url="/login.xhtml?loggedout=true" logout-url="/j_spring_security_logout" delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBER_ME_COOKIE" />
 	</http>
 	
 	<beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
