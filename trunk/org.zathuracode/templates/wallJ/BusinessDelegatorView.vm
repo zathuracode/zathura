@@ -5,6 +5,9 @@ import java.util.Set;
 import java.math.BigDecimal;
 import java.sql.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import ${virginPackage}.presentation.businessDelegate.IBusinessDelegatorView;
@@ -62,6 +65,9 @@ import ${virginPackage}.presentation.businessDelegate.IBusinessDelegatorView;
 */
 @Stateless
 public class BusinessDelegatorView implements IBusinessDelegatorView{
+
+private static final Logger log = LoggerFactory.getLogger(BusinessDelegatorView.class);
+
 #foreach($metaData  in $dataModel.theMetaData)
 	
 	@EJB

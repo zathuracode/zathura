@@ -3,6 +3,9 @@ import java.util.Date;
 import java.io.Serializable;
 import java.sql.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
 * @author Zathura Code Generator http://code.google.com/p/zathura/
@@ -12,6 +15,9 @@ import java.sql.*;
 public class ${metaData.getRealClassName()}DTO implements Serializable {
 
 private static final long serialVersionUID = 1L;
+
+private static final Logger log = LoggerFactory.getLogger(${metaData.getRealClassName()}DTO.class);
+
 	
 	#foreach($member  in $variableDto)	
 	private  $member;	
