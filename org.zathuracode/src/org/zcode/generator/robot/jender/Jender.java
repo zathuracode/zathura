@@ -87,20 +87,20 @@ public class Jender implements IZathuraJenderTemplate,IZathuraGenerator{
 		String pathWebXml= extPath+"WEB-INF"+GeneratorUtil.slash;
 		String generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages = extPath + GeneratorUtil.slash + "images"	+ GeneratorUtil.slash;
 		
-		String pathHibernate= librariesPath+"core-hibernate4.3.6"+GeneratorUtil.slash;
-		String pathJpaHibernate=librariesPath+"hibernate-jpa2.1"+GeneratorUtil.slash;
+		String pathHibernate= librariesPath+"core-hibernate"+GeneratorUtil.slash;
+		String pathJpaHibernate=librariesPath+"hibernate-jpa"+GeneratorUtil.slash;
 		
-		String pathPrimeFaces= librariesPath+"primeFaces5.1"+GeneratorUtil.slash;
+		String pathPrimeFaces= librariesPath+"primeFaces"+GeneratorUtil.slash;
 		
-		String pathSpring= librariesPath+"spring4.1.1"+GeneratorUtil.slash;
-		String pathSpringSecurity= librariesPath+"spring-security3.2.5"+GeneratorUtil.slash;
+		String pathSpring= librariesPath+"spring"+GeneratorUtil.slash;
+		String pathSpringSecurity= librariesPath+"spring-security"+GeneratorUtil.slash;
 		
-		String pathSL4J= librariesPath+"slf4j1.7.5"+GeneratorUtil.slash;
-		String pathJamon= librariesPath+"jamon2.79"+GeneratorUtil.slash;
-		String pathMojarra= librariesPath+"mojarra2.2.6"+GeneratorUtil.slash;
+		String pathSL4J= librariesPath+"slf4j"+GeneratorUtil.slash;
+		String pathJamon= librariesPath+"jamon"+GeneratorUtil.slash;
+		String pathMojarra= librariesPath+"mojarra"+GeneratorUtil.slash;
 		String pathApacheCommons= librariesPath+"apache-commons"+GeneratorUtil.slash;
-		String pathAopAlliance= librariesPath+"aopalliance1.0"+GeneratorUtil.slash;
-		String pathLog4j=librariesPath+"log4j1.2"+GeneratorUtil.slash;
+		String pathAopAlliance= librariesPath+"aopalliance"+GeneratorUtil.slash;
+		String pathLog4j=librariesPath+"log4j"+GeneratorUtil.slash;
 		//String pathServlet=librariesPath+"servlet3.1.1"+GeneratorUtil.slash;
 		
 		String pathLib= properties.getProperty("libFolderPath");
