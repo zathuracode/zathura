@@ -15,9 +15,7 @@
             #end
         #end
         
-        <properties>
-             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-        </properties>
+       
         
     </persistence-unit>
 </persistence>

@@ -67,10 +67,14 @@ public class ${metaData.getRealClassName()}Logic implements I${metaData.getRealC
 
 	@TransactionAttribute
 public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() throws Exception{
+
+	log.debug("finding all ${metaData.getRealClassName()} instances");
+	
     List<${metaData.getRealClassName()}> list = new ArrayList<${metaData.getRealClassName()}>();
             try {
             list = ${metaData.getRealClassNameAsVariable()}DAO.findAll();
             } catch (Exception e) {
+             log.error("finding all ${metaData.getRealClassName()} failed", e);
             throw new ZMessManager().new GettingException(ZMessManager.ALL+"${metaData.getRealClassName()}");
             }finally{
             }
@@ -81,7 +85,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			@TransactionAttribute(TransactionAttributeType.REQUIRED)
             public void save${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
-
+				log.debug("saving ${metaData.getRealClassName()} instance");
             try {
             
             #if(${metaData.isGetManyToOneProperties()})
@@ -102,8 +106,10 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             }
 
             ${metaData.getRealClassNameAsVariable()}DAO.save(entity);
+             log.debug("save ${metaData.getRealClassName()} successful");
             } catch (Exception e) {
-            throw e;
+            	log.error("save ${metaData.getRealClassName()} failed", e);
+            	throw e;
             }finally{
             }
             }
@@ -112,6 +118,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			@TransactionAttribute(TransactionAttributeType.REQUIRED)
             public void delete${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
+            	log.debug("deleting ${metaData.getRealClassName()} instance");
             
 	            if(entity==null){
 	    			throw new ZMessManager().new NullEntityExcepcion("${metaData.getRealClassName()}");
@@ -149,7 +156,9 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 				#end
 			#end
             ${metaData.getRealClassNameAsVariable()}DAO.deleteById(entity.get${metaData.primaryKey.getGetNameOfPrimaryName()}());
+            log.debug("delete ${metaData.getRealClassName()} successful");
             } catch (Exception e) {
+            	log.error("delete ${metaData.getRealClassName()} failed", e);
             throw e;
             }
             finally{
@@ -160,7 +169,7 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			@TransactionAttribute(TransactionAttributeType.REQUIRED)
             public void update${metaData.getRealClassName()}(${metaData.getRealClassName()} entity) throws Exception {
-
+				log.debug("updating ${metaData.getRealClassName()} instance");
             try {
             
             	if(entity==null){
@@ -180,6 +189,9 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
             #end
 
             ${metaData.getRealClassNameAsVariable()}DAO.update(entity);
+            
+            log.debug("update ${metaData.getRealClassName()} successful");
+            
             } catch (Exception e) {
             throw e;
             }finally{
@@ -217,10 +229,14 @@ public List<${metaData.getRealClassName()}> get${metaData.getRealClassName()}() 
 			
 			@TransactionAttribute
             public ${metaData.getRealClassName()} get${metaData.getRealClassName()}(${metaData.primaryKey.getRealClassName()} ${metaData.primaryKey.getShowName()}) throws Exception {
+            
+            log.debug("getting ${metaData.getRealClassName()} instance");
+            
             ${metaData.getRealClassName()} entity = null;
             try {
             entity = ${metaData.getRealClassNameAsVariable()}DAO.findById(${metaData.primaryKey.getShowName()});
             } catch (Exception e) {
+            	log.error("get ${metaData.getRealClassName()} failed", e);
              throw new ZMessManager().new FindingException("${metaData.getRealClassName()}");
             }finally{
             }

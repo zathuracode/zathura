@@ -9,16 +9,19 @@
 	<name>${name}</name>
 	<description>${description}</description>	
 
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-       	<hibernate.version>4.3.6.Final</hibernate.version>
+       	<hibernate.version>4.3.8.Final</hibernate.version>
         <primefaces.version>5.1</primefaces.version>
-		<spring.version>4.1.1.RELEASE</spring.version>
-		<spring.security.version>3.2.5.RELEASE</spring.security.version>
-		<mojarra.version>2.2.6</mojarra.version>	
+		<spring.version>4.1.5.RELEASE</spring.version>
+		<spring.security.version>3.2.6.RELEASE</spring.security.version>
+		<mojarra.version>2.2.9</mojarra.version>
+		<slf4j.version>1.7.10</slf4j.version>	
     </properties>
     
-     <repositories>
+    
+    <repositories>
 	    <repository>
 	        <id>prime-repo</id>
 	        <name>PrimeFaces Maven Repository</name>
@@ -234,13 +237,15 @@
 		<dependency>
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-api</artifactId>
-		  <version>1.7.5</version>
+		  <version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 		  <groupId>org.slf4j</groupId>
 		  <artifactId>slf4j-log4j12</artifactId>
-		  <version>1.7.5</version>
+		  <version>${slf4j.version}</version>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>com.jamonapi</groupId>
 			<artifactId>jamon</artifactId>
