@@ -80,14 +80,14 @@ public class WallJ implements IZathuraWallJTemplate,IZathuraGenerator{
 		String generatorExtZathuraJavaEEWebSpringPrimeHibernateCentricImages = extPath + GeneratorUtil.slash + "images"	+ GeneratorUtil.slash;
 		
 		String pathEjb= librariesPath+"ejb-3.1"+GeneratorUtil.slash;
-		String pathJpa= librariesPath+"hibernate-jpa2.1"+GeneratorUtil.slash;
-		String pathPrimeFaces= librariesPath+"primeFaces5.1"+GeneratorUtil.slash;
-		String pathSL4J= librariesPath+"slf4j1.7.5"+GeneratorUtil.slash;
-		String pathJamon= librariesPath+"jamon2.79"+GeneratorUtil.slash;
-		String pathMojarra= librariesPath+"mojarra2.2.6"+GeneratorUtil.slash;
+		String pathJpa= librariesPath+"hibernate-jpa"+GeneratorUtil.slash;
+		String pathPrimeFaces= librariesPath+"primeFaces"+GeneratorUtil.slash;
+		String pathSL4J= librariesPath+"slf4j"+GeneratorUtil.slash;
+		String pathJamon= librariesPath+"jamon"+GeneratorUtil.slash;
+		String pathMojarra= librariesPath+"mojarra"+GeneratorUtil.slash;
 		String pathApacheCommons= librariesPath+"apache-commons"+GeneratorUtil.slash;
-		String pathAopAlliance= librariesPath+"aopalliance1.0"+GeneratorUtil.slash;
-		String pathLog4j=librariesPath+"log4j1.2"+GeneratorUtil.slash;
+		String pathAopAlliance= librariesPath+"aopalliance"+GeneratorUtil.slash;
+		String pathLog4j=librariesPath+"log4j"+GeneratorUtil.slash;
 		//String pathServlet=librariesPath+"servlet3.1.1"+GeneratorUtil.slash;
 		
 		
