@@ -349,7 +349,14 @@
 			<groupId>${groupIdConnector}</groupId>
 			<artifactId>${artifactIdConnector}</artifactId>
 			<version>${versionConnector}</version>
-		</dependency>	
+		</dependency>
+		
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>

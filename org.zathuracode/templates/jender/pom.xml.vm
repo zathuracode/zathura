@@ -233,6 +233,12 @@
 		  <version>${slf4j.version}</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
 		
 		<dependency>
 			<groupId>com.jamonapi</groupId>
