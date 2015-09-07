@@ -52,15 +52,9 @@ public class Member implements Comparable {
 	 */
 
 	public String getRealClassName() {
-		String realName ="";
-		if(type.isArray()==true){
-			realName=type.getTypeName();
-		}else{
-			String typeComplete = type.getName();
-			String[] tmp = (typeComplete.replace(".", "%")).split("%");
-			realName = tmp[tmp.length - 1];
-		}
-		
+		String typeComplete = type.getName();
+		String[] tmp = (typeComplete.replace(".", "%")).split("%");
+		String realName = tmp[tmp.length - 1];
 		return realName;
 	}
 
